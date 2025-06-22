@@ -1,0 +1,2885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrados y Codificaciones - Escapify</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cipher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .cipher-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cipher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .cipher-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .cipher-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--heading-color);
+        }
+        
+        .cipher-card p {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .cipher-example {
+            background: var(--subtle-bg);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .cipher-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .cipher-tag {
+            display: inline-block;
+            background: var(--subtle-bg);
+            color: var(--text-color);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        
+        .hero-ciphers {
+            background: linear-gradient(135deg, #3498db, #1d6fa5);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .subtitle {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .cipher-difficulty {
+            margin-bottom: 10px;
+        }
+        
+        .difficulty-indicator {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .difficulty-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 2px;
+        }
+        
+        .dot-filled {
+            background-color: var(--primary-color);
+        }
+        
+        .dot-empty {
+            background-color: var(--subtle-bg);
+        }
+        
+        /* Estilos para el modal de cifrados */
+        .resource-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+        
+        .resource-modal.visible {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Modificar el tamaño de los modales */
+        .resource-modal-content {
+            position: relative;
+            background-color: var(--card-bg);
+            margin: 30px auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 1000px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .resource-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .resource-modal-header h2 {
+            margin: 0;
+            color: var(--heading-color);
+        }
+        
+        .close-modal {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .resource-modal-body {
+            padding: 25px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .resource-intro {
+            margin-bottom: 30px;
+        }
+        
+        .resource-description {
+            margin-bottom: 20px;
+        }
+        
+        .resource-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .coding-system {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .coding-system:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .system-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .system-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .system-description {
+            margin-bottom: 20px;
+        }
+        
+        .system-implementation {
+            margin-bottom: 30px;
+        }
+        
+        .system-example {
+            background: var(--subtle-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .system-playground {
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        .result-container {
+            margin-top: 20px;
+            background: var(--subtle-bg);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .encoded-result {
+            font-family: monospace;
+            font-size: 1.1rem;
+            padding: 10px;
+            background: var(--card-bg);
+            border-radius: 4px;
+            min-height: 40px;
+            word-break: break-all;
+        }
+        
+        /* Estilos específicos para cada cifrado */
+        .morse-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .morse-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .morse-cell {
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 4px;
+            flex: 1;
+            text-align: center;
+            font-family: monospace;
+        }
+        
+        .polybius-grid table {
+            margin: 20px 0;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .polybius-grid th,
+        .polybius-grid td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+            background-color: var(--card-bg);
+        }
+        
+        .polybius-grid th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .pigpen-interactive {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .pigpen-chart {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .pigpen-chart img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+        }
+        
+        .pigpen-result-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .pigpen-symbols {
+            min-height: 80px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .play-morse {
+            margin-top: 10px;
+        }
+        
+        /* Estilos para Pigpen interactivo */
+        .pigpen-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .pigpen-grid {
+            border: 2px solid var(--text-color);
+            display: inline-block;
+        }
+        
+        .pigpen-grid-row {
+            display: flex;
+        }
+        
+        .pigpen-grid-cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .pigpen-grid-cell:hover {
+            background-color: var(--primary-color-light);
+        }
+        
+        .pigpen-grid-cell.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .pigpen-grid-row:not(:last-child) .pigpen-grid-cell {
+            border-bottom: 1px solid var(--text-color);
+        }
+        
+        .pigpen-grid-cell:not(:last-child) {
+            border-right: 1px solid var(--text-color);
+        }
+        
+        .pigpen-grid-cell.dot::after {
+            content: "•";
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        
+        .pigpen-x-grid {
+            display: flex;
+            flex-wrap: wrap;
+            width: 120px;
+        }
+        
+        .pigpen-x-grid .pigpen-grid-cell {
+            border: 1px solid var(--text-color);
+            margin: 2px;
+        }
+        
+        .pigpen-x-grid .pigpen-grid-cell::before {
+            content: "X";
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .pigpen-symbol {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            margin: 5px;
+            font-size: 0;
+            border: 1px solid var(--primary-color);
+        }
+        
+        /* Estilos para cifrado de sustitución */
+        .substitution-alphabet {
+            margin-bottom: 20px;
+        }
+        
+        .substitution-row {
+            margin-bottom: 10px;
+        }
+        
+        .alphabet-cells {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .alphabet-cells span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            font-family: monospace;
+        }
+        
+        .alphabet-cells.custom input {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            font-family: monospace;
+            color: var(--text-color);
+            text-transform: uppercase;
+            padding: 0;
+        }
+        
+        .substitution-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Notificaciones */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s;
+            max-width: 300px;
+        }
+        
+        .notification.error {
+            background-color: #e74c3c;
+        }
+        
+        .notification.success {
+            background-color: #2ecc71;
+        }
+        
+        /* Estilos para el teclado Nokia */
+        .nokia-keypad-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .nokia-keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .nokia-key {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .nokia-key:hover {
+            background-color: var(--primary-color-light);
+            transform: translateY(-2px);
+        }
+        
+        .nokia-key:active {
+            transform: translateY(1px);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nokia-number {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .nokia-chars {
+            font-size: 12px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        
+        .nokia-display {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            background-color: #8fc467;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nokia-screen {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            width: 100%;
+            text-align: center;
+            overflow-wrap: break-word;
+            min-height: 24px;
+        }
+        
+        .nokia-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        /* Estilos para la ruleta del cifrado César */
+        .caesar-wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0 40px 0;
+            position: relative;
+        }
+        
+        .caesar-wheel {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 20px auto;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 0;
+        }
+        
+        .wheel-outer, .wheel-inner {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        
+        .wheel-outer {
+            border: 3px solid var(--primary-color);
+            z-index: 1;
+            background-color: rgba(52, 152, 219, 0.05);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .wheel-inner {
+            border: 3px solid var(--primary-color);
+            z-index: 2;
+            background-color: rgba(52, 152, 219, 0.1);
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            transform-origin: center center;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .wheel-markers {
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .wheel-top-marker {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--primary-color);
+        }
+        
+        .wheel-center-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .wheel-reference-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 1px;
+            background-color: rgba(52, 152, 219, 0.3);
+            z-index: 1;
+        }
+        
+        .wheel-label {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .wheel-example {
+            display: inline-block;
+            margin-top: 5px;
+            font-weight: normal;
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .letter-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        
+        .letter {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .letter-outer {
+            color: var(--text-color);
+        }
+        
+        .letter-inner {
+            color: var(--primary-color);
+        }
+
+        /* Añadir estilo para los botones de cifrado */
+        .caesar-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .encode-decode-active {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .wheel-note {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color);
+            background-color: rgba(52, 152, 219, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content para accesibilidad con teclado -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-controls="nav-menu" aria-label="Menú de navegación">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link active" aria-current="page">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="history-hero" aria-labelledby="ciphers-title">
+        <div class="container">
+            <h1 class="section-title" id="ciphers-title">Cifrados y codificaciones</h1>
+            <p class="section-subtitle">Explora todos los sistemas de cifrado disponibles para tus escape rooms educativos</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content" class="container">
+        <section class="filters-section">
+            <div class="difficulty-filters" role="tablist" aria-label="Filtros de dificultad" id="difficultyFilters">
+                <button class="difficulty-filter-btn all active" aria-label="Mostrar todos los cifrados" role="tab" aria-selected="true" data-filter="all">Todos</button>
+                <button class="difficulty-filter-btn easy" aria-label="Filtrar por dificultad fácil" role="tab" aria-selected="false" data-filter="easy">
+                    Fácil
+                    <span class="coloradd-symbol" aria-hidden="true"></span>
+                </button>
+                <button class="difficulty-filter-btn medium" aria-label="Filtrar por dificultad media" role="tab" aria-selected="false" data-filter="medium">
+                    Media
+                    <span class="coloradd-symbol" aria-hidden="true"></span>
+                </button>
+                <button class="difficulty-filter-btn hard" aria-label="Filtrar por dificultad difícil" role="tab" aria-selected="false" data-filter="historical">
+                    Históricos
+                    <span class="coloradd-symbol" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div class="history-filters">
+                <div class="search-box">
+                    <input type="text" id="searchCiphers" placeholder="Buscar cifrados..." aria-label="Buscar cifrados por nombre o descripción">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </div>
+                <div class="filter-options">
+                    <select id="filterCategory" aria-label="Filtrar por categoría">
+                        <option value="all">Todas las categorías</option>
+                        <option value="historical">Históricos</option>
+                        <option value="modern">Modernos</option>
+                        <option value="easy">Fáciles</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cipher-section">
+            <div class="cipher-grid">
+                <!-- 1. Cifrado César -->
+                <div class="cipher-card" data-categories="historical easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-history" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado César</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Fácil">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Uno de los sistemas de cifrado más antiguos. Desplaza cada letra del mensaje un número fijo de posiciones en el alfabeto.</p>
+                    <div class="cipher-example">
+                        Original: HOLA<br>
+                        Cifrado (3): KROD
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Sustitución</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 2. Código Morse -->
+                <div class="cipher-card" data-categories="historical">
+                    <div class="cipher-icon">
+                        <i class="fas fa-broadcast-tower" aria-hidden="true"></i>
+                    </div>
+                    <h3>Código Morse</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Representa letras y números mediante secuencias de señales cortas y largas (puntos y rayas).</p>
+                    <div class="cipher-example">
+                        Original: SOS<br>
+                        Morse: ... --- ...
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Sonoro</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 3. Cifrado de Polibio -->
+                <div class="cipher-card" data-categories="historical">
+                    <div class="cipher-icon">
+                        <i class="fas fa-th" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado de Polibio</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Usa una cuadrícula 5x5 donde cada letra corresponde a un par de coordenadas (fila, columna).</p>
+                    <div class="cipher-example">
+                        Original: HOLA<br>
+                        Polibio: 23 34 31 11
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Coordenadas</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 4. Cifrado Pigpen -->
+                <div class="cipher-card" data-categories="historical">
+                    <div class="cipher-icon">
+                        <i class="fas fa-compass" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado Pigpen</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Cifrado geométrico usado por los francmasones que reemplaza letras por símbolos basados en fragmentos de una cuadrícula.</p>
+                    <div class="cipher-example">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Pigpen_cipher_key.svg/320px-Pigpen_cipher_key.svg.png" alt="Ejemplo Pigpen" style="max-width:100%">
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Visual</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 5. Cifrado Vigenère -->
+                <div class="cipher-card" data-categories="historical">
+                    <div class="cipher-icon">
+                        <i class="fas fa-key" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado Vigenère</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Alta">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                        </div>
+                    </div>
+                    <p>Cifrado polialfabético que usa una palabra clave para determinar diferentes valores de desplazamiento para cada letra del mensaje.</p>
+                    <div class="cipher-example">
+                        Original: ATACAR<br>
+                        Clave: LEMON<br>
+                        Cifrado: LXMQNC
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Polialfabético</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 6. Cifrado Atbash -->
+                <div class="cipher-card" data-categories="historical easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado Atbash</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Fácil">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Cifrado de sustitución que invierte el alfabeto, reemplazando la primera letra por la última, la segunda por la penúltima, etc.</p>
+                    <div class="cipher-example">
+                        Original: SECRETO<br>
+                        Atbash: HVXIVGL
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Histórico</span>
+                        <span class="cipher-tag">Sustitución</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 7. Código ASCII -->
+                <div class="cipher-card" data-categories="modern easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                    </div>
+                    <h3>Código ASCII</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Fácil">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Estándar que asigna valores numéricos a letras, números y caracteres especiales, usado en informática.</p>
+                    <div class="cipher-example">
+                        Original: HOLA<br>
+                        ASCII: 72 79 76 65
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Computación</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 8. Cifrado Binario -->
+                <div class="cipher-card" data-categories="modern">
+                    <div class="cipher-icon">
+                        <i class="fas fa-binary" aria-hidden="true">10</i>
+                    </div>
+                    <h3>Cifrado Binario</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Convierte cada carácter a su representación en sistema binario (0s y 1s), basado en la codificación ASCII.</p>
+                    <div class="cipher-example">
+                        Original: A<br>
+                        Binario: 01000001
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Computación</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 9. Cifrado de Sustitución -->
+                <div class="cipher-card" data-categories="historical easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-random" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cifrado de Sustitución</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Variable">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Permite crear tu propio alfabeto de sustitución, reemplazando cada letra por un símbolo, número u otra letra.</p>
+                    <div class="cipher-example">
+                        A → X, B → Y, C → Z...<br>
+                        Original: ABC<br>
+                        Cifrado: XYZ
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Personalizable</span>
+                        <span class="cipher-tag">Sustitución</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 10. Teclado Nokia -->
+                <div class="cipher-card" data-categories="modern easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                    </div>
+                    <h3>Teclado Nokia</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Sistema basado en los antiguos móviles, donde cada número representa varias letras y para seleccionar una letra se pulsa el número repetidamente.</p>
+                    <div class="cipher-example">
+                        A = 2, B = 22, C = 222<br>
+                        Original: HOLA<br>
+                        Codificado: 44 666 555 2
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Numérico</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de sugerencias -->
+        <section class="suggestion-section">
+            <div class="suggestion-card">
+                <h2>¿Conoces otro sistema de cifrado?</h2>
+                <p>Si conoces algún sistema de cifrado interesante que podríamos añadir, no dudes en sugerirlo. Estamos constantemente ampliando nuestra colección.</p>
+                <a href="#" class="btn btn-primary" id="suggestCipher">Sugerir cifrado</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Filtrado de cifrados
+            const searchInput = document.getElementById('searchCiphers');
+            const difficultyButtons = document.querySelectorAll('.difficulty-filter-btn');
+            const categoryFilter = document.getElementById('filterCategory');
+            const cipherCards = document.querySelectorAll('.cipher-card');
+            
+            // Buscar por texto
+            searchInput.addEventListener('input', filterCiphers);
+            
+            // Filtrar por dificultad
+            difficultyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Cambiar botón activo
+                    difficultyButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-selected', 'true');
+                    
+                    // Filtrar tarjetas
+                    filterCiphers();
+                });
+            });
+            
+            // Filtrar por categoría
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', filterCiphers);
+            }
+            
+            // Función para filtrar cifrados
+            function filterCiphers() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.difficulty-filter-btn.active').dataset.filter;
+                const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
+                
+                cipherCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const categories = card.dataset.categories;
+                    
+                    // Aplicar filtros
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesDifficulty = activeFilter === 'all' || categories.includes(activeFilter);
+                    const matchesCategory = selectedCategory === 'all' || categories.includes(selectedCategory);
+                    
+                    // Mostrar u ocultar según filtros
+                    if (matchesSearch && matchesDifficulty && matchesCategory) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Modal para sistemas de cifrado
+            const cipherModals = {}; // Objeto para almacenar los modales
+            const probarButtons = document.querySelectorAll('.cipher-actions .btn-secondary');
+            
+            // Crear el contenedor principal para modales si no existe
+            let modalContainer = document.getElementById('cipherModalsContainer');
+            if (!modalContainer) {
+                modalContainer = document.createElement('div');
+                modalContainer.id = 'cipherModalsContainer';
+                document.body.appendChild(modalContainer);
+            }
+            
+            // Crear modales para cada tipo de cifrado
+            probarButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const cipherCard = this.closest('.cipher-card');
+                    const cipherTitle = cipherCard.querySelector('h3').textContent;
+                    const cipherType = getCipherTypeFromTitle(cipherTitle);
+                    
+                    // Si el modal no existe, crearlo
+                    if (!cipherModals[cipherType]) {
+                        createCipherModal(cipherType, cipherTitle, cipherCard);
+                    }
+                    
+                    // Mostrar el modal
+                    openModal(cipherModals[cipherType]);
+                });
+            });
+            
+            function getCipherTypeFromTitle(title) {
+                // Extraer tipo de cifrado del título
+                return title.toLowerCase().replace(/\s+/g, '-');
+            }
+            
+            function createCipherModal(type, title, card) {
+                const modal = document.createElement('div');
+                modal.id = `modal-${type}`;
+                modal.className = 'resource-modal';
+                
+                const modalContent = document.createElement('div');
+                modalContent.className = 'resource-modal-content';
+                
+                // Header del modal
+                const modalHeader = document.createElement('div');
+                modalHeader.className = 'resource-modal-header';
+                modalHeader.innerHTML = `
+                    <h2>${title}</h2>
+                    <button class="close-modal" aria-label="Cerrar modal">&times;</button>
+                `;
+                
+                // Body del modal
+                const modalBody = document.createElement('div');
+                modalBody.className = 'resource-modal-body';
+                
+                // Construir el contenido del modal según el tipo de cifrado
+                const modalInner = buildCipherModalContent(type, card);
+                modalBody.appendChild(modalInner);
+                
+                // Ensamblar modal
+                modalContent.appendChild(modalHeader);
+                modalContent.appendChild(modalBody);
+                modal.appendChild(modalContent);
+                
+                // Agregar al DOM
+                modalContainer.appendChild(modal);
+                
+                // Guardar referencia
+                cipherModals[type] = modal;
+                
+                // Agregar event listener para cerrar
+                modal.querySelector('.close-modal').addEventListener('click', () => {
+                    closeModal(modal);
+                });
+                
+                // Cerrar modal al hacer clic fuera o con ESC
+                window.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+                
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.classList.contains('visible')) {
+                        closeModal(modal);
+                    }
+                });
+                
+                // Inicializar las funcionalidades del cifrado
+                initCipherFunctions(type, modal);
+            }
+            
+            function buildCipherModalContent(type, card) {
+                const container = document.createElement('div');
+                container.className = 'coding-system';
+                
+                // Obtener descripción del cifrado
+                const description = card.querySelector('p').textContent;
+                const example = card.querySelector('.cipher-example') ? 
+                    card.querySelector('.cipher-example').innerHTML : '';
+                
+                // Contenido del modal según el tipo de cifrado
+                switch(type) {
+                    case 'cifrado-césar':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="caesar-wheel-container">
+                                    <div class="caesar-wheel">
+                                        <div class="wheel-reference-line"></div>
+                                        <div class="wheel-outer">
+                                            <div class="letter-container" id="outerLetters"></div>
+                                        </div>
+                                        <div class="wheel-inner" id="wheelInner">
+                                            <div class="letter-container" id="innerLetters"></div>
+                                        </div>
+                                        <div class="wheel-markers">
+                                            <div class="wheel-top-marker"></div>
+                                            <div class="wheel-center-marker"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wheel-label">Desplazamiento actual: 0</div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="caesar-playground">
+                                        <div class="input-group">
+                                            <label for="caesarInput">Texto original:</label>
+                                            <input type="text" id="caesarInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="caesarShift">Desplazamiento:</label>
+                                            <input type="number" id="caesarShift" value="0" min="0" max="25">
+                                        </div>
+                                        <div class="caesar-buttons">
+                                            <button class="btn btn-secondary encode-caesar">Codificar</button>
+                                            <button class="btn btn-secondary decode-caesar">Decodificar</button>
+                                        </div>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="caesarResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'código-morse':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="morse-table">
+                                    <div class="morse-row">
+                                        <div class="morse-cell">A: .-</div>
+                                        <div class="morse-cell">B: -...</div>
+                                        <div class="morse-cell">C: -.-.</div>
+                                        <div class="morse-cell">D: -..</div>
+                                    </div>
+                                    <div class="morse-row">
+                                        <div class="morse-cell">E: .</div>
+                                        <div class="morse-cell">F: ..-.</div>
+                                        <div class="morse-cell">G: --.</div>
+                                        <div class="morse-cell">H: ....</div>
+                                    </div>
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="morse-playground">
+                                        <div class="input-group">
+                                            <label for="morseInput">Texto original:</label>
+                                            <input type="text" id="morseInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-morse">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="morseResult"></div>
+                                            <button class="btn btn-small play-morse">
+                                                <i class="fas fa-volume-up"></i> Escuchar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-de-polibio':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="polybius-grid">
+                                    <table>
+                                        <tr>
+                                            <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td>
+                                        </tr>
+                                        <tr>
+                                            <th>2</th><td>F</td><td>G</td><td>H</td><td>I/J</td><td>K</td>
+                                        </tr>
+                                        <tr>
+                                            <th>3</th><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td>
+                                        </tr>
+                                        <tr>
+                                            <th>4</th><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td>
+                                        </tr>
+                                        <tr>
+                                            <th>5</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="polybius-playground">
+                                        <div class="input-group">
+                                            <label for="polybiusInput">Texto original:</label>
+                                            <input type="text" id="polybiusInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-polybius">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="polybiusResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-pigpen':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="pigpen-interactive">
+                                        <div class="pigpen-grid-container">
+                                            <div class="pigpen-grid">
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell" data-letter="A">A</div>
+                                                    <div class="pigpen-grid-cell" data-letter="B">B</div>
+                                                    <div class="pigpen-grid-cell" data-letter="C">C</div>
+                                                </div>
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell" data-letter="D">D</div>
+                                                    <div class="pigpen-grid-cell" data-letter="E">E</div>
+                                                    <div class="pigpen-grid-cell" data-letter="F">F</div>
+                                                </div>
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell" data-letter="G">G</div>
+                                                    <div class="pigpen-grid-cell" data-letter="H">H</div>
+                                                    <div class="pigpen-grid-cell" data-letter="I">I</div>
+                                                </div>
+                                            </div>
+                                            <div class="pigpen-grid">
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell dot" data-letter="J">J</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="K">K</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="L">L</div>
+                                                </div>
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell dot" data-letter="M">M</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="N">N</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="O">O</div>
+                                                </div>
+                                                <div class="pigpen-grid-row">
+                                                    <div class="pigpen-grid-cell dot" data-letter="P">P</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="Q">Q</div>
+                                                    <div class="pigpen-grid-cell dot" data-letter="R">R</div>
+                                                </div>
+                                            </div>
+                                            <div class="pigpen-x-grid">
+                                                <div class="pigpen-grid-cell x" data-letter="S">S</div>
+                                                <div class="pigpen-grid-cell x" data-letter="T">T</div>
+                                                <div class="pigpen-grid-cell x" data-letter="U">U</div>
+                                                <div class="pigpen-grid-cell x" data-letter="V">V</div>
+                                            </div>
+                                            <div class="pigpen-x-grid">
+                                                <div class="pigpen-grid-cell x dot" data-letter="W">W</div>
+                                                <div class="pigpen-grid-cell x dot" data-letter="X">X</div>
+                                                <div class="pigpen-grid-cell x dot" data-letter="Y">Y</div>
+                                                <div class="pigpen-grid-cell x dot" data-letter="Z">Z</div>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="pigpenInput">Texto original:</label>
+                                            <input type="text" id="pigpenInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-pigpen">Visualizar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="pigpenResult"></div>
+                                            <div class="pigpen-symbols" id="pigpenSymbols"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-vigenère':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="vigenere-playground">
+                                        <div class="input-group">
+                                            <label for="vigenereInput">Texto original:</label>
+                                            <input type="text" id="vigenereInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="vigenereKey">Clave:</label>
+                                            <input type="text" id="vigenereKey" placeholder="Palabra clave">
+                                        </div>
+                                        <button class="btn btn-secondary encode-vigenere">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="vigenereResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-atbash':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="atbash-playground">
+                                        <div class="input-group">
+                                            <label for="atbashInput">Texto original:</label>
+                                            <input type="text" id="atbashInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-atbash">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="atbashResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-de-sustitución':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="substitution-playground">
+                                        <div class="substitution-alphabet">
+                                            <div class="substitution-row">
+                                                <p>Alfabeto original:</p>
+                                                <div class="alphabet-cells">
+                                                    <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span>
+                                                    <span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span>
+                                                </div>
+                                            </div>
+                                            <div class="substitution-row">
+                                                <p>Tu alfabeto:</p>
+                                                <div class="alphabet-cells custom">
+                                                    <input type="text" maxlength="1" value="Z" data-original="A">
+                                                    <input type="text" maxlength="1" value="Y" data-original="B">
+                                                    <input type="text" maxlength="1" value="X" data-original="C">
+                                                    <input type="text" maxlength="1" value="W" data-original="D">
+                                                    <input type="text" maxlength="1" value="V" data-original="E">
+                                                    <input type="text" maxlength="1" value="U" data-original="F">
+                                                    <input type="text" maxlength="1" value="T" data-original="G">
+                                                    <input type="text" maxlength="1" value="S" data-original="H">
+                                                    <input type="text" maxlength="1" value="R" data-original="I">
+                                                    <input type="text" maxlength="1" value="Q" data-original="J">
+                                                    <input type="text" maxlength="1" value="P" data-original="K">
+                                                    <input type="text" maxlength="1" value="O" data-original="L">
+                                                    <input type="text" maxlength="1" value="N" data-original="M">
+                                                    <input type="text" maxlength="1" value="M" data-original="N">
+                                                    <input type="text" maxlength="1" value="L" data-original="O">
+                                                    <input type="text" maxlength="1" value="K" data-original="P">
+                                                    <input type="text" maxlength="1" value="J" data-original="Q">
+                                                    <input type="text" maxlength="1" value="I" data-original="R">
+                                                    <input type="text" maxlength="1" value="H" data-original="S">
+                                                    <input type="text" maxlength="1" value="G" data-original="T">
+                                                    <input type="text" maxlength="1" value="F" data-original="U">
+                                                    <input type="text" maxlength="1" value="E" data-original="V">
+                                                    <input type="text" maxlength="1" value="D" data-original="W">
+                                                    <input type="text" maxlength="1" value="C" data-original="X">
+                                                    <input type="text" maxlength="1" value="B" data-original="Y">
+                                                    <input type="text" maxlength="1" value="A" data-original="Z">
+                                                </div>
+                                            </div>
+                                            <div class="substitution-actions">
+                                                <button class="btn btn-small" id="randomizeSubst">Aleatorio</button>
+                                                <button class="btn btn-small" id="resetSubst">Restablecer</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="substitutionInput">Texto original:</label>
+                                            <input type="text" id="substitutionInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-substitution">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="substitutionResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'código-ascii':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="ascii-playground">
+                                        <div class="input-group">
+                                            <label for="asciiInput">Texto original:</label>
+                                            <input type="text" id="asciiInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-ascii">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="asciiResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-binario':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="binary-playground">
+                                        <div class="input-group">
+                                            <label for="binaryInput">Texto original:</label>
+                                            <input type="text" id="binaryInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <button class="btn btn-secondary encode-binary">Codificar</button>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="binaryResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'teclado-nokia':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <div class="nokia-keypad-container">
+                                    <div class="nokia-keypad">
+                                        <div class="nokia-key" data-key="1">
+                                            <span class="nokia-number">1</span>
+                                            <span class="nokia-chars">.,?!</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="2">
+                                            <span class="nokia-number">2</span>
+                                            <span class="nokia-chars">ABC</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="3">
+                                            <span class="nokia-number">3</span>
+                                            <span class="nokia-chars">DEF</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="4">
+                                            <span class="nokia-number">4</span>
+                                            <span class="nokia-chars">GHI</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="5">
+                                            <span class="nokia-number">5</span>
+                                            <span class="nokia-chars">JKL</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="6">
+                                            <span class="nokia-number">6</span>
+                                            <span class="nokia-chars">MNO</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="7">
+                                            <span class="nokia-number">7</span>
+                                            <span class="nokia-chars">PQRS</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="8">
+                                            <span class="nokia-number">8</span>
+                                            <span class="nokia-chars">TUV</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="9">
+                                            <span class="nokia-number">9</span>
+                                            <span class="nokia-chars">WXYZ</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="*">
+                                            <span class="nokia-number">*</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="0">
+                                            <span class="nokia-number">0</span>
+                                            <span class="nokia-chars">_</span>
+                                        </div>
+                                        <div class="nokia-key" data-key="#">
+                                            <span class="nokia-number">#</span>
+                                        </div>
+                                    </div>
+                                    <div class="nokia-display">
+                                        <div class="nokia-screen" id="nokiaText"></div>
+                                    </div>
+                                </div>
+                                <div class="system-playground">
+                                    <h4>Pruébalo:</h4>
+                                    <div class="nokia-playground">
+                                        <div class="input-group">
+                                            <label for="nokiaInput">Texto original:</label>
+                                            <input type="text" id="nokiaInput" placeholder="Escribe tu mensaje aquí">
+                                        </div>
+                                        <div class="nokia-buttons">
+                                            <button class="btn btn-secondary encode-nokia">Codificar</button>
+                                            <button class="btn btn-secondary decode-nokia">Decodificar</button>
+                                        </div>
+                                        <div class="result-container">
+                                            <h5>Resultado:</h5>
+                                            <div class="encoded-result" id="nokiaResult"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    default:
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                </div>
+                                <div class="system-example">
+                                    ${example}
+                                </div>
+                                <p class="system-note">Lo sentimos, la implementación interactiva de este cifrado estará disponible próximamente.</p>
+                            </div>
+                        `;
+                }
+                
+                return container;
+            }
+            
+            // Inicializar las funciones específicas para cada tipo de cifrado
+            function initCipherFunctions(type, modal) {
+                // Funciones compartidas para cifrado
+                const applyCaesarCipher = (text, shift) => {
+                    // Asegurarse que el desplazamiento sea un número entre 0 y 25
+                    shift = ((shift % 26) + 26) % 26;
+                    
+                    return Array.from(text).map(char => {
+                        if (/[A-Z]/.test(char)) {
+                            // Cuando el desplazamiento es 0, devolvemos la misma letra
+                            if (shift === 0) return char;
+                            
+                            const code = char.charCodeAt(0);
+                            return String.fromCharCode(((code - 65 + shift) % 26) + 65);
+                        }
+                        return char;
+                    }).join('');
+                };
+                
+                const textToMorse = (text) => {
+                    const morseCode = {
+                        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
+                        'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
+                        'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+                        'Y': '-.--', 'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+                        '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', ' ': '/'
+                    };
+                    
+                    return Array.from(text).map(char => {
+                        return morseCode[char] || char;
+                    }).join(' ');
+                };
+                
+                const playMorseCode = (morse) => {
+                    // Función mejorada para reproducir código morse con manejo de AudioContext moderno
+                    let audioContext;
+                    
+                    // Intentar crear el contexto de audio
+                    try {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    } catch (e) {
+                        console.error('Error creando AudioContext:', e);
+                        showNotification('Tu navegador no soporta la reproducción de audio', 'error');
+                        return;
+                    }
+                    
+                    // Si el contexto está suspendido (navegadores modernos), intentar resumir
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume().then(() => {
+                            playMorseSequence(audioContext, morse);
+                        }).catch((e) => {
+                            console.error('Error resumiendo AudioContext:', e);
+                            showNotification('No se pudo inicializar el audio. Intenta hacer clic en cualquier parte de la página primero.', 'error');
+                        });
+                    } else {
+                        playMorseSequence(audioContext, morse);
+                    }
+                    
+                    function playMorseSequence(context, morseText) {
+                        const dot = 60; // Duración de un punto en ms
+                        const dash = dot * 3; // Duración de una raya
+                        const pauseElement = dot; // Pausa entre elementos
+                        const pauseChar = dot * 3; // Pausa entre caracteres
+                        const pauseWord = dot * 7; // Pausa entre palabras
+                        
+                        let time = context.currentTime;
+                        
+                        morseText.split('').forEach(char => {
+                            if (char === '.') {
+                                playBeep(context, time, dot);
+                                time += dot/1000 + pauseElement/1000;
+                            } else if (char === '-') {
+                                playBeep(context, time, dash);
+                                time += dash/1000 + pauseElement/1000;
+                            } else if (char === ' ') {
+                                time += pauseChar/1000;
+                            } else if (char === '/') {
+                                time += pauseWord/1000;
+                            }
+                        });
+                        
+                        // Mostrar notificación de éxito
+                        showNotification('Reproduciendo código morse...', 'success');
+                    }
+                    
+                    function playBeep(context, startTime, duration) {
+                        try {
+                            const oscillator = context.createOscillator();
+                            const gainNode = context.createGain();
+                            
+                            oscillator.connect(gainNode);
+                            gainNode.connect(context.destination);
+                            oscillator.frequency.value = 700; // Frecuencia del tono
+                            oscillator.type = 'sine';
+                            
+                            // Configurar el volumen con fade in/out para evitar clicks
+                            gainNode.gain.setValueAtTime(0.001, startTime);
+                            gainNode.gain.exponentialRampToValueAtTime(0.3, startTime + 0.01);
+                            gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration/1000);
+                            
+                            oscillator.start(startTime);
+                            oscillator.stop(startTime + duration/1000 + 0.05);
+                        } catch (e) {
+                            console.error('Error reproduciendo beep:', e);
+                        }
+                    }
+                };
+                
+                const applyPolybiusCipher = (text) => {
+                    const polybius = {
+                        'A': '11', 'B': '12', 'C': '13', 'D': '14', 'E': '15',
+                        'F': '21', 'G': '22', 'H': '23', 'I': '24', 'J': '24', 'K': '25',
+                        'L': '31', 'M': '32', 'N': '33', 'O': '34', 'P': '35',
+                        'Q': '41', 'R': '42', 'S': '43', 'T': '44', 'U': '45',
+                        'V': '51', 'W': '52', 'X': '53', 'Y': '54', 'Z': '55'
+                    };
+                    
+                    return Array.from(text).map(char => {
+                        if (/[A-Z]/.test(char)) {
+                            return polybius[char] || char;
+                        }
+                        return char;
+                    }).join(' ');
+                };
+                
+                const applyVigenereCipher = (text, key) => {
+                    if (!key) return text;
+                    
+                    key = key.toUpperCase().replace(/[^A-Z]/g, '');
+                    if (key.length === 0) return text;
+                    
+                    let result = '';
+                    let keyIndex = 0;
+                    
+                    for (let i = 0; i < text.length; i++) {
+                        const char = text[i];
+                        if (/[A-Z]/.test(char)) {
+                            const charCode = char.charCodeAt(0) - 65;
+                            const keyChar = key[keyIndex % key.length];
+                            const keyCode = keyChar.charCodeAt(0) - 65;
+                            
+                            const encodedCharCode = (charCode + keyCode) % 26;
+                            
+                            result += String.fromCharCode(encodedCharCode + 65);
+                            
+                            keyIndex++;
+                        } else {
+                            result += char;
+                        }
+                    }
+                    return result;
+                };
+                
+                const applyAtbashCipher = (text) => {
+                    return Array.from(text).map(char => {
+                        if (/[A-Z]/.test(char)) {
+                            return String.fromCharCode(155 - char.charCodeAt(0));
+                        }
+                        return char;
+                    }).join('');
+                };
+                
+                const textToBinary = (text) => {
+                    return Array.from(text).map(char => {
+                        const binary = char.charCodeAt(0).toString(2);
+                        return '0'.repeat(8 - binary.length) + binary;
+                    }).join(' ');
+                };
+                
+                const textToAscii = (text) => {
+                    return Array.from(text).map(char => {
+                        return char.charCodeAt(0);
+                    }).join(' ');
+                };
+                
+                const applySubstitutionCipher = (text, customAlphabet = {}) => {
+                    // Solo procesamos letras en mayúsculas
+                    text = text.toUpperCase();
+                    
+                    let result = '';
+                    for (let i = 0; i < text.length; i++) {
+                        const char = text[i];
+                        const alphabetIndex = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char);
+                        if (alphabetIndex !== -1) {
+                            result += customAlphabet['ABCDEFGHIJKLMNOPQRSTUVWXYZ'[alphabetIndex]] || char;
+                        } else {
+                            result += char;
+                        }
+                    }
+                    return result;
+                };
+                
+                const shuffleArray = (array) => {
+                    const arr = [...array];
+                    for (let i = arr.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [arr[i], arr[j]] = [arr[j], arr[i]];
+                    }
+                    return arr;
+                };
+                
+                const applyPigpenCipher = (text) => {
+                    // Solo procesamos letras en mayúsculas
+                    text = text.toUpperCase().replace(/[^A-Z]/g, '');
+                    
+                    // Esta función solo devuelve el texto original para que podamos visualizarlo
+                    return text;
+                };
+                
+                const renderPigpenSymbols = (text) => {
+                    const symbolsContainer = document.getElementById('pigpenSymbols');
+                    symbolsContainer.innerHTML = '';
+                    
+                    // Definimos cómo dibujar cada símbolo
+                    const pigpenMap = {
+                        'L': `<div class="pigpen-symbol" title="L">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="40" cy="40" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'E': `<div class="pigpen-symbol" title="E">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="45" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="5" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'T': `<div class="pigpen-symbol" title="T">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'S': `<div class="pigpen-symbol" title="S">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="40" cy="40" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'P': `<div class="pigpen-symbol" title="P">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="10" cy="10" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'A': `<div class="pigpen-symbol" title="A">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'Y': `<div class="pigpen-symbol" title="Y">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="45" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'G': `<div class="pigpen-symbol" title="G">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="45" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'O': `<div class="pigpen-symbol" title="O">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        
+                        // Completamos el resto de letras
+                        'A': `<div class="pigpen-symbol" title="A">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'B': `<div class="pigpen-symbol" title="B">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'C': `<div class="pigpen-symbol" title="C">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'D': `<div class="pigpen-symbol" title="D">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="45" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'E': `<div class="pigpen-symbol" title="E">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'F': `<div class="pigpen-symbol" title="F">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'G': `<div class="pigpen-symbol" title="G">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'H': `<div class="pigpen-symbol" title="H">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'I': `<div class="pigpen-symbol" title="I">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'J': `<div class="pigpen-symbol" title="J">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'K': `<div class="pigpen-symbol" title="K">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'L': `<div class="pigpen-symbol" title="L">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'M': `<div class="pigpen-symbol" title="M">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="45" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'N': `<div class="pigpen-symbol" title="N">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'O': `<div class="pigpen-symbol" title="O">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'P': `<div class="pigpen-symbol" title="P">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'Q': `<div class="pigpen-symbol" title="Q">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'R': `<div class="pigpen-symbol" title="R">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'S': `<div class="pigpen-symbol" title="S">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'T': `<div class="pigpen-symbol" title="T">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'U': `<div class="pigpen-symbol" title="U">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'V': `<div class="pigpen-symbol" title="V">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                             </div>`,
+                        'W': `<div class="pigpen-symbol" title="W">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'X': `<div class="pigpen-symbol" title="X">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="45" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'Y': `<div class="pigpen-symbol" title="Y">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="5" y1="5" x2="45" y2="5" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`,
+                        'Z': `<div class="pigpen-symbol" title="Z">
+                                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="5" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="5" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <line x1="45" y1="5" x2="45" y2="45" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="25" cy="25" r="4" fill="currentColor" />
+                                </svg>
+                             </div>`
+                    };
+                    
+                    // Añadir cada símbolo al contenedor
+                    for (let i = 0; i < text.length; i++) {
+                        const char = text[i];
+                        if (pigpenMap[char]) {
+                            const symbolElement = document.createElement('div');
+                            symbolElement.innerHTML = pigpenMap[char];
+                            symbolsContainer.appendChild(symbolElement.firstChild);
+                        } else if (char === ' ') {
+                            const spaceElement = document.createElement('div');
+                            spaceElement.style.width = '30px';
+                            symbolsContainer.appendChild(spaceElement);
+                        }
+                    }
+                };
+                
+                // Configurar event listeners para cada tipo de cifrado
+                switch (type) {
+                    case 'cifrado-césar': {
+                        const input = modal.querySelector('#caesarInput');
+                        const shift = modal.querySelector('#caesarShift');
+                        const encodeBtn = modal.querySelector('.encode-caesar');
+                        const result = modal.querySelector('#caesarResult');
+                        const wheelInner = modal.querySelector('#wheelInner');
+                        
+                        // Crear la ruleta de cifrado
+                        const createCaesarWheel = () => {
+                            // Obtener elementos del DOM
+                            const outerLettersContainer = modal.querySelector('#outerLetters');
+                            const innerLettersContainer = modal.querySelector('#innerLetters');
+                            const wheelInner = modal.querySelector('#wheelInner');
+                            
+                            if (!outerLettersContainer || !innerLettersContainer || !wheelInner) {
+                                return;
+                            }
+                            
+                            // Limpiar contenedores
+                            outerLettersContainer.innerHTML = '';
+                            innerLettersContainer.innerHTML = '';
+                            
+                            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                            const shiftValue = parseInt(shift.value) || 0;
+                            
+                            // Rotar el anillo interior según el desplazamiento
+                            wheelInner.style.transform = `rotate(${(-shiftValue * 360 / 26)}deg)`;
+                            
+                            // Posicionar letras en el anillo exterior
+                            for (let i = 0; i < 26; i++) {
+                                // Calcular ángulo y posición
+                                const angle = i * (360 / 26);
+                                const radian = (angle - 90) * (Math.PI / 180);
+                                
+                                // Radio para el círculo exterior
+                                const radius = 130;
+                                const x = Math.round(radius * Math.cos(radian));
+                                const y = Math.round(radius * Math.sin(radian));
+                                
+                                // Crear letra
+                                const letter = document.createElement('div');
+                                letter.className = 'letter letter-outer';
+                                letter.textContent = alphabet[i];
+                                letter.style.left = `${150 + x - 12}px`;
+                                letter.style.top = `${150 + y - 12}px`;
+                                
+                                // Añadir al contenedor
+                                outerLettersContainer.appendChild(letter);
+                            }
+                            
+                            // Posicionar letras en el anillo interior
+                            for (let i = 0; i < 26; i++) {
+                                // Calcular ángulo y posición
+                                const angle = i * (360 / 26);
+                                const radian = (angle - 90) * (Math.PI / 180);
+                                
+                                // Radio para el círculo interior
+                                const radius = 75;
+                                const x = Math.round(radius * Math.cos(radian));
+                                const y = Math.round(radius * Math.sin(radian));
+                                
+                                // Crear letra
+                                const letter = document.createElement('div');
+                                letter.className = 'letter letter-inner';
+                                letter.textContent = alphabet[i];
+                                letter.style.left = `${105 + x - 12}px`;
+                                letter.style.top = `${105 + y - 12}px`;
+                                
+                                // Añadir al contenedor
+                                innerLettersContainer.appendChild(letter);
+                            }
+                            
+                            // Actualizar ejemplo
+const wheelLabel = modal.querySelector('.wheel-label');
+if (wheelLabel) {
+    // Obtener ejemplo
+    const resultLetter = applyCaesarCipher('A', shiftValue);
+    let example = `<span class="wheel-example">Ejemplo: A → ${resultLetter}</span>`;
+    
+    // Obtener texto del usuario o usar un texto predeterminado
+    const userText = (modal.querySelector('#caesarInput')?.value || '').trim().toUpperCase();
+    const exampleText = userText || 'HOLA';
+    
+    // Añadir ejemplo de codificación/decodificación si hay desplazamiento
+    if (shiftValue > 0) {
+        const codedExample = applyCaesarCipher(exampleText, shiftValue);
+        const decodedExample = applyCaesarCipher(codedExample, (26 - shiftValue) % 26);
+        example += `<br><span class="wheel-example">Codificación: ${exampleText} → ${codedExample}</span>`;
+        example += `<br><span class="wheel-example">Decodificación: ${codedExample} → ${decodedExample}</span>`;
+    }
+    
+    wheelLabel.innerHTML = `Desplazamiento actual: <strong>${shiftValue}</strong><br>${example}`;
+    
+    // Añadir nota explicativa sobre decodificación
+    let wheelNote = modal.querySelector('.wheel-note');
+    if (!wheelNote) {
+        wheelNote = document.createElement('div');
+        wheelNote.className = 'wheel-note';
+        wheelNote.innerHTML = `Para <strong>decodificar</strong> un mensaje, introduce el mismo desplazamiento que se usó para cifrarlo y pulsa "Decodificar".`;
+        wheelLabel.parentNode.appendChild(wheelNote);
+    }
+}
+                        };
+                        
+                        // Inicializar la ruleta
+                        createCaesarWheel();
+                        
+                        // Actualizar la ruleta cuando cambie el desplazamiento
+                        shift.addEventListener('input', function() {
+                            const newValue = parseInt(this.value) || 0;
+                            // Validar el rango
+                            if (newValue < 0) this.value = 0;
+                            if (newValue > 25) this.value = 25;
+                            
+                            createCaesarWheel();
+                        });
+                        
+                                                // Función para actualizar resultado en tiempo real
+                        const updateCaesarResult = (encode = true) => {
+                            const text = input.value.trim().toUpperCase();
+                            const shiftValue = parseInt(shift.value) || 0;
+                            
+                            if (!text) {
+                                result.textContent = '';
+                                return;
+                            }
+                            
+                            if (encode) {
+                                result.textContent = applyCaesarCipher(text, shiftValue);
+                            } else {
+                                result.textContent = applyCaesarCipher(text, (26 - shiftValue) % 26);
+                            }
+                        };
+                        
+                        // Actualizar en cada cambio de texto
+                        input.addEventListener('input', () => {
+                            const activeButton = modal.querySelector('.encode-decode-active') || encodeBtn;
+                            updateCaesarResult(activeButton === encodeBtn);
+                            
+                            // Actualizar también los ejemplos en la descripción
+                            createCaesarWheel();
+                        });
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            encodeBtn.classList.add('encode-decode-active');
+                            if (decodeBtn) decodeBtn.classList.remove('encode-decode-active');
+                            
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                updateCaesarResult(true);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        
+                        const decodeBtn = modal.querySelector('.decode-caesar');
+                        if (decodeBtn) {
+                            decodeBtn.addEventListener('click', () => {
+                                decodeBtn.classList.add('encode-decode-active');
+                                encodeBtn.classList.remove('encode-decode-active');
+                                
+                                const text = input.value.trim().toUpperCase();
+                                
+                                if (text) {
+                                    updateCaesarResult(false);
+                                } else {
+                                    showNotification('Por favor, introduce un texto para decodificar', 'error');
+                                }
+                            });
+                        }
+                        break;
+                    }
+                    case 'código-morse': {
+                        const input = modal.querySelector('#morseInput');
+                        const encodeBtn = modal.querySelector('.encode-morse');
+                        const result = modal.querySelector('#morseResult');
+                        const playBtn = modal.querySelector('.play-morse');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                const morse = textToMorse(text);
+                                result.textContent = morse;
+                                console.log('✅ Texto codificado a morse:', morse);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        
+                        if (playBtn) {
+                            playBtn.addEventListener('click', async () => {
+                                const morse = result.textContent.trim();
+                                console.log('🎵 Botón de reproducir morse clickeado, morse:', morse);
+                                
+                                if (morse && morse !== '') {
+                                    try {
+                                        // Deshabilitar el botón temporalmente para evitar múltiples reproducciones
+                                        playBtn.disabled = true;
+                                        playBtn.textContent = 'Reproduciendo...';
+                                        
+                                        await playMorseCode(morse);
+                                        
+                                        console.log('✅ Reproducción de morse completada exitosamente');
+                                    } catch (error) {
+                                        console.error('❌ Error reproduciendo morse:', error);
+                                        showNotification('Error al reproducir el código morse. Asegúrate de haber interactuado con la página primero.', 'error');
+                                    } finally {
+                                        // Rehabilitar el botón
+                                        setTimeout(() => {
+                                            playBtn.disabled = false;
+                                            playBtn.innerHTML = '<i class="fas fa-volume-up"></i> Escuchar';
+                                        }, 1000);
+                                    }
+                                } else {
+                                    showNotification('Primero debes codificar un texto para poder escucharlo', 'error');
+                                    console.log('❌ No hay código morse para reproducir');
+                                }
+                            });
+                        }
+                        
+                        break;
+                    }
+                    case 'cifrado-de-polibio': {
+                        const input = modal.querySelector('#polybiusInput');
+                        const encodeBtn = modal.querySelector('.encode-polybius');
+                        const result = modal.querySelector('#polybiusResult');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                result.textContent = applyPolybiusCipher(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'cifrado-pigpen': {
+                        const input = modal.querySelector('#pigpenInput');
+                        const encodeBtn = modal.querySelector('.encode-pigpen');
+                        const result = modal.querySelector('#pigpenResult');
+                        const symbolsContainer = modal.querySelector('#pigpenSymbols');
+                        
+                        // Añadir efecto visual al hacer hover sobre las celdas del grid
+                        const gridCells = modal.querySelectorAll('.pigpen-grid-cell');
+                        gridCells.forEach(cell => {
+                            cell.addEventListener('mouseenter', () => {
+                                const letter = cell.getAttribute('data-letter');
+                                cell.classList.add('active');
+                            });
+                            
+                            cell.addEventListener('mouseleave', () => {
+                                cell.classList.remove('active');
+                            });
+                            
+                            cell.addEventListener('click', () => {
+                                const letter = cell.getAttribute('data-letter');
+                                input.value += letter;
+                                // Actualizar la visualización al hacer clic en las letras
+                                result.textContent = input.value;
+                                renderPigpenSymbols(input.value);
+                            });
+                        });
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                result.textContent = applyPigpenCipher(text);
+                                renderPigpenSymbols(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'cifrado-vigenère': {
+                        const input = modal.querySelector('#vigenereInput');
+                        const key = modal.querySelector('#vigenereKey');
+                        const encodeBtn = modal.querySelector('.encode-vigenere');
+                        const result = modal.querySelector('#vigenereResult');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            const keyText = key.value.trim().toUpperCase();
+                            
+                            if (text && keyText) {
+                                result.textContent = applyVigenereCipher(text, keyText);
+                            } else {
+                                showNotification('Por favor, introduce un texto y una clave para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'cifrado-atbash': {
+                        const input = modal.querySelector('#atbashInput');
+                        const encodeBtn = modal.querySelector('.encode-atbash');
+                        const result = modal.querySelector('#atbashResult');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                result.textContent = applyAtbashCipher(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'cifrado-de-sustitución': {
+                        const input = modal.querySelector('#substitutionInput');
+                        const encodeBtn = modal.querySelector('.encode-substitution');
+                        const result = modal.querySelector('#substitutionResult');
+                        const customInputs = modal.querySelectorAll('.alphabet-cells.custom input');
+                        const randomizeBtn = modal.querySelector('#randomizeSubst');
+                        const resetBtn = modal.querySelector('#resetSubst');
+                        
+                        // Función para obtener el alfabeto personalizado actual
+                        const getCurrentAlphabet = () => {
+                            const alphabet = {};
+                            customInputs.forEach(input => {
+                                const original = input.getAttribute('data-original');
+                                const replacement = input.value.toUpperCase();
+                                if (replacement && /[A-Z]/.test(replacement)) {
+                                    alphabet[original] = replacement;
+                                } else {
+                                    alphabet[original] = original; // Si no hay valor válido, usamos el original
+                                }
+                            });
+                            return alphabet;
+                        };
+                        
+                        // Aleatorizar el alfabeto
+                        if (randomizeBtn) {
+                            randomizeBtn.addEventListener('click', () => {
+                                const originalAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                const randomAlphabet = shuffleArray(originalAlphabet.split(''));
+                                
+                                customInputs.forEach((input, index) => {
+                                    input.value = randomAlphabet[index];
+                                });
+                            });
+                        }
+                        
+                        // Restablecer el alfabeto al ATBASH (A=Z, B=Y, etc.)
+                        if (resetBtn) {
+                            resetBtn.addEventListener('click', () => {
+                                const originalAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                const reversedAlphabet = 'ZYXWVUTSRQPONMLKJIHGFEDCBA';
+                                
+                                customInputs.forEach((input, index) => {
+                                    input.value = reversedAlphabet[index];
+                                });
+                            });
+                        }
+                        
+                        // Codificación
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            
+                            if (text) {
+                                const customAlphabet = getCurrentAlphabet();
+                                result.textContent = applySubstitutionCipher(text, customAlphabet);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'código-ascii': {
+                        const input = modal.querySelector('#asciiInput');
+                        const encodeBtn = modal.querySelector('.encode-ascii');
+                        const result = modal.querySelector('#asciiResult');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim();
+                            
+                            if (text) {
+                                result.textContent = textToAscii(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'cifrado-binario': {
+                        const input = modal.querySelector('#binaryInput');
+                        const encodeBtn = modal.querySelector('.encode-binary');
+                        const result = modal.querySelector('#binaryResult');
+                        
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim();
+                            
+                            if (text) {
+                                result.textContent = textToBinary(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        break;
+                    }
+                    case 'teclado-nokia': {
+                        const input = modal.querySelector('#nokiaInput');
+                        const encodeBtn = modal.querySelector('.encode-nokia');
+                        const decodeBtn = modal.querySelector('.decode-nokia');
+                        const result = modal.querySelector('#nokiaResult');
+                        const nokiaKeys = modal.querySelectorAll('.nokia-key');
+                        const nokiaScreen = modal.querySelector('#nokiaText');
+                        
+                        // Añadir evento para las teclas del teclado Nokia
+                        nokiaKeys.forEach(key => {
+                            key.addEventListener('click', () => {
+                                const keyValue = key.dataset.key;
+                                let lastChar = '';
+                                
+                                // Mostrar la interacción con el teclado
+                                nokiaScreen.textContent = keyValue;
+                                setTimeout(() => {
+                                    nokiaScreen.textContent = '';
+                                }, 500);
+                                
+                                // Añadir el valor al input según el modo
+                                if (decodeBtn.classList.contains('active')) {
+                                    // Modo decodificación: añadir el número directamente
+                                    input.value += keyValue;
+                                } else {
+                                    // Modo codificación: mostrar la letra correspondiente
+                                    const charMap = {
+                                        '1': ['.', ',', '?', '!'],
+                                        '2': ['A', 'B', 'C'],
+                                        '3': ['D', 'E', 'F'],
+                                        '4': ['G', 'H', 'I'],
+                                        '5': ['J', 'K', 'L'],
+                                        '6': ['M', 'N', 'O'],
+                                        '7': ['P', 'Q', 'R', 'S'],
+                                        '8': ['T', 'U', 'V'],
+                                        '9': ['W', 'X', 'Y', 'Z'],
+                                        '0': [' '],
+                                        '*': ['*'],
+                                        '#': ['#']
+                                    };
+                                    
+                                    if (charMap[keyValue]) {
+                                        input.value += charMap[keyValue][0];
+                                    }
+                                }
+                            });
+                        });
+                        
+                        // Botón de codificación
+                        encodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim();
+                            
+                            if (text) {
+                                result.textContent = applyNokiaEncoding(text);
+                            } else {
+                                showNotification('Por favor, introduce un texto para codificar', 'error');
+                            }
+                        });
+                        
+                        // Botón de decodificación
+                        decodeBtn.addEventListener('click', () => {
+                            const text = input.value.trim();
+                            
+                            if (text) {
+                                result.textContent = applyNokiaDecoding(text);
+                            } else {
+                                showNotification('Por favor, introduce secuencias numéricas para decodificar', 'error');
+                            }
+                        });
+                        
+                        break;
+                    }
+                }
+            }
+            
+            // Funciones para abrir y cerrar modales
+            function openModal(modal) {
+                modal.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+                
+                // Si es el modal del cifrado César, inicializar la ruleta después de que sea visible
+                if (modal.id === 'modal-cifrado-césar') {
+                    setTimeout(() => {
+                        if (typeof createCaesarWheel === 'function') {
+                            // Resetear los campos de entrada y salida
+                            const input = modal.querySelector('#caesarInput');
+                            const result = modal.querySelector('#caesarResult');
+                            const shiftInput = modal.querySelector('#caesarShift');
+                            
+                            if (input) input.value = '';
+                            if (result) result.textContent = '';
+                            if (shiftInput) {
+                                shiftInput.value = '0';
+                                createCaesarWheel();
+                            } else {
+                                createCaesarWheel();
+                            }
+                        }
+                    }, 100);
+                }
+            }
+            
+            function closeModal(modal) {
+                modal.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+            
+            // Función para mostrar notificaciones
+            function showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.setAttribute('role', 'alert');
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Modal para sugerir cifrados
+            const suggestBtn = document.getElementById('suggestCipher');
+            if (suggestBtn) {
+                suggestBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showNotification('¡Gracias por tu interés! La funcionalidad para sugerir cifrados estará disponible próximamente.', 'success');
+                });
+            }
+
+            // Añadir función para el cifrado Nokia
+            const nokiaKeyMap = {
+                'A': '2', 'B': '22', 'C': '222',
+                'D': '3', 'E': '33', 'F': '333',
+                'G': '4', 'H': '44', 'I': '444',
+                'J': '5', 'K': '55', 'L': '555',
+                'M': '6', 'N': '66', 'O': '666',
+                'P': '7', 'Q': '77', 'R': '777', 'S': '7777',
+                'T': '8', 'U': '88', 'V': '888',
+                'W': '9', 'X': '99', 'Y': '999', 'Z': '9999',
+                ' ': '0'
+            };
+            
+            const nokiaReverseMap = {
+                '2': 'A', '22': 'B', '222': 'C',
+                '3': 'D', '33': 'E', '333': 'F',
+                '4': 'G', '44': 'H', '444': 'I',
+                '5': 'J', '55': 'K', '555': 'L',
+                '6': 'M', '66': 'N', '666': 'O',
+                '7': 'P', '77': 'Q', '777': 'R', '7777': 'S',
+                '8': 'T', '88': 'U', '888': 'V',
+                '9': 'W', '99': 'X', '999': 'Y', '9999': 'Z',
+                '0': ' ',
+                '1': '.', '11': ',', '111': '?', '1111': '!'
+            };
+            
+            const applyNokiaEncoding = (text) => {
+                text = text.toUpperCase();
+                let result = [];
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    if (nokiaKeyMap[char]) {
+                        result.push(nokiaKeyMap[char]);
+                    } else {
+                        result.push(char);
+                    }
+                }
+                
+                return result.join(' ');
+            };
+            
+            const applyNokiaDecoding = (text) => {
+                // Dividir por espacios para obtener cada secuencia de números
+                const sequences = text.trim().split(/\s+/);
+                let result = '';
+                
+                for (let i = 0; i < sequences.length; i++) {
+                    const seq = sequences[i];
+                    if (nokiaReverseMap[seq]) {
+                        result += nokiaReverseMap[seq];
+                    } else {
+                        result += seq;
+                    }
+                }
+                
+                return result;
+            };
+        });
+    </script>
+</body>
+</html> 

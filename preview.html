@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolver Candado - Escapify</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <style>
+        :root[data-theme="light"] {
+            --preview-bg: white;
+            --preview-text: var(--text-color);
+            --preview-surface: var(--background-color);
+            --preview-border: rgba(0, 0, 0, 0.1);
+            --preview-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --preview-hover: rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="dark"] {
+            --preview-bg: #1a1a1a;
+            --preview-text: #ffffff;
+            --preview-surface: #2d2d2d;
+            --preview-border: rgba(255, 255, 255, 0.1);
+            --preview-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --preview-hover: rgba(255, 255, 255, 0.05);
+        }
+
+        .preview-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--preview-bg);
+            color: var(--preview-text);
+            border-radius: 10px;
+            box-shadow: var(--preview-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: none;
+            border: none;
+            color: var(--preview-text);
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        .preview-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-header p {
+            color: var(--preview-text);
+            opacity: 0.8;
+        }
+
+        .lock-preview {
+            background: var(--preview-surface);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .lock-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .code-display {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: monospace;
+            font-size: var(--keypad-size, 1.2rem);
+            margin-bottom: 1rem;
+            min-height: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .hint-button {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem auto;
+            transition: all 0.3s ease;
+        }
+
+        .hint-button:hover {
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .hint-content {
+            display: none;
+            background: var(--preview-surface);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            border: 1px solid var(--preview-border);
+            transition: all 0.3s ease;
+        }
+
+        .hint-content.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lock-message {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .lock-message.visible {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .lock-message.success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .lock-message.error {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .preview-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-preview {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-preview.primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-preview.secondary {
+            background-color: var(--preview-surface);
+            color: var(--preview-text);
+            border: 1px solid var(--preview-border);
+        }
+
+        .btn-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--preview-shadow);
+        }
+
+        .customization-panel {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--preview-bg);
+            padding: 2rem;
+            box-shadow: var(--preview-shadow);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .customization-panel.visible {
+            right: 0;
+        }
+
+        .customization-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--preview-shadow);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .customization-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .customization-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .customization-section h3 {
+            color: var(--preview-text);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .customization-option {
+            margin-bottom: 1rem;
+        }
+
+        .customization-option label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--preview-text);
+        }
+
+        .customization-option select,
+        .customization-option input[type="range"] {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--preview-border);
+            background: var(--preview-surface);
+            color: var(--preview-text);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--preview-border);
+            transition: transform 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .preview-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .preview-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .lock-preview {
+                padding: 1rem;
+            }
+
+            .customization-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* Estilos para efectos de confeti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        .confetti {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 20px;
+            animation: confetti-fall linear forwards;
+            transform-origin: center;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content para accesibilidad con teclado -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <div class="container">
+        <!-- Sistema de Puntuación y Tiempo -->
+        <div class="score-container">
+            <i class="fas fa-star score-icon"></i>
+            <span class="score-value" id="scoreDisplay">0</span>
+        </div>
+        <div class="timer-container">
+            <i class="fas fa-clock timer-icon"></i>
+            <span class="timer-value" id="timerDisplay">00:00</span>
+        </div>
+
+        <!-- Contenido del Candado -->
+        <div class="lock-container">
+            <h1 class="lock-title" id="lockName">Resolver Candado</h1>
+            <p class="lock-description" id="lockDescription"></p>
+            
+            <div class="lock-image-container" id="lockImageContainer" style="display: none;">
+                <img id="lockImage" class="lock-image" alt="Imagen del candado">
+            </div>
+
+            <!-- Sistema de Pistas -->
+            <div class="hints-container" id="hintsContainer" style="display: none;">
+                <div class="hints-header">
+                    <div class="hints-count">
+                        <i class="fas fa-lightbulb"></i>
+                        <span id="hintsRemaining">3</span> pistas restantes
+                    </div>
+                    <button class="hint-button" id="hintButton">
+                        <i class="fas fa-lightbulb"></i>
+                        Obtener Pista
+                    </button>
+                </div>
+                <div class="hint-content" id="hintContent"></div>
+            </div>
+
+            <div class="code-display" id="codeDisplay">
+                <span class="placeholder">Ingresa el código</span>
+            </div>
+
+            <div id="lockKeypad" class="lock-keypad-container">
+                <!-- El teclado específico se cargará dinámicamente -->
+            </div>
+
+            <div class="lock-message" id="lockMessage"></div>
+
+            <div class="lock-actions">
+                <button class="btn btn-secondary" id="resetButton">
+                    <i class="fas fa-redo"></i> Reiniciar
+                </button>
+                <button class="btn btn-secondary" id="backButton">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+        </div>
+
+        <!-- Misiones Activas -->
+        <div class="missions-container" id="missionsContainer">
+            <div class="missions-header">
+                <h2 class="missions-title">
+                    <i class="fas fa-trophy"></i>
+                    Misiones Activas
+                </h2>
+            </div>
+            <div class="missions-grid" id="missionsGrid">
+                <!-- Las misiones se cargarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <button class="customization-toggle" id="customizationToggle" aria-label="Personalizar">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <div class="customization-panel" id="customizationPanel">
+        <div class="customization-section">
+            <h3>Apariencia</h3>
+            <div class="customization-option">
+                <label>Tema de color</label>
+                <div class="color-picker" id="themeColors">
+                    <div class="color-option" style="background: #2c3e50;" data-theme="default"></div>
+                    <div class="color-option" style="background: #27ae60;" data-theme="green"></div>
+                    <div class="color-option" style="background: #8e44ad;" data-theme="purple"></div>
+                    <div class="color-option" style="background: #e67e22;" data-theme="orange"></div>
+                    <div class="color-option" style="background: #c0392b;" data-theme="red"></div>
+                </div>
+            </div>
+            <div class="customization-option">
+                <label>Tamaño del teclado</label>
+                <input type="range" id="keypadSize" min="0.8" max="1.5" step="0.1" value="1">
+            </div>
+        </div>
+
+        <div class="customization-section">
+            <h3>Efectos</h3>
+            <div class="customization-option">
+                <label>
+                    <input type="checkbox" id="enableAnimations" checked>
+                    Habilitar animaciones
+                </label>
+            </div>
+            <div class="customization-option">
+                <label>
+                    <input type="checkbox" id="enableSounds" checked>
+                    Habilitar sonidos
+                </label>
+            </div>
+        </div>
+
+        <div class="customization-section">
+            <h3>Estilo de botones</h3>
+            <div class="customization-option">
+                <label>Forma</label>
+                <select id="buttonStyle">
+                    <option value="rounded">Redondeado</option>
+                    <option value="square">Cuadrado</option>
+                    <option value="pill">Píldora</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <!-- Scripts -->
+        <script src="assets/js/theme.js" type="module"></script>
+        <script src="assets/js/nav.js" type="module"></script>
+        <script src="assets/js/accessibility.js" type="module"></script>
+        <script type="module">
+            import LockTypes from './assets/js/lock-types.js';
+            import LockSystem from './assets/js/lock-system.js';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const lockSystem = new LockSystem();
+                const lockData = JSON.parse(localStorage.getItem('previewLock') || '{}');
+                
+                // Elementos del DOM
+                const lockName = document.getElementById('lockName');
+                const lockDescription = document.getElementById('lockDescription');
+                const lockImage = document.getElementById('lockImage');
+                const lockImageContainer = document.getElementById('lockImageContainer');
+                const codeDisplay = document.getElementById('codeDisplay');
+                const lockKeypad = document.getElementById('lockKeypad');
+                const hintButton = document.getElementById('hintButton');
+                const hintContent = document.getElementById('hintContent');
+                const hintsContainer = document.getElementById('hintsContainer');
+                const hintsRemaining = document.getElementById('hintsRemaining');
+                const lockMessage = document.getElementById('lockMessage');
+                const backButton = document.getElementById('backButton');
+                const resetButton = document.getElementById('resetButton');
+                const timerDisplay = document.getElementById('timerDisplay');
+                const missionsGrid = document.getElementById('missionsGrid');
+
+                let enteredCode = '';
+                let currentLockType = null;
+                let timerInterval = null;
+                let startTime = null;
+
+                // Inicializar el candado
+                if (lockData.type) {
+                    currentLockType = LockTypes.TYPES[lockData.type.toUpperCase()];
+                    if (currentLockType) {
+                        // Configurar datos básicos
+                        lockName.textContent = lockData.name || `Candado ${currentLockType.name}`;
+                        lockDescription.textContent = lockData.description || currentLockType.description;
+                        
+                        // Configurar imagen
+                        if (lockData.image) {
+                            lockImage.src = lockData.image;
+                            lockImageContainer.style.display = 'block';
+                        }
+
+                        // Configurar pistas
+                        if (lockData.hints && lockData.hints.length > 0) {
+                            hintsContainer.style.display = 'block';
+                            lockSystem.initializeHints(lockData);
+                            updateHintsDisplay();
+                        }
+
+                        // Cargar el teclado específico
+                        const template = LockTypes.getTemplate(currentLockType.id);
+                        if (template) {
+                            lockKeypad.appendChild(template);
+                            setupKeypadListeners();
+                        }
+
+                        // Iniciar temporizador
+                        startTimer();
+                    }
+                }
+
+                // Configurar eventos
+                function setupKeypadListeners() {
+                    lockKeypad.querySelectorAll('.keypad-button').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const value = button.dataset.value;
+                            if (currentLockType.id.includes('pattern')) {
+                                handlePatternInput(button);
+                            } else {
+                                handleNormalInput(value);
+                            }
+                        });
+                    });
+                }
+
+                function handlePatternInput(button) {
+                    button.classList.toggle('selected');
+                    const selectedButtons = lockKeypad.querySelectorAll('.pattern-button.selected');
+                    enteredCode = Array.from(selectedButtons).map(btn => btn.dataset.value).join(',');
+                    updateDisplay();
+                    checkCode();
+                }
+
+                function handleNormalInput(value) {
+                    if (currentLockType.id === 'computer-login') {
+                        const username = document.getElementById('username')?.value || '';
+                        const password = document.getElementById('password')?.value || '';
+                        enteredCode = `${username}:${password}`;
+                    } else {
+                        enteredCode += value;
+                    }
+                    updateDisplay();
+                    checkCode();
+                }
+
+                function updateDisplay() {
+                    if (enteredCode) {
+                        codeDisplay.innerHTML = `<span class="code">${enteredCode}</span>`;
+                    } else {
+                        codeDisplay.innerHTML = '<span class="placeholder">Ingresa el código</span>';
+                    }
+                }
+
+                function checkCode() {
+                    if (LockTypes.validateCode(currentLockType.id, enteredCode)) {
+                        if (enteredCode === lockData.code) {
+                            const timeSpent = (Date.now() - startTime) / 1000;
+                            const score = lockSystem.calculateScore();
+                            lockSystem.updateScore(score);
+                            lockSystem.updateMissionProgress('speed', timeSpent);
+                            
+                            showMessage('¡Candado desbloqueado!', 'success');
+                            stopTimer();
+                            
+                            if (lockData.url) {
+                                setTimeout(() => window.location.href = lockData.url, 2000);
+                            }
+                        } else {
+                            showMessage('Código incorrecto', 'error');
+                            codeDisplay.classList.add('shake');
+                            setTimeout(() => codeDisplay.classList.remove('shake'), 500);
+                        }
+                    }
+                }
+
+                function showMessage(message, type) {
+                    lockMessage.textContent = message;
+                    lockMessage.className = `lock-message ${type} visible`;
+                    setTimeout(() => {
+                        lockMessage.classList.remove('visible');
+                    }, 3000);
+                }
+
+                // Sistema de Pistas
+                hintButton.addEventListener('click', () => {
+                    const hint = lockSystem.getNextHint();
+                    if (hint) {
+                        hintContent.textContent = hint.text;
+                        hintContent.classList.add('visible');
+                        updateHintsDisplay();
+                    }
+                });
+
+                function updateHintsDisplay() {
+                    hintsRemaining.textContent = lockSystem.remainingHints;
+                    hintButton.disabled = lockSystem.remainingHints <= 0;
+                }
+
+                // Sistema de Temporizador
+                function startTimer() {
+                    startTime = Date.now();
+                    timerInterval = setInterval(updateTimer, 1000);
+                }
+
+                function stopTimer() {
+                    if (timerInterval) {
+                        clearInterval(timerInterval);
+                    }
+                }
+
+                function updateTimer() {
+                    const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    // Advertencia cuando quede poco tiempo
+                    if (timeSpent >= 240) { // 4 minutos
+                        timerDisplay.classList.add('warning');
+                    }
+                }
+
+                // Sistema de Misiones
+                function renderMissions() {
+                    const activeMissions = lockSystem.missions.filter(m => !m.completed);
+                    missionsGrid.innerHTML = activeMissions.map(mission => `
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <h3 class="mission-title">${mission.title}</h3>
+                                <span class="mission-reward">+${mission.reward}</span>
+                            </div>
+                            <p class="mission-description">${mission.description}</p>
+                            ${mission.type === 'theme' ? `
+                                <div class="mission-progress">
+                                    <div class="mission-progress-bar" style="width: ${(mission.progress / mission.target) * 100}%"></div>
+                                </div>
+                                <div class="mission-status">
+                                    <span>Progreso: ${mission.progress}/${mission.target}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('') || '<p class="no-missions">No hay misiones activas</p>';
+                }
+
+                // Eventos de botones
+                backButton.addEventListener('click', () => {
+                    stopTimer();
+                    window.location.href = '/generador.html';
+                });
+
+                resetButton.addEventListener('click', () => {
+                    enteredCode = '';
+                    updateDisplay();
+                    if (currentLockType.id.includes('pattern')) {
+                        lockKeypad.querySelectorAll('.pattern-button').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                    }
+                    lockMessage.classList.remove('visible');
+                    hintContent.classList.remove('visible');
+                });
+
+                // Inicializar
+                renderMissions();
+                lockSystem.updateScoreDisplay();
+
+                // Nuevas variables para personalización
+                const themeToggle = document.getElementById('themeToggle');
+                const customizationToggle = document.getElementById('customizationToggle');
+                const customizationPanel = document.getElementById('customizationPanel');
+                const themeColors = document.getElementById('themeColors');
+                const keypadSize = document.getElementById('keypadSize');
+                const enableAnimations = document.getElementById('enableAnimations');
+                const enableSounds = document.getElementById('enableSounds');
+                const buttonStyle = document.getElementById('buttonStyle');
+
+                // Sonidos
+                const sounds = {
+                    click: new Audio('assets/sounds/click.mp3'),
+                    success: new Audio('assets/sounds/success.mp3'),
+                    error: new Audio('assets/sounds/error.mp3')
+                };
+
+                // Cargar preferencias guardadas
+                const preferences = JSON.parse(localStorage.getItem('lockPreferences') || '{}');
+                document.documentElement.setAttribute('data-theme', preferences.theme || 'light');
+                document.documentElement.style.setProperty('--keypad-size', `${preferences.keypadSize || 1}rem`);
+                enableAnimations.checked = preferences.animations !== false;
+                enableSounds.checked = preferences.sounds !== false;
+                buttonStyle.value = preferences.buttonStyle || 'rounded';
+
+                // Cambiar tema
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    themeToggle.innerHTML = newTheme === 'light' ? 
+                        '<i class="fas fa-moon"></i>' : 
+                        '<i class="fas fa-sun"></i>';
+                    savePreferences();
+                });
+
+                // Toggle panel de personalización
+                customizationToggle.addEventListener('click', () => {
+                    customizationPanel.classList.toggle('visible');
+                    customizationToggle.innerHTML = customizationPanel.classList.contains('visible') ?
+                        '<i class="fas fa-times"></i>' :
+                        '<i class="fas fa-cog"></i>';
+                });
+
+                // Cambiar tema de color
+                themeColors.querySelectorAll('.color-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        themeColors.querySelectorAll('.color-option').forEach(opt => 
+                            opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        document.documentElement.style.setProperty('--primary-color', option.style.background);
+                        savePreferences();
+                    });
+                });
+
+                // Cambiar tamaño del teclado
+                keypadSize.addEventListener('input', (e) => {
+                    document.documentElement.style.setProperty('--keypad-size', `${e.target.value}rem`);
+                    savePreferences();
+                });
+
+                // Habilitar/deshabilitar animaciones
+                enableAnimations.addEventListener('change', () => {
+                    document.body.style.setProperty('--enable-animations', enableAnimations.checked ? '1' : '0');
+                    savePreferences();
+                });
+
+                // Habilitar/deshabilitar sonidos
+                enableSounds.addEventListener('change', savePreferences);
+
+                // Cambiar estilo de botones
+                buttonStyle.addEventListener('change', (e) => {
+                    document.documentElement.style.setProperty('--button-radius', 
+                        e.target.value === 'rounded' ? '5px' :
+                        e.target.value === 'square' ? '0' : '50px');
+                    savePreferences();
+                });
+
+                // Guardar preferencias
+                function savePreferences() {
+                    const preferences = {
+                        theme: document.documentElement.getAttribute('data-theme'),
+                        keypadSize: keypadSize.value,
+                        animations: enableAnimations.checked,
+                        sounds: enableSounds.checked,
+                        buttonStyle: buttonStyle.value,
+                        primaryColor: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--primary-color').trim()
+                    };
+                    localStorage.setItem('lockPreferences', JSON.stringify(preferences));
+                }
+
+                // Modificar funciones existentes para incluir sonidos
+                const originalShowMessage = showMessage;
+                showMessage = function(message, type) {
+                    originalShowMessage(message, type);
+                    if (enableSounds.checked) {
+                        sounds[type === 'success' ? 'success' : 'error'].play();
+                    }
+                };
+
+                // Modificar setupKeypadListeners para incluir sonidos
+                const originalSetupKeypadListeners = setupKeypadListeners;
+                setupKeypadListeners = function() {
+                    originalSetupKeypadListeners();
+                    lockKeypad.querySelectorAll('.keypad-button').forEach(button => {
+                        button.addEventListener('click', () => {
+                            if (enableSounds.checked) {
+                                sounds.click.play();
+                            }
+                        });
+                    });
+                };
+            });
+        </script>
+    </main>
+</body>
+</html> 

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda - Escapify</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to content para accesibilidad con teclado -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link active" aria-current="page">Ayuda</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="history-hero" aria-labelledby="hero-title">
+        <div class="container">
+            <h1 class="section-title" id="hero-title">Centro de Ayuda</h1>
+            <p class="section-subtitle">Todo lo que necesitas saber sobre Escapify</p>
+            <div class="search-box help-search">
+                <input type="text" id="helpSearch" placeholder="Buscar en la ayuda..." aria-label="Buscar en la ayuda">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Sección de guías rápidas -->
+            <section class="quick-guides">
+                <h2 class="section-title">Guías Rápidas</h2>
+                <div class="guides-grid">
+                    <a href="#crear-candado" class="guide-card">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Crear un Candado</h3>
+                        <p>Aprende a crear tu primer candado digital</p>
+                    </a>
+                    <a href="#tipos-candados" class="guide-card">
+                        <i class="fas fa-key"></i>
+                        <h3>Tipos de Candados</h3>
+                        <p>Conoce los diferentes tipos de candados disponibles</p>
+                    </a>
+                    <a href="#compartir" class="guide-card">
+                        <i class="fas fa-share-alt"></i>
+                        <h3>Compartir Candados</h3>
+                        <p>Aprende a compartir tus candados con otros</p>
+                    </a>
+                    <a href="#personalizar" class="guide-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Personalización</h3>
+                        <p>Personaliza la apariencia de tus candados</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Sección de FAQ -->
+            <section class="faq-section" id="faq">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Qué es un candado digital?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Un candado digital es una herramienta interactiva que permite crear desafíos o pruebas que requieren un código específico para ser resueltos. Pueden ser numéricos, direccionales, de colores, patrones y más.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cómo puedo crear mi primer candado?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para crear un candado, ve a la sección "Generador", selecciona el tipo de candado que deseas crear, configura las opciones y guarda. ¡Es así de sencillo!</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Puedo compartir mis candados?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sí, puedes compartir tus candados de varias formas: mediante códigos QR, enlaces directos o exportando el historial completo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Los candados son seguros?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Los candados se almacenan localmente en tu navegador y no se comparten con servidores externos. Sin embargo, recuerda que son herramientas para entretenimiento y no para seguridad crítica.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de guías detalladas -->
+            <section class="detailed-guides">
+                <h2 class="section-title">Guías Detalladas</h2>
+                
+                <article id="crear-candado" class="guide-article">
+                    <h3>Crear un Candado</h3>
+                    <div class="guide-content">
+                        <div class="guide-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Selecciona el tipo</h4>
+                                <p>Elige entre los diferentes tipos de candados disponibles: numérico, direccional, de colores, patrones, etc.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Configura las opciones</h4>
+                                <p>Personaliza el nombre, descripción, mensaje de éxito y pistas para tu candado.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Establece el código</h4>
+                                <p>Define el código o patrón que desbloqueará el candado.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Guarda y comparte</h4>
+                                <p>Guarda tu candado y genera un código QR o enlace para compartirlo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="tipos-candados" class="guide-article">
+                    <h3>Tipos de Candados</h3>
+                    <div class="lock-types-grid">
+                        <div class="lock-type-card">
+                            <i class="fas fa-hashtag"></i>
+                            <h4>Numérico</h4>
+                            <p>Códigos PIN de 4-8 dígitos</p>
+                        </div>
+                        <div class="lock-type-card">
+                            <i class="fas fa-font"></i>
+                            <h4>Alfanumérico</h4>
+                            <p>Combinaciones de letras y números</p>
+                        </div>
+                        <div class="lock-type-card">
+                            <i class="fas fa-arrows-alt"></i>
+                            <h4>Direccional</h4>
+                            <p>Secuencias de direcciones (4 u 8)</p>
+                        </div>
+                        <div class="lock-type-card">
+                            <i class="fas fa-palette"></i>
+                            <h4>Color</h4>
+                            <p>Combinaciones de colores</p>
+                        </div>
+                        <div class="lock-type-card">
+                            <i class="fas fa-th"></i>
+                            <h4>Patrón</h4>
+                            <p>Patrones en grid de 3x3 o 4x4</p>
+                        </div>
+                        <div class="lock-type-card">
+                            <i class="fas fa-desktop"></i>
+                            <h4>Login</h4>
+                            <p>Simulación de inicio de sesión</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="compartir" class="guide-article">
+                    <h3>Compartir Candados</h3>
+                    <div class="guide-content">
+                        <div class="share-method">
+                            <i class="fas fa-qrcode"></i>
+                            <h4>Código QR</h4>
+                            <p>Genera un código QR que enlaza directamente a tu candado. Perfecto para compartir en persona o en materiales impresos.</p>
+                        </div>
+                        <div class="share-method">
+                            <i class="fas fa-link"></i>
+                            <h4>Enlace Directo</h4>
+                            <p>Obtén un enlace único que puedes compartir por mensaje, email o redes sociales.</p>
+                        </div>
+                        <div class="share-method">
+                            <i class="fas fa-file-export"></i>
+                            <h4>Exportar Historial</h4>
+                            <p>Exporta tu historial completo de candados en formato JSON para respaldo o transferencia.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="personalizar" class="guide-article">
+                    <h3>Personalización</h3>
+                    <div class="guide-content">
+                        <div class="customization-option">
+                            <i class="fas fa-paint-brush"></i>
+                            <h4>Apariencia</h4>
+                            <p>Personaliza colores, fuentes y estilos de tus candados.</p>
+                        </div>
+                        <div class="customization-option">
+                            <i class="fas fa-comment-alt"></i>
+                            <h4>Mensajes</h4>
+                            <p>Configura mensajes de éxito, error y pistas personalizadas.</p>
+                        </div>
+                        <div class="customization-option">
+                            <i class="fas fa-image"></i>
+                            <h4>Imágenes</h4>
+                            <p>Añade imágenes personalizadas a tus candados.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Seccion de Accesibilidad -->
+                <div class="container">
+                    <div class="guide-article">
+                        <h3 id="accesibilidad">Características de Accesibilidad</h3>
+                        <div class="guide-content">
+                            <p>En Escapify nos comprometemos a hacer que nuestras herramientas sean accesibles para todos. Hemos implementado numerosas características para garantizar que todos los usuarios puedan disfrutar de nuestra plataforma, independientemente de sus capacidades.</p>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>ColorADD para Daltónicos</h4>
+                                    <p>Hemos implementado el sistema ColorADD, un "alfabeto de colores" que permite a las personas con daltonismo identificar correctamente los colores mediante símbolos estandarizados.</p>
+                                    
+                                    <div class="coloradd-explanation">
+                                        <h5>Símbolos básicos de ColorADD:</h5>
+                                        <ul>
+                                            <li>
+                                                <svg width="20" height="20" viewBox="0 0 50 50">
+                                                    <line x1="10" y1="40" x2="40" y2="10" stroke="black" stroke-width="4" stroke-linecap="round"/>
+                                                </svg>
+                                                Amarillo - Representa el color amarillo con una barra diagonal
+                                            </li>
+                                            <li>
+                                                <svg width="20" height="20" viewBox="0 0 50 50">
+                                                    <polygon points="10,10 10,40 40,25" fill="black"/>
+                                                </svg>
+                                                Azul - Representa el color azul con un triángulo apuntando a la derecha
+                                            </li>
+                                            <li>
+                                                <svg width="20" height="20" viewBox="0 0 50 50">
+                                                    <polygon points="40,10 40,40 10,25" fill="black"/>
+                                                </svg>
+                                                Rojo - Representa el color rojo con un triángulo apuntando a la izquierda
+                                            </li>
+                                        </ul>
+                                        <p>Estos símbolos pueden combinarse para representar otros colores, como el verde (combinación de amarillo y azul) y el naranja (combinación de amarillo y rojo).</p>
+                                        <p>Para activar ColorADD, utiliza el panel de accesibilidad pulsando el botón <i class="fas fa-universal-access"></i> en la parte superior derecha de la pantalla.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Para Discapacidad Visual</h4>
+                                    <p>Hemos implementado varias características para usuarios con baja visión:</p>
+                                    <ul>
+                                        <li>Modo de alto contraste para mejorar la legibilidad</li>
+                                        <li>Opción de texto más grande y espaciado</li>
+                                        <li>Compatibilidad con lectores de pantalla (ARIA)</li>
+                                        <li>Navegación por teclado mejorada</li>
+                                        <li>Enlaces "saltar al contenido" para evitar navegación repetitiva</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Para Discapacidad Auditiva</h4>
+                                    <p>Aseguramos que los usuarios con discapacidad auditiva puedan utilizar plenamente nuestra aplicación:</p>
+                                    <ul>
+                                        <li>Alertas visuales para notificaciones importantes</li>
+                                        <li>No dependemos del audio para funcionalidades esenciales</li>
+                                        <li>Opciones para desactivar o personalizar efectos de sonido</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Para Discapacidad Intelectual</h4>
+                                    <p>Hemos creado opciones para simplificar la experiencia:</p>
+                                    <ul>
+                                        <li>Modo de interfaz simplificada que reduce elementos distractores</li>
+                                        <li>Lenguaje sencillo y claro</li>
+                                        <li>Pictogramas e iconos descriptivos junto al texto</li>
+                                        <li>Instrucciones paso a paso para tareas complejas</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h4>Para Adultos Mayores</h4>
+                                    <p>Entendemos las necesidades específicas de los usuarios mayores:</p>
+                                    <ul>
+                                        <li>Modo senior con botones y texto más grandes</li>
+                                        <li>Mayor espaciado entre elementos interactivos</li>
+                                        <li>Contraste aumentado para mejor legibilidad</li>
+                                        <li>Navegación simplificada</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="guide-step">
+                                <div class="step-number">6</div>
+                                <div class="step-content">
+                                    <h4>Para Niños</h4>
+                                    <p>Hemos creado un modo especial para los más pequeños:</p>
+                                    <ul>
+                                        <li>Interfaz más colorida y atractiva</li>
+                                        <li>Animaciones amigables</li>
+                                        <li>Botones más grandes con efectos visuales</li>
+                                        <li>Lenguaje adaptado al nivel infantil</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4>Cómo Activar las Funciones de Accesibilidad</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Para acceder a estas opciones, simplemente haz clic en el botón <i class="fas fa-universal-access"></i> ubicado en la parte superior derecha de la pantalla. Esto abrirá el panel de accesibilidad donde podrás activar las funciones que necesites.</p>
+                                    <p>También puedes usar el atajo de teclado <kbd>Alt</kbd> + <kbd>A</kbd> para abrir el panel de accesibilidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de contacto -->
+            <section class="contact-section">
+                <h2 class="section-title">¿Necesitas más ayuda?</h2>
+                <div class="contact-content">
+                    <p>Si no encuentras lo que buscas o tienes alguna sugerencia, no dudes en contactarnos.</p>
+                    <a href="mailto:contacto@candados.digital" class="btn btn-primary btn-large">
+                        <i class="fas fa-envelope"></i> Contactar Soporte
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module">
+        import ThemeManager from './assets/js/theme.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar el gestor de temas
+            ThemeManager.init();
+
+            // Manejar FAQ acordeón
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+
+                    // Toggle active class
+                    item.classList.toggle('active');
+                    
+                    // Toggle icon
+                    icon.style.transform = item.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+                    
+                    // Toggle answer height
+                    if (item.classList.contains('active')) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // Búsqueda en la ayuda
+            const searchInput = document.getElementById('helpSearch');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const articles = document.querySelectorAll('.guide-article');
+                const faqItems = document.querySelectorAll('.faq-item');
+
+                // Buscar en guías
+                articles.forEach(article => {
+                    const text = article.textContent.toLowerCase();
+                    const isVisible = text.includes(searchTerm);
+                    article.style.display = isVisible ? 'block' : 'none';
+                });
+
+                // Buscar en FAQ
+                faqItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    const isVisible = text.includes(searchTerm);
+                    item.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+</body>
+</html> 

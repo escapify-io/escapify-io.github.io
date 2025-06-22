@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vista previa - Plantilla Candado Numérico</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="plantilla-candado-numerico.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="preview-container" id="candado-preview">
+        <button id="download-pdf" class="download-btn"><i class="fas fa-download"></i> Descargar PDF</button>
+        <div class="preview-title">Plantilla de Candado Numérico</div>
+        <div class="preview-subtitle">Utiliza esta plantilla para crear retos de combinación numérica en tus escape rooms educativos.</div>
+        <div class="instructions">
+            <strong>¿Cómo se usa?</strong><br>
+            Escribe la combinación secreta en las casillas. Puedes añadir pistas o instrucciones para que los participantes descubran el código. Imprime la plantilla y recorta si lo necesitas.
+        </div>
+        <div class="candado-visual">
+            <div class="candado-icon"><i class="fas fa-lock"></i></div>
+            <div class="combination-boxes">
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+            </div>
+            <div style="color:var(--text-color-light);font-size:0.95rem;">Introduce aquí la combinación</div>
+        </div>
+        <div class="escapify-logo">
+            <i class="fas fa-lock"></i> Escapify
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="plantilla-candado-numerico.js"></script>
+</body>
+</html> 

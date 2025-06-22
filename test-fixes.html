@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Correcciones - Escapify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn.secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn.secondary:hover {
+            background-color: #545b62;
+        }
+        
+        /* Estilos para las notificaciones */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: #2ecc71;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s;
+            max-width: 300px;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .notification.error {
+            background-color: #e74c3c;
+        }
+        
+        .notification.success {
+            background-color: #2ecc71;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .morse-result {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test de Correcciones Escapify</h1>
+    
+    <div class="test-section">
+        <h2>1. Test de Notificaciones</h2>
+        <p>Prueba que las notificaciones se muestran correctamente:</p>
+        <button class="btn" onclick="testNotification('success')">Notificación de Éxito</button>
+        <button class="btn secondary" onclick="testNotification('error')">Notificación de Error</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Test de Código Morse</h2>
+        <p>Prueba que el código morse se reproduce correctamente:</p>
+        <input type="text" id="morseInput" placeholder="Escribe un mensaje (ej: SOS)" value="SOS">
+        <br>
+        <button class="btn" onclick="convertToMorse()">Convertir a Morse</button>
+        <button class="btn secondary" onclick="playMorse()">Reproducir Morse</button>
+        <div class="morse-result" id="morseResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Test de LocalStorage</h2>
+        <p>Prueba que el guardado funciona correctamente:</p>
+        <button class="btn" onclick="testLocalStorage()">Probar LocalStorage</button>
+        <button class="btn secondary" onclick="showStoredData()">Ver Datos Guardados</button>
+        <div id="storageResult"></div>
+    </div>
+    
+    <script>
+        // Función para mostrar notificaciones
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.setAttribute('role', 'alert');
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Test de notificaciones
+        function testNotification(type) {
+            const messages = {
+                success: '✅ Esta es una notificación de éxito',
+                error: '❌ Esta es una notificación de error'
+            };
+            showNotification(messages[type], type);
+        }
+        
+        // Convertir texto a código Morse
+        function textToMorse(text) {
+            const morseCode = {
+                'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
+                'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
+                'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+                'Y': '-.--', 'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+                '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', ' ': '/'
+            };
+            
+            return Array.from(text.toUpperCase()).map(char => {
+                return morseCode[char] || char;
+            }).join(' ');
+        }
+        
+        let currentMorse = '';
+        
+        function convertToMorse() {
+            const input = document.getElementById('morseInput');
+            const result = document.getElementById('morseResult');
+            const text = input.value.trim();
+            
+            if (text) {
+                currentMorse = textToMorse(text);
+                result.textContent = currentMorse;
+                showNotification('Texto convertido a código morse', 'success');
+            } else {
+                showNotification('Por favor, introduce un texto para convertir', 'error');
+            }
+        }
+        
+        // Función mejorada para reproducir código morse
+        function playMorse() {
+            if (!currentMorse) {
+                showNotification('Primero convierte un texto a morse', 'error');
+                return;
+            }
+            
+            let audioContext;
+            
+            // Intentar crear el contexto de audio
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.error('Error creando AudioContext:', e);
+                showNotification('Tu navegador no soporta la reproducción de audio', 'error');
+                return;
+            }
+            
+            // Si el contexto está suspendido (navegadores modernos), intentar resumir
+            if (audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    playMorseSequence(audioContext, currentMorse);
+                }).catch((e) => {
+                    console.error('Error resumiendo AudioContext:', e);
+                    showNotification('No se pudo inicializar el audio. Haz clic en cualquier parte de la página primero.', 'error');
+                });
+            } else {
+                playMorseSequence(audioContext, currentMorse);
+            }
+        }
+        
+        function playMorseSequence(context, morseText) {
+            const dot = 60; // Duración de un punto en ms
+            const dash = dot * 3; // Duración de una raya
+            const pauseElement = dot; // Pausa entre elementos
+            const pauseChar = dot * 3; // Pausa entre caracteres
+            const pauseWord = dot * 7; // Pausa entre palabras
+            
+            let time = context.currentTime;
+            
+            morseText.split('').forEach(char => {
+                if (char === '.') {
+                    playBeep(context, time, dot);
+                    time += dot/1000 + pauseElement/1000;
+                } else if (char === '-') {
+                    playBeep(context, time, dash);
+                    time += dash/1000 + pauseElement/1000;
+                } else if (char === ' ') {
+                    time += pauseChar/1000;
+                } else if (char === '/') {
+                    time += pauseWord/1000;
+                }
+            });
+            
+            // Mostrar notificación de éxito
+            showNotification('🔊 Reproduciendo código morse...', 'success');
+        }
+        
+        function playBeep(context, startTime, duration) {
+            try {
+                const oscillator = context.createOscillator();
+                const gainNode = context.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(context.destination);
+                oscillator.frequency.value = 700; // Frecuencia del tono
+                oscillator.type = 'sine';
+                
+                // Configurar el volumen con fade in/out para evitar clicks
+                gainNode.gain.setValueAtTime(0.001, startTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.3, startTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration/1000);
+                
+                oscillator.start(startTime);
+                oscillator.stop(startTime + duration/1000 + 0.05);
+            } catch (e) {
+                console.error('Error reproduciendo beep:', e);
+            }
+        }
+        
+        // Test de localStorage
+        function testLocalStorage() {
+            try {
+                // Simular guardado de candado
+                const testData = {
+                    id: Date.now(),
+                    type: 'numeric',
+                    name: 'Candado de Prueba',
+                    code: '1234',
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Obtener historial actual
+                const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                history.unshift(testData);
+                localStorage.setItem('lockHistory', JSON.stringify(history));
+                
+                showNotification('✅ Candado de prueba guardado correctamente', 'success');
+                console.log('Test data guardado:', testData);
+                
+            } catch (e) {
+                console.error('Error en localStorage:', e);
+                showNotification('❌ Error guardando en localStorage: ' + e.message, 'error');
+            }
+        }
+        
+        function showStoredData() {
+            try {
+                const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                const result = document.getElementById('storageResult');
+                
+                if (history.length > 0) {
+                    result.innerHTML = `
+                        <h4>Datos guardados (${history.length} candados):</h4>
+                        <ul>
+                            ${history.slice(0, 5).map(lock => `
+                                <li><strong>${lock.name}</strong> - ${lock.code} (${lock.type})</li>
+                            `).join('')}
+                        </ul>
+                        ${history.length > 5 ? `<p>... y ${history.length - 5} más</p>` : ''}
+                    `;
+                    showNotification('Datos cargados correctamente', 'success');
+                } else {
+                    result.innerHTML = '<p>No hay candados guardados</p>';
+                    showNotification('No se encontraron datos guardados', 'error');
+                }
+            } catch (e) {
+                console.error('Error leyendo localStorage:', e);
+                showNotification('Error leyendo localStorage: ' + e.message, 'error');
+            }
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            showNotification('🧪 Test page cargada correctamente', 'success');
+            console.log('Test de correcciones inicializado');
+        });
+    </script>
+</body>
+</html> 

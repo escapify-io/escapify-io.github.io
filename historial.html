@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial - Escapify</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to content para accesibilidad con teclado -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link active" aria-current="page">Historial</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Título de la sección -->
+    <section class="history-hero" aria-labelledby="history-title">
+        <div class="container">
+            <h1 class="section-title" id="history-title">Historial de Candados</h1>
+            <p class="section-subtitle">Gestiona todos tus candados creados</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Filtros de dificultad con ColorADD -->
+            <section class="filters-section">
+                <h2 class="sr-only">Filtros</h2>
+                <div class="difficulty-filters" role="tablist" aria-label="Filtros de dificultad" id="difficultyFilters">
+                    <button class="difficulty-filter-btn all active" aria-label="Mostrar todos los candados" role="tab" aria-selected="true" data-difficulty="all">Todos</button>
+                    <button class="difficulty-filter-btn easy" aria-label="Filtrar por dificultad fácil" role="tab" aria-selected="false" data-coloradd-tooltip="Verde - Dificultad fácil" data-difficulty="easy">
+                        Fácil
+                        <span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
+                    <button class="difficulty-filter-btn medium" aria-label="Filtrar por dificultad media" role="tab" aria-selected="false" data-coloradd-tooltip="Amarillo - Dificultad media" data-difficulty="medium">
+                        Media
+                        <span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
+                    <button class="difficulty-filter-btn hard" aria-label="Filtrar por dificultad difícil" role="tab" aria-selected="false" data-coloradd-tooltip="Rojo - Dificultad difícil" data-difficulty="hard">
+                        Difícil
+                        <span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <div class="history-filters">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Buscar candados..." aria-label="Buscar candados por nombre o descripción">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select id="filterType" aria-label="Filtrar por tipo de candado">
+                            <option value="all">Todos los tipos</option>
+                            <option value="numeric">Numéricos</option>
+                            <option value="directional">Direccionales</option>
+                            <option value="pattern">Patrones</option>
+                        </select>
+                        <select id="filterDate" aria-label="Filtrar por fecha de creación">
+                            <option value="all">Todas las fechas</option>
+                            <option value="today">Hoy</option>
+                            <option value="week">Esta semana</option>
+                            <option value="month">Este mes</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de candados -->
+            <section class="history-section">
+                <div class="history-list-container">
+                    <ul class="history-list" id="historyList" role="list" aria-label="Lista de candados creados" aria-live="polite">
+                        <!-- Los elementos del historial se cargarán dinámicamente -->
+                    </ul>
+                </div>
+                
+                <div class="history-actions">
+                    <button id="exportBtn" class="btn btn-primary" aria-label="Exportar historial de candados">
+                        <i class="fas fa-download" aria-hidden="true"></i> Exportar Historial
+                    </button>
+                    <button id="clearHistoryBtn" class="btn btn-danger" aria-label="Limpiar historial de candados">
+                        <i class="fas fa-trash" aria-hidden="true"></i> Limpiar Historial
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Sección de ayuda -->
+            <section class="history-help-section">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h2 class="panel-title"><i class="fas fa-info-circle" aria-hidden="true"></i> Consejos para gestionar tu historial</h2>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Usa los filtros de dificultad para encontrar rápidamente tus candados.</li>
+                            <li>Busca por nombre o descripción para localizar un candado específico.</li>
+                            <li>Exporta tu historial regularmente para tener una copia de seguridad.</li>
+                            <li>Puedes acceder a tus candados más recientes desde la página de inicio.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/historial.js"></script>
+</body>
+</html> 

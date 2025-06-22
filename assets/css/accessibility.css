@@ -1,0 +1,488 @@
+/* Estilos para accesibilidad - Escapify */
+
+/* ===== SISTEMA COLORADD PARA DALTÓNICOS ===== */
+.coloradd-symbol {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.coloradd-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+/* Por defecto, oculta el tooltip de ColorADD */
+.coloradd-tooltip:hover::after, 
+.coloradd-tooltip:focus::after {
+    display: none !important;
+}
+
+/* Solo muestra el tooltip y sus estilos si el modo daltonismo está activo */
+body.daltonismo-activo .coloradd-tooltip:hover::after, 
+body.daltonismo-activo .coloradd-tooltip:focus::after {
+    display: block !important;
+    content: attr(data-coloradd-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos específicos para badges de dificultad con ColorADD */
+.difficulty-badge {
+    display: flex;
+    align-items: center;
+    padding-right: 22px; /* Más espacio para el ícono */
+}
+
+.difficulty-badge.difficulty-easy .coloradd-symbol {
+    background: url('../svg/coloradd.svg#green-symbol') no-repeat center;
+    background-size: contain;
+}
+
+.difficulty-badge.difficulty-medium .coloradd-symbol {
+    background: url('../svg/coloradd.svg#yellow-symbol') no-repeat center;
+    background-size: contain;
+}
+
+.difficulty-badge.difficulty-hard .coloradd-symbol {
+    background: url('../svg/coloradd.svg#red-symbol') no-repeat center;
+    background-size: contain;
+}
+
+/* ===== MEJORAS PARA DISCAPACIDAD VISUAL ===== */
+/* Contraste mejorado */
+.high-contrast {
+    --primary-color: #0066cc !important;
+    --secondary-color: #009900 !important;
+    --error-color: #cc0000 !important;
+    --background-color: #ffffff !important;
+    --text-color: #000000 !important;
+    --border-color: #000000 !important;
+}
+
+/* Textos más legibles */
+.readable-text {
+    font-size: 110% !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.03em !important;
+}
+
+/* Enfoque más visible */
+a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:focus {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 5px rgba(var(--primary-color-rgb), 0.5) !important;
+}
+
+/* ===== MEJORAS PARA DISCAPACIDAD AUDITIVA ===== */
+/* Alertas visuales más potentes */
+.visual-alert {
+    animation: flash 0.5s 3 ease-in-out;
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ===== MEJORAS PARA DISCAPACIDAD INTELECTUAL ===== */
+/* Modo simplificado */
+.simplified-ui .non-essential {
+    display: none !important;
+}
+
+.simplified-ui .container {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
+.simplified-ui .button-text {
+    font-size: 120% !important;
+}
+
+.simplified-ui .step-by-step {
+    display: block !important;
+}
+
+/* ===== MEJORAS PARA ADULTOS MAYORES ===== */
+/* Interfaz para seniors */
+.senior-ui {
+    font-size: 120% !important;
+}
+
+.senior-ui button, 
+.senior-ui .btn, 
+.senior-ui input, 
+.senior-ui select, 
+.senior-ui .keypad-button {
+    min-height: 50px !important;
+    min-width: 50px !important;
+    font-size: 110% !important;
+}
+
+.senior-ui .spacing-controls > * {
+    margin-right: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* ===== MEJORAS PARA NIÑOS ===== */
+/* Interfaz infantil */
+.kids-ui {
+    --primary-color: #ff6b6b !important;
+    --secondary-color: #4ecdc4 !important;
+    --accent-color: #ffbe0b !important;
+    --text-color: #1a535c !important;
+}
+
+.kids-ui .btn, 
+.kids-ui .keypad-button {
+    border-radius: 15px !important;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+.kids-ui .btn:active, 
+.kids-ui .keypad-button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.kids-ui .btn:hover,
+.kids-ui .keypad-button:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.kids-ui .hero-icon,
+.kids-ui .feature-icon {
+    animation: bounce 2s infinite ease-in-out !important;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== TOGGLES PARA CONFIGURACIONES DE ACCESIBILIDAD ===== */
+.accessibility-panel {
+    position: fixed;
+    top: 80px;
+    right: -350px;
+    width: 350px;
+    background-color: var(--card-bg);
+    border-radius: 16px 0 0 16px;
+    box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.2);
+    padding: 28px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: auto;
+    max-height: calc(100vh - 100px);
+    border: 1px solid var(--border-color);
+    border-right: none;
+}
+
+.accessibility-panel.active {
+    right: 0;
+}
+
+.accessibility-panel h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.accessibility-panel h2::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232D7FF9' d='M256 112c-48.6 0-88 39.4-88 88C168 248.6 207.4 288 256 288s88-39.4 88-88C344 151.4 304.6 112 256 112zM256 240c-22.06 0-40-17.95-40-40C216 177.9 233.9 160 256 160s40 17.94 40 40C296 222.1 278.1 240 256 240zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-46.73 0-89.76-15.68-124.5-41.79C148.8 389 182.4 368 220.2 368h71.69c37.75 0 71.31 21.01 88.68 54.21C345.8 448.3 302.7 464 256 464zM416.2 388.5C389.2 346.3 343.2 320 291.8 320H220.2c-51.36 0-97.35 26.25-124.4 68.48C65.96 352.5 48 306.3 48 256c0-114.7 93.31-208 208-208s208 93.31 208 208C464 306.3 446 352.5 416.2 388.5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.accessibility-section {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accessibility-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.accessibility-section:last-child {
+    margin-bottom: 5px;
+}
+
+.accessibility-section h3 {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.accessibility-section h3::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.accessibility-section:nth-of-type(1) h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232D7FF9' d='M500.3 7.251C507.7 13.33 512 22.44 512 31.1V128c0 12.94-7.781 24.62-19.75 29.56s-25.75 2.25-34.31-6.344l-12.95-12.94l-45.22 45.22c31.29 36.68 48.22 82.63 48.22 130.3C448 397.5 368.5 480 272 480s-176-82.54-176-166.1c0-41.32 14.22-81.04 40.78-115.4c-4.531-.1641-8.547-2.547-11.34-6.344l-64-85.31c-6.328-8.406-6.906-19.72-1.5-28.75s16.11-13.91 26.59-11.41l112 32c8.656 2.5 15.22 9.611 16.94 18.55c1.688 8.953-1.906 18.09-9.25 23.53L172.1 162.3C161.9 177.8 155.1 194.1 152 211.8c9.625-1.641 19.5-2.562 29.53-2.562c41.98 0 82.23 15.59 113.3 44.08c10.14 9.312 19.06 19.78 26.64 31.09c5.906 8.75 3.625 20.62-5.094 26.56c-8.734 5.969-20.61 3.656-26.55-5.094c-5.641-8.406-12.25-16.3-19.84-23.28c-23.25-21.44-53.23-33.28-83.66-33.28c-68.98 0-125 56.01-125 124.1c0 68.95 56.05 125 125 125c68.99 0 125-56.05 125-125c0-5.062-.2969-10.19-.875-15.22c-1.25-10.69 6.062-20.44 16.81-21.78c10.83-1.219 20.44 6.062 21.78 16.81c.7813 6.688 1.172 13.55 1.172 20.19c0 24.63-6.031 47.5-16.09 68.42c25.09-12.11 46.55-30.54 61.95-53.58c14.45-21.7 22.14-46.99 22.14-73.06c0-32.96-13.17-64.2-36.28-88.7l-45.27 45.22l-13-12.97c-8.594-8.578-11.19-21.53-6.344-32.78c4.812-11.25 15.69-18.53 27.97-18.53h96c9.562 0 18.66 4.334 24.75 11.25C507.8 64.08 512 73.37 512 82.94v63.94c0 17.67-14.31 32.03-32 32.03s-32-14.36-32-32.03V113.3l-29.25 29.22C403.8 161.8 416 201.1 416 244.7C416 345.6 352.2 432 272 432c-38.02 0-73.85-15.17-101.9-42.61l-28.74 28.69c-6.25 6.25-14.44 9.375-22.62 9.375c-8.19 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.76 0-45.26l28.8-28.73C107.2 316.5 96 289.2 96 261.1V159.1c0-11.41 7.84-21.38 18.97-24c11.12-2.625 22.66 2.375 28.03 12.16l21.28 38.69l55.69-44.46L142.8 122.5l-64.32-15.08l32.2 42.91c5.967 7.958 5.203 19.03-1.844 26.03C108.8 176.5 107.4 176.6 106 176.9v84.19c0 46.39 40.56 92.95 102.1 99.63l49.14-49.09C253 306.9 249.7 301.5 249.7 296c0-8.844 7.158-16 16-16s16 7.156 16 16c0 7.219-4.785 13.31-11.34 15.33L312.9 269c11.44-23.58 17.14-49.49 17.14-76.19c0-44.89-16.94-86.62-45.23-115.4L240 121.9v-96.09c0-11.44 9.344-21.89 21.5-21.76c98.7 1.219 179.3 76.73 185.1 173.1c.6562 11.41-8.047 21.19-19.53 21.84c-11.55 .7813-21.18-8.047-21.85-19.53c-4.484-73.41-65.14-130.2-140.9-130.2l45.31 45.31c8.688 8.75 8.688 22.91 0 31.64s-22.87 8.75-31.56 0L177.3 23.76c-6.25-6.25-9.375-14.44-9.375-22.63C167.9 14.38 171 6.19 177.3 0C183.6-6.25 191.7-9.374 199.9-9.374s16.38 3.125 22.62 9.375l99.22 99.12c4.625 4.625 9.342 9.154 14.09 13.85l45.28-45.28l-12.95-12.94C359.1 46.14 357.8 33.19 363.7 21.95c5.875-11.25 17.5-18.28 30.28-18.28h96c9.562 0 18.66 4.334 24.75 11.25L500.3 7.251z'/%3E%3C/svg%3E");
+}
+
+.accessibility-section:nth-of-type(2) h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%232D7FF9' d='M574.1 280.4L528.7 98.15C521.1 71.85 502.2 52.35 479.1 48.05L463.9 44.05C441.1 39.75 422.1 48.35 409.1 65.45L225.7 261.9c-1.8 2.28-3.106 4.818-3.822 7.512L210.4 304.8c-1.9 7.2 .5996 14.9 6.4 20.7c5.8 5.8 13.5 8.3 20.7 6.4l35.4-11.5c2.73-.729 5.299-2.04 7.59-3.857l52.4-41.9h32c8.8 0 16 7.2 16 16c0 9.7-7.2 16.9-16 16.9h-32c-7.6 0-14.7 4.4-17.9 11.3l-18 39.5c-1.9 4.1-2.5 8.7-1.8 13.2l14.7 91.9c1.9 11.7-8.6 22.3-20.7 20.1l-40.2-5.7l-4.8 1.7c-11.4 4.5-22.4-3.8-22.4-15.9v-44c0-8.8-7.2-16-16-16s-16 7.2-16 16v72.3c0 12.1-11 20.4-22.4 15.9l-38.6-14c-10.7-3.9-15.1-16.4-9.3-26.4l8.5-14.7c4.7-8.1 1.9-18.2-6.2-22.9C77.17 388.3 67.07 391 62.37 398.9L52.37 415.6c-7.9 13.7-1.5 31.2 13.5 36.3l19.6 6.8c5.8 1.9 11.3 2.9 16.9 2.9c6.2 0 12.2-1.2 18-3.6l9.3-3.3l40.2 5.7c5.3 .8 10.6 1.2 15.8 1.2c35.3 0 66.4-24.3 74.4-58.8l-14.7-91.8v-1c0-.3-.1-.7-.1-1h63.2l38.9 31.1l-20.2 56.1c-3.5 9.8 1.6 20.5 11.3 24c9.8 3.5 20.5-1.6 24-11.3l24-66.9c1.5-4.2 1.7-8.6 .7-13l-13.1-57.8L509.4 111.8c4.7-5.6 11.4-8.8 18.4-8.8c8.3 0 16.2 4.1 20.9 11.1c10.8 16.1 18.7 34.6 22.8 54.5l45.4 182.3c1.8 7.2 2.7 14.6 2.7 22.1c0 50.4-41 91.3-91.4 91.3H128c-8.8 0-16-7.2-16-16s7.2-16 16-16h299.9c32.8 0 59.4-26.6 59.4-59.3c0-24.3-15.1-46.3-37.8-55.1l-119.9-45.3c-9.5-3.6-14.3-14.3-10.7-23.8c3.6-9.5 14.3-14.3 23.8-10.7l120 45.4c19.6 7.6 36.9 21.9 46.8 39.7c35.2-7.2 61.8-38.2 61.8-75.3c0-4.8-.5-9.6-1.5-14.3z'/%3E%3C/svg%3E");
+}
+
+.accessibility-section:nth-of-type(3) h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232D7FF9' d='M495.9 166.6C499.2 175.2 496.4 184.9 489.6 191.2L446.3 230.6C447.4 238.9 448 247.4 448 256C448 264.6 447.4 273.1 446.3 281.4L489.6 320.8C496.4 327.1 499.2 336.8 495.9 345.4C491.5 357.3 486.2 368.8 480.2 379.7L475.5 387.8C468.9 398.8 461.5 409.2 453.4 419.1C447.4 426.2 437.7 428.7 428.9 425.9L373.2 408.1C359.8 418.4 344.1 427 329.2 433.6L316.7 490.7C314.7 499.7 307.7 506.1 298.5 508.5C284.7 510.8 270.5 512 255.1 512C241.5 512 227.3 510.8 213.5 508.5C204.3 506.1 197.3 499.7 195.3 490.7L182.8 433.6C167 427 152.2 418.4 138.8 408.1L83.14 425.9C74.3 428.7 64.55 426.2 58.63 419.1C50.52 409.2 43.12 398.8 36.52 387.8L31.84 379.7C25.77 368.8 20.49 357.3 16.06 345.4C12.82 336.8 15.55 327.1 22.41 320.8L65.67 281.4C64.57 273.1 64 264.6 64 256C64 247.4 64.57 238.9 65.67 230.6L22.41 191.2C15.55 184.9 12.82 175.3 16.06 166.6C20.49 154.7 25.78 143.2 31.84 132.3L36.51 124.2C43.12 113.2 50.52 102.8 58.63 92.95C64.55 85.8 74.3 83.32 83.14 86.14L138.8 103.9C152.2 93.56 167 84.96 182.8 78.43L195.3 21.33C197.3 12.25 204.3 5.04 213.5 3.51C227.3 1.201 241.5 0 256 0C270.5 0 284.7 1.201 298.5 3.51C307.7 5.04 314.7 12.25 316.7 21.33L329.2 78.43C344.1 84.96 359.8 93.56 373.2 103.9L428.9 86.14C437.7 83.32 447.4 85.8 453.4 92.95C461.5 102.8 468.9 113.2 475.5 124.2L480.2 132.3C486.2 143.2 491.5 154.7 495.9 166.6V166.6zM256 336C300.2 336 336 300.2 336 255.1C336 211.8 300.2 175.1 256 175.1C211.8 175.1 176 211.8 176 255.1C176 300.2 211.8 336 256 336z'/%3E%3C/svg%3E");
+}
+
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    position: relative;
+    padding-left: 5px;
+}
+
+.accessibility-option:last-child {
+    margin-bottom: 0;
+}
+
+.accessibility-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.accessibility-option label {
+    color: var(--text-color);
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.accessibility-option input[type="checkbox"] + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accessibility-option input[type="checkbox"] + label::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='white' d='M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s ease;
+}
+
+.accessibility-option input[type="checkbox"]:checked + label::before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.accessibility-option input[type="checkbox"]:checked + label::after {
+    transform: translateY(-50%) scale(1);
+}
+
+.accessibility-option input[type="checkbox"]:focus + label::before {
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.accessibility-option:hover label {
+    color: var(--primary-color);
+}
+
+#accessibility-close {
+    width: 100%;
+    margin-top: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+#accessibility-close:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.accessibility-toggle {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1200;
+    background: #3b4cca;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    font-size: 1.7rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.accessibility-toggle:hover,
+.accessibility-toggle:focus {
+    background: #2d7ff9;
+    outline: none;
+}
+
+.accessibility-key-shortcut {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.accessibility-keys {
+    display: inline-block;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    z-index: 9999;
+    transition: top 0.3s ease;
+    border-radius: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Lenguaje sencillo para modo simplificado */
+.simple-language {
+    display: none;
+}
+
+.simplified-ui .simple-language {
+    display: block;
+}
+
+.simplified-ui .normal-language {
+    display: none;
+}
+
+/* Accesibilidad: escala de grises */
+body.grayscale {
+    filter: grayscale(1) !important;
+}
+
+/* Accesibilidad: contraste negativo */
+body.negative-contrast {
+    filter: invert(1) hue-rotate(180deg) !important;
+    background: #111 !important;
+}
+
+/* Accesibilidad: fondo claro */
+body.light-bg {
+    background: #fff !important;
+    color: #111 !important;
+}
+body.light-bg .main-header,
+body.light-bg .main-footer,
+body.light-bg .accessibility-panel {
+    background: #fff !important;
+    color: #111 !important;
+}
+
+/* Accesibilidad: subrayar enlaces */
+body.underline-links a {
+    text-decoration: underline !important;
+}
+
+/* Accesibilidad: tamaño de fuente global (ya se gestiona por inline style en html) */
+html {
+    transition: font-size 0.2s;
+} 

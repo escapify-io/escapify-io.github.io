@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="100" viewBox="0 0 500 100">
+  <!-- Amarillo - Barra diagonal -->
+  <g id="yellow-symbol">
+    <line x1="10" y1="80" x2="40" y2="20" stroke="black" stroke-width="8" stroke-linecap="round"/>
+    <title>Amarillo</title>
+  </g>
+
+  <!-- Azul - Triángulo derecha -->
+  <g id="blue-symbol">
+    <polygon points="70,20 70,80 110,50" fill="black"/>
+    <title>Azul</title>
+  </g>
+
+  <!-- Rojo - Triángulo izquierda -->
+  <g id="red-symbol">
+    <polygon points="150,50 190,20 190,80" fill="black"/>
+    <title>Rojo</title>
+  </g>
+
+  <!-- Verde (Azul + Amarillo) -->
+  <g id="green-symbol">
+    <line x1="220" y1="80" x2="250" y2="20" stroke="black" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="260,20 260,80 300,50" fill="black"/>
+    <title>Verde</title>
+  </g>
+
+  <!-- Naranja (Amarillo + Rojo) -->
+  <g id="orange-symbol">
+    <line x1="320" y1="80" x2="350" y2="20" stroke="black" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="380,50 420,20 420,80" fill="black"/>
+    <title>Naranja</title>
+  </g>
+
+  <!-- Blanco - Cuadrado blanco con borde -->
+  <g id="white-symbol">
+    <rect x="440" y="20" width="50" height="60" fill="white" stroke="black" stroke-width="3"/>
+    <title>Blanco</title>
+  </g>
+
+  <!-- Negro - Cuadrado negro -->
+  <g id="black-symbol" transform="translate(0, 0)">
+    <rect x="440" y="20" width="50" height="60" fill="black"/>
+    <title>Negro</title>
+  </g>
+</svg> 

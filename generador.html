@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de candados - Escapify</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Librería Leaflet para mapas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" 
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" 
+            crossorigin=""></script>
+    <style>
+        /* Estilos para las notificaciones */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: #2ecc71;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: opacity 0.3s;
+            max-width: 300px;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .notification.error {
+            background-color: #e74c3c;
+        }
+        
+        .notification.success {
+            background-color: #2ecc71;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content para accesibilidad con teclado -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link active" aria-current="page">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección hero del generador -->
+    <section class="history-hero" aria-labelledby="generator-title">
+        <div class="container">
+            <h1 class="section-title" id="generator-title">Generador de candados digitales</h1>
+            <p class="section-subtitle">Crea desafíos personalizados para tus actividades educativas</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <div class="container">
+            <div class="lock-type-selector">
+                <h2>Selecciona el tipo de candado</h2>
+                <div class="difficulty-filters" id="difficultyFilters" role="tablist" aria-label="Filtros de dificultad">
+                    <button class="difficulty-filter-btn all active" data-difficulty="all" role="tab" aria-selected="true" aria-controls="lockTypesGrid">Todos</button>
+                    <button class="difficulty-filter-btn easy" data-difficulty="easy" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Fácil</button>
+                    <button class="difficulty-filter-btn medium" data-difficulty="medium" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Medio</button>
+                    <button class="difficulty-filter-btn hard" data-difficulty="hard" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Difícil</button>
+                </div>
+                <div class="lock-types-grid" id="lockTypesGrid" role="tabpanel">
+                    <!-- Los tipos de candados se cargarán dinámicamente -->
+                </div>
+            </div>
+
+            <div class="lock-creator" id="lockCreator" style="display: none;">
+                <div class="lock-header">
+                    <h2 id="lockTypeTitle">Crear candado</h2>
+                    <span id="lockTypeDifficulty" class="lock-difficulty-label"></span>
+                    <button class="btn btn-secondary" id="backToTypes" aria-label="Volver a la selección de tipos">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver
+                    </button>
+                </div>
+
+                <div class="lock-form">
+                    <div class="form-group">
+                        <label for="lockName">Nombre del candado</label>
+                        <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockDescription">Descripción (opcional)</label>
+                        <textarea id="lockDescription" placeholder="Describe el candado o añade pistas" aria-describedby="descHelp"></textarea>
+                        <div id="descHelp" class="sr-only">La descripción ayudará a los usuarios a entender el propósito del candado</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockCustomUrl">Enlace personalizado (opcional)</label>
+                        <div class="custom-url-input">
+                            <span class="url-prefix">https://escapify.io/candado/</span>
+                            <input type="text" id="lockCustomUrl" placeholder="mi-candado">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockDirectory">Almacenado en el directorio</label>
+                        <div class="directory-selector">
+                            <input type="text" id="lockDirectory" value="Sin directorio" readonly>
+                            <button class="btn btn-secondary" id="editDirectory">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lock-display-container">
+                        <div class="lock-display" id="lockDisplay" aria-live="polite" aria-atomic="true">
+                            <span class="placeholder">Selecciona el código</span>
+                        </div>
+                        <div class="lock-actions">
+                            <button class="btn btn-secondary" id="clearCode" aria-label="Borrar código">
+                                <i class="fas fa-eraser" aria-hidden="true"></i> Borrar
+                            </button>
+                            <button class="btn btn-secondary" id="copyCode" aria-label="Copiar código">
+                                <i class="fas fa-copy" aria-hidden="true"></i> Copiar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="lockKeypad" class="lock-keypad-container" aria-label="Teclado del candado">
+                        <!-- El teclado específico se cargará dinámicamente -->
+                    </div>
+
+                    <!-- Opciones avanzadas para candado numérico -->
+                    <div id="numericOptions" class="numeric-options" style="display: none;">
+                        <h4>Opciones avanzadas</h4>
+                        <div class="option-group">
+                            <p>Orden de visualización de dígitos:</p>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="digitOrder" value="789456123" checked>
+                                    789 : 456 : 123
+                                </label>
+                                <label>
+                                    <input type="radio" name="digitOrder" value="123456789">
+                                    123 : 456 : 789
+                                </label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="allowDelete" checked>
+                                Permitir borrar la última entrada
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="showConfetti" checked>
+                                Mostrar confeti en caso de éxito
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="playSounds" checked>
+                                Emitir sonido en caso de fallo y éxito
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Opciones avanzadas para candado Nokia -->
+                    <div id="nokiaOptions" class="nokia-options" style="display: none;">
+                        <h4>Opciones avanzadas</h4>
+                        <div class="option-group">
+                            <p>Velocidad de entrada T9:</p>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="nokiaSpeed" value="fast">
+                                    Rápida (1 segundo)
+                                </label>
+                                <label>
+                                    <input type="radio" name="nokiaSpeed" value="medium" checked>
+                                    Media (1.5 segundos)
+                                </label>
+                                <label>
+                                    <input type="radio" name="nokiaSpeed" value="slow">
+                                    Lenta (2 segundos)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="nokiaShowLetters" checked>
+                                Mostrar letras en los botones
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="nokiaPlaySounds" checked>
+                                Reproducir sonidos de teclas
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="nokiaVibrate">
+                                Vibración al confirmar caracteres
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Opciones avanzadas para candado de Coordenadas -->
+                    <div id="coordinatesOptions" class="coordinates-options" style="display: none;">
+                        <h4>Opciones avanzadas</h4>
+                        <div class="option-group">
+                            <p>Estilo del mapa:</p>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="mapStyle" value="streets" checked>
+                                    Calles
+                                </label>
+                                <label>
+                                    <input type="radio" name="mapStyle" value="satellite">
+                                    Satélite
+                                </label>
+                                <label>
+                                    <input type="radio" name="mapStyle" value="terrain">
+                                    Terreno
+                                </label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <p>Precisión requerida:</p>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="coordPrecision" value="high">
+                                    Alta (6 decimales)
+                                </label>
+                                <label>
+                                    <input type="radio" name="coordPrecision" value="medium" checked>
+                                    Media (4 decimales)
+                                </label>
+                                <label>
+                                    <input type="radio" name="coordPrecision" value="low">
+                                    Baja (2 decimales)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="showCoordMarker" checked>
+                                Mostrar marcador en el mapa
+                            </label>
+                        </div>
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="showCoordRadius">
+                                Mostrar radio de aceptación
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="successMessage">Mensaje de éxito</label>
+                        <div class="success-message-editor">
+                            <div class="editor-toolbar">
+                                <select class="format-select" id="formatSelect">
+                                    <option>Párrafo</option>
+                                    <option>Encabezado 1</option>
+                                    <option>Encabezado 2</option>
+                                </select>
+                                <button class="toolbar-btn" data-format="bold"><i class="fas fa-bold"></i></button>
+                                <button class="toolbar-btn" data-format="italic"><i class="fas fa-italic"></i></button>
+                                <button class="toolbar-btn" data-format="underline"><i class="fas fa-underline"></i></button>
+                                <button class="toolbar-btn" data-format="link"><i class="fas fa-link"></i></button>
+                            </div>
+                            <div class="editor-content" id="successMessageEditor" contenteditable="true"></div>
+                            <input type="hidden" id="lockMessage">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockNextLock">Incluir un enlace a otro candado</label>
+                        <div class="directory-selector">
+                            <input type="text" id="lockNextLock" value="Sin candado vinculado" readonly>
+                            <button class="btn btn-secondary" id="selectNextLock">
+                                <i class="fas fa-link"></i> Seleccionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockHint">Pista (opcional)</label>
+                        <input type="text" id="lockHint" placeholder="Añade una pista para resolver el candado">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockImage">URL de imagen (opcional)</label>
+                        <input type="text" id="lockImage" placeholder="URL de una imagen relacionada">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lockUrl">URL de redirección (opcional)</label>
+                        <input type="text" id="lockUrl" placeholder="URL a la que redirigir al resolver">
+                    </div>
+
+                    <!-- Sección de opciones avanzadas -->
+                    <div class="lock-options" id="advancedOptions">
+                        <h3>Opciones avanzadas</h3>
+                        
+                        <!-- Dificultad con ColorADD -->
+                        <div class="form-group">
+                            <label for="lockDifficulty">Nivel de dificultad:</label>
+                            <div class="difficulty-selector">
+                                <div class="radio-group">
+                                    <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Verde - Dificultad fácil">
+                                        <input type="radio" name="lockDifficulty" value="easy" checked>
+                                        Fácil <span class="difficulty-badge difficulty-easy">fácil<span class="coloradd-symbol" aria-hidden="true"></span></span>
+                                    </label>
+                                    <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Amarillo - Dificultad media">
+                                        <input type="radio" name="lockDifficulty" value="medium">
+                                        Media <span class="difficulty-badge difficulty-medium">media<span class="coloradd-symbol" aria-hidden="true"></span></span>
+                                    </label>
+                                    <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Rojo - Dificultad difícil">
+                                        <input type="radio" name="lockDifficulty" value="hard">
+                                        Difícil <span class="difficulty-badge difficulty-hard">difícil<span class="coloradd-symbol" aria-hidden="true"></span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="saveLock" aria-label="Guardar candado">
+                            <i class="fas fa-save" aria-hidden="true"></i> Guardar candado
+                        </button>
+                        <button class="btn btn-secondary" id="previewLock" aria-label="Ver vista previa del candado">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Vista previa
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section" id="qrSection" style="display: none;" aria-labelledby="qrTitle">
+                <h3 id="qrTitle">Código QR del candado</h3>
+                <div id="qrCode" role="img" aria-label="Código QR para acceder al candado"></div>
+                <button class="btn btn-primary" id="downloadQR" aria-label="Descargar código QR">
+                    <i class="fas fa-download" aria-hidden="true"></i> Descargar QR
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module">
+        import LockTypes from './assets/js/lock-types.js';
+        import ThemeManager from './assets/js/theme.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lockTypesGrid = document.getElementById('lockTypesGrid');
+            const lockCreator = document.getElementById('lockCreator');
+            const lockKeypad = document.getElementById('lockKeypad');
+            const lockDisplay = document.getElementById('lockDisplay');
+            const lockTypeTitle = document.getElementById('lockTypeTitle');
+            const backToTypes = document.getElementById('backToTypes');
+            const clearCode = document.getElementById('clearCode');
+            const copyCode = document.getElementById('copyCode');
+            const saveLock = document.getElementById('saveLock');
+            const previewLock = document.getElementById('previewLock');
+            const qrSection = document.getElementById('qrSection');
+            const qrCode = document.getElementById('qrCode');
+            const downloadQR = document.getElementById('downloadQR');
+            
+            // Elementos del editor de texto enriquecido
+            const successMessageEditor = document.getElementById('successMessageEditor');
+            const formatSelect = document.getElementById('formatSelect');
+            const toolbarButtons = document.querySelectorAll('.toolbar-btn');
+            
+            // Elementos para opciones numéricas
+            const numericOptions = document.getElementById('numericOptions');
+            const digitOrderRadios = document.querySelectorAll('input[name="digitOrder"]');
+            const allowDeleteCheck = document.getElementById('allowDelete');
+            const showConfettiCheck = document.getElementById('showConfetti');
+            const playSoundsCheck = document.getElementById('playSounds');
+
+            let currentLockType = null;
+            let enteredCode = '';
+
+            // Cargar tipos de candados
+            let allTypes = Object.values(LockTypes.TYPES);
+            let currentDifficulty = 'all';
+
+            function renderLockTypes() {
+                lockTypesGrid.innerHTML = '';
+                allTypes.filter(type =>
+                    currentDifficulty === 'all' || type.difficulty === currentDifficulty
+                ).forEach(type => {
+                    const typeCard = document.createElement('div');
+                    typeCard.className = 'lock-type-card';
+                    typeCard.innerHTML = `
+                        <i class="${type.icon}"></i>
+                        <h3>${type.name}
+                            <span class="difficulty-badge difficulty-${type.difficulty}">${type.difficulty === 'easy' ? 'Fácil' : type.difficulty === 'medium' ? 'Medio' : 'Difícil'}</span>
+                        </h3>
+                        <p>${type.description}</p>
+                    `;
+                    typeCard.addEventListener('click', () => selectLockType(type));
+                    lockTypesGrid.appendChild(typeCard);
+                });
+            }
+
+            renderLockTypes();
+
+            // Filtros de dificultad
+            document.getElementById('difficultyFilters').addEventListener('click', (e) => {
+                if (e.target.classList.contains('difficulty-filter-btn')) {
+                    document.querySelectorAll('.difficulty-filter-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentDifficulty = e.target.dataset.difficulty;
+                    renderLockTypes();
+                }
+            });
+
+            function selectLockType(type) {
+                currentLockType = type;
+                lockTypeTitle.textContent = `Crear Candado ${type.name}`;
+                document.getElementById('lockTypeDifficulty').innerHTML = `<span class="difficulty-badge difficulty-${type.difficulty}">${type.difficulty === 'easy' ? 'Fácil' : type.difficulty === 'medium' ? 'Medio' : 'Difícil'}</span>`;
+                lockCreator.style.display = 'block';
+                document.querySelector('.lock-type-selector').style.display = 'none';
+                
+                // Mostrar/ocultar opciones específicas según el tipo de candado
+                // Primero, ocultar todas las opciones
+                if (numericOptions) numericOptions.style.display = 'none';
+                if (document.getElementById('nokiaOptions')) document.getElementById('nokiaOptions').style.display = 'none';
+                if (document.getElementById('coordinatesOptions')) document.getElementById('coordinatesOptions').style.display = 'none';
+
+                // Mostrar las opciones específicas del tipo seleccionado
+                if (type.id === 'numeric' && numericOptions) {
+                    numericOptions.style.display = 'block';
+                } else if (type.id === 'nokia' && document.getElementById('nokiaOptions')) {
+                    document.getElementById('nokiaOptions').style.display = 'block';
+                } else if (type.id === 'coordinates' && document.getElementById('coordinatesOptions')) {
+                    document.getElementById('coordinatesOptions').style.display = 'block';
+                }
+                
+                // Limpiar y cargar el teclado específico
+                lockKeypad.innerHTML = '';
+                const template = LockTypes.getTemplate(type.id);
+                if (template) {
+                    lockKeypad.appendChild(template);
+                    setupKeypadListeners();
+                }
+                
+                // Reiniciar editor de texto
+                if (successMessageEditor) {
+                    successMessageEditor.innerHTML = '';
+                }
+            }
+
+            function setupKeypadListeners() {
+                lockKeypad.querySelectorAll('.keypad-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        if (button.dataset.action === 'delete') {
+                            // Manejar borrado de último dígito
+                            if (enteredCode.length > 0) {
+                                enteredCode = enteredCode.slice(0, -1);
+                                updateDisplay();
+                            }
+                            return;
+                        }
+                        
+                        const value = button.dataset.value;
+                        if (currentLockType.id === 'pattern-9' || currentLockType.id === 'pattern-16') {
+                            handlePatternInput(button);
+                        } else {
+                            handleNormalInput(value);
+                        }
+                    });
+                });
+            }
+
+            function handlePatternInput(button) {
+                button.classList.toggle('selected');
+                const selectedButtons = lockKeypad.querySelectorAll('.pattern-button.selected');
+                enteredCode = Array.from(selectedButtons).map(btn => btn.dataset.value).join(',');
+                updateDisplay();
+            }
+
+            function handleNormalInput(value) {
+                if (currentLockType.id === 'computer-login') {
+                    // Manejar input especial para login de ordenador
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    enteredCode = `${username}:${password}`;
+                } else {
+                    enteredCode += value;
+                }
+                updateDisplay();
+            }
+
+            function updateDisplay() {
+                if (enteredCode) {
+                    lockDisplay.innerHTML = `<span class="code">${enteredCode}</span>`;
+                } else {
+                    lockDisplay.innerHTML = '<span class="placeholder">Selecciona el código</span>';
+                }
+            }
+
+            backToTypes.addEventListener('click', () => {
+                lockCreator.style.display = 'none';
+                document.querySelector('.lock-type-selector').style.display = 'block';
+                qrSection.style.display = 'none';
+                resetForm();
+            });
+
+            clearCode.addEventListener('click', () => {
+                enteredCode = '';
+                updateDisplay();
+                if (currentLockType.id.includes('pattern')) {
+                    lockKeypad.querySelectorAll('.pattern-button').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                }
+            });
+
+            copyCode.addEventListener('click', async () => {
+                if (enteredCode) {
+                    try {
+                        await navigator.clipboard.writeText(enteredCode);
+                        showNotification('Código copiado al portapapeles', 'success');
+                    } catch (err) {
+                        showNotification('Error al copiar el código', 'error');
+                    }
+                }
+            });
+
+            saveLock.addEventListener('click', () => {
+                console.log('🔒 Iniciando guardado de candado...');
+                console.log('Current lock type:', currentLockType);
+                console.log('Entered code:', enteredCode);
+                
+                // Verificar que tenemos los datos básicos
+                if (!currentLockType) {
+                    showNotification('Error: No se ha seleccionado un tipo de candado', 'error');
+                    console.error('❌ No currentLockType');
+                    return;
+                }
+                
+                if (!enteredCode) {
+                    showNotification('Error: No se ha introducido un código', 'error');
+                    console.error('❌ No enteredCode');
+                    return;
+                }
+                
+                const lockName = document.getElementById('lockName').value.trim();
+                if (!lockName) {
+                    showNotification('Error: El nombre del candado es obligatorio', 'error');
+                    console.error('❌ No lock name');
+                    return;
+                }
+                
+                // Transferir contenido del editor al campo oculto
+                const lockMessageValue = successMessageEditor ? successMessageEditor.innerHTML : '';
+                const lockMessageField = document.getElementById('lockMessage');
+                if (lockMessageField) {
+                    lockMessageField.value = lockMessageValue;
+                }
+                
+                const lockData = {
+                    id: Date.now(),
+                    type: currentLockType.id,
+                    name: lockName,
+                    description: document.getElementById('lockDescription')?.value || '',
+                    code: enteredCode,
+                    message: lockMessageField?.value || '',
+                    hint: document.getElementById('lockHint')?.value || '',
+                    image: document.getElementById('lockImage')?.value || '',
+                    url: document.getElementById('lockUrl')?.value || '',
+                    difficulty: currentLockType.difficulty,
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('📦 Lock data preparado:', lockData);
+                
+                // Añadir opciones adicionales si están disponibles
+                const customUrlField = document.getElementById('lockCustomUrl');
+                if (customUrlField && customUrlField.value.trim()) {
+                    lockData.customUrl = customUrlField.value.trim();
+                }
+                
+                const directoryField = document.getElementById('lockDirectory');
+                if (directoryField && directoryField.value !== 'Sin directorio') {
+                    lockData.directory = directoryField.value;
+                }
+                
+                const nextLockField = document.getElementById('lockNextLock');
+                if (nextLockField && nextLockField.value !== 'Sin candado vinculado') {
+                    lockData.nextLock = nextLockField.value;
+                }
+                
+                // Opciones para candados numéricos
+                if (currentLockType.id === 'numeric') {
+                    lockData.options = {
+                        digitOrder: document.querySelector('input[name="digitOrder"]:checked')?.value || '789456123',
+                        allowDelete: allowDeleteCheck?.checked || false,
+                        showConfetti: showConfettiCheck?.checked || false,
+                        playSounds: playSoundsCheck?.checked || false
+                    };
+                }
+
+                // Opciones para candado Nokia
+                if (currentLockType.id === 'nokia') {
+                    lockData.options = {
+                        nokiaSpeed: document.querySelector('input[name="nokiaSpeed"]:checked')?.value || 'medium',
+                        showLetters: document.getElementById('nokiaShowLetters')?.checked || true,
+                        playSounds: document.getElementById('nokiaPlaySounds')?.checked || false,
+                        vibrate: document.getElementById('nokiaVibrate')?.checked || false
+                    };
+                }
+
+                // Opciones para candado Coordenadas
+                if (currentLockType.id === 'coordinates') {
+                    lockData.options = {
+                        mapStyle: document.querySelector('input[name="mapStyle"]:checked')?.value || 'streets',
+                        precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || 'medium',
+                        showMarker: document.getElementById('showCoordMarker')?.checked || true,
+                        showRadius: document.getElementById('showCoordRadius')?.checked || false
+                    };
+                }
+
+                // Validar localStorage
+                try {
+                    localStorage.setItem('test', 'test');
+                    localStorage.removeItem('test');
+                } catch (e) {
+                    showNotification('Error: El almacenamiento local no está disponible', 'error');
+                    console.error('❌ LocalStorage no disponible:', e);
+                    return;
+                }
+
+                // Guardar en el historial
+                try {
+                    const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                    console.log('📚 Historial actual:', history.length, 'candados');
+                    
+                    history.unshift(lockData);
+                    localStorage.setItem('lockHistory', JSON.stringify(history));
+                    
+                    console.log('✅ Candado guardado en localStorage');
+                    console.log('📚 Nuevo historial:', history.length, 'candados');
+                    
+                    // Generar QR si la biblioteca está disponible
+                    if (typeof QRCode !== 'undefined') {
+                        qrCode.innerHTML = '';
+                        new QRCode(qrCode, {
+                            text: `${window.location.origin}/candado/${lockData.id}`,
+                            width: 200,
+                            height: 200
+                        });
+                        qrSection.style.display = 'block';
+                        console.log('📱 QR generado');
+                    } else {
+                        console.warn('⚠️ QRCode library no disponible');
+                    }
+
+                    showNotification('Candado guardado correctamente', 'success');
+                    
+                } catch (e) {
+                    console.error('❌ Error guardando en localStorage:', e);
+                    showNotification('Error al guardar el candado: ' + e.message, 'error');
+                }
+            });
+
+            previewLock.addEventListener('click', () => {
+                if (!enteredCode) {
+                    showNotification('Primero debes crear un código', 'error');
+                    return;
+                }
+                
+                // Guardar temporalmente para la vista previa incluyendo las opciones
+                const previewData = {
+                    type: currentLockType.id,
+                    code: enteredCode
+                };
+                
+                // Añadir opciones si es un candado numérico
+                if (currentLockType.id === 'numeric') {
+                    previewData.options = {
+                        digitOrder: document.querySelector('input[name="digitOrder"]:checked')?.value || '789456123',
+                        allowDelete: document.getElementById('allowDelete')?.checked || false,
+                        showConfetti: document.getElementById('showConfetti')?.checked || false,
+                        playSounds: document.getElementById('playSounds')?.checked || false
+                    };
+                }
+
+                // Añadir opciones si es un candado Nokia
+                if (currentLockType.id === 'nokia') {
+                    previewData.options = {
+                        nokiaSpeed: document.querySelector('input[name="nokiaSpeed"]:checked')?.value || 'medium',
+                        showLetters: document.getElementById('nokiaShowLetters')?.checked || true,
+                        playSounds: document.getElementById('nokiaPlaySounds')?.checked || false,
+                        vibrate: document.getElementById('nokiaVibrate')?.checked || false
+                    };
+                }
+
+                // Añadir opciones si es un candado de Coordenadas
+                if (currentLockType.id === 'coordinates') {
+                    previewData.options = {
+                        mapStyle: document.querySelector('input[name="mapStyle"]:checked')?.value || 'streets',
+                        precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || 'medium',
+                        showMarker: document.getElementById('showCoordMarker')?.checked || true,
+                        showRadius: document.getElementById('showCoordRadius')?.checked || false
+                    };
+                }
+                
+                localStorage.setItem('previewLock', JSON.stringify(previewData));
+                window.open('/preview.html', '_blank');
+            });
+
+            downloadQR.addEventListener('click', () => {
+                const canvas = qrCode.querySelector('canvas');
+                if (canvas) {
+                    const link = document.createElement('a');
+                    link.download = `candado-qr-${Date.now()}.png`;
+                    link.href = canvas.toDataURL();
+                    link.click();
+                }
+            });
+
+            function resetForm() {
+                document.getElementById('lockName').value = '';
+                document.getElementById('lockDescription').value = '';
+                document.getElementById('lockMessage').value = '';
+                document.getElementById('lockHint').value = '';
+                document.getElementById('lockImage').value = '';
+                document.getElementById('lockUrl').value = '';
+                enteredCode = '';
+                updateDisplay();
+                currentLockType = null;
+            }
+
+            function showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.setAttribute('role', 'alert');
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Función para debug de guardado
+            function debugSave() {
+                console.log('CurrentLockType:', currentLockType);
+                console.log('EnteredCode:', enteredCode);
+                console.log('LocalStorage test:', localStorage.getItem('lockHistory'));
+            }
+
+            // Inicializar editor de texto enriquecido
+            if (toolbarButtons && toolbarButtons.length > 0) {
+                toolbarButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const format = button.dataset.format;
+                        document.execCommand(format);
+                        if (successMessageEditor) {
+                            successMessageEditor.focus();
+                        }
+                    });
+                });
+            }
+            
+            if (formatSelect) {
+                formatSelect.addEventListener('change', (e) => {
+                    const format = e.target.value;
+                    if (format === 'Párrafo') {
+                        document.execCommand('formatBlock', false, 'p');
+                    } else if (format === 'Encabezado 1') {
+                        document.execCommand('formatBlock', false, 'h1');
+                    } else if (format === 'Encabezado 2') {
+                        document.execCommand('formatBlock', false, 'h2');
+                    }
+                    if (successMessageEditor) {
+                        successMessageEditor.focus();
+                    }
+                });
+            }
+            
+            // Inicializar enlaces para elementos del directorio y candado vinculado
+            const editDirectoryBtn = document.getElementById('editDirectory');
+            if (editDirectoryBtn) {
+                editDirectoryBtn.addEventListener('click', () => {
+                    // Aquí podrías mostrar un modal para seleccionar directorio
+                    const directory = prompt('Introduce el nombre del directorio:');
+                    if (directory) {
+                        document.getElementById('lockDirectory').value = directory;
+                    }
+                });
+            }
+            
+            const selectNextLockBtn = document.getElementById('selectNextLock');
+            if (selectNextLockBtn) {
+                selectNextLockBtn.addEventListener('click', () => {
+                    // Aquí podrías mostrar un modal con lista de candados existentes
+                    const nextLock = prompt('Introduce el ID del siguiente candado:');
+                    if (nextLock) {
+                        document.getElementById('lockNextLock').value = nextLock;
+                    }
+                });
+            }
+
+            // Escuchar cambios en las opciones para actualizar el teclado numérico
+            if (document.querySelector('input[name="digitOrder"]')) {
+                document.querySelectorAll('input[name="digitOrder"]').forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        if (currentLockType && currentLockType.id === 'numeric') {
+                            lockKeypad.innerHTML = '';
+                            const template = LockTypes.getTemplate(currentLockType.id);
+                            if (template) {
+                                lockKeypad.appendChild(template);
+                                setupKeypadListeners();
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Escuchar cambios en la opción de permitir borrado
+            if (allowDeleteCheck) {
+                allowDeleteCheck.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'numeric') {
+                        lockKeypad.innerHTML = '';
+                        const template = LockTypes.getTemplate(currentLockType.id);
+                        if (template) {
+                            lockKeypad.appendChild(template);
+                            setupKeypadListeners();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+    <!-- Script de diagnóstico temporal -->
+    <script>
+        console.log('Diagnóstico de generador.html');
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM completamente cargado');
+            // Verificar elementos críticos
+            const lockTypesGrid = document.getElementById('lockTypesGrid');
+            console.log('lockTypesGrid existe:', !!lockTypesGrid);
+            
+            // Verificar si los estilos están cargados correctamente
+            const styles = Array.from(document.styleSheets);
+            console.log('Número de hojas de estilo cargadas:', styles.length);
+            
+            // Verificar si hay errores de JavaScript
+            window.addEventListener('error', (e) => {
+                console.error('Error detectado:', e.message);
+            });
+        });
+    </script>
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa.</p>
+        </div>
+    </footer>
+</body>
+</html> 
