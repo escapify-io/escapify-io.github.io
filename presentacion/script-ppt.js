@@ -6,6 +6,15 @@ let totalSlides = 0;
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     initializePresentation();
+    const agendaCards = document.querySelectorAll('.agenda-card');
+    const url = window.location.pathname;
+    agendaCards.forEach(card => {
+        card.classList.remove('active'); // Limpia cualquier activo por defecto
+        const href = card.getAttribute('href');
+        if (href && url.endsWith(href)) {
+            card.classList.add('active');
+        }
+    });
 });
 
 // Función de inicialización
