@@ -6,30 +6,8 @@
     <title>ESCAPE ROOMS EDUCATIVOS - Taller Completo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Sistema de variables de Escapify */
+        /* Sistema de variables de Escapify - Solo modo oscuro */
         :root {
-            --primary-color: #0252CD;
-            --secondary-color: #2D7FF9;
-            --accent-color: #FF5757;
-            --background-color: #ffffff;
-            --surface-color: #ffffff;
-            --card-bg: #ffffff;
-            --text-color: #111827;
-            --text-color-light: #4b5563;
-            --text-muted: #6b7280;
-            --border-color: rgba(0, 0, 0, 0.08);
-            --shadow-color: rgba(0, 0, 0, 0.06);
-            --success-color: #10B981;
-            --error-color: #EF4444;
-            --warning-color: #F59E0B;
-            --hover-color: rgba(45, 127, 249, 0.08);
-            --primary-color-rgb: 2, 82, 205;
-            --secondary-color-rgb: 45, 127, 249;
-            --input-bg: #ffffff;
-            --tag-bg: #f3f4f6;
-        }
-
-        [data-theme="dark"] {
             --primary-color: #2D7FF9;
             --secondary-color: #5096FF;
             --accent-color: #FF5757;
@@ -50,7 +28,7 @@
             --input-bg: #374151;
             --tag-bg: #374151;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
@@ -139,15 +117,23 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
         }
         
         .logo i {
             font-size: 1.8rem;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         
         .logo:hover {
             color: var(--secondary-color);
             transform: scale(1.05);
+        }
+        
+        .logo:hover i {
+            transform: rotate(10deg);
+            color: var(--secondary-color);
         }
         
         /* Slide específicos */
@@ -164,6 +150,10 @@
         
         .slide-1 .logo {
             color: white;
+        }
+        
+        .slide-1 .logo:hover {
+            color: rgba(255, 255, 255, 0.8);
         }
         
         /* Botones estilo Escapify */
@@ -283,6 +273,12 @@
             position: relative;
             box-shadow: 0 4px 12px var(--shadow-color);
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .comparison-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-color);
         }
         
         .boring-class {
@@ -342,6 +338,12 @@
             font-weight: 600;
             position: relative;
             box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .narrative-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.4);
         }
         
         .arrow {
@@ -414,6 +416,12 @@
             font-weight: 600;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pyramid-level:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         
         .level-1 { background: var(--success-color); width: 80%; }
@@ -459,6 +467,12 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px var(--shadow-color);
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
         
         .subjects-grid {
@@ -483,9 +497,9 @@
         }
         
         .math-card { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); }
-        .history-card { background: linear-gradient(135deg, var(--accent-color) 0%, #f5576c 100%); }
-        .science-card { background: linear-gradient(135deg, var(--secondary-color) 0%, #00f2fe 100%); }
-        .language-card { background: linear-gradient(135deg, var(--success-color) 0%, #38f9d7 100%); }
+        .history-card { background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color) 100%); }
+        .science-card { background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-color) 100%); }
+        .language-card { background: linear-gradient(135deg, var(--success-color) 0%, var(--success-color) 100%); }
         
         .navigation {
             position: fixed;
@@ -527,6 +541,12 @@
             z-index: 1000;
             box-shadow: 0 4px 12px var(--shadow-color);
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .slide-counter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px var(--shadow-color);
         }
         
         .quote {
@@ -568,6 +588,12 @@
             color: var(--text-muted);
             box-shadow: 0 4px 12px var(--shadow-color);
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .qr-code:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px var(--shadow-color);
         }
         
         .contact-info {
@@ -640,13 +666,6 @@
                 right: 20px; 
                 padding: 8px 15px;
                 font-size: 0.9rem;
-            }
-            .theme-toggle {
-                top: 20px;
-                left: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
             }
             .logo {
                 top: 20px;
@@ -747,13 +766,6 @@
                 padding: 6px 12px;
                 font-size: 0.8rem;
             }
-            .theme-toggle {
-                top: 15px;
-                left: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 0.9rem;
-            }
             .logo {
                 top: 15px;
                 left: 15px;
@@ -778,59 +790,276 @@
             }
         }
 
-        /* Toggle de tema */
-        .theme-toggle {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-color);
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px var(--shadow-color);
-        }
 
         /* Ajustes específicos para el tema oscuro */
-        body[data-theme="dark"] .slide-1 {
-            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
-        }
 
-        body[data-theme="dark"] .slide-1 h1,
-        body[data-theme="dark"] .slide-1 .subtitle {
-            color: #F9FAFB;
+        /* Efectos hover adicionales para modo oscuro */
+        .agenda-item:hover .agenda-icon,
+        .pillar:hover .pillar-icon,
+        .mechanic-card:hover .mechanic-icon {
+            transform: scale(1.2);
+            color: var(--secondary-color);
         }
-
-        body[data-theme="dark"] .slide-1 .logo {
-            color: #F9FAFB;
+        
+        .agenda-icon,
+        .pillar-icon,
+        .mechanic-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos interactivos */
+        .objective-item:hover .check-icon {
+            transform: scale(1.2);
+            animation: pulse 0.6s ease;
+        }
+        
+        .check-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1.2); }
+        }
+        
+        /* Efectos de hover para botones de navegación */
+        .nav-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        /* Efectos de hover para elementos de texto */
+        .quote:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de contacto */
+        .contact-info:hover {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* Efectos de hover para hashtags */
+        .hashtags:hover {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de evaluación */
+        input[type="radio"]:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s ease;
+        }
+        
+        /* Efectos de hover para elementos de formulario */
+        input[type="radio"],
+        input[type="checkbox"] {
+            transition: transform 0.2s ease;
+        }
+        
+        /* Efectos de hover para elementos de presentador */
+        .presenter-info:hover {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de gradiente */
+        .subject-card:hover {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+        
+        /* Efectos de hover para elementos de cifrado */
+        .cipher-card:hover {
+            border-top-color: var(--secondary-color);
+        }
+        
+        /* Efectos de hover para elementos de checklist */
+        .checklist-item:hover span {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de navegación */
+        .arrow:hover {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de gradiente en modo oscuro */
+        .slide-1:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            transition: background 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de texto en modo oscuro */
+        .slide-1:hover h1,
+        .slide-1:hover .subtitle {
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            transition: text-shadow 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de contador */
+        .slide-counter:hover {
+            background: var(--surface-color);
+            border-color: var(--secondary-color);
+        }
+        
+        /* Efectos de hover para elementos de navegación */
+        .navigation:hover {
+            transform: translateX(-50%) scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de QR */
+        .qr-code:hover {
+            border-color: var(--secondary-color);
+            background: var(--surface-color);
+        }
+        
+        /* Efectos de hover para elementos de contacto */
+        .contact-info:hover strong {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de hashtags */
+        .hashtags:hover {
+            text-shadow: 0 0 10px rgba(var(--secondary-color-rgb), 0.3);
+        }
+        
+        /* Efectos de hover para elementos de evaluación */
+        .slide-20 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de cierre */
+        .slide-21 .slide-content:hover,
+        .slide-22 .slide-content:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de recursos */
+        .slide-18 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de ejemplos */
+        .slide-19 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de construcción */
+        .slide-16 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de checklist */
+        .slide-17 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de tarjetas */
+        .slide-15 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de aplicación */
+        .slide-14 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de colección */
+        .slide-13 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de cifrados */
+        .slide-12 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de desafíos */
+        .slide-11 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de mecánicas */
+        .slide-10 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de narrativa */
+        .slide-9 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de ejemplos */
+        .slide-8 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de estructura */
+        .slide-7 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de pilares */
+        .slide-6 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de mini-escape */
+        .slide-5 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de comparación */
+        .slide-4 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de objetivos */
+        .slide-3 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Efectos de hover para elementos de agenda */
+        .slide-2 .slide-content:hover {
+            transform: scale(1.01);
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
-<body data-theme="light">
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-        <i class="fas fa-moon"></i>
-    </button>
-    
+<body data-theme="dark">
     <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">22</span>
+        <span id="current-slide">1</span> / <span id="total-slides">26</span>
     </div>
 
     <!-- Slide 1: Portada -->
     <div class="slide slide-1 active">
-        <a href="#" class="logo">
+        <a href="index.html" class="logo" aria-label="Inicio - Escapify">
             <i class="fas fa-lock" aria-hidden="true"></i>
             Escapify
         </a>
@@ -844,7 +1073,7 @@
             </div>
         </div>
         <div class="presenter-info">
-            Raquel Cuesta Barberá | 23-25 de Junio
+            Raquel Cuesta Barberá | CSMLB
         </div>
     </div>
 
@@ -961,7 +1190,7 @@
         <div class="slide-content">
             <h2>🔐 Mini-Escape de Bienvenida</h2>
             <div style="font-size: 4rem; margin: 40px 0;">📦🗝️</div>
-            <div style="background: #f8f9ff; padding: 40px; border-radius: 15px; margin: 40px 0;">
+            <div style="background: var(--hover-color); padding: 40px; border-radius: 15px; margin: 40px 0;">
                 <h3 style="color: var(--primary-color); margin-bottom: 20px;">El Aula del Profesor Sabiondo</h3>
                 <p style="font-size: 1.3rem; line-height: 1.6;">
                     <em>"Sois un equipo de profesores investigadores que habéis descubierto un aula abandonada del siglo pasado. 
@@ -969,7 +1198,7 @@
                     antes de jubilarse. Tenéis 20 minutos para encontrarlo antes de que llegue la limpieza."</em>
                 </p>
             </div>
-            <div style="font-size: 1.5rem; color: #667eea; font-weight: 600;">
+            <div style="font-size: 1.5rem; color: var(--primary-color); font-weight: 600;">
                 ¿Estáis listos para vuestra primera misión?
             </div>
         </div>
@@ -1300,7 +1529,7 @@
         <div class="slide-content">
             <h2>🃏 Tarjetas de Referencia</h2>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px;">
+                <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 30px; border-radius: 15px;">
                     <h3>CIFRADO | APLICACIÓN</h3>
                     <hr style="margin: 20px 0; border: 1px solid rgba(255,255,255,0.3);">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.95rem;">
@@ -1312,7 +1541,7 @@
                         <div><strong>Musical</strong></div><div>Educación musical</div>
                     </div>
                 </div>
-                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 30px; border-radius: 15px;">
+                <div style="background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color) 100%); color: white; padding: 30px; border-radius: 15px;">
                     <h3>NIVEL | RECOMENDACIÓN</h3>
                     <hr style="margin: 20px 0; border: 1px solid rgba(255,255,255,0.3);">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.95rem;">
@@ -1332,24 +1561,24 @@
     <div class="slide">
         <div class="slide-content">
             <h2>🏗️ Construcción del Escape Completo</h2>
-            <div style="background: #f8f9ff; padding: 40px; border-radius: 15px; margin: 40px 0;">
+            <div style="background: var(--hover-color); padding: 40px; border-radius: 15px; margin: 40px 0;">
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-                    <div style="background: #667eea; color: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 10px; text-align: center;">
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">📖</div>
                         <h4>NARRATIVA</h4>
                         <p>Historia que engancha</p>
                     </div>
-                    <div style="background: #764ba2; color: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <div style="background: var(--secondary-color); color: white; padding: 25px; border-radius: 10px; text-align: center;">
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
                         <h4>DESAFÍOS</h4>
                         <p>4-6 retos diferentes</p>
                     </div>
-                    <div style="background: #f093fb; color: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <div style="background: var(--accent-color); color: white; padding: 25px; border-radius: 10px; text-align: center;">
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">🔐</div>
                         <h4>CIFRADOS</h4>
                         <p>Códigos y misterios</p>
                     </div>
-                    <div style="background: #43e97b; color: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <div style="background: var(--success-color); color: white; padding: 25px; border-radius: 10px; text-align: center;">
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">📊</div>
                         <h4>EVALUACIÓN</h4>
                         <p>Reflexión y aprendizaje</p>
@@ -1368,7 +1597,7 @@
         <div class="slide-content">
             <h2>✅ Checklist Final</h2>
             <div class="checklist">
-                <h3 style="color: #667eea; margin-bottom: 25px;">🔧 Aspectos Técnicos</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 25px;">🔧 Aspectos Técnicos</h3>
                 <div class="checklist-item">
                     <span style="margin-right: 15px; font-size: 1.2rem;">☐</span>
                     ¿Todos los candados tienen el código correcto?
@@ -1386,7 +1615,7 @@
                     ¿Habéis probado la secuencia completa?
                 </div>
                 
-                <h3 style="color: #667eea; margin: 30px 0 25px 0;">🎓 Aspectos Pedagógicos</h3>
+                <h3 style="color: var(--primary-color); margin: 30px 0 25px 0;">🎓 Aspectos Pedagógicos</h3>
                 <div class="checklist-item">
                     <span style="margin-right: 15px; font-size: 1.2rem;">☐</span>
                     ¿Los objetivos curriculares están claros?
@@ -1411,23 +1640,23 @@
     <div class="slide">
         <div class="slide-content">
             <h2>🌐 Recursos en escapify.io</h2>
-            <div style="background: #f8f9ff; padding: 40px; border-radius: 15px; margin: 40px 0;">
-                <div style="background: white; border-radius: 10px; padding: 30px; border: 2px solid #667eea;">
-                    <h3 style="color: #667eea; margin-bottom: 20px;">Tu Plataforma de Referencia</h3>
+            <div style="background: var(--hover-color); padding: 40px; border-radius: 15px; margin: 40px 0;">
+                <div style="background: var(--card-bg); border-radius: 10px; padding: 30px; border: 2px solid var(--primary-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">Tu Plataforma de Referencia</h3>
                 </div>
             </div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
-                <div style="background: #667eea; color: white; padding: 25px; border-radius: 15px; text-align: center;">
+                <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 15px; text-align: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 15px;">📚</div>
                     <h4>BIBLIOTECA</h4>
                     <p>Plantillas, ejemplos, inspiración</p>
                 </div>
-                <div style="background: #764ba2; color: white; padding: 25px; border-radius: 15px; text-align: center;">
+                <div style="background: var(--secondary-color); color: white; padding: 25px; border-radius: 15px; text-align: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 15px;">👥</div>
                     <h4>COMUNIDAD</h4>
                     <p>Conecta con otros profesores</p>
                 </div>
-                <div style="background: #f093fb; color: white; padding: 25px; border-radius: 15px; text-align: center;">
+                <div style="background: var(--accent-color); color: white; padding: 25px; border-radius: 15px; text-align: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 15px;">🔄</div>
                     <h4>ACTUALIZACIONES</h4>
                     <p>Nuevos contenidos cada mes</p>
@@ -1491,20 +1720,20 @@
     <div class="slide">
         <div class="slide-content">
             <h2>📊 Evaluación del Taller</h2>
-            <div style="background: #f8f9ff; padding: 40px; border-radius: 15px; margin: 40px 0;">
-                <h3 style="color: #667eea; margin-bottom: 25px;">🎯 Tu Feedback es Importante</h3>
+            <div style="background: var(--hover-color); padding: 40px; border-radius: 15px; margin: 40px 0;">
+                <h3 style="color: var(--primary-color); margin-bottom: 25px;">🎯 Tu Feedback es Importante</h3>
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
                     <div>
                         <h4 style="margin-bottom: 15px;">¿Qué es lo más valioso que te llevas?</h4>
-                        <div style="border: 1px solid #ccc; border-radius: 8px; height: 80px; background: white;"></div>
+                        <div style="border: 1px solid var(--border-color); border-radius: 8px; height: 80px; background: var(--card-bg);"></div>
                     </div>
                     <div>
                         <h4 style="margin-bottom: 15px;">¿Cuándo vas a usar tu primer escape room?</h4>
-                        <div style="border: 1px solid #ccc; border-radius: 8px; height: 80px; background: white;"></div>
+                        <div style="border: 1px solid var(--border-color); border-radius: 8px; height: 80px; background: var(--card-bg);"></div>
                     </div>
                     <div>
                         <h4 style="margin-bottom: 15px;">¿Qué mejorarías del taller?</h4>
-                        <div style="border: 1px solid #ccc; border-radius: 8px; height: 80px; background: white;"></div>
+                        <div style="border: 1px solid var(--border-color); border-radius: 8px; height: 80px; background: var(--card-bg);"></div>
                     </div>
                     <div>
                         <h4 style="margin-bottom: 15px;">¿Recomendarías este taller?</h4>
@@ -1522,15 +1751,223 @@
         </div>
     </div>
 
-    <!-- Slide 21: Cierre y motivación final -->
+    <!-- Slide 21: Casos de éxito reales -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>🏆 Casos de Éxito Reales</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">📈</div>
+                    <h3 style="color: var(--success-color);">Colegio San José (Madrid)</h3>
+                    <p><strong>Resultado:</strong> Incremento del 40% en participación activa</p>
+                    <p><strong>Asignatura:</strong> Ciencias Naturales - 3º ESO</p>
+                    <p><strong>Escape:</strong> "El Laboratorio del Dr. Virus"</p>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                        "Los estudiantes no querían que terminara la clase"
+                    </div>
+                </div>
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🎯</div>
+                    <h3 style="color: var(--success-color);">IES La Senda (Valencia)</h3>
+                    <p><strong>Resultado:</strong> Mejora del 35% en calificaciones</p>
+                    <p><strong>Asignatura:</strong> Matemáticas - 2º ESO</p>
+                    <p><strong>Escape:</strong> "La Mansión de los Números"</p>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                        "Los conceptos abstractos se volvieron tangibles"
+                    </div>
+                </div>
+            </div>
+            <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 16px; margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">📊 Estadísticas Globales</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold;">89%</div>
+                        <div>Mejora en engagement</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold;">76%</div>
+                        <div>Retención de conceptos</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold;">94%</div>
+                        <div>Estudiantes satisfechos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 22: Herramientas digitales -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>💻 Herramientas Digitales</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 40px;">
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🔐</div>
+                    <h4>ESCAPIFY.IO</h4>
+                    <p>Plataforma principal con generador de candados, plantillas y comunidad</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Gratuita</div>
+                </div>
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📱</div>
+                    <h4>GENIALLY</h4>
+                    <p>Creación de escape rooms digitales interactivos</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Freemium</div>
+                </div>
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🎮</div>
+                    <h4>SCRATCH</h4>
+                    <p>Programación de mini-juegos para escape rooms</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Gratuita</div>
+                </div>
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🎨</div>
+                    <h4>CANVA</h4>
+                    <p>Diseño de materiales visuales y pistas</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Freemium</div>
+                </div>
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🔊</div>
+                    <h4>AUDACITY</h4>
+                    <p>Creación de pistas de audio y ambientación</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Gratuita</div>
+                </div>
+                <div style="background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📊</div>
+                    <h4>GOOGLE FORMS</h4>
+                    <p>Evaluación y recopilación de respuestas</p>
+                    <div style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">Gratuita</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 23: Adaptación para NEE -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>♿ Adaptación para Necesidades Especiales</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">👁️ Dificultades Visuales</h3>
+                    <ul style="text-align: left; font-size: 1.1rem;">
+                        <li>Pistas táctiles con texturas</li>
+                        <li>Audio descripciones detalladas</li>
+                        <li>Contraste alto en materiales</li>
+                        <li>Pistas de audio con códigos QR</li>
+                        <li>Braille en materiales clave</li>
+                    </ul>
+                </div>
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🔊 Dificultades Auditivas</h3>
+                    <ul style="text-align: left; font-size: 1.1rem;">
+                        <li>Pistas visuales predominantes</li>
+                        <li>Subtítulos en videos</li>
+                        <li>Señales luminosas</li>
+                        <li>Vibraciones en dispositivos</li>
+                        <li>Comunicación escrita clara</li>
+                    </ul>
+                </div>
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🧠 Dificultades Cognitivas</h3>
+                    <ul style="text-align: left; font-size: 1.1rem;">
+                        <li>Instrucciones paso a paso</li>
+                        <li>Pistas más directas</li>
+                        <li>Tiempo extra disponible</li>
+                        <li>Apoyo visual constante</li>
+                        <li>Refuerzo positivo frecuente</li>
+                    </ul>
+                </div>
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🦽 Dificultades Motoras</h3>
+                    <ul style="text-align: left; font-size: 1.1rem;">
+                        <li>Pistas digitales accesibles</li>
+                        <li>Materiales adaptados</li>
+                        <li>Espacios amplios</li>
+                        <li>Ayuda de compañeros</li>
+                        <li>Alternativas táctiles</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="background: var(--success-color); color: white; padding: 25px; border-radius: 16px; margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">💡 Principio Universal</h3>
+                <p style="font-size: 1.2rem;">"Un escape room bien diseñado para NEE es un escape room mejor diseñado para todos"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 24: Evaluación y seguimiento -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>📋 Evaluación y Seguimiento</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🎯 Evaluación Inmediata</h3>
+                    <div style="background: var(--background-color); padding: 20px; border-radius: 16px; margin-bottom: 15px;">
+                        <strong>Rúbrica de Observación:</strong>
+                        <ul style="margin-top: 10px; text-align: left;">
+                            <li>Participación activa (25%)</li>
+                            <li>Colaboración grupal (25%)</li>
+                            <li>Resolución de problemas (25%)</li>
+                            <li>Aplicación de contenidos (25%)</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--background-color); padding: 20px; border-radius: 16px;">
+                        <strong>Reflexión Post-Escape:</strong>
+                        <p style="margin-top: 10px;">"¿Qué aprendiste? ¿Qué te sorprendió? ¿Qué cambiarías?"</p>
+                    </div>
+                </div>
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">📊 Seguimiento a Largo Plazo</h3>
+                    <div style="background: var(--background-color); padding: 20px; border-radius: 16px; margin-bottom: 15px;">
+                        <strong>Evaluación Sumativa:</strong>
+                        <ul style="margin-top: 10px; text-align: left;">
+                            <li>Test de retención (1 semana)</li>
+                            <li>Proyecto aplicativo (1 mes)</li>
+                            <li>Evaluación de competencias (trimestre)</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--background-color); padding: 20px; border-radius: 16px;">
+                        <strong>Portfolio Digital:</strong>
+                        <p style="margin-top: 10px;">Recopilación de evidencias de aprendizaje</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 16px; margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">🔄 Ciclo de Mejora Continua</h3>
+                <div style="display: flex; justify-content: space-around; text-align: center;">
+                    <div>
+                        <div style="font-size: 2rem;">1️⃣</div>
+                        <div>Implementar</div>
+                    </div>
+                    <div style="font-size: 2rem;">→</div>
+                    <div>
+                        <div style="font-size: 2rem;">2️⃣</div>
+                        <div>Evaluar</div>
+                    </div>
+                    <div style="font-size: 2rem;">→</div>
+                    <div>
+                        <div style="font-size: 2rem;">3️⃣</div>
+                        <div>Reflexionar</div>
+                    </div>
+                    <div style="font-size: 2rem;">→</div>
+                    <div>
+                        <div style="font-size: 2rem;">4️⃣</div>
+                        <div>Mejorar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 25: Cierre y motivación final -->
     <div class="slide">
         <div class="slide-content">
             <div style="font-size: 4rem; margin-bottom: 30px;">🎉</div>
-            <h1 style="color: #667eea;">¡FELICIDADES!</h1>
+            <h1 style="color: var(--primary-color);">¡FELICIDADES!</h1>
             <div class="quote" style="font-size: 2.5rem; margin: 40px 0;">
                 Tu aula no volverá a ser la misma
             </div>
-            <div style="background: #f8f9ff; padding: 40px; border-radius: 15px; margin: 40px 0;">
+            <div style="background: var(--hover-color); padding: 40px; border-radius: 15px; margin: 40px 0;">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; font-size: 1.3rem;">
                     <div>🎓 <strong>Herramienta poderosa adquirida</strong></div>
                     <div>🎯 <strong>Estudiantes que recordarán estas clases</strong></div>
@@ -1538,7 +1975,7 @@
                     <div>🌟 <strong>Parte del cambio educativo</strong></div>
                 </div>
             </div>
-            <div style="font-size: 2rem; color: #667eea; font-weight: 700; margin-top: 40px;">
+            <div style="font-size: 2rem; color: var(--primary-color); font-weight: 700; margin-top: 40px;">
                 💪 AHORA... ¡A REVOLUCIONAR VUESTRAS AULAS!
             </div>
             <div class="hashtags">
@@ -1547,11 +1984,11 @@
         </div>
     </div>
 
-    <!-- Slide 22: ¡Gracias! -->
+    <!-- Slide 26: ¡Gracias! -->
     <div class="slide">
         <div class="slide-content">
             <div style="font-size: 5rem; margin-bottom: 30px;">🙏</div>
-            <h1 style="color: #667eea;">¡GRACIAS!</h1>
+            <h1 style="color: var(--primary-color);">¡GRACIAS!</h1>
             <div class="contact-info">
                 <div style="margin-bottom: 20px;">
                     <strong>📧 info@escapify.io</strong>
@@ -1568,7 +2005,7 @@
                 <strong>Acceso a todos los recursos</strong><br>
                 <small>escapify.io/recursos</small>
             </div>
-            <div style="font-size: 1.5rem; color: #667eea; margin-top: 40px;">
+            <div style="font-size: 1.5rem; color: var(--primary-color); margin-top: 40px;">
                 ¡Que empiecen los escape rooms! 🚀
             </div>
         </div>
@@ -1601,45 +2038,16 @@
             showSlide(currentSlide - 1);
         }
 
-        // Función para cambiar tema
-        function toggleTheme() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle i');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeToggle.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeToggle.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Cargar tema guardado
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle i');
-            
-            body.setAttribute('data-theme', savedTheme);
-            themeToggle.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 nextSlide();
             } else if (e.key === 'ArrowLeft') {
                 previousSlide();
-            } else if (e.key === 't' || e.key === 'T') {
-                toggleTheme();
             }
         });
 
         // Initialize
-        loadTheme();
         showSlide(0);
     </script>
 </body>
