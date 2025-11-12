@@ -380,9 +380,11 @@ class LockTypes {
             helper.textContent = `Selecciona hasta ${maxLength} direcciones (actual: ${sequence.length}).`;
             memoryContainer.innerHTML = '';
             if (sequence.length === 0) {
-                memoryContainer.textContent = 'Sin direcciones todavía';
+                // No mostrar nada cuando está vacío - el placeholder ya está en el helper
+                memoryContainer.style.display = 'none';
                 return;
             }
+            memoryContainer.style.display = 'flex';
             sequence.forEach(direction => {
                 const step = document.createElement('span');
                 step.className = 'directional-step';

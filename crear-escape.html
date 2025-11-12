@@ -648,9 +648,9 @@
         .step-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
         }
 
@@ -673,30 +673,45 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            font-size: 1rem;
             color: var(--text-color);
         }
 
         .required {
             color: var(--error-color);
+            font-weight: 700;
+            margin-left: 0.25rem;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             background: var(--input-bg);
             color: var(--text-color);
             font-size: 1rem;
+            min-height: 48px;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
         }
 
         .form-group input:focus,
@@ -709,51 +724,62 @@
         .form-actions {
             display: flex;
             justify-content: space-between;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.25rem;
+            margin-top: 2.5rem;
             padding-top: 2rem;
             border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
         }
 
         .selection-options {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
 
         .selected-locks-container {
-            margin: 2rem 0;
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: var(--surface-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
         .selected-locks-list {
             min-height: 100px;
-            padding: 1rem;
+            padding: 1.5rem;
             background: var(--subtle-bg);
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .selected-lock-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
+            padding: 1.25rem 1.5rem;
             background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
+            border-radius: 10px;
+            margin-bottom: 0;
             border: 1px solid var(--border-color);
+            gap: 1rem;
         }
 
         .lock-info {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
+            flex: 1;
         }
 
         .lock-order {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
@@ -761,6 +787,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            font-size: 1.1rem;
         }
 
         .btn-remove {
@@ -768,13 +795,19 @@
             border: none;
             color: var(--error-color);
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background 0.3s;
+            padding: 0.625rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-remove:hover {
             background: var(--hover-color);
+            transform: scale(1.1);
         }
 
         .locks-history-modal {
@@ -806,8 +839,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1.75rem 2rem;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
         }
 
         .close-modal {
@@ -816,39 +854,53 @@
             font-size: 1.5rem;
             color: var(--text-color);
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.625rem;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .close-modal:hover {
+            background: var(--hover-color);
         }
 
         .modal-body {
-            padding: 1.5rem;
+            padding: 2rem;
             overflow-y: auto;
             flex: 1;
         }
 
         .search-filters {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .search-input {
             flex: 1;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
+            min-height: 48px;
+            font-size: 1rem;
         }
 
         .locks-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .lock-card-selectable {
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.75rem;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -890,19 +942,28 @@
         }
 
         .sequence-list {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .sequence-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 1.25rem;
+            padding: 1.25rem 1.5rem;
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 0;
             cursor: move;
+            transition: all 0.2s ease;
+        }
+        
+        .sequence-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.15);
         }
 
         .sequence-item.drag-over {
@@ -910,14 +971,10 @@
             background: var(--hover-color);
         }
 
-        .drag-handle {
-            color: var(--text-muted);
-            cursor: grab;
-        }
-
         .sequence-number {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
@@ -925,6 +982,28 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .sequence-name {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .drag-handle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            cursor: grab;
+            padding: 0.5rem;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .drag-handle:active {
+            cursor: grabbing;
         }
 
         .escape-success {
@@ -950,20 +1029,35 @@
         }
 
         .help-text {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            margin-top: 0.25rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .section-description {
             color: var(--text-color-light);
             margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         .empty-message {
             text-align: center;
             color: var(--text-muted);
-            padding: 2rem;
+            padding: 3rem 2rem;
+            font-style: italic;
+            line-height: 1.7;
+        }
+        
+        .success-actions {
+            gap: 1.25rem !important;
+            margin-top: 2.5rem !important;
+        }
+        
+        .success-icon {
+            margin-bottom: 1.5rem !important;
         }
 
         @media (max-width: 768px) {

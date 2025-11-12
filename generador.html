@@ -137,35 +137,18 @@
                 </div>
 
                 <div class="lock-form">
+                    <!-- 1. Nombre (más importante) -->
                     <div class="form-group">
-                        <label for="lockName">Nombre del candado</label>
+                        <label for="lockName">Nombre del candado <span class="required">*</span></label>
                         <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
                     </div>
 
-                    <div class="form-group">
-                        <label for="lockDescription">Descripción (opcional)</label>
-                        <textarea id="lockDescription" placeholder="Describe el candado o añade pistas" aria-describedby="descHelp"></textarea>
-                        <div id="descHelp" class="sr-only">La descripción ayudará a los usuarios a entender el propósito del candado</div>
+                    <!-- 2. Teclado/Keypad (lo más importante funcionalmente) -->
+                    <div id="lockKeypad" class="lock-keypad-container" aria-label="Teclado del candado">
+                        <!-- El teclado específico se cargará dinámicamente -->
                     </div>
 
-                    <div class="form-group">
-                        <label for="lockCustomUrl">Enlace personalizado (opcional)</label>
-                        <div class="custom-url-input">
-                            <span class="url-prefix">https://escapify.io/candado/</span>
-                            <input type="text" id="lockCustomUrl" placeholder="mi-candado">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lockDirectory">Almacenado en el directorio</label>
-                        <div class="directory-selector">
-                            <input type="text" id="lockDirectory" value="Sin directorio" readonly>
-                            <button class="btn btn-secondary" id="editDirectory">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
-                        </div>
-                    </div>
-
+                    <!-- 3. Display del código (visualización) -->
                     <div class="lock-display-container">
                         <div class="lock-display" id="lockDisplay" aria-live="polite" aria-atomic="true">
                             <span class="placeholder">Selecciona el código</span>
@@ -180,8 +163,11 @@
                         </div>
                     </div>
 
-                    <div id="lockKeypad" class="lock-keypad-container" aria-label="Teclado del candado">
-                        <!-- El teclado específico se cargará dinámicamente -->
+                    <!-- 4. Descripción -->
+                    <div class="form-group">
+                        <label for="lockDescription">Descripción (opcional)</label>
+                        <textarea id="lockDescription" placeholder="Describe el candado o añade pistas" aria-describedby="descHelp"></textarea>
+                        <div id="descHelp" class="sr-only">La descripción ayudará a los usuarios a entender el propósito del candado</div>
                     </div>
 
                     <!-- Opciones avanzadas para candado numérico -->
@@ -220,7 +206,6 @@
                         </div>
                     </div>
 
-                    <!-- Opciones avanzadas para candado Nokia -->
                     <div id="nokiaOptions" class="nokia-options" style="display: none;">
                         <h4>Opciones avanzadas</h4>
                         <div class="option-group">
@@ -260,7 +245,6 @@
                         </div>
                     </div>
 
-                    <!-- Opciones avanzadas para candado de Coordenadas -->
                     <div id="coordinatesOptions" class="coordinates-options" style="display: none;">
                         <h4>Opciones avanzadas</h4>
                         <div class="option-group">
@@ -355,6 +339,7 @@
                         <input type="text" id="lockUrl" placeholder="URL a la que redirigir al resolver">
                     </div>
 
+                    <!-- 6. Longitud del código (importante para configuración) -->
                     <div class="form-group">
                         <label for="codeLength">Longitud del código</label>
                         <div class="code-length-control">
@@ -363,7 +348,7 @@
                         </div>
                     </div>
 
-                    <!-- Sección de opciones avanzadas -->
+                    <!-- 7. Sección de opciones avanzadas (menos importante) -->
                     <div class="lock-options" id="advancedOptions">
                         <h3>Opciones avanzadas</h3>
                         
