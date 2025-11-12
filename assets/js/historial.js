@@ -66,9 +66,17 @@ class HistoryManager {
                 let label = item.difficulty === 'easy' ? 'Fácil' : item.difficulty === 'medium' ? 'Medio' : 'Difícil';
                 badge = `<span class="difficulty-badge difficulty-${item.difficulty}">${label}</span>`;
             }
+            
+            // Verificar si es favorito
+            const isFavorite = window.favoritesManager && window.favoritesManager.isLockFavorite(item.id);
+            const favoriteClass = isFavorite ? 'active' : '';
+            
             return `
             <li class="history-item">
                 <div class="history-item-content">
+                    <button class="favorite-btn ${favoriteClass}" data-id="${item.id}" data-type="lock" aria-label="${isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}">
+                        <i class="fas fa-star"></i>
+                    </button>
                     <span class="history-item-name">${item.name}</span>
                     ${badge}
                     <span class="history-item-type">${this.getTypeLabel(item.type)}</span>
@@ -92,6 +100,7 @@ class HistoryManager {
             `;
         }).join('');
 
+        // Event listeners para acciones
         this.historyList.querySelectorAll('.history-action-btn').forEach(btn => {
             btn.addEventListener('click', (event) => {
                 const action = event.currentTarget.dataset.action;
@@ -112,6 +121,41 @@ class HistoryManager {
                         break;
                     default:
                         break;
+                }
+            });
+        });
+
+        // Event listeners para favoritos
+        this.historyList.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const id = event.currentTarget.dataset.id;
+                const type = event.currentTarget.dataset.type;
+                
+                if (window.favoritesManager) {
+                    let isFavorite;
+                    if (type === 'lock') {
+                        isFavorite = window.favoritesManager.toggleLock(id);
+                    } else {
+                        isFavorite = window.favoritesManager.toggleEscape(id);
+                    }
+                    
+                    // Actualizar UI
+                    event.currentTarget.classList.toggle('active');
+                    const icon = event.currentTarget.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fas');
+                        icon.classList.toggle('far');
+                    }
+                    
+                    // Notificación
+                    if (window.notificationManager) {
+                        if (isFavorite) {
+                            window.notificationManager.success('Añadido a favoritos');
+                        } else {
+                            window.notificationManager.info('Eliminado de favoritos');
+                        }
+                    }
                 }
             });
         });
@@ -183,14 +227,20 @@ class HistoryManager {
 
     async copyCode(code) {
         if (!code) {
-            this.showNotification('Este candado no tiene código disponible', 'error');
+            if (window.notificationManager) {
+                window.notificationManager.error('Este candado no tiene código disponible');
+            }
             return;
         }
         try {
             await navigator.clipboard.writeText(code);
-            this.showNotification('Código copiado al portapapeles', 'success');
+            if (window.notificationManager) {
+                window.notificationManager.success('Código copiado al portapapeles');
+            }
         } catch (err) {
-            this.showNotification('Error al copiar el código', 'error');
+            if (window.notificationManager) {
+                window.notificationManager.error('Error al copiar el código');
+            }
         }
     }
 
@@ -204,7 +254,9 @@ class HistoryManager {
     async copyShareLink(id) {
         const targetLock = this.history.find(item => item.id?.toString() === id?.toString());
         if (!targetLock) {
-            this.showNotification('No encontramos ese candado', 'error');
+            if (window.notificationManager) {
+                window.notificationManager.error('No encontramos ese candado');
+            }
             return;
         }
 
@@ -213,17 +265,23 @@ class HistoryManager {
         const shareUrl = buildShareUrlFromPayload(payload);
 
         if (!shareUrl) {
-            this.showNotification('No se pudo generar el enlace', 'error');
+            if (window.notificationManager) {
+                window.notificationManager.error('No se pudo generar el enlace');
+            }
             return;
         }
 
         try {
             await navigator.clipboard.writeText(shareUrl);
             this.persistHistory();
-            this.showNotification('Enlace copiado al portapapeles', 'success');
+            if (window.notificationManager) {
+                window.notificationManager.success('Enlace copiado al portapapeles');
+            }
         } catch (error) {
             console.error('No se pudo copiar el enlace compartido:', error);
-            this.showNotification('Error al copiar el enlace', 'error');
+            if (window.notificationManager) {
+                window.notificationManager.error('Error al copiar el enlace');
+            }
         }
     }
 
@@ -232,7 +290,9 @@ class HistoryManager {
             this.history = this.history.filter(item => item.id?.toString() !== id?.toString());
             this.persistHistory();
             this.filterHistory();
-            this.showNotification('Candado eliminado del historial', 'success');
+            if (window.notificationManager) {
+                window.notificationManager.success('Candado eliminado del historial');
+            }
         }
     }
 
@@ -258,34 +318,10 @@ class HistoryManager {
             this.history = [];
             localStorage.removeItem('lockHistory');
             this.renderHistory([]);
-            this.showNotification('Historial limpiado', 'success');
+            if (window.notificationManager) {
+                window.notificationManager.success('Historial limpiado');
+            }
         }
-    }
-
-    showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-
-        document.body.appendChild(notification);
-
-        Object.assign(notification.style, {
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            padding: '1rem 2rem',
-            borderRadius: '5px',
-            backgroundColor: type === 'success' ? 'var(--success-color)' : 'var(--error-color)',
-            color: 'white',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-            zIndex: '1000',
-            transition: 'opacity 0.3s ease'
-        });
-
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
     }
 }
 
