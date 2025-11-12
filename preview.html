@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root[data-theme="light"] {
             --preview-bg: white;
@@ -405,6 +406,29 @@
                     <i class="fas fa-arrow-left"></i> Volver
                 </button>
             </div>
+
+            <div class="share-panel" id="sharePanel" style="display: none;">
+                <h3><i class="fas fa-share-alt"></i> Compartir este candado</h3>
+                <p>Comparte el enlace o reparte el QR para que los jugadores accedan al instante.</p>
+                <div class="share-link-group">
+                    <label for="shareLinkInput">Enlace del candado</label>
+                    <div class="share-link-control">
+                        <input type="text" id="shareLinkInput" readonly>
+                        <button class="btn btn-secondary" id="copyShareLink" aria-label="Copiar enlace">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn btn-secondary" id="openShareLink" aria-label="Abrir enlace en nueva pestaña">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="qr-wrapper">
+                    <div id="previewQr" role="img" aria-label="Código QR del candado"></div>
+                    <button class="btn btn-primary" id="downloadShareQR">
+                        <i class="fas fa-download"></i> Descargar QR
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Misiones Activas -->
@@ -481,10 +505,12 @@
         <script type="module">
             import LockTypes from './assets/js/lock-types.js';
             import LockSystem from './assets/js/lock-system.js';
+            import { appendSharePayload, buildShareUrlFromPayload, decodeLockData, ensureSharePayload } from './assets/js/share.js';
 
             document.addEventListener('DOMContentLoaded', () => {
                 const lockSystem = new LockSystem();
-                const lockData = JSON.parse(localStorage.getItem('previewLock') || '{}');
+                let lockData = resolveLockData() || {};
+                const lockOptions = lockData.options || {};
                 
                 // Elementos del DOM
                 const lockName = document.getElementById('lockName');
@@ -502,16 +528,143 @@
                 const resetButton = document.getElementById('resetButton');
                 const timerDisplay = document.getElementById('timerDisplay');
                 const missionsGrid = document.getElementById('missionsGrid');
+                const sharePanel = document.getElementById('sharePanel');
+                const shareLinkInput = document.getElementById('shareLinkInput');
+                const copyShareLink = document.getElementById('copyShareLink');
+                const openShareLink = document.getElementById('openShareLink');
+                const downloadShareQR = document.getElementById('downloadShareQR');
+                const previewQr = document.getElementById('previewQr');
 
                 let enteredCode = '';
                 let currentLockType = null;
                 let timerInterval = null;
                 let startTime = null;
+                let shareUrl = '';
+
+                function getCodeLengthLimit() {
+                    if (lockOptions.codeLength) return lockOptions.codeLength;
+                    if (currentLockType?.maxLength) return currentLockType.maxLength;
+                    if (currentLockType?.minLength) return currentLockType.minLength;
+                    return 4;
+                }
+
+                if (copyShareLink) {
+                    copyShareLink.addEventListener('click', async () => {
+                        if (!shareUrl) {
+                            showToast('Genera o carga un candado para compartirlo', 'error');
+                            return;
+                        }
+                        try {
+                            await navigator.clipboard.writeText(shareUrl);
+                            showToast('Enlace copiado al portapapeles', 'success');
+                        } catch (error) {
+                            showToast('No se pudo copiar el enlace', 'error');
+                        }
+                    });
+                }
+
+                if (openShareLink) {
+                    openShareLink.addEventListener('click', () => {
+                        if (!shareUrl) {
+                            showToast('Todavía no hay un enlace disponible', 'error');
+                            return;
+                        }
+                        window.open(shareUrl, '_blank');
+                    });
+                }
+
+                if (downloadShareQR) {
+                    downloadShareQR.addEventListener('click', () => {
+                        if (!shareUrl) {
+                            showToast('Genera el candado antes de descargar su QR', 'error');
+                            return;
+                        }
+                        const canvas = previewQr?.querySelector('canvas');
+                        if (canvas) {
+                            const link = document.createElement('a');
+                            link.download = `candado-qr-${Date.now()}.png`;
+                            link.href = canvas.toDataURL();
+                            link.click();
+                        } else {
+                            showToast('El QR no está disponible todavía', 'error');
+                        }
+                    });
+                }
+
+                function resolveLockData() {
+                    const params = new URLSearchParams(window.location.search);
+
+                    if (params.has('data')) {
+                        const decoded = decodeLockData(params.get('data'));
+                        if (decoded) {
+                            return decoded;
+                        }
+                    }
+
+                    if (params.has('id')) {
+                        try {
+                            const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                            const matched = history.find(item => item.id?.toString() === params.get('id'));
+                            if (matched) {
+                                return matched;
+                            }
+                        } catch (error) {
+                            console.warn('No se pudo leer el historial local:', error);
+                        }
+                    }
+
+                    return JSON.parse(localStorage.getItem('previewLock') || '{}');
+                }
+
+                function hydrateSharePanel(data) {
+                    if (!sharePanel) return;
+
+                    const payload = ensureSharePayload(data);
+                    shareUrl = buildShareUrlFromPayload(payload);
+
+                    if (shareUrl) {
+                        sharePanel.style.display = 'block';
+                        if (shareLinkInput) {
+                            shareLinkInput.value = shareUrl;
+                        }
+                        if (typeof QRCode !== 'undefined' && previewQr) {
+                            previewQr.innerHTML = '';
+                            new QRCode(previewQr, {
+                                text: shareUrl,
+                                width: 180,
+                                height: 180
+                            });
+                        }
+                    } else {
+                        sharePanel.style.display = 'none';
+                    }
+                }
+
+                function renderEmptyState() {
+                    lockName.textContent = 'Candado no disponible';
+                    lockDescription.textContent = 'No pudimos cargar los datos del candado. Revisa el enlace o crea uno nuevo en el generador.';
+                    lockKeypad.innerHTML = '';
+                    hintsContainer.style.display = 'none';
+                    sharePanel && (sharePanel.style.display = 'none');
+                    lockMessage.textContent = 'Vuelve al generador para crear tu primer candado.';
+                    lockMessage.className = 'lock-message error visible';
+                }
+
+                function renderUnsupportedType(type) {
+                    lockName.textContent = 'Tipo de candado no compatible';
+                    lockDescription.textContent = `El tipo "${type}" no está disponible en esta versión.`;
+                    lockKeypad.innerHTML = '';
+                    sharePanel && (sharePanel.style.display = 'none');
+                    lockMessage.textContent = 'Actualiza el candado desde el generador.';
+                    lockMessage.className = 'lock-message error visible';
+                }
 
                 // Inicializar el candado
-                if (lockData.type) {
+                if (lockData?.type) {
                     currentLockType = LockTypes.TYPES[lockData.type.toUpperCase()];
                     if (currentLockType) {
+                        lockData = appendSharePayload(lockData);
+                        hydrateSharePanel(lockData);
                         // Configurar datos básicos
                         lockName.textContent = lockData.name || `Candado ${currentLockType.name}`;
                         lockDescription.textContent = lockData.description || currentLockType.description;
@@ -530,15 +683,26 @@
                         }
 
                         // Cargar el teclado específico
-                        const template = LockTypes.getTemplate(currentLockType.id);
+                        const template = LockTypes.getTemplate(currentLockType.id, lockData.options || {});
                         if (template) {
                             lockKeypad.appendChild(template);
                             setupKeypadListeners();
+                            template.addEventListener('codeEntered', (event) => {
+                                enteredCode = event.detail || '';
+                                updateDisplay();
+                                checkCode();
+                            });
                         }
 
                         // Iniciar temporizador
                         startTimer();
+                    } else {
+                        renderUnsupportedType(lockData.type);
+                        return;
                     }
+                } else {
+                    renderEmptyState();
+                    return;
                 }
 
                 // Configurar eventos
@@ -556,7 +720,17 @@
                 }
 
                 function handlePatternInput(button) {
-                    button.classList.toggle('selected');
+                    const limit = getCodeLengthLimit();
+                    if (button.classList.contains('selected')) {
+                        button.classList.remove('selected');
+                    } else {
+                        const currentSelected = lockKeypad.querySelectorAll('.pattern-button.selected').length;
+                        if (currentSelected >= limit) {
+                            showToast(`Este candado admite un máximo de ${limit} puntos`, 'error');
+                            return;
+                        }
+                        button.classList.add('selected');
+                    }
                     const selectedButtons = lockKeypad.querySelectorAll('.pattern-button.selected');
                     enteredCode = Array.from(selectedButtons).map(btn => btn.dataset.value).join(',');
                     updateDisplay();
@@ -569,6 +743,11 @@
                         const password = document.getElementById('password')?.value || '';
                         enteredCode = `${username}:${password}`;
                     } else {
+                        const limit = getCodeLengthLimit();
+                        if (enteredCode.length >= limit) {
+                            showToast(`Has alcanzado la longitud máxima (${limit})`, 'error');
+                            return;
+                        }
                         enteredCode += value;
                     }
                     updateDisplay();
@@ -584,7 +763,7 @@
                 }
 
                 function checkCode() {
-                    if (LockTypes.validateCode(currentLockType.id, enteredCode)) {
+                    if (LockTypes.validateCode(currentLockType.id, enteredCode, lockData.options || {})) {
                         if (enteredCode === lockData.code) {
                             const timeSpent = (Date.now() - startTime) / 1000;
                             const score = lockSystem.calculateScore();
@@ -611,6 +790,18 @@
                     setTimeout(() => {
                         lockMessage.classList.remove('visible');
                     }, 3000);
+                }
+
+                function showToast(message, type = 'success') {
+                    const notification = document.createElement('div');
+                    notification.className = `notification ${type}`;
+                    notification.textContent = message;
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => notification.remove(), 300);
+                    }, 2500);
                 }
 
                 // Sistema de Pistas

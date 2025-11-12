@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla Candado de Palabra</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="plantilla-candado-numerico.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .word-hints table,
+        .word-hints th,
+        .word-hints td {
+            border: 1px solid #cbd5ff;
+            border-collapse: collapse;
+        }
+        .word-hints table {
+            width: 100%;
+            margin-top: 12px;
+        }
+        .word-hints th,
+        .word-hints td {
+            padding: 8px;
+        }
+        .word-notes {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container" id="word-lock-preview">
+        <button id="download-pdf" class="download-btn"><i class="fas fa-download"></i> Descargar PDF</button>
+        <div class="preview-title">Plantilla de Candado de Palabra</div>
+        <div class="preview-subtitle">Usa esta hoja para diseñar candados basados en palabras clave o pistas lingüísticas.</div>
+        
+        <div class="instructions">
+            <strong>Instrucciones sugeridas:</strong><br>
+            1. Define la palabra objetivo y anótala en las casillas.<br>
+            2. Añade pistas o descripciones para cada letra (sin revelar la respuesta).<br>
+            3. Recorta la sección inferior si necesitas entregar la tarjeta al alumnado.
+        </div>
+
+        <div class="candado-visual">
+            <div class="candado-icon"><i class="fas fa-font"></i></div>
+            <div class="combination-boxes word-boxes">
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+                <div class="combination-box">_</div>
+            </div>
+            <div style="color:var(--text-color-light);font-size:0.95rem;">Escribe aquí la palabra clave</div>
+        </div>
+
+        <div class="word-hints">
+            <h3>Pistas por letra</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Letra</th>
+                        <th>Pista / Referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>&nbsp;</td><td></td></tr>
+                    <tr><td>2</td><td>&nbsp;</td><td></td></tr>
+                    <tr><td>3</td><td>&nbsp;</td><td></td></tr>
+                    <tr><td>4</td><td>&nbsp;</td><td></td></tr>
+                    <tr><td>5</td><td>&nbsp;</td><td></td></tr>
+                    <tr><td>6</td><td>&nbsp;</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="word-notes">
+            <h3>Notas para el docente</h3>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+        </div>
+
+        <div class="escapify-logo">
+            <i class="fas fa-lock"></i> Escapify
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            const clone = document.getElementById('word-lock-preview').cloneNode(true);
+            prepareCloneForPrint(clone);
+
+            const opt = {
+                margin: [1.5, 1.5, 1.5, 1.5],
+                filename: 'plantilla-candado-palabra.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(clone).save();
+        });
+
+        function prepareCloneForPrint(clone) {
+            clone.style.background = '#fff';
+            clone.style.color = '#111827';
+            clone.querySelectorAll('.combination-box').forEach(box => {
+                box.style.background = '#f8fafc';
+                box.style.color = '#0252CD';
+                box.style.borderColor = '#0252CD';
+            });
+            const subtitle = clone.querySelector('.preview-subtitle');
+            if (subtitle) subtitle.style.color = '#4b5563';
+            const instructions = clone.querySelector('.instructions');
+            if (instructions) instructions.style.color = '#111827';
+            const logo = clone.querySelector('.escapify-logo');
+            if (logo) logo.style.color = '#0252CD';
+        }
+
+        function getThemeFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('theme');
+        }
+
+        function applyTheme() {
+            const theme = getThemeFromUrl();
+            document.body.classList.remove('modo-dark', 'modo-light');
+            document.documentElement.classList.remove('modo-dark', 'modo-light');
+            if (theme === 'dark') {
+                document.body.classList.add('modo-dark');
+                document.documentElement.classList.add('modo-dark');
+            } else if (theme === 'light') {
+                document.body.classList.add('modo-light');
+                document.documentElement.classList.add('modo-light');
+            }
+        }
+
+        applyTheme();
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('autoDownload') === '1') {
+            setTimeout(() => document.getElementById('download-pdf').click(), 400);
+        }
+    </script>
+</body>
+</html>

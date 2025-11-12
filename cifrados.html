@@ -446,6 +446,87 @@
             font-size: 0;
             border: 1px solid var(--primary-color);
         }
+
+        .cryptex-lab,
+        .safe-dial-lab,
+        .music-lab {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .cryptex-preview {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            font-family: monospace;
+            font-size: 1.4rem;
+        }
+
+        .cryptex-preview span {
+            width: 32px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--subtle-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+        }
+
+        .safe-dial-value {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .safe-sequence {
+            min-height: 48px;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .safe-controls,
+        .music-controls {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .music-result {
+            min-height: 48px;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: var(--subtle-bg);
+            font-family: monospace;
+        }
+
+        .cipher-modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .music-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .music-table th,
+        .music-table td {
+            border: 1px solid var(--border-color);
+            padding: 6px;
+            text-align: center;
+        }
         
         /* Estilos para cifrado de sustitución */
         .substitution-alphabet {
@@ -1114,6 +1195,85 @@
                         <a href="#" class="btn btn-small btn-secondary">Probar</a>
                     </div>
                 </div>
+
+                <!-- 11. Cryptex digital -->
+                <div class="cipher-card" data-categories="modern hard">
+                    <div class="cipher-icon">
+                        <i class="fas fa-ring" aria-hidden="true"></i>
+                    </div>
+                    <h3>Cryptex digital</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Difícil">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                        </div>
+                    </div>
+                    <p>Simula los cilindros giratorios de un cryptex en papel o de forma digital, permitiendo pistas encadenadas por letras.</p>
+                    <div class="cipher-example">
+                        Palabra objetivo: FUEGO<br>
+                        Anillos: F – U – E – G – O
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Manipulativo</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 12. Dial de caja fuerte -->
+                <div class="cipher-card" data-categories="modern">
+                    <div class="cipher-icon">
+                        <i class="fas fa-bullseye" aria-hidden="true"></i>
+                    </div>
+                    <h3>Dial de caja fuerte</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Media">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Basado en giros izquierda/derecha y números concretos, perfecto para recrear mandos giratorios como los de Lockee.</p>
+                    <div class="cipher-example">
+                        Secuencia: R-25 → L-12 → R-3
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Secuencial</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
+
+                <!-- 13. Clave musical -->
+                <div class="cipher-card" data-categories="modern easy">
+                    <div class="cipher-icon">
+                        <i class="fas fa-music" aria-hidden="true"></i>
+                    </div>
+                    <h3>Clave musical</h3>
+                    <div class="cipher-difficulty">
+                        <div class="difficulty-indicator" title="Dificultad: Fácil">
+                            <span class="difficulty-dot dot-filled"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                            <span class="difficulty-dot dot-empty"></span>
+                        </div>
+                    </div>
+                    <p>Convierte letras en notas musicales y viceversa para integrar melodías o partituras dentro de tus retos.</p>
+                    <div class="cipher-example">
+                        AULA → DO · FA · LA · DO
+                    </div>
+                    <div class="cipher-tags">
+                        <span class="cipher-tag">Moderno</span>
+                        <span class="cipher-tag">Auditivo</span>
+                    </div>
+                    <div class="cipher-actions">
+                        <a href="#" class="btn btn-small btn-secondary">Probar</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1148,7 +1308,354 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
+        const cipherLockMap = {
+            'cifrado-cesar': 'alphanumeric',
+            'codigo-morse': 'alphanumeric',
+            'cifrado-de-polibio': 'alphanumeric',
+            'cifrado-pigpen': 'pattern-9',
+            'cifrado-vigenere': 'alphanumeric',
+            'cifrado-atbash': 'alphanumeric',
+            'cifrado-de-sustitucion': 'alphanumeric',
+            'codigo-ascii': 'alphanumeric',
+            'cifrado-binario': 'alphanumeric',
+            'teclado-nokia': 'nokia',
+            'cryptex-digital': 'cryptex',
+            'dial-de-caja-fuerte': 'rotary',
+            'clave-musical': 'musical'
+        };
+
+        const cipherTemplates = {
+            'cifrado-cesar': {
+                title: 'Plantilla Cifrado César',
+                description: 'Desplaza el alfabeto un número fijo de posiciones para ocultar el mensaje original.',
+                steps: [
+                    'Escribe el mensaje original en la primera columna.',
+                    'Elige el desplazamiento y completa el alfabeto desplazado.',
+                    'Transcribe el mensaje aplicando el desplazamiento y valida el resultado.'
+                ],
+                sampleHeaders: ['Mensaje original', 'Desplazamiento', 'Mensaje cifrado']
+            },
+            'codigo-morse': {
+                title: 'Plantilla Código Morse',
+                description: 'Convierte letras y números en puntos y rayas; ideal para retos auditivos o luminosos.',
+                steps: [
+                    'Anota el mensaje original.',
+                    'Sustituye cada letra por su secuencia Morse.',
+                    'Entrega pistas auditivas o visuales para que el equipo pueda descifrarlo.'
+                ],
+                sampleHeaders: ['Mensaje original', 'Código Morse', 'Notas']
+            },
+            'cifrado-de-polibio': {
+                title: 'Plantilla Cifrado de Polibio',
+                description: 'Usa coordenadas de una tabla 5x5 para representar cada letra del mensaje.',
+                steps: [
+                    'Completa la cuadrícula con el alfabeto.',
+                    'Escribe el mensaje original y anota las coordenadas correspondientes.',
+                    'Comprueba la tabla final antes de compartirla con el alumnado.'
+                ],
+                sampleHeaders: ['Mensaje original', 'Coordenadas', 'Mensaje cifrado']
+            },
+            'cifrado-pigpen': {
+                title: 'Plantilla Cifrado Pigpen',
+                description: 'Sustituye letras por símbolos geométricos inspirados en rejillas y diagonales.',
+                steps: [
+                    'Dibuja las rejillas con o sin puntos y asigna una letra a cada símbolo.',
+                    'Escribe el mensaje y sustitúyelo por los símbolos correspondientes.',
+                    'Incluye una clave visual independiente para facilitar la corrección.'
+                ],
+                sampleHeaders: ['Letra', 'Símbolo', 'Pista']
+            },
+            'cifrado-vigenere': {
+                title: 'Plantilla Cifrado Vigenère',
+                description: 'Aplica desplazamientos múltiples usando una palabra clave repetida.',
+                steps: [
+                    'Escribe el mensaje en mayúsculas eliminando acentos.',
+                    'Repite la clave hasta igualar la longitud del mensaje.',
+                    'Suma el valor de cada letra y registra el resultado cifrado.'
+                ],
+                sampleHeaders: ['Letra original', 'Letra de la clave', 'Resultado']
+            },
+            'cifrado-atbash': {
+                title: 'Plantilla Cifrado Atbash',
+                description: 'Invierte la posición de cada letra en el alfabeto (A ↔ Z, B ↔ Y).',
+                steps: [
+                    'Anota el mensaje original.',
+                    'Sustituye cada letra por su espejo en el alfabeto.',
+                    'Repasa el mensaje final y proporciona pistas adicionales si es necesario.'
+                ],
+                sampleHeaders: ['Letra', 'Letra invertida', 'Notas']
+            },
+            'cifrado-de-sustitucion': {
+                title: 'Plantilla Cifrado de Sustitución',
+                description: 'Crea tu propio alfabeto sustituyendo letras por símbolos, números u otras letras.',
+                steps: [
+                    'Diseña el alfabeto sustituido y comparte algunas pistas con el alumnado.',
+                    'Escribe el mensaje original y su equivalente cifrado.',
+                    'Añade indicaciones para comprobar la coherencia del código.'
+                ],
+                sampleHeaders: ['Letra original', 'Sustitución', 'Ejemplo o pista']
+            },
+            'codigo-ascii': {
+                title: 'Plantilla Código ASCII',
+                description: 'Representa letras usando su valor numérico en la tabla ASCII.',
+                steps: [
+                    'Escribe el mensaje original.',
+                    'Convierte cada carácter a su valor decimal.',
+                    'Incluye una tabla de referencia para que el alumnado pueda descifrarlo.'
+                ],
+                sampleHeaders: ['Carácter', 'Valor ASCII', 'Notas']
+            },
+            'cifrado-binario': {
+                title: 'Plantilla Cifrado Binario',
+                description: 'Transforma cada carácter en una secuencia de bits basada en ASCII.',
+                steps: [
+                    'Escribe el mensaje original.',
+                    'Convierte cada letra al formato binario de 8 bits.',
+                    'Comprueba que cada bloque tiene ocho dígitos y anota observaciones.'
+                ],
+                sampleHeaders: ['Carácter', 'Binario (8 bits)', 'Comprobación']
+            },
+            'teclado-nokia': {
+                title: 'Plantilla Teclado Nokia',
+                description: 'Codifica mensajes usando el teclado T9 de los teléfonos clásicos.',
+                steps: [
+                    'Escribe el mensaje original en mayúsculas.',
+                    'Sustituye cada letra por la secuencia numérica correspondiente.',
+                    'Usa la columna de observaciones para añadir pistas o tiempos de pulsación.'
+                ],
+                sampleHeaders: ['Letra', 'Secuencia numérica', 'Notas'],
+                customTables: [
+                    {
+                        title: 'Referencia T9',
+                        headers: ['Número', 'Letras asociadas'],
+                        rowsData: [
+                            ['1', '. , ? !'],
+                            ['2', 'A B C'],
+                            ['3', 'D E F'],
+                            ['4', 'G H I'],
+                            ['5', 'J K L'],
+                            ['6', 'M N O'],
+                            ['7', 'P Q R S'],
+                            ['8', 'T U V'],
+                            ['9', 'W X Y Z'],
+                            ['0', 'Espacio']
+                        ]
+                    }
+                ]
+            },
+            'cryptex-digital': {
+                title: 'Plantilla Cryptex Digital',
+                description: 'Planifica palabras clave y pistas asociadas a cada anillo.',
+                steps: [
+                    'Define la longitud de la palabra y escribe una pista global.',
+                    'Anota la letra objetivo de cada anillo.',
+                    'Relaciona cada anillo con una pista, imagen o acertijo adicional.'
+                ],
+                sampleHeaders: ['Anillo', 'Letra objetivo', 'Pista'],
+                sampleRows: 8
+            },
+            'dial-de-caja-fuerte': {
+                title: 'Plantilla Dial de caja fuerte',
+                description: 'Simula un mando giratorio indicando la dirección y el número exacto.',
+                steps: [
+                    'Define el número de giros y el rango del dial.',
+                    'Escribe la secuencia de instrucciones (R-25, L-12...).',
+                    'Incluye una nota de verificación para comprobar la apertura.'
+                ],
+                customTables: [
+                    {
+                        title: 'Secuencia de giros',
+                        headers: ['Paso', 'Dirección', 'Número', 'Comprobación'],
+                        rows: 5
+                    }
+                ]
+            },
+            'clave-musical': {
+                title: 'Plantilla Clave musical',
+                description: 'Convierte letras en notas musicales para integrar melodías en el escape room.',
+                steps: [
+                    'Selecciona la escala o conjunto de notas.',
+                    'Mapea cada letra del mensaje a una nota específica.',
+                    'Entrega la partitura o pistas auditivas a los equipos.'
+                ],
+                customTables: [
+                    {
+                        title: 'Tabla de correspondencia',
+                        headers: ['Letra', 'Nota'],
+                        rowsData: [
+                            ['A', 'DO'],
+                            ['B', 'RE'],
+                            ['C', 'MI'],
+                            ['D', 'FA'],
+                            ['E', 'SOL'],
+                            ['F', 'LA'],
+                            ['G', 'SI']
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function buildTemplatePrintable(config, metadata = {}) {
+            const title = config.title || `Plantilla ${metadata.cipherTitle || ''}`.trim();
+            const description = config.description || metadata.cipherDescription || '';
+            const example = metadata.cipherExample ? `<section><h2>Ejemplo de referencia</h2><div class="template-example">${metadata.cipherExample}</div></section>` : '';
+            const steps = (config.steps && config.steps.length ? config.steps : [
+                'Escribe el mensaje original.',
+                'Aplica las reglas del cifrado paso a paso.',
+                'Anota la solución y prepara pistas para tu alumnado.'
+            ]).map(step => `<li>${step}</li>`).join('');
+            const headers = config.sampleHeaders || ['Actividad', 'Espacio para trabajar', 'Observaciones'];
+            const rows = config.sampleRows || 6;
+            const tableRows = Array.from({ length: rows }).map(() => `<tr>${headers.map(() => '<td></td>').join('')}</tr>`).join('');
+            const customTables = (config.customTables || []).map(table => buildCustomTable(table)).join('');
+
+            const printable = document.createElement('div');
+            printable.className = 'cipher-template-printable';
+            printable.innerHTML = `
+                <style>
+                    .cipher-template-printable {
+                        font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+                        color: #111827;
+                        padding: 0;
+                    }
+                    .template-page {
+                        padding: 24px;
+                        background: #ffffff;
+                        max-width: 800px;
+                    }
+                    .template-page h1 {
+                        font-size: 28px;
+                        margin-bottom: 8px;
+                        color: #0f172a;
+                    }
+                    .template-page h2 {
+                        margin-top: 24px;
+                        margin-bottom: 8px;
+                        font-size: 18px;
+                        color: #0f172a;
+                    }
+                    .template-page p {
+                        margin-bottom: 12px;
+                        line-height: 1.5;
+                    }
+                    .template-page ol {
+                        padding-left: 20px;
+                        line-height: 1.5;
+                    }
+                    .template-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 8px;
+                        font-size: 0.95rem;
+                    }
+                    .template-table th,
+                    .template-table td {
+                        border: 1px solid #94a3b8;
+                        padding: 8px;
+                        min-height: 24px;
+                        text-align: left;
+                    }
+                    .template-example {
+                        padding: 12px;
+                        border: 1px dashed #94a3b8;
+                        border-radius: 8px;
+                        background: #f8fafc;
+                    }
+                    .template-notes {
+                        margin-top: 24px;
+                        padding: 12px;
+                        border: 1px solid #cbd5f5;
+                        border-radius: 8px;
+                        min-height: 80px;
+                    }
+                </style>
+                <article class="template-page">
+                    <header>
+                        <h1>${title}</h1>
+                        <p>${description}</p>
+                    </header>
+                    <section>
+                        <h2>Instrucciones</h2>
+                        <ol>${steps}</ol>
+                    </section>
+                    ${example}
+                    <section>
+                        <h2>Registro del cifrado</h2>
+                        <table class="template-table">
+                            <thead>
+                                <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
+                            </thead>
+                            <tbody>${tableRows}</tbody>
+                        </table>
+                    </section>
+                    ${customTables}
+                    <section class="template-notes">
+                        <strong>Notas del docente:</strong>
+                        <p>__________________________________________________________</p>
+                        <p>__________________________________________________________</p>
+                        <p>__________________________________________________________</p>
+                    </section>
+                </article>
+            `;
+
+            return printable;
+        }
+
+        function buildCustomTable(table) {
+            const headers = table.headers || ['Campo 1', 'Campo 2'];
+            let rows = '';
+            if (table.rowsData) {
+                rows = table.rowsData.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('');
+            } else {
+                const count = table.rows || 5;
+                rows = Array.from({ length: count }).map(() => `<tr>${headers.map(() => '<td></td>').join('')}</tr>`).join('');
+            }
+            return `
+                <section>
+                    <h2>${table.title || 'Tabla'}</h2>
+                    <table class="template-table">
+                        <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </section>
+            `;
+        }
+
+        function downloadCipherTemplate(type, modal) {
+            if (typeof html2pdf === 'undefined') {
+                showNotification('No se pudo generar la plantilla en este momento', 'error');
+                return;
+            }
+            const metadataNode = modal.querySelector('.coding-system');
+            const metadata = metadataNode ? metadataNode.dataset : {};
+            const config = cipherTemplates[type] || {};
+            const printable = buildTemplatePrintable(config, metadata);
+            document.body.appendChild(printable);
+
+            const opt = {
+                margin: [1.5, 1.5, 1.5, 1.5],
+                filename: `plantilla-${type}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(printable).save().finally(() => printable.remove());
+        }
+
+        function openCipherInGenerator(type) {
+            const lockType = cipherLockMap[type];
+            if (!lockType) {
+                showNotification('Este cifrado todavía no está vinculado a un candado del generador', 'error');
+                return;
+            }
+            localStorage.setItem('selectedCipherType', lockType);
+            window.location.href = '/generador.html';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Filtrado de cifrados
             const searchInput = document.getElementById('searchCiphers');
@@ -1182,18 +1689,20 @@
             
             // Función para filtrar cifrados
             function filterCiphers() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeFilter = document.querySelector('.difficulty-filter-btn.active').dataset.filter;
+                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                const activeFilterBtn = document.querySelector('.difficulty-filter-btn.active');
+                const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
                 const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
                 
                 cipherCards.forEach(card => {
                     const title = card.querySelector('h3').textContent.toLowerCase();
                     const description = card.querySelector('p').textContent.toLowerCase();
-                    const categories = card.dataset.categories;
+                    const categories = card.dataset.categories || '';
+                    const difficulty = card.dataset.difficulty || '';
                     
                     // Aplicar filtros
-                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
-                    const matchesDifficulty = activeFilter === 'all' || categories.includes(activeFilter);
+                    const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesDifficulty = activeFilter === 'all' || difficulty === activeFilter || categories.includes(activeFilter);
                     const matchesCategory = selectedCategory === 'all' || categories.includes(selectedCategory);
                     
                     // Mostrar u ocultar según filtros
@@ -1236,8 +1745,12 @@
             });
             
             function getCipherTypeFromTitle(title) {
-                // Extraer tipo de cifrado del título
-                return title.toLowerCase().replace(/\s+/g, '-');
+                return title
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
             }
             
             function createCipherModal(type, title, card) {
@@ -1305,10 +1818,15 @@
                 const description = card.querySelector('p').textContent;
                 const example = card.querySelector('.cipher-example') ? 
                     card.querySelector('.cipher-example').innerHTML : '';
+                const title = card.querySelector('h3')?.textContent || 'Cifrado';
+                container.dataset.cipherType = type;
+                container.dataset.cipherTitle = title;
+                container.dataset.cipherDescription = description;
+                container.dataset.cipherExample = example;
                 
                 // Contenido del modal según el tipo de cifrado
                 switch(type) {
-                    case 'cifrado-césar':
+                    case 'cifrado-cesar':
                         container.innerHTML = `
                             <div class="system-content">
                                 <div class="system-description">
@@ -1357,7 +1875,7 @@
                             </div>
                         `;
                         break;
-                    case 'código-morse':
+                    case 'codigo-morse':
                         container.innerHTML = `
                             <div class="system-content">
                                 <div class="system-description">
@@ -1523,7 +2041,84 @@
                             </div>
                         `;
                         break;
-                    case 'cifrado-vigenère':
+                    case 'cryptex-digital':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                    <p>Esta versión digital permite definir la palabra objetivo, el número de anillos y generar pistas coherentes para el aula.</p>
+                                </div>
+                                <div class="system-playground cryptex-lab">
+                                    <div class="input-group">
+                                        <label for="cryptexLength">Número de anillos</label>
+                                        <input type="range" id="cryptexLength" min="3" max="8" value="5">
+                                        <span id="cryptexLengthValue">5</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="cryptexWord">Palabra objetivo</label>
+                                        <input type="text" id="cryptexWord" maxlength="8" placeholder="Secreto">
+                                    </div>
+                                    <button class="btn btn-secondary cryptex-random">Generar palabra aleatoria</button>
+                                    <div class="cryptex-preview" id="cryptexPreview" aria-live="polite"></div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'dial-de-caja-fuerte':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                    <p>Combina giros hacia la derecha e izquierda con números concretos. Ideal para retar la memoria secuencial del alumnado.</p>
+                                </div>
+                                <div class="system-playground safe-dial-lab">
+                                    <div class="safe-dial-value" id="safeDialValue">0</div>
+                                    <input type="range" id="safeDial" min="0" max="39" value="0">
+                                    <div class="safe-controls">
+                                        <label><input type="radio" name="safeDirection" value="R" checked> Giro a la derecha</label>
+                                        <label><input type="radio" name="safeDirection" value="L"> Giro a la izquierda</label>
+                                    </div>
+                                    <div class="safe-controls">
+                                        <button class="btn btn-secondary" id="safeAddStep">Añadir giro</button>
+                                        <button class="btn btn-secondary" id="safeResetSequence">Limpiar</button>
+                                    </div>
+                                    <div class="safe-sequence" id="safeSequence">Secuencia vacía</div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'clave-musical':
+                        container.innerHTML = `
+                            <div class="system-content">
+                                <div class="system-description">
+                                    <p>${description}</p>
+                                    <p>Asigna notas musicales a cada letra para que las pistas se conviertan en melodías o patrones rítmicos.</p>
+                                </div>
+                                <div class="system-playground music-lab">
+                                    <div class="input-group">
+                                        <label for="musicInput">Texto o secuencia</label>
+                                        <input type="text" id="musicInput" placeholder="AULA / DO RE MI">
+                                    </div>
+                                    <div class="music-controls">
+                                        <button class="btn btn-secondary music-encode">Texto → Notas</button>
+                                        <button class="btn btn-secondary music-decode">Notas → Texto</button>
+                                    </div>
+                                    <div class="music-result" id="musicResult" aria-live="polite"></div>
+                                    <table class="music-table">
+                                        <tr><th>Letra</th><th>Nota</th></tr>
+                                        <tr><td>A</td><td>DO</td></tr>
+                                        <tr><td>B</td><td>RE</td></tr>
+                                        <tr><td>C</td><td>MI</td></tr>
+                                        <tr><td>D</td><td>FA</td></tr>
+                                        <tr><td>E</td><td>SOL</td></tr>
+                                        <tr><td>F</td><td>LA</td></tr>
+                                        <tr><td>G</td><td>SI</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'cifrado-vigenere':
                         container.innerHTML = `
                             <div class="system-content">
                                 <div class="system-description">
@@ -1579,7 +2174,7 @@
                             </div>
                         `;
                         break;
-                    case 'cifrado-de-sustitución':
+                    case 'cifrado-de-sustitucion':
                         container.innerHTML = `
                             <div class="system-content">
                                 <div class="system-description">
@@ -1649,7 +2244,7 @@
                             </div>
                         `;
                         break;
-                    case 'código-ascii':
+                    case 'codigo-ascii':
                         container.innerHTML = `
                             <div class="system-content">
                                 <div class="system-description">
@@ -1797,6 +2392,18 @@
                         `;
                 }
                 
+                const actions = document.createElement('div');
+                actions.className = 'cipher-modal-actions';
+                actions.innerHTML = `
+                    <button class="btn btn-primary modal-apply" data-cipher="${type}">
+                        <i class="fas fa-lock"></i> Usar en el generador
+                    </button>
+                    <button class="btn btn-secondary modal-download" data-cipher="${type}">
+                        <i class="fas fa-file-download"></i> Descargar plantilla
+                    </button>
+                `;
+                container.appendChild(actions);
+
                 return container;
             }
             
@@ -2286,7 +2893,7 @@
                 
                 // Configurar event listeners para cada tipo de cifrado
                 switch (type) {
-                    case 'cifrado-césar': {
+                    case 'cifrado-cesar': {
                         const input = modal.querySelector('#caesarInput');
                         const shift = modal.querySelector('#caesarShift');
                         const encodeBtn = modal.querySelector('.encode-caesar');
@@ -2459,7 +3066,7 @@ if (wheelLabel) {
                         }
                         break;
                     }
-                    case 'código-morse': {
+                    case 'codigo-morse': {
                         const input = modal.querySelector('#morseInput');
                         const encodeBtn = modal.querySelector('.encode-morse');
                         const result = modal.querySelector('#morseResult');
@@ -2565,7 +3172,7 @@ if (wheelLabel) {
                         });
                         break;
                     }
-                    case 'cifrado-vigenère': {
+                    case 'cifrado-vigenere': {
                         const input = modal.querySelector('#vigenereInput');
                         const key = modal.querySelector('#vigenereKey');
                         const encodeBtn = modal.querySelector('.encode-vigenere');
@@ -2599,7 +3206,7 @@ if (wheelLabel) {
                         });
                         break;
                     }
-                    case 'cifrado-de-sustitución': {
+                    case 'cifrado-de-sustitucion': {
                         const input = modal.querySelector('#substitutionInput');
                         const encodeBtn = modal.querySelector('.encode-substitution');
                         const result = modal.querySelector('#substitutionResult');
@@ -2659,7 +3266,7 @@ if (wheelLabel) {
                         });
                         break;
                     }
-                    case 'código-ascii': {
+                    case 'codigo-ascii': {
                         const input = modal.querySelector('#asciiInput');
                         const encodeBtn = modal.querySelector('.encode-ascii');
                         const result = modal.querySelector('#asciiResult');
@@ -2763,6 +3370,156 @@ if (wheelLabel) {
                         
                         break;
                     }
+                    case 'cryptex-digital': {
+                        const lengthInput = modal.querySelector('#cryptexLength');
+                        const lengthValue = modal.querySelector('#cryptexLengthValue');
+                        const wordInput = modal.querySelector('#cryptexWord');
+                        const preview = modal.querySelector('#cryptexPreview');
+                        const randomBtn = modal.querySelector('.cryptex-random');
+                        const alphabet = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+
+                        const renderPreview = () => {
+                            const len = Math.max(3, Math.min(8, parseInt(lengthInput.value, 10) || 5));
+                            lengthInput.value = len;
+                            lengthValue.textContent = len;
+                            let word = (wordInput.value || '').toUpperCase().replace(/[^A-ZÑ]/g, '');
+                            if (!word) {
+                                word = 'SECRETO'.slice(0, len);
+                            }
+                            word = word.slice(0, len);
+                            if (word.length < len) {
+                                word = word.padEnd(len, '•');
+                            }
+                            preview.innerHTML = word.split('').map(char => `<span>${char}</span>`).join('');
+                        };
+
+                        randomBtn?.addEventListener('click', () => {
+                            const len = parseInt(lengthInput.value, 10) || 5;
+                            let randomWord = '';
+                            for (let i = 0; i < len; i++) {
+                                const index = Math.floor(Math.random() * alphabet.length);
+                                randomWord += alphabet[index];
+                            }
+                            wordInput.value = randomWord;
+                            renderPreview();
+                        });
+
+                        lengthInput?.addEventListener('input', renderPreview);
+                        wordInput?.addEventListener('input', renderPreview);
+                        renderPreview();
+                        break;
+                    }
+                    case 'dial-de-caja-fuerte': {
+                        const slider = modal.querySelector('#safeDial');
+                        const valueLabel = modal.querySelector('#safeDialValue');
+                        const addBtn = modal.querySelector('#safeAddStep');
+                        const resetBtn = modal.querySelector('#safeResetSequence');
+                        const sequenceContainer = modal.querySelector('#safeSequence');
+                        const steps = [];
+
+                        const updateValue = () => {
+                            valueLabel.textContent = slider.value;
+                        };
+
+                        const renderSequence = () => {
+                            if (steps.length === 0) {
+                                sequenceContainer.textContent = 'Secuencia vacía';
+                                return;
+                            }
+                            sequenceContainer.textContent = steps.map((step, index) => `Paso ${index + 1}: ${step}`).join(' · ');
+                        };
+
+                        addBtn?.addEventListener('click', () => {
+                            const direction = modal.querySelector('input[name="safeDirection"]:checked')?.value || 'R';
+                            steps.push(`${direction}-${slider.value}`);
+                            renderSequence();
+                        });
+
+                        resetBtn?.addEventListener('click', () => {
+                            steps.length = 0;
+                            renderSequence();
+                        });
+
+                        slider?.addEventListener('input', updateValue);
+                        updateValue();
+                        renderSequence();
+                        break;
+                    }
+                    case 'clave-musical': {
+                        const input = modal.querySelector('#musicInput');
+                        const encodeBtn = modal.querySelector('.music-encode');
+                        const decodeBtn = modal.querySelector('.music-decode');
+                        const result = modal.querySelector('#musicResult');
+
+                        const mapping = {
+                            'A': 'DO',
+                            'B': 'RE',
+                            'C': 'MI',
+                            'D': 'FA',
+                            'E': 'SOL',
+                            'F': 'LA',
+                            'G': 'SI',
+                            'H': 'DO#',
+                            'I': 'RE#',
+                            'J': 'FA#',
+                            'K': 'SOL#',
+                            'L': 'LA#',
+                            'M': 'DO2',
+                            'N': 'RE2',
+                            'O': 'MI2',
+                            'P': 'FA2',
+                            'Q': 'SOL2',
+                            'R': 'LA2',
+                            'S': 'SI2',
+                            'T': 'DO3',
+                            'U': 'RE3',
+                            'V': 'MI3',
+                            'W': 'FA3',
+                            'X': 'SOL3',
+                            'Y': 'LA3',
+                            'Z': 'SI3'
+                        };
+                        const inverseMapping = Object.fromEntries(Object.entries(mapping).map(([letter, note]) => [note, letter]));
+
+                        encodeBtn?.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            if (!text) {
+                                showNotification('Introduce un texto para codificar', 'error');
+                                return;
+                            }
+                            const encoded = text.split('').map(char => {
+                                if (char === ' ') return '|';
+                                return mapping[char] || '?';
+                            }).join(' ');
+                            result.textContent = encoded;
+                        });
+
+                        decodeBtn?.addEventListener('click', () => {
+                            const text = input.value.trim().toUpperCase();
+                            if (!text) {
+                                showNotification('Introduce notas separadas por espacios', 'error');
+                                return;
+                            }
+                            const tokens = text.replace(/[;,]+/g, ' ').split(/\s+/).filter(Boolean);
+                            const decoded = tokens.map(token => {
+                                if (token === '|') return ' ';
+                                return inverseMapping[token] || '?';
+                            }).join('');
+                            result.textContent = decoded;
+                        });
+
+                        break;
+                    }
+                }
+
+                const applyBtn = modal.querySelector('.modal-apply');
+                if (applyBtn) {
+                    applyBtn.addEventListener('click', () => openCipherInGenerator(type));
+                }
+
+                const downloadBtn = modal.querySelector('.modal-download');
+                if (downloadBtn) {
+                    downloadBtn.addEventListener('click', () => downloadCipherTemplate(type, modal));
                 }
             }
             

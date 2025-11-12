@@ -258,29 +258,85 @@
                                     <p>Hemos implementado el sistema ColorADD, un "alfabeto de colores" que permite a las personas con daltonismo identificar correctamente los colores mediante símbolos estandarizados.</p>
                                     
                                     <div class="coloradd-explanation">
+                                        <h5>¿Qué es ColorADD?</h5>
+                                        <p>ColorADD es un sistema de identificación de colores universalmente reconocido que utiliza símbolos gráficos para representar colores. Este sistema fue creado específicamente para ayudar a personas con daltonismo a identificar y distinguir colores mediante símbolos estandarizados.</p>
+                                        
                                         <h5>Símbolos básicos de ColorADD:</h5>
-                                        <ul>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 50 50">
-                                                    <line x1="10" y1="40" x2="40" y2="10" stroke="black" stroke-width="4" stroke-linecap="round"/>
-                                                </svg>
-                                                Amarillo - Representa el color amarillo con una barra diagonal
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 50 50">
-                                                    <polygon points="10,10 10,40 40,25" fill="black"/>
-                                                </svg>
-                                                Azul - Representa el color azul con un triángulo apuntando a la derecha
-                                            </li>
-                                            <li>
-                                                <svg width="20" height="20" viewBox="0 0 50 50">
-                                                    <polygon points="40,10 40,40 10,25" fill="black"/>
-                                                </svg>
-                                                Rojo - Representa el color rojo con un triángulo apuntando a la izquierda
-                                            </li>
-                                        </ul>
-                                        <p>Estos símbolos pueden combinarse para representar otros colores, como el verde (combinación de amarillo y azul) y el naranja (combinación de amarillo y rojo).</p>
-                                        <p>Para activar ColorADD, utiliza el panel de accesibilidad pulsando el botón <i class="fas fa-universal-access"></i> en la parte superior derecha de la pantalla.</p>
+                                        <div class="coloradd-symbols-grid">
+                                            <div class="coloradd-symbol-item">
+                                                <div class="symbol-display">
+                                                    <svg width="40" height="40" viewBox="0 0 50 50">
+                                                        <line x1="10" y1="40" x2="40" y2="10" stroke="black" stroke-width="6" stroke-linecap="round"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="symbol-info">
+                                                    <strong>Amarillo</strong>
+                                                    <p>Representado por una barra diagonal de izquierda abajo a derecha arriba</p>
+                                                </div>
+                                            </div>
+                                            <div class="coloradd-symbol-item">
+                                                <div class="symbol-display">
+                                                    <svg width="40" height="40" viewBox="0 0 50 50">
+                                                        <polygon points="10,10 10,40 40,25" fill="black"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="symbol-info">
+                                                    <strong>Azul</strong>
+                                                    <p>Representado por un triángulo apuntando hacia la derecha</p>
+                                                </div>
+                                            </div>
+                                            <div class="coloradd-symbol-item">
+                                                <div class="symbol-display">
+                                                    <svg width="40" height="40" viewBox="0 0 50 50">
+                                                        <polygon points="40,10 40,40 10,25" fill="black"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="symbol-info">
+                                                    <strong>Rojo</strong>
+                                                    <p>Representado por un triángulo apuntando hacia la izquierda</p>
+                                                </div>
+                                            </div>
+                                            <div class="coloradd-symbol-item">
+                                                <div class="symbol-display">
+                                                    <svg width="40" height="40" viewBox="0 0 50 50">
+                                                        <line x1="10" y1="40" x2="30" y2="20" stroke="black" stroke-width="6" stroke-linecap="round"/>
+                                                        <polygon points="35,20 35,40 50,30" fill="black"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="symbol-info">
+                                                    <strong>Verde</strong>
+                                                    <p>Combinación de amarillo (barra) + azul (triángulo derecha)</p>
+                                                </div>
+                                            </div>
+                                            <div class="coloradd-symbol-item">
+                                                <div class="symbol-display">
+                                                    <svg width="40" height="40" viewBox="0 0 50 50">
+                                                        <line x1="10" y1="40" x2="30" y2="20" stroke="black" stroke-width="6" stroke-linecap="round"/>
+                                                        <polygon points="40,30 50,20 50,40" fill="black"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="symbol-info">
+                                                    <strong>Naranja</strong>
+                                                    <p>Combinación de amarillo (barra) + rojo (triángulo izquierda)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="coloradd-info-box">
+                                            <h6>¿Cómo funciona en Escapify?</h6>
+                                            <p>Cuando activas ColorADD en el panel de accesibilidad, verás símbolos junto a todos los elementos que usan colores para transmitir información:</p>
+                                            <ul>
+                                                <li><strong>Niveles de dificultad:</strong> Los badges de dificultad (Fácil, Medio, Difícil) muestran símbolos ColorADD para identificar el color sin necesidad de verlo</li>
+                                                <li><strong>Candados de colores:</strong> Los botones de colores en candados tipo "Color" muestran sus símbolos ColorADD correspondientes</li>
+                                                <li><strong>Filtros y botones:</strong> Todos los botones que usan color para diferenciación incluyen símbolos ColorADD</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="coloradd-activation">
+                                            <h6>Activar ColorADD</h6>
+                                            <p>Para activar ColorADD, utiliza el panel de accesibilidad pulsando el botón <i class="fas fa-universal-access"></i> en la parte superior derecha de la pantalla, o usa el atajo de teclado <kbd>Alt</kbd> + <kbd>A</kbd>.</p>
+                                            <p>Una vez activado, los símbolos ColorADD aparecerán automáticamente junto a todos los elementos que usan colores, permitiendo identificar la información sin depender de la percepción del color.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

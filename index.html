@@ -98,6 +98,12 @@
                         <h3>Accesible</h3>
                         <p class="normal-language">Diseñado para ser inclusivo, con múltiples ajustes de accesibilidad y soporte para ColorADD (daltonismo).</p>
                         <p class="simple-language">Todos pueden usar Escapify, incluso personas con daltonismo o dificultades visuales.</p>
+                        <div class="coloradd-info-inline">
+                            <p><strong>Sistema ColorADD:</strong> Activa el panel de accesibilidad para ver símbolos que identifican colores sin necesidad de percibirlos visualmente.</p>
+                            <a href="/ayuda.html#accesibilidad" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-info-circle"></i> Más sobre ColorADD
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,8 +250,15 @@
                 'pattern-9': 'fa-th',
                 'pattern-16': 'fa-th-large',
                 'computer-login': 'fa-desktop',
+                'nokia': 'fa-mobile-screen-button',
+                'coordinates': 'fa-map-location-dot',
                 'musical': 'fa-music',
-                'emoji': 'fa-smile'
+                'emoji': 'fa-smile',
+                'word-wheel': 'fa-spell-check',
+                'switches': 'fa-toggle-on',
+                'slider': 'fa-sliders',
+                'cryptex': 'fa-ring',
+                'rotary': 'fa-bullseye'
             };
             return icons[type] || 'fa-lock';
         }

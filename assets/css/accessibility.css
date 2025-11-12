@@ -2,11 +2,21 @@
 
 /* ===== SISTEMA COLORADD PARA DALTÓNICOS ===== */
 .coloradd-symbol {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
+    display: none; /* Oculto por defecto */
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
     vertical-align: middle;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Mostrar símbolos cuando ColorADD está activo */
+body.daltonismo-activo .coloradd-symbol {
+    display: inline-block;
+    opacity: 1;
 }
 
 .coloradd-tooltip {
@@ -29,36 +39,296 @@ body.daltonismo-activo .coloradd-tooltip:focus::after {
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 5px 10px;
+    padding: 8px 12px;
     background-color: var(--surface-color);
     color: var(--text-color);
     border-radius: 8px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     white-space: nowrap;
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
 }
 
 /* Estilos específicos para badges de dificultad con ColorADD */
 .difficulty-badge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    padding-right: 22px; /* Más espacio para el ícono */
+    gap: 4px;
 }
 
 .difficulty-badge.difficulty-easy .coloradd-symbol {
-    background: url('../svg/coloradd.svg#green-symbol') no-repeat center;
-    background-size: contain;
+    /* Verde = Amarillo + Azul */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='30' y2='20' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3Cpolygon points='35,20 35,40 50,30' fill='%23000'/%3E%3C/svg%3E");
 }
 
 .difficulty-badge.difficulty-medium .coloradd-symbol {
-    background: url('../svg/coloradd.svg#yellow-symbol') no-repeat center;
-    background-size: contain;
+    /* Amarillo = Barra diagonal */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='40' y2='10' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 .difficulty-badge.difficulty-hard .coloradd-symbol {
-    background: url('../svg/coloradd.svg#red-symbol') no-repeat center;
+    /* Rojo = Triángulo izquierda */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpolygon points='40,25 10,10 10,40' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* ColorADD para botones de filtro de dificultad */
+.difficulty-filter-btn.easy .coloradd-symbol {
+    /* Verde = Amarillo + Azul */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='30' y2='20' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3Cpolygon points='35,20 35,40 50,30' fill='%23000'/%3E%3C/svg%3E");
+}
+
+.difficulty-filter-btn.medium .coloradd-symbol {
+    /* Amarillo = Barra diagonal */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='40' y2='10' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.difficulty-filter-btn.hard .coloradd-symbol {
+    /* Rojo = Triángulo izquierda */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpolygon points='40,25 10,10 10,40' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* ColorADD para botones de colores en candados */
+body.daltonismo-activo .color-button {
+    position: relative;
+    padding-right: 28px;
+}
+
+body.daltonismo-activo .color-button::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: contain;
+}
+
+/* Símbolos ColorADD para cada color en botones */
+body.daltonismo-activo .color-button[data-value="🔴"]::after {
+    /* Rojo = Triángulo izquierda */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpolygon points='40,25 10,10 10,40' fill='%23000'/%3E%3C/svg%3E");
+}
+
+body.daltonismo-activo .color-button[data-value="🔵"]::after {
+    /* Azul = Triángulo derecha */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpolygon points='10,10 10,40 40,25' fill='%23000'/%3E%3C/svg%3E");
+}
+
+body.daltonismo-activo .color-button[data-value="🟡"]::after {
+    /* Amarillo = Barra diagonal */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='40' y2='10' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+body.daltonismo-activo .color-button[data-value="🟢"]::after {
+    /* Verde = Amarillo + Azul */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='30' y2='20' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3Cpolygon points='35,20 35,40 50,30' fill='%23000'/%3E%3C/svg%3E");
+}
+
+body.daltonismo-activo .color-button[data-value="🟣"]::after {
+    /* Morado = Azul + Rojo - Combinación de símbolos */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpolygon points='10,10 10,40 30,25' fill='%23000'/%3E%3Cpolygon points='40,25 20,10 20,40' fill='%23000'/%3E%3C/svg%3E");
+}
+
+body.daltonismo-activo .color-button[data-value="🟠"]::after {
+    /* Naranja = Amarillo + Rojo */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cline x1='10' y1='40' x2='30' y2='20' stroke='%23000' stroke-width='6' stroke-linecap='round'/%3E%3Cpolygon points='40,25 20,10 20,40' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* ColorADD para opciones de dificultad en formularios */
+.difficulty-option .coloradd-symbol {
+    margin-left: 4px;
+}
+
+/* Asegurar que los botones de filtro muestren los símbolos correctamente */
+.difficulty-filter-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.difficulty-filter-btn .coloradd-symbol {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+}
+
+/* Mejorar visibilidad de los símbolos cuando ColorADD está activo */
+body.daltonismo-activo .coloradd-symbol {
+    filter: contrast(1.3) brightness(0.9);
+    opacity: 1;
+    border: none;
+}
+
+/* Asegurar que los badges muestren los símbolos correctamente */
+.difficulty-badge {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+}
+
+.difficulty-badge .coloradd-symbol {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+}
+
+/* Ajustes para que los símbolos sean más visibles en fondos de colores */
+body.daltonismo-activo .difficulty-badge.difficulty-easy .coloradd-symbol,
+body.daltonismo-activo .difficulty-filter-btn.easy .coloradd-symbol {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+body.daltonismo-activo .difficulty-badge.difficulty-medium .coloradd-symbol,
+body.daltonismo-activo .difficulty-filter-btn.medium .coloradd-symbol {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+body.daltonismo-activo .difficulty-badge.difficulty-hard .coloradd-symbol,
+body.daltonismo-activo .difficulty-filter-btn.hard .coloradd-symbol {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+/* Estilos para la explicación de ColorADD en ayuda.html */
+.coloradd-explanation {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--subtle-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.coloradd-symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.coloradd-symbol-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.symbol-display {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-color);
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.symbol-info {
+    flex: 1;
+}
+
+.symbol-info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--heading-color);
+    font-size: 1.1rem;
+}
+
+.symbol-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+}
+
+.coloradd-info-box {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+}
+
+.coloradd-info-box h6 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: var(--heading-color);
+    font-size: 1.1rem;
+}
+
+.coloradd-info-box ul {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+}
+
+.coloradd-info-box li {
+    margin-bottom: 0.5rem;
+}
+
+.coloradd-activation {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 12px;
+}
+
+.coloradd-activation h6 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.coloradd-activation p {
+    margin-bottom: 0.75rem;
+    opacity: 0.95;
+}
+
+.coloradd-activation p:last-child {
+    margin-bottom: 0;
+}
+
+.coloradd-activation kbd {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .coloradd-symbols-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .coloradd-symbol-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .symbol-display {
+        margin: 0 auto;
+    }
 }
 
 /* ===== MEJORAS PARA DISCAPACIDAD VISUAL ===== */
@@ -177,7 +447,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 
 /* ===== TOGGLES PARA CONFIGURACIONES DE ACCESIBILIDAD ===== */
 .accessibility-panel {
-    position: fixed;
+    position: fixed !important;
     top: 80px;
     right: -350px;
     width: 350px;
@@ -186,11 +456,13 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
     box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.2);
     padding: 28px;
     transition: all 0.3s ease;
-    z-index: 1000;
+    z-index: 9999 !important;
     overflow: auto;
     max-height: calc(100vh - 100px);
     border: 1px solid var(--border-color);
     border-right: none;
+    visibility: visible !important;
+    display: block !important;
 }
 
 .accessibility-panel.active {
@@ -268,6 +540,14 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 
 .accessibility-section:nth-of-type(3) h3::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232D7FF9' d='M495.9 166.6C499.2 175.2 496.4 184.9 489.6 191.2L446.3 230.6C447.4 238.9 448 247.4 448 256C448 264.6 447.4 273.1 446.3 281.4L489.6 320.8C496.4 327.1 499.2 336.8 495.9 345.4C491.5 357.3 486.2 368.8 480.2 379.7L475.5 387.8C468.9 398.8 461.5 409.2 453.4 419.1C447.4 426.2 437.7 428.7 428.9 425.9L373.2 408.1C359.8 418.4 344.1 427 329.2 433.6L316.7 490.7C314.7 499.7 307.7 506.1 298.5 508.5C284.7 510.8 270.5 512 255.1 512C241.5 512 227.3 510.8 213.5 508.5C204.3 506.1 197.3 499.7 195.3 490.7L182.8 433.6C167 427 152.2 418.4 138.8 408.1L83.14 425.9C74.3 428.7 64.55 426.2 58.63 419.1C50.52 409.2 43.12 398.8 36.52 387.8L31.84 379.7C25.77 368.8 20.49 357.3 16.06 345.4C12.82 336.8 15.55 327.1 22.41 320.8L65.67 281.4C64.57 273.1 64 264.6 64 256C64 247.4 64.57 238.9 65.67 230.6L22.41 191.2C15.55 184.9 12.82 175.3 16.06 166.6C20.49 154.7 25.78 143.2 31.84 132.3L36.51 124.2C43.12 113.2 50.52 102.8 58.63 92.95C64.55 85.8 74.3 83.32 83.14 86.14L138.8 103.9C152.2 93.56 167 84.96 182.8 78.43L195.3 21.33C197.3 12.25 204.3 5.04 213.5 3.51C227.3 1.201 241.5 0 256 0C270.5 0 284.7 1.201 298.5 3.51C307.7 5.04 314.7 12.25 316.7 21.33L329.2 78.43C344.1 84.96 359.8 93.56 373.2 103.9L428.9 86.14C437.7 83.32 447.4 85.8 453.4 92.95C461.5 102.8 468.9 113.2 475.5 124.2L480.2 132.3C486.2 143.2 491.5 154.7 495.9 166.6V166.6zM256 336C300.2 336 336 300.2 336 255.1C336 211.8 300.2 175.1 256 175.1C211.8 175.1 176 211.8 176 255.1C176 300.2 211.8 336 256 336z'/%3E%3C/svg%3E");
+}
+
+.accessibility-section:nth-of-type(4) h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%232D7FF9' d='M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H352c53 0 96-43 96-96V96c0-53-43-96-96-96H96zM48 96c0-26.5 21.5-48 48-48H352c26.5 0 48 21.5 48 48V416c0 26.5-21.5 48-48 48H96c-26.5 0-48-21.5-48-48V96zM192 288c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32s-32 14.3-32 32v32c0 17.7 14.3 32 32 32zm64-64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V224c0-17.7-14.3-32-32-32s-32 14.3-32 32z'/%3E%3C/svg%3E");
+}
+
+.accessibility-section:nth-of-type(5) h3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232D7FF9' d='M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z'/%3E%3C/svg%3E");
 }
 
 .accessibility-option {
@@ -368,24 +648,25 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 }
 
 .accessibility-toggle {
-    position: fixed;
+    position: fixed !important;
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
-    z-index: 1200;
+    z-index: 9998 !important;
     background: #3b4cca;
     color: #fff;
     border: none;
     border-radius: 12px;
     width: 48px;
     height: 48px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     font-size: 1.7rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    visibility: visible !important;
 }
 
 .accessibility-toggle:hover,
@@ -485,4 +766,143 @@ body.underline-links a {
 /* Accesibilidad: tamaño de fuente global (ya se gestiona por inline style en html) */
 html {
     transition: font-size 0.2s;
+}
+
+/* ===== NUEVAS OPCIONES DE ACCESIBILIDAD ===== */
+
+/* Resaltar elementos enfocados */
+body.highlight-focus *:focus {
+    outline: 4px solid #2d7ff9 !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(45, 127, 249, 0.3) !important;
+}
+
+body.highlight-focus button:focus,
+body.highlight-focus a:focus,
+body.highlight-focus input:focus,
+body.highlight-focus select:focus,
+body.highlight-focus textarea:focus {
+    outline: 4px solid #2d7ff9 !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(45, 127, 249, 0.3) !important;
+    border-color: #2d7ff9 !important;
+}
+
+/* Aumentar espaciado entre elementos */
+body.increase-spacing * {
+    letter-spacing: 0.05em;
+}
+
+body.increase-spacing p,
+body.increase-spacing li,
+body.increase-spacing div {
+    margin-bottom: 1.5em !important;
+    line-height: 1.8 !important;
+}
+
+body.increase-spacing button,
+body.increase-spacing .btn {
+    padding: 12px 24px !important;
+    margin: 8px !important;
+}
+
+body.increase-spacing input,
+body.increase-spacing select,
+body.increase-spacing textarea {
+    padding: 12px !important;
+    margin-bottom: 16px !important;
+}
+
+/* Fuente compatible con dislexia */
+body.dyslexia-font {
+    font-family: 'Comic Sans MS', 'Comic Sans', 'OpenDyslexic', 'Arial', sans-serif !important;
+}
+
+body.dyslexia-font * {
+    font-family: inherit !important;
+    letter-spacing: 0.1em !important;
+    word-spacing: 0.2em !important;
+    line-height: 1.8 !important;
+}
+
+/* Modo de lectura */
+body.reading-mode {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
+body.reading-mode main,
+body.reading-mode article,
+body.reading-mode .container {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+}
+
+body.reading-mode h1,
+body.reading-mode h2,
+body.reading-mode h3,
+body.reading-mode h4,
+body.reading-mode h5,
+body.reading-mode h6 {
+    font-size: 1.5em !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5em !important;
+}
+
+body.reading-mode p {
+    font-size: 1.1em !important;
+    line-height: 1.8 !important;
+    margin-bottom: 1.5em !important;
+    text-align: justify !important;
+}
+
+body.reading-mode aside,
+body.reading-mode nav,
+body.reading-mode .sidebar {
+    display: none !important;
+}
+
+/* Reducir animaciones */
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Mejoras para el panel de accesibilidad en móviles */
+@media (max-width: 768px) {
+    .accessibility-panel {
+        width: 100% !important;
+        right: -100% !important;
+        top: 0 !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        border-right: 1px solid var(--border-color) !important;
+    }
+    
+    .accessibility-panel.active {
+        right: 0 !important;
+    }
+    
+    .accessibility-toggle {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.5rem !important;
+        right: 10px !important;
+    }
 } 

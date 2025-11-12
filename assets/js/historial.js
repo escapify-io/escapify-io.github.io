@@ -1,3 +1,5 @@
+import { appendSharePayload, buildShareUrlFromPayload, ensureSharePayload } from './share.js';
+
 class HistoryManager {
     constructor() {
         this.historyList = document.getElementById('historyList');
@@ -32,12 +34,24 @@ class HistoryManager {
     loadHistory() {
         const savedHistory = localStorage.getItem('lockHistory');
         if (savedHistory) {
-            this.history = JSON.parse(savedHistory);
-            this.renderHistory(this.history);
+            try {
+                const parsed = JSON.parse(savedHistory);
+                this.history = parsed.map(item => appendSharePayload(item));
+                localStorage.setItem('lockHistory', JSON.stringify(this.history));
+                this.renderHistory(this.history);
+            } catch (error) {
+                console.error('No se pudo cargar el historial:', error);
+                this.history = [];
+                this.historyList.innerHTML = '<li class="empty-history">No hay candados en el historial</li>';
+            }
         } else {
             this.history = [];
             this.historyList.innerHTML = '<li class="empty-history">No hay candados en el historial</li>';
         }
+    }
+
+    persistHistory() {
+        localStorage.setItem('lockHistory', JSON.stringify(this.history));
     }
 
     renderHistory(historyItems) {
@@ -61,10 +75,16 @@ class HistoryManager {
                     <span class="history-item-date">${new Date(item.timestamp).toLocaleString()}</span>
                 </div>
                 <div class="history-item-actions">
-                    <button class="btn-copy" data-code="${item.code}">
+                    <button class="history-action-btn" data-action="copy" data-code="${item.code || ''}" aria-label="Copiar código">
                         <i class="fas fa-copy"></i>
                     </button>
-                    <button class="btn-delete" data-id="${item.id}">
+                    <button class="history-action-btn" data-action="open" data-id="${item.id}" aria-label="Abrir candado">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="history-action-btn" data-action="share" data-id="${item.id}" aria-label="Copiar enlace del candado">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button class="history-action-btn btn-delete" data-action="delete" data-id="${item.id}" aria-label="Eliminar candado">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -72,13 +92,28 @@ class HistoryManager {
             `;
         }).join('');
 
-        // Agregar event listeners a los botones
-        this.historyList.querySelectorAll('.btn-copy').forEach(btn => {
-            btn.addEventListener('click', (e) => this.copyCode(e.target.dataset.code));
-        });
+        this.historyList.querySelectorAll('.history-action-btn').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                const action = event.currentTarget.dataset.action;
+                const { id, code } = event.currentTarget.dataset;
 
-        this.historyList.querySelectorAll('.btn-delete').forEach(btn => {
-            btn.addEventListener('click', (e) => this.deleteItem(e.target.dataset.id));
+                switch (action) {
+                    case 'copy':
+                        this.copyCode(code);
+                        break;
+                    case 'open':
+                        this.openLock(id);
+                        break;
+                    case 'share':
+                        this.copyShareLink(id);
+                        break;
+                    case 'delete':
+                        this.deleteItem(id);
+                        break;
+                    default:
+                        break;
+                }
+            });
         });
     }
 
@@ -90,7 +125,10 @@ class HistoryManager {
 
         const filtered = this.history.filter(item => {
             const matchesSearch = item.name.toLowerCase().includes(searchTerm);
-            const matchesType = typeFilter === 'all' || item.type === typeFilter;
+            const matchesType = typeFilter === 'all' ||
+                item.type === typeFilter ||
+                (typeFilter === 'directional' && item.type.startsWith('directional')) ||
+                (typeFilter === 'pattern' && item.type.startsWith('pattern'));
             const matchesDate = this.matchesDateFilter(item.timestamp, dateFilter);
             const matchesDifficulty = difficultyFilter === 'all' || item.difficulty === difficultyFilter;
             return matchesSearch && matchesType && matchesDate && matchesDifficulty;
@@ -123,17 +161,31 @@ class HistoryManager {
     getTypeLabel(type) {
         const types = {
             'numeric': 'Numérico',
+            'alphanumeric': 'Alfanumérico',
             'directional-4': 'Direccional (4)',
             'directional-8': 'Direccional (8)',
             'color': 'Color',
             'musical': 'Musical',
             'pattern-9': 'Patrón (9)',
-            'pattern-16': 'Patrón (16)'
+            'pattern-16': 'Patrón (16)',
+            'computer-login': 'Login de ordenador',
+            'emoji': 'Emoji',
+            'nokia': 'Teclado Nokia',
+            'coordinates': 'Coordenadas',
+            'word-wheel': 'Palabra giratoria',
+            'switches': 'Palancas binarias',
+            'slider': 'Deslizadores',
+            'cryptex': 'Cryptex',
+            'rotary': 'Mando giratorio'
         };
         return types[type] || type;
     }
 
     async copyCode(code) {
+        if (!code) {
+            this.showNotification('Este candado no tiene código disponible', 'error');
+            return;
+        }
         try {
             await navigator.clipboard.writeText(code);
             this.showNotification('Código copiado al portapapeles', 'success');
@@ -142,10 +194,43 @@ class HistoryManager {
         }
     }
 
+    openLock(id) {
+        if (!id) return;
+        const url = new URL('preview.html', window.location.href);
+        url.searchParams.set('id', id);
+        window.open(url.toString(), '_blank');
+    }
+
+    async copyShareLink(id) {
+        const targetLock = this.history.find(item => item.id?.toString() === id?.toString());
+        if (!targetLock) {
+            this.showNotification('No encontramos ese candado', 'error');
+            return;
+        }
+
+        const payload = ensureSharePayload(targetLock);
+        targetLock.sharePayload = payload;
+        const shareUrl = buildShareUrlFromPayload(payload);
+
+        if (!shareUrl) {
+            this.showNotification('No se pudo generar el enlace', 'error');
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(shareUrl);
+            this.persistHistory();
+            this.showNotification('Enlace copiado al portapapeles', 'success');
+        } catch (error) {
+            console.error('No se pudo copiar el enlace compartido:', error);
+            this.showNotification('Error al copiar el enlace', 'error');
+        }
+    }
+
     deleteItem(id) {
         if (confirm('¿Estás seguro de que quieres eliminar este candado del historial?')) {
-            this.history = this.history.filter(item => item.id !== id);
-            localStorage.setItem('lockHistory', JSON.stringify(this.history));
+            this.history = this.history.filter(item => item.id?.toString() !== id?.toString());
+            this.persistHistory();
             this.filterHistory();
             this.showNotification('Candado eliminado del historial', 'success');
         }

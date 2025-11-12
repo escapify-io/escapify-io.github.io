@@ -45,6 +45,10 @@
         <div class="container">
             <h1 class="section-title" id="resources-title">Recursos Educativos</h1>
             <p class="section-subtitle">Descubre herramientas y materiales para potenciar tus escape rooms educativos</p>
+            <div class="accessibility-note">
+                <i class="fas fa-universal-access"></i>
+                <span>Accesibilidad: Todos los recursos incluyen soporte para <strong>ColorADD</strong> y otras adaptaciones. <a href="/ayuda.html#accesibilidad">Más información</a></span>
+            </div>
         </div>
     </section>
 
@@ -76,42 +80,136 @@
             </div>
         </section>
 
+        <section class="resources-section cipher-callout">
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-user-secret" aria-hidden="true"></i>
+                </div>
+                <h3>Laboratorio de cifrados</h3>
+                <p>Explora más de 15 sistemas de codificación con simuladores, tablas imprimibles y guías paso a paso.</p>
+                <a href="/cifrados.html" class="btn btn-primary" role="button" aria-label="Abrir laboratorio de cifrados">Abrir cifrados</a>
+            </div>
+        </section>
+
+        <section class="resources-section" id="digital-locks">
+            <div class="section-header">
+                <h2>Kit de candados digitales</h2>
+                <button class="btn btn-primary" onclick="window.location.href='/generador.html'">Crear candado</button>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open" aria-hidden="true"></i>
+                    </div>
+                    <h3>Guía completa de candados digitales</h3>
+                    <p>Pasos, rúbricas y plantillas para diseñar combinaciones numéricas, alfabéticas y visuales inspiradas en Lockee.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Guía</span>
+                        <span class="resource-level">Docentes</span>
+                    </div>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="manual-candados" role="button" aria-label="Descargar guía de candados digitales">Descargar</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-ring" aria-hidden="true"></i>
+                    </div>
+                    <h3>Kit de Cryptex y discos imprimibles</h3>
+                    <p>Anillos listos para imprimir, instrucciones de montaje y propuestas de uso para Cryptex físicos o digitales.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Plantillas</span>
+                        <span class="resource-level">Secundaria</span>
+                    </div>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="cryptex-kit" role="button" aria-label="Descargar kit de cryptex imprimibles">Descargar</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-qrcode" aria-hidden="true"></i>
+                    </div>
+                    <h3>Plantillas de QR y tarjetas de acceso</h3>
+                    <p>Modelos de tarjetas para repartir códigos QR, instrucciones para estudiantes y checklist de revisión.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Material</span>
+                        <span class="resource-level">Todos los niveles</span>
+                    </div>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="kit-qr" role="button" aria-label="Descargar plantillas de QR">Descargar</a>
+                    <a href="/generador.html#qrSection" class="btn btn-preview" role="button" aria-label="Abrir generador con sección de QR">Usar en el generador</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Grid de recursos en 3 columnas -->
         <section class="resources-section">
-            <h2 class="section-title">Recursos y Descargas</h2>
-            <!-- <p class="section-subtitle">Descarga plantillas y materiales útiles para tus escape rooms educativos.</p> -->
+            <div class="section-header">
+                <h2 class="section-title">Recursos y Descargas</h2>
+                <div class="bulk-download-controls" id="bulkDownloadControls" style="display: none;">
+                    <span class="selected-count" id="selectedCount">0 seleccionados</span>
+                    <button class="btn btn-primary" id="downloadSelected">
+                        <i class="fas fa-download"></i> Descargar seleccionados
+                    </button>
+                    <button class="btn btn-secondary" id="clearSelection">
+                        <i class="fas fa-times"></i> Limpiar selección
+                    </button>
+                </div>
+            </div>
+            <p class="section-subtitle">Selecciona las plantillas que necesites y descárgalas todas juntas, o descarga individualmente.</p>
             <div class="resources-grid resources-grid-3cols">
                 <!-- Plantilla de Candado Numérico -->
-                <div class="resource-card">
+                <div class="resource-card resource-card-selectable" data-template-id="plantilla-candado-numerico">
+                    <div class="resource-checkbox">
+                        <input type="checkbox" id="template-numerico" data-template-id="plantilla-candado-numerico" aria-label="Seleccionar plantilla de candado numérico">
+                        <label for="template-numerico"></label>
+                    </div>
                     <div class="resource-icon"><i class="fas fa-lock" aria-hidden="true"></i></div>
                     <h3>Plantilla de Candado Numérico</h3>
                     <p>Plantilla editable para crear candados numéricos en PDF.</p>
-                    <a href="/recursos/plantilla-candado-numerico.pdf" class="btn btn-secondary" download role="button" aria-label="Descargar plantilla de candado numérico en PDF" tabindex="0">Descargar PDF</a>
-                    <a href="/recursos/plantilla-candado-numerico.html" class="btn btn-preview" target="_blank" role="button" aria-label="Vista previa de la plantilla de candado numérico">Vista previa</a>
+                    <div class="resource-actions">
+                        <a href="#" class="btn btn-secondary" data-template-download="plantilla-candado-numerico" role="button" aria-label="Descargar plantilla de candado numérico en PDF" tabindex="0">Descargar PDF</a>
+                        <a href="#" class="btn btn-preview" data-template-preview="plantilla-candado-numerico" role="button" aria-label="Vista previa de la plantilla de candado numérico">Vista previa</a>
+                    </div>
                 </div>
                 <!-- Plantilla de Candado de Palabra -->
-                <div class="resource-card">
+                <div class="resource-card resource-card-selectable" data-template-id="plantilla-candado-palabra">
+                    <div class="resource-checkbox">
+                        <input type="checkbox" id="template-palabra" data-template-id="plantilla-candado-palabra" aria-label="Seleccionar plantilla de candado de palabra">
+                        <label for="template-palabra"></label>
+                    </div>
                     <div class="resource-icon"><i class="fas fa-key" aria-hidden="true"></i></div>
                     <h3>Plantilla de Candado de Palabra</h3>
                     <p>Plantilla para candados de palabras, lista para imprimir o editar.</p>
-                    <a href="/recursos/plantilla-candado-palabra.docx" class="btn btn-secondary" download role="button" aria-label="Descargar plantilla de candado de palabra en Word" tabindex="0">Descargar Word</a>
-                    <a href="#" class="btn btn-preview" onclick="alert('Vista previa no disponible en este ejemplo');return false;" role="button" aria-label="Vista previa de la plantilla de candado de palabra">Vista previa</a>
+                    <div class="resource-actions">
+                        <a href="#" class="btn btn-secondary" data-template-download="plantilla-candado-palabra" role="button" aria-label="Descargar plantilla de candado de palabra" tabindex="0">Descargar</a>
+                        <a href="#" class="btn btn-preview" data-template-preview="plantilla-candado-palabra" role="button" aria-label="Vista previa de la plantilla de candado de palabra">Vista previa</a>
+                    </div>
                 </div>
                 <!-- Plantilla de Cifrado César -->
-                <div class="resource-card">
+                <div class="resource-card resource-card-selectable" data-template-id="plantilla-cifrado-cesar">
+                    <div class="resource-checkbox">
+                        <input type="checkbox" id="template-cesar" data-template-id="plantilla-cifrado-cesar" aria-label="Seleccionar plantilla de cifrado César">
+                        <label for="template-cesar"></label>
+                    </div>
                     <div class="resource-icon"><i class="fas fa-user-secret" aria-hidden="true"></i></div>
                     <h3>Plantilla de Cifrado César</h3>
                     <p>Tabla y hoja de trabajo para cifrados tipo César.</p>
-                    <a href="/recursos/plantilla-cifrado-cesar.pdf" class="btn btn-secondary" download role="button" aria-label="Descargar plantilla de cifrado César en PDF" tabindex="0">Descargar PDF</a>
-                    <a href="#" class="btn btn-preview" onclick="alert('Vista previa no disponible en este ejemplo');return false;" role="button" aria-label="Vista previa de la plantilla de cifrado César">Vista previa</a>
+                    <div class="resource-actions">
+                        <a href="#" class="btn btn-secondary" data-template-download="plantilla-cifrado-cesar" role="button" aria-label="Descargar plantilla de cifrado César" tabindex="0">Descargar</a>
+                        <a href="#" class="btn btn-preview" data-template-preview="plantilla-cifrado-cesar" role="button" aria-label="Vista previa de la plantilla de cifrado César">Vista previa</a>
+                    </div>
                 </div>
                 <!-- Guía rápida para profesorado -->
-                <div class="resource-card">
+                <div class="resource-card resource-card-selectable" data-template-id="guia-profesorado">
+                    <div class="resource-checkbox">
+                        <input type="checkbox" id="template-guia" data-template-id="guia-profesorado" aria-label="Seleccionar guía rápida para profesorado">
+                        <label for="template-guia"></label>
+                    </div>
                     <div class="resource-icon"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></div>
                     <h3>Guía rápida para profesorado</h3>
                     <p>Consejos y pasos para usar candados digitales en el aula.</p>
-                    <a href="/recursos/guia-profesorado.pdf" class="btn btn-secondary" download role="button" aria-label="Descargar guía rápida para profesorado en PDF" tabindex="0">Descargar PDF</a>
-                    <a href="#" class="btn btn-preview" onclick="alert('Vista previa no disponible en este ejemplo');return false;" role="button" aria-label="Vista previa de la guía rápida para profesorado">Vista previa</a>
+                    <div class="resource-actions">
+                        <a href="#" class="btn btn-secondary" data-template-download="guia-profesorado" role="button" aria-label="Descargar guía rápida para profesorado" tabindex="0">Descargar</a>
+                        <a href="#" class="btn btn-preview" data-template-preview="guia-profesorado" role="button" aria-label="Vista previa de la guía rápida para profesorado">Vista previa</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -132,7 +230,7 @@
                         <span class="resource-type">Plantilla</span>
                         <span class="resource-level">Todos los niveles</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar plantilla de pistas secuenciales" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="pistas-secuenciales" role="button" aria-label="Descargar plantilla de pistas secuenciales" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -145,7 +243,7 @@
                         <span class="resource-type">Plantilla</span>
                         <span class="resource-level">Secundaria</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar retos matemáticos progresivos" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="retos-matematicos" role="button" aria-label="Descargar retos matemáticos progresivos" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -158,7 +256,7 @@
                         <span class="resource-type">Plantilla</span>
                         <span class="resource-level">Todos los niveles</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar plantilla de escape room de idiomas" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="escape-idiomas" role="button" aria-label="Descargar plantilla de escape room de idiomas" tabindex="0">Descargar</a>
                 </div>
             </div>
         </section>
@@ -179,7 +277,7 @@
                         <span class="resource-type">Material</span>
                         <span class="resource-level">Todos los niveles</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar kit de cajas y candados imprimibles" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="kit-cajas" role="button" aria-label="Descargar kit de cajas y candados imprimibles" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -192,7 +290,7 @@
                         <span class="resource-type">Material</span>
                         <span class="resource-level">Primaria/Secundaria</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar guía de experimentos científicos para escape rooms" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="experimentos" role="button" aria-label="Descargar guía de experimentos científicos para escape rooms" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -205,7 +303,7 @@
                         <span class="resource-type">Material</span>
                         <span class="resource-level">Todos los niveles</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar tarjetas de pistas y acertijos" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="tarjetas-pistas" role="button" aria-label="Descargar tarjetas de pistas y acertijos" tabindex="0">Descargar</a>
                 </div>
             </div>
         </section>
@@ -273,7 +371,7 @@
                         <span class="resource-type">Kit</span>
                         <span class="resource-level">Todos los niveles</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar sistema de insignias y recompensas" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="insignias" role="button" aria-label="Descargar sistema de insignias y recompensas" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -286,7 +384,7 @@
                         <span class="resource-type">Plantilla</span>
                         <span class="resource-level">Primaria/Secundaria</span>
                     </div>
-                    <a href="#" class="btn btn-secondary" role="button" aria-label="Descargar plantillas de tableros de progresión" tabindex="0">Descargar</a>
+                    <a href="#" class="btn btn-secondary" data-resource-pack="tableros" role="button" aria-label="Descargar plantillas de tableros de progresión" tabindex="0">Descargar</a>
                 </div>
 
                 <div class="resource-card">
@@ -875,7 +973,119 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
+        const RESOURCE_PACKS = {
+            'kit-cajas': {
+                filename: 'kit-cajas-escapify.md',
+                content: `
+# Kit de cajas y candados imprimibles
+- Plantillas de cubos con pestañas listas para imprimir.
+- Candados numéricos recortables y ruletas del 0 al 9.
+- Consejos de montaje y materiales recomendados.
+`
+            },
+            'manual-candados': {
+                filename: 'guia-candados-digitales.md',
+                content: `
+# Guía de candados digitales (Lockee + Escapify)
+- Checklist para definir objetivo, pista y recompensa.
+- Tabla de correspondencias entre tipos de candados (numérico, palabra, cryptex, dial).
+- Recomendaciones de accesibilidad (colores, ayudas visuales y lector de pantalla).
+- Plantillas para registrar combinaciones y enlaces QR.
+`
+            },
+            'cryptex-kit': {
+                filename: 'kit-cryptex-escapify.md',
+                content: `
+# Kit de cryptex y discos
+- Anillos del alfabeto español y símbolos extra.
+- Disco interior/exterior para tarjeta de pistas.
+- Indicaciones para generar palabras clave y pistas graduadas.
+- Ideas para combinar cryptex físico con candados digitales.
+`
+            },
+            'kit-qr': {
+                filename: 'kit-qr-pistas.md',
+                content: `
+# Plantillas de códigos QR y tarjetas de acceso
+- Tarjeta editable con hueco para QR y nombre del candado.
+- Instrucciones para imprimir, plastificar y entregar a equipos.
+- Checklist para revisar enlaces compartidos y caducidad.
+- Espacio para notas del docente (pistas extra, comodines, tiempos).
+`
+            },
+            'pistas-secuenciales': {
+                filename: 'plantilla-pistas-secuenciales.md',
+                content: `
+# Plantilla de pistas secuenciales
+1. Contexto narrativo.
+2. Pista inicial con indicaciones.
+3. Retos intermedios y recursos.
+4. Candado final y mensaje de cierre.
+`
+            },
+            'retos-matematicos': {
+                filename: 'retos-matematicos-progresivos.md',
+                content: `
+# Retos matemáticos progresivos
+- Series numéricas.
+- Problemas de lógica.
+- Coordenadas y geometría.
+- Desafíos bonus con fracciones.
+`
+            },
+            'escape-idiomas': {
+                filename: 'escape-room-idiomas.md',
+                content: `
+# Escape room de idiomas
+- Objetivos lingüísticos.
+- Dinámicas cooperativas.
+- Pistas auditivas y visuales.
+- Rúbrica de evaluación formativa.
+`
+            },
+            'tarjetas-pistas': {
+                filename: 'tarjetas-pistas-y-acertijos.md',
+                content: `
+# Tarjetas de pistas y acertijos
+- 10 pistas lógicas.
+- 10 retos numéricos.
+- 10 acertijos visuales.
+- Espacio para personalizar soluciones.
+`
+            },
+            'experimentos': {
+                filename: 'experimentos-cientificos-escape.md',
+                content: `
+# Experimentos científicos para escape rooms
+1. Indicador ácido-base.
+2. Cromatografía casera.
+3. Circuito eléctrico simple.
+4. Reacción efervescente con mensaje oculto.
+`
+            },
+            'insignias': {
+                filename: 'sistema-insignias-escapify.md',
+                content: `
+# Sistema de insignias e incentivos
+- Insignia Criptógrafo.
+- Insignia Colaborador.
+- Insignia Investigador.
+- Banco de recompensas y comodines.
+`
+            },
+            'tableros': {
+                filename: 'tableros-progresion.md',
+                content: `
+# Tableros de progresión
+- Columnas para misiones.
+- Indicadores de tiempo y pistas.
+- Espacio de reflexión final.
+`
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             // Referencias a elementos DOM
             const searchInput = document.querySelector('.search-box input');
@@ -1038,17 +1248,13 @@
             if (downloadResourceBtn) {
                 downloadResourceBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const resourceId = e.target.closest('.download-resource').dataset.resource;
-                    showNotification(`Descargando recurso: ${resourceId}`, 'success');
+                    exportCodingGuide();
                 });
             }
             
             if (printResourceBtn) {
                 printResourceBtn.addEventListener('click', () => {
-                    showNotification('Preparando documento para imprimir...', 'success');
-                    setTimeout(() => {
-                        window.print();
-                    }, 500);
+                    printCodingGuide();
                 });
             }
             
@@ -1151,7 +1357,7 @@
             }
             
             // Botones de descargar y ver guía (excepto el de codificación)
-            document.querySelectorAll('.resource-card .btn-secondary:not(.view-coding-guide)').forEach(button => {
+            document.querySelectorAll('.resource-card .btn-secondary:not(.view-coding-guide):not([data-resource-pack]):not([data-template-download])').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     const resourceTitle = this.closest('.resource-card').querySelector('h3').textContent;
@@ -1167,6 +1373,14 @@
                     showNotification(`Acción "${action}" iniciada. Esta funcionalidad estará disponible próximamente.`, 'success');
                 });
             });
+
+            document.querySelectorAll('[data-resource-pack]').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const packId = button.dataset.resourcePack;
+                    downloadResourcePack(packId);
+                });
+            });
             
             // Función para mostrar notificaciones
             function showNotification(message, type = 'success') {
@@ -1180,6 +1394,81 @@
                     notification.style.opacity = '0';
                     setTimeout(() => notification.remove(), 300);
                 }, 3000);
+            }
+
+            function downloadResourcePack(packId) {
+                const pack = RESOURCE_PACKS[packId];
+                if (!pack) {
+                    showNotification('Estamos preparando este recurso todavía', 'error');
+                    return;
+                }
+                const blob = new Blob([pack.content.trim()], { type: 'text/markdown' });
+                downloadBlob(blob, pack.filename);
+                showNotification(`Descargando ${pack.filename}`, 'success');
+            }
+
+            function downloadBlob(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            function exportCodingGuide() {
+                if (!codingSystemsModal) return;
+                const content = codingSystemsModal.querySelector('.resource-modal-body');
+                if (!content) return;
+                const clone = content.cloneNode(true);
+
+                if (typeof html2pdf !== 'undefined') {
+                    showNotification('Generando guía en PDF...', 'success');
+                    html2pdf().set({
+                        margin: 10,
+                        filename: 'guia-codigos-escapify.pdf',
+                        image: { type: 'jpeg', quality: 0.95 },
+                        html2canvas: { scale: 2, useCORS: true },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    }).from(clone).save();
+                } else {
+                    downloadBlob(new Blob([clone.innerText], { type: 'text/plain' }), 'guia-codigos-escapify.txt');
+                }
+            }
+
+            function printCodingGuide() {
+                if (!codingSystemsModal) return;
+                const content = codingSystemsModal.querySelector('.resource-modal-body');
+                if (!content) return;
+                const printer = window.open('', '_blank', 'width=900,height=1000');
+                if (!printer) {
+                    showNotification('Activa las ventanas emergentes para imprimir la guía', 'error');
+                    return;
+                }
+                printer.document.write('<html><head><title>Pruebas de Codificación y Cifrado</title>');
+                printer.document.write('<link rel="stylesheet" href="/assets/css/styles.css">');
+                printer.document.write('</head><body>');
+                printer.document.write(content.innerHTML);
+                printer.document.write('</body></html>');
+                printer.document.close();
+                printer.focus();
+                printer.print();
+            }
+
+            function getPreferredTheme() {
+                if (document.documentElement.classList.contains('dark')) {
+                    return 'dark';
+                }
+                if (document.documentElement.classList.contains('light')) {
+                    return 'light';
+                }
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || stored === 'light') {
+                    return stored;
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             }
             
             // Funciones auxiliares para los sistemas de codificación
@@ -1377,35 +1666,183 @@
                 card.style.display = 'block';
             });
 
-            // Selecciona el botón de vista previa de candado numérico
-            const previewBtn = document.querySelector('.resource-card a.btn-preview[href$="plantilla-candado-numerico.html"]');
-            if (previewBtn) {
-                previewBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // 1. Intenta detectar por clase en <html>
-                    let theme = '';
-                    if (document.documentElement.classList.contains('dark')) {
-                        theme = 'dark';
-                    } else if (document.documentElement.classList.contains('light')) {
-                        theme = 'light';
-                    }
-                    // 2. Si no hay clase, intenta por localStorage
-                    if (!theme) {
-                        const stored = localStorage.getItem('theme');
-                        if (stored === 'dark' || stored === 'light') {
-                            theme = stored;
-                        }
-                    }
-                    // 3. Si no hay nada, usa el modo del sistema
-                    if (!theme) {
-                        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    // 4. Abre la vista previa con el parámetro correcto
-                    const url = '/recursos/plantilla-candado-numerico.html?theme=' + theme;
-                    window.open(url, '_blank');
-                });
+            function openTemplatePreview(templateId, autoDownload) {
+                if (!templateId) return;
+                const params = new URLSearchParams();
+                params.set('theme', getPreferredTheme());
+                if (autoDownload) {
+                    params.set('autoDownload', '1');
+                }
+                window.open(`/recursos/${templateId}.html?${params.toString()}`, '_blank');
             }
+
+            document.querySelectorAll('[data-template-preview]').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    openTemplatePreview(button.dataset.templatePreview, false);
+                });
+            });
+
+            document.querySelectorAll('[data-template-download]').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    openTemplatePreview(button.dataset.templateDownload, true);
+                });
+            });
+
+            // Sistema de selección múltiple para descarga en bloque
+            const selectedTemplates = new Set();
+            const bulkControls = document.getElementById('bulkDownloadControls');
+            const selectedCount = document.getElementById('selectedCount');
+            const downloadSelectedBtn = document.getElementById('downloadSelected');
+            const clearSelectionBtn = document.getElementById('clearSelection');
+
+            function updateBulkControls() {
+                const count = selectedTemplates.size;
+                if (count > 0) {
+                    bulkControls.style.display = 'flex';
+                    selectedCount.textContent = `${count} ${count === 1 ? 'seleccionado' : 'seleccionados'}`;
+                    downloadSelectedBtn.disabled = false;
+                } else {
+                    bulkControls.style.display = 'none';
+                }
+            }
+
+            function toggleTemplateSelection(templateId, checkbox) {
+                if (checkbox.checked) {
+                    selectedTemplates.add(templateId);
+                    checkbox.closest('.resource-card-selectable').classList.add('selected');
+                } else {
+                    selectedTemplates.delete(templateId);
+                    checkbox.closest('.resource-card-selectable').classList.remove('selected');
+                }
+                updateBulkControls();
+            }
+
+            // Event listeners para checkboxes
+            document.querySelectorAll('[data-template-id]').forEach(card => {
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.addEventListener('change', () => {
+                        toggleTemplateSelection(checkbox.dataset.templateId, checkbox);
+                    });
+
+                    // Permitir seleccionar haciendo clic en la tarjeta
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('.resource-actions') && !e.target.closest('.resource-checkbox')) {
+                            checkbox.checked = !checkbox.checked;
+                            toggleTemplateSelection(checkbox.dataset.templateId, checkbox);
+                        }
+                    });
+                }
+            });
+
+            // Descargar seleccionados
+            downloadSelectedBtn.addEventListener('click', () => {
+                if (selectedTemplates.size === 0) {
+                    showNotification('No hay plantillas seleccionadas', 'error');
+                    return;
+                }
+
+                const templates = Array.from(selectedTemplates);
+                showNotification(`Iniciando descarga de ${templates.length} plantilla(s)...`, 'success');
+                
+                templates.forEach((templateId, index) => {
+                    setTimeout(() => {
+                        openTemplatePreview(templateId, true);
+                    }, 500 * index);
+                });
+            });
+
+            // Limpiar selección
+            clearSelectionBtn.addEventListener('click', () => {
+                selectedTemplates.clear();
+                document.querySelectorAll('input[type="checkbox"][data-template-id]').forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.resource-card-selectable').classList.remove('selected');
+                });
+                updateBulkControls();
+                showNotification('Selección limpiada', 'success');
+            });
+
+            // Inicializar
+            updateBulkControls();
         });
     </script>
+    <style>
+        .resource-card-selectable {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card-selectable:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .resource-card-selectable.selected {
+            border: 2px solid var(--primary-color);
+            background: var(--hover-color);
+        }
+
+        .resource-checkbox {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+        }
+
+        .resource-checkbox input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .resource-checkbox label {
+            display: none;
+        }
+
+        .resource-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .bulk-download-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .selected-count {
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            background: var(--hover-color);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .bulk-download-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .bulk-download-controls button {
+                width: 100%;
+            }
+
+            .resource-actions {
+                flex-direction: column;
+            }
+
+            .resource-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </body>
 </html> 

@@ -89,6 +89,10 @@
         <div class="container">
             <h1 class="section-title" id="generator-title">Generador de candados digitales</h1>
             <p class="section-subtitle">Crea desafíos personalizados para tus actividades educativas</p>
+            <div class="accessibility-note">
+                <i class="fas fa-universal-access"></i>
+                <span>Los niveles de dificultad incluyen símbolos <strong>ColorADD</strong> para usuarios con daltonismo. Actívalos en el panel de accesibilidad. <a href="/ayuda.html#accesibilidad">Más información</a></span>
+            </div>
         </div>
     </section>
 
@@ -115,6 +119,21 @@
                     <button class="btn btn-secondary" id="backToTypes" aria-label="Volver a la selección de tipos">
                         <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver
                     </button>
+                </div>
+
+                <div class="lock-summary" aria-live="polite">
+                    <div class="lock-summary-item">
+                        <span>Tipo</span>
+                        <strong id="summaryType">—</strong>
+                    </div>
+                    <div class="lock-summary-item">
+                        <span>Dificultad</span>
+                        <strong id="summaryDifficulty">—</strong>
+                    </div>
+                    <div class="lock-summary-item">
+                        <span>Longitud</span>
+                        <strong id="summaryLength">—</strong>
+                    </div>
                 </div>
 
                 <div class="lock-form">
@@ -336,6 +355,14 @@
                         <input type="text" id="lockUrl" placeholder="URL a la que redirigir al resolver">
                     </div>
 
+                    <div class="form-group">
+                        <label for="codeLength">Longitud del código</label>
+                        <div class="code-length-control">
+                            <input type="number" id="codeLength" min="1" max="12" value="4" aria-describedby="codeLengthHelp">
+                            <span class="code-length-hint" id="codeLengthHelp">Define cuántos elementos debe introducir la persona que resuelve este candado.</span>
+                        </div>
+                    </div>
+
                     <!-- Sección de opciones avanzadas -->
                     <div class="lock-options" id="advancedOptions">
                         <h3>Opciones avanzadas</h3>
@@ -346,15 +373,15 @@
                             <div class="difficulty-selector">
                                 <div class="radio-group">
                                     <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Verde - Dificultad fácil">
-                                        <input type="radio" name="lockDifficulty" value="easy" checked>
+                                        <input type="radio" name="lockDifficulty" value="easy" data-label="Fácil" checked>
                                         Fácil <span class="difficulty-badge difficulty-easy">fácil<span class="coloradd-symbol" aria-hidden="true"></span></span>
                                     </label>
                                     <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Amarillo - Dificultad media">
-                                        <input type="radio" name="lockDifficulty" value="medium">
+                                        <input type="radio" name="lockDifficulty" value="medium" data-label="Media">
                                         Media <span class="difficulty-badge difficulty-medium">media<span class="coloradd-symbol" aria-hidden="true"></span></span>
                                     </label>
                                     <label class="difficulty-option coloradd-tooltip" data-coloradd-tooltip="Rojo - Dificultad difícil">
-                                        <input type="radio" name="lockDifficulty" value="hard">
+                                        <input type="radio" name="lockDifficulty" value="hard" data-label="Difícil">
                                         Difícil <span class="difficulty-badge difficulty-hard">difícil<span class="coloradd-symbol" aria-hidden="true"></span></span>
                                     </label>
                                 </div>
@@ -374,11 +401,24 @@
             </div>
 
             <div class="qr-section" id="qrSection" style="display: none;" aria-labelledby="qrTitle">
-                <h3 id="qrTitle">Código QR del candado</h3>
-                <div id="qrCode" role="img" aria-label="Código QR para acceder al candado"></div>
-                <button class="btn btn-primary" id="downloadQR" aria-label="Descargar código QR">
-                    <i class="fas fa-download" aria-hidden="true"></i> Descargar QR
-                </button>
+                <h3 id="qrTitle">Comparte tu candado</h3>
+                <p class="qr-description">Comparte el enlace o entrega el código QR para que tus estudiantes accedan directamente.</p>
+                <div class="share-link-group">
+                    <label for="shareUrlInput">Enlace compartible</label>
+                    <div class="share-link-control">
+                        <input type="text" id="shareUrlInput" readonly aria-describedby="shareHelp">
+                        <button class="btn btn-secondary" id="copyShareLink" aria-label="Copiar enlace de compartir">
+                            <i class="fas fa-link"></i> Copiar enlace
+                        </button>
+                    </div>
+                    <small id="shareHelp">Este enlace incluye toda la información necesaria del candado.</small>
+                </div>
+                <div class="qr-wrapper">
+                    <div id="qrCode" role="img" aria-label="Código QR para acceder al candado"></div>
+                    <button class="btn btn-primary" id="downloadQR" aria-label="Descargar código QR">
+                        <i class="fas fa-download" aria-hidden="true"></i> Descargar QR
+                    </button>
+                </div>
             </div>
         </div>
     </main>
@@ -387,6 +427,7 @@
     <script type="module">
         import LockTypes from './assets/js/lock-types.js';
         import ThemeManager from './assets/js/theme.js';
+        import { appendSharePayload, buildShareUrlFromPayload } from './assets/js/share.js';
 
         document.addEventListener('DOMContentLoaded', () => {
             const lockTypesGrid = document.getElementById('lockTypesGrid');
@@ -402,6 +443,13 @@
             const qrSection = document.getElementById('qrSection');
             const qrCode = document.getElementById('qrCode');
             const downloadQR = document.getElementById('downloadQR');
+            const codeLengthInput = document.getElementById('codeLength');
+            const shareUrlInput = document.getElementById('shareUrlInput');
+            const copyShareLink = document.getElementById('copyShareLink');
+            let lastShareUrl = '';
+            const summaryType = document.getElementById('summaryType');
+            const summaryDifficulty = document.getElementById('summaryDifficulty');
+            const summaryLength = document.getElementById('summaryLength');
             
             // Elementos del editor de texto enriquecido
             const successMessageEditor = document.getElementById('successMessageEditor');
@@ -416,6 +464,7 @@
             const playSoundsCheck = document.getElementById('playSounds');
 
             let currentLockType = null;
+            let currentLockOptions = { codeLength: 4 };
             let enteredCode = '';
 
             // Cargar tipos de candados
@@ -442,6 +491,16 @@
             }
 
             renderLockTypes();
+            updateSummary({ type: '—', difficulty: '—', length: '—' });
+
+            const presetType = localStorage.getItem('selectedCipherType');
+            if (presetType) {
+                localStorage.removeItem('selectedCipherType');
+                const targetType = allTypes.find(type => type.id === presetType);
+                if (targetType) {
+                    selectLockType(targetType);
+                }
+            }
 
             // Filtros de dificultad
             document.getElementById('difficultyFilters').addEventListener('click', (e) => {
@@ -453,12 +512,132 @@
                 }
             });
 
+            function clampCodeLength(value, min, max) {
+                const parsed = parseInt(value, 10);
+                if (Number.isNaN(parsed)) return min;
+                return Math.min(Math.max(parsed, min), max);
+            }
+
+            function getCodeLengthLimit() {
+                if (currentLockOptions?.codeLength) return currentLockOptions.codeLength;
+                if (currentLockType?.maxLength) return currentLockType.maxLength;
+                if (currentLockType?.minLength) return currentLockType.minLength;
+                return 4;
+            }
+
+            function updateCodeLengthControl(type) {
+                if (!codeLengthInput) return;
+                const minLength = type.minLength || 1;
+                const maxLength = type.maxLength || Math.max(minLength, 12);
+                codeLengthInput.min = minLength;
+                codeLengthInput.max = maxLength;
+                const defaultLength = clampCodeLength(type.minLength || codeLengthInput.value || minLength, minLength, maxLength);
+                codeLengthInput.value = defaultLength;
+                currentLockOptions.codeLength = defaultLength;
+            }
+
+            function renderLockTemplate() {
+                if (!currentLockType) return;
+                lockKeypad.innerHTML = '';
+                const template = LockTypes.getTemplate(currentLockType.id, currentLockOptions);
+                if (template) {
+                    lockKeypad.appendChild(template);
+                    setupKeypadListeners();
+                    template.addEventListener('codeEntered', (event) => {
+                        enteredCode = event.detail || '';
+                        updateDisplay();
+                    });
+                }
+            }
+
+            function updateSummary(partial = {}) {
+                if (partial.type && summaryType) {
+                    summaryType.textContent = partial.type;
+                }
+                if (partial.difficulty && summaryDifficulty) {
+                    summaryDifficulty.textContent = partial.difficulty;
+                }
+                if (partial.length !== undefined && summaryLength) {
+                    if (typeof partial.length === 'number') {
+                        summaryLength.textContent = `${partial.length} ${partial.length === 1 ? 'carácter' : 'caracteres'}`;
+                    } else {
+                        summaryLength.textContent = partial.length;
+                    }
+                }
+            }
+
+            function updateCurrentOptions(partialOptions = {}, options = { render: true, resetCode: true }) {
+                currentLockOptions = {
+                    ...currentLockOptions,
+                    ...partialOptions
+                };
+                if (options.resetCode) {
+                    enteredCode = '';
+                    updateDisplay();
+                }
+                if (options.render && currentLockType) {
+                    renderLockTemplate();
+                }
+            }
+
+            function buildOptionsForType(type) {
+                const min = type.minLength || 1;
+                const defaultLength = clampCodeLength(codeLengthInput?.value || min, min, type.maxLength || Math.max(min, 12));
+                currentLockOptions = { codeLength: defaultLength };
+
+                if (type.id === 'numeric') {
+                    currentLockOptions = {
+                        ...currentLockOptions,
+                        digitOrder: document.querySelector('input[name="digitOrder"]:checked')?.value || '789456123',
+                        allowDelete: allowDeleteCheck ? allowDeleteCheck.checked : true,
+                        showConfetti: showConfettiCheck ? showConfettiCheck.checked : false,
+                        playSounds: playSoundsCheck ? playSoundsCheck.checked : false
+                    };
+                }
+
+                if (type.id === 'nokia') {
+                    currentLockOptions = {
+                        ...currentLockOptions,
+                        nokiaSpeed: document.querySelector('input[name="nokiaSpeed"]:checked')?.value || 'medium',
+                        showLetters: document.getElementById('nokiaShowLetters') ? document.getElementById('nokiaShowLetters').checked : true,
+                        playSounds: document.getElementById('nokiaPlaySounds') ? document.getElementById('nokiaPlaySounds').checked : false,
+                        vibrate: document.getElementById('nokiaVibrate') ? document.getElementById('nokiaVibrate').checked : false
+                    };
+                }
+
+                if (type.id === 'coordinates') {
+                    currentLockOptions = {
+                        ...currentLockOptions,
+                        mapStyle: document.querySelector('input[name="mapStyle"]:checked')?.value || 'streets',
+                        precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || 'medium',
+                        showMarker: document.getElementById('showCoordMarker') ? document.getElementById('showCoordMarker').checked : true,
+                        showRadius: document.getElementById('showCoordRadius') ? document.getElementById('showCoordRadius').checked : false
+                    };
+                }
+            }
+
+            if (codeLengthInput) {
+                codeLengthInput.addEventListener('input', () => {
+                    if (!currentLockType) return;
+                    const min = parseInt(codeLengthInput.min, 10) || 1;
+                    const max = parseInt(codeLengthInput.max, 10) || Math.max(min, 12);
+                    const value = clampCodeLength(codeLengthInput.value, min, max);
+                    codeLengthInput.value = value;
+                    updateCurrentOptions({ codeLength: value });
+                    updateSummary({ length: value });
+                });
+            }
+
             function selectLockType(type) {
                 currentLockType = type;
                 lockTypeTitle.textContent = `Crear Candado ${type.name}`;
                 document.getElementById('lockTypeDifficulty').innerHTML = `<span class="difficulty-badge difficulty-${type.difficulty}">${type.difficulty === 'easy' ? 'Fácil' : type.difficulty === 'medium' ? 'Medio' : 'Difícil'}</span>`;
                 lockCreator.style.display = 'block';
                 document.querySelector('.lock-type-selector').style.display = 'none';
+                enteredCode = '';
+                updateDisplay();
+                updateCodeLengthControl(type);
+                buildOptionsForType(type);
                 
                 // Mostrar/ocultar opciones específicas según el tipo de candado
                 // Primero, ocultar todas las opciones
@@ -475,13 +654,12 @@
                     document.getElementById('coordinatesOptions').style.display = 'block';
                 }
                 
-                // Limpiar y cargar el teclado específico
-                lockKeypad.innerHTML = '';
-                const template = LockTypes.getTemplate(type.id);
-                if (template) {
-                    lockKeypad.appendChild(template);
-                    setupKeypadListeners();
-                }
+                renderLockTemplate();
+                updateSummary({
+                    type: type.name,
+                    difficulty: document.querySelector('input[name="lockDifficulty"]:checked')?.dataset.label || (type.difficulty === 'easy' ? 'Fácil' : type.difficulty === 'medium' ? 'Media' : 'Difícil'),
+                    length: currentLockOptions.codeLength
+                });
                 
                 // Reiniciar editor de texto
                 if (successMessageEditor) {
@@ -512,7 +690,17 @@
             }
 
             function handlePatternInput(button) {
-                button.classList.toggle('selected');
+                const limit = getCodeLengthLimit();
+                if (button.classList.contains('selected')) {
+                    button.classList.remove('selected');
+                } else {
+                    const currentSelected = lockKeypad.querySelectorAll('.pattern-button.selected').length;
+                    if (currentSelected >= limit) {
+                        showNotification(`Este candado admite un máximo de ${limit} puntos`, 'error');
+                        return;
+                    }
+                    button.classList.add('selected');
+                }
                 const selectedButtons = lockKeypad.querySelectorAll('.pattern-button.selected');
                 enteredCode = Array.from(selectedButtons).map(btn => btn.dataset.value).join(',');
                 updateDisplay();
@@ -525,6 +713,11 @@
                     const password = document.getElementById('password').value;
                     enteredCode = `${username}:${password}`;
                 } else {
+                    const codeLimit = getCodeLengthLimit();
+                    if (enteredCode.length >= codeLimit) {
+                        showNotification(`Has alcanzado la longitud máxima (${codeLimit}) definida para este candado`, 'error');
+                        return;
+                    }
                     enteredCode += value;
                 }
                 updateDisplay();
@@ -598,6 +791,7 @@
                     lockMessageField.value = lockMessageValue;
                 }
                 
+                const selectedDifficulty = document.querySelector('input[name="lockDifficulty"]:checked');
                 const lockData = {
                     id: Date.now(),
                     type: currentLockType.id,
@@ -608,7 +802,7 @@
                     hint: document.getElementById('lockHint')?.value || '',
                     image: document.getElementById('lockImage')?.value || '',
                     url: document.getElementById('lockUrl')?.value || '',
-                    difficulty: currentLockType.difficulty,
+                    difficulty: selectedDifficulty ? selectedDifficulty.value : currentLockType.difficulty,
                     timestamp: new Date().toISOString()
                 };
                 
@@ -630,35 +824,42 @@
                     lockData.nextLock = nextLockField.value;
                 }
                 
-                // Opciones para candados numéricos
+                let lockOptions = { ...currentLockOptions };
+
                 if (currentLockType.id === 'numeric') {
-                    lockData.options = {
-                        digitOrder: document.querySelector('input[name="digitOrder"]:checked')?.value || '789456123',
-                        allowDelete: allowDeleteCheck?.checked || false,
-                        showConfetti: showConfettiCheck?.checked || false,
-                        playSounds: playSoundsCheck?.checked || false
+                    lockOptions = {
+                        ...lockOptions,
+                        digitOrder: document.querySelector('input[name="digitOrder"]:checked')?.value || lockOptions.digitOrder || '789456123',
+                        allowDelete: allowDeleteCheck ? allowDeleteCheck.checked : lockOptions.allowDelete,
+                        showConfetti: showConfettiCheck ? showConfettiCheck.checked : lockOptions.showConfetti,
+                        playSounds: playSoundsCheck ? playSoundsCheck.checked : lockOptions.playSounds
                     };
                 }
 
-                // Opciones para candado Nokia
                 if (currentLockType.id === 'nokia') {
-                    lockData.options = {
-                        nokiaSpeed: document.querySelector('input[name="nokiaSpeed"]:checked')?.value || 'medium',
-                        showLetters: document.getElementById('nokiaShowLetters')?.checked || true,
-                        playSounds: document.getElementById('nokiaPlaySounds')?.checked || false,
-                        vibrate: document.getElementById('nokiaVibrate')?.checked || false
+                    lockOptions = {
+                        ...lockOptions,
+                        nokiaSpeed: document.querySelector('input[name="nokiaSpeed"]:checked')?.value || lockOptions.nokiaSpeed || 'medium',
+                        showLetters: document.getElementById('nokiaShowLetters') ? document.getElementById('nokiaShowLetters').checked : lockOptions.showLetters,
+                        playSounds: document.getElementById('nokiaPlaySounds') ? document.getElementById('nokiaPlaySounds').checked : lockOptions.playSounds,
+                        vibrate: document.getElementById('nokiaVibrate') ? document.getElementById('nokiaVibrate').checked : lockOptions.vibrate
                     };
                 }
 
-                // Opciones para candado Coordenadas
                 if (currentLockType.id === 'coordinates') {
-                    lockData.options = {
-                        mapStyle: document.querySelector('input[name="mapStyle"]:checked')?.value || 'streets',
-                        precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || 'medium',
-                        showMarker: document.getElementById('showCoordMarker')?.checked || true,
-                        showRadius: document.getElementById('showCoordRadius')?.checked || false
+                    lockOptions = {
+                        ...lockOptions,
+                        mapStyle: document.querySelector('input[name="mapStyle"]:checked')?.value || lockOptions.mapStyle || 'streets',
+                        precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || lockOptions.precision || 'medium',
+                        showMarker: document.getElementById('showCoordMarker') ? document.getElementById('showCoordMarker').checked : lockOptions.showMarker,
+                        showRadius: document.getElementById('showCoordRadius') ? document.getElementById('showCoordRadius').checked : lockOptions.showRadius
                     };
                 }
+
+                lockData.options = lockOptions;
+
+                appendSharePayload(lockData);
+                const shareUrl = buildShareUrlFromPayload(lockData.sharePayload);
 
                 // Validar localStorage
                 try {
@@ -681,17 +882,21 @@
                     console.log('✅ Candado guardado en localStorage');
                     console.log('📚 Nuevo historial:', history.length, 'candados');
                     
-                    // Generar QR si la biblioteca está disponible
-                    if (typeof QRCode !== 'undefined') {
+                    if (shareUrlInput && shareUrl) {
+                        shareUrlInput.value = shareUrl;
+                    }
+                    lastShareUrl = shareUrl;
+                    qrSection.style.display = shareUrl ? 'block' : 'none';
+                    
+                    if (shareUrl && typeof QRCode !== 'undefined') {
                         qrCode.innerHTML = '';
                         new QRCode(qrCode, {
-                            text: `${window.location.origin}/candado/${lockData.id}`,
+                            text: shareUrl,
                             width: 200,
                             height: 200
                         });
-                        qrSection.style.display = 'block';
                         console.log('📱 QR generado');
-                    } else {
+                    } else if (!window.QRCode) {
                         console.warn('⚠️ QRCode library no disponible');
                     }
 
@@ -750,14 +955,35 @@
             });
 
             downloadQR.addEventListener('click', () => {
+                if (!lastShareUrl) {
+                    showNotification('Genera un candado para descargar su QR', 'error');
+                    return;
+                }
                 const canvas = qrCode.querySelector('canvas');
                 if (canvas) {
                     const link = document.createElement('a');
                     link.download = `candado-qr-${Date.now()}.png`;
                     link.href = canvas.toDataURL();
                     link.click();
+                } else {
+                    showNotification('El QR todavía no está disponible', 'error');
                 }
             });
+
+            if (copyShareLink) {
+                copyShareLink.addEventListener('click', async () => {
+                    if (!lastShareUrl) {
+                        showNotification('Crea y guarda un candado para obtener el enlace', 'error');
+                        return;
+                    }
+                    try {
+                        await navigator.clipboard.writeText(lastShareUrl);
+                        showNotification('Enlace copiado al portapapeles', 'success');
+                    } catch (error) {
+                        showNotification('No se pudo copiar el enlace', 'error');
+                    }
+                });
+            }
 
             function resetForm() {
                 document.getElementById('lockName').value = '';
@@ -769,6 +995,11 @@
                 enteredCode = '';
                 updateDisplay();
                 currentLockType = null;
+                currentLockOptions = { codeLength: 4 };
+                if (codeLengthInput) {
+                    codeLengthInput.value = 4;
+                }
+                updateSummary({ type: '—', difficulty: '—', length: '—' });
             }
 
             function showNotification(message, type = 'success') {
@@ -849,27 +1080,109 @@
                 document.querySelectorAll('input[name="digitOrder"]').forEach(radio => {
                     radio.addEventListener('change', () => {
                         if (currentLockType && currentLockType.id === 'numeric') {
-                            lockKeypad.innerHTML = '';
-                            const template = LockTypes.getTemplate(currentLockType.id);
-                            if (template) {
-                                lockKeypad.appendChild(template);
-                                setupKeypadListeners();
-                            }
+                            updateCurrentOptions({ digitOrder: radio.value });
                         }
                     });
                 });
             }
             
-            // Escuchar cambios en la opción de permitir borrado
             if (allowDeleteCheck) {
                 allowDeleteCheck.addEventListener('change', () => {
                     if (currentLockType && currentLockType.id === 'numeric') {
-                        lockKeypad.innerHTML = '';
-                        const template = LockTypes.getTemplate(currentLockType.id);
-                        if (template) {
-                            lockKeypad.appendChild(template);
-                            setupKeypadListeners();
-                        }
+                        updateCurrentOptions({ allowDelete: allowDeleteCheck.checked });
+                    }
+                });
+            }
+
+            if (showConfettiCheck) {
+                showConfettiCheck.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'numeric') {
+                        updateCurrentOptions({ showConfetti: showConfettiCheck.checked }, { render: false, resetCode: false });
+                    }
+                });
+            }
+
+            if (playSoundsCheck) {
+                playSoundsCheck.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'numeric') {
+                        updateCurrentOptions({ playSounds: playSoundsCheck.checked }, { render: false, resetCode: false });
+                    }
+                });
+            }
+
+            document.querySelectorAll('input[name="lockDifficulty"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (radio.checked) {
+                        updateSummary({ difficulty: radio.dataset.label || radio.value });
+                    }
+                });
+            });
+
+            document.querySelectorAll('input[name="nokiaSpeed"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'nokia') {
+                        updateCurrentOptions({ nokiaSpeed: radio.value });
+                    }
+                });
+            });
+
+            const nokiaShowLetters = document.getElementById('nokiaShowLetters');
+            if (nokiaShowLetters) {
+                nokiaShowLetters.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'nokia') {
+                        updateCurrentOptions({ showLetters: nokiaShowLetters.checked }, { render: true, resetCode: false });
+                    }
+                });
+            }
+
+            const nokiaPlaySounds = document.getElementById('nokiaPlaySounds');
+            if (nokiaPlaySounds) {
+                nokiaPlaySounds.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'nokia') {
+                        updateCurrentOptions({ playSounds: nokiaPlaySounds.checked }, { render: false, resetCode: false });
+                    }
+                });
+            }
+
+            const nokiaVibrate = document.getElementById('nokiaVibrate');
+            if (nokiaVibrate) {
+                nokiaVibrate.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'nokia') {
+                        updateCurrentOptions({ vibrate: nokiaVibrate.checked }, { render: false, resetCode: false });
+                    }
+                });
+            }
+
+            document.querySelectorAll('input[name="mapStyle"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'coordinates') {
+                        updateCurrentOptions({ mapStyle: radio.value }, { render: true, resetCode: false });
+                    }
+                });
+            });
+
+            document.querySelectorAll('input[name="coordPrecision"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'coordinates') {
+                        updateCurrentOptions({ precision: radio.value }, { render: false, resetCode: false });
+                    }
+                });
+            });
+
+            const coordMarker = document.getElementById('showCoordMarker');
+            if (coordMarker) {
+                coordMarker.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'coordinates') {
+                        updateCurrentOptions({ showMarker: coordMarker.checked }, { render: true, resetCode: false });
+                    }
+                });
+            }
+
+            const coordRadius = document.getElementById('showCoordRadius');
+            if (coordRadius) {
+                coordRadius.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'coordinates') {
+                        updateCurrentOptions({ showRadius: coordRadius.checked }, { render: true, resetCode: false });
                     }
                 });
             }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla Cifrado César</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="plantilla-candado-numerico.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid #cbd5ff;
+            border-collapse: collapse;
+        }
+        table {
+            width: 100%;
+            margin-top: 12px;
+        }
+        th, td {
+            padding: 8px;
+        }
+        .caesar-wheel-card {
+            margin-top: 1rem;
+        }
+        .caesar-grid {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container" id="cesar-template">
+        <button id="download-pdf" class="download-btn"><i class="fas fa-download"></i> Descargar PDF</button>
+        <div class="preview-title">Plantilla de Cifrado César</div>
+        <div class="preview-subtitle">Planifica y corrige mensajes codificados con desplazamiento constante.</div>
+
+        <div class="instructions">
+            <strong>Pasos sugeridos:</strong><br>
+            1. Indica el desplazamiento seleccionado y el alfabeto de referencia.<br>
+            2. Escribe el mensaje original y aplica el desplazamiento letra a letra.<br>
+            3. Comprueba el mensaje descifrado y anota observaciones para tu alumnado.
+        </div>
+
+        <div class="caesar-wheel-card">
+            <h3>Registro de desplazamiento</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Alfabeto original</th>
+                        <th>Alfabeto desplazado</th>
+                        <th>Valor del desplazamiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z</td>
+                        <td>&nbsp;</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="caesar-grid">
+            <h3>Mensajes para practicar</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mensaje original</th>
+                        <th>Proceso de sustitución</th>
+                        <th>Mensaje cifrado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="word-notes">
+            <h3>Pistas y anotaciones</h3>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+        </div>
+
+        <div class="escapify-logo">
+            <i class="fas fa-lock"></i> Escapify
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            const clone = document.getElementById('cesar-template').cloneNode(true);
+            prepareCloneForPrint(clone);
+
+            const opt = {
+                margin: [1.5, 1.5, 1.5, 1.5],
+                filename: 'plantilla-cifrado-cesar.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(clone).save();
+        });
+
+        function prepareCloneForPrint(clone) {
+            clone.style.background = '#fff';
+            clone.style.color = '#111827';
+            const subtitle = clone.querySelector('.preview-subtitle');
+            if (subtitle) subtitle.style.color = '#4b5563';
+            const instructions = clone.querySelector('.instructions');
+            if (instructions) instructions.style.color = '#111827';
+            const logo = clone.querySelector('.escapify-logo');
+            if (logo) logo.style.color = '#0252CD';
+        }
+
+        function applyTheme() {
+            const params = new URLSearchParams(window.location.search);
+            const theme = params.get('theme');
+            document.body.classList.remove('modo-dark', 'modo-light');
+            document.documentElement.classList.remove('modo-dark', 'modo-light');
+            if (theme === 'dark') {
+                document.body.classList.add('modo-dark');
+                document.documentElement.classList.add('modo-dark');
+            } else if (theme === 'light') {
+                document.body.classList.add('modo-light');
+                document.documentElement.classList.add('modo-light');
+            }
+        }
+
+        applyTheme();
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('autoDownload') === '1') {
+            setTimeout(() => document.getElementById('download-pdf').click(), 400);
+        }
+    </script>
+</body>
+</html>

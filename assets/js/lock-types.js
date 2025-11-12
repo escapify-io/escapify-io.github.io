@@ -27,6 +27,8 @@ class LockTypes {
             description: 'Candado con 4 direcciones',
             directions: ['⬆️', '⬇️', '⬅️', '➡️'],
             template: 'directional-template',
+            minLength: 3,
+            maxLength: 10,
             difficulty: 'medium'
         },
         DIRECTIONAL_8: {
@@ -36,6 +38,8 @@ class LockTypes {
             description: 'Candado con 8 direcciones',
             directions: ['⬆️', '⬇️', '⬅️', '➡️', '↖️', '↗️', '↙️', '↘️'],
             template: 'directional-template',
+            minLength: 4,
+            maxLength: 12,
             difficulty: 'hard'
         },
         COLOR: {
@@ -45,6 +49,8 @@ class LockTypes {
             description: 'Candado de colores',
             colors: ['🔴', '🔵', '🟡', '🟢', '🟣', '🟠'],
             template: 'color-template',
+            minLength: 3,
+            maxLength: 6,
             difficulty: 'easy'
         },
         PATTERN_9: {
@@ -80,6 +86,8 @@ class LockTypes {
             description: 'Candado con notas musicales',
             notes: ['♪', '♫', '♬', '♩', '♭', '♮', '♯'],
             template: 'musical-template',
+            minLength: 3,
+            maxLength: 6,
             difficulty: 'medium'
         },
         EMOJI: {
@@ -89,6 +97,8 @@ class LockTypes {
             description: 'Candado con emojis',
             emojis: ['😀', '😎', '🤖', '👻', '🎮', '🎲', '🎯', '🎨'],
             template: 'emoji-template',
+            minLength: 3,
+            maxLength: 6,
             difficulty: 'easy'
         },
         NOKIA: {
@@ -122,12 +132,74 @@ class LockTypes {
             description: 'Candado con coordenadas geográficas en un mapa',
             template: 'coordinates-template',
             difficulty: 'hard'
+        },
+        WORD_WHEEL: {
+            id: 'word-wheel',
+            name: 'Palabra giratoria',
+            icon: 'fas fa-spell-check',
+            description: 'Alinea las ruedas de letras para formar la palabra correcta',
+            template: 'word-wheel-template',
+            slots: 5,
+            minLength: 4,
+            maxLength: 8,
+            difficulty: 'medium'
+        },
+        SWITCHES: {
+            id: 'switches',
+            name: 'Palancas binarias',
+            icon: 'fas fa-toggle-on',
+            description: 'Configura la combinación correcta de palancas activadas y desactivadas',
+            template: 'switches-template',
+            switches: 5,
+            minLength: 4,
+            maxLength: 8,
+            difficulty: 'easy'
+        },
+        SLIDER: {
+            id: 'slider',
+            name: 'Deslizadores',
+            icon: 'fas fa-sliders-h',
+            description: 'Ajusta cada deslizador hasta alcanzar la combinación correcta',
+            template: 'slider-template',
+            sliders: 4,
+            min: 0,
+            max: 9,
+            minLength: 3,
+            maxLength: 6,
+            difficulty: 'medium'
+        },
+        CRYPTEX: {
+            id: 'cryptex',
+            name: 'Cryptex',
+            icon: 'fas fa-ring',
+            description: 'Ruedas giratorias con letras para descubrir una palabra secreta',
+            template: 'cryptex-template',
+            minLength: 4,
+            maxLength: 8,
+            difficulty: 'hard'
+        },
+        ROTARY: {
+            id: 'rotary',
+            name: 'Mando giratorio',
+            icon: 'fas fa-bullseye',
+            description: 'Simula el dial de una caja fuerte con giros izquierda/derecha',
+            template: 'rotary-template',
+            minLength: 3,
+            maxLength: 5,
+            difficulty: 'medium'
         }
     };
 
-    static getTemplate(typeId) {
-        const type = this.TYPES[typeId.toUpperCase()];
-        if (!type) return null;
+    static resolveType(typeId) {
+        if (!typeId) return null;
+        const normalized = typeId.replace(/-/g, '_').toUpperCase();
+        return this.TYPES[normalized] || Object.values(this.TYPES).find(type => type.id === typeId);
+    }
+
+    static getTemplate(typeId, customOptions = {}) {
+        const baseType = this.resolveType(typeId);
+        if (!baseType) return null;
+        const type = { ...baseType, options: customOptions || {} };
 
         switch (type.template) {
             case 'numeric-template':
@@ -150,56 +222,59 @@ class LockTypes {
                 return this.createNokiaTemplate(type);
             case 'coordinates-template':
                 return this.createCoordinatesTemplate(type);
+            case 'word-wheel-template':
+                return this.createWordWheelTemplate(type);
+            case 'switches-template':
+                return this.createSwitchesTemplate(type);
+            case 'slider-template':
+                return this.createSliderTemplate(type);
+            case 'cryptex-template':
+                return this.createCryptexTemplate(type);
+            case 'rotary-template':
+                return this.createRotaryTemplate(type);
             default:
                 return null;
         }
     }
 
     static createNumericTemplate(type) {
+        const options = type.options || {};
         const container = document.createElement('div');
         container.className = 'lock-keypad numeric-keypad';
         container.style.gridTemplateColumns = 'repeat(3, 1fr)';
         container.style.gridTemplateRows = 'repeat(4, 1fr)';
         container.style.gap = '10px';
         
-        // Comprobamos si hay opciones guardadas
-        const digitOrderValue = document.querySelector('input[name="digitOrder"]:checked')?.value || '789456123';
+        const digitOrderValue = options.digitOrder || '789456123';
         const isReversed = digitOrderValue === '123456789';
         
-        // Orden de botones según la opción seleccionada
-        let buttonOrder;
-        if (isReversed) {
-            // Orden 123, 456, 789
-            buttonOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, ''];
-        } else {
-            // Orden 789, 456, 123 (predeterminado)
-            buttonOrder = [7, 8, 9, 4, 5, 6, 1, 2, 3, '', 0, ''];
-        }
+        const buttonOrder = isReversed
+            ? [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, '']
+            : [7, 8, 9, 4, 5, 6, 1, 2, 3, '', 0, ''];
         
-        // Crear los botones en el orden configurado
         buttonOrder.forEach(num => {
             if (num === '') {
                 const spacer = document.createElement('div');
                 container.appendChild(spacer);
-            } else {
-                const button = document.createElement('button');
-                button.className = 'keypad-button';
-                button.textContent = num.toString();
-                button.dataset.value = num.toString();
-                if (num === 0) {
-                    button.style.gridColumn = '2'; // Centrar el 0
-                }
-                container.appendChild(button);
+                return;
             }
+            const button = document.createElement('button');
+            button.className = 'keypad-button';
+            button.textContent = num.toString();
+            button.dataset.value = num.toString();
+            if (num === 0) {
+                button.style.gridColumn = '2';
+            }
+            container.appendChild(button);
         });
         
-        // Añadir botón de borrar si está habilitado
-        const allowDelete = document.getElementById('allowDelete')?.checked;
+        const allowDelete = options.allowDelete !== undefined ? options.allowDelete : true;
         if (allowDelete) {
             const deleteButton = document.createElement('button');
             deleteButton.className = 'keypad-button delete-button';
             deleteButton.innerHTML = '<i class="fas fa-backspace"></i>';
             deleteButton.dataset.action = 'delete';
+            deleteButton.setAttribute('aria-label', 'Borrar último dígito');
             container.appendChild(deleteButton);
         }
         
@@ -224,144 +299,99 @@ class LockTypes {
     }
 
     static createDirectionalTemplate(type) {
+        const options = type.options || {};
+        const maxLength = options.codeLength || type.maxLength || Math.min(8, type.directions.length * 2);
         const container = document.createElement('div');
         container.className = 'directional-keypad';
-        container.style.backgroundColor = '#f5f5f5';
-        container.style.padding = '20px';
-        container.style.borderRadius = '10px';
-        container.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-        container.style.maxWidth = '400px';
-        container.style.margin = '0 auto';
+        container.setAttribute('aria-label', 'Candado direccional');
         
-        // Crear el contenedor de memoria (secuencia seleccionada)
+        const helper = document.createElement('p');
+        helper.className = 'directional-helper';
+        helper.textContent = `Selecciona hasta ${maxLength} direcciones y confirma la secuencia.`;
+        container.appendChild(helper);
+
         const memoryContainer = document.createElement('div');
         memoryContainer.className = 'directional-memory';
-        memoryContainer.style.display = 'flex';
-        memoryContainer.style.justifyContent = 'center';
-        memoryContainer.style.gap = '10px';
-        memoryContainer.style.marginBottom = '20px';
-        memoryContainer.style.padding = '15px';
-        memoryContainer.style.backgroundColor = 'white';
-        memoryContainer.style.borderRadius = '8px';
-        memoryContainer.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.1)';
-        memoryContainer.style.minHeight = '60px';
-        memoryContainer.style.alignItems = 'center';
+        memoryContainer.setAttribute('aria-live', 'polite');
         container.appendChild(memoryContainer);
-        
-        // Crear el grid de direcciones
+
         const grid = document.createElement('div');
         grid.className = 'directional-grid';
-        grid.style.display = 'grid';
-        grid.style.gap = '10px';
-        
-        // Determinar el tamaño del grid basado en la cantidad de direcciones
         const gridSize = Math.ceil(Math.sqrt(type.directions.length));
-        grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-        
-        // Añadir los botones de dirección
-        type.directions.forEach((direction, index) => {
+        grid.style.gridTemplateColumns = `repeat(${gridSize}, minmax(50px, 1fr))`;
+        container.appendChild(grid);
+
+        const sequence = [];
+
+        type.directions.forEach(direction => {
             const button = document.createElement('button');
             button.className = 'directional-button';
             button.dataset.value = direction;
-            button.dataset.index = index;
-            
-            // Configurar el contenido del botón con el emoji
             button.textContent = direction;
-            
-            // Estilos para el botón
-            button.style.fontSize = '24px'; // Tamaño grande para el emoji
-            button.style.padding = '20px';
-            button.style.border = 'none';
-            button.style.borderRadius = '10px';
-            button.style.backgroundColor = '#0066cc';
-            button.style.color = 'white';
-            button.style.cursor = 'pointer';
-            button.style.boxShadow = '0 4px 0 #004c99, 0 6px 10px rgba(0, 0, 0, 0.2)';
-            button.style.transition = 'all 0.2s ease';
-            button.style.aspectRatio = '1 / 1'; // Asegurar que sea cuadrado
-            
-            // Efectos de hover y active
-            button.addEventListener('mouseenter', () => {
-                button.style.backgroundColor = '#0077ee';
-                button.style.transform = 'translateY(-2px)';
+            button.setAttribute('aria-label', `Agregar ${direction}`);
+            button.addEventListener('click', () => {
+                if (sequence.length >= maxLength) {
+                    helper.textContent = `Has alcanzado el máximo de ${maxLength} pasos. Usa borrar para corregir.`;
+                    return;
+                }
+                sequence.push(direction);
+                renderSequence();
             });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.backgroundColor = '#0066cc';
-                button.style.transform = 'translateY(0)';
-            });
-            
-            button.addEventListener('mousedown', () => {
-                button.style.transform = 'translateY(4px)';
-                button.style.boxShadow = '0 0 0 #004c99, 0 2px 4px rgba(0, 0, 0, 0.2)';
-            });
-            
-            button.addEventListener('mouseup', () => {
-                button.style.transform = 'translateY(-2px)';
-                button.style.boxShadow = '0 4px 0 #004c99, 0 6px 10px rgba(0, 0, 0, 0.2)';
-            });
-            
             grid.appendChild(button);
         });
-        
-        container.appendChild(grid);
 
-        // Añadir eventos a los botones
-        let currentSequence = [];
-        grid.querySelectorAll('.directional-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const index = parseInt(button.dataset.index);
-                
-                button.classList.add('active');
-                setTimeout(() => button.classList.remove('active'), 200);
-                
-                currentSequence.push(index);
-                updateMemory(currentSequence);
-                
-                // Verificar si la secuencia es correcta
-                if (currentSequence.length === type.directions.length) {
-                    const code = currentSequence.map(i => type.directions[i]).join('');
-                    const event = new CustomEvent('codeEntered', { detail: code });
-                    container.dispatchEvent(event);
-                }
-            });
+        const actions = document.createElement('div');
+        actions.className = 'directional-actions';
+
+        const undoButton = document.createElement('button');
+        undoButton.className = 'btn btn-secondary';
+        undoButton.innerHTML = '<i class="fas fa-backspace"></i> Borrar último';
+        undoButton.addEventListener('click', () => {
+            sequence.pop();
+            renderSequence();
         });
 
-        // Función para actualizar la memoria
-        function updateMemory(sequence) {
+        const clearButton = document.createElement('button');
+        clearButton.className = 'btn btn-secondary';
+        clearButton.innerHTML = '<i class="fas fa-eraser"></i> Limpiar';
+        clearButton.addEventListener('click', () => {
+            sequence.length = 0;
+            renderSequence();
+        });
+
+        const confirmButton = document.createElement('button');
+        confirmButton.className = 'btn btn-primary';
+        confirmButton.innerHTML = '<i class="fas fa-check"></i> Confirmar';
+        confirmButton.addEventListener('click', () => {
+            if (sequence.length === 0) {
+                helper.textContent = 'Añade al menos una dirección antes de confirmar.';
+                return;
+            }
+            const event = new CustomEvent('codeEntered', { detail: sequence.join('-') });
+            container.dispatchEvent(event);
+        });
+
+        actions.appendChild(undoButton);
+        actions.appendChild(clearButton);
+        actions.appendChild(confirmButton);
+        container.appendChild(actions);
+
+        function renderSequence() {
+            helper.textContent = `Selecciona hasta ${maxLength} direcciones (actual: ${sequence.length}).`;
             memoryContainer.innerHTML = '';
-            sequence.forEach(index => {
-                const memoryItem = document.createElement('div');
-                memoryItem.style.fontSize = '24px';
-                memoryItem.style.padding = '5px 10px';
-                memoryItem.style.backgroundColor = '#e9ecef';
-                memoryItem.style.borderRadius = '6px';
-                memoryItem.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-                memoryItem.style.animation = 'fadeIn 0.3s ease';
-                memoryItem.textContent = type.directions[index];
-                memoryContainer.appendChild(memoryItem);
+            if (sequence.length === 0) {
+                memoryContainer.textContent = 'Sin direcciones todavía';
+                return;
+            }
+            sequence.forEach(direction => {
+                const step = document.createElement('span');
+                step.className = 'directional-step';
+                step.textContent = direction;
+                memoryContainer.appendChild(step);
             });
         }
 
-        // Añadir un botón para reiniciar la secuencia
-        const resetButton = document.createElement('button');
-        resetButton.textContent = '🔄 Reiniciar secuencia';
-        resetButton.style.marginTop = '20px';
-        resetButton.style.width = '100%';
-        resetButton.style.padding = '10px';
-        resetButton.style.border = 'none';
-        resetButton.style.borderRadius = '6px';
-        resetButton.style.backgroundColor = '#6c757d';
-        resetButton.style.color = 'white';
-        resetButton.style.cursor = 'pointer';
-        resetButton.style.fontSize = '16px';
-        resetButton.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-        resetButton.addEventListener('click', () => {
-            currentSequence = [];
-            updateMemory(currentSequence);
-        });
-        container.appendChild(resetButton);
-
+        renderSequence();
         return container;
     }
 
@@ -1124,37 +1154,598 @@ class LockTypes {
         return container;
     }
 
-    static validateCode(typeId, code) {
-        const type = this.TYPES[typeId.toUpperCase()];
-        if (!type) return false;
+    static createWordWheelTemplate(type) {
+        const options = type.options || {};
+        const slots = options.codeLength || options.slots || type.slots || 5;
+        const alphabet = (options.alphabet || type.alphabet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ').split('');
+        const container = document.createElement('div');
+        container.className = 'word-wheel-lock';
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.alignItems = 'center';
+        container.style.gap = '1rem';
 
-        // Validaciones específicas por tipo
-        switch (typeId) {
+        const title = document.createElement('p');
+        title.textContent = 'Gira las ruedas para formar la palabra';
+        title.style.fontWeight = '600';
+        title.style.margin = '0';
+        container.appendChild(title);
+
+        const currentWord = document.createElement('div');
+        currentWord.className = 'word-wheel-display';
+        currentWord.style.fontSize = '1.5rem';
+        currentWord.style.letterSpacing = '0.2rem';
+        currentWord.style.fontFamily = 'monospace';
+        container.appendChild(currentWord);
+
+        const wheelsWrapper = document.createElement('div');
+        wheelsWrapper.className = 'word-wheel-wrapper';
+        wheelsWrapper.style.display = 'flex';
+        wheelsWrapper.style.gap = '0.5rem';
+        container.appendChild(wheelsWrapper);
+
+        const currentLetters = Array(slots).fill(alphabet[0]);
+
+        const emitCode = () => {
+            const word = currentLetters.join('');
+            currentWord.textContent = word;
+            container.dispatchEvent(new CustomEvent('codeEntered', { detail: word }));
+        };
+
+        for (let i = 0; i < slots; i++) {
+            const column = document.createElement('div');
+            column.className = 'word-wheel-column';
+            column.style.display = 'flex';
+            column.style.flexDirection = 'column';
+            column.style.alignItems = 'center';
+            column.style.gap = '0.25rem';
+
+            const upBtn = document.createElement('button');
+            upBtn.className = 'wheel-btn';
+            upBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            upBtn.style.padding = '0.4rem';
+            upBtn.style.borderRadius = '50%';
+            upBtn.style.border = '1px solid var(--border-color)';
+            upBtn.style.background = 'var(--card-bg)';
+            upBtn.addEventListener('click', () => {
+                const currentIndex = alphabet.indexOf(currentLetters[i]);
+                const nextIndex = (currentIndex + 1) % alphabet.length;
+                currentLetters[i] = alphabet[nextIndex];
+                letterDisplay.textContent = currentLetters[i];
+                emitCode();
+            });
+
+            const letterDisplay = document.createElement('div');
+            letterDisplay.className = 'wheel-letter';
+            letterDisplay.textContent = currentLetters[i];
+            letterDisplay.style.width = '3rem';
+            letterDisplay.style.height = '3rem';
+            letterDisplay.style.display = 'flex';
+            letterDisplay.style.alignItems = 'center';
+            letterDisplay.style.justifyContent = 'center';
+            letterDisplay.style.borderRadius = '10px';
+            letterDisplay.style.background = 'var(--subtle-bg)';
+            letterDisplay.style.fontSize = '1.2rem';
+            letterDisplay.style.fontWeight = '700';
+
+            const downBtn = document.createElement('button');
+            downBtn.className = 'wheel-btn';
+            downBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            downBtn.style.padding = '0.4rem';
+            downBtn.style.borderRadius = '50%';
+            downBtn.style.border = '1px solid var(--border-color)';
+            downBtn.style.background = 'var(--card-bg)';
+            downBtn.addEventListener('click', () => {
+                const currentIndex = alphabet.indexOf(currentLetters[i]);
+                const nextIndex = currentIndex - 1 < 0 ? alphabet.length - 1 : currentIndex - 1;
+                currentLetters[i] = alphabet[nextIndex];
+                letterDisplay.textContent = currentLetters[i];
+                emitCode();
+            });
+
+            column.appendChild(upBtn);
+            column.appendChild(letterDisplay);
+            column.appendChild(downBtn);
+            wheelsWrapper.appendChild(column);
+        }
+
+        const resetBtn = document.createElement('button');
+        resetBtn.textContent = 'Restablecer ruedas';
+        resetBtn.className = 'btn btn-secondary';
+        resetBtn.addEventListener('click', () => {
+            for (let i = 0; i < slots; i++) {
+                currentLetters[i] = alphabet[0];
+            }
+            wheelsWrapper.querySelectorAll('.wheel-letter').forEach(letter => {
+                letter.textContent = alphabet[0];
+            });
+            emitCode();
+        });
+        container.appendChild(resetBtn);
+
+        emitCode();
+        return container;
+    }
+
+    static createSwitchesTemplate(type) {
+        const options = type.options || {};
+        const switchesCount = options.switches || options.codeLength || type.switches || 5;
+        const container = document.createElement('div');
+        container.className = 'switches-lock';
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.gap = '1rem';
+
+        const info = document.createElement('p');
+        info.textContent = 'Activa/desactiva las palancas para formar el patrón correcto';
+        info.style.margin = '0';
+        info.style.fontWeight = '500';
+        container.appendChild(info);
+
+        const switchesWrapper = document.createElement('div');
+        switchesWrapper.className = 'switches-wrapper';
+        switchesWrapper.style.display = 'flex';
+        switchesWrapper.style.gap = '0.75rem';
+        container.appendChild(switchesWrapper);
+
+        const state = Array(switchesCount).fill(0);
+
+        const emitState = () => {
+            const code = state.join('');
+            container.dispatchEvent(new CustomEvent('codeEntered', { detail: code }));
+        };
+
+        for (let i = 0; i < switchesCount; i++) {
+            const button = document.createElement('button');
+            button.className = 'switch-button';
+            button.setAttribute('aria-pressed', 'false');
+            button.textContent = 'OFF';
+            button.style.padding = '0.8rem 1.2rem';
+            button.style.borderRadius = '999px';
+            button.style.border = '1px solid var(--border-color)';
+            button.style.minWidth = '70px';
+            button.style.fontWeight = '600';
+            button.addEventListener('click', () => {
+                state[i] = state[i] === 0 ? 1 : 0;
+                const isActive = state[i] === 1;
+                button.textContent = isActive ? 'ON' : 'OFF';
+                button.style.background = isActive ? 'var(--secondary-color)' : 'var(--card-bg)';
+                button.style.color = isActive ? '#fff' : 'var(--text-color)';
+                button.setAttribute('aria-pressed', String(isActive));
+                emitState();
+            });
+            switchesWrapper.appendChild(button);
+        }
+
+        const controls = document.createElement('div');
+        controls.className = 'switch-controls';
+        controls.style.display = 'flex';
+        controls.style.gap = '0.5rem';
+        container.appendChild(controls);
+
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'btn btn-secondary';
+        clearBtn.textContent = 'Limpiar combinación';
+        clearBtn.addEventListener('click', () => {
+            state.fill(0);
+            switchesWrapper.querySelectorAll('.switch-button').forEach(button => {
+                button.textContent = 'OFF';
+                button.style.background = 'var(--card-bg)';
+                button.style.color = 'var(--text-color)';
+                button.setAttribute('aria-pressed', 'false');
+            });
+            emitState();
+        });
+        controls.appendChild(clearBtn);
+
+        return container;
+    }
+
+    static createSliderTemplate(type) {
+        const options = type.options || {};
+        const sliders = options.sliders || options.codeLength || type.sliders || 4;
+        const min = Number.isFinite(options.min) ? options.min : Number.isFinite(type.min) ? type.min : 0;
+        const max = Number.isFinite(options.max) ? options.max : Number.isFinite(type.max) ? type.max : 9;
+        const container = document.createElement('div');
+        container.className = 'slider-lock';
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.gap = '1rem';
+
+        const intro = document.createElement('p');
+        intro.textContent = 'Mueve los deslizadores para colocar cada valor en el punto exacto';
+        intro.style.margin = '0';
+        intro.style.fontWeight = '500';
+        container.appendChild(intro);
+
+        const slidersWrapper = document.createElement('div');
+        slidersWrapper.style.display = 'flex';
+        slidersWrapper.style.flexDirection = 'column';
+        slidersWrapper.style.gap = '1rem';
+        container.appendChild(slidersWrapper);
+
+        const values = Array(sliders).fill(min);
+
+        const emitValues = () => {
+            const code = values.join('-');
+            container.dispatchEvent(new CustomEvent('codeEntered', { detail: code }));
+        };
+
+        for (let i = 0; i < sliders; i++) {
+            const group = document.createElement('div');
+            group.className = 'slider-group';
+            group.style.display = 'flex';
+            group.style.flexDirection = 'column';
+            group.style.gap = '0.5rem';
+
+            const label = document.createElement('label');
+            label.textContent = `Deslizador ${i + 1}`;
+            label.style.fontWeight = '600';
+            group.appendChild(label);
+
+            const input = document.createElement('input');
+            input.type = 'range';
+            input.min = min;
+            input.max = max;
+            input.value = min;
+            input.step = 1;
+            input.className = 'slider-input';
+            group.appendChild(input);
+
+            const valueLabel = document.createElement('div');
+            valueLabel.className = 'slider-value';
+            valueLabel.textContent = min;
+            valueLabel.style.alignSelf = 'flex-end';
+            valueLabel.style.fontFamily = 'monospace';
+            group.appendChild(valueLabel);
+
+            input.addEventListener('input', (event) => {
+                const newValue = Number(event.target.value);
+                values[i] = newValue;
+                valueLabel.textContent = newValue;
+                emitValues();
+            });
+
+            slidersWrapper.appendChild(group);
+        }
+
+        const autoBtn = document.createElement('button');
+        autoBtn.className = 'btn btn-secondary';
+        autoBtn.textContent = 'Aleatorizar';
+        autoBtn.addEventListener('click', () => {
+            values.forEach((_, index) => {
+                const randomValue = Math.floor(Math.random() * (max - min + 1)) + min;
+                values[index] = randomValue;
+                const slider = slidersWrapper.querySelectorAll('.slider-input')[index];
+                const valueLabel = slidersWrapper.querySelectorAll('.slider-value')[index];
+                slider.value = randomValue;
+                valueLabel.textContent = randomValue;
+            });
+            emitValues();
+        });
+        container.appendChild(autoBtn);
+
+        const confirmBtn = document.createElement('button');
+        confirmBtn.className = 'btn btn-primary';
+        confirmBtn.textContent = 'Confirmar valores';
+        confirmBtn.addEventListener('click', emitValues);
+        container.appendChild(confirmBtn);
+
+        emitValues();
+        return container;
+    }
+
+
+    static createCryptexTemplate(type) {
+        const options = type.options || {};
+        const rings = options.codeLength || options.rings || type.minLength || 4;
+        const alphabet = (options.alphabet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ').split('');
+
+        const container = document.createElement('div');
+        container.className = 'cryptex-lock';
+
+        const info = document.createElement('p');
+        info.className = 'cryptex-helper';
+        info.textContent = `Configura una palabra de ${rings} letras.`;
+        container.appendChild(info);
+
+        const currentWord = document.createElement('div');
+        currentWord.className = 'cryptex-current-word';
+        container.appendChild(currentWord);
+
+        const ringsWrapper = document.createElement('div');
+        ringsWrapper.className = 'cryptex-rings';
+        container.appendChild(ringsWrapper);
+
+        const letters = Array(rings).fill(alphabet[0]);
+
+        const updateWord = (dispatch = true) => {
+            const word = letters.join('');
+            currentWord.textContent = word;
+            if (dispatch) {
+                container.dispatchEvent(new CustomEvent('codeEntered', { detail: word }));
+            }
+        };
+
+        for (let i = 0; i < rings; i++) {
+            const ring = document.createElement('div');
+            ring.className = 'cryptex-ring';
+
+            const upBtn = document.createElement('button');
+            upBtn.className = 'cryptex-btn';
+            upBtn.setAttribute('aria-label', `Avanzar rueda ${i + 1}`);
+            upBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+
+            const letterDisplay = document.createElement('div');
+            letterDisplay.className = 'cryptex-letter';
+            letterDisplay.textContent = letters[i];
+
+            const downBtn = document.createElement('button');
+            downBtn.className = 'cryptex-btn';
+            downBtn.setAttribute('aria-label', `Retroceder rueda ${i + 1}`);
+            downBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+
+            const rotate = (direction) => {
+                const currentIndex = alphabet.indexOf(letters[i]);
+                const offset = direction === 'up' ? 1 : -1;
+                const nextIndex = (currentIndex + offset + alphabet.length) % alphabet.length;
+                letters[i] = alphabet[nextIndex];
+                letterDisplay.textContent = letters[i];
+                updateWord();
+            };
+
+            upBtn.addEventListener('click', () => rotate('up'));
+            downBtn.addEventListener('click', () => rotate('down'));
+
+            ring.appendChild(upBtn);
+            ring.appendChild(letterDisplay);
+            ring.appendChild(downBtn);
+            ringsWrapper.appendChild(ring);
+        }
+
+        updateWord(false);
+
+        const confirm = document.createElement('button');
+        confirm.className = 'btn btn-primary';
+        confirm.innerHTML = '<i class="fas fa-check"></i> Confirmar palabra';
+        confirm.addEventListener('click', () => {
+            const event = new CustomEvent('codeEntered', { detail: letters.join('') });
+            container.dispatchEvent(event);
+        });
+        container.appendChild(confirm);
+
+        return container;
+    }
+
+    static createRotaryTemplate(type) {
+        const options = type.options || {};
+        const maxNumber = options.maxNumber || 39;
+        const requiredSteps = options.codeLength || type.minLength || 3;
+
+        const container = document.createElement('div');
+        container.className = 'rotary-lock';
+
+        const instructions = document.createElement('p');
+        const baseInstruction = 'Código de desbloqueo';
+        instructions.className = 'rotary-heading';
+        instructions.textContent = baseInstruction;
+        container.appendChild(instructions);
+
+        const dialValue = document.createElement('div');
+        dialValue.className = 'rotary-value';
+        dialValue.textContent = '0';
+        container.appendChild(dialValue);
+
+        const dialWrapper = document.createElement('div');
+        dialWrapper.className = 'rotary-dial-wrapper';
+        const dial = document.createElement('div');
+        dial.className = 'rotary-dial';
+        dial.tabIndex = 0;
+        dial.setAttribute('role', 'slider');
+        dial.setAttribute('aria-valuemin', '0');
+        dial.setAttribute('aria-valuemax', String(maxNumber));
+        dial.setAttribute('aria-valuenow', '0');
+        dial.setAttribute('aria-label', 'Dial giratorio');
+
+        const ticksContainer = document.createElement('div');
+        ticksContainer.className = 'rotary-ticks';
+        for (let i = 0; i <= maxNumber; i++) {
+            const tick = document.createElement('span');
+            tick.className = 'rotary-tick';
+            const angle = (i / (maxNumber + 1)) * 360;
+            tick.style.setProperty('--tick-rotation', `${angle}deg`);
+            const label = document.createElement('span');
+            label.textContent = i;
+            tick.appendChild(label);
+            ticksContainer.appendChild(tick);
+        }
+
+        const pointer = document.createElement('div');
+        pointer.className = 'rotary-pointer';
+        dial.appendChild(ticksContainer);
+        dial.appendChild(pointer);
+        dialWrapper.appendChild(dial);
+        container.appendChild(dialWrapper);
+
+        const dialSlider = document.createElement('input');
+        dialSlider.type = 'range';
+        dialSlider.min = 0;
+        dialSlider.max = maxNumber;
+        dialSlider.value = 0;
+        dialSlider.className = 'rotary-slider';
+        dialSlider.setAttribute('aria-hidden', 'true');
+        dialSlider.setAttribute('aria-label', 'Dial numérico');
+        container.appendChild(dialSlider);
+
+        const updateDialValue = (value) => {
+            const numericValue = Number(value);
+            dialSlider.value = numericValue;
+            dialValue.textContent = numericValue;
+            dial.setAttribute('aria-valuenow', numericValue);
+            dial.setAttribute('aria-valuetext', `${numericValue}`);
+            pointer.style.setProperty('--pointer-rotation', `${(numericValue / (maxNumber + 1)) * 360}deg`);
+        };
+
+        dialSlider.addEventListener('input', () => {
+            updateDialValue(dialSlider.value);
+        });
+
+        dial.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                const next = Math.min(maxNumber, Number(dialSlider.value) + 1);
+                updateDialValue(next);
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+                event.preventDefault();
+                const prev = Math.max(0, Number(dialSlider.value) - 1);
+                updateDialValue(prev);
+            }
+        });
+
+        dial.addEventListener('click', () => dial.focus());
+        dial.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            const delta = event.deltaY < 0 ? 1 : -1;
+            const nextValue = Math.min(maxNumber, Math.max(0, Number(dialSlider.value) - delta));
+            updateDialValue(nextValue);
+        }, { passive: false });
+        updateDialValue(0);
+
+        const directionGroupName = `rotaryDirection-${Math.random().toString(36).slice(2)}`;
+        const directionWrapper = document.createElement('div');
+        directionWrapper.className = 'rotary-direction';
+        directionWrapper.innerHTML = `
+            <label><input type="radio" name="${directionGroupName}" value="R" checked> Derecha</label>
+            <label><input type="radio" name="${directionGroupName}" value="L"> Izquierda</label>
+        `;
+        container.appendChild(directionWrapper);
+
+        const sequenceLabel = document.createElement('p');
+        sequenceLabel.className = 'rotary-sequence-heading';
+        sequenceLabel.textContent = 'Secuencia';
+        container.appendChild(sequenceLabel);
+
+        const sequenceList = document.createElement('div');
+        sequenceList.className = 'rotary-sequence';
+        sequenceList.textContent = 'Secuencia vacía';
+        container.appendChild(sequenceList);
+
+        const steps = [];
+
+        const actions = document.createElement('div');
+        actions.className = 'rotary-actions';
+
+        const addStep = document.createElement('button');
+        addStep.className = 'btn btn-secondary';
+        addStep.innerHTML = '<i class="fas fa-plus"></i> Añadir paso';
+        addStep.addEventListener('click', () => {
+            if (steps.length >= requiredSteps) {
+                instructions.textContent = `Máximo ${requiredSteps} pasos.`;
+                return;
+            }
+            const direction = container.querySelector(`input[name="${directionGroupName}"]:checked`)?.value || 'R';
+            steps.push(`${direction}-${dialSlider.value}`);
+            renderSequence();
+        });
+
+        const undo = document.createElement('button');
+        undo.className = 'btn btn-secondary';
+        undo.innerHTML = '<i class="fas fa-undo"></i> Deshacer';
+        undo.addEventListener('click', () => {
+            steps.pop();
+            renderSequence();
+        });
+
+        const confirm = document.createElement('button');
+        confirm.className = 'btn btn-primary';
+        confirm.innerHTML = '<i class="fas fa-lock"></i> Confirmar';
+        confirm.addEventListener('click', () => {
+            if (steps.length !== requiredSteps) {
+                instructions.textContent = `Necesitas ${requiredSteps} pasos para confirmar.`;
+                return;
+            }
+            const event = new CustomEvent('codeEntered', { detail: steps.join('|') });
+            container.dispatchEvent(event);
+        });
+
+        actions.appendChild(addStep);
+        actions.appendChild(undo);
+        actions.appendChild(confirm);
+        container.appendChild(actions);
+
+        function renderSequence() {
+            instructions.textContent = baseInstruction;
+            if (steps.length === 0) {
+                sequenceList.textContent = 'Secuencia vacía';
+                return;
+            }
+            sequenceList.textContent = steps.map((step, index) => `Paso ${index + 1}: ${step}`).join(' · ');
+        }
+
+        renderSequence();
+        return container;
+    }
+
+    static validateCode(typeId, code, options = {}) {
+        const type = this.resolveType(typeId);
+        if (!type) return false;
+        if (!code) return false;
+
+        const normalizedType = typeId.toLowerCase();
+        const minLength = options.codeLength || type.minLength || 1;
+        const maxLength = options.codeLength || type.maxLength || Infinity;
+        const requireExactLength = Boolean(options.codeLength);
+
+        switch (normalizedType) {
             case 'numeric':
             case 'alphanumeric':
-                return code.length >= type.minLength && code.length <= type.maxLength;
-            
+            case 'word-wheel':
+            case 'cryptex':
+                return typeof code === 'string' &&
+                    (requireExactLength ? code.length === minLength : (code.length >= minLength && code.length <= maxLength));
+
+            case 'musical':
+            case 'emoji':
+            case 'color':
+                return typeof code === 'string' &&
+                    (requireExactLength ? code.length === minLength : code.length >= minLength);
+
             case 'directional-4':
             case 'directional-8':
-                // Si el código contiene 'dir-', es de nuestro nuevo formato
-                if (code.includes('dir-')) {
-                    const parts = code.split(',');
-                    return parts.length === type.directions.length;
-                } else {
-                    // Mantener compatibilidad con códigos antiguos
-                    return code.length === type.directions.length;
+                if (code.includes('-')) {
+                    const steps = code.split('-').filter(Boolean);
+                    return requireExactLength ? steps.length === minLength : steps.length >= minLength;
                 }
+                return requireExactLength ? code.length === minLength : code.length >= minLength;
             
             case 'pattern-9':
             case 'pattern-16':
-                const parts = code.split(',');
-                return parts.length > 0 && parts.every(part => /^\d+$/.test(part));
+                const patternParts = code.split(',').filter(Boolean);
+                return (requireExactLength ? patternParts.length === minLength : patternParts.length >= minLength) &&
+                    patternParts.every(part => /^\d+$/.test(part));
             
             case 'computer-login':
                 return code.includes(':');
             
+            case 'switches':
+                return typeof code === 'string' &&
+                    /^[01]+$/.test(code) &&
+                    code.length === (options.switches || options.codeLength || type.switches || code.length);
+            
+            case 'slider':
+                const sliderParts = code.split('-').filter(Boolean);
+                return sliderParts.length === (options.sliders || options.codeLength || type.sliders || sliderParts.length) &&
+                    sliderParts.every(value => !isNaN(parseInt(value, 10)));
+
+            case 'rotary':
+                const rotaryParts = code.split('|').filter(Boolean);
+                return rotaryParts.length === (options.codeLength || type.minLength || rotaryParts.length);
+
+            case 'coordinates':
+                return code.split(',').length === 2;
+            
             default:
-                return code.length > 0;
+                return code.length >= requiredLength;
         }
     }
 }

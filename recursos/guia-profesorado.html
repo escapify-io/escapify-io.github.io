@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía rápida para profesorado</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="plantilla-candado-numerico.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .guide-section {
+            margin-top: 1rem;
+        }
+        .guide-section table,
+        .guide-section th,
+        .guide-section td {
+            border: 1px solid #cbd5ff;
+            border-collapse: collapse;
+        }
+        .guide-section table {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        .guide-section th,
+        .guide-section td {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container" id="teacher-guide">
+        <button id="download-pdf" class="download-btn"><i class="fas fa-download"></i> Descargar PDF</button>
+        <div class="preview-title">Guía rápida para profesorado</div>
+        <div class="preview-subtitle">Checklist para diseñar escape rooms educativos con candados digitales.</div>
+
+        <section class="guide-section">
+            <h3>1. Antes de comenzar</h3>
+            <ul>
+                <li>Define el objetivo curricular y la competencia que quieres trabajar.</li>
+                <li>Selecciona el tipo de candado (numérico, palabra, cryptex, dial).</li>
+                <li>Determina la duración, el tamaño de los equipos y los apoyos necesarios.</li>
+            </ul>
+        </section>
+
+        <section class="guide-section">
+            <h3>2. Diseño del reto</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prueba</th>
+                        <th>Recurso / pista</th>
+                        <th>Código esperado</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="guide-section">
+            <h3>3. Inclusión y accesibilidad</h3>
+            <ul>
+                <li>Incluye pistas visuales y auditivas cuando sea posible.</li>
+                <li>Ofrece un canal alternativo (lectura fácil, pictogramas o audio).</li>
+                <li>Prepara pistas escalonadas para facilitar la diferenciación.</li>
+            </ul>
+        </section>
+
+        <section class="guide-section">
+            <h3>4. Evaluación express</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Tiempo</th>
+                        <th>Pistas usadas</th>
+                        <th>Reflexión final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="word-notes">
+            <h3>Observaciones</h3>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+            <p>__________________________________________________________________________________________</p>
+        </div>
+
+        <div class="escapify-logo">
+            <i class="fas fa-lock"></i> Escapify
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            const clone = document.getElementById('teacher-guide').cloneNode(true);
+            const opt = {
+                margin: [1.5, 1.5, 1.5, 1.5],
+                filename: 'guia-profesorado-escapify.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(clone).save();
+        });
+
+        function applyTheme() {
+            const params = new URLSearchParams(window.location.search);
+            const theme = params.get('theme');
+            document.body.classList.remove('modo-dark', 'modo-light');
+            document.documentElement.classList.remove('modo-dark', 'modo-light');
+            if (theme === 'dark') {
+                document.body.classList.add('modo-dark');
+                document.documentElement.classList.add('modo-dark');
+            } else if (theme === 'light') {
+                document.body.classList.add('modo-light');
+                document.documentElement.classList.add('modo-light');
+            }
+        }
+
+        applyTheme();
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('autoDownload') === '1') {
+            setTimeout(() => document.getElementById('download-pdf').click(), 400);
+        }
+    </script>
+</body>
+</html>

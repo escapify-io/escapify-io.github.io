@@ -53,4 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     applyTheme();
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('autoDownload') === '1') {
+        setTimeout(() => {
+            document.getElementById('download-pdf').click();
+        }, 500);
+    }
 }); 

@@ -13,6 +13,11 @@ class AccessibilityManager {
         this.simplifiedUiEnabled = false;
         this.seniorUiEnabled = false;
         this.kidsUiEnabled = false;
+        this.highlightFocusEnabled = false;
+        this.increaseSpacingEnabled = false;
+        this.dyslexiaEnabled = false;
+        this.readingModeEnabled = false;
+        this.reduceMotionEnabled = false;
         
         // Crear panel de accesibilidad
         this.createAccessibilityPanel();
@@ -78,6 +83,10 @@ class AccessibilityManager {
                     <label for="underline-links-toggle">Subrayar enlaces</label>
                 </div>
                 <div class="accessibility-option">
+                    <input type="checkbox" id="highlight-focus-toggle" name="highlight-focus-toggle">
+                    <label for="highlight-focus-toggle">Resaltar elementos enfocados</label>
+                </div>
+                <div class="accessibility-option">
                     <button id="increase-text-btn" class="btn btn-secondary" style="margin-right: 8px;"><i class="fas fa-search-plus"></i> Aumentar texto</button>
                     <button id="decrease-text-btn" class="btn btn-secondary"><i class="fas fa-search-minus"></i> Disminuir texto</button>
                 </div>
@@ -97,11 +106,39 @@ class AccessibilityManager {
                     <input type="checkbox" id="kids-ui-toggle" name="kids-ui-toggle">
                     <label for="kids-ui-toggle">Modo para niños</label>
                 </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="increase-spacing-toggle" name="increase-spacing-toggle">
+                    <label for="increase-spacing-toggle">Aumentar espaciado entre elementos</label>
+                </div>
             </div>
+            
+            <div class="accessibility-section">
+                <h3>Lectura y Comprensión</h3>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="dyslexia-toggle" name="dyslexia-toggle">
+                    <label for="dyslexia-toggle">Fuente compatible con dislexia</label>
+                </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="reading-mode-toggle" name="reading-mode-toggle">
+                    <label for="reading-mode-toggle">Modo de lectura</label>
+                </div>
+            </div>
+            
+            <div class="accessibility-section">
+                <h3>Animaciones y Movimiento</h3>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="reduce-motion-toggle" name="reduce-motion-toggle">
+                    <label for="reduce-motion-toggle">Reducir animaciones</label>
+                </div>
+            </div>
+            
             <div class="accessibility-section">
                 <button id="accessibility-reset" class="btn btn-primary" style="width:100%;margin-top:10px;"><i class="fas fa-undo"></i> Restablecer</button>
             </div>
             <button id="accessibility-close" class="btn btn-secondary">Cerrar</button>
+            <div class="accessibility-key-shortcut">
+                <p>Atajo de teclado: <span class="accessibility-keys">Alt</span> + <span class="accessibility-keys">A</span></p>
+            </div>
         `;
         
         // Añadir al DOM
@@ -218,13 +255,59 @@ class AccessibilityManager {
             this.savePreferences();
         });
         
+        // Resaltar focus
+        document.getElementById('highlight-focus-toggle').addEventListener('change', (e) => {
+            this.highlightFocusEnabled = e.target.checked;
+            this.toggleHighlightFocus(this.highlightFocusEnabled);
+            this.savePreferences();
+        });
+        
+        // Aumentar espaciado
+        document.getElementById('increase-spacing-toggle').addEventListener('change', (e) => {
+            this.increaseSpacingEnabled = e.target.checked;
+            this.toggleIncreaseSpacing(this.increaseSpacingEnabled);
+            this.savePreferences();
+        });
+        
+        // Dislexia
+        document.getElementById('dyslexia-toggle').addEventListener('change', (e) => {
+            this.dyslexiaEnabled = e.target.checked;
+            this.toggleDyslexia(this.dyslexiaEnabled);
+            this.savePreferences();
+        });
+        
+        // Modo lectura
+        document.getElementById('reading-mode-toggle').addEventListener('change', (e) => {
+            this.readingModeEnabled = e.target.checked;
+            this.toggleReadingMode(this.readingModeEnabled);
+            this.savePreferences();
+        });
+        
+        // Reducir animaciones
+        document.getElementById('reduce-motion-toggle').addEventListener('change', (e) => {
+            this.reduceMotionEnabled = e.target.checked;
+            this.toggleReduceMotion(this.reduceMotionEnabled);
+            this.savePreferences();
+        });
+        
         // Teclas de acceso rápido
         document.addEventListener('keydown', (e) => {
             // Alt + A para abrir/cerrar panel de accesibilidad
-            if (e.altKey && e.key === 'a') {
+            if (e.altKey && e.key === 'a' || e.altKey && e.key === 'A') {
+                e.preventDefault();
                 this.accessPanel.classList.toggle('active');
                 const isExpanded = this.accessPanel.classList.contains('active');
                 this.accessButton.setAttribute('aria-expanded', isExpanded);
+            }
+        });
+        
+        // Cerrar panel al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (this.accessPanel.classList.contains('active') && 
+                !this.accessPanel.contains(e.target) && 
+                !this.accessButton.contains(e.target)) {
+                this.accessPanel.classList.remove('active');
+                this.accessButton.setAttribute('aria-expanded', false);
             }
         });
     }
@@ -235,10 +318,12 @@ class AccessibilityManager {
     initColorAdd() {
         // Añadir ColorADD a los badges de dificultad
         document.querySelectorAll('.difficulty-badge').forEach(badge => {
-            const symbol = document.createElement('span');
-            symbol.className = 'coloradd-symbol';
-            symbol.setAttribute('aria-hidden', 'true');
-            badge.appendChild(symbol);
+            if (!badge.querySelector('.coloradd-symbol')) {
+                const symbol = document.createElement('span');
+                symbol.className = 'coloradd-symbol';
+                symbol.setAttribute('aria-hidden', 'true');
+                badge.appendChild(symbol);
+            }
             
             // Tooltip para explicar el símbolo
             badge.classList.add('coloradd-tooltip');
@@ -254,10 +339,12 @@ class AccessibilityManager {
         
         // Añadir ColorADD a los botones de filtro de dificultad
         document.querySelectorAll('.difficulty-filter-btn').forEach(btn => {
-            const symbol = document.createElement('span');
-            symbol.className = 'coloradd-symbol';
-            symbol.setAttribute('aria-hidden', 'true');
-            btn.appendChild(symbol);
+            if (!btn.querySelector('.coloradd-symbol')) {
+                const symbol = document.createElement('span');
+                symbol.className = 'coloradd-symbol';
+                symbol.setAttribute('aria-hidden', 'true');
+                btn.appendChild(symbol);
+            }
             
             // Tooltip para explicar el símbolo
             btn.classList.add('coloradd-tooltip');
@@ -271,27 +358,95 @@ class AccessibilityManager {
             }
         });
         
+        // Añadir ColorADD a botones de colores en candados
+        this.addColorAddToColorButtons();
+        
+        // Observar cambios dinámicos en el DOM para añadir ColorADD a nuevos elementos
+        this.observeColorElements();
+        
         // Por defecto, los símbolos están ocultos
         this.toggleColorAdd(false);
+    }
+    
+    /**
+     * Añade ColorADD a botones de colores
+     */
+    addColorAddToColorButtons() {
+        document.querySelectorAll('.color-button').forEach(button => {
+            // Asegurar que el botón tenga la clase para que CSS pueda aplicar los símbolos
+            if (!button.classList.contains('coloradd-ready')) {
+                button.classList.add('coloradd-ready');
+            }
+        });
+    }
+    
+    /**
+     * Observa cambios en el DOM para añadir ColorADD a elementos nuevos
+     */
+    observeColorElements() {
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver(() => {
+                // Re-añadir ColorADD a badges y botones nuevos
+                document.querySelectorAll('.difficulty-badge:not(.coloradd-processed)').forEach(badge => {
+                    if (!badge.querySelector('.coloradd-symbol')) {
+                        const symbol = document.createElement('span');
+                        symbol.className = 'coloradd-symbol';
+                        symbol.setAttribute('aria-hidden', 'true');
+                        badge.appendChild(symbol);
+                        badge.classList.add('coloradd-tooltip');
+                        
+                        if (badge.classList.contains('difficulty-easy')) {
+                            badge.setAttribute('data-coloradd-tooltip', 'Verde - Dificultad fácil');
+                        } else if (badge.classList.contains('difficulty-medium')) {
+                            badge.setAttribute('data-coloradd-tooltip', 'Amarillo - Dificultad media');
+                        } else if (badge.classList.contains('difficulty-hard')) {
+                            badge.setAttribute('data-coloradd-tooltip', 'Rojo - Dificultad difícil');
+                        }
+                        badge.classList.add('coloradd-processed');
+                    }
+                });
+                
+                // Re-añadir ColorADD a botones de colores nuevos
+                this.addColorAddToColorButtons();
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
     }
     
     /**
      * Activa/desactiva los símbolos ColorADD
      */
     toggleColorAdd(enabled) {
-        const symbols = document.querySelectorAll('.coloradd-symbol');
-        symbols.forEach(symbol => {
-            symbol.style.display = enabled ? 'inline-block' : 'none';
-        });
-        
-        // Actualizar el checkbox
-        document.getElementById('coloradd-toggle').checked = enabled;
+        // Actualizar el checkbox si existe
+        const toggle = document.getElementById('coloradd-toggle');
+        if (toggle) {
+            toggle.checked = enabled;
+        }
         
         if (enabled) {
             this.body.classList.add('daltonismo-activo');
+            // Re-inicializar para asegurar que todos los elementos tengan símbolos
+            this.initColorAdd();
+            // Asegurar que todos los símbolos existentes se muestren
+            document.querySelectorAll('.coloradd-symbol').forEach(symbol => {
+                symbol.style.display = 'inline-block';
+                symbol.style.opacity = '1';
+            });
+            // Re-inicializar para añadir símbolos a botones de colores
+            this.addColorAddToColorButtons();
         } else {
             this.body.classList.remove('daltonismo-activo');
+            // Los símbolos se ocultan automáticamente por CSS
+            document.querySelectorAll('.coloradd-symbol').forEach(symbol => {
+                symbol.style.display = 'none';
+            });
         }
+        
+        this.colorAddEnabled = enabled;
     }
     
     /**
@@ -383,6 +538,74 @@ class AccessibilityManager {
     }
     
     /**
+     * Activa/desactiva el resaltado de elementos enfocados
+     */
+    toggleHighlightFocus(enabled) {
+        if (enabled) {
+            this.body.classList.add('highlight-focus');
+        } else {
+            this.body.classList.remove('highlight-focus');
+        }
+        
+        document.getElementById('highlight-focus-toggle').checked = enabled;
+    }
+    
+    /**
+     * Activa/desactiva el aumento de espaciado
+     */
+    toggleIncreaseSpacing(enabled) {
+        if (enabled) {
+            this.body.classList.add('increase-spacing');
+        } else {
+            this.body.classList.remove('increase-spacing');
+        }
+        
+        document.getElementById('increase-spacing-toggle').checked = enabled;
+    }
+    
+    /**
+     * Activa/desactiva la fuente compatible con dislexia
+     */
+    toggleDyslexia(enabled) {
+        if (enabled) {
+            this.body.classList.add('dyslexia-font');
+        } else {
+            this.body.classList.remove('dyslexia-font');
+        }
+        
+        document.getElementById('dyslexia-toggle').checked = enabled;
+    }
+    
+    /**
+     * Activa/desactiva el modo de lectura
+     */
+    toggleReadingMode(enabled) {
+        if (enabled) {
+            this.body.classList.add('reading-mode');
+        } else {
+            this.body.classList.remove('reading-mode');
+        }
+        
+        document.getElementById('reading-mode-toggle').checked = enabled;
+    }
+    
+    /**
+     * Activa/desactiva la reducción de animaciones
+     */
+    toggleReduceMotion(enabled) {
+        if (enabled) {
+            this.body.classList.add('reduce-motion');
+            // Respetar preferencia del sistema
+            document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+        } else {
+            this.body.classList.remove('reduce-motion');
+            document.documentElement.style.removeProperty('--animation-duration');
+        }
+        
+        document.getElementById('reduce-motion-toggle').checked = enabled;
+    }
+    
+    /**
      * Guarda las preferencias en localStorage
      */
     savePreferences() {
@@ -392,7 +615,12 @@ class AccessibilityManager {
             readableText: this.readableTextEnabled,
             simplifiedUi: this.simplifiedUiEnabled,
             seniorUi: this.seniorUiEnabled,
-            kidsUi: this.kidsUiEnabled
+            kidsUi: this.kidsUiEnabled,
+            highlightFocus: this.highlightFocusEnabled,
+            increaseSpacing: this.increaseSpacingEnabled,
+            dyslexia: this.dyslexiaEnabled,
+            readingMode: this.readingModeEnabled,
+            reduceMotion: this.reduceMotionEnabled
         };
         
         localStorage.setItem('escapify_accessibility', JSON.stringify(preferences));
@@ -407,21 +635,33 @@ class AccessibilityManager {
         if (savedPrefs) {
             const preferences = JSON.parse(savedPrefs);
             
-            // Aplicar preferencias
-            this.toggleColorAdd(preferences.colorAdd);
-            this.toggleHighContrast(preferences.highContrast);
-            this.toggleReadableText(preferences.readableText);
-            this.toggleSimplifiedUi(preferences.simplifiedUi);
-            this.toggleSeniorUi(preferences.seniorUi);
-            this.toggleKidsUi(preferences.kidsUi);
+            // Aplicar preferencias existentes
+            this.toggleColorAdd(preferences.colorAdd || false);
+            this.toggleHighContrast(preferences.highContrast || false);
+            this.toggleReadableText(preferences.readableText || false);
+            this.toggleSimplifiedUi(preferences.simplifiedUi || false);
+            this.toggleSeniorUi(preferences.seniorUi || false);
+            this.toggleKidsUi(preferences.kidsUi || false);
+            
+            // Aplicar nuevas preferencias
+            this.toggleHighlightFocus(preferences.highlightFocus || false);
+            this.toggleIncreaseSpacing(preferences.increaseSpacing || false);
+            this.toggleDyslexia(preferences.dyslexia || false);
+            this.toggleReadingMode(preferences.readingMode || false);
+            this.toggleReduceMotion(preferences.reduceMotion || false);
             
             // Actualizar variables
-            this.colorAddEnabled = preferences.colorAdd;
-            this.highContrastEnabled = preferences.highContrast;
-            this.readableTextEnabled = preferences.readableText;
-            this.simplifiedUiEnabled = preferences.simplifiedUi;
-            this.seniorUiEnabled = preferences.seniorUi;
-            this.kidsUiEnabled = preferences.kidsUi;
+            this.colorAddEnabled = preferences.colorAdd || false;
+            this.highContrastEnabled = preferences.highContrast || false;
+            this.readableTextEnabled = preferences.readableText || false;
+            this.simplifiedUiEnabled = preferences.simplifiedUi || false;
+            this.seniorUiEnabled = preferences.seniorUi || false;
+            this.kidsUiEnabled = preferences.kidsUi || false;
+            this.highlightFocusEnabled = preferences.highlightFocus || false;
+            this.increaseSpacingEnabled = preferences.increaseSpacing || false;
+            this.dyslexiaEnabled = preferences.dyslexia || false;
+            this.readingModeEnabled = preferences.readingMode || false;
+            this.reduceMotionEnabled = preferences.reduceMotion || false;
         }
     }
     
@@ -438,9 +678,11 @@ class AccessibilityManager {
     // Restablece todas las opciones de accesibilidad
     resetAccessibility() {
         // Quitar todas las clases
-        document.body.classList.remove('grayscale', 'negative-contrast', 'light-bg', 'underline-links');
+        document.body.classList.remove('grayscale', 'negative-contrast', 'light-bg', 'underline-links', 
+            'highlight-focus', 'increase-spacing', 'dyslexia-font', 'reading-mode', 'reduce-motion');
         // Quitar tamaño de fuente
         document.documentElement.style.fontSize = '';
+        document.documentElement.style.removeProperty('--animation-duration');
         // Quitar todos los checkboxes
         [
             'coloradd-toggle',
@@ -452,7 +694,12 @@ class AccessibilityManager {
             'underline-links-toggle',
             'simplified-ui-toggle',
             'senior-ui-toggle',
-            'kids-ui-toggle'
+            'kids-ui-toggle',
+            'highlight-focus-toggle',
+            'increase-spacing-toggle',
+            'dyslexia-toggle',
+            'reading-mode-toggle',
+            'reduce-motion-toggle'
         ].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.checked = false;
@@ -464,6 +711,14 @@ class AccessibilityManager {
         this.toggleSimplifiedUi(false);
         this.toggleSeniorUi(false);
         this.toggleKidsUi(false);
+        this.toggleHighlightFocus(false);
+        this.toggleIncreaseSpacing(false);
+        this.toggleDyslexia(false);
+        this.toggleReadingMode(false);
+        this.toggleReduceMotion(false);
+        
+        // Limpiar localStorage
+        localStorage.removeItem('escapify_accessibility');
     }
 }
 

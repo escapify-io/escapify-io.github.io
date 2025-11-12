@@ -35,16 +35,207 @@
         </nav>
     </header>
     <main id="main-content" class="container">
-        <section class="hero-section" aria-labelledby="crear-escape-title">
-            <div class="hero-content">
-                <h1 class="hero-title" id="crear-escape-title">Crea tu Escape Room Educativo</h1>
-                <p class="hero-subtitle">
-                    Pronto podrás diseñar experiencias completas de escape room, combinando retos, candados, recursos y gamificación para tu aula o centro educativo.<br>
-                    ¡Esta sección estará disponible muy pronto!
-                </p>
+        <section class="history-hero" aria-labelledby="crear-escape-title">
+            <div class="container">
+                <h1 class="section-title" id="crear-escape-title">Crea tu Escape Room Educativo</h1>
+                <p class="section-subtitle">Diseña experiencias completas combinando retos, candados, recursos y gamificación para tu aula</p>
+                <div class="accessibility-note">
+                    <i class="fas fa-universal-access"></i>
+                    <span>¿Tienes daltonismo? Activa <strong>ColorADD</strong> en el panel de accesibilidad para ver símbolos que identifican colores. <a href="/ayuda.html#accesibilidad">Más información</a></span>
+                </div>
             </div>
         </section>
-        <!-- Aquí se desarrollarán las funcionalidades de creación de escape room -->
+
+        <div class="escape-creator-container">
+            <!-- Paso 1: Información básica -->
+            <div class="escape-step active" id="step1" data-step="1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2>Información básica</h2>
+                </div>
+                <div class="escape-form">
+                    <div class="form-group">
+                        <label for="escapeName">Nombre del Escape Room <span class="required">*</span></label>
+                        <input type="text" id="escapeName" placeholder="Ej: Aventura Matemática" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="escapeDescription">Descripción</label>
+                        <textarea id="escapeDescription" rows="4" placeholder="Describe el escape room, su temática y objetivos educativos"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="escapeTheme">Tema o asignatura</label>
+                        <select id="escapeTheme">
+                            <option value="">Selecciona un tema</option>
+                            <option value="matematicas">Matemáticas</option>
+                            <option value="ciencias">Ciencias</option>
+                            <option value="historia">Historia</option>
+                            <option value="lengua">Lengua y Literatura</option>
+                            <option value="idiomas">Idiomas</option>
+                            <option value="arte">Arte</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="escapeLevel">Nivel educativo</label>
+                        <select id="escapeLevel">
+                            <option value="">Selecciona un nivel</option>
+                            <option value="primaria">Primaria</option>
+                            <option value="secundaria">Secundaria</option>
+                            <option value="bachillerato">Bachillerato</option>
+                            <option value="universidad">Universidad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="escapeDuration">Duración estimada (minutos)</label>
+                        <input type="number" id="escapeDuration" min="15" max="120" value="45" placeholder="45">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="nextToStep2">Siguiente: Añadir Candados</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2: Seleccionar candados -->
+            <div class="escape-step" id="step2" data-step="2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2>Añadir Candados</h2>
+                </div>
+                <div class="locks-selection">
+                    <div class="selection-options">
+                        <button class="btn btn-secondary" id="addFromHistory">
+                            <i class="fas fa-history"></i> Usar candados del historial
+                        </button>
+                        <a href="/generador.html" class="btn btn-secondary" target="_blank">
+                            <i class="fas fa-plus"></i> Crear nuevo candado
+                        </a>
+                    </div>
+                    <div class="selected-locks-container">
+                        <h3>Candados seleccionados</h3>
+                        <div class="selected-locks-list" id="selectedLocksList">
+                            <p class="empty-message">No hay candados seleccionados. Añade candados desde el historial o crea nuevos.</p>
+                        </div>
+                    </div>
+                    <div class="locks-history-modal" id="locksHistoryModal" style="display: none;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Seleccionar candados del historial</h3>
+                                <button class="close-modal" id="closeLocksModal" aria-label="Cerrar">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="search-filters">
+                                    <input type="text" id="searchLocks" placeholder="Buscar candados..." class="search-input">
+                                    <select id="filterLockType">
+                                        <option value="">Todos los tipos</option>
+                                        <option value="numeric">Numérico</option>
+                                        <option value="alphanumeric">Alfanumérico</option>
+                                        <option value="directional-4">Direccional 4</option>
+                                        <option value="directional-8">Direccional 8</option>
+                                        <option value="color">Color</option>
+                                        <option value="pattern-9">Patrón 9</option>
+                                        <option value="pattern-16">Patrón 16</option>
+                                        <option value="nokia">Nokia</option>
+                                        <option value="coordinates">Coordenadas</option>
+                                    </select>
+                                </div>
+                                <div class="locks-grid" id="locksGrid">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="backToStep1">Anterior</button>
+                        <button class="btn btn-primary" id="nextToStep3">Siguiente: Añadir Recursos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3: Añadir recursos -->
+            <div class="escape-step" id="step3" data-step="3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2>Añadir Recursos y Plantillas</h2>
+                </div>
+                <div class="resources-selection">
+                    <p class="section-description">Selecciona las plantillas y recursos que quieres incluir en tu escape room. Podrás descargarlos todos juntos al finalizar.</p>
+                    <div class="resources-grid-selectable" id="resourcesGrid">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="backToStep2">Anterior</button>
+                        <button class="btn btn-primary" id="nextToStep4">Siguiente: Configuración</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4: Configuración final -->
+            <div class="escape-step" id="step4" data-step="4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2>Configuración Final</h2>
+                </div>
+                <div class="final-config">
+                    <div class="form-group">
+                        <label for="escapeSequence">Orden de los candados</label>
+                        <p class="help-text">Arrastra los candados para cambiar su orden de aparición</p>
+                        <div class="sequence-list" id="sequenceList">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableTimer" checked>
+                            Activar temporizador
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableHints" checked>
+                            Permitir pistas
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableScoring" checked>
+                            Activar sistema de puntuación
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="successMessage">Mensaje de éxito final</label>
+                        <textarea id="successMessage" rows="3" placeholder="¡Felicidades! Has completado el escape room..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="backToStep3">Anterior</button>
+                        <button class="btn btn-primary btn-large" id="saveEscapeRoom">
+                            <i class="fas fa-save"></i> Guardar Escape Room
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen y descarga -->
+            <div class="escape-success" id="escapeSuccess" style="display: none;">
+                <div class="success-content">
+                    <i class="fas fa-check-circle success-icon"></i>
+                    <h2>¡Escape Room creado con éxito!</h2>
+                    <p>Tu escape room ha sido guardado. Puedes descargar todos los recursos seleccionados.</p>
+                    <div class="success-actions">
+                        <button class="btn btn-primary" id="downloadAllResources">
+                            <i class="fas fa-download"></i> Descargar todos los recursos
+                        </button>
+                        <a href="/historial.html" class="btn btn-secondary">
+                            <i class="fas fa-history"></i> Ver en historial
+                        </a>
+                        <button class="btn btn-secondary" id="createAnother">
+                            <i class="fas fa-plus"></i> Crear otro escape room
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="main-footer" role="contentinfo">
         <div class="footer-content">
@@ -64,5 +255,825 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Estado de la aplicación
+            const escapeRoomData = {
+                name: '',
+                description: '',
+                theme: '',
+                level: '',
+                duration: 45,
+                locks: [],
+                resources: [],
+                sequence: [],
+                settings: {
+                    timer: true,
+                    hints: true,
+                    scoring: true
+                },
+                successMessage: ''
+            };
+
+            const selectedLocks = [];
+            const selectedResources = [];
+
+            // Navegación entre pasos
+            function showStep(stepNumber) {
+                document.querySelectorAll('.escape-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+                const step = document.getElementById(`step${stepNumber}`);
+                if (step) {
+                    step.classList.add('active');
+                    step.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            // Event listeners para navegación
+            document.getElementById('nextToStep2').addEventListener('click', () => {
+                const name = document.getElementById('escapeName').value.trim();
+                if (!name) {
+                    showNotification('El nombre del escape room es obligatorio', 'error');
+                    return;
+                }
+                escapeRoomData.name = name;
+                escapeRoomData.description = document.getElementById('escapeDescription').value;
+                escapeRoomData.theme = document.getElementById('escapeTheme').value;
+                escapeRoomData.level = document.getElementById('escapeLevel').value;
+                escapeRoomData.duration = parseInt(document.getElementById('escapeDuration').value) || 45;
+                showStep(2);
+            });
+
+            document.getElementById('backToStep1').addEventListener('click', () => showStep(1));
+            document.getElementById('nextToStep3').addEventListener('click', () => {
+                if (selectedLocks.length === 0) {
+                    showNotification('Debes añadir al menos un candado', 'error');
+                    return;
+                }
+                escapeRoomData.locks = [...selectedLocks];
+                escapeRoomData.sequence = [...selectedLocks];
+                loadResources();
+                showStep(3);
+            });
+
+            document.getElementById('backToStep2').addEventListener('click', () => showStep(2));
+            document.getElementById('nextToStep4').addEventListener('click', () => {
+                escapeRoomData.resources = [...selectedResources];
+                updateSequenceList();
+                showStep(4);
+            });
+
+            document.getElementById('backToStep3').addEventListener('click', () => showStep(3));
+
+            // Cargar candados del historial
+            document.getElementById('addFromHistory').addEventListener('click', () => {
+                const modal = document.getElementById('locksHistoryModal');
+                modal.style.display = 'block';
+                loadLocksFromHistory();
+            });
+
+            document.getElementById('closeLocksModal').addEventListener('click', () => {
+                document.getElementById('locksHistoryModal').style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('locksHistoryModal');
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            function loadLocksFromHistory() {
+                const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                const grid = document.getElementById('locksGrid');
+                const searchInput = document.getElementById('searchLocks');
+                const typeFilter = document.getElementById('filterLockType');
+
+                function renderLocks(locks) {
+                    grid.innerHTML = '';
+                    if (locks.length === 0) {
+                        grid.innerHTML = '<p class="empty-message">No hay candados en el historial. <a href="/generador.html">Crea uno nuevo</a></p>';
+                        return;
+                    }
+
+                    locks.forEach(lock => {
+                        const isSelected = selectedLocks.some(l => l.id === lock.id);
+                        const card = document.createElement('div');
+                        card.className = `lock-card-selectable ${isSelected ? 'selected' : ''}`;
+                        card.innerHTML = `
+                            <div class="lock-card-header">
+                                <i class="fas ${getLockIcon(lock.type)}"></i>
+                                <h4>${lock.name || 'Sin nombre'}</h4>
+                                <span class="difficulty-badge difficulty-${lock.difficulty || 'medium'}">${getDifficultyLabel(lock.difficulty)}</span>
+                            </div>
+                            <p>${lock.description || 'Sin descripción'}</p>
+                            <div class="lock-card-actions">
+                                <button class="btn btn-sm ${isSelected ? 'btn-secondary' : 'btn-primary'}" data-lock-id="${lock.id}">
+                                    ${isSelected ? '<i class="fas fa-check"></i> Seleccionado' : '<i class="fas fa-plus"></i> Seleccionar'}
+                                </button>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+
+                    // Event listeners para seleccionar candados
+                    grid.querySelectorAll('[data-lock-id]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const lockId = btn.dataset.lockId;
+                            const lock = history.find(l => l.id == lockId);
+                            if (lock) {
+                                toggleLockSelection(lock);
+                                loadLocksFromHistory();
+                            }
+                        });
+                    });
+                }
+
+                function filterLocks() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const typeFilterValue = typeFilter.value;
+                    let filtered = history.filter(lock => {
+                        const matchesSearch = !searchTerm || 
+                            (lock.name && lock.name.toLowerCase().includes(searchTerm)) ||
+                            (lock.description && lock.description.toLowerCase().includes(searchTerm));
+                        const matchesType = !typeFilterValue || lock.type === typeFilterValue;
+                        return matchesSearch && matchesType;
+                    });
+                    renderLocks(filtered);
+                }
+
+                searchInput.addEventListener('input', filterLocks);
+                typeFilter.addEventListener('change', filterLocks);
+                renderLocks(history);
+            }
+
+            function toggleLockSelection(lock) {
+                const index = selectedLocks.findIndex(l => l.id === lock.id);
+                if (index >= 0) {
+                    selectedLocks.splice(index, 1);
+                } else {
+                    selectedLocks.push(lock);
+                }
+                updateSelectedLocksList();
+            }
+
+            function updateSelectedLocksList() {
+                const list = document.getElementById('selectedLocksList');
+                if (selectedLocks.length === 0) {
+                    list.innerHTML = '<p class="empty-message">No hay candados seleccionados. Añade candados desde el historial o crea nuevos.</p>';
+                    return;
+                }
+
+                list.innerHTML = selectedLocks.map((lock, index) => `
+                    <div class="selected-lock-item">
+                        <div class="lock-info">
+                            <span class="lock-order">${index + 1}</span>
+                            <i class="fas ${getLockIcon(lock.type)}"></i>
+                            <span class="lock-name">${lock.name || 'Sin nombre'}</span>
+                            <span class="difficulty-badge difficulty-${lock.difficulty || 'medium'}">${getDifficultyLabel(lock.difficulty)}</span>
+                        </div>
+                        <button class="btn-remove" data-lock-id="${lock.id}" aria-label="Eliminar candado">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                list.querySelectorAll('.btn-remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const lockId = btn.dataset.lockId;
+                        const index = selectedLocks.findIndex(l => l.id == lockId);
+                        if (index >= 0) {
+                            selectedLocks.splice(index, 1);
+                            updateSelectedLocksList();
+                        }
+                    });
+                });
+            }
+
+            // Cargar recursos disponibles
+            function loadResources() {
+                const resources = [
+                    { id: 'plantilla-candado-numerico', name: 'Plantilla Candado Numérico', icon: 'fa-lock', type: 'template' },
+                    { id: 'plantilla-candado-palabra', name: 'Plantilla Candado de Palabra', icon: 'fa-key', type: 'template' },
+                    { id: 'plantilla-cifrado-cesar', name: 'Plantilla Cifrado César', icon: 'fa-user-secret', type: 'template' },
+                    { id: 'guia-profesorado', name: 'Guía para Profesorado', icon: 'fa-chalkboard-teacher', type: 'guide' }
+                ];
+
+                const grid = document.getElementById('resourcesGrid');
+                grid.innerHTML = resources.map(resource => {
+                    const isSelected = selectedResources.includes(resource.id);
+                    return `
+                        <div class="resource-card-selectable ${isSelected ? 'selected' : ''}" data-resource-id="${resource.id}">
+                            <div class="resource-icon">
+                                <i class="fas ${resource.icon}"></i>
+                            </div>
+                            <h3>${resource.name}</h3>
+                            <span class="resource-type-badge">${resource.type === 'template' ? 'Plantilla' : 'Guía'}</span>
+                            <button class="btn btn-sm ${isSelected ? 'btn-secondary' : 'btn-primary'}" data-resource-id="${resource.id}">
+                                ${isSelected ? '<i class="fas fa-check"></i> Seleccionado' : '<i class="fas fa-plus"></i> Seleccionar'}
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+
+                grid.querySelectorAll('[data-resource-id]').forEach(card => {
+                    const resourceId = card.dataset.resourceId;
+                    const btn = card.querySelector('button');
+                    btn.addEventListener('click', () => {
+                        const index = selectedResources.indexOf(resourceId);
+                        if (index >= 0) {
+                            selectedResources.splice(index, 1);
+                        } else {
+                            selectedResources.push(resourceId);
+                        }
+                        loadResources();
+                    });
+                });
+            }
+
+            // Actualizar lista de secuencia
+            function updateSequenceList() {
+                const list = document.getElementById('sequenceList');
+                list.innerHTML = escapeRoomData.sequence.map((lock, index) => `
+                    <div class="sequence-item" data-lock-id="${lock.id}" draggable="true">
+                        <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                        <span class="sequence-number">${index + 1}</span>
+                        <i class="fas ${getLockIcon(lock.type)}"></i>
+                        <span class="sequence-name">${lock.name || 'Sin nombre'}</span>
+                    </div>
+                `).join('');
+
+                // Hacer los elementos arrastrables
+                const items = list.querySelectorAll('.sequence-item');
+                items.forEach(item => {
+                    item.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('text/plain', item.dataset.lockId);
+                    });
+                    item.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        item.classList.add('drag-over');
+                    });
+                    item.addEventListener('dragleave', () => {
+                        item.classList.remove('drag-over');
+                    });
+                    item.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        item.classList.remove('drag-over');
+                        const draggedId = e.dataTransfer.getData('text/plain');
+                        const draggedIndex = escapeRoomData.sequence.findIndex(l => l.id == draggedId);
+                        const dropIndex = escapeRoomData.sequence.findIndex(l => l.id == item.dataset.lockId);
+                        if (draggedIndex !== -1 && dropIndex !== -1) {
+                            const [removed] = escapeRoomData.sequence.splice(draggedIndex, 1);
+                            escapeRoomData.sequence.splice(dropIndex, 0, removed);
+                            updateSequenceList();
+                        }
+                    });
+                });
+            }
+
+            // Guardar escape room
+            document.getElementById('saveEscapeRoom').addEventListener('click', () => {
+                escapeRoomData.settings.timer = document.getElementById('enableTimer').checked;
+                escapeRoomData.settings.hints = document.getElementById('enableHints').checked;
+                escapeRoomData.settings.scoring = document.getElementById('enableScoring').checked;
+                escapeRoomData.successMessage = document.getElementById('successMessage').value;
+
+                // Guardar en localStorage
+                const escapeRooms = JSON.parse(localStorage.getItem('escapeRooms') || '[]');
+                const escapeRoom = {
+                    ...escapeRoomData,
+                    id: Date.now(),
+                    createdAt: new Date().toISOString()
+                };
+                escapeRooms.unshift(escapeRoom);
+                localStorage.setItem('escapeRooms', JSON.stringify(escapeRooms));
+
+                // Mostrar pantalla de éxito
+                document.querySelectorAll('.escape-step').forEach(step => step.style.display = 'none');
+                document.getElementById('escapeSuccess').style.display = 'block';
+                showNotification('Escape room guardado correctamente', 'success');
+            });
+
+            // Descargar todos los recursos
+            document.getElementById('downloadAllResources').addEventListener('click', () => {
+                selectedResources.forEach(resourceId => {
+                    setTimeout(() => {
+                        window.open(`/recursos/${resourceId}.html?autoDownload=1`, '_blank');
+                    }, 500 * selectedResources.indexOf(resourceId));
+                });
+                showNotification('Iniciando descarga de recursos...', 'success');
+            });
+
+            document.getElementById('createAnother').addEventListener('click', () => {
+                location.reload();
+            });
+
+            // Funciones auxiliares
+            function getLockIcon(type) {
+                const icons = {
+                    'numeric': 'fa-hashtag',
+                    'alphanumeric': 'fa-font',
+                    'directional-4': 'fa-arrows-alt',
+                    'directional-8': 'fa-compass',
+                    'color': 'fa-palette',
+                    'pattern-9': 'fa-th',
+                    'pattern-16': 'fa-th-large',
+                    'computer-login': 'fa-desktop',
+                    'nokia': 'fa-mobile-screen-button',
+                    'coordinates': 'fa-map-location-dot',
+                    'musical': 'fa-music',
+                    'emoji': 'fa-smile',
+                    'word-wheel': 'fa-spell-check',
+                    'switches': 'fa-toggle-on',
+                    'slider': 'fa-sliders',
+                    'cryptex': 'fa-ring',
+                    'rotary': 'fa-bullseye'
+                };
+                return icons[type] || 'fa-lock';
+            }
+
+            function getDifficultyLabel(difficulty) {
+                const labels = {
+                    'easy': 'Fácil',
+                    'medium': 'Medio',
+                    'hard': 'Difícil'
+                };
+                return labels[difficulty] || 'Medio';
+            }
+
+            function showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.setAttribute('role', 'alert');
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            // Inicializar
+            updateSelectedLocksList();
+        });
+    </script>
+    <style>
+        .escape-creator-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .escape-step {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .escape-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            color: var(--heading-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .required {
+            color: var(--error-color);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .selection-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .selected-locks-container {
+            margin: 2rem 0;
+        }
+
+        .selected-locks-list {
+            min-height: 100px;
+            padding: 1rem;
+            background: var(--subtle-bg);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .selected-lock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .lock-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lock-order {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: var(--error-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .btn-remove:hover {
+            background: var(--hover-color);
+        }
+
+        .locks-history-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .locks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .lock-card-selectable {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .lock-card-selectable:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .lock-card-selectable.selected {
+            border-color: var(--primary-color);
+            background: var(--hover-color);
+        }
+
+        .resources-grid-selectable {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card-selectable {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .resource-card-selectable:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .resource-card-selectable.selected {
+            border-color: var(--primary-color);
+            background: var(--hover-color);
+        }
+
+        .sequence-list {
+            margin-top: 1rem;
+        }
+
+        .sequence-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: move;
+        }
+
+        .sequence-item.drag-over {
+            border-color: var(--primary-color);
+            background: var(--hover-color);
+        }
+
+        .drag-handle {
+            color: var(--text-muted);
+            cursor: grab;
+        }
+
+        .sequence-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .escape-success {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .section-description {
+            color: var(--text-color-light);
+            margin-bottom: 2rem;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .escape-creator-container {
+                padding: 0 0.5rem;
+            }
+
+            .escape-step {
+                padding: 1.5rem;
+            }
+
+            .locks-grid,
+            .resources-grid-selectable {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions button {
+                width: 100%;
+            }
+
+            .search-filters {
+                flex-direction: column;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: var(--success-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            transition: opacity 0.3s;
+            max-width: 300px;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        .notification.error {
+            background-color: var(--error-color);
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .lock-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .lock-card-header i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .lock-card-header h4 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .lock-card-actions {
+            margin-top: 1rem;
+        }
+
+        .accessibility-note {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--hover-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .accessibility-note i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .accessibility-note a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .accessibility-note a:hover {
+            text-decoration: none;
+        }
+    </style>
 </body>
 </html> 
