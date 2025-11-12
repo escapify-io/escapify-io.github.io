@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generador de candados digitales para escape rooms educativos. Crea candados personalizados con múltiples tipos y opciones de configuración.">
+    <meta name="keywords" content="generador candados, escape room educativo, candados digitales, gamificación educativa">
     <title>Generador de candados - Escapify</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
@@ -15,42 +17,6 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" 
             crossorigin=""></script>
-    <style>
-        /* Estilos para las notificaciones */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            background-color: #2ecc71;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            transition: opacity 0.3s;
-            max-width: 300px;
-            animation: slideInRight 0.3s ease-out;
-        }
-        
-        .notification.error {
-            background-color: #e74c3c;
-        }
-        
-        .notification.success {
-            background-color: #2ecc71;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Skip to content para accesibilidad con teclado -->
@@ -100,26 +66,37 @@
     <main id="main-content">
         <div class="container">
             <div class="lock-type-selector">
-                <h2>Selecciona el tipo de candado</h2>
+                <header class="section-header">
+                    <h2>Selecciona el tipo de candado</h2>
+                    <p class="section-subtitle">Elige entre más de 15 tipos diferentes de candados digitales para tus actividades educativas</p>
+                </header>
                 <div class="difficulty-filters" id="difficultyFilters" role="tablist" aria-label="Filtros de dificultad">
                     <button class="difficulty-filter-btn all active" data-difficulty="all" role="tab" aria-selected="true" aria-controls="lockTypesGrid">Todos</button>
-                    <button class="difficulty-filter-btn easy" data-difficulty="easy" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Fácil</button>
-                    <button class="difficulty-filter-btn medium" data-difficulty="medium" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Medio</button>
-                    <button class="difficulty-filter-btn hard" data-difficulty="hard" role="tab" aria-selected="false" aria-controls="lockTypesGrid">Difícil</button>
+                    <button class="difficulty-filter-btn easy" data-difficulty="easy" role="tab" aria-selected="false" aria-controls="lockTypesGrid">
+                        Fácil<span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
+                    <button class="difficulty-filter-btn medium" data-difficulty="medium" role="tab" aria-selected="false" aria-controls="lockTypesGrid">
+                        Medio<span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
+                    <button class="difficulty-filter-btn hard" data-difficulty="hard" role="tab" aria-selected="false" aria-controls="lockTypesGrid">
+                        Difícil<span class="coloradd-symbol" aria-hidden="true"></span>
+                    </button>
                 </div>
-                <div class="lock-types-grid" id="lockTypesGrid" role="tabpanel">
+                <div class="lock-types-grid" id="lockTypesGrid" role="tabpanel" aria-label="Lista de tipos de candados disponibles">
                     <!-- Los tipos de candados se cargarán dinámicamente -->
                 </div>
             </div>
 
             <div class="lock-creator" id="lockCreator" style="display: none;">
-                <div class="lock-header">
-                    <h2 id="lockTypeTitle">Crear candado</h2>
-                    <span id="lockTypeDifficulty" class="lock-difficulty-label"></span>
+                <header class="lock-header">
+                    <div class="lock-header-content">
+                        <h2 id="lockTypeTitle">Crear candado</h2>
+                        <span id="lockTypeDifficulty" class="lock-difficulty-label" aria-label="Dificultad del candado"></span>
+                    </div>
                     <button class="btn btn-secondary" id="backToTypes" aria-label="Volver a la selección de tipos">
                         <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver
                     </button>
-                </div>
+                </header>
 
                 <div class="lock-summary" aria-live="polite">
                     <div class="lock-summary-item">
@@ -137,10 +114,19 @@
                 </div>
 
                 <div class="lock-form">
-                    <!-- 1. Nombre (más importante) -->
-                    <div class="form-group">
-                        <label for="lockName">Nombre del candado <span class="required">*</span></label>
-                        <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
+                    <!-- 1. Nombre y Longitud (más importante) -->
+                    <div class="form-group form-group-inline">
+                        <div class="form-group-item">
+                            <label for="lockName">Nombre del candado <span class="required">*</span></label>
+                            <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
+                        </div>
+                        <div class="form-group-item">
+                            <label for="codeLength">Longitud del código</label>
+                            <div class="code-length-control">
+                                <input type="number" id="codeLength" min="1" max="12" value="4" aria-describedby="codeLengthHelp">
+                                <span class="code-length-hint" id="codeLengthHelp">Define cuántos elementos debe introducir la persona que resuelve este candado.</span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- 2. Teclado/Keypad (lo más importante funcionalmente) -->
@@ -337,15 +323,6 @@
                     <div class="form-group">
                         <label for="lockUrl">URL de redirección (opcional)</label>
                         <input type="text" id="lockUrl" placeholder="URL a la que redirigir al resolver">
-                    </div>
-
-                    <!-- 6. Longitud del código (importante para configuración) -->
-                    <div class="form-group">
-                        <label for="codeLength">Longitud del código</label>
-                        <div class="code-length-control">
-                            <input type="number" id="codeLength" min="1" max="12" value="4" aria-describedby="codeLengthHelp">
-                            <span class="code-length-hint" id="codeLengthHelp">Define cuántos elementos debe introducir la persona que resuelve este candado.</span>
-                        </div>
                     </div>
 
                     <!-- 7. Sección de opciones avanzadas (menos importante) -->
@@ -988,17 +965,20 @@
             }
 
             function showNotification(message, type = 'success') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.textContent = message;
-                notification.setAttribute('role', 'alert');
-
-                document.body.appendChild(notification);
-
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    setTimeout(() => notification.remove(), 300);
-                }, 3000);
+                if (window.notificationManager) {
+                    window.notificationManager.show(message, type);
+                } else {
+                    // Fallback básico
+                    const notification = document.createElement('div');
+                    notification.className = `notification ${type}`;
+                    notification.textContent = message;
+                    notification.setAttribute('role', 'alert');
+                    document.body.appendChild(notification);
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => notification.remove(), 300);
+                    }, 3000);
+                }
             }
             
             // Función para debug de guardado
@@ -1173,26 +1153,10 @@
             }
         });
     </script>
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
-    <!-- Script de diagnóstico temporal -->
-    <script>
-        console.log('Diagnóstico de generador.html');
-        window.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM completamente cargado');
-            // Verificar elementos críticos
-            const lockTypesGrid = document.getElementById('lockTypesGrid');
-            console.log('lockTypesGrid existe:', !!lockTypesGrid);
-            
-            // Verificar si los estilos están cargados correctamente
-            const styles = Array.from(document.styleSheets);
-            console.log('Número de hojas de estilo cargadas:', styles.length);
-            
-            // Verificar si hay errores de JavaScript
-            window.addEventListener('error', (e) => {
-                console.error('Error detectado:', e.message);
-            });
-        });
-    </script>
+    <script src="assets/js/notifications.js" type="module"></script>
     <footer class="main-footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">

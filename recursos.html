@@ -1135,15 +1135,22 @@
             
             // Función para filtrar recursos
             function filterResources() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const selectedType = typeFilter.value;
-                const selectedLevel = levelFilter.value;
+                const searchTerm = (searchInput && searchInput.value) ? searchInput.value.toLowerCase() : '';
+                const selectedType = typeFilter ? typeFilter.value : 'all';
+                const selectedLevel = levelFilter ? levelFilter.value : 'all';
                 
                 resourceCards.forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const description = card.querySelector('p').textContent.toLowerCase();
-                    const type = card.querySelector('.resource-type').textContent.toLowerCase();
-                    const level = card.querySelector('.resource-level').textContent.toLowerCase();
+                    const titleEl = card.querySelector('h3');
+                    const descEl = card.querySelector('p');
+                    const typeEl = card.querySelector('.resource-type');
+                    const levelEl = card.querySelector('.resource-level');
+                    
+                    if (!titleEl || !descEl || !typeEl || !levelEl) return;
+                    
+                    const title = titleEl.textContent.toLowerCase();
+                    const description = descEl.textContent.toLowerCase();
+                    const type = typeEl.textContent.toLowerCase();
+                    const level = levelEl.textContent.toLowerCase();
                     
                     // Aplicar filtros
                     const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
@@ -1179,9 +1186,15 @@
             }
             
             // Event listeners para filtros y búsqueda
-            searchInput.addEventListener('input', filterResources);
-            typeFilter.addEventListener('change', filterResources);
-            levelFilter.addEventListener('change', filterResources);
+            if (searchInput) {
+                searchInput.addEventListener('input', filterResources);
+            }
+            if (typeFilter) {
+                typeFilter.addEventListener('change', filterResources);
+            }
+            if (levelFilter) {
+                levelFilter.addEventListener('change', filterResources);
+            }
             
             // Event listeners para botones "Ver todas"
             sectionButtons.forEach(button => {
@@ -1738,32 +1751,36 @@
             });
 
             // Descargar seleccionados
-            downloadSelectedBtn.addEventListener('click', () => {
-                if (selectedTemplates.size === 0) {
-                    showNotification('No hay plantillas seleccionadas', 'error');
-                    return;
-                }
+            if (downloadSelectedBtn) {
+                downloadSelectedBtn.addEventListener('click', () => {
+                    if (selectedTemplates.size === 0) {
+                        showNotification('No hay plantillas seleccionadas', 'error');
+                        return;
+                    }
 
-                const templates = Array.from(selectedTemplates);
-                showNotification(`Iniciando descarga de ${templates.length} plantilla(s)...`, 'success');
-                
-                templates.forEach((templateId, index) => {
-                    setTimeout(() => {
-                        openTemplatePreview(templateId, true);
-                    }, 500 * index);
+                    const templates = Array.from(selectedTemplates);
+                    showNotification(`Iniciando descarga de ${templates.length} plantilla(s)...`, 'success');
+                    
+                    templates.forEach((templateId, index) => {
+                        setTimeout(() => {
+                            openTemplatePreview(templateId, true);
+                        }, 500 * index);
+                    });
                 });
-            });
+            }
 
             // Limpiar selección
-            clearSelectionBtn.addEventListener('click', () => {
-                selectedTemplates.clear();
-                document.querySelectorAll('input[type="checkbox"][data-template-id]').forEach(cb => {
-                    cb.checked = false;
-                    cb.closest('.resource-card-selectable').classList.remove('selected');
+            if (clearSelectionBtn) {
+                clearSelectionBtn.addEventListener('click', () => {
+                    selectedTemplates.clear();
+                    document.querySelectorAll('input[type="checkbox"][data-template-id]').forEach(cb => {
+                        cb.checked = false;
+                        cb.closest('.resource-card-selectable').classList.remove('selected');
+                    });
+                    updateBulkControls();
+                    showNotification('Selección limpiada', 'success');
                 });
-                updateBulkControls();
-                showNotification('Selección limpiada', 'success');
-            });
+            }
 
             // Inicializar
             updateBulkControls();

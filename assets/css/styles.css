@@ -2390,33 +2390,66 @@ a:hover {
 
 .lock-types-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .lock-type-card {
-    background-color: var(--background-color);
-    border-radius: 8px;
-    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
     text-align: center;
     border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(var(--primary-color-rgb), 0.07);
+}
+
+.lock-type-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(var(--primary-color-rgb), 0.13);
+    border-color: var(--primary-color);
+    background: var(--hover-color);
 }
 
 .lock-type-card i {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
 }
 
-.lock-type-card h4 {
+.lock-type-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+    color: var(--secondary-color);
+}
+
+.lock-type-card h3 {
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.lock-type-card:hover h3 {
+    color: var(--secondary-color);
+}
+
+.lock-type-card p {
+    color: var(--text-color-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
 }
 
 .share-method, .customization-option {
     display: flex;
     flex-direction: column;
-    align-items: ;
+    align-items: center;
     background-color: var(--background-color);
     border-radius: 8px;
     padding: 1.5rem;
@@ -3337,14 +3370,64 @@ select:hover {
     opacity: 0.8;
 }
 
+.lock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.lock-header-content {
+    flex: 1;
+    min-width: 200px;
+}
+
+.lock-header h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.75rem;
+    color: var(--primary-color);
+}
+
+.lock-difficulty-label {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.lock-type-selector {
+    margin-bottom: 3rem;
+}
+
+.lock-type-selector .section-header {
+    margin-bottom: 2rem;
+}
+
+.lock-type-selector h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.lock-creator {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 12px rgba(var(--primary-color-rgb), 0.07);
+    margin-bottom: 2rem;
+}
+
 .lock-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
     border-radius: 12px;
-    background: var(--card-bg);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
 }
 
@@ -5168,7 +5251,7 @@ select:invalid:focus {
 
 /* Modal de recursos */
 .resource-modal {
-    display: none;
+    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -5178,10 +5261,14 @@ select:invalid:focus {
     z-index: 1100;
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .resource-modal.visible {
-    display: block;
+    display: block !important;
+    visibility: visible;
+    opacity: 1;
 }
 
 .resource-modal-content {
@@ -6250,6 +6337,45 @@ button:disabled, .btn:disabled {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+}
+
+.form-group-inline {
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.form-group-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.form-group-inline .form-group-item:first-child {
+    flex: 2;
+}
+
+.form-group-inline .code-length-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group-inline .code-length-control input {
+    max-width: 120px;
+}
+
+@media (max-width: 768px) {
+    .form-group-inline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-group-inline .code-length-control input {
+        max-width: 100%;
+    }
 }
 
 .form-group label {
