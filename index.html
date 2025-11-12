@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Escapify: Plataforma educativa para crear candados digitales y escape rooms. Herramientas, plantillas y recursos para docentes innovadores. Incluye accesibilidad completa y soporte ColorADD.">
+    <meta name="keywords" content="escape room educativo, candados digitales, gamificación educativa, recursos docentes, plantillas educativas, ColorADD, accesibilidad">
+    <meta name="author" content="Escapify">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://escapify.io/">
+    <meta property="og:title" content="Escapify - Candados digitales para escape rooms educativos">
+    <meta property="og:description" content="Plataforma educativa para crear candados digitales y escape rooms. Herramientas, plantillas y recursos para docentes innovadores.">
+    <meta property="og:image" content="https://escapify.io/assets/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://escapify.io/">
+    <meta property="twitter:title" content="Escapify - Candados digitales para escape rooms educativos">
+    <meta property="twitter:description" content="Plataforma educativa para crear candados digitales y escape rooms. Herramientas, plantillas y recursos para docentes innovadores.">
+    <meta property="twitter:image" content="https://escapify.io/assets/images/og-image.jpg">
+    
     <title>Escapify - Candados digitales para escape rooms educativos</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
@@ -42,113 +60,143 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section" aria-labelledby="hero-title">
+    <section class="hero-section" aria-labelledby="hero-title" role="banner">
         <div class="hero-content">
             <h1 class="hero-title" id="hero-title">
                 Innovación y gamificación educativa
             </h1>
             <p class="hero-subtitle">
-                Recursos, herramientas y experiencias para transformar el aprendizaje en tu aula.<br>
+                Recursos, herramientas y experiencias para transformar el aprendizaje en tu aula.
                 Plantillas, retos, candados digitales, guías y mucho más para docentes innovadores.
             </p>
-            <div class="hero-actions">
-                <a href="/crear-escape.html" class="btn btn-primary btn-large">Crear escape room</a>
-                <a href="/recursos.html" class="btn btn-secondary btn-large">Explorar recursos</a>
+            <div class="hero-actions" role="group" aria-label="Acciones principales">
+                <a href="/crear-escape.html" class="btn btn-primary btn-large" aria-label="Crear un nuevo escape room educativo">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i> Crear escape room
+                </a>
+                <a href="/recursos.html" class="btn btn-secondary btn-large" aria-label="Explorar recursos y plantillas disponibles">
+                    <i class="fas fa-folder-open" aria-hidden="true"></i> Explorar recursos
+                </a>
             </div>
         </div>
-        <div class="hero-image" aria-hidden="true" style="display: flex; gap: 2rem; justify-content: center; align-items: center;">
-            <i class="fas fa-lightbulb hero-icon" title="Innovación"></i>
-            <i class="fas fa-gamepad hero-icon" title="Gamificación"></i>
-            <i class="fas fa-lock hero-icon" title="Candados digitales"></i>
+        <div class="hero-image" aria-hidden="true" role="presentation">
+            <i class="fas fa-lightbulb hero-icon" aria-hidden="true"></i>
+            <i class="fas fa-gamepad hero-icon" aria-hidden="true"></i>
+            <i class="fas fa-lock hero-icon" aria-hidden="true"></i>
         </div>
     </section>
 
     <!-- Contenido principal -->
     <main id="main-content">
         <!-- Características -->
-        <section class="features-section">
+        <section class="features-section" aria-labelledby="features-title">
             <div class="container">
-                <h2 class="section-title">¿Por qué usar Escapify?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-graduation-cap feature-icon" aria-hidden="true"></i>
-                        <h3>Educativo</h3>
-                        <p>Transforma el aprendizaje en una aventura con desafíos que refuerzan el conocimiento.</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <i class="fas fa-cogs feature-icon" aria-hidden="true"></i>
-                        <h3>Personalizable</h3>
-                        <p>Adapta los candados a tus necesidades con múltiples opciones y niveles de dificultad.</p>
-                        <div class="difficulty-filters">
-                            <button class="difficulty-filter-btn easy" aria-label="Filtrar por dificultad fácil">Fácil</button>
-                            <button class="difficulty-filter-btn medium" aria-label="Filtrar por dificultad media">Media</button>
-                            <button class="difficulty-filter-btn hard" aria-label="Filtrar por dificultad difícil">Difícil</button>
+                <header class="section-header">
+                    <h2 class="section-title" id="features-title">¿Por qué usar Escapify?</h2>
+                    <p class="section-subtitle">Una plataforma completa diseñada para docentes que buscan innovar en el aula</p>
+                </header>
+                <div class="features-grid" role="list">
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon-container" aria-hidden="true">
+                            <i class="fas fa-graduation-cap feature-icon" aria-hidden="true"></i>
                         </div>
-                    </div>
+                        <h3>Educativo</h3>
+                        <p>Transforma el aprendizaje en una aventura con desafíos que refuerzan el conocimiento y fomentan la participación activa de los estudiantes.</p>
+                    </article>
 
-                    <div class="feature-card">
-                        <i class="fas fa-share-alt feature-icon" aria-hidden="true"></i>
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon-container" aria-hidden="true">
+                            <i class="fas fa-cogs feature-icon" aria-hidden="true"></i>
+                        </div>
+                        <h3>Personalizable</h3>
+                        <p>Adapta los candados a tus necesidades con múltiples opciones y niveles de dificultad. Configura cada detalle según tu objetivo educativo.</p>
+                        <div class="difficulty-filters" role="group" aria-label="Niveles de dificultad disponibles">
+                            <span class="difficulty-label">Niveles disponibles:</span>
+                            <span class="difficulty-badge difficulty-easy" aria-label="Dificultad fácil">
+                                Fácil<span class="coloradd-symbol" aria-hidden="true"></span>
+                            </span>
+                            <span class="difficulty-badge difficulty-medium" aria-label="Dificultad media">
+                                Media<span class="coloradd-symbol" aria-hidden="true"></span>
+                            </span>
+                            <span class="difficulty-badge difficulty-hard" aria-label="Dificultad difícil">
+                                Difícil<span class="coloradd-symbol" aria-hidden="true"></span>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon-container" aria-hidden="true">
+                            <i class="fas fa-share-alt feature-icon" aria-hidden="true"></i>
+                        </div>
                         <h3>Compartible</h3>
-                        <p>Comparte fácilmente los candados con tus estudiantes o colegas mediante enlaces o códigos QR.</p>
-                    </div>
+                        <p>Comparte fácilmente los candados con tus estudiantes o colegas mediante enlaces o códigos QR. Distribución instantánea y sin complicaciones.</p>
+                    </article>
 
-                    <div class="feature-card">
-                        <i class="fas fa-universal-access feature-icon" aria-hidden="true"></i>
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon-container" aria-hidden="true">
+                            <i class="fas fa-universal-access feature-icon" aria-hidden="true"></i>
+                        </div>
                         <h3>Accesible</h3>
-                        <p class="normal-language">Diseñado para ser inclusivo, con múltiples ajustes de accesibilidad y soporte para ColorADD (daltonismo).</p>
+                        <p class="normal-language">Diseñado para ser inclusivo, con múltiples ajustes de accesibilidad y soporte para ColorADD (daltonismo). Cumple con estándares WCAG 2.1.</p>
                         <p class="simple-language">Todos pueden usar Escapify, incluso personas con daltonismo o dificultades visuales.</p>
                         <div class="coloradd-info-inline">
-                            <p><strong>Sistema ColorADD:</strong> Activa el panel de accesibilidad para ver símbolos que identifican colores sin necesidad de percibirlos visualmente.</p>
-                            <a href="/ayuda.html#accesibilidad" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-info-circle"></i> Más sobre ColorADD
+                            <p><strong>Sistema ColorADD:</strong> Activa el panel de accesibilidad (Alt+A) para ver símbolos que identifican colores sin necesidad de percibirlos visualmente.</p>
+                            <a href="/ayuda.html#accesibilidad" class="btn btn-sm btn-secondary" aria-label="Más información sobre ColorADD y accesibilidad">
+                                <i class="fas fa-info-circle" aria-hidden="true"></i> Más sobre ColorADD
                             </a>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
         <!-- Cómo funciona -->
-        <section class="how-to-section">
+        <section class="how-to-section" aria-labelledby="how-to-title">
             <div class="container">
-                <h2 class="section-title">Cómo funciona</h2>
-                <div class="steps-container">
-                    <div class="step-card">
-                        <div class="step-number" aria-hidden="true">1</div>
+                <header class="section-header">
+                    <h2 class="section-title" id="how-to-title">Cómo funciona</h2>
+                    <p class="section-subtitle">Crea tu primer candado digital en tres sencillos pasos</p>
+                </header>
+                <ol class="steps-container" role="list">
+                    <li class="step-card" role="listitem">
+                        <div class="step-number" aria-hidden="true" aria-label="Paso 1">1</div>
                         <div class="step-content">
                             <h3>Elige un tipo de candado</h3>
-                            <p>Selecciona entre numérico, direccional, colores y más, según tus necesidades educativas.</p>
+                            <p>Selecciona entre más de 15 tipos diferentes: numérico, direccional, colores, patrones, coordenadas y más, según tus necesidades educativas.</p>
                         </div>
-                    </div>
+                    </li>
 
-                    <div class="step-card">
-                        <div class="step-number" aria-hidden="true">2</div>
+                    <li class="step-card" role="listitem">
+                        <div class="step-number" aria-hidden="true" aria-label="Paso 2">2</div>
                         <div class="step-content">
                             <h3>Personaliza la configuración</h3>
-                            <p>Define la clave, el mensaje de éxito y los ajustes avanzados para tu candado.</p>
+                            <p>Define la clave, el mensaje de éxito, nivel de dificultad y los ajustes avanzados para tu candado. Totalmente personalizable.</p>
                         </div>
-                    </div>
+                    </li>
 
-                    <div class="step-card">
-                        <div class="step-number" aria-hidden="true">3</div>
+                    <li class="step-card" role="listitem">
+                        <div class="step-number" aria-hidden="true" aria-label="Paso 3">3</div>
                         <div class="step-content">
                             <h3>Comparte con tus estudiantes</h3>
-                            <p>Obtén un enlace o código QR para distribuir fácilmente el candado digital.</p>
+                            <p>Obtén un enlace único o código QR para distribuir fácilmente el candado digital. Comparte en cualquier momento y lugar.</p>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ol>
             </div>
         </section>
 
         <!-- Candados recientes -->
-        <section class="recent-locks-section">
+        <section class="recent-locks-section" aria-labelledby="recent-locks-title">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Candados recientes</h2>
-                    <a href="/historial.html" class="btn btn-secondary">Ver historial completo</a>
+                    <div>
+                        <h2 class="section-title" id="recent-locks-title">Candados recientes</h2>
+                        <p class="section-subtitle">Accede rápidamente a tus candados más recientes</p>
+                    </div>
+                    <a href="/historial.html" class="btn btn-secondary" aria-label="Ver todos los candados en el historial completo">
+                        <i class="fas fa-history" aria-hidden="true"></i> Ver historial completo
+                    </a>
                 </div>
-                <div class="recent-locks-grid" id="recentLocks">
+                <div class="recent-locks-grid" id="recentLocks" role="list" aria-live="polite" aria-label="Lista de candados recientes">
                     <!-- Contenido dinámico desde JavaScript -->
                 </div>
             </div>
@@ -160,15 +208,27 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Escapify</h3>
-                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+                <p>Plataforma para crear candados digitales para escape rooms educativos. Herramientas, plantillas y recursos para docentes innovadores.</p>
             </div>
             <div class="footer-section">
                 <h3>Accesibilidad</h3>
-                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual. Cumple con estándares WCAG 2.1.</p>
+                <p><strong>Atajo de teclado:</strong> Presiona <kbd>Alt</kbd> + <kbd>A</kbd> para abrir el panel de accesibilidad.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces rápidos</h3>
+                <nav aria-label="Enlaces del pie de página">
+                    <ul>
+                        <li><a href="/generador.html">Generador de candados</a></li>
+                        <li><a href="/historial.html">Historial</a></li>
+                        <li><a href="/recursos.html">Recursos</a></li>
+                        <li><a href="/ayuda.html">Ayuda</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa.</p>
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa de código abierto.</p>
         </div>
     </footer>
 
@@ -177,7 +237,6 @@
     <script src="assets/js/accessibility.js" type="module"></script>
     <script src="assets/js/notifications.js" type="module"></script>
     <script src="assets/js/favorites.js" type="module"></script>
-    <script src="assets/js/breadcrumbs.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Obtener candados recientes del localStorage
@@ -189,28 +248,30 @@
                 // Mostrar los 3 más recientes
                 const recentLocks = locks.slice(0, 3);
                 
-                recentLocks.forEach(lock => {
-                    const card = document.createElement('div');
+                recentLocks.forEach((lock, index) => {
+                    const card = document.createElement('article');
                     card.className = 'lock-card';
+                    card.setAttribute('role', 'listitem');
+                    card.setAttribute('aria-label', `Candado: ${lock.name || 'Sin nombre'}`);
                     card.innerHTML = `
                         <div class="lock-card-header">
                             <i class="fas ${getLockIcon(lock.type)}" aria-hidden="true"></i>
                             <h3>${lock.name || 'Candado sin nombre'}</h3>
                             <span class="difficulty-badge difficulty-${lock.difficulty || 'medium'}" 
                                   aria-label="Dificultad: ${lock.difficulty || 'media'}">
-                                ${lock.difficulty || 'media'}
+                                ${lock.difficulty || 'media'}<span class="coloradd-symbol" aria-hidden="true"></span>
                             </span>
                         </div>
                         <p class="lock-description">${lock.description || 'Sin descripción'}</p>
-                        <div class="lock-card-actions">
+                        <div class="lock-card-actions" role="group" aria-label="Acciones del candado">
                             <button class="btn btn-sm btn-primary copy-code" 
                                     data-code="${lock.id}" 
-                                    aria-label="Copiar código del candado">
-                                Copiar código
+                                    aria-label="Copiar código del candado ${lock.name || 'sin nombre'}">
+                                <i class="fas fa-copy" aria-hidden="true"></i> Copiar código
                             </button>
                             <a href="/preview.html?id=${lock.id}" class="btn btn-sm btn-secondary"
-                               aria-label="Previsualizar candado">
-                                Previsualizar
+                               aria-label="Previsualizar candado ${lock.name || 'sin nombre'}">
+                                <i class="fas fa-eye" aria-hidden="true"></i> Previsualizar
                             </a>
                         </div>
                     `;
@@ -220,11 +281,15 @@
                 // Mensaje si no hay candados
                 const emptyState = document.createElement('div');
                 emptyState.className = 'empty-state';
+                emptyState.setAttribute('role', 'status');
+                emptyState.setAttribute('aria-live', 'polite');
                 emptyState.innerHTML = `
                     <i class="fas fa-lock-open" aria-hidden="true"></i>
                     <h3>No hay candados recientes</h3>
                     <p>Crea tu primer candado digital para verlo aquí.</p>
-                    <a href="/generador.html" class="btn btn-primary">Crear Candado</a>
+                    <a href="/generador.html" class="btn btn-primary" aria-label="Ir al generador de candados">
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i> Crear Candado
+                    </a>
                 `;
                 recentLocksContainer.appendChild(emptyState);
             }
@@ -235,9 +300,17 @@
                     const code = button.dataset.code;
                     try {
                         await navigator.clipboard.writeText(code);
-                        showNotification('Código copiado al portapapeles', 'success');
+                        if (window.notificationManager) {
+                            window.notificationManager.success('Código copiado al portapapeles');
+                        } else {
+                            showNotification('Código copiado al portapapeles', 'success');
+                        }
                     } catch (err) {
-                        showNotification('Error al copiar el código', 'error');
+                        if (window.notificationManager) {
+                            window.notificationManager.error('Error al copiar el código');
+                        } else {
+                            showNotification('Error al copiar el código', 'error');
+                        }
                     }
                 });
             });
