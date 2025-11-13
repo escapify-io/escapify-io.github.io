@@ -242,6 +242,14 @@ body.daltonismo-activo .difficulty-filter-btn.hard .coloradd-symbol {
     background: var(--background-color);
     border-radius: 8px;
     border: 2px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.symbol-display svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .symbol-info {
@@ -288,9 +296,46 @@ body.daltonismo-activo .difficulty-filter-btn.hard .coloradd-symbol {
 .coloradd-activation {
     margin-top: 1.5rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border-radius: 12px;
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+}
+
+.coloradd-reference {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--hover-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.coloradd-reference a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.coloradd-reference a:hover {
+    text-decoration: none;
+}
+
+.symbol-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+.coloradd-explanation h5 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.coloradd-explanation h5:first-of-type {
+    margin-top: 0;
 }
 
 .coloradd-activation h6 {

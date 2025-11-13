@@ -3953,7 +3953,7 @@ select:hover {
 .dev-ribbon-bottom {
     position: fixed;
     bottom: 52px;
-    left: -52px;
+    left: -58px;
     background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
     color: white;
     padding: 12px 60px;
