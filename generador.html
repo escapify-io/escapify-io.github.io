@@ -6,6 +6,40 @@
     <meta name="description" content="Generador de candados digitales para escape rooms educativos. Crea candados personalizados con múltiples tipos y opciones de configuración.">
     <meta name="keywords" content="generador candados, escape room educativo, candados digitales, gamificación educativa">
     <title>Generador de candados - Escapify</title>
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Generador de Candados Escapify",
+        "description": "Herramienta para crear candados digitales personalizados para escape rooms educativos",
+        "url": "https://escapify.io/generador.html",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "featureList": [
+            "17 tipos de candados diferentes",
+            "Configuración personalizada",
+            "Sistema de pistas",
+            "Exportación e importación",
+            "Accesibilidad completa"
+        ],
+        "inLanguage": "es",
+        "isAccessibleForFree": true
+    }
+    </script>
+    
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -40,6 +74,7 @@
                 <li><a href="/" class="nav-link">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link active" aria-current="page">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
@@ -69,7 +104,7 @@
         <div class="container">
             <div class="lock-type-selector">
                 <header class="section-header">
-                    <h2>Selecciona el tipo de candado</h2>
+                <h2>Selecciona el tipo de candado</h2>
                     <p class="section-subtitle">Elige entre más de 15 tipos diferentes de candados digitales para tus actividades educativas</p>
                 </header>
                 <div class="difficulty-filters" id="difficultyFilters" role="tablist" aria-label="Filtros de dificultad">
@@ -92,7 +127,7 @@
             <div class="lock-creator" id="lockCreator" style="display: none;">
                 <header class="lock-header">
                     <div class="lock-header-content">
-                        <h2 id="lockTypeTitle">Crear candado</h2>
+                    <h2 id="lockTypeTitle">Crear candado</h2>
                         <span id="lockTypeDifficulty" class="lock-difficulty-label" aria-label="Dificultad del candado"></span>
                     </div>
                     <button class="btn btn-secondary" id="backToTypes" aria-label="Volver a la selección de tipos">
@@ -120,14 +155,14 @@
                     <div class="form-group form-group-inline">
                         <div class="form-group-item">
                             <label for="lockName">Nombre del candado <span class="required">*</span></label>
-                            <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
-                        </div>
+                        <input type="text" id="lockName" placeholder="Introduce un nombre para el candado" aria-required="true">
+                    </div>
                         <div class="form-group-item">
                             <label for="codeLength">Longitud del código</label>
                             <div class="code-length-control">
                                 <input type="number" id="codeLength" min="1" max="12" value="4" aria-describedby="codeLengthHelp">
                                 <span class="code-length-hint" id="codeLengthHelp">Define cuántos elementos debe introducir la persona que resuelve este candado.</span>
-                            </div>
+                    </div>
                         </div>
                     </div>
 
@@ -151,11 +186,40 @@
                         </div>
                     </div>
 
+                    <!-- Opción de múltiples códigos (avanzado) -->
+                    <div class="form-group" id="multipleCodesSection" style="display: none;">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="enableMultipleCodes">
+                            <span>Permitir múltiples códigos de desbloqueo</span>
+                        </label>
+                        <div id="multipleCodesContainer" style="display: none; margin-top: 1rem;">
+                            <p class="form-help-text">Puedes añadir códigos alternativos que también desbloquearán el candado.</p>
+                            <div id="additionalCodesList" class="additional-codes-list"></div>
+                            <button type="button" class="btn btn-secondary btn-sm" id="addCodeBtn">
+                                <i class="fas fa-plus" aria-hidden="true"></i> Añadir código alternativo
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- 4. Descripción -->
                     <div class="form-group">
                         <label for="lockDescription">Descripción (opcional)</label>
-                        <textarea id="lockDescription" placeholder="Describe el candado o añade pistas" aria-describedby="descHelp"></textarea>
+                        <textarea id="lockDescription" placeholder="Describe el candado o añade información general" aria-describedby="descHelp"></textarea>
                         <div id="descHelp" class="sr-only">La descripción ayudará a los usuarios a entender el propósito del candado</div>
+                    </div>
+
+                    <!-- 5. Sistema de Pistas -->
+                    <div class="form-group">
+                        <label for="hintsSection">Pistas (opcional)</label>
+                        <div class="hints-manager" id="hintsManager">
+                            <p class="hints-description">Añade pistas que se revelarán progresivamente cuando el usuario las solicite. Las pistas se mostrarán en orden.</p>
+                            <div class="hints-list" id="hintsList">
+                                <!-- Las pistas se añadirán aquí dinámicamente -->
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" id="addHintBtn">
+                                <i class="fas fa-plus" aria-hidden="true"></i> Añadir Pista
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Opciones avanzadas para candado numérico -->
@@ -312,17 +376,42 @@
                         <label for="successMessage">Mensaje de éxito</label>
                         <div class="success-message-editor">
                             <div class="editor-toolbar">
-                                <select class="format-select" id="formatSelect">
-                                    <option>Párrafo</option>
-                                    <option>Encabezado 1</option>
-                                    <option>Encabezado 2</option>
+                                <select class="format-select" id="formatSelect" aria-label="Formato de texto">
+                                    <option value="p">Párrafo</option>
+                                    <option value="h1">Encabezado 1</option>
+                                    <option value="h2">Encabezado 2</option>
+                                    <option value="h3">Encabezado 3</option>
                                 </select>
-                                <button class="toolbar-btn" data-format="bold"><i class="fas fa-bold"></i></button>
-                                <button class="toolbar-btn" data-format="italic"><i class="fas fa-italic"></i></button>
-                                <button class="toolbar-btn" data-format="underline"><i class="fas fa-underline"></i></button>
-                                <button class="toolbar-btn" data-format="link"><i class="fas fa-link"></i></button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-format="bold" aria-label="Negrita" title="Negrita (Ctrl+B)">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button class="toolbar-btn" data-format="italic" aria-label="Cursiva" title="Cursiva (Ctrl+I)">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button class="toolbar-btn" data-format="underline" aria-label="Subrayado" title="Subrayado (Ctrl+U)">
+                                    <i class="fas fa-underline"></i>
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-format="link" aria-label="Insertar enlace" title="Insertar enlace">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                                <button class="toolbar-btn" data-format="image" aria-label="Insertar imagen" title="Insertar imagen">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-format="unorderedList" aria-label="Lista con viñetas" title="Lista con viñetas">
+                                    <i class="fas fa-list-ul"></i>
+                                </button>
+                                <button class="toolbar-btn" data-format="orderedList" aria-label="Lista numerada" title="Lista numerada">
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-format="removeFormat" aria-label="Quitar formato" title="Quitar formato">
+                                    <i class="fas fa-remove-format"></i>
+                                </button>
                             </div>
-                            <div class="editor-content" id="successMessageEditor" contenteditable="true"></div>
+                            <div class="editor-content" id="successMessageEditor" contenteditable="true" role="textbox" aria-label="Editor de mensaje de éxito" data-placeholder="Escribe el mensaje que se mostrará al resolver el candado..."></div>
                             <input type="hidden" id="lockMessage">
                         </div>
                     </div>
@@ -443,7 +532,6 @@
             // Elementos del editor de texto enriquecido
             const successMessageEditor = document.getElementById('successMessageEditor');
             const formatSelect = document.getElementById('formatSelect');
-            const toolbarButtons = document.querySelectorAll('.toolbar-btn');
             
             // Elementos para opciones numéricas
             const numericOptions = document.getElementById('numericOptions');
@@ -654,6 +742,11 @@
                     document.getElementById('rotaryOptions').style.display = 'block';
                 }
                 
+                // Actualizar visibilidad de múltiples códigos
+                if (window.updateMultipleCodesVisibility) {
+                    window.updateMultipleCodesVisibility();
+                }
+                
                 renderLockTemplate();
                 updateSummary({
                     type: type.name,
@@ -764,7 +857,7 @@
                 console.log('Current lock type:', currentLockType);
                 console.log('Entered code:', enteredCode);
                 
-                // Verificar que tenemos los datos básicos
+                // Validación mejorada del formulario
                 if (!currentLockType) {
                     showNotification('Error: No se ha seleccionado un tipo de candado', 'error');
                     console.error('❌ No currentLockType');
@@ -780,7 +873,23 @@
                 const lockName = document.getElementById('lockName').value.trim();
                 if (!lockName) {
                     showNotification('Error: El nombre del candado es obligatorio', 'error');
+                    document.getElementById('lockName').focus();
                     console.error('❌ No lock name');
+                    return;
+                }
+
+                // Validar longitud del código según el tipo
+                const codeLength = enteredCode.length;
+                const minLength = currentLockType.minLength || 1;
+                const maxLength = currentLockType.maxLength || 12;
+                
+                if (codeLength < minLength) {
+                    showNotification(`Error: El código debe tener al menos ${minLength} caracteres`, 'error');
+                    return;
+                }
+                
+                if (codeLength > maxLength) {
+                    showNotification(`Error: El código no puede tener más de ${maxLength} caracteres`, 'error');
                     return;
                 }
                 
@@ -792,18 +901,54 @@
                 }
                 
                 const selectedDifficulty = document.querySelector('input[name="lockDifficulty"]:checked');
+                
+                // Recopilar pistas
+                const hints = [];
+                const hintsList = document.getElementById('hintsList');
+                if (hintsList) {
+                    hintsList.querySelectorAll('.hint-item').forEach((item, index) => {
+                        const text = item.querySelector('.hint-text').value.trim();
+                        if (text) {
+                            hints.push({
+                                id: `hint-${index + 1}`,
+                                text: text,
+                                order: index + 1
+                            });
+                        }
+                    });
+                }
+
+                // Recopilar códigos alternativos
+                const additionalCodes = [];
+                const enableMultipleCodes = document.getElementById('enableMultipleCodes')?.checked;
+                if (enableMultipleCodes) {
+                    const additionalCodesList = document.getElementById('additionalCodesList');
+                    if (additionalCodesList) {
+                        additionalCodesList.querySelectorAll('.code-item input').forEach(input => {
+                            const code = input.value.trim();
+                            if (code && code !== enteredCode) {
+                                additionalCodes.push(code);
+                            }
+                        });
+                    }
+                }
+                
                 const lockData = {
                     id: Date.now(),
                     type: currentLockType.id,
                     name: lockName,
                     description: document.getElementById('lockDescription')?.value || '',
                     code: enteredCode,
+                    additionalCodes: additionalCodes.length > 0 ? additionalCodes : undefined,
                     message: lockMessageField?.value || '',
-                    hint: document.getElementById('lockHint')?.value || '',
+                    hints: hints.length > 0 ? hints : undefined,
                     image: document.getElementById('lockImage')?.value || '',
                     url: document.getElementById('lockUrl')?.value || '',
                     difficulty: selectedDifficulty ? selectedDifficulty.value : currentLockType.difficulty,
-                    timestamp: new Date().toISOString()
+                    timestamp: new Date().toISOString(),
+                    // Estadísticas
+                    usageCount: 0,
+                    lastUsed: null
                 };
                 
                 console.log('📦 Lock data preparado:', lockData);
@@ -1023,15 +1168,15 @@
                     window.notificationManager.show(message, type);
                 } else {
                     // Fallback básico
-                    const notification = document.createElement('div');
-                    notification.className = `notification ${type}`;
-                    notification.textContent = message;
-                    notification.setAttribute('role', 'alert');
-                    document.body.appendChild(notification);
-                    setTimeout(() => {
-                        notification.style.opacity = '0';
-                        setTimeout(() => notification.remove(), 300);
-                    }, 3000);
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.setAttribute('role', 'alert');
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
                 }
             }
             
@@ -1042,34 +1187,108 @@
                 console.log('LocalStorage test:', localStorage.getItem('lockHistory'));
             }
 
-            // Inicializar editor de texto enriquecido
+            // Inicializar editor de texto enriquecido mejorado
+            function initRichTextEditor() {
+                if (!successMessageEditor) return;
+
+                // Placeholder para el editor
+                const placeholder = successMessageEditor.getAttribute('data-placeholder') || '';
+                const updatePlaceholder = () => {
+                    if (successMessageEditor.textContent.trim() === '') {
+                        successMessageEditor.classList.add('editor-empty');
+                        successMessageEditor.setAttribute('data-placeholder', placeholder);
+                    } else {
+                        successMessageEditor.classList.remove('editor-empty');
+                    }
+                };
+
+                successMessageEditor.addEventListener('input', updatePlaceholder);
+                successMessageEditor.addEventListener('blur', updatePlaceholder);
+                updatePlaceholder();
+
+                // Atajos de teclado
+                successMessageEditor.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey || e.metaKey) {
+                        switch (e.key.toLowerCase()) {
+                            case 'b':
+                                e.preventDefault();
+                                document.execCommand('bold');
+                                break;
+                            case 'i':
+                                e.preventDefault();
+                                document.execCommand('italic');
+                                break;
+                            case 'u':
+                                e.preventDefault();
+                                document.execCommand('underline');
+                                break;
+                        }
+                    }
+                });
+
+                // Botones de la barra de herramientas
+                const toolbarButtons = document.querySelectorAll('.toolbar-btn');
             if (toolbarButtons && toolbarButtons.length > 0) {
                 toolbarButtons.forEach(button => {
-                    button.addEventListener('click', () => {
+                        button.addEventListener('click', (e) => {
+                            e.preventDefault();
                         const format = button.dataset.format;
-                        document.execCommand(format);
-                        if (successMessageEditor) {
+                            
+                            if (format === 'link') {
+                                const url = prompt('Introduce la URL del enlace:');
+                                if (url) {
+                                    document.execCommand('createLink', false, url);
+                                }
+                            } else if (format === 'image') {
+                                const url = prompt('Introduce la URL de la imagen:');
+                                if (url) {
+                                    document.execCommand('insertImage', false, url);
+                                }
+                            } else if (format === 'removeFormat') {
+                                document.execCommand('removeFormat');
+                                document.execCommand('unlink');
+                            } else {
+                                document.execCommand(format, false, null);
+                            }
+                            
                             successMessageEditor.focus();
-                        }
+                            updatePlaceholder();
                     });
                 });
             }
             
+                // Selector de formato
             if (formatSelect) {
                 formatSelect.addEventListener('change', (e) => {
                     const format = e.target.value;
-                    if (format === 'Párrafo') {
+                        if (format === 'p') {
                         document.execCommand('formatBlock', false, 'p');
-                    } else if (format === 'Encabezado 1') {
+                        } else if (format === 'h1') {
                         document.execCommand('formatBlock', false, 'h1');
-                    } else if (format === 'Encabezado 2') {
+                        } else if (format === 'h2') {
                         document.execCommand('formatBlock', false, 'h2');
+                        } else if (format === 'h3') {
+                            document.execCommand('formatBlock', false, 'h3');
                     }
-                    if (successMessageEditor) {
                         successMessageEditor.focus();
+                    });
+                }
+
+                // Actualizar selector de formato según la selección
+                successMessageEditor.addEventListener('keyup', () => {
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        const block = selection.anchorNode.parentElement.closest('h1, h2, h3, p');
+                        if (block && formatSelect) {
+                            const tagName = block.tagName.toLowerCase();
+                            formatSelect.value = tagName === 'p' ? 'p' : tagName;
+                        }
                     }
                 });
             }
+
+            // Inicializar el editor cuando el DOM esté listo
+            initRichTextEditor();
             
             // Inicializar enlaces para elementos del directorio y candado vinculado
             const editDirectoryBtn = document.getElementById('editDirectory');
@@ -1215,12 +1434,95 @@
                     }
                 });
             });
+
+            // Sistema de múltiples códigos
+            const enableMultipleCodesCheck = document.getElementById('enableMultipleCodes');
+            const multipleCodesContainer = document.getElementById('multipleCodesContainer');
+            const additionalCodesList = document.getElementById('additionalCodesList');
+            const addCodeBtn = document.getElementById('addCodeBtn');
+            const multipleCodesSection = document.getElementById('multipleCodesSection');
+
+            // Mostrar/ocultar sección de múltiples códigos según el tipo
+            window.updateMultipleCodesVisibility = function() {
+                if (multipleCodesSection && currentLockType) {
+                    // Solo mostrar para tipos numéricos y alfanuméricos
+                    const supportsMultipleCodes = ['numeric', 'alphanumeric', 'word-wheel'].includes(currentLockType.id);
+                    multipleCodesSection.style.display = supportsMultipleCodes ? 'block' : 'none';
+                    
+                    if (!supportsMultipleCodes && enableMultipleCodesCheck) {
+                        enableMultipleCodesCheck.checked = false;
+                        if (multipleCodesContainer) {
+                            multipleCodesContainer.style.display = 'none';
+                        }
+                        if (additionalCodesList) {
+                            additionalCodesList.innerHTML = '';
+                        }
+                    }
+                } else if (multipleCodesSection && !currentLockType) {
+                    multipleCodesSection.style.display = 'none';
+                }
+            };
+
+            if (enableMultipleCodesCheck) {
+                enableMultipleCodesCheck.addEventListener('change', (e) => {
+                    if (multipleCodesContainer) {
+                        multipleCodesContainer.style.display = e.target.checked ? 'block' : 'none';
+                    }
+                });
+            }
+
+            function addAdditionalCode(value = '') {
+                if (!additionalCodesList) return;
+
+                const codeItem = document.createElement('div');
+                codeItem.className = 'code-item';
+                codeItem.innerHTML = `
+                    <input type="text" 
+                           class="code-input" 
+                           placeholder="Código alternativo" 
+                           value="${value}"
+                           aria-label="Código alternativo">
+                    <button type="button" class="btn-icon code-remove" aria-label="Eliminar código">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                const removeBtn = codeItem.querySelector('.code-remove');
+                removeBtn.addEventListener('click', () => {
+                    codeItem.remove();
+                });
+
+                additionalCodesList.appendChild(codeItem);
+                codeItem.querySelector('.code-input').focus();
+            }
+
+            if (addCodeBtn) {
+                addCodeBtn.addEventListener('click', () => addAdditionalCode());
+            }
+
+            // Cargar códigos alternativos si se está editando
+            function loadAdditionalCodesFromData(lockData) {
+                if (additionalCodesList && lockData?.additionalCodes && Array.isArray(lockData.additionalCodes)) {
+                    additionalCodesList.innerHTML = '';
+                    lockData.additionalCodes.forEach(code => {
+                        addAdditionalCode(code);
+                    });
+                    if (enableMultipleCodesCheck) {
+                        enableMultipleCodesCheck.checked = true;
+                        if (multipleCodesContainer) {
+                            multipleCodesContainer.style.display = 'block';
+                        }
+                    }
+                }
+            }
         });
     </script>
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
     <script src="assets/js/notifications.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
     <footer class="main-footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">

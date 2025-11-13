@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos Educativos - Escapify</title>
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -30,6 +36,7 @@
                 <li><a href="/" class="nav-link">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link active" aria-current="page">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
@@ -104,7 +111,7 @@
                         <i class="fas fa-book-open" aria-hidden="true"></i>
                     </div>
                     <h3>Guía completa de candados digitales</h3>
-                    <p>Pasos, rúbricas y plantillas para diseñar combinaciones numéricas, alfabéticas y visuales inspiradas en Lockee.</p>
+                    <p>Pasos, rúbricas y plantillas para diseñar combinaciones numéricas, alfabéticas y visuales para candados digitales educativos.</p>
                     <div class="resource-meta">
                         <span class="resource-type">Guía</span>
                         <span class="resource-level">Docentes</span>
@@ -976,6 +983,8 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script type="text/javascript">
         //<![CDATA[
@@ -992,7 +1001,7 @@
             'manual-candados': {
                 filename: 'guia-candados-digitales.md',
                 content: `
-# Guía de candados digitales (Lockee + Escapify)
+# Guía de candados digitales (Escapify)
 - Checklist para definir objetivo, pista y recompensa.
 - Tabla de correspondencias entre tipos de candados (numérico, palabra, cryptex, dial).
 - Recomendaciones de accesibilidad (colores, ayudas visuales y lector de pantalla).

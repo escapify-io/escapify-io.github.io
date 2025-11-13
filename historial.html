@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial - Escapify</title>
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -30,6 +36,7 @@
                 <li><a href="/" class="nav-link">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link active" aria-current="page">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
@@ -77,6 +84,10 @@
                         <input type="text" id="searchInput" placeholder="Buscar candados..." aria-label="Buscar candados por nombre o descripción">
                         <i class="fas fa-search" aria-hidden="true"></i>
                     </div>
+                    <div class="tags-filter-container" id="tagsFilterContainer" style="margin-bottom: 1rem;">
+                        <label for="tagsFilter" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Filtrar por etiquetas:</label>
+                        <div class="tags-filter" id="tagsFilter"></div>
+                    </div>
                     <div class="filter-options">
                         <select id="filterType" aria-label="Filtrar por tipo de candado">
                             <option value="all">Todos los tipos</option>
@@ -102,12 +113,61 @@
                             <option value="week">Esta semana</option>
                             <option value="month">Este mes</option>
                         </select>
+                        <select id="sortBy" aria-label="Ordenar por">
+                            <option value="date-desc">Más recientes primero</option>
+                            <option value="date-asc">Más antiguos primero</option>
+                            <option value="name-asc">Nombre (A-Z)</option>
+                            <option value="name-desc">Nombre (Z-A)</option>
+                            <option value="difficulty-asc">Dificultad (Fácil → Difícil)</option>
+                            <option value="difficulty-desc">Dificultad (Difícil → Fácil)</option>
+                            <option value="type-asc">Tipo (A-Z)</option>
+                        </select>
                     </div>
                 </div>
             </section>
 
+            <!-- Colecciones -->
+            <section class="collections-section" id="collectionsSection" style="margin-bottom: 3rem;">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div>
+                        <h2>Colecciones</h2>
+                        <p class="section-subtitle">Organiza tus candados en grupos o proyectos</p>
+                    </div>
+                    <button id="createCollectionBtn" class="btn btn-primary">
+                        <i class="fas fa-plus" aria-hidden="true"></i> Nueva Colección
+                    </button>
+                </div>
+                <div class="collections-grid" id="collectionsGrid">
+                    <!-- Las colecciones se cargarán dinámicamente -->
+                </div>
+            </section>
+
+            <!-- Acciones rápidas -->
+            <div class="filters-bar" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                <div class="filters-left">
+                    <a href="/generador.html" class="btn btn-primary">
+                        <i class="fas fa-plus" aria-hidden="true"></i> Nuevo candado
+                    </a>
+                    <a href="/nuevo-candado.html" class="btn btn-secondary">
+                        <i class="fas fa-magic" aria-hidden="true"></i> Crear rápido
+                    </a>
+                    <a href="/panel.html" class="btn btn-secondary">
+                        <i class="fas fa-th-large" aria-hidden="true"></i> Panel
+                    </a>
+                    <a href="/creacion-candados.html" class="btn btn-secondary">
+                        <i class="fas fa-list" aria-hidden="true"></i> Gestión avanzada
+                    </a>
+                </div>
+            </div>
+
             <!-- Lista de candados -->
             <section class="history-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div>
+                        <h2>Historial de Candados</h2>
+                        <p class="section-subtitle">Todos tus candados creados</p>
+                    </div>
+                </div>
                 <div class="history-list-container">
                     <ul class="history-list" id="historyList" role="list" aria-label="Lista de candados creados" aria-live="polite">
                         <!-- Los elementos del historial se cargarán dinámicamente -->
@@ -115,11 +175,14 @@
                 </div>
                 
                 <div class="history-actions">
+                    <button id="importBtn" class="btn btn-secondary" aria-label="Importar historial de candados">
+                        <i class="fas fa-upload" aria-hidden="true"></i> Importar
+                    </button>
                     <button id="exportBtn" class="btn btn-primary" aria-label="Exportar historial de candados">
-                        <i class="fas fa-download" aria-hidden="true"></i> Exportar Historial
+                        <i class="fas fa-download" aria-hidden="true"></i> Exportar
                     </button>
                     <button id="clearHistoryBtn" class="btn btn-danger" aria-label="Limpiar historial de candados">
-                        <i class="fas fa-trash" aria-hidden="true"></i> Limpiar Historial
+                        <i class="fas fa-trash" aria-hidden="true"></i> Limpiar
                     </button>
                 </div>
             </section>
@@ -167,6 +230,12 @@
     <script src="assets/js/accessibility.js" type="module"></script>
     <script src="assets/js/notifications.js" type="module"></script>
     <script src="assets/js/favorites.js" type="module"></script>
+    <script src="assets/js/confirm-modal.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/tags.js" type="module"></script>
+    <script src="assets/js/collections.js" type="module"></script>
+    <script src="assets/js/notes.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
     <script type="module" src="assets/js/historial.js"></script>
 </body>
 </html> 

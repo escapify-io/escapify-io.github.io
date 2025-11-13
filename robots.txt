@@ -1,0 +1,24 @@
+# robots.txt para Escapify
+# https://escapify.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://escapify.io/sitemap.xml
+
+# No indexar archivos de desarrollo y recursos internos
+Disallow: /assets/
+Disallow: /ppt/
+Disallow: /presentacion/
+Disallow: /test-fixes.html
+
+# Permitir recursos públicos
+Allow: /recursos/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+
+# Crawl-delay (opcional, ajustar según necesidades)
+# Crawl-delay: 1
+

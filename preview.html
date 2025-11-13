@@ -766,7 +766,15 @@
 
                 function checkCode() {
                     if (LockTypes.validateCode(currentLockType.id, enteredCode, lockData.options || {})) {
-                        if (enteredCode === lockData.code) {
+                        // Verificar código principal
+                        let isCorrect = enteredCode === lockData.code;
+                        
+                        // Verificar códigos alternativos si existen
+                        if (!isCorrect && lockData.additionalCodes && Array.isArray(lockData.additionalCodes)) {
+                            isCorrect = lockData.additionalCodes.includes(enteredCode);
+                        }
+                        
+                        if (isCorrect) {
                             const timeSpent = (Date.now() - startTime) / 1000;
                             const score = lockSystem.calculateScore();
                             lockSystem.updateScore(score);

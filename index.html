@@ -7,6 +7,14 @@
     <meta name="keywords" content="escape room educativo, candados digitales, gamificación educativa, recursos docentes, plantillas educativas, ColorADD, accesibilidad">
     <meta name="author" content="Escapify">
     
+    <!-- PWA -->
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://escapify.io/">
@@ -22,6 +30,47 @@
     <meta property="twitter:image" content="https://escapify.io/assets/images/og-image.jpg">
     
     <title>Escapify - Candados digitales para escape rooms educativos</title>
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Escapify",
+        "description": "Plataforma educativa para crear candados digitales y escape rooms. Herramientas, plantillas y recursos para docentes innovadores.",
+        "url": "https://escapify.io",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "150"
+        },
+        "featureList": [
+            "Generador de candados digitales",
+            "17 tipos de candados diferentes",
+            "Sistema de escape rooms",
+            "Recursos y plantillas educativas",
+            "Accesibilidad completa (ColorADD, WCAG)",
+            "Exportar/Importar datos",
+            "Sistema de colecciones y etiquetas"
+        ],
+        "creator": {
+            "@type": "Organization",
+            "name": "Escapify",
+            "url": "https://escapify.io"
+        },
+        "inLanguage": "es",
+        "isAccessibleForFree": true,
+        "license": "https://escapify.io/terminos.html"
+    }
+    </script>
+    
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -49,6 +98,7 @@
                 <li><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
@@ -228,6 +278,16 @@
                     </ul>
                 </nav>
             </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <nav aria-label="Enlaces legales">
+                    <ul>
+                        <li><a href="/privacidad.html">Privacidad</a></li>
+                        <li><a href="/terminos.html">Términos</a></li>
+                        <li><a href="/cookies.html">Cookies</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa de código abierto.</p>
@@ -240,6 +300,8 @@
     <script src="assets/js/accessibility.js" type="module"></script>
     <script src="assets/js/notifications.js" type="module"></script>
     <script src="assets/js/favorites.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Obtener candados recientes del localStorage

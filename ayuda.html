@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayuda - Escapify</title>
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -30,6 +36,7 @@
                 <li><a href="/" class="nav-link">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link active" aria-current="page">Ayuda</a></li>
@@ -271,8 +278,8 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #0066CC;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Azul: Triángulo derecha con bordes redondeados -->
-                                                        <path d="M 42,8 L 42,42 L 12,25 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <!-- Azul: Triángulo derecha centrado con bordes redondeados -->
+                                                        <path d="M 40,10 L 40,40 L 15,25 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -283,7 +290,8 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #FFD700;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <line x1="8" y1="42" x2="42" y2="8" stroke="black" stroke-width="6" stroke-linecap="round"/>
+                                                        <!-- Amarillo: Diagonal centrada de esquina a esquina -->
+                                                        <line x1="10" y1="40" x2="40" y2="10" stroke="black" stroke-width="6" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -294,8 +302,8 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #CC0000;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Rojo: Triángulo izquierda con bordes redondeados -->
-                                                        <path d="M 8,8 L 8,42 L 38,25 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <!-- Rojo: Triángulo izquierda centrado con bordes redondeados -->
+                                                        <path d="M 10,10 L 10,40 L 35,25 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -336,9 +344,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #00CC00;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Verde: Azul (triángulo derecha) + Amarillo (diagonal) - bien posicionados según referencia -->
-                                                        <path d="M 42,8 L 42,42 L 18,25 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-                                                        <line x1="18" y1="25" x2="8" y2="8" stroke="black" stroke-width="5.5" stroke-linecap="round"/>
+                                                        <!-- Verde: Diagonal negra de esquina superior izquierda a inferior derecha, triángulo blanco a la derecha, bien alineados -->
+                                                        <line x1="10" y1="10" x2="28" y2="28" stroke="black" stroke-width="5.5" stroke-linecap="round"/>
+                                                        <path d="M 32,12 L 32,36 L 18,24 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -350,9 +358,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #FF6600;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Naranja: Amarillo (diagonal) + Rojo (triángulo izquierda) - bien posicionados según referencia -->
-                                                        <line x1="8" y1="42" x2="32" y2="25" stroke="black" stroke-width="5.5" stroke-linecap="round"/>
-                                                        <path d="M 8,8 L 8,42 L 32,25 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <!-- Naranja: Triángulo blanco apuntando a la derecha, diagonal negra desde su vértice, bien alineados -->
+                                                        <path d="M 10,10 L 10,36 L 26,23 Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <line x1="26" y1="23" x2="40" y2="40" stroke="black" stroke-width="5.5" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -364,11 +372,11 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #6600CC;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Púrpura: Rojo (triángulo izquierda) + Azul (triángulo derecha) - formando símbolo X con bordes redondeados -->
-                                                        <path d="M 8,8 L 8,22 L 25,15 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
-                                                        <path d="M 42,8 L 42,22 L 25,15 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
-                                                        <path d="M 8,28 L 8,42 L 25,35 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
-                                                        <path d="M 42,28 L 42,42 L 25,35 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <!-- Púrpura: Dos formas de "bow-tie" apiladas verticalmente, perfectamente centradas -->
+                                                        <path d="M 10,12 L 10,18 L 25,15 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <path d="M 40,12 L 40,18 L 25,15 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <path d="M 10,32 L 10,38 L 25,35 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <path d="M 40,32 L 40,38 L 25,35 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -385,7 +393,8 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #FFFFFF; border: 2px solid #000000;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <rect x="10" y="10" width="30" height="30" fill="white" stroke="black" stroke-width="2"/>
+                                                        <!-- Blanco: Cuadrado centrado con bordes redondeados -->
+                                                        <rect x="12" y="12" width="26" height="26" fill="white" stroke="black" stroke-width="2" rx="2"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -396,7 +405,8 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #000000;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <rect x="10" y="10" width="30" height="30" fill="black"/>
+                                                        <!-- Negro: Cuadrado centrado con bordes redondeados -->
+                                                        <rect x="12" y="12" width="26" height="26" fill="black" rx="2"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -407,9 +417,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #808080;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Gris Claro: Cuadrado blanco con pequeño cuadrado negro -->
-                                                        <rect x="10" y="10" width="30" height="30" fill="white" stroke="black" stroke-width="2"/>
-                                                        <rect x="18" y="18" width="14" height="14" fill="black"/>
+                                                        <!-- Gris Claro: Cuadrado blanco centrado con pequeño cuadrado negro centrado -->
+                                                        <rect x="12" y="12" width="26" height="26" fill="white" stroke="black" stroke-width="2" rx="2"/>
+                                                        <rect x="19" y="19" width="12" height="12" fill="black" rx="1"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -420,9 +430,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #404040;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Gris Oscuro: Cuadrado negro con pequeño cuadrado blanco -->
-                                                        <rect x="10" y="10" width="30" height="30" fill="black"/>
-                                                        <rect x="18" y="18" width="14" height="14" fill="white"/>
+                                                        <!-- Gris Oscuro: Cuadrado negro centrado con pequeño cuadrado blanco centrado -->
+                                                        <rect x="12" y="12" width="26" height="26" fill="black" rx="2"/>
+                                                        <rect x="19" y="19" width="12" height="12" fill="white" rx="1"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -433,9 +443,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #FFD700;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Dorado: Paréntesis + Amarillo (diagonal) -->
-                                                        <path d="M 12 10 Q 8 10 8 15 L 8 20 Q 8 25 12 25" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        <line x1="18" y1="30" x2="38" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                                                        <!-- Dorado: Paréntesis a la izquierda, diagonal (amarillo) a la derecha, bien alineados -->
+                                                        <path d="M 12 12 Q 8 12 8 17 L 8 20 Q 8 25 12 25" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <line x1="18" y1="28" x2="38" y2="10" stroke="black" stroke-width="5" stroke-linecap="round"/>
                                                     </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -446,10 +456,10 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #C0C0C0;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Plateado: Paréntesis + Gris Claro -->
-                                                        <path d="M 12 10 Q 8 10 8 15 L 8 20 Q 8 25 12 25" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        <rect x="18" y="10" width="20" height="20" fill="white" stroke="black" stroke-width="1.5" rx="2"/>
-                                                        <rect x="24" y="16" width="8" height="8" fill="black" rx="1"/>
+                                                        <!-- Plateado: Paréntesis a la izquierda, Gris Claro (cuadrado con interior) a la derecha, bien alineados -->
+                                                        <path d="M 12 12 Q 8 12 8 17 L 8 20 Q 8 25 12 25" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <rect x="18" y="12" width="18" height="18" fill="white" stroke="black" stroke-width="1.5" rx="2"/>
+                                                        <rect x="23" y="17" width="8" height="8" fill="black" rx="1"/>
                                                 </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -465,9 +475,9 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #FFFF99;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Amarillo Claro: Diagonal (amarillo) + Cuadrado blanco -->
-                                                        <line x1="8" y1="30" x2="30" y2="8" stroke="black" stroke-width="5" stroke-linecap="round"/>
-                                                        <rect x="32" y="8" width="10" height="10" fill="white" stroke="black" stroke-width="1.5" rx="1"/>
+                                                        <!-- Amarillo Claro: Diagonal (amarillo) + Cuadrado blanco al final, bien alineados -->
+                                                        <line x1="10" y1="38" x2="28" y2="20" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                                                        <rect x="30" y="18" width="10" height="10" fill="white" stroke="black" stroke-width="1.5" rx="1"/>
                                                 </svg>
                                                 </div>
                                                 <div class="symbol-info">
@@ -478,14 +488,14 @@
                                             <div class="coloradd-symbol-item">
                                                 <div class="symbol-display" style="background-color: #003366;">
                                                     <svg width="50" height="50" viewBox="0 0 50 50" style="display: block;">
-                                                        <!-- Azul Oscuro: Triángulo derecha (azul) + Cuadrado negro -->
-                                                        <path d="M 30,8 L 30,30 L 10,19 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
-                                                        <rect x="32" y="8" width="10" height="10" fill="black" rx="1"/>
+                                                        <!-- Azul Oscuro: Triángulo izquierda (rojo) + Cuadrado negro, bien alineados -->
+                                                        <path d="M 10,10 L 10,28 L 22,19 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+                                                        <rect x="24" y="10" width="10" height="10" fill="black" rx="1"/>
                                                 </svg>
                                                 </div>
                                                 <div class="symbol-info">
                                                     <strong>Azul Oscuro</strong>
-                                                    <p>Triángulo derecha + Cuadrado negro</p>
+                                                    <p>Triángulo izquierda + Cuadrado negro</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -691,6 +701,10 @@
             });
         });
     </script>
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
 </body>
 </html> 

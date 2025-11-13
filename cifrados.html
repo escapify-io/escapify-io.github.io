@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cifrados y Codificaciones - Escapify</title>
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -869,6 +875,7 @@
                 <li><a href="/" class="nav-link">Inicio</a></li>
                 <li><a href="/generador.html" class="nav-link">Generador</a></li>
                 <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
                 <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
                 <li><a href="/cifrados.html" class="nav-link active" aria-current="page">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
@@ -1238,7 +1245,7 @@
                             <span class="difficulty-dot dot-empty"></span>
                         </div>
                     </div>
-                    <p>Basado en giros izquierda/derecha y números concretos, perfecto para recrear mandos giratorios como los de Lockee.</p>
+                    <p>Basado en giros izquierda/derecha y números concretos, perfecto para recrear mandos giratorios digitales interactivos.</p>
                     <div class="cipher-example">
                         Secuencia: R-25 → L-12 → R-3
                     </div>
@@ -1311,6 +1318,8 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         const cipherLockMap = {
