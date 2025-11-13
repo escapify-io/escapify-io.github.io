@@ -17,25 +17,35 @@
     <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
 
     <header class="main-header" role="banner">
-        <nav class="main-nav" role="navigation" aria-label="Navegación principal">
-            <div class="nav-container">
-                <a href="/" class="nav-logo" aria-label="Escapify - Inicio">
-                    <i class="fas fa-lock" aria-hidden="true"></i>
-                    <span>Escapify</span>
-                </a>
-                <button class="mobile-menu-btn" aria-label="Menú móvil" aria-expanded="false">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/generador.html">Generador</a></li>
-                    <li><a href="/historial.html">Historial</a></li>
-                    <li><a href="/crear-escape.html">Escape Room</a></li>
-                    <li><a href="/recursos.html">Recursos</a></li>
-                    <li><a href="/cifrados.html">Cifrados</a></li>
-                    <li><a href="/ayuda.html">Ayuda</a></li>
-                </ul>
-            </div>
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <a href="/login.html" class="nav-link user-icon-link" aria-label="Iniciar sesión o ver perfil">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
         </nav>
     </header>
 
@@ -147,7 +157,9 @@
     <script src="assets/js/theme.js" type="module"></script>
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
     <script src="assets/js/pwa.js" type="module"></script>
+    <script src="assets/js/user-menu.js" type="module"></script>
 </body>
 </html>
 

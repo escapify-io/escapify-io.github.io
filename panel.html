@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Escapify</title>
+    <meta name="description" content="Gestiona y organiza tus candados en colecciones desde el panel de control de Escapify">
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dev-ribbon" aria-label="Página en desarrollo">En desarrollo</div>
+    <div class="dev-ribbon-bottom" aria-label="Página en desarrollo">En desarrollo</div>
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <a href="/login.html" class="nav-link user-icon-link" aria-label="Iniciar sesión o ver perfil">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="history-hero" aria-labelledby="panel-title">
+        <div class="container">
+            <h1 class="section-title" id="panel-title">Panel de Control</h1>
+            <p class="section-subtitle">Organiza y gestiona tus candados en colecciones</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Estadísticas del usuario -->
+            <section class="panel-section" style="margin-bottom: 3rem;">
+                <div class="user-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div class="stat-item" style="background: var(--card-bg); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px var(--shadow-color); border: 1px solid var(--border-color); text-align: center;">
+                        <div class="stat-value" id="totalLocks" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">0</div>
+                        <div class="stat-label" style="color: var(--text-muted); font-size: 0.9rem;">Candados totales</div>
+                    </div>
+                    <div class="stat-item" style="background: var(--card-bg); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px var(--shadow-color); border: 1px solid var(--border-color); text-align: center;">
+                        <div class="stat-value" id="totalCollections" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">0</div>
+                        <div class="stat-label" style="color: var(--text-muted); font-size: 0.9rem;">Colecciones</div>
+                    </div>
+                    <div class="stat-item" style="background: var(--card-bg); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px var(--shadow-color); border: 1px solid var(--border-color); text-align: center;">
+                        <div class="stat-value" id="totalUsage" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">0</div>
+                        <div class="stat-label" style="color: var(--text-muted); font-size: 0.9rem;">Candados utilizados</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Colecciones -->
+            <section class="panel-section" style="margin-bottom: 3rem;">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2 class="section-title" style="font-size: 1.75rem; margin: 0 0 0.5rem 0;">Colecciones</h2>
+                        <p class="section-subtitle" style="margin: 0; color: var(--text-muted);">Organiza tus candados en grupos o proyectos</p>
+                    </div>
+                    <button id="createCollectionBtn" class="btn btn-primary">
+                        <i class="fas fa-plus" aria-hidden="true"></i> Nueva Colección
+                    </button>
+                </div>
+                <div class="collections-grid" id="collectionsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <!-- Las colecciones se cargarán dinámicamente -->
+                </div>
+            </section>
+
+            <!-- Filtros y búsqueda -->
+            <section class="panel-section" style="margin-bottom: 3rem;">
+                <div class="filters-bar" style="background: var(--card-bg); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px var(--shadow-color); border: 1px solid var(--border-color);">
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                placeholder="Buscar candados..." 
+                                class="form-input"
+                                style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--input-bg); color: var(--text-color);"
+                            >
+                        </div>
+                        <div>
+                            <select id="filterType" class="form-input" style="padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--input-bg); color: var(--text-color);">
+                                <option value="all">Todos los tipos</option>
+                                <option value="numeric">Numérico</option>
+                                <option value="word">Palabra</option>
+                                <option value="directional">Direccional</option>
+                                <option value="pattern">Patrón</option>
+                                <option value="rotary">Mando giratorio</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="sortBy" class="form-input" style="padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--input-bg); color: var(--text-color);">
+                                <option value="date-desc">Más recientes</option>
+                                <option value="date-asc">Más antiguos</option>
+                                <option value="name-asc">Nombre (A-Z)</option>
+                                <option value="name-desc">Nombre (Z-A)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de candados -->
+            <section class="panel-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2 class="section-title" style="font-size: 1.75rem; margin: 0 0 0.5rem 0;">Todos los Candados</h2>
+                        <p class="section-subtitle" style="margin: 0; color: var(--text-muted);" id="locksCount">0 candados</p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <button id="selectAllBtn" class="btn btn-secondary">
+                            <i class="fas fa-check-square" aria-hidden="true"></i> Seleccionar todos
+                        </button>
+                        <button id="exportSelectedBtn" class="btn btn-secondary" disabled>
+                            <i class="fas fa-download" aria-hidden="true"></i> Exportar seleccionados
+                        </button>
+                        <button id="deleteSelectedBtn" class="btn btn-danger" disabled>
+                            <i class="fas fa-trash" aria-hidden="true"></i> Eliminar seleccionados
+                        </button>
+                    </div>
+                </div>
+                <div class="history-list-container">
+                    <ul class="history-list" id="locksList" role="list" aria-label="Lista de candados" aria-live="polite">
+                        <!-- Los candados se cargarán dinámicamente -->
+                    </ul>
+                    <div id="emptyState" style="display: none; text-align: center; padding: 3rem; color: var(--text-muted);">
+                        <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p style="font-size: 1.1rem; margin: 0;">No hay candados que mostrar</p>
+                        <a href="/generador.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                            <i class="fas fa-plus" aria-hidden="true"></i> Crear tu primer candado
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Acciones rápidas -->
+            <section class="panel-section" style="margin-top: 3rem;">
+                <div style="background: var(--card-bg); border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px var(--shadow-color); border: 1px solid var(--border-color);">
+                    <h3 style="margin: 0 0 1rem 0; color: var(--heading-color);">Acciones Rápidas</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="/generador.html" class="btn btn-primary">
+                            <i class="fas fa-plus" aria-hidden="true"></i> Nuevo Candado
+                        </a>
+                        <a href="/historial.html" class="btn btn-secondary">
+                            <i class="fas fa-history" aria-hidden="true"></i> Ver Historial Completo
+                        </a>
+                        <a href="/crear-escape.html" class="btn btn-secondary">
+                            <i class="fas fa-door-open" aria-hidden="true"></i> Crear Escape Room
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa de código abierto.</p>
+            <p> v1.3.0 - Noviembre 2025</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/notifications.js" type="module"></script>
+    <script src="assets/js/confirm-modal.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/tags.js" type="module"></script>
+    <script src="assets/js/collections.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
+    <script src="assets/js/user-menu.js" type="module"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            // Crear instancia de HistoryManager si está disponible
+            let historyManager = null;
+            if (window.HistoryManager) {
+                historyManager = new window.HistoryManager();
+            }
+            
+            // Referencias a elementos del DOM
+            const collectionsGrid = document.getElementById('collectionsGrid');
+            const createCollectionBtn = document.getElementById('createCollectionBtn');
+            const locksList = document.getElementById('locksList');
+            const emptyState = document.getElementById('emptyState');
+            const searchInput = document.getElementById('searchInput');
+            const filterType = document.getElementById('filterType');
+            const sortBy = document.getElementById('sortBy');
+            const selectAllBtn = document.getElementById('selectAllBtn');
+            const exportSelectedBtn = document.getElementById('exportSelectedBtn');
+            const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+            const locksCount = document.getElementById('locksCount');
+            const totalLocks = document.getElementById('totalLocks');
+            const totalCollections = document.getElementById('totalCollections');
+            const totalUsage = document.getElementById('totalUsage');
+
+            let allLocks = [];
+            let selectedLocks = new Set();
+
+            // Cargar estadísticas
+            function loadStats() {
+                try {
+                    const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                    const collections = JSON.parse(localStorage.getItem('escapify_collections') || '[]');
+                    
+                    let totalUsageCount = 0;
+                    history.forEach(lock => {
+                        totalUsageCount += (lock.usageCount || 0);
+                    });
+
+                    totalLocks.textContent = history.length;
+                    totalCollections.textContent = collections.length;
+                    totalUsage.textContent = totalUsageCount;
+                } catch (error) {
+                    console.error('Error cargando estadísticas:', error);
+                }
+            }
+
+            // Cargar y renderizar candados
+            function loadLocks() {
+                try {
+                    allLocks = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                    filterAndRenderLocks();
+                } catch (error) {
+                    console.error('Error cargando candados:', error);
+                    if (window.notificationManager) {
+                        window.notificationManager.error('Error al cargar los candados');
+                    }
+                }
+            }
+
+            // Filtrar y renderizar candados
+            function filterAndRenderLocks() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const typeFilter = filterType.value;
+                const sortValue = sortBy.value;
+
+                let filtered = allLocks.filter(lock => {
+                    const matchesSearch = !searchTerm || 
+                        (lock.name || '').toLowerCase().includes(searchTerm) ||
+                        (lock.description || '').toLowerCase().includes(searchTerm) ||
+                        (lock.code || '').toLowerCase().includes(searchTerm);
+                    
+                    const matchesType = typeFilter === 'all' || lock.type === typeFilter ||
+                        (typeFilter === 'directional' && lock.type?.startsWith('directional')) ||
+                        (typeFilter === 'pattern' && lock.type?.startsWith('pattern'));
+
+                    return matchesSearch && matchesType;
+                });
+
+                // Ordenar
+                filtered.sort((a, b) => {
+                    switch (sortValue) {
+                        case 'date-desc':
+                            return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+                        case 'date-asc':
+                            return new Date(a.timestamp || 0) - new Date(b.timestamp || 0);
+                        case 'name-asc':
+                            return (a.name || '').localeCompare(b.name || '', 'es');
+                        case 'name-desc':
+                            return (b.name || '').localeCompare(a.name || '', 'es');
+                        default:
+                            return 0;
+                    }
+                });
+
+                renderLocks(filtered);
+                locksCount.textContent = `${filtered.length} candado${filtered.length !== 1 ? 's' : ''}`;
+            }
+
+            // Renderizar candados
+            function renderLocks(locks) {
+                if (locks.length === 0) {
+                    locksList.innerHTML = '';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                emptyState.style.display = 'none';
+                
+                locksList.innerHTML = locks.map(lock => {
+                    const isSelected = selectedLocks.has(lock.id);
+                    const difficulty = lock.difficulty || 'medium';
+                    const difficultyLabels = { easy: 'Fácil', medium: 'Media', hard: 'Difícil' };
+                    const difficultyColors = { easy: '#10B981', medium: '#F59E0B', hard: '#EF4444' };
+                    
+                    return `
+                        <li class="history-item">
+                            <div class="history-item-content">
+                                <input 
+                                    type="checkbox" 
+                                    class="lock-checkbox" 
+                                    data-id="${lock.id}"
+                                    ${isSelected ? 'checked' : ''}
+                                    aria-label="Seleccionar ${lock.name || 'candado'}"
+                                >
+                                <div>
+                                    <h3 class="history-item-name">${escapeHtml(lock.name || 'Candado sin nombre')}</h3>
+                                    <p class="history-item-description" style="margin: 0.25rem 0; color: var(--text-muted); font-size: 0.9rem;">
+                                        ${escapeHtml(lock.description || 'Sin descripción')}
+                                    </p>
+                                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                        <span class="difficulty-badge difficulty-${difficulty}" style="background: ${difficultyColors[difficulty]}; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem;">
+                                            ${difficultyLabels[difficulty]}
+                                        </span>
+                                        <span style="color: var(--text-muted); font-size: 0.85rem;">
+                                            ${getTypeLabel(lock.type)}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="history-item-actions">
+                                <button class="history-action-btn" data-action="open" data-id="${lock.id}" aria-label="Abrir candado">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="history-action-btn" data-action="edit" data-id="${lock.id}" aria-label="Editar candado">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="history-action-btn" data-action="share" data-id="${lock.id}" aria-label="Compartir candado">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="history-action-btn btn-delete" data-action="delete" data-id="${lock.id}" aria-label="Eliminar candado">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    `;
+                }).join('');
+
+                // Event listeners
+                locksList.querySelectorAll('.lock-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        const id = parseInt(e.target.dataset.id);
+                        if (e.target.checked) {
+                            selectedLocks.add(id);
+                        } else {
+                            selectedLocks.delete(id);
+                        }
+                        updateSelectionButtons();
+                    });
+                });
+
+                locksList.querySelectorAll('.history-action-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const action = e.currentTarget.dataset.action;
+                        const id = parseInt(e.currentTarget.dataset.id);
+                        handleLockAction(action, id);
+                    });
+                });
+            }
+
+            // Manejar acciones de candados
+            function handleLockAction(action, id) {
+                switch (action) {
+                    case 'open':
+                        window.location.href = `/preview.html?id=${id}`;
+                        break;
+                    case 'edit':
+                        window.location.href = `/generador.html?edit=${id}`;
+                        break;
+                    case 'share':
+                        const lock = allLocks.find(l => l.id === id);
+                        if (lock && lock.sharePayload) {
+                            const url = `${window.location.origin}/preview.html?data=${encodeURIComponent(lock.sharePayload)}`;
+                            navigator.clipboard.writeText(url).then(() => {
+                                if (window.notificationManager) {
+                                    window.notificationManager.success('Enlace copiado al portapapeles');
+                                }
+                            });
+                        }
+                        break;
+                    case 'delete':
+                        deleteLock(id);
+                        break;
+                }
+            }
+
+            // Eliminar candado
+            async function deleteLock(id) {
+                const confirmed = await window.showConfirm?.(
+                    'Eliminar candado',
+                    '¿Estás seguro de que quieres eliminar este candado? Esta acción no se puede deshacer.',
+                    'Eliminar',
+                    'Cancelar',
+                    'danger'
+                );
+
+                if (confirmed) {
+                    allLocks = allLocks.filter(lock => lock.id !== id);
+                    selectedLocks.delete(id);
+                    localStorage.setItem('lockHistory', JSON.stringify(allLocks));
+                    filterAndRenderLocks();
+                    loadStats();
+                    if (window.notificationManager) {
+                        window.notificationManager.success('Candado eliminado');
+                    }
+                }
+            }
+
+            // Actualizar botones de selección
+            function updateSelectionButtons() {
+                const count = selectedLocks.size;
+                exportSelectedBtn.disabled = count === 0;
+                deleteSelectedBtn.disabled = count === 0;
+                selectAllBtn.innerHTML = count === allLocks.length 
+                    ? '<i class="fas fa-square" aria-hidden="true"></i> Deseleccionar todos'
+                    : '<i class="fas fa-check-square" aria-hidden="true"></i> Seleccionar todos';
+            }
+
+            // Seleccionar todos
+            selectAllBtn.addEventListener('click', () => {
+                const allSelected = selectedLocks.size === allLocks.length;
+                if (allSelected) {
+                    selectedLocks.clear();
+                } else {
+                    allLocks.forEach(lock => selectedLocks.add(lock.id));
+                }
+                filterAndRenderLocks();
+                updateSelectionButtons();
+            });
+
+            // Exportar seleccionados
+            exportSelectedBtn.addEventListener('click', () => {
+                const selected = allLocks.filter(lock => selectedLocks.has(lock.id));
+                const data = {
+                    locks: selected,
+                    exportDate: new Date().toISOString()
+                };
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `escapify-candados-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                if (window.notificationManager) {
+                    window.notificationManager.success(`${selected.length} candado${selected.length !== 1 ? 's' : ''} exportado${selected.length !== 1 ? 's' : ''}`);
+                }
+            });
+
+            // Eliminar seleccionados
+            deleteSelectedBtn.addEventListener('click', async () => {
+                const count = selectedLocks.size;
+                const confirmed = await window.showConfirm?.(
+                    'Eliminar candados',
+                    `¿Estás seguro de que quieres eliminar ${count} candado${count !== 1 ? 's' : ''}? Esta acción no se puede deshacer.`,
+                    'Eliminar',
+                    'Cancelar',
+                    'danger'
+                );
+
+                if (confirmed) {
+                    allLocks = allLocks.filter(lock => !selectedLocks.has(lock.id));
+                    selectedLocks.clear();
+                    localStorage.setItem('lockHistory', JSON.stringify(allLocks));
+                    filterAndRenderLocks();
+                    loadStats();
+                    updateSelectionButtons();
+                    if (window.notificationManager) {
+                        window.notificationManager.success(`${count} candado${count !== 1 ? 's' : ''} eliminado${count !== 1 ? 's' : ''}`);
+                    }
+                }
+            });
+
+            // Filtros
+            searchInput.addEventListener('input', filterAndRenderLocks);
+            filterType.addEventListener('change', filterAndRenderLocks);
+            sortBy.addEventListener('change', filterAndRenderLocks);
+
+            // Crear colección
+            if (createCollectionBtn && window.collectionsManager) {
+                createCollectionBtn.addEventListener('click', () => {
+                    window.collectionsManager.showCreateCollectionModal((collection) => {
+                        renderCollections();
+                        loadStats();
+                        document.dispatchEvent(new CustomEvent('collectionsUpdated'));
+                    });
+                });
+            }
+
+            // Renderizar colecciones
+            function renderCollections() {
+                if (!collectionsGrid || !window.collectionsManager) return;
+
+                window.collectionsManager.renderCollections(collectionsGrid, {
+                    clickable: true,
+                    onSelect: (id) => {
+                        // Filtrar por colección
+                        const collection = window.collectionsManager.getCollection(id);
+                        if (collection) {
+                            allLocks = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                            const collectionLocks = allLocks.filter(lock => collection.lockIds.includes(lock.id));
+                            renderLocks(collectionLocks);
+                        }
+                    },
+                    onEdit: (id) => {
+                        if (window.collectionsManager) {
+                            const collection = window.collectionsManager.getCollection(id);
+                            if (collection) {
+                                // Mostrar modal de edición (simplificado)
+                                const name = prompt('Nuevo nombre:', collection.name);
+                                if (name && name.trim()) {
+                                    collection.name = name.trim();
+                                    window.collectionsManager.updateCollection(id, collection);
+                                    renderCollections();
+                                    loadStats();
+                                }
+                            }
+                        }
+                    },
+                    onDelete: async (id) => {
+                        const confirmed = await window.showConfirm?.(
+                            'Eliminar colección',
+                            '¿Estás seguro de que quieres eliminar esta colección? Los candados no se eliminarán.',
+                            'Eliminar',
+                            'Cancelar',
+                            'danger'
+                        );
+                        if (confirmed && window.collectionsManager) {
+                            window.collectionsManager.deleteCollection(id);
+                            renderCollections();
+                            loadStats();
+                            if (window.notificationManager) {
+                                window.notificationManager.success('Colección eliminada');
+                            }
+                        }
+                    },
+                    onAddLocks: (id) => {
+                        // Obtener todos los candados disponibles
+                        const collection = window.collectionsManager.getCollection(id);
+                        if (!collection) return;
+
+                        const availableLocks = allLocks.filter(lock => !collection.lockIds.includes(lock.id));
+                        if (availableLocks.length === 0) {
+                            if (window.notificationManager) {
+                                window.notificationManager.info('No hay candados disponibles para añadir');
+                            }
+                            return;
+                        }
+
+                        // Crear modal para seleccionar candados
+                        const modal = document.createElement('div');
+                        modal.className = 'confirm-modal visible';
+                        modal.setAttribute('role', 'dialog');
+                        modal.innerHTML = `
+                            <div class="confirm-modal-overlay"></div>
+                            <div class="confirm-modal-content" style="max-width: 600px; max-height: 80vh;">
+                                <div class="confirm-modal-header">
+                                    <h3 class="confirm-modal-title">Añadir candados a "${escapeHtml(collection.name)}"</h3>
+                                    <button class="confirm-modal-close" aria-label="Cerrar">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="confirm-modal-body" style="overflow-y: auto; max-height: 50vh;">
+                                    <p style="margin-bottom: 1rem;">Selecciona los candados que deseas añadir:</p>
+                                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                        ${availableLocks.map(lock => `
+                                            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                                                <input type="checkbox" value="${lock.id}" class="lock-checkbox">
+                                                <div style="flex: 1;">
+                                                    <strong>${escapeHtml(lock.name || 'Candado sin nombre')}</strong>
+                                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">${getTypeLabel(lock.type)}</p>
+                                                </div>
+                                            </label>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="confirm-modal-footer">
+                                    <button class="btn btn-secondary confirm-modal-cancel">Cancelar</button>
+                                    <button class="btn btn-primary confirm-modal-confirm">Añadir seleccionados</button>
+                                </div>
+                            </div>
+                        `;
+                        document.body.appendChild(modal);
+
+                        const close = () => {
+                            modal.remove();
+                            document.body.style.overflow = '';
+                        };
+
+                        const add = () => {
+                            const selected = Array.from(modal.querySelectorAll('.lock-checkbox:checked')).map(cb => parseInt(cb.value));
+                            if (selected.length === 0) {
+                                if (window.notificationManager) {
+                                    window.notificationManager.warning('Selecciona al menos un candado');
+                                }
+                                return;
+                            }
+
+                            selected.forEach(lockId => {
+                                window.collectionsManager.addLockToCollection(lockId, id);
+                            });
+
+                            localStorage.setItem('lockHistory', JSON.stringify(allLocks));
+                            filterAndRenderLocks();
+                            renderCollections();
+                            loadStats();
+                            
+                            if (window.notificationManager) {
+                                window.notificationManager.success(`${selected.length} candado${selected.length !== 1 ? 's' : ''} añadido${selected.length !== 1 ? 's' : ''}`);
+                            }
+                            close();
+                        };
+
+                        modal.querySelector('.confirm-modal-close').addEventListener('click', close);
+                        modal.querySelector('.confirm-modal-overlay').addEventListener('click', close);
+                        modal.querySelector('.confirm-modal-cancel').addEventListener('click', close);
+                        modal.querySelector('.confirm-modal-confirm').addEventListener('click', add);
+                        document.body.style.overflow = 'hidden';
+                    },
+                    onCreateLock: (id) => {
+                        sessionStorage.setItem('selectedCollectionForNewLock', id);
+                        window.location.href = '/generador.html';
+                    }
+                });
+            }
+
+            // Utilidades
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function getTypeLabel(type) {
+                const types = {
+                    'numeric': 'Numérico',
+                    'word': 'Palabra',
+                    'directional': 'Direccional',
+                    'pattern': 'Patrón',
+                    'rotary': 'Mando giratorio',
+                    'coordinates': 'Coordenadas',
+                    'nokia': 'Nokia T9',
+                    'color': 'Color',
+                    'qrcode': 'Código QR',
+                    'barcode': 'Código de barras'
+                };
+                return types[type] || type || 'Desconocido';
+            }
+
+            // Inicializar
+            loadStats();
+            loadLocks();
+            renderCollections();
+            updateSelectionButtons();
+        });
+    </script>
+</body>
+</html>
+

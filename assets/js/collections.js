@@ -165,10 +165,16 @@ class CollectionsManager {
                     </div>
                     ${collection.description ? `<p class="collection-description">${this.escapeHtml(collection.description)}</p>` : ''}
                     <div class="collection-actions">
-                        <button class="btn-icon collection-edit" data-action="edit" data-id="${collection.id}" aria-label="Editar colección">
+                        <button class="btn btn-secondary btn-sm collection-add-locks" data-action="add-locks" data-id="${collection.id}" aria-label="Añadir candados a la colección" title="Añadir candados">
+                            <i class="fas fa-plus"></i> Añadir candados
+                        </button>
+                        <button class="btn btn-primary btn-sm collection-create-lock" data-action="create-lock" data-id="${collection.id}" aria-label="Crear nuevo candado en esta colección" title="Crear candado">
+                            <i class="fas fa-lock"></i> Crear candado
+                        </button>
+                        <button class="btn-icon collection-edit" data-action="edit" data-id="${collection.id}" aria-label="Editar colección" title="Editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn-icon collection-delete" data-action="delete" data-id="${collection.id}" aria-label="Eliminar colección">
+                        <button class="btn-icon collection-delete" data-action="delete" data-id="${collection.id}" aria-label="Eliminar colección" title="Eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -205,6 +211,28 @@ class CollectionsManager {
                 const id = btn.dataset.id;
                 if (options.onDelete) {
                     options.onDelete(id);
+                }
+            });
+        });
+
+        // Botones para añadir candados
+        container.querySelectorAll('.collection-add-locks').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.dataset.id;
+                if (options.onAddLocks) {
+                    options.onAddLocks(id);
+                }
+            });
+        });
+
+        // Botones para crear candado
+        container.querySelectorAll('.collection-create-lock').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.dataset.id;
+                if (options.onCreateLock) {
+                    options.onCreateLock(id);
                 }
             });
         });

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Escapify</title>
+    <meta name="description" content="Gestiona tu perfil, historial de candados y configuraciones personales en Escapify">
+    <meta name="theme-color" content="#0252CD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Escapify">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dev-ribbon" aria-label="Página en desarrollo">En desarrollo</div>
+    <div class="dev-ribbon-bottom" aria-label="Página en desarrollo">En desarrollo</div>
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+    <!-- Header de navegación -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+            <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Escapify
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/generador.html" class="nav-link">Generador</a></li>
+                <li><a href="/historial.html" class="nav-link">Historial</a></li>
+                <li><a href="/crear-escape.html" class="nav-link">Escape Room</a></li>
+                <li><a href="/recursos.html" class="nav-link">Recursos</a></li>
+                <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
+                <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
+                <li>
+                    <a href="/login.html" class="nav-link user-icon-link active" aria-label="Iniciar sesión o ver perfil" aria-current="page">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="history-hero" aria-labelledby="profile-title">
+        <div class="container">
+            <h1 class="section-title" id="profile-title">Mi Perfil</h1>
+            <p class="section-subtitle">Gestiona tu información personal y tus candados</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Información del usuario -->
+            <section class="profile-section" style="margin-bottom: 3rem;">
+                <div class="user-info-card" style="background: var(--card-bg); border-radius: 16px; padding: 2rem; box-shadow: 0 4px 12px var(--shadow-color); border: 1px solid var(--border-color);">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem;">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h2 style="margin: 0 0 0.5rem 0; color: var(--heading-color);" id="userName">Usuario</h2>
+                            <p style="margin: 0; color: var(--text-muted);" id="userEmail">usuario@escapify.io</p>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalLocks">0</div>
+                            <div class="stat-label">Candados creados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalCollections">0</div>
+                            <div class="stat-label">Colecciones</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalEscapeRooms">0</div>
+                            <div class="stat-label">Escape Rooms</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalUsage">0</div>
+                            <div class="stat-label">Candados utilizados</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accesos rápidos -->
+            <section class="profile-section" style="margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 1.75rem; margin-bottom: 1.5rem;">Accesos Rápidos</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <a href="/generador.html" class="quick-access-card" style="display: block; background: var(--card-bg); border-radius: 12px; padding: 1.5rem; text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; box-shadow: 0 2px 8px var(--shadow-color);">
+                        <i class="fas fa-plus-circle" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="margin: 0 0 0.5rem 0; color: var(--heading-color);">Crear Candado</h3>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Genera un nuevo candado digital</p>
+                    </a>
+                    <a href="/historial.html" class="quick-access-card" style="display: block; background: var(--card-bg); border-radius: 12px; padding: 1.5rem; text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; box-shadow: 0 2px 8px var(--shadow-color);">
+                        <i class="fas fa-history" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="margin: 0 0 0.5rem 0; color: var(--heading-color);">Mi Historial</h3>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Gestiona todos tus candados</p>
+                    </a>
+                    <a href="/panel.html" class="quick-access-card" style="display: block; background: var(--card-bg); border-radius: 12px; padding: 1.5rem; text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; box-shadow: 0 2px 8px var(--shadow-color);">
+                        <i class="fas fa-th-large" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="margin: 0 0 0.5rem 0; color: var(--heading-color);">Panel de Control</h3>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Organiza tus candados en colecciones</p>
+                    </a>
+                    <a href="/crear-escape.html" class="quick-access-card" style="display: block; background: var(--card-bg); border-radius: 12px; padding: 1.5rem; text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; box-shadow: 0 2px 8px var(--shadow-color);">
+                        <i class="fas fa-door-open" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="margin: 0 0 0.5rem 0; color: var(--heading-color);">Crear Escape Room</h3>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Crea un escape room completo</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Configuración -->
+            <section class="profile-section">
+                <h2 class="section-title" style="font-size: 1.75rem; margin-bottom: 1.5rem;">Configuración</h2>
+                <div style="background: var(--card-bg); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px var(--shadow-color); border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-color);">
+                        <div>
+                            <h3 style="margin: 0 0 0.25rem 0; color: var(--heading-color);">Tema</h3>
+                            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Cambiar entre tema claro y oscuro</p>
+                        </div>
+                        <button class="theme-toggle" id="profileThemeToggle" aria-label="Cambiar tema">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+                        <div>
+                            <h3 style="margin: 0 0 0.25rem 0; color: var(--heading-color);">Exportar datos</h3>
+                            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Descarga una copia de todos tus candados</p>
+                        </div>
+                        <button class="btn btn-secondary" id="exportDataBtn">
+                            <i class="fas fa-download" aria-hidden="true"></i> Exportar
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Escapify</h3>
+                <p>Plataforma para crear candados digitales para escape rooms educativos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Accesibilidad</h3>
+                <p>Este sitio está optimizado para todos los usuarios, incluyendo características para usuarios con daltonismo, discapacidad visual, auditiva e intelectual.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Escapify. Desarrollado como herramienta educativa de código abierto.</p>
+            <p> v1.3.0 - Noviembre 2025</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/theme.js" type="module"></script>
+    <script src="assets/js/nav.js" type="module"></script>
+    <script src="assets/js/accessibility.js" type="module"></script>
+    <script src="assets/js/notifications.js" type="module"></script>
+    <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
+    <script src="assets/js/pwa.js" type="module"></script>
+    <script src="assets/js/user-menu.js" type="module"></script>
+    <script type="module">
+        // Inicializar menú de usuario
+        document.addEventListener('DOMContentLoaded', () => {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userMenuDropdown = document.getElementById('userMenuDropdown');
+            
+            if (userMenuBtn && userMenuDropdown) {
+                userMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isExpanded = userMenuBtn.getAttribute('aria-expanded') === 'true';
+                    userMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                    userMenuDropdown.classList.toggle('active');
+                });
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', (e) => {
+                    if (!userMenuBtn.contains(e.target) && !userMenuDropdown.contains(e.target)) {
+                        userMenuBtn.setAttribute('aria-expanded', 'false');
+                        userMenuDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Cargar estadísticas del usuario
+            function loadUserStats() {
+                try {
+                    const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
+                    const collections = JSON.parse(localStorage.getItem('escapify_collections') || '[]');
+                    const escapeRooms = JSON.parse(localStorage.getItem('escapeRooms') || '[]');
+                    
+                    let totalUsage = 0;
+                    history.forEach(lock => {
+                        totalUsage += (lock.usageCount || 0);
+                    });
+
+                    document.getElementById('totalLocks').textContent = history.length;
+                    document.getElementById('totalCollections').textContent = collections.length;
+                    document.getElementById('totalEscapeRooms').textContent = escapeRooms.length;
+                    document.getElementById('totalUsage').textContent = totalUsage;
+                } catch (error) {
+                    console.error('Error cargando estadísticas:', error);
+                }
+            }
+
+            // Cargar información del usuario
+            function loadUserInfo() {
+                try {
+                    const userInfo = JSON.parse(localStorage.getItem('escapify_user') || '{}');
+                    if (userInfo.name) {
+                        document.getElementById('userName').textContent = userInfo.name;
+                    }
+                    if (userInfo.email) {
+                        document.getElementById('userEmail').textContent = userInfo.email;
+                    }
+                } catch (error) {
+                    console.error('Error cargando información del usuario:', error);
+                }
+            }
+
+            // Exportar datos
+            const exportDataBtn = document.getElementById('exportDataBtn');
+            if (exportDataBtn) {
+                exportDataBtn.addEventListener('click', () => {
+                    try {
+                        const data = {
+                            history: JSON.parse(localStorage.getItem('lockHistory') || '[]'),
+                            collections: JSON.parse(localStorage.getItem('escapify_collections') || '[]'),
+                            escapeRooms: JSON.parse(localStorage.getItem('escapeRooms') || '[]'),
+                            favorites: JSON.parse(localStorage.getItem('escapify_favorites') || '[]'),
+                            tags: JSON.parse(localStorage.getItem('escapify_tags') || '[]'),
+                            notes: JSON.parse(localStorage.getItem('escapify_notes') || '{}'),
+                            exportDate: new Date().toISOString()
+                        };
+
+                        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `escapify-backup-${new Date().toISOString().split('T')[0]}.json`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+
+                        if (window.notificationManager) {
+                            window.notificationManager.success('Datos exportados correctamente');
+                        }
+                    } catch (error) {
+                        console.error('Error exportando datos:', error);
+                        if (window.notificationManager) {
+                            window.notificationManager.error('Error al exportar datos');
+                        }
+                    }
+                });
+            }
+
+            // Sincronizar toggle de tema
+            const profileThemeToggle = document.getElementById('profileThemeToggle');
+            if (profileThemeToggle) {
+                profileThemeToggle.addEventListener('click', () => {
+                    const mainThemeToggle = document.getElementById('themeToggle');
+                    if (mainThemeToggle) {
+                        mainThemeToggle.click();
+                    }
+                });
+            }
+
+            // Verificar si hay usuario logueado
+            try {
+                const userInfo = JSON.parse(localStorage.getItem('escapify_user') || '{}');
+                if (!userInfo || !userInfo.name) {
+                    // Redirigir a login si no hay usuario
+                    window.location.href = '/login.html';
+                    return;
+                }
+            } catch (error) {
+                console.error('Error verificando usuario:', error);
+                window.location.href = '/login.html';
+                return;
+            }
+
+            loadUserInfo();
+            loadUserStats();
+        });
+    </script>
+</body>
+</html>
+

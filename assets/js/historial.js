@@ -841,6 +841,12 @@ class HistoryManager {
             onDelete: (id) => {
                 this.deleteCollection(id);
             },
+            onAddLocks: (id) => {
+                this.addLocksToCollection(id);
+            },
+            onCreateLock: (id) => {
+                this.createLockInCollection(id);
+            },
             selectedId: this.selectedCollection
         });
     }
@@ -1021,6 +1027,137 @@ class HistoryManager {
                 window.notificationManager.success('Historial limpiado');
             }
         }
+    }
+
+    // Añadir candados a una colección
+    addLocksToCollection(collectionId) {
+        if (!window.collectionsManager) return;
+
+        const collection = window.collectionsManager.getCollection(collectionId);
+        if (!collection) return;
+
+        // Obtener todos los candados disponibles
+        const allLocks = this.history.filter(lock => {
+            // Excluir los que ya están en la colección
+            return !collection.lockIds.includes(lock.id);
+        });
+
+        if (allLocks.length === 0) {
+            if (window.notificationManager) {
+                window.notificationManager.info('No hay candados disponibles para añadir a esta colección');
+            }
+            return;
+        }
+
+        // Crear modal para seleccionar candados
+        const modal = document.createElement('div');
+        modal.className = 'confirm-modal visible';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-labelledby', 'addLocksModalTitle');
+        modal.innerHTML = `
+            <div class="confirm-modal-overlay"></div>
+            <div class="confirm-modal-content" style="max-width: 600px; max-height: 80vh;">
+                <div class="confirm-modal-header">
+                    <h3 id="addLocksModalTitle" class="confirm-modal-title">Añadir candados a "${this.escapeHtml(collection.name)}"</h3>
+                    <button class="confirm-modal-close" aria-label="Cerrar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="confirm-modal-body" style="overflow-y: auto; max-height: 50vh;">
+                    <p style="margin-bottom: 1rem;">Selecciona los candados que deseas añadir a esta colección:</p>
+                    <div class="locks-selection-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        ${allLocks.map(lock => `
+                            <label class="lock-selection-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                                <input type="checkbox" value="${lock.id}" class="lock-checkbox">
+                                <div style="flex: 1;">
+                                    <strong>${this.escapeHtml(lock.name || 'Candado sin nombre')}</strong>
+                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">${this.getTypeLabel(lock.type)}</p>
+                                </div>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="confirm-modal-footer">
+                    <button class="btn btn-secondary confirm-modal-cancel">Cancelar</button>
+                    <button class="btn btn-primary confirm-modal-confirm">Añadir seleccionados</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Estilos para las opciones
+        const style = document.createElement('style');
+        style.textContent = `
+            .lock-selection-item:hover {
+                border-color: var(--primary-color) !important;
+                background-color: var(--hover-color) !important;
+            }
+            .lock-selection-item input[type="checkbox"]:checked + div strong {
+                color: var(--primary-color);
+            }
+        `;
+        document.head.appendChild(style);
+
+        const close = () => {
+            modal.remove();
+            style.remove();
+            document.body.style.overflow = '';
+        };
+
+        const add = () => {
+            const selected = Array.from(modal.querySelectorAll('.lock-checkbox:checked')).map(cb => parseInt(cb.value));
+            
+            if (selected.length === 0) {
+                if (window.notificationManager) {
+                    window.notificationManager.warning('Selecciona al menos un candado');
+                }
+                return;
+            }
+
+            // Añadir candados a la colección
+            selected.forEach(lockId => {
+                window.collectionsManager.addLockToCollection(lockId, collectionId);
+                
+                // Actualizar el candado en el historial
+                const lock = this.history.find(l => l.id === lockId);
+                if (lock) {
+                    if (!lock.collections) {
+                        lock.collections = [];
+                    }
+                    if (!lock.collections.includes(collectionId)) {
+                        lock.collections.push(collectionId);
+                    }
+                    lock.directory = collectionId;
+                }
+            });
+
+            // Guardar cambios
+            localStorage.setItem('lockHistory', JSON.stringify(this.history));
+            
+            this.filterHistory();
+            this.renderCollections();
+            
+            if (window.notificationManager) {
+                window.notificationManager.success(`${selected.length} candado${selected.length !== 1 ? 's' : ''} añadido${selected.length !== 1 ? 's' : ''} a la colección`);
+            }
+            
+            close();
+        };
+
+        modal.querySelector('.confirm-modal-close').addEventListener('click', close);
+        modal.querySelector('.confirm-modal-overlay').addEventListener('click', close);
+        modal.querySelector('.confirm-modal-cancel').addEventListener('click', close);
+        modal.querySelector('.confirm-modal-confirm').addEventListener('click', add);
+
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Crear nuevo candado en una colección
+    createLockInCollection(collectionId) {
+        // Guardar el ID de la colección en sessionStorage para que el generador lo detecte
+        sessionStorage.setItem('selectedCollectionForNewLock', collectionId);
+        // Redirigir al generador
+        window.location.href = '/generador.html';
     }
 }
 

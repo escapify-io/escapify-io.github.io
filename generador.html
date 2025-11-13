@@ -79,6 +79,11 @@
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
                 <li>
+                    <a href="/login.html" class="nav-link user-icon-link" aria-label="Iniciar sesión o ver perfil">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
                     <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
                         <i class="fas fa-moon" aria-hidden="true"></i>
                     </button>
@@ -206,6 +211,21 @@
                         <label for="lockDescription">Descripción (opcional)</label>
                         <textarea id="lockDescription" placeholder="Describe el candado o añade información general" aria-describedby="descHelp"></textarea>
                         <div id="descHelp" class="sr-only">La descripción ayudará a los usuarios a entender el propósito del candado</div>
+                    </div>
+
+                    <!-- 4.5. Colección -->
+                    <div class="form-group">
+                        <label for="lockCollection">Colección (opcional)</label>
+                        <div class="collection-selector">
+                            <select id="lockCollection" aria-label="Seleccionar colección">
+                                <option value="">Sin colección</option>
+                                <!-- Se cargarán dinámicamente -->
+                            </select>
+                            <button type="button" class="btn btn-secondary" id="createCollectionFromGenerator" aria-label="Crear nueva colección">
+                                <i class="fas fa-plus" aria-hidden="true"></i> Nueva colección
+                            </button>
+                        </div>
+                        <small style="color: var(--text-muted); margin-top: 0.5rem; display: block;">Organiza tus candados en colecciones para gestionarlos mejor</small>
                     </div>
 
                     <!-- 5. Sistema de Pistas -->
@@ -576,6 +596,104 @@
                 const targetType = allTypes.find(type => type.id === presetType);
                 if (targetType) {
                     selectLockType(targetType);
+                }
+            }
+
+            // Cargar colecciones en el selector
+            function loadCollections() {
+                const collectionSelect = document.getElementById('lockCollection');
+                if (!collectionSelect) return;
+
+                try {
+                    const collections = JSON.parse(localStorage.getItem('escapify_collections') || '[]');
+                    // Limpiar opciones excepto "Sin colección"
+                    const options = collectionSelect.querySelectorAll('option:not([value=""])');
+                    options.forEach(opt => opt.remove());
+
+                    collections.forEach(collection => {
+                        const option = document.createElement('option');
+                        option.value = collection.id;
+                        option.textContent = collection.name;
+                        collectionSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error cargando colecciones:', error);
+                }
+            }
+
+            // Crear colección desde el generador
+            const createCollectionBtn = document.getElementById('createCollectionFromGenerator');
+            if (createCollectionBtn) {
+                createCollectionBtn.addEventListener('click', () => {
+                    if (window.collectionsManager) {
+                        window.collectionsManager.showCreateCollectionModal((collection) => {
+                            loadCollections();
+                            // Seleccionar la nueva colección
+                            const collectionSelect = document.getElementById('lockCollection');
+                            if (collectionSelect) {
+                                collectionSelect.value = collection.id;
+                            }
+                            if (window.notificationManager) {
+                                window.notificationManager.success(`Colección "${collection.name}" creada y seleccionada`);
+                            }
+                        });
+                    } else {
+                        const name = prompt('Nombre de la colección:');
+                        if (name && name.trim()) {
+                            try {
+                                const collections = JSON.parse(localStorage.getItem('escapify_collections') || '[]');
+                                const colors = ['#0252CD', '#2D7FF9', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4'];
+                                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                                
+                                const newCollection = {
+                                    id: Date.now(),
+                                    name: name.trim(),
+                                    description: '',
+                                    color: randomColor,
+                                    lockIds: [],
+                                    createdAt: new Date().toISOString(),
+                                    updatedAt: new Date().toISOString()
+                                };
+                                collections.push(newCollection);
+                                localStorage.setItem('escapify_collections', JSON.stringify(collections));
+                                loadCollections();
+                                
+                                const collectionSelect = document.getElementById('lockCollection');
+                                if (collectionSelect) {
+                                    collectionSelect.value = newCollection.id;
+                                }
+                                if (window.notificationManager) {
+                                    window.notificationManager.success('Colección creada');
+                                }
+                            } catch (error) {
+                                console.error('Error creando colección:', error);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Cargar colecciones al inicio
+            loadCollections();
+
+            // Escuchar cambios en colecciones
+            document.addEventListener('collectionsUpdated', () => {
+                loadCollections();
+            });
+
+            // Si hay una colección preseleccionada (desde historial)
+            const preselectedCollection = sessionStorage.getItem('selectedCollectionForNewLock');
+            if (preselectedCollection) {
+                sessionStorage.removeItem('selectedCollectionForNewLock');
+                const collectionSelect = document.getElementById('lockCollection');
+                if (collectionSelect) {
+                    // Esperar a que se carguen las colecciones
+                    setTimeout(() => {
+                        collectionSelect.value = preselectedCollection;
+                        if (window.notificationManager) {
+                            window.notificationManager.info('Colección preseleccionada. El candado se añadirá automáticamente al guardar.');
+                        }
+                    }, 100);
                 }
             }
 
@@ -1011,6 +1129,18 @@
 
                 lockData.options = lockOptions;
 
+                // Añadir colección si está seleccionada
+                const selectedCollectionId = document.getElementById('lockCollection')?.value;
+                if (selectedCollectionId && selectedCollectionId !== '') {
+                    lockData.directory = parseInt(selectedCollectionId);
+                    if (!lockData.collections) {
+                        lockData.collections = [];
+                    }
+                    if (!lockData.collections.includes(parseInt(selectedCollectionId))) {
+                        lockData.collections.push(parseInt(selectedCollectionId));
+                    }
+                }
+
                 appendSharePayload(lockData);
                 const shareUrl = buildShareUrlFromPayload(lockData.sharePayload);
 
@@ -1031,6 +1161,12 @@
                     
                     history.unshift(lockData);
                     localStorage.setItem('lockHistory', JSON.stringify(history));
+                    
+                    // Añadir candado a la colección si está seleccionada
+                    if (selectedCollectionId && selectedCollectionId !== '' && window.collectionsManager) {
+                        window.collectionsManager.addLockToCollection(lockData.id, parseInt(selectedCollectionId));
+                        console.log('✅ Candado añadido a la colección:', selectedCollectionId);
+                    }
                     
                     console.log('✅ Candado guardado en localStorage');
                     console.log('📚 Nuevo historial:', history.length, 'candados');
@@ -1523,6 +1659,8 @@
     <script src="assets/js/notifications.js" type="module"></script>
     <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
     <script src="assets/js/pwa.js" type="module"></script>
+    <script src="assets/js/collections.js" type="module"></script>
+    <script src="assets/js/user-menu.js" type="module"></script>
     <footer class="main-footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">

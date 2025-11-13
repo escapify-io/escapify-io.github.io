@@ -561,6 +561,175 @@ p {
     transform: rotate(30deg);
 }
 
+/* Menú de usuario */
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-color-light);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.user-menu-btn:hover {
+    color: var(--primary-color);
+    background-color: var(--hover-color);
+}
+
+.user-menu-btn[aria-expanded="true"] {
+    color: var(--primary-color);
+    background-color: var(--hover-color);
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    padding: 0.5rem 0;
+}
+
+.user-menu-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.user-menu-item:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+}
+
+.user-menu-item i {
+    width: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.user-menu-item:hover i {
+    color: var(--primary-color);
+}
+
+.user-menu-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .user-menu-dropdown {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    
+    .user-menu-dropdown.active {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Tarjetas de acceso rápido en perfil */
+.quick-access-card {
+    display: block;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.quick-access-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    border-color: var(--primary-color);
+    background-color: rgba(var(--primary-color-rgb), 0.03);
+}
+
+.quick-access-card:hover i {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+}
+
+.quick-access-card i {
+    transition: all 0.3s ease;
+}
+
+.user-menu-item.active {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.user-menu-item.active i {
+    color: var(--primary-color);
+}
+
+/* Enlace de icono de usuario en navegación */
+.user-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.user-icon-link:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.user-icon-link i {
+    font-size: 1.1rem;
+}
+
+.user-icon-link.active {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--primary-color);
+}
+
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -8266,6 +8435,24 @@ tr:hover {
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
     justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.collection-add-locks,
+.collection-create-lock {
+    flex: 1;
+    min-width: 140px;
+}
+
+.collection-selector {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.collection-selector select {
+    flex: 1;
+    min-width: 200px;
 }
 
 .btn-icon {
