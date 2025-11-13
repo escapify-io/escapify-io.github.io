@@ -410,7 +410,11 @@ p {
 /* Estilos responsivos para historial */
 @media (max-width: 768px) {
     .history-hero {
-        padding: 2rem 0;
+        padding: 3rem 1rem;
+    }
+
+    .help-hero {
+        padding: 3rem 1rem;
     }
     
     .history-hero .section-title {
@@ -1483,6 +1487,8 @@ a:hover {
     flex: 1;
     position: relative;
     z-index: 2;
+    margin-left: auto;
+    padding-left: 3rem;
 }
 
 .hero-title {
@@ -2123,7 +2129,7 @@ a:hover {
 
 .footer-bottom {
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 2rem 2rem 120px;
     margin-top: 4rem;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
@@ -2156,10 +2162,17 @@ a:hover {
     .footer-bottom {
         flex-direction: column;
         text-align: center;
+        padding: 2rem;
+        padding-left: 100px;
     }
     
     .footer-bottom-links {
         justify-content: center;
+    }
+
+    .hero-content {
+        padding-left: 0;
+        margin-left: 0;
     }
 }
 
@@ -2213,6 +2226,8 @@ a:hover {
     color: white;
     padding: 4rem 2rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .help-search {
@@ -4083,6 +4098,10 @@ select:hover {
         font-size: 0.75rem;
         letter-spacing: 0.08em;
     }
+
+    .footer-bottom {
+        padding-left: 80px;
+    }
 }
 
 /* Efecto visual para historial y misiones */
@@ -4522,7 +4541,7 @@ select:invalid:focus {
 .history-hero {
     background: linear-gradient(135deg, #121212, #2D3748);
     color: white;
-    padding: 5rem 0;
+    padding: 4rem 2rem;
     margin-bottom: 3rem;
     text-align: center;
     position: relative;
@@ -4794,7 +4813,11 @@ select:invalid:focus {
 /* Estilos responsivos para historial */
 @media (max-width: 768px) {
     .history-hero {
-        padding: 2rem 0;
+        padding: 3rem 1rem;
+    }
+
+    .help-hero {
+        padding: 3rem 1rem;
     }
     
     .history-hero .section-title {
