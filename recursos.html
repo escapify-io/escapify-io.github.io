@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="dev-ribbon" aria-label="Página en desarrollo">En desarrollo</div>
+    <div class="dev-ribbon-bottom" aria-label="Página en desarrollo">En desarrollo</div>
     <!-- Skip to content para accesibilidad con teclado -->
     <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
 
@@ -974,7 +976,8 @@
     <script src="assets/js/nav.js" type="module"></script>
     <script src="assets/js/accessibility.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script>
+    <script type="text/javascript">
+        //<![CDATA[
         const RESOURCE_PACKS = {
             'kit-cajas': {
                 filename: 'kit-cajas-escapify.md',
@@ -1785,6 +1788,7 @@
             // Inicializar
             updateBulkControls();
         });
+        //]]>
     </script>
     <style>
         .resource-card-selectable {

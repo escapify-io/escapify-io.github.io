@@ -676,6 +676,16 @@ p {
 }
 
 /* Estilos generales para los candados */
+.lock-keypad-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0;
+    padding: 0;
+}
+
 .lock-keypad {
     display: grid;
     gap: 10px;
@@ -683,6 +693,8 @@ p {
     background-color: var(--surface-color);
     border-radius: 8px;
     margin: 15px 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 .keypad-button {
@@ -3644,12 +3656,18 @@ select:hover {
 .rotary-lock {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
-    padding: 1.5rem;
+    justify-content: center;
+    padding: 2.5rem 1.5rem;
     border-radius: 16px;
-    background: radial-gradient(circle at top, rgba(15,23,42,0.95) 0%, rgba(15,15,20,0.98) 60%, #050505 100%);
-    color: #e2e8f0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .rotary-heading {
@@ -3670,13 +3688,30 @@ select:hover {
     height: 260px;
     border-radius: 50%;
     position: relative;
+    background: var(--surface-color);
+    border: 6px solid var(--border-color);
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.1),
+        0 20px 40px rgba(0,0,0,0.15);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+:root[data-theme="light"] .rotary-dial {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: #dee2e6;
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.05),
+        0 20px 40px rgba(0,0,0,0.1);
+}
+
+:root[data-theme="dark"] .rotary-dial {
     background: radial-gradient(circle at 50% 45%, #1d1d2a 0%, #171823 40%, #0c0d16 70%);
-    border: 6px solid rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.08);
     box-shadow:
         inset 0 0 25px rgba(0,0,0,0.45),
         0 20px 40px rgba(0,0,0,0.45);
-    outline: none;
-    cursor: pointer;
 }
 
 .rotary-ticks {
@@ -3691,7 +3726,8 @@ select:hover {
     transform-origin: center;
     transform: rotate(var(--tick-rotation)) translate(0, -118px);
     font-size: 0.65rem;
-    color: rgba(226,232,240,0.9);
+    color: var(--text-color);
+    opacity: 0.8;
     text-align: center;
 }
 
@@ -3732,7 +3768,8 @@ select:hover {
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
-    color: #f8fafc;
+    color: var(--text-color);
+    margin: 0.5rem 0;
 }
 
 .rotary-slider {
@@ -3764,9 +3801,10 @@ select:hover {
     width: 100%;
     padding: 0.85rem;
     border-radius: 10px;
-    background: rgba(255,255,255,0.05);
-    border: 1px dashed rgba(255,255,255,0.2);
+    background: var(--surface-color);
+    border: 1px dashed var(--border-color);
     font-size: 0.95rem;
+    color: var(--text-color);
 }
 
 .rotary-actions {
@@ -3846,6 +3884,205 @@ select:hover {
 .nav-logo:hover i {
     transform: rotate(10deg);
     color: var(--secondary-color);
+}
+
+/* Ribbon de construcción/desarrollo */
+/* Opción 2: Naranja/Amarillo (llamativo y destacado) - ACTIVA */
+/* Posición: Esquina superior derecha */
+.dev-ribbon {
+    position: fixed;
+    top: 52px;
+    right: -52px;
+    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+    color: white;
+    padding: 12px 60px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: rotate(45deg);
+    transform-origin: center;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dev-ribbon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 28px 5px;
+    border-color: transparent transparent #D97706 transparent;
+}
+
+.dev-ribbon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 28px 0;
+    border-color: transparent #D97706 transparent transparent;
+}
+
+/* Ribbon en esquina inferior izquierda */
+.dev-ribbon-bottom {
+    position: fixed;
+    bottom: 52px;
+    left: -52px;
+    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+    color: white;
+    padding: 12px 60px;
+    font-size: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: rotate(225deg);
+    transform-origin: center;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ocultar el texto original */
+.dev-ribbon-bottom > * {
+    font-size: 0;
+    opacity: 0;
+}
+
+/* Mostrar texto rotado 180 grados usando pseudo-elemento */
+.dev-ribbon-bottom::before {
+    content: 'En desarrollo';
+    font-size: 0.9rem;
+    display: inline-block;
+    transform: rotate(180deg);
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Borde derecho del ribbon inferior */
+.dev-ribbon-bottom::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 28px 0;
+    border-color: transparent #D97706 transparent transparent;
+}
+
+/* Opción 1: Azul (combina con la paleta principal) */
+/* .dev-ribbon {
+    background: linear-gradient(135deg, #0252CD 0%, #2D7FF9 100%);
+    box-shadow: 0 4px 16px rgba(2, 82, 205, 0.35);
+}
+.dev-ribbon::before {
+    border-color: transparent transparent #0140A0 transparent;
+}
+.dev-ribbon::after {
+    border-color: transparent #0140A0 transparent transparent;
+} */
+
+/* Opción 3: Rojo/Naranja (actual pero mejorado) */
+/* .dev-ribbon {
+    background: linear-gradient(135deg, #FF5757 0%, #FF8C42 100%);
+    box-shadow: 0 4px 16px rgba(255, 87, 87, 0.4);
+}
+.dev-ribbon::before {
+    border-color: transparent transparent #C0392B transparent;
+}
+.dev-ribbon::after {
+    border-color: transparent #C0392B transparent transparent;
+} */
+
+/* Opción 4: Verde (fresco y positivo) */
+/* .dev-ribbon {
+    background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+.dev-ribbon::before {
+    border-color: transparent transparent #059669 transparent;
+}
+.dev-ribbon::after {
+    border-color: transparent #059669 transparent transparent;
+} */
+
+/* Opción 5: Azul-Verde (combinación única) */
+/* .dev-ribbon {
+    background: linear-gradient(135deg, #0252CD 0%, #10B981 100%);
+    box-shadow: 0 4px 16px rgba(2, 82, 205, 0.35);
+}
+.dev-ribbon::before {
+    border-color: transparent transparent #0140A0 transparent;
+}
+.dev-ribbon::after {
+    border-color: transparent #0140A0 transparent transparent;
+} */
+
+/* Opción 6: Púrpura (moderno y distintivo) */
+/* .dev-ribbon {
+    background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+}
+.dev-ribbon::before {
+    border-color: transparent transparent #6D28D9 transparent;
+}
+.dev-ribbon::after {
+    border-color: transparent #6D28D9 transparent transparent;
+} */
+
+@media (max-width: 768px) {
+    .dev-ribbon {
+        top: 28px;
+        right: -35px;
+        padding: 10px 50px;
+        font-size: 0.8rem;
+    }
+    .dev-ribbon-bottom {
+        bottom: 28px;
+        left: -35px;
+        padding: 10px 50px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dev-ribbon {
+        top: 22px;
+        right: -38px;
+        padding: 8px 45px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+    }
+    .dev-ribbon-bottom {
+        bottom: 22px;
+        left: -38px;
+        padding: 8px 45px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+    }
 }
 
 /* Efecto visual para historial y misiones */
@@ -5817,6 +6054,35 @@ select:invalid:focus {
 }
 
 .coordinates-options:hover h4 {
+    color: var(--secondary-color);
+}
+
+/* Opciones para Mando Giratorio */
+.rotary-options {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 18px;
+    margin: 20px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rotary-options:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.rotary-options h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.rotary-options:hover h4 {
     color: var(--secondary-color);
 }
 

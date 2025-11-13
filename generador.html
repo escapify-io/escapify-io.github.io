@@ -19,6 +19,8 @@
             crossorigin=""></script>
 </head>
 <body>
+    <div class="dev-ribbon" aria-label="Página en desarrollo">En desarrollo</div>
+    <div class="dev-ribbon-bottom" aria-label="Página en desarrollo">En desarrollo</div>
     <!-- Skip to content para accesibilidad con teclado -->
     <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
 
@@ -278,6 +280,31 @@
                                 <input type="checkbox" id="showCoordRadius">
                                 Mostrar radio de aceptación
                             </label>
+                        </div>
+                    </div>
+
+                    <div id="rotaryOptions" class="rotary-options" style="display: none;">
+                        <h4>Opciones avanzadas</h4>
+                        <div class="option-group">
+                            <p>Número de caracteres en el dial:</p>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="rotaryMaxNumber" value="30" checked>
+                                    30 caracteres
+                                </label>
+                                <label>
+                                    <input type="radio" name="rotaryMaxNumber" value="45">
+                                    45 caracteres
+                                </label>
+                                <label>
+                                    <input type="radio" name="rotaryMaxNumber" value="60">
+                                    60 caracteres
+                                </label>
+                                <label>
+                                    <input type="radio" name="rotaryMaxNumber" value="90">
+                                    90 caracteres
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -576,6 +603,14 @@
                         showRadius: document.getElementById('showCoordRadius') ? document.getElementById('showCoordRadius').checked : false
                     };
                 }
+
+                if (type.id === 'rotary') {
+                    const rotaryMaxNumber = parseInt(document.querySelector('input[name="rotaryMaxNumber"]:checked')?.value || '30', 10);
+                    currentLockOptions = {
+                        ...currentLockOptions,
+                        maxNumber: rotaryMaxNumber
+                    };
+                }
             }
 
             if (codeLengthInput) {
@@ -606,6 +641,7 @@
                 if (numericOptions) numericOptions.style.display = 'none';
                 if (document.getElementById('nokiaOptions')) document.getElementById('nokiaOptions').style.display = 'none';
                 if (document.getElementById('coordinatesOptions')) document.getElementById('coordinatesOptions').style.display = 'none';
+                if (document.getElementById('rotaryOptions')) document.getElementById('rotaryOptions').style.display = 'none';
 
                 // Mostrar las opciones específicas del tipo seleccionado
                 if (type.id === 'numeric' && numericOptions) {
@@ -614,6 +650,8 @@
                     document.getElementById('nokiaOptions').style.display = 'block';
                 } else if (type.id === 'coordinates' && document.getElementById('coordinatesOptions')) {
                     document.getElementById('coordinatesOptions').style.display = 'block';
+                } else if (type.id === 'rotary' && document.getElementById('rotaryOptions')) {
+                    document.getElementById('rotaryOptions').style.display = 'block';
                 }
                 
                 renderLockTemplate();
@@ -818,6 +856,14 @@
                     };
                 }
 
+                if (currentLockType.id === 'rotary') {
+                    const rotaryMaxNumber = parseInt(document.querySelector('input[name="rotaryMaxNumber"]:checked')?.value || '30', 10);
+                    lockOptions = {
+                        ...lockOptions,
+                        maxNumber: rotaryMaxNumber
+                    };
+                }
+
                 lockData.options = lockOptions;
 
                 appendSharePayload(lockData);
@@ -909,6 +955,14 @@
                         precision: document.querySelector('input[name="coordPrecision"]:checked')?.value || 'medium',
                         showMarker: document.getElementById('showCoordMarker')?.checked || true,
                         showRadius: document.getElementById('showCoordRadius')?.checked || false
+                    };
+                }
+
+                // Añadir opciones si es un mando giratorio
+                if (currentLockType.id === 'rotary') {
+                    const rotaryMaxNumber = parseInt(document.querySelector('input[name="rotaryMaxNumber"]:checked')?.value || '30', 10);
+                    previewData.options = {
+                        maxNumber: rotaryMaxNumber
                     };
                 }
                 
@@ -1151,6 +1205,16 @@
                     }
                 });
             }
+
+            // Event listeners para opciones del mando giratorio
+            document.querySelectorAll('input[name="rotaryMaxNumber"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (currentLockType && currentLockType.id === 'rotary') {
+                        const maxNumber = parseInt(radio.value, 10);
+                        updateCurrentOptions({ maxNumber: maxNumber }, { render: true, resetCode: true });
+                    }
+                });
+            });
         });
     </script>
     <script src="assets/js/theme.js" type="module"></script>
