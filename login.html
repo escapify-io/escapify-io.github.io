@@ -165,11 +165,6 @@
                 <li><a href="/cifrados.html" class="nav-link">Cifrados</a></li>
                 <li><a href="/ayuda.html" class="nav-link">Ayuda</a></li>
                 <li>
-                    <a href="/login.html" class="nav-link user-icon-link active" aria-label="Iniciar sesión o ver perfil" aria-current="page">
-                        <i class="fas fa-user" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li>
                     <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro">
                         <i class="fas fa-moon" aria-hidden="true"></i>
                     </button>
@@ -186,52 +181,19 @@
                     <div class="logo">
                         <i class="fas fa-lock" aria-hidden="true"></i>
                     </div>
-                    <h1>Bienvenido a Escapify</h1>
-                    <p>Gestiona tus candados y escape rooms</p>
+                    <h1>Acceso en desarrollo</h1>
+                    <p>Por ahora, Escapify funciona sin inicio de sesión</p>
                 </div>
-
-                <form class="login-form" id="loginForm" novalidate>
-                    <div class="form-group">
-                        <label for="userName">Nombre de usuario</label>
-                        <input 
-                            type="text" 
-                            id="userName" 
-                            name="userName" 
-                            placeholder="Introduce tu nombre"
-                            required
-                            autocomplete="username"
-                            aria-required="true"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userEmail">Email (opcional)</label>
-                        <input 
-                            type="email" 
-                            id="userEmail" 
-                            name="userEmail" 
-                            placeholder="tu@email.com"
-                            autocomplete="email"
-                        >
-                    </div>
-
-                    <div class="login-actions">
-                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
-                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Iniciar Sesión
-                        </button>
-                    </div>
-                </form>
 
                 <div class="info-note">
                     <i class="fas fa-info-circle" aria-hidden="true"></i>
-                    <strong>Nota:</strong> Escapify funciona de forma local en tu navegador. Tus datos se guardan en tu dispositivo y no se comparten con servidores externos.
+                    <strong>Nota:</strong> Escapify guarda los datos de forma local en tu navegador (sin enviar información a servidores).
                 </div>
 
                 <div class="login-footer">
-                    <p>¿No tienes cuenta? No es necesario.</p>
                     <p>
-                        <a href="/perfil.html">Acceder directamente al perfil</a> o 
-                        <a href="/">Continuar sin iniciar sesión</a>
+                        <a href="/generador.html">Ir al generador</a> o
+                        <a href="/">Continuar en el inicio</a>
                     </p>
                 </div>
             </div>
@@ -263,155 +225,6 @@
     <script src="assets/js/notifications.js" type="module"></script>
     <script src="assets/js/keyboard-shortcuts.js" type="module"></script>
     <script src="assets/js/pwa.js" type="module"></script>
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('loginForm');
-            const userNameInput = document.getElementById('userName');
-            const userEmailInput = document.getElementById('userEmail');
-
-            // Cargar datos de usuario si existen
-            try {
-                const userInfo = JSON.parse(localStorage.getItem('escapify_user') || '{}');
-                if (userInfo.name) {
-                    userNameInput.value = userInfo.name;
-                }
-                if (userInfo.email) {
-                    userEmailInput.value = userInfo.email;
-                }
-            } catch (error) {
-                console.error('Error cargando información del usuario:', error);
-            }
-
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const name = userNameInput.value.trim();
-                if (!name) {
-                    if (window.notificationManager) {
-                        window.notificationManager.error('Por favor, introduce un nombre de usuario');
-                    }
-                    userNameInput.focus();
-                    return;
-                }
-
-                // Guardar información del usuario
-                const userInfo = {
-                    name: name,
-                    email: userEmailInput.value.trim() || '',
-                    loginDate: new Date().toISOString()
-                };
-
-                try {
-                    localStorage.setItem('escapify_user', JSON.stringify(userInfo));
-                    
-                    if (window.notificationManager) {
-                        window.notificationManager.success(`¡Bienvenido, ${name}!`);
-                    }
-
-                    // Mostrar el perfil directamente en la misma página
-                    showProfile(userInfo);
-                } catch (error) {
-                    console.error('Error guardando información del usuario:', error);
-                    if (window.notificationManager) {
-                        window.notificationManager.error('Error al guardar la información');
-                    }
-                }
-            });
-
-            // Verificar si ya hay usuario logueado
-            function checkExistingUser() {
-                try {
-                    const userInfo = JSON.parse(localStorage.getItem('escapify_user') || '{}');
-                    if (userInfo && userInfo.name) {
-                        // Si ya hay usuario, mostrar el perfil directamente
-                        showProfile(userInfo);
-                    }
-                } catch (error) {
-                    console.error('Error verificando usuario:', error);
-                }
-            }
-
-            // Mostrar el perfil
-            function showProfile(userInfo) {
-                const loginContainer = document.querySelector('.login-container');
-                if (!loginContainer) return;
-
-                // Ocultar el formulario de login
-                const loginCard = loginContainer.querySelector('.login-card');
-                if (loginCard) {
-                    loginCard.style.display = 'none';
-                }
-
-                // Cargar y mostrar el contenido del perfil
-                fetch('/perfil.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        const mainContent = doc.querySelector('main');
-                        
-                        if (mainContent) {
-                            // Crear contenedor del perfil
-                            const profileContainer = document.createElement('div');
-                            profileContainer.className = 'profile-container';
-                            profileContainer.style.cssText = 'min-height: calc(100vh - 200px); padding: 2rem;';
-                            
-                            // Copiar el contenido del perfil
-                            profileContainer.innerHTML = mainContent.innerHTML;
-                            
-                            // Actualizar información del usuario
-                            const userNameElement = profileContainer.querySelector('#userName');
-                            const userEmailElement = profileContainer.querySelector('#userEmail');
-                            if (userNameElement) userNameElement.textContent = userInfo.name;
-                            if (userEmailElement) userEmailElement.textContent = userInfo.email || 'usuario@escapify.io';
-                            
-                            // Añadir al contenedor
-                            loginContainer.innerHTML = '';
-                            loginContainer.appendChild(profileContainer);
-                            
-                            // Ejecutar scripts del perfil si es necesario
-                            loadProfileScripts();
-                        } else {
-                            // Si no se puede cargar, redirigir
-                            window.location.href = '/perfil.html';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error cargando perfil:', error);
-                        // Redirigir al perfil si hay error
-                        window.location.href = '/perfil.html';
-                    });
-            }
-
-            // Cargar scripts necesarios para el perfil
-            function loadProfileScripts() {
-                // Cargar estadísticas del usuario
-                try {
-                    const history = JSON.parse(localStorage.getItem('lockHistory') || '[]');
-                    const collections = JSON.parse(localStorage.getItem('escapify_collections') || '[]');
-                    
-                    // Actualizar estadísticas si existen los elementos
-                    const totalLocks = document.getElementById('totalLocks');
-                    const totalCollections = document.getElementById('totalCollections');
-                    const totalUsage = document.getElementById('totalUsage');
-                    
-                    if (totalLocks) totalLocks.textContent = history.length;
-                    if (totalCollections) totalCollections.textContent = collections.length;
-                    
-                    let totalUsageCount = 0;
-                    history.forEach(lock => {
-                        totalUsageCount += (lock.usageCount || 0);
-                    });
-                    if (totalUsage) totalUsage.textContent = totalUsageCount;
-                } catch (error) {
-                    console.error('Error cargando estadísticas:', error);
-                }
-            }
-
-            // Verificar usuario existente al cargar
-            checkExistingUser();
-        });
-    </script>
 </body>
 </html>
 

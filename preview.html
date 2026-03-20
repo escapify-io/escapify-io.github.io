@@ -756,11 +756,39 @@
                     checkCode();
                 }
 
+                function getSafeRedirectUrl(rawUrl) {
+                    try {
+                        const trimmed = String(rawUrl || '').trim();
+                        if (!trimmed) return null;
+
+                        const url = new URL(trimmed, window.location.origin);
+
+                        // Bloquear esquemas potencialmente peligrosos (javascript:, data:, etc.)
+                        if (!['http:', 'https:'].includes(url.protocol)) return null;
+
+                        // Solo permitir redirecciones al mismo origin.
+                        if (url.origin !== window.location.origin) return null;
+
+                        return url.toString();
+                    } catch {
+                        return null;
+                    }
+                }
+
                 function updateDisplay() {
                     if (enteredCode) {
-                        codeDisplay.innerHTML = `<span class="code">${enteredCode}</span>`;
+                        // Evitar inyección: renderizamos como texto, no como HTML.
+                        codeDisplay.textContent = '';
+                        const span = document.createElement('span');
+                        span.className = 'code';
+                        span.textContent = enteredCode;
+                        codeDisplay.appendChild(span);
                     } else {
-                        codeDisplay.innerHTML = '<span class="placeholder">Ingresa el código</span>';
+                        codeDisplay.textContent = '';
+                        const span = document.createElement('span');
+                        span.className = 'placeholder';
+                        span.textContent = 'Ingresa el código';
+                        codeDisplay.appendChild(span);
                     }
                 }
 
@@ -783,8 +811,9 @@
                             showMessage('¡Candado desbloqueado!', 'success');
                             stopTimer();
                             
-                            if (lockData.url) {
-                                setTimeout(() => window.location.href = lockData.url, 2000);
+                            const safeRedirectUrl = getSafeRedirectUrl(lockData.url);
+                            if (safeRedirectUrl) {
+                                setTimeout(() => window.location.assign(safeRedirectUrl), 2000);
                             }
                         } else {
                             showMessage('Código incorrecto', 'error');
@@ -856,23 +885,68 @@
                 // Sistema de Misiones
                 function renderMissions() {
                     const activeMissions = lockSystem.missions.filter(m => !m.completed);
-                    missionsGrid.innerHTML = activeMissions.map(mission => `
-                        <div class="mission-card">
-                            <div class="mission-header">
-                                <h3 class="mission-title">${mission.title}</h3>
-                                <span class="mission-reward">+${mission.reward}</span>
-                            </div>
-                            <p class="mission-description">${mission.description}</p>
-                            ${mission.type === 'theme' ? `
-                                <div class="mission-progress">
-                                    <div class="mission-progress-bar" style="width: ${(mission.progress / mission.target) * 100}%"></div>
-                                </div>
-                                <div class="mission-status">
-                                    <span>Progreso: ${mission.progress}/${mission.target}</span>
-                                </div>
-                            ` : ''}
-                        </div>
-                    `).join('') || '<p class="no-missions">No hay misiones activas</p>';
+                    missionsGrid.textContent = '';
+
+                    if (!activeMissions.length) {
+                        const empty = document.createElement('p');
+                        empty.className = 'no-missions';
+                        empty.textContent = 'No hay misiones activas';
+                        missionsGrid.appendChild(empty);
+                        return;
+                    }
+
+                    activeMissions.forEach((mission) => {
+                        const card = document.createElement('div');
+                        card.className = 'mission-card';
+
+                        const header = document.createElement('div');
+                        header.className = 'mission-header';
+
+                        const title = document.createElement('h3');
+                        title.className = 'mission-title';
+                        title.textContent = mission.title || '';
+
+                        const reward = document.createElement('span');
+                        reward.className = 'mission-reward';
+                        reward.textContent = `+${mission.reward ?? 0}`;
+
+                        header.appendChild(title);
+                        header.appendChild(reward);
+
+                        const description = document.createElement('p');
+                        description.className = 'mission-description';
+                        description.textContent = mission.description || '';
+
+                        card.appendChild(header);
+                        card.appendChild(description);
+
+                        if (mission.type === 'theme') {
+                            const progressWrap = document.createElement('div');
+                            progressWrap.className = 'mission-progress';
+
+                            const progressBar = document.createElement('div');
+                            progressBar.className = 'mission-progress-bar';
+
+                            const progress = Number(mission.progress || 0);
+                            const target = Number(mission.target || 1) || 1;
+                            const pct = Math.max(0, Math.min(100, (progress / target) * 100));
+                            progressBar.style.width = `${pct}%`;
+
+                            progressWrap.appendChild(progressBar);
+
+                            const status = document.createElement('div');
+                            status.className = 'mission-status';
+
+                            const statusText = document.createElement('span');
+                            statusText.textContent = `Progreso: ${progress}/${target}`;
+                            status.appendChild(statusText);
+
+                            card.appendChild(progressWrap);
+                            card.appendChild(status);
+                        }
+
+                        missionsGrid.appendChild(card);
+                    });
                 }
 
                 // Eventos de botones

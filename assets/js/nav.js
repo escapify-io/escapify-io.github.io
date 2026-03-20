@@ -10,6 +10,16 @@ class Navigation {
     }
 
     initializeNavigation() {
+        // Deshabilitar el acceso público al login (evita que aparezca en el menú).
+        // Esto es útil tanto para UX como para reducir falsos positivos de seguridad.
+        try {
+            document.querySelectorAll('a[href*="login.html"]').forEach((a) => {
+                a.remove();
+            });
+        } catch {
+            // Si algo falla, no rompemos la navegación.
+        }
+
         // Marcar el enlace activo basado en la ruta actual
         this.navLinks.forEach(link => {
             const linkPath = link.getAttribute('href');
