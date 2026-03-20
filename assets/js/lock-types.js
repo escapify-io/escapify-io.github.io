@@ -461,9 +461,9 @@ class LockTypes {
                             Contraseña
                         </label>
                         <div class="input-wrapper">
-                            <input type="password" id="password" placeholder="••••••••" autocomplete="off">
+                            <input type="text" id="password" class="computer-login-secret-input" placeholder="••••••••" autocomplete="off" spellcheck="false" inputmode="text" aria-label="Código secreto del candado (simulación educativa)">
                             <div class="typing-effect"></div>
-                            <button class="toggle-password" aria-label="Mostrar/Ocultar contraseña">
+                            <button type="button" class="toggle-password" aria-label="Mostrar u ocultar caracteres">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -610,9 +610,9 @@ class LockTypes {
         });
 
         togglePassword.addEventListener('click', () => {
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-            togglePassword.innerHTML = `<i class="fas fa-eye${type === 'password' ? '' : '-slash'}"></i>`;
+            passwordInput.classList.toggle('revealed');
+            const revealed = passwordInput.classList.contains('revealed');
+            togglePassword.innerHTML = `<i class="fas fa-eye${revealed ? '-slash' : ''}"></i>`;
         });
 
         loginButton.addEventListener('click', async () => {

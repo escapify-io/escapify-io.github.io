@@ -6,6 +6,7 @@
     <meta name="description" content="Escapify: Plataforma educativa para crear candados digitales y escape rooms. Herramientas, plantillas y recursos para docentes innovadores. Incluye accesibilidad completa y soporte ColorADD.">
     <meta name="keywords" content="escape room educativo, candados digitales, gamificación educativa, recursos docentes, plantillas educativas, ColorADD, accesibilidad">
     <meta name="author" content="Escapify">
+    <meta name="google-site-verification" content="IvNnRj6VfkFcm8__BNqufI8UygSPwWpom5wuOTAI5I4" />
     
     <!-- PWA -->
     <meta name="theme-color" content="#0252CD">
@@ -304,6 +305,16 @@
     <script src="assets/js/pwa.js" type="module"></script>
     <script src="assets/js/user-menu.js" type="module"></script>
     <script>
+        function escapeHtml(s) {
+            if (s == null) return '';
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Obtener candados recientes del localStorage
             const locks = JSON.parse(localStorage.getItem('lockHistory') || '[]');
@@ -315,6 +326,13 @@
                 const recentLocks = locks.slice(0, 3);
                 
                 recentLocks.forEach((lock, index) => {
+                    const safeId = Number(lock && lock.id);
+                    if (!Number.isFinite(safeId)) return;
+
+                    const name = lock.name || 'Candado sin nombre';
+                    const desc = lock.description || 'Sin descripción';
+                    const diff = String(lock.difficulty || 'medium').replace(/[^a-zA-Z0-9_-]/g, '') || 'medium';
+
                     const card = document.createElement('article');
                     card.className = 'lock-card';
                     card.setAttribute('role', 'listitem');
@@ -322,21 +340,21 @@
                     card.innerHTML = `
                         <div class="lock-card-header">
                             <i class="fas ${getLockIcon(lock.type)}" aria-hidden="true"></i>
-                            <h3>${lock.name || 'Candado sin nombre'}</h3>
-                            <span class="difficulty-badge difficulty-${lock.difficulty || 'medium'}" 
-                                  aria-label="Dificultad: ${lock.difficulty || 'media'}">
-                                ${lock.difficulty || 'media'}<span class="coloradd-symbol" aria-hidden="true"></span>
+                            <h3>${escapeHtml(name)}</h3>
+                            <span class="difficulty-badge difficulty-${diff}" 
+                                  aria-label="Dificultad: ${diff}">
+                                ${escapeHtml(diff)}<span class="coloradd-symbol" aria-hidden="true"></span>
                             </span>
                         </div>
-                        <p class="lock-description">${lock.description || 'Sin descripción'}</p>
+                        <p class="lock-description">${escapeHtml(desc)}</p>
                         <div class="lock-card-actions" role="group" aria-label="Acciones del candado">
                             <button class="btn btn-sm btn-primary copy-code" 
-                                    data-code="${lock.id}" 
-                                    aria-label="Copiar código del candado ${lock.name || 'sin nombre'}">
+                                    data-code="${safeId}" 
+                                    aria-label="Copiar código del candado ${escapeHtml(name)}">
                                 <i class="fas fa-copy" aria-hidden="true"></i> Copiar código
                             </button>
-                            <a href="/preview.html?id=${lock.id}" class="btn btn-sm btn-secondary"
-                               aria-label="Previsualizar candado ${lock.name || 'sin nombre'}">
+                            <a href="/preview.html?id=${safeId}" class="btn btn-sm btn-secondary"
+                               aria-label="Previsualizar candado ${escapeHtml(name)}">
                                 <i class="fas fa-eye" aria-hidden="true"></i> Previsualizar
                             </a>
                         </div>

@@ -18,6 +18,68 @@ const SHARE_FIELDS = [
 
 const FALLBACK_BASE = 'https://escapify.io/';
 
+/** Origen del sitio (mismo host que la página). Vacío fuera del navegador. */
+function getSiteOrigin() {
+    if (typeof window !== 'undefined' && window.location && window.location.origin) {
+        return window.location.origin;
+    }
+    return '';
+}
+
+/**
+ * Solo rutas del mismo sitio (evita open redirect / phishing en ?data=).
+ * Devuelve pathname+search+hash o cadena vacía si no es seguro.
+ */
+function sanitizeUrlField(value, origin) {
+    if (value === undefined || value === null) return '';
+    const t = String(value).trim();
+    if (!t) return '';
+    if (!origin) {
+        return t.startsWith('/') && !t.startsWith('//') ? t : '';
+    }
+    try {
+        const u = new URL(t, origin);
+        if (!['http:', 'https:'].includes(u.protocol)) return '';
+        if (u.origin !== new URL(origin).origin) return '';
+        return u.pathname + u.search + u.hash;
+    } catch {
+        return '';
+    }
+}
+
+/** Imágenes: rutas relativas seguras o URL absoluta solo mismo origin. */
+function sanitizeImageField(value, origin) {
+    if (value === undefined || value === null) return '';
+    const t = String(value).trim();
+    if (!t) return '';
+    if (t.startsWith('/') && !t.startsWith('//')) {
+        return t.length > 2000 ? t.slice(0, 2000) : t;
+    }
+    if (!origin) return '';
+    try {
+        const u = new URL(t, origin);
+        if (!['http:', 'https:'].includes(u.protocol)) return '';
+        if (u.origin !== new URL(origin).origin) return '';
+        return u.toString();
+    } catch {
+        return '';
+    }
+}
+
+/** Limpia datos decodificados desde ?data= (payload puede ser manipulado). */
+function sanitizeDecodedLockData(data) {
+    if (!data || typeof data !== 'object') return data;
+    const origin = getSiteOrigin();
+    const out = { ...data };
+    if (out.url != null) out.url = sanitizeUrlField(out.url, origin);
+    if (out.customUrl != null) out.customUrl = sanitizeUrlField(out.customUrl, origin);
+    if (out.image != null) out.image = sanitizeImageField(out.image, origin);
+    ['url', 'customUrl', 'image'].forEach((k) => {
+        if (out[k] === '') delete out[k];
+    });
+    return out;
+}
+
 function sanitizeLockData(lockData = {}) {
     const sanitized = {};
 
@@ -30,6 +92,14 @@ function sanitizeLockData(lockData = {}) {
     if (lockData.hints) {
         sanitized.hints = lockData.hints;
     }
+
+    const origin = getSiteOrigin();
+    if (sanitized.url != null) sanitized.url = sanitizeUrlField(String(sanitized.url), origin);
+    if (sanitized.customUrl != null) sanitized.customUrl = sanitizeUrlField(String(sanitized.customUrl), origin);
+    if (sanitized.image != null) sanitized.image = sanitizeImageField(String(sanitized.image), origin);
+    ['url', 'customUrl', 'image'].forEach((k) => {
+        if (sanitized[k] === '') delete sanitized[k];
+    });
 
     return sanitized;
 }
@@ -79,7 +149,8 @@ export function decodeLockData(payload) {
     if (!json) return null;
 
     try {
-        return JSON.parse(json);
+        const data = JSON.parse(json);
+        return sanitizeDecodedLockData(data);
     } catch (error) {
         console.error('Error interpretando el candado compartido:', error);
         return null;

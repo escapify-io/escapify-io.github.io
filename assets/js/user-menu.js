@@ -112,7 +112,7 @@ class UserMenu {
         const protectedPages = ['/perfil.html', '/panel.html'];
         if (protectedPages.includes(window.location.pathname)) {
             setTimeout(() => {
-                window.location.href = '/login.html';
+                window.location.href = '/';
             }, 500);
         }
     }

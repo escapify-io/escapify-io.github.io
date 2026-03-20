@@ -1105,6 +1105,14 @@ p {
     transition: all 0.3s ease;
 }
 
+/* Evita <input type="password"> (heurísticas anti-phishing); mismo efecto visual */
+.computer-login-secret-input {
+    -webkit-text-security: disc;
+}
+.computer-login-secret-input.revealed {
+    -webkit-text-security: none;
+}
+
 .login-screen {
     text-align: center;
 }

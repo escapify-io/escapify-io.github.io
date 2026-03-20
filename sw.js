@@ -3,7 +3,7 @@
  * Permite funcionamiento offline y caché de recursos
  */
 
-const CACHE_NAME = 'escapify-v1.3.0';
+const CACHE_NAME = 'escapify-v1.3.1';
 const RUNTIME_CACHE = 'escapify-runtime-v1';
 
 // Recursos estáticos para cachear

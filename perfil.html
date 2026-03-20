@@ -282,13 +282,13 @@
             try {
                 const userInfo = JSON.parse(localStorage.getItem('escapify_user') || '{}');
                 if (!userInfo || !userInfo.name) {
-                    // Redirigir a login si no hay usuario
-                    window.location.href = '/login.html';
+                    // Sin sesión local: el acceso por perfil no requiere login remoto
+                    window.location.href = '/';
                     return;
                 }
             } catch (error) {
                 console.error('Error verificando usuario:', error);
-                window.location.href = '/login.html';
+                window.location.href = '/';
                 return;
             }
 
