@@ -791,8 +791,9 @@
     html.dc-motion-ok [data-dc-reveal].dc-revealed{opacity:1;transform:translateY(0)}
     html.dc-reduce-motion [data-dc-reveal]{opacity:1;transform:none;transition:none}
   </style>
+  <link rel="stylesheet" href="./css/escapify-unified.css" />
 </head>
-<body>
+<body data-esf-page="datos-contexto">
   <div class="hero-wrap">
     <div class="dc-hero-mesh" data-dc-mesh aria-hidden="true"></div>
   <section class="section">
@@ -2039,6 +2040,52 @@
       </article>
     </section>
   </section>
+
+  <section class="esf-journey-footer" aria-labelledby="esf-jf-title">
+    <div class="esf-journey-head">
+      <span class="esf-journey-kicker"><i class="fa-solid fa-route" aria-hidden="true"></i> Recorrido sugerido</span>
+      <h2 id="esf-jf-title" class="esf-journey-title">Orden de lectura</h2>
+      <p class="esf-journey-lead">Del modelo a la validación — mismo trabajo que presentas en <strong>IEBS</strong> y enlazas con <strong>La Maleta</strong>.</p>
+    </div>
+    <div class="section" style="padding-top: 0">
+      <div class="esf-timeline-scroll">
+        <ol class="esf-timeline" role="list">
+          <li class="esf-timeline-step" data-step="lean-canvas">
+            <a href="./lean-canvas.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-table-cells-large"></i></span><span class="esf-timeline-label">Lean Canvas</span><span class="esf-timeline-sub">Modelo</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="early-adopter">
+            <a href="./early-adopter.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-users"></i></span><span class="esf-timeline-label">Early Adopter</span><span class="esf-timeline-sub">Quién</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="propuesta-valor">
+            <a href="./propuesta-valor.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-gem"></i></span><span class="esf-timeline-label">Propuesta</span><span class="esf-timeline-sub">Valor</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="plan-ecofin">
+            <a href="./plan-ecofin.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span><span class="esf-timeline-label">Ecofin</span><span class="esf-timeline-sub">Números</span></a>
+          </li>
+          <li class="esf-timeline-step esf-timeline-step--current" data-step="datos-contexto">
+            <a href="./datos-contexto.html?bloque=contexto"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-database"></i></span><span class="esf-timeline-label">Datos</span><span class="esf-timeline-sub">Validación</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="maleta">
+            <a href="./index-maleta.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-suitcase"></i></span><span class="esf-timeline-label">La Maleta</span><span class="esf-timeline-sub">Investigación</span></a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <footer class="esf-ecosystem-footer" role="contentinfo">
+    <div class="esf-ecosystem-inner">
+      <div class="esf-ecosystem-brand">
+        <span class="esf-logo-mark">escapify.io</span>
+        <p>Documentación estratégica Fase 2 · Ecosistema unificado con La Maleta del Tiempo y la Semana del Emprendedor IEBS.</p>
+      </div>
+      <nav class="esf-ecosystem-links" aria-label="Enlaces del ecosistema">
+        <a href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe" aria-hidden="true"></i> Producto</a>
+        <a href="./index-iebs.html"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> IEBS</a>
+        <a href="./index-maleta.html"><i class="fa-solid fa-suitcase" aria-hidden="true"></i> La Maleta</a>
+        <a href="./fase2.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Hub Fase 2</a>
+      </nav>
+    </div>
+  </footer>
 
   <script>
     const select = document.getElementById("bloqueSelect");

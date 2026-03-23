@@ -273,8 +273,9 @@
       .tabs,.f2-hub-grid{grid-template-columns:1fr}
     }
   </style>
+  <link rel="stylesheet" href="./css/escapify-unified.css" />
 </head>
-<body>
+<body data-esf-page="fase2">
   <div class="hero-wrap">
     <div class="hero-mesh" data-f2-mesh aria-hidden="true"></div>
     <section class="section">
@@ -430,7 +431,106 @@
         </article>
       </div>
     </section>
+
+    <section class="section esf-journey-section" aria-labelledby="esf-f2-visual">
+      <div class="esf-journey-head">
+        <span class="esf-journey-kicker"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Visual · Misma narrativa</span>
+        <h2 id="esf-f2-visual" class="esf-journey-title">Cómo se conecta con La Maleta e IEBS</h2>
+        <p class="esf-journey-lead">
+          <strong>La Maleta del Tiempo</strong> aporta investigación y modelo inclusivo; <strong>escapify.io</strong> lo productiza;
+          la <strong>Semana del Emprendedor IEBS</strong> resume el relato para inversión y comunidad.
+        </p>
+      </div>
+      <div class="esf-insight">
+        <span class="esf-insight__ico" aria-hidden="true"><i class="fa-solid fa-link"></i></span>
+        <p>
+          <strong>Un solo hilo:</strong> del lienzo y los datos de mercado al pitch — sin perder el foco en el <strong>impacto en aula</strong> y la <strong>accesibilidad</strong>.
+        </p>
+      </div>
+      <div class="esf-chart-block">
+        <h3 class="esf-chart-title"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Foco de trabajo en Fase 2 (ilustrativo)</h3>
+        <div class="esf-bars">
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Modelo + propuesta de valor</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 92%"></span></span></div>
+          </div>
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Personas + datos / validación</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 88%"></span></span></div>
+          </div>
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Ecofin + pricing</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 70%"></span></span></div>
+          </div>
+          <div class="esf-bar-row esf-bar-row--muted">
+            <span class="esf-bar-name">Escala empresa (después)</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 28%"></span></span></div>
+          </div>
+        </div>
+        <p class="esf-bar-hint">Barras relativas al esfuerzo de lectura en esta fase, no a ingresos.</p>
+      </div>
+      <div class="esf-stat-visual">
+        <div class="esf-stat-visual-item">
+          <div class="esf-sv-num">5</div>
+          <div class="esf-sv-lab">Páginas core</div>
+        </div>
+        <div class="esf-stat-visual-item">
+          <div class="esf-sv-num">10+</div>
+          <div class="esf-sv-lab">Bloques en datos</div>
+        </div>
+        <div class="esf-stat-visual-item">
+          <div class="esf-sv-num">3</div>
+          <div class="esf-sv-lab">Pilares · Maleta · Producto · Pitch</div>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <section class="esf-journey-footer" aria-labelledby="esf-jf-title">
+    <div class="esf-journey-head">
+      <span class="esf-journey-kicker"><i class="fa-solid fa-route" aria-hidden="true"></i> Recorrido sugerido</span>
+      <h2 id="esf-jf-title" class="esf-journey-title">Orden de lectura</h2>
+      <p class="esf-journey-lead">Del modelo a la validación — mismo trabajo que presentas en <strong>IEBS</strong> y enlazas con <strong>La Maleta</strong>.</p>
+    </div>
+    <div class="section" style="padding-top: 0">
+      <div class="esf-timeline-scroll">
+        <ol class="esf-timeline" role="list">
+          <li class="esf-timeline-step" data-step="lean-canvas">
+            <a href="./lean-canvas.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-table-cells-large"></i></span><span class="esf-timeline-label">Lean Canvas</span><span class="esf-timeline-sub">Modelo</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="early-adopter">
+            <a href="./early-adopter.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-users"></i></span><span class="esf-timeline-label">Early Adopter</span><span class="esf-timeline-sub">Quién</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="propuesta-valor">
+            <a href="./propuesta-valor.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-gem"></i></span><span class="esf-timeline-label">Propuesta</span><span class="esf-timeline-sub">Valor</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="plan-ecofin">
+            <a href="./plan-ecofin.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span><span class="esf-timeline-label">Ecofin</span><span class="esf-timeline-sub">Números</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="datos-contexto">
+            <a href="./datos-contexto.html?bloque=contexto"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-database"></i></span><span class="esf-timeline-label">Datos</span><span class="esf-timeline-sub">Validación</span></a>
+          </li>
+          <li class="esf-timeline-step" data-step="maleta">
+            <a href="./index-maleta.html"><span class="esf-timeline-dot" aria-hidden="true"><i class="fa-solid fa-suitcase"></i></span><span class="esf-timeline-label">La Maleta</span><span class="esf-timeline-sub">Investigación</span></a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <footer class="esf-ecosystem-footer" role="contentinfo">
+    <div class="esf-ecosystem-inner">
+      <div class="esf-ecosystem-brand">
+        <span class="esf-logo-mark">escapify.io</span>
+        <p>Documentación estratégica Fase 2 · Ecosistema unificado con La Maleta del Tiempo y la Semana del Emprendedor IEBS.</p>
+      </div>
+      <nav class="esf-ecosystem-links" aria-label="Enlaces del ecosistema">
+        <a href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe" aria-hidden="true"></i> Producto</a>
+        <a href="./index-iebs.html"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> IEBS</a>
+        <a href="./index-maleta.html"><i class="fa-solid fa-suitcase" aria-hidden="true"></i> La Maleta</a>
+        <a href="./fase2.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Hub Fase 2</a>
+      </nav>
+    </div>
+  </footer>
   <script src="./js/fase2-effects.js" defer></script>
 </body>
 </html>
