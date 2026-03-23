@@ -13,15 +13,46 @@
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
       --green:#16a34a; --amber:#d97706;
+      --slate-label:#475569;
+      --purple:#7c3aed; --purple-bg:#f3e8ff;
       --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      background:linear-gradient(160deg,#e0e9f8 0%,#eef2ff 40%,#f8fafc 100%);
       border-bottom:1px solid var(--border);
     }
+    .ef-hero-mesh{
+      position:absolute;inset:-28% -18% -22% -18%;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 48% 40% at 72% 16%, rgba(99,102,241,.14), transparent 55%),
+        radial-gradient(ellipse 42% 38% at 14% 78%, rgba(37,99,235,.15), transparent 50%),
+        radial-gradient(ellipse 32% 28% at 88% 80%, rgba(14,165,233,.1), transparent 45%);
+      opacity:.78;
+      transform:translate(var(--ef-mx,0), var(--ef-my,0));
+      will-change:transform;
+      animation:ef-mesh-breathe 16s ease-in-out infinite alternate;
+    }
+    @keyframes ef-mesh-breathe{
+      0%{filter:hue-rotate(-5deg) saturate(1.05);opacity:.74}
+      100%{filter:hue-rotate(6deg) saturate(1.1);opacity:.84}
+    }
+    html.ef-reduce-motion .ef-hero-mesh{animation:none}
+    .ef-float{
+      position:absolute;pointer-events:none;z-index:1;
+      color:rgba(37,99,235,.26);font-size:clamp(1.8rem,3.2vw,2.8rem);
+      animation:ef-float 8s ease-in-out infinite;
+    }
+    .ef-float--1{top:10%;right:6%;animation-delay:-1.2s}
+    .ef-float--2{bottom:18%;right:11%;font-size:clamp(1.4rem,2.4vw,2rem);animation-delay:-3s;opacity:.88}
+    .ef-float--3{top:38%;left:3%;font-size:clamp(1.2rem,2vw,1.7rem);animation-delay:-2.5s;opacity:.72}
+    @keyframes ef-float{
+      0%,100%{transform:translateY(0) rotate(-5deg)}
+      50%{transform:translateY(-14px) rotate(5deg)}
+    }
+    html.ef-reduce-motion .ef-float{animation:none}
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
       background:
@@ -65,6 +96,7 @@
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
       border:1px solid var(--border);border-radius:18px;padding:28px;
       box-shadow:0 16px 36px rgba(15,23,42,.08);
+      isolation:isolate;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -78,15 +110,27 @@
       background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
       pointer-events:none;
     }
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
-    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:720px}
+    .hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.05;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero h1 .ef-gradient{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 38%,#6366f1 68%,#0ea5e9 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero .lead{margin-top:14px;color:var(--muted);font-size:clamp(16px,1.9vw,18px);max-width:720px;line-height:1.65}
+    .ef-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .ef-chip{
+      font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--blue-dark);background:rgba(255,255,255,.92);
+      border:1px solid var(--blue-mid);border-radius:999px;padding:6px 11px;
+      box-shadow:0 2px 10px rgba(37,99,235,.07);
+    }
+    .ef-chip i{margin-right:5px;font-size:11px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .hero-kpi{
       display:inline-flex;align-items:baseline;gap:6px;
@@ -107,31 +151,87 @@
       padding:11px 16px;font-size:14px;font-weight:700;
     }
     .hero-side{
-      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(255,255,255,.82));
+      border:1px solid rgba(191,219,254,.95);border-radius:16px;padding:16px 15px;
+      box-shadow:0 8px 28px rgba(37,99,235,.1),0 1px 0 rgba(255,255,255,.95) inset;
+      backdrop-filter:blur(10px);position:relative;overflow:hidden;
     }
-    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
-    .hero-side ul{padding-left:16px}
+    .hero-side::before{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
+      background:linear-gradient(135deg,rgba(37,99,235,.35),transparent 42%,rgba(14,165,233,.18));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.55;
+    }
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px;position:relative;z-index:1}
+    .hero-side ul{padding-left:16px;position:relative;z-index:1}
     .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
     .hero-side .mini{
+      position:relative;z-index:1;
       margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
       padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
-    /* Panel principal */
-    .panel{margin-top:0;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 20px 28px;
-      box-shadow:0 8px 28px rgba(15,23,42,.07);}
+    /* Panel principal — lienzo + IEBS (Escapify) */
+    .panel{
+      margin-top:0;position:relative;border-radius:18px;padding:24px 22px 30px;
+      background:linear-gradient(145deg,#ffffff 0%,#fafbff 48%,#f8fafc 100%);
+      border:1px solid rgba(191,219,254,.85);
+      box-shadow:0 10px 40px rgba(37,99,235,.08),0 1px 0 rgba(255,255,255,.9) inset;
+      overflow:hidden;
+    }
+    .panel::before{
+      content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;opacity:.55;
+      background:
+        radial-gradient(ellipse 60% 45% at 100% 0%,rgba(99,102,241,.08),transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 100%,rgba(37,99,235,.06),transparent 48%);
+    }
+    .panel > *{position:relative;z-index:1}
+    .section-overline{
+      display:flex;align-items:center;gap:8px;
+      font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--slate-label);margin:0 0 10px;
+    }
+    .section-overline i{font-size:0.95em;opacity:.9}
+    .section-head{margin:0 0 8px;padding:0 0 4px}
+    .section-head-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .section-head .num,.section-head-row .num{
+      flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+      min-width:36px;height:36px;padding:0 8px;border-radius:10px;
+      background:var(--blue);color:#fff;font-size:17px;font-weight:900;line-height:1;
+      box-shadow:0 4px 14px rgba(37,99,235,.28);
+    }
+    .section-head h2,.section-head-row h2{
+      font-size:clamp(1.45rem,2.8vw,1.9rem);color:var(--ink);font-weight:900;letter-spacing:-.4px;
+      line-height:1.15;margin:0;
+    }
+    .section-desc{
+      margin-top:12px;font-size:17px;line-height:1.55;color:var(--muted);max-width:780px;
+    }
+    .section-desc strong{color:var(--ink);font-weight:700}
     .ec-page-title{font-size:clamp(1.35rem,2.8vw,1.85rem);font-weight:900;color:var(--ink);letter-spacing:-.4px;margin-bottom:6px}
     .ec-page-sub{font-size:14px;color:var(--muted);max-width:780px;margin-bottom:20px;line-height:1.55}
-    .ec-kicker{
-      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
-      margin-bottom:8px;display:flex;align-items:center;gap:8px;
-    }
     .ec-grid-2{display:grid;gap:14px;margin-bottom:22px}
     @media(min-width:800px){.ec-grid-2{grid-template-columns:1fr 1fr}}
     .ec-card{
-      background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;
-      box-shadow:0 4px 14px rgba(15,23,42,.04);
+      background:linear-gradient(160deg,#fff 0%,var(--surface) 100%);
+      border:1px solid var(--border);border-radius:14px;padding:16px;
+      box-shadow:0 4px 14px rgba(15,23,42,.05);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+      position:relative;overflow:hidden;
     }
+    .ec-card::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px;
+      background:linear-gradient(180deg,var(--blue),#6366f1);opacity:.85;
+    }
+    @media(hover:hover){
+      .ec-card:hover{
+        transform:translateY(-3px);
+        box-shadow:0 12px 28px rgba(37,99,235,.12);
+        border-color:#c7d7fe;
+      }
+    }
+    html.ef-reduce-motion .ec-card{transition:none}
+    html.ef-reduce-motion .ec-card:hover{transform:none}
     .ec-card h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
     .ec-dl{display:grid;gap:8px}
     .ec-dl div{display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:10px;font-size:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
@@ -145,57 +245,112 @@
     @media(min-width:640px){.ec-metrics{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:900px){.ec-metrics{grid-template-columns:repeat(3,1fr)}}
     .ec-metric{
-      background:linear-gradient(145deg,#fff 0%,var(--surface) 100%);
+      background:linear-gradient(145deg,#fff 0%,#f1f5f9 100%);
       border:1px solid var(--border);border-radius:12px;padding:12px 14px;
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+    @media(hover:hover){
+      .ec-metric:hover{
+        transform:translateY(-2px);
+        box-shadow:0 8px 20px rgba(37,99,235,.1);
+        border-color:#bfdbfe;
+      }
     }
     .ec-metric .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-    .ec-metric .val{font-size:22px;font-weight:900;color:var(--ink);margin-top:4px;line-height:1.15}
+    .ec-metric .val{
+      font-size:22px;font-weight:900;margin-top:4px;line-height:1.15;
+      background:linear-gradient(105deg,var(--ink) 0%,#1e40af 55%,#2563eb 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
     .ec-metric .hint{font-size:12px;color:var(--muted);margin-top:4px}
     .ec-section-title{
-      font-size:18px;font-weight:900;color:var(--ink);margin:26px 0 12px;
+      font-size:clamp(1.05rem,2vw,1.2rem);font-weight:900;color:var(--ink);margin:26px 0 12px;
       display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      padding-bottom:10px;border-bottom:1px dashed var(--border);
+      position:relative;
+    }
+    .ec-section-title::after{
+      content:"";position:absolute;left:0;bottom:-1px;width:72px;height:2px;border-radius:2px;
+      background:linear-gradient(90deg,var(--blue),#6366f1,#a78bfa);
     }
     .ec-section-title:first-of-type{margin-top:4px}
+    .ec-section-title i{color:var(--blue);opacity:.9}
     .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
     .btn-s{border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--blue-dark);padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:.15s ease}
     .btn-s:hover{background:var(--blue-light)}
     .btn-s.active{background:var(--blue);border-color:var(--blue);color:#fff}
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
-    .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:0 6px 16px rgba(15,23,42,.06)}
+    .kpi{
+      background:linear-gradient(165deg,#fff,#f8fafc);
+      border:1px solid var(--border);border-radius:12px;padding:14px;
+      box-shadow:0 6px 16px rgba(15,23,42,.06);
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+    @media(hover:hover){
+      .kpi:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.1);border-color:#c7d7fe}
+    }
+    html.ef-reduce-motion .kpi{transition:none}
+    html.ef-reduce-motion .kpi:hover{transform:none}
     .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
     .v{font-size:26px;font-weight:900;color:var(--ink);line-height:1.1;margin-top:4px}
-    .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#06b6d4)}
+    .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#6366f1,#06b6d4);transition:width .45s cubic-bezier(.4,.14,.3,1)}
     .scenario-hint{font-size:12px;color:var(--muted);margin-bottom:16px;font-style:italic}
     .table-wrap{width:100%;overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-top:10px}
     table.ec-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
-    .ec-table th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+    .ec-table th{
+      background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#1e40af 100%);
+      color:#fff;text-align:left;padding:11px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+      font-weight:800;
+    }
     .ec-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
     .ec-table tr:last-child td{border-bottom:none}
     .ec-table tr:nth-child(even) td{background:#fafbfc}
+    .ec-table tbody tr{transition:background .15s ease}
+    @media(hover:hover){
+      .ec-table tbody tr:hover td{background:#eff6ff}
+    }
     .ec-table .plan-name{font-weight:800;color:var(--ink)}
     .ec-callout{
-      margin-top:16px;padding:14px 16px;border-radius:12px;
+      margin-top:16px;padding:15px 17px;border-radius:14px;
       background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);
       border:1px solid #fcd34d;font-size:14px;color:#92400e;line-height:1.55;font-weight:600;
+      box-shadow:0 6px 20px rgba(245,158,11,.1);
     }
     .ec-callout i{margin-right:8px;color:var(--amber)}
     .ec-notes{display:grid;gap:10px;margin-top:12px}
     .ec-note{
-      padding:12px 14px;border-radius:12px;border:1px solid var(--border);
-      background:var(--surface);font-size:14px;line-height:1.55;
+      padding:14px 16px;border-radius:12px;border:1px solid var(--border);
+      background:linear-gradient(145deg,#fff 0%,var(--surface) 100%);
+      font-size:14px;line-height:1.55;
+      border-left:4px solid var(--blue);
+      box-shadow:0 4px 14px rgba(15,23,42,.04);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    @media(hover:hover){
+      .ec-note:hover{transform:translateX(2px);box-shadow:0 6px 18px rgba(37,99,235,.1)}
     }
     .ec-note strong{display:block;color:var(--ink);margin-bottom:4px;font-size:13px}
     .ec-src{font-size:11px;color:var(--muted);word-break:break-all;margin-top:4px}
     .note-foot{
-      margin-top:20px;padding:10px 12px;border-radius:10px;background:var(--blue-light);
+      margin-top:20px;padding:12px 14px;border-radius:12px;background:var(--blue-light);
       border:1px dashed var(--blue-mid);font-size:12px;color:var(--blue-dark);
+      line-height:1.5;
     }
+    /* Scroll reveal */
+    [data-ef-reveal]{
+      opacity:0;transform:translateY(18px);
+      transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    html.ef-motion-ok [data-ef-reveal].ef-revealed{opacity:1;transform:translateY(0)}
+    html.ef-reduce-motion [data-ef-reveal]{opacity:1;transform:none;transition:none}
     @media(max-width:980px){.tabs,.kpis{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.tabs,.kpis{grid-template-columns:1fr}.ec-metrics{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="hero-wrap">
+    <div class="ef-hero-mesh" data-ef-mesh aria-hidden="true"></div>
   <section class="section">
     <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
     <nav class="tabs" aria-label="Navegación Fase 2">
@@ -220,23 +375,32 @@
       </div>
     </nav>
     <div class="hero">
+        <span class="ef-float ef-float--1" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>
+        <span class="ef-float ef-float--2" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>
+        <span class="ef-float ef-float--3" aria-hidden="true"><i class="fa-solid fa-file-invoice-dollar"></i></span>
       <div class="hero-grid">
         <div>
-          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
-          <h1>Plan económico-financiero</h1>
-          <p class="lead">Pricing orientado a docentes y centros: suscripción, anualidades, licencias B2B y pagos únicos. Alineado con el modelo del libro Excel de trabajo (marzo 2026).</p>
-          <div class="hero-kpis" aria-label="Referencia rápida del modelo">
+          <span class="hero-badge" data-ef-reveal data-ef-delay="0"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <h1 data-ef-reveal data-ef-delay="0.04">Plan <span class="ef-gradient">económico-financiero</span></h1>
+          <p class="lead" data-ef-reveal data-ef-delay="0.07">Pricing orientado a docentes y centros: suscripción, anualidades, licencias B2B y pagos únicos. Alineado con el modelo del libro Excel de trabajo (marzo 2026).</p>
+          <div class="ef-chip-row" data-ef-reveal data-ef-delay="0.1">
+            <span class="ef-chip"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Pricing · Caja</span>
+            <span class="ef-chip"><i class="fa-solid fa-flask" aria-hidden="true"></i> Validación</span>
+            <span class="ef-chip"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> B2B centro</span>
+          </div>
+          <div class="hero-kpis" aria-label="Referencia rápida del modelo" data-ef-reveal data-ef-delay="0.12">
             <span class="hero-kpi"><strong>9,90 €</strong> /mes ref.</span>
             <span class="hero-kpi"><strong>89 €</strong> /año ref.</span>
             <span class="hero-kpi"><strong>~12,3k €</strong> ingresos Y1 (modelo)</span>
           </div>
-          <div class="hero-actions">
+          <div class="hero-actions" data-ef-reveal data-ef-delay="0.15">
             <a class="btn-primary" href="./datos-contexto.html?bloque=plan-marketing"><i class="fa-solid fa-bullhorn"></i>Plan de marketing</a>
             <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
             <a class="btn-secondary" href="./datos-contexto.html?bloque=mvp"><i class="fa-solid fa-flask"></i>PMV validación</a>
+            <a class="btn-secondary" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i>escapify.io</a>
           </div>
         </div>
-        <aside class="hero-side">
+        <aside class="hero-side" data-ef-reveal data-ef-delay="0.18">
           <h3><i class="fa-solid fa-calculator"></i> Decisión clave</h3>
           <ul>
             <li>Priorizar validación de pago y retención antes de escalar desarrollo.</li>
@@ -250,11 +414,16 @@
   </section>
   </div>
 
-  <section class="section">
+  <section class="section" aria-labelledby="ec-panel-heading">
     <div class="panel">
-      <p class="ec-kicker"><i class="fa-solid fa-coins" aria-hidden="true"></i> Documento vivo</p>
-      <h2 class="ec-page-title">Modelo económico y tabla de precios</h2>
-      <p class="ec-page-sub">Versión web de referencia: mismos supuestos que la hoja <strong>Resumen</strong>, <strong>Propuesta Pricing</strong> y <strong>Benchmark Precios</strong> del archivo Excel. Los escenarios inferiores son una <strong>sensibilidad ilustrativa</strong> (tracción); ajústalos cuando tengas datos reales.</p>
+      <p class="section-overline" data-ef-reveal data-ef-delay="0.02"><i class="fa-solid fa-coins" aria-hidden="true"></i> Documento vivo · Excel + web</p>
+      <div class="section-head" data-ef-reveal data-ef-delay="0.05">
+        <div class="section-head-row">
+          <span class="num" aria-hidden="true">4</span>
+          <h2 id="ec-panel-heading">Modelo económico y tabla de precios</h2>
+        </div>
+        <p class="section-desc">Versión web de referencia: mismos supuestos que la hoja <strong>Resumen</strong>, <strong>Propuesta Pricing</strong> y <strong>Benchmark Precios</strong> del archivo Excel. Los escenarios inferiores son una <strong>sensibilidad ilustrativa</strong> (tracción); ajústalos cuando tengas datos reales.</p>
+      </div>
 
       <div class="ec-grid-2">
         <div class="ec-card">
@@ -494,6 +663,7 @@
     </div>
   </section>
 
+  <script src="./js/plan-ecofin-effects.js" defer></script>
   <script>
     const data = {
       pesimista:{a:"120",c:"4%",m:"432 €",aw:20,cw:15,mw:12},

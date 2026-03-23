@@ -12,15 +12,46 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --slate-label:#475569;
+      --green:#16a34a; --amber:#d97706; --purple:#7c3aed;
       --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      background:linear-gradient(160deg,#e0e9f8 0%,#eef2ff 40%,#f8fafc 100%);
       border-bottom:1px solid var(--border);
     }
+    .pv-hero-mesh{
+      position:absolute;inset:-28% -18% -22% -18%;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 48% 40% at 72% 16%, rgba(99,102,241,.14), transparent 55%),
+        radial-gradient(ellipse 42% 38% at 14% 78%, rgba(37,99,235,.15), transparent 50%),
+        radial-gradient(ellipse 32% 28% at 88% 80%, rgba(14,165,233,.1), transparent 45%);
+      opacity:.78;
+      transform:translate(var(--pv-mx,0), var(--pv-my,0));
+      will-change:transform;
+      animation:pv-mesh-breathe 16s ease-in-out infinite alternate;
+    }
+    @keyframes pv-mesh-breathe{
+      0%{filter:hue-rotate(-5deg) saturate(1.05);opacity:.74}
+      100%{filter:hue-rotate(6deg) saturate(1.1);opacity:.84}
+    }
+    html.pv-reduce-motion .pv-hero-mesh{animation:none}
+    .pv-float{
+      position:absolute;pointer-events:none;z-index:1;
+      color:rgba(37,99,235,.26);font-size:clamp(1.8rem,3.2vw,2.8rem);
+      animation:pv-float 8s ease-in-out infinite;
+    }
+    .pv-float--1{top:10%;right:6%;animation-delay:-1.2s}
+    .pv-float--2{bottom:18%;right:12%;font-size:clamp(1.4rem,2.4vw,2rem);animation-delay:-3s;opacity:.88}
+    .pv-float--3{top:36%;left:3%;font-size:clamp(1.2rem,2vw,1.7rem);animation-delay:-2.5s;opacity:.72}
+    @keyframes pv-float{
+      0%,100%{transform:translateY(0) rotate(-5deg)}
+      50%{transform:translateY(-14px) rotate(5deg)}
+    }
+    html.pv-reduce-motion .pv-float{animation:none}
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
       background:
@@ -64,6 +95,7 @@
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
       border:1px solid var(--border);border-radius:18px;padding:28px;
       box-shadow:0 16px 36px rgba(15,23,42,.08);
+      isolation:isolate;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -77,15 +109,27 @@
       background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
       pointer-events:none;
     }
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
-    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.05;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero h1 .pv-gradient{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 38%,#6366f1 68%,#0ea5e9 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero .lead{margin-top:14px;color:var(--muted);font-size:clamp(16px,1.9vw,18px);max-width:720px;line-height:1.65}
+    .pv-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .pv-chip{
+      font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--blue-dark);background:rgba(255,255,255,.9);
+      border:1px solid var(--blue-mid);border-radius:999px;padding:6px 11px;
+      box-shadow:0 2px 10px rgba(37,99,235,.07);
+    }
+    .pv-chip i{margin-right:5px;font-size:11px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hero-kpi{
       display:inline-flex;align-items:baseline;gap:6px;
@@ -106,40 +150,82 @@
       padding:11px 16px;font-size:14px;font-weight:700;
     }
     .hero-side{
-      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(255,255,255,.82));
+      border:1px solid rgba(191,219,254,.95);border-radius:16px;padding:16px 15px;
+      box-shadow:0 8px 28px rgba(37,99,235,.1),0 1px 0 rgba(255,255,255,.95) inset;
+      backdrop-filter:blur(10px);position:relative;overflow:hidden;
     }
-    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
-    .hero-side ul{padding-left:16px}
+    .hero-side::before{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
+      background:linear-gradient(135deg,rgba(37,99,235,.35),transparent 42%,rgba(14,165,233,.18));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.55;
+    }
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px;position:relative;z-index:1}
+    .hero-side ul{padding-left:16px;position:relative;z-index:1}
     .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
     .hero-side .mini{
+      position:relative;z-index:1;
       margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
       padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-    .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 6px 16px rgba(15,23,42,.06);transition:.2s ease}
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10);border-color:#bfd6ff}
+    .card{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;
+      box-shadow:0 6px 16px rgba(15,23,42,.06);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+    }
+    @media(hover:hover){
+      .card:hover{
+        transform:translateY(-3px);box-shadow:0 14px 32px rgba(15,23,42,.1);border-color:#c7d7fe;
+      }
+    }
+    html.pv-reduce-motion .card{transition:none}
+    html.pv-reduce-motion .card:hover{transform:none;box-shadow:0 6px 16px rgba(15,23,42,.06)}
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:6px}
-    .section-title{
-      font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:900;color:var(--ink);margin-bottom:10px;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    /* Cabeceras — mismo patrón que lean-canvas.html */
+    .section-overline{
+      display:flex;align-items:center;gap:8px;
+      font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--slate-label);margin:0 0 10px;
     }
-    .section-num{
-      display:inline-flex;align-items:center;justify-content:center;
-      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:900;
+    .section-overline i{font-size:0.95em;opacity:.9}
+    .section-head{margin:0 0 6px;padding:0 0 4px}
+    .section > .section-overline + .section-head{margin-top:0}
+    .section-head-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .section-head .num,.section-head-row .num{
+      flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+      min-width:36px;height:36px;padding:0 8px;border-radius:10px;
+      background:var(--blue);color:#fff;font-size:17px;font-weight:900;line-height:1;
+      box-shadow:0 4px 14px rgba(37,99,235,.28);
     }
+    .section-head h2,.section-head-row h2{
+      font-size:clamp(1.45rem,2.8vw,1.9rem);color:var(--ink);font-weight:900;letter-spacing:-.4px;
+      line-height:1.15;margin:0;
+    }
+    .section-desc,.vpc-lead.section-desc{
+      margin-top:14px;font-size:17px;line-height:1.55;color:var(--muted);max-width:720px;
+    }
+    .vpc-lead.section-desc{margin-top:0}
+    .section-desc strong,.vpc-lead strong{color:var(--ink);font-weight:700}
+    .vpc-title-note{font-size:14px;font-weight:700;color:var(--muted)}
     .vpc-status{
       display:flex;align-items:flex-start;gap:12px;
       background:linear-gradient(135deg,#fffbeb 0%,#ffffff 100%);
-      border:1px solid #fcd34d;border-radius:14px;padding:14px 16px;margin-bottom:18px;
+      border:1px solid #fcd34d;border-radius:14px;padding:14px 16px;margin-bottom:18px;margin-top:4px;
       font-size:14px;line-height:1.55;color:#92400e;
       box-shadow:0 4px 14px rgba(245,158,11,.08);
+      transition:transform .22s ease,box-shadow .22s ease;
+    }
+    @media(hover:hover){
+      .vpc-status:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,158,11,.12)}
     }
     .vpc-status i{margin-top:3px;color:#d97706}
     .vpc-status strong{color:#b45309}
-    .vpc-lead{font-size:14px;color:var(--muted);margin-bottom:16px;max-width:720px;line-height:1.55}
+    .vpc-lead{font-size:17px;color:var(--muted);margin-bottom:16px;max-width:720px;line-height:1.55}
     .vpc-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -151,7 +237,17 @@
       background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 18px 18px;
       box-shadow:0 8px 26px rgba(15,23,42,.07);
       position:relative;overflow:hidden;
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
+    @media(hover:hover){
+      .vpc-panel:hover{
+        transform:translateY(-4px);
+        box-shadow:0 14px 36px rgba(15,23,42,.12);
+        border-color:#c7d7fe;
+      }
+    }
+    html.pv-reduce-motion .vpc-panel{transition:none}
+    html.pv-reduce-motion .vpc-panel:hover{transform:none;box-shadow:0 8px 26px rgba(15,23,42,.07)}
     .vpc-panel::before{
       content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px;
     }
@@ -185,10 +281,6 @@
       font-size:13px;color:var(--blue-dark);line-height:1.5;
     }
     .vpc-fit strong{color:var(--ink)}
-    .vpc-main-kicker{
-      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
-      margin-bottom:8px;display:flex;align-items:center;gap:8px;
-    }
     .vpc-jobs-tier{margin-top:12px}
     .vpc-jobs-tier:first-child{margin-top:4px}
     .vpc-jobs-tier .tier-label{
@@ -216,6 +308,10 @@
       border:1px solid var(--border);
       background:linear-gradient(145deg,#fff7ed 0%,#ffffff 48%,#eff6ff 100%);
       box-shadow:0 8px 26px rgba(15,23,42,.07);
+      transition:transform .22s ease,box-shadow .22s ease;
+    }
+    @media(hover:hover){
+      .vpc-encaje:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,23,42,.1)}
     }
     .vpc-encaje h3{
       font-size:17px;font-weight:900;color:var(--ink);margin-bottom:10px;
@@ -228,6 +324,10 @@
       background:linear-gradient(145deg,#0f172a 0%,#1e3a5f 100%);
       color:#e2e8f0;font-size:15px;line-height:1.6;border:1px solid rgba(148,163,184,.2);
       box-shadow:0 12px 32px rgba(15,23,42,.25);
+      transition:transform .22s ease,box-shadow .22s ease;
+    }
+    @media(hover:hover){
+      .vpc-pitch:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(15,23,42,.32)}
     }
     .vpc-pitch .vpc-pitch-label{
       font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#93c5fd;margin-bottom:8px;
@@ -238,13 +338,129 @@
       background:linear-gradient(90deg,#60a5fa,#a78bfa);margin-bottom:12px;
     }
     #frase-pitch{scroll-margin-top:88px}
-    .subhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:24px 0 12px}
+    /* —— Síntesis por segmento (bloque destacado tipo lienzo) —— */
+    .pv-synth-section{padding-top:8px;padding-bottom:8px}
+    .pv-synth{
+      position:relative;margin-top:6px;padding:26px 22px 28px;border-radius:18px;
+      border:1px solid rgba(191,219,254,.85);
+      background:
+        linear-gradient(145deg,rgba(239,246,255,.97) 0%,rgba(255,255,255,.94) 42%,rgba(250,245,255,.92) 100%);
+      box-shadow:0 8px 32px rgba(37,99,235,.07),0 1px 0 rgba(255,255,255,.9) inset;
+      overflow:hidden;
+    }
+    .pv-synth::before{
+      content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;
+      background:
+        radial-gradient(ellipse 72% 55% at 8% 0%,rgba(37,99,235,.11),transparent 52%),
+        radial-gradient(ellipse 55% 45% at 100% 100%,rgba(124,58,237,.09),transparent 48%);
+    }
+    .pv-synth::after{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;border-radius:18px;
+      background:repeating-linear-gradient(-9deg,transparent,transparent 48px,rgba(37,99,235,.04) 48px,rgba(37,99,235,.04) 49px);
+    }
+    .pv-synth-inner{position:relative;z-index:1}
+    .pv-synth-head{margin:0 0 18px}
+    .pv-synth-head h2.section-overline{margin:0 0 8px}
+    .pv-synth-lead{
+      margin:0;font-size:17px;line-height:1.55;color:var(--muted);max-width:720px;
+    }
+    .pv-synth-lead strong{color:var(--ink);font-weight:700}
+    .pv-synth-k{color:var(--ink);font-weight:700}
+    .pv-synth-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    }
+    @media(max-width:800px){.pv-synth-grid{grid-template-columns:1fr}}
+    .pv-synth-card{
+      position:relative;display:flex;flex-direction:column;
+      padding:20px 20px 18px 22px;border-radius:16px;min-height:100%;
+      background:linear-gradient(155deg,rgba(255,255,255,.92),rgba(248,250,252,.88));
+      border:1px solid rgba(226,232,240,.95);
+      box-shadow:0 6px 24px rgba(15,23,42,.07),0 1px 0 rgba(255,255,255,.85) inset;
+      backdrop-filter:blur(12px);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+      overflow:hidden;
+    }
+    .pv-synth-card::before{
+      content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:4px;
+    }
+    .pv-synth-card--edu::before{background:linear-gradient(180deg,#3b82f6,#1d4ed8)}
+    .pv-synth-card--biz::before{background:linear-gradient(180deg,#8b5cf6,#6d28d9)}
+    .pv-synth-card::after{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;pointer-events:none;opacity:.45;
+      background:linear-gradient(135deg,rgba(37,99,235,.2),transparent 50%,rgba(124,58,237,.12));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+    }
+    @media(hover:hover){
+      .pv-synth-card:hover{
+        transform:translateY(-4px);
+        box-shadow:0 14px 36px rgba(37,99,235,.14);
+        border-color:#c7d7fe;
+      }
+    }
+    html.pv-reduce-motion .pv-synth-card{transition:none}
+    html.pv-reduce-motion .pv-synth-card:hover{transform:none}
+    .pv-synth-badge{
+      display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+      font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+      padding:6px 11px;border-radius:999px;margin-bottom:12px;
+      border:1px solid rgba(37,99,235,.14);
+      background:rgba(239,246,255,.95);color:var(--blue-dark);
+      box-shadow:0 2px 8px rgba(37,99,235,.06);
+    }
+    .pv-synth-card--biz .pv-synth-badge{
+      background:rgba(245,243,255,.95);color:#5b21b6;border-color:rgba(124,58,237,.2);
+    }
+    .pv-synth-card--biz .pv-synth-badge i{color:#7c3aed}
+    .pv-synth-card h3{
+      font-size:clamp(1.05rem,2.2vw,1.28rem);font-weight:900;color:var(--ink);
+      letter-spacing:-.35px;line-height:1.2;margin:0 0 14px;padding:0;
+    }
+    .pv-synth-card__grad{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 45%,#6366f1 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .pv-synth-card--biz .pv-synth-card__grad{
+      background:linear-gradient(105deg,#1e1b4b 0%,#7c3aed 50%,#a78bfa 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .pv-synth-list{
+      list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;
+    }
+    .pv-synth-list li{
+      display:flex;align-items:flex-start;gap:12px;margin:0;
+      font-size:15px;line-height:1.5;color:var(--body);
+      padding:11px 12px;border-radius:12px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(226,232,240,.9);
+      transition:background .2s ease,border-color .2s ease;
+    }
+    @media(hover:hover){
+      .pv-synth-list li:hover{background:#fff;border-color:#bfdbfe}
+    }
+    .pv-synth-list .pv-synth-ico{
+      flex-shrink:0;display:flex;align-items:center;justify-content:center;
+      width:26px;height:26px;border-radius:8px;margin-top:1px;
+      font-size:12px;color:#fff;
+    }
+    .pv-synth-card--edu .pv-synth-ico{background:linear-gradient(145deg,#3b82f6,#2563eb)}
+    .pv-synth-card--biz .pv-synth-ico{background:linear-gradient(145deg,#8b5cf6,#6d28d9)}
+    .pv-synth-list li span:last-child{flex:1}
+    /* Scroll reveal — alineado con lean-canvas */
+    [data-pv-reveal]{
+      opacity:0;transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.2,.8,.2,1),transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+    html.pv-motion-ok [data-pv-reveal].pv-revealed{opacity:1;transform:translateY(0)}
+    html.pv-reduce-motion [data-pv-reveal]{opacity:1;transform:none;transition:none}
     @media(max-width:980px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="hero-wrap">
+    <div class="pv-hero-mesh" data-pv-mesh aria-hidden="true"></div>
   <section class="section">
     <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
     <nav class="tabs" aria-label="Navegación Fase 2">
@@ -269,23 +485,26 @@
       </div>
     </nav>
     <div class="hero">
+        <span class="pv-float pv-float--1" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+        <span class="pv-float pv-float--2" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+        <span class="pv-float pv-float--3" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
       <div class="hero-grid">
         <div>
-          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
-          <h1>Propuesta de valor</h1>
-          <p class="lead"><strong>Escapify</strong> permite a los docentes <strong>diseñar escape rooms educativos</strong> de forma <strong>rápida, estructurada e inclusiva</strong>, combinando <strong>recursos listos para usar</strong>, <strong>herramientas digitales</strong> y <strong>materiales físicos</strong>, sin necesidad de experiencia previa.</p>
-          <div class="hero-kpis">
-            <span class="hero-kpi"><strong>Rápido</strong> + estructurado</span>
-            <span class="hero-kpi"><strong>Listos</strong> + inclusivo</span>
-            <span class="hero-kpi"><strong>Digital</strong> + físico</span>
+          <span class="hero-badge" data-pv-reveal data-pv-delay="0"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <h1 data-pv-reveal data-pv-delay="0.04"><span class="pv-gradient">Propuesta de valor</span></h1>
+          <p class="lead" data-pv-reveal data-pv-delay="0.07"><strong>Escapify</strong> permite a los docentes <strong>diseñar escape rooms educativos</strong> de forma <strong>rápida, estructurada e inclusiva</strong>, combinando <strong>recursos listos para usar</strong>, <strong>herramientas digitales</strong> y <strong>materiales físicos</strong>, sin necesidad de experiencia previa.</p>
+          <div class="pv-chip-row" data-pv-reveal data-pv-delay="0.1">
+            <span class="pv-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Rápido + estructurado</span>
+            <span class="pv-chip"><i class="fa-solid fa-universal-access" aria-hidden="true"></i> Listo + inclusivo</span>
+            <span class="pv-chip"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Digital + físico</span>
           </div>
-          <div class="hero-actions">
+          <div class="hero-actions" data-pv-reveal data-pv-delay="0.14">
             <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
             <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Contexto</a>
             <a class="btn-secondary" href="#frase-pitch"><i class="fa-solid fa-bullseye"></i>Frase en el lienzo VPC</a>
           </div>
         </div>
-        <aside class="hero-side">
+        <aside class="hero-side" data-pv-reveal data-pv-delay="0.18">
           <h3><i class="fa-solid fa-microphone-lines"></i> Misma frase que el pitch (VPC)</h3>
           <ul>
             <li><strong>Sistema claro</strong>, no ideas sueltas: narrativa + pruebas ordenadas.</li>
@@ -300,20 +519,22 @@
   </div>
 
   <section class="section" aria-labelledby="vpc-heading">
-    <p class="vpc-main-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Value Proposition Canvas · Escapify.io</p>
-    <h2 id="vpc-heading" class="section-title">
-      <span class="section-num">3</span>
-      Lienzo de propuesta de valor <span style="font-size:14px;font-weight:700;color:var(--muted)">(VPC completo)</span>
-    </h2>
+    <p class="section-overline" data-pv-reveal data-pv-delay="0.02"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Value Proposition Canvas · Escapify.io</p>
+    <div class="section-head" data-pv-reveal data-pv-delay="0.04">
+      <div class="section-head-row">
+        <span class="num" aria-hidden="true">3</span>
+        <h2 id="vpc-heading">Lienzo de propuesta de valor <span class="vpc-title-note">(VPC completo)</span></h2>
+      </div>
+    </div>
 
-    <div class="vpc-status" role="status">
+    <div class="vpc-status" role="status" data-pv-reveal data-pv-delay="0.06">
       <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
       <div>
         <strong>Iteración continua:</strong> este lienzo recoge <strong>perfil del cliente</strong> (jobs / pains / gains) y <strong>mapa de valor</strong> (productos / pain relievers / gain creators). Refínalo con entrevistas hasta cerrar el <strong>encaje (fit)</strong> con evidencia.
       </div>
     </div>
 
-    <p class="vpc-lead">
+    <p class="vpc-lead section-desc" data-pv-reveal data-pv-delay="0.08">
       El <strong>Value Proposition Canvas</strong> enlaza lo que el docente <strong>intenta hacer, sufrir y conseguir</strong> con lo que Escapify <strong>ofrece, alivia y potencia</strong>. Versión operativa para pitch y validación.
     </p>
 
@@ -431,7 +652,7 @@
       </div>
     </div>
 
-    <div class="vpc-encaje">
+    <div class="vpc-encaje" data-pv-reveal data-pv-delay="0.12">
       <h3><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i> Encaje (fit) clave</h3>
       <p style="font-size:14px;color:var(--body);margin:0;line-height:1.55"><strong>Escapify encaja porque:</strong></p>
       <ul>
@@ -442,36 +663,64 @@
       </ul>
     </div>
 
-    <div class="vpc-pitch" id="frase-pitch">
-      <div class="vpc-pitch-label">Frase clave (pitch)</div>
+    <div class="vpc-pitch" id="frase-pitch" data-pv-reveal data-pv-delay="0.14">
+      <div class="vpc-pitch-label">Pitch</div>
       <p>Escapify permite a los docentes <strong>diseñar escape rooms educativos</strong> de forma <strong>rápida, estructurada e inclusiva</strong>, combinando <strong>recursos listos para usar</strong>, <strong>herramientas digitales</strong> y <strong>materiales físicos</strong>, sin necesidad de experiencia previa.</p>
     </div>
 
-    <div class="vpc-fit">
+    <div class="vpc-fit" data-pv-reveal data-pv-delay="0.16">
       <strong>Siguiente paso de validación:</strong> contrastar pains y gains prioritarios con <a href="./datos-contexto.html?bloque=customer-dev" style="color:var(--blue-dark);font-weight:700">Customer Development</a> y medir qué pain relievers y gain creators son <strong>imprescindibles</strong> en la percepción del docente.
     </div>
   </section>
 
-  <section class="section">
-    <p class="subhead">Síntesis por segmento</p>
-    <div class="grid">
-      <article class="card">
-        <h3>Valor para educación</h3>
-        <ul>
-          <li>Ahorro de tiempo para docentes.</li>
-          <li>Materiales inclusivos listos para aplicar.</li>
-          <li>Impacto en motivación y participación del alumnado.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Valor para empresa</h3>
-        <ul>
-          <li>Dinámicas prácticas para aprendizaje de equipos.</li>
-          <li>Formato experiencial para onboarding y soft skills.</li>
-          <li>Diseño adaptable por objetivo y nivel.</li>
-        </ul>
-      </article>
+  <section class="section pv-synth-section" aria-labelledby="pv-synth-heading">
+    <div class="pv-synth">
+      <div class="pv-synth-inner">
+        <div class="pv-synth-head" data-pv-reveal data-pv-delay="0.04">
+          <h2 class="section-overline" id="pv-synth-heading"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Síntesis por segmento</h2>
+          <p class="pv-synth-lead">Dos lecturas del mismo producto: <strong>impacto en aula</strong> frente a <strong>formación experiencial en equipos</strong>.</p>
+        </div>
+        <div class="pv-synth-grid">
+          <article class="pv-synth-card pv-synth-card--edu" data-pv-reveal>
+            <span class="pv-synth-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Educación</span>
+            <h3><span class="pv-synth-card__grad">Valor</span> para el aula</h3>
+            <ul class="pv-synth-list">
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
+                <span><strong class="pv-synth-k">Tiempo:</strong> menos horas de preparación para el docente.</span>
+              </li>
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-universal-access"></i></span>
+                <span><strong class="pv-synth-k">Inclusión:</strong> materiales listos para aplicar con diversidad real.</span>
+              </li>
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+                <span><strong class="pv-synth-k">Impacto:</strong> más motivación y participación del alumnado.</span>
+              </li>
+            </ul>
+          </article>
+          <article class="pv-synth-card pv-synth-card--biz" data-pv-reveal>
+            <span class="pv-synth-badge"><i class="fa-solid fa-building" aria-hidden="true"></i> Empresa</span>
+            <h3><span class="pv-synth-card__grad">Valor</span> para equipos</h3>
+            <ul class="pv-synth-list">
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>
+                <span><strong class="pv-synth-k">Dinámicas:</strong> aprendizaje práctico en grupo, con objetivo claro.</span>
+              </li>
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-user-tie"></i></span>
+                <span><strong class="pv-synth-k">Experiencial:</strong> onboarding y soft skills con formato memorable.</span>
+              </li>
+              <li>
+                <span class="pv-synth-ico" aria-hidden="true"><i class="fa-solid fa-sliders"></i></span>
+                <span><strong class="pv-synth-k">Flexible:</strong> diseño adaptable por objetivo y nivel del equipo.</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
+  <script src="./js/propuesta-valor-effects.js" defer></script>
 </body>
 </html>
