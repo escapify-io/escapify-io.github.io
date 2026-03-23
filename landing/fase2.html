@@ -18,21 +18,52 @@
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      background:linear-gradient(160deg,#e0e9f8 0%,#eef2ff 38%,#f8fafc 100%);
       border-bottom:1px solid var(--border);
     }
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
       background:
-        radial-gradient(ellipse 84% 58% at 12% 14%, rgba(37,99,235,.14), transparent 52%),
+        radial-gradient(ellipse 84% 58% at 12% 14%, rgba(37,99,235,.16), transparent 52%),
         radial-gradient(ellipse 68% 46% at 90% 84%, rgba(15,23,42,.08), transparent 50%);
       pointer-events:none;
     }
     .hero-wrap::after{
-      content:"";position:absolute;inset:0;opacity:.35;
-      background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.05) 56px,rgba(37,99,235,.05) 57px);
+      content:"";position:absolute;inset:0;opacity:.4;
+      background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.045) 56px,rgba(37,99,235,.045) 57px);
       pointer-events:none;
     }
+    /* Mesh animado + parallax (JS) */
+    .hero-mesh{
+      position:absolute;inset:-30% -20% -25% -20%;pointer-events:none;
+      background:
+        radial-gradient(ellipse 50% 42% at 70% 18%, rgba(99,102,241,.12), transparent 55%),
+        radial-gradient(ellipse 45% 40% at 15% 75%, rgba(37,99,235,.14), transparent 50%),
+        radial-gradient(ellipse 35% 30% at 85% 80%, rgba(14,165,233,.1), transparent 45%);
+      opacity:.75;
+      transform:translate(var(--f2-mx,0), var(--f2-my,0));
+      will-change:transform;
+      animation:f2-mesh-breathe 14s ease-in-out infinite alternate;
+    }
+    @keyframes f2-mesh-breathe{
+      0%{filter:hue-rotate(-6deg) saturate(1.05);opacity:.72}
+      100%{filter:hue-rotate(8deg) saturate(1.12);opacity:.82}
+    }
+    .f2-reduce-motion .hero-mesh{animation:none}
+    /* Flotantes decorativos */
+    .hero-float{
+      position:absolute;pointer-events:none;z-index:1;
+      color:rgba(37,99,235,.28);font-size:clamp(2rem,3.5vw,3.2rem);
+      animation:f2-float 7s ease-in-out infinite;
+    }
+    .hero-float--1{top:12%;right:8%;animation-delay:-1s}
+    .hero-float--2{bottom:22%;right:14%;font-size:clamp(1.6rem,2.8vw,2.4rem);animation-delay:-3s;opacity:.85}
+    .hero-float--3{top:38%;left:4%;font-size:clamp(1.4rem,2.2vw,2rem);animation-delay:-2s;opacity:.75}
+    @keyframes f2-float{
+      0%,100%{transform:translateY(0) rotate(-6deg)}
+      50%{transform:translateY(-12px) rotate(4deg)}
+    }
+    .f2-reduce-motion .hero-float{animation:none}
     .section{max-width:var(--max);margin:0 auto;padding:34px 24px;position:relative;z-index:1}
     .label-pill{
       display:inline-flex;align-items:center;gap:8px;
@@ -67,6 +98,7 @@
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
       border:1px solid var(--border);border-radius:18px;padding:28px;
       box-shadow:0 16px 36px rgba(15,23,42,.08);
+      isolation:isolate;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -80,15 +112,40 @@
       background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
       pointer-events:none;
     }
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
-    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.05;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero h1 .gradient-text{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 35%,#6366f1 65%,#0ea5e9 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      display:inline-block;
+    }
+    .hero .lead{margin-top:14px;color:var(--muted);font-size:clamp(16px,1.9vw,18px);max-width:720px;line-height:1.65}
+    .hero-escapify-strip{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center;
+    }
+    .hero-chip{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--blue-dark);background:rgba(255,255,255,.85);
+      border:1px solid var(--blue-mid);border-radius:999px;padding:6px 11px;
+      box-shadow:0 2px 10px rgba(37,99,235,.08);
+    }
+    .hero-chip i{font-size:12px}
+    .hero-chip--link{
+      text-decoration:none;cursor:pointer;transition:.18s ease;
+      background:linear-gradient(135deg,#fff,#eff6ff);
+    }
+    .hero-chip--link:hover{border-color:#93c5fd;box-shadow:0 4px 16px rgba(37,99,235,.15);transform:translateY(-1px)}
+    /* Entradas JS */
+    [data-f2-reveal]{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.2,.8,.2,1),transform .65s cubic-bezier(.2,.8,.2,1)}
+    .f2-revealed,[data-f2-reveal].f2-revealed{opacity:1;transform:translateY(0)}
+    .f2-reduce-motion [data-f2-reveal]{opacity:1;transform:none;transition:none}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hero-kpi{
       display:inline-flex;align-items:baseline;gap:6px;
@@ -109,8 +166,17 @@
       padding:11px 16px;font-size:14px;font-weight:700;
     }
     .hero-side{
-      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(255,255,255,.78));
+      border:1px solid rgba(191,219,254,.9);border-radius:16px;padding:16px 15px;
+      box-shadow:0 8px 28px rgba(37,99,235,.1),0 1px 0 rgba(255,255,255,.9) inset;
+      backdrop-filter:blur(10px);position:relative;overflow:hidden;
+    }
+    .hero-side::before{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
+      background:linear-gradient(135deg,rgba(37,99,235,.35),transparent 40%,rgba(14,165,233,.2));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.6;
     }
     .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
     .hero-side ul{padding-left:16px}
@@ -119,24 +185,98 @@
       margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
       padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
-    .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:0}
-    .card{
-      background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;
-      box-shadow:0 6px 16px rgba(15,23,42,.06);transition:.2s ease;
+    /* ─── Hub de páginas (rejilla 3×2) ─── */
+    .f2-hub-section{padding:8px 0 40px}
+    .f2-hub-head{margin-bottom:22px;max-width:720px}
+    .f2-hub-kicker{
+      display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+      letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;
     }
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10);border-color:#bfd6ff}
-    .card h3{font-size:16px;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-    .card p{font-size:14px;color:var(--muted)}
+    .f2-hub-title{
+      font-size:clamp(22px,2.4vw,28px);font-weight:900;color:var(--ink);letter-spacing:-.03em;
+      line-height:1.15;margin:0 0 8px;
+    }
+    .f2-hub-sub{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
+    .f2-hub-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch;
+    }
+    .f2-card{
+      --card-accent:var(--blue);
+      position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;
+      padding:0;overflow:hidden;
+      box-shadow:0 4px 14px rgba(15,23,42,.06);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+    }
+    .f2-card::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:4px;
+      background:linear-gradient(90deg,var(--card-accent),#93c5fd);
+      opacity:.95;
+    }
+    .f2-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 16px 36px rgba(15,23,42,.12);
+      border-color:#c7d7fe;
+    }
+    .f2-card--canvas{--card-accent:#2563eb}
+    .f2-card--adopter{--card-accent:#4f46e5}
+    .f2-card--valor{--card-accent:#7c3aed}
+    .f2-card--ecofin{--card-accent:#059669}
+    .f2-card--contexto{--card-accent:#0284c7}
+    .f2-card--atajos{--card-accent:#d97706}
+    .f2-card__cover{
+      display:flex;flex-direction:column;height:100%;min-height:100%;
+      padding:18px 18px 16px;text-decoration:none;color:inherit;border-radius:16px;
+    }
+    .f2-card__cover:focus-visible{
+      outline:2px solid var(--blue);outline-offset:3px;
+    }
+    .f2-card__top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+    .f2-card__icon{
+      flex-shrink:0;width:46px;height:46px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.15rem;color:#fff;
+      background:linear-gradient(145deg,var(--card-accent),#1e293b);
+      box-shadow:0 6px 14px rgba(15,23,42,.18);
+    }
+    .f2-card__tag{
+      font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--card-accent);background:var(--blue-light);
+      border-radius:6px;padding:4px 8px;margin-left:auto;align-self:flex-start;
+    }
+    .f2-card h3{
+      font-size:16px;font-weight:900;color:var(--ink);margin:0 0 8px;line-height:1.25;
+      letter-spacing:-.02em;
+    }
+    .f2-card p{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0 0 12px;flex:1}
+    .f2-card__cta{
+      display:inline-flex;align-items:center;gap:8px;margin-top:auto;
+      font-size:13px;font-weight:800;color:var(--blue);
+    }
+    .f2-card__cta i{font-size:11px;transition:transform .2s ease}
+    .f2-card:hover .f2-card__cta i{transform:translateX(4px)}
+    .f2-card--atajos .f2-card__pad{padding:18px}
+    .f2-card--atajos p{margin-bottom:0}
+    .f2-card__mini{margin:12px 0 0;padding:0;list-style:none}
+    .f2-card__mini li+li{border-top:1px solid var(--border)}
+    .f2-card__mini a{
+      display:flex;align-items:center;justify-content:space-between;gap:8px;
+      padding:10px 0;font-size:13px;font-weight:600;color:var(--blue-dark);text-decoration:none;
+    }
+    .f2-card__mini a:hover{color:var(--blue)}
+    .f2-card__mini a i{font-size:11px;opacity:.65}
     @media(max-width:980px){
       .tabs{grid-template-columns:1fr 1fr}
-      .cards{grid-template-columns:1fr 1fr}
+      .f2-hub-grid{grid-template-columns:1fr 1fr}
       .hero-grid{grid-template-columns:1fr}
     }
-    @media(max-width:640px){.tabs,.cards{grid-template-columns:1fr}}
+    @media(max-width:640px){
+      .tabs,.f2-hub-grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
   <div class="hero-wrap">
+    <div class="hero-mesh" data-f2-mesh aria-hidden="true"></div>
     <section class="section">
       <span class="label-pill"><i class="fa-solid fa-layer-group"></i>Escapify · Fase 2</span>
       <nav class="tabs" aria-label="Navegación Fase 2">
@@ -163,58 +303,134 @@
         </div>
       </nav>
       <div class="hero">
+        <span class="hero-float hero-float--1" aria-hidden="true"><i class="fa-solid fa-key"></i></span>
+        <span class="hero-float hero-float--2" aria-hidden="true"><i class="fa-solid fa-puzzle-piece"></i></span>
+        <span class="hero-float hero-float--3" aria-hidden="true"><i class="fa-solid fa-lock-open"></i></span>
         <div class="hero-grid">
           <div>
-            <span class="hero-badge"><i class="fa-solid fa-compass"></i>Hub estratégico</span>
-            <h1>Estrategia visual<br/>lista para ejecutar</h1>
-            <p class="lead">Centraliza Lean Canvas, target, propuesta de valor, plan ecofin y toda la validación en una experiencia premium, clara y accionable.</p>
-            <div class="hero-kpis">
-              <span class="hero-kpi"><strong>10</strong> bloques de validación</span>
-              <span class="hero-kpi"><strong>5</strong> páginas estratégicas</span>
-              <span class="hero-kpi"><strong>1</strong> narrativa unificada</span>
+            <span class="hero-badge" data-f2-reveal data-f2-delay="0"><i class="fa-solid fa-wand-magic-sparkles"></i> Hub estratégico · Fase 2</span>
+            <h1 data-f2-reveal data-f2-delay="0.04">
+              De la idea al <span class="gradient-text">impacto en aula</span>
+            </h1>
+            <p class="lead" data-f2-reveal data-f2-delay="0.08">
+              Filosofía <strong>escapify.io</strong>: experiencias educativas, recursos accionables e inclusión. Aquí concentras <strong>Lean Canvas</strong>, validación, datos de contexto y <strong>plan ecofin</strong> en una narrativa clara.
+            </p>
+            <div class="hero-escapify-strip" data-f2-reveal data-f2-delay="0.12">
+              <span class="hero-chip"><i class="fa-solid fa-graduation-cap"></i> Educativo</span>
+              <span class="hero-chip"><i class="fa-solid fa-sliders"></i> Personalizable</span>
+              <span class="hero-chip"><i class="fa-solid fa-universal-access"></i> Accesible</span>
+              <a class="hero-chip hero-chip--link" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Producto · escapify.io</a>
             </div>
-            <div class="hero-actions">
-              <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Ir a Lean Canvas</a>
-              <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-circle-info"></i>Abrir Saber más</a>
+            <div class="hero-kpis" data-f2-count-wrap data-f2-reveal data-f2-delay="0.16">
+              <span class="hero-kpi"><strong data-f2-count="10">0</strong> bloques de validación</span>
+              <span class="hero-kpi"><strong data-f2-count="5">0</strong> páginas estratégicas</span>
+              <span class="hero-kpi"><strong data-f2-count="1">0</strong> narrativa unificada</span>
+            </div>
+            <div class="hero-actions" data-f2-reveal data-f2-delay="0.2">
+              <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Explorar Lean Canvas</a>
+              <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-database"></i>Datos y validación</a>
+              <a class="btn-secondary" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i>Visitar escapify.io</a>
             </div>
           </div>
-          <aside class="hero-side">
+          <aside class="hero-side" data-f2-reveal data-f2-delay="0.22">
             <h3><i class="fa-solid fa-bullseye"></i> Prioridad ahora</h3>
             <ul>
-              <li>Validar problema y activación real.</li>
-              <li>Medir conversión y repetición de uso.</li>
-              <li>Escalar de educación a empresa.</li>
+              <li>Validar problema y <strong>activación real</strong> en aula (no solo registros).</li>
+              <li>Medir conversión, repetición y señales de pago.</li>
+              <li>Escalar de educación a <strong>formación en empresa</strong> cuando el embudo esté medido.</li>
             </ul>
-            <div class="mini"><i class="fa-solid fa-rocket"></i> Foco: pasar de presentación a tracción.</div>
+            <div class="mini"><i class="fa-solid fa-rocket"></i> Objetivo: pasar de presentación a <strong>tracción medible</strong>.</div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="section">
-    <div class="cards">
-      <article class="card">
-        <h3><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</h3>
-        <p>Modelo completo del negocio con problema, solución, segmentos, canales, costes e ingresos.</p>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-users"></i>Early Adopter</h3>
-        <p>Perfil detallado de clientes iniciales para validar rápido y con mejor enfoque comercial.</p>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-gem"></i>Propuesta de Valor</h3>
-        <p>Encaje entre necesidades reales y beneficios concretos para educación y formación en empresas.</p>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-chart-line"></i>Plan Ecofin</h3>
-        <p>Escenarios económicos (pesimista/medio/optimista), hipótesis y próximos hitos de validación.</p>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-circle-info"></i>Contexto y validación</h3>
-        <p>Desplegable con datos de contexto educativo, competencia, MVP, estado 4C, embudo, acciones e hipótesis. Target y early adopters en la pestaña Early Adopter.</p>
-      </article>
-    </div>
+    <section class="section f2-hub-section">
+      <header class="f2-hub-head" data-f2-reveal data-f2-delay="0.04">
+        <span class="f2-hub-kicker"><i class="fa-solid fa-grip" aria-hidden="true"></i> Mapa Fase 2</span>
+        <h2 class="f2-hub-title">Todo el hub, en un vistazo</h2>
+        <p class="f2-hub-sub">Cinco páginas para narrar y decidir, más el <strong>panel de datos</strong> (competencia, embudo, journey, marketing, hipótesis…) y atajos a lo que más se pide en reuniones.</p>
+      </header>
+      <div class="f2-hub-grid" data-f2-reveal data-f2-delay="0.1">
+        <article class="f2-card f2-card--canvas">
+          <a class="f2-card__cover" href="./lean-canvas.html">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-table-cells-large"></i></span>
+              <span class="f2-card__tag">Modelo</span>
+            </div>
+            <h3>Lean Canvas</h3>
+            <p>Problema, solución, segmentos, canales, costes e ingresos — lienzo completo alineado con el feedback recibido.</p>
+            <span class="f2-card__cta">Abrir lienzo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </article>
+        <article class="f2-card f2-card--adopter">
+          <a class="f2-card__cover" href="./early-adopter.html">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-users"></i></span>
+              <span class="f2-card__tag">Personas</span>
+            </div>
+            <h3>Early Adopter</h3>
+            <p>Doble target (docente + alumno), personas concretas, canvas y guion para entrevistas — sin duplicar el panel de datos.</p>
+            <span class="f2-card__cta">Ver perfiles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </article>
+        <article class="f2-card f2-card--valor">
+          <a class="f2-card__cover" href="./propuesta-valor.html">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+              <span class="f2-card__tag">Oferta</span>
+            </div>
+            <h3>Propuesta de valor</h3>
+            <p>Encaje entre necesidades reales y beneficios para educación y, cuando toque, formación en empresa.</p>
+            <span class="f2-card__cta">Ver propuesta <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </article>
+        <article class="f2-card f2-card--ecofin">
+          <a class="f2-card__cover" href="./plan-ecofin.html">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>
+              <span class="f2-card__tag">Números</span>
+            </div>
+            <h3>Plan Ecofin</h3>
+            <p>Escenarios pesimista / medio / optimista, hipótesis de ingresos y próximos hitos de validación.</p>
+            <span class="f2-card__cta">Ver escenarios <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </article>
+        <article class="f2-card f2-card--contexto">
+          <a class="f2-card__cover" href="./datos-contexto.html">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-database"></i></span>
+              <span class="f2-card__tag">Panel</span>
+            </div>
+            <h3>Contexto y validación</h3>
+            <p>Un solo sitio con contexto educativo, competencia, PMV, estado 4C, embudo, acciones de mercado, Customer Dev, journey, marketing e hipótesis. Úsalo con el desplegable «Saber más».</p>
+            <span class="f2-card__cta">Abrir panel <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </article>
+        <article class="f2-card f2-card--atajos">
+          <div class="f2-card__pad">
+            <div class="f2-card__top">
+              <span class="f2-card__icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
+              <span class="f2-card__tag">Atajos</span>
+            </div>
+            <h3>Lo que más se comparte</h3>
+            <p>Entra directo a bloques del panel que suelen salir en follow-ups (sin buscar en el menú).</p>
+            <ul class="f2-card__mini">
+              <li>
+                <a href="./datos-contexto.html?bloque=customer-journey">Customer Journey <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="./datos-contexto.html?bloque=plan-marketing">Plan de marketing <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
     </section>
   </div>
+  <script src="./js/fase2-effects.js" defer></script>
 </body>
 </html>
