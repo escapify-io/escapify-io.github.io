@@ -170,12 +170,21 @@
       color:var(--slate-label);margin:0 0 10px;
     }
     .section-head-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .section-head .num,.section-head-row .num,.comp-block-head .comp-num,.pmv-intro-head .pmv-num,.mvp-title-row .mvp-num{
+    .section-head .num,.section-head-row .num,.block h2 .dc-num,.comp-block-head .dc-num,.comp-block-head .comp-num,.st4c-head h2 .dc-num{
       flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
       min-width:36px;height:36px;padding:0 8px;border-radius:10px;
       background:var(--blue);color:#fff;font-size:17px;font-weight:900;line-height:1;
       box-shadow:0 4px 14px rgba(37,99,235,.28);
     }
+    /* Subsecciones dentro del bloque PMV (3.x) */
+    .mvp-title-row .dc-num-sub,.mvp-val-section .mvp-title-row .dc-num-sub{
+      min-width:44px;height:34px;font-size:14px;font-weight:900;border-radius:10px;
+      background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.22);
+    }
+    .mvp-val-section .mvp-title-row .dc-num-sub{
+      background:var(--green);box-shadow:0 4px 12px rgba(22,163,74,.28);
+    }
+    .block h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .panel{
       margin-top:16px;position:relative;border-radius:18px;padding:22px 20px 24px;
       background:linear-gradient(145deg,#ffffff 0%,#fafbff 50%,#f8fafc 100%);
@@ -202,6 +211,64 @@
     select{
       border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:var(--ink);
       min-width:320px;font-weight:600;
+    }
+    /* Desplegable de bloques — más visible */
+    .dc-select-shell{
+      margin-bottom:20px;padding:16px 18px 14px;border-radius:16px;
+      border:2px solid rgba(37,99,235,.35);
+      background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 55%,#eef2ff 100%);
+      box-shadow:0 10px 32px rgba(37,99,235,.12),0 1px 0 rgba(255,255,255,.9) inset;
+    }
+    .dc-select-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+    .dc-select-ico{
+      width:44px;height:44px;border-radius:12px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,var(--blue),#1d4ed8);color:#fff;font-size:1.1rem;
+      box-shadow:0 4px 14px rgba(37,99,235,.35);
+    }
+    .dc-select-titles{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .dc-select-kicker{
+      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
+    }
+    .dc-select-heading{
+      font-size:clamp(1rem,2.2vw,1.15rem);font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.25;
+    }
+    .dc-select-badge{
+      display:inline-flex;align-items:center;justify-content:center;
+      margin-left:6px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:800;
+      vertical-align:middle;background:var(--blue-mid);color:var(--blue-dark);
+    }
+    .dc-select-row{display:flex;flex-direction:column;gap:8px}
+    .dc-select-label{
+      font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-label);
+      display:flex;align-items:center;gap:8px;
+    }
+    .dc-select-label::after{
+      content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);min-width:40px;
+    }
+    .dc-select-field{position:relative;max-width:100%}
+    .dc-select-field select{
+      width:100%;max-width:100%;min-width:0;padding:14px 48px 14px 16px;font-size:15px;font-weight:700;
+      border:2px solid var(--blue-mid);border-radius:12px;background:#fff;
+      box-shadow:0 4px 16px rgba(15,23,42,.06);
+      cursor:pointer;appearance:none;-webkit-appearance:none;
+      transition:border-color .2s ease,box-shadow .2s ease;
+    }
+    .dc-select-field select:hover{border-color:#93c5fd}
+    .dc-select-field select:focus{
+      outline:none;border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(37,99,235,.18),0 6px 20px rgba(15,23,42,.08);
+    }
+    .dc-select-chevron{
+      position:absolute;right:14px;top:50%;transform:translateY(-50%);
+      pointer-events:none;color:var(--blue);font-size:14px;opacity:.9;
+    }
+    .dc-select-hint{
+      margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--muted);
+    }
+    .dc-select-hint strong{color:var(--blue-dark)}
+    @media(max-width:520px){
+      .dc-select-field select{font-size:14px;padding:12px 44px 12px 14px}
     }
     .block{display:none}
     .block.active{display:block}
@@ -399,51 +466,147 @@
       margin-top:18px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.55;
       color:var(--blue-dark);background:var(--blue-light);border:1px dashed var(--blue-mid);
     }
-    /* Embudo visual (captación → escala) */
+    /* Embudo visual (captación → escala) — versión enriquecida */
     .funnel-lead{
-      font-size:15px;color:var(--muted);line-height:1.55;max-width:900px;margin:10px 0 6px;
+      font-size:15px;color:var(--muted);line-height:1.55;max-width:900px;margin:10px 0 14px;
     }
-    .funnel{
+    .funnel-viz-wrap{
+      position:relative;margin:8px 0 6px;padding:0 0 8px;
+      border-radius:22px;
+      background:linear-gradient(165deg,#f8fafc 0%,#eef2ff 42%,#f0f9ff 100%);
+      border:1px solid rgba(191,219,254,.85);
+      box-shadow:
+        0 20px 50px rgba(37,99,235,.09),
+        0 1px 0 rgba(255,255,255,.95) inset;
+      overflow:hidden;
+    }
+    .funnel-viz-wrap::before{
+      content:"";position:absolute;inset:0;pointer-events:none;border-radius:22px;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% -8%,rgba(99,102,241,.16),transparent 52%),
+        radial-gradient(ellipse 60% 40% at 100% 100%,rgba(14,165,233,.1),transparent 45%);
+    }
+    .funnel-viz-funnelbar{
+      position:relative;height:56px;margin:0;
+      background:linear-gradient(90deg,#0ea5e9 0%,#2563eb 28%,#6366f1 52%,#7c3aed 78%,#059669 100%);
+      opacity:.22;
+      clip-path:polygon(8% 0, 92% 0, 72% 100%, 28% 100%);
+    }
+    .funnel-viz-funnelbar::after{
+      content:"";position:absolute;left:50%;bottom:4px;transform:translateX(-50%);
+      width:min(92%,720px);height:3px;border-radius:99px;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+      opacity:.9;
+    }
+    .funnel.funnel--visual{
+      display:grid;
+      grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr;
+      gap:0;align-items:stretch;
+      margin:0;padding:18px 12px 22px;
+      position:relative;z-index:1;
+    }
+    @media(max-width:1199px){
+      .funnel.funnel--visual{
+        display:flex;flex-direction:column;align-items:stretch;
+        padding:16px 14px 20px;
+      }
+    }
+    .funnel-card{
+      min-width:0;
+      background:linear-gradient(180deg,rgba(255,255,255,.97) 0%,#fff 38%);
+      border:1px solid rgba(226,232,240,.95);
+      border-radius:16px;
+      padding:16px 14px 16px;
+      text-align:center;
+      position:relative;
+      box-shadow:
+        0 4px 6px rgba(15,23,42,.04),
+        0 12px 28px rgba(15,23,42,.07);
+      transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+    }
+    @media(hover:hover){
+      .funnel-card:hover{
+        transform:translateY(-5px);
+        box-shadow:0 16px 40px rgba(37,99,235,.14);
+        border-color:rgba(147,197,253,.95);
+      }
+    }
+    html.dc-reduce-motion .funnel-card{transition:none}
+    html.dc-reduce-motion .funnel-card:hover{transform:none}
+    .funnel-card--s1{--fc-top:#0ea5e9;--fc-ico1:#38bdf8;--fc-ico2:#0284c7}
+    .funnel-card--s2{--fc-top:#2563eb;--fc-ico1:#60a5fa;--fc-ico2:#1d4ed8}
+    .funnel-card--s3{--fc-top:#6366f1;--fc-ico1:#818cf8;--fc-ico2:#4f46e5}
+    .funnel-card--s4{--fc-top:#a855f7;--fc-ico1:#c084fc;--fc-ico2:#7c3aed}
+    .funnel-card--s5{--fc-top:#10b981;--fc-ico1:#34d399;--fc-ico2:#047857}
+    .funnel-card--s1,.funnel-card--s2,.funnel-card--s3,.funnel-card--s4,.funnel-card--s5{
+      border-top:4px solid var(--fc-top);
+    }
+    .funnel-step{
+      position:absolute;top:10px;left:10px;
+      font-size:10px;font-weight:900;letter-spacing:.06em;
+      color:#fff;background:var(--fc-top);
+      padding:3px 7px;border-radius:6px;
+      line-height:1;box-shadow:0 2px 8px rgba(15,23,42,.12);
+    }
+    .funnel-card .funnel-ico-wrap{
+      width:52px;height:52px;margin:8px auto 12px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.28rem;color:#fff;
+      background:linear-gradient(145deg,var(--fc-ico1),var(--fc-ico2));
+      box-shadow:
+        0 8px 20px rgba(15,23,42,.12),
+        inset 0 1px 0 rgba(255,255,255,.25);
+    }
+    .funnel-card .ft{
+      font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--ink);margin-bottom:8px;line-height:1.25;
+    }
+    .funnel-card .fd{
+      font-size:12.5px;color:var(--muted);line-height:1.5;
+    }
+    .funnel-between{
+      display:flex;align-items:center;justify-content:center;
+      color:var(--blue);opacity:.9;
+      position:relative;min-height:100%;
+    }
+    .funnel-between i{
+      font-size:1.05rem;filter:drop-shadow(0 2px 4px rgba(37,99,235,.2));
+    }
+    @media(max-width:1199px){
+      .funnel-between{
+        min-height:28px;padding:6px 0;
+      }
+      .funnel-between i{transform:rotate(90deg)}
+    }
+    @media(min-width:1200px){
+      .funnel-between::before{
+        content:"";position:absolute;left:50%;top:18%;bottom:18%;width:2px;
+        transform:translateX(-50%);
+        background:linear-gradient(180deg,transparent,rgba(37,99,235,.2),transparent);
+        border-radius:2px;
+      }
+    }
+    /* Compat: grid antiguo si queda algún .funnel sin --visual */
+    .funnel:not(.funnel--visual){
       display:grid;grid-template-columns:repeat(5,1fr);gap:8px 22px;
       margin:18px 0 4px;align-items:stretch;
     }
-    .funnel-card{
-      background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 12px 14px;
-      text-align:center;box-shadow:0 8px 22px rgba(15,23,42,.07);
-      position:relative;min-height:100%;
-    }
-    .funnel-card .funnel-ico{
-      width:44px;height:44px;margin:0 auto 10px;border-radius:12px;
+    .funnel:not(.funnel--visual) .funnel-card .funnel-ico{
+      display:flex;width:44px;height:44px;margin:0 auto 10px;border-radius:12px;
       background:linear-gradient(145deg,#f1f5f9,#e2e8f0);
-      display:flex;align-items:center;justify-content:center;
       font-size:1.15rem;color:var(--ink);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
     }
-    .funnel-card .ft{
-      font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
-      margin-bottom:8px;line-height:1.25;
-    }
-    .funnel-card .fd{
-      font-size:12.5px;color:var(--muted);line-height:1.45;
-    }
-    .funnel-card::after{
-      content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
-      font-size:1.05rem;font-weight:800;color:var(--blue);
-      z-index:1;text-shadow:0 0 0 #fff;
-    }
-    .funnel-card:last-child::after{display:none}
     @media(max-width:980px){
       .tabs{grid-template-columns:1fr 1fr}
       .grid{grid-template-columns:1fr 1fr}
       .cards{grid-template-columns:1fr}
       .cards-acciones{grid-template-columns:1fr 1fr}
       .riesgos-detail-grid{grid-template-columns:1fr}
-      .funnel{grid-template-columns:1fr 1fr;gap:14px}
-      .funnel-card::after{display:none}
+      .funnel:not(.funnel--visual){grid-template-columns:1fr 1fr;gap:14px}
       .hero-grid{grid-template-columns:1fr}
     }
     @media(max-width:640px){
-      .tabs,.grid,.funnel,.cards-acciones{grid-template-columns:1fr}
+      .tabs,.grid,.funnel:not(.funnel--visual),.cards-acciones{grid-template-columns:1fr}
       select{min-width:100%}
     }
     /* Customer Development */
@@ -557,7 +720,6 @@
       margin-top:22px;padding-top:20px;border-top:1px dashed var(--border);
     }
     .mvp-val-section .mvp-title-row{margin-bottom:12px}
-    .mvp-val-section .mvp-num{background:var(--green);box-shadow:0 4px 12px rgba(22,163,74,.28)}
     .mvp-metrics-list,.mvp-signals-list{list-style:none;padding-left:0!important;margin:0}
     .mvp-metrics-list li,.mvp-signals-list li{
       font-size:14px;line-height:1.5;color:var(--body);padding:10px 12px;margin-bottom:8px;border-radius:10px;
@@ -847,7 +1009,7 @@
             <li>Convertir datos en decisiones de producto y mercado.</li>
             <li>Priorizar hipótesis con foco en tracción real.</li>
           </ul>
-          <div class="mini"><i class="fa-solid fa-bolt"></i> Usa el desplegable inferior para saltar entre bloques.</div>
+          <div class="mini"><i class="fa-solid fa-bolt"></i> Abre el <strong>menú desplegable</strong> del panel (bloques <strong>1–10</strong>) para cambiar de sección sin salir de la página.</div>
         </aside>
       </div>
     </div>
@@ -860,36 +1022,60 @@
         <a href="./index-iebs.html"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Ver propuesta IEBS</a>
         <a class="dc-iebs--ghost" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> escapify.io</a>
       </div>
-      <div class="control" data-dc-reveal data-dc-delay="0.06">
-        <label for="bloqueSelect">Selecciona bloque</label>
-        <select id="bloqueSelect">
-          <option value="contexto">Datos contexto educativo</option>
-          <option value="competencia">Análisis competitivo</option>
-          <option value="mvp">PMV · Plan de validación</option>
-          <option value="estado">Punto en el que estamos</option>
-          <option value="funnel">Embudo y escalabilidad</option>
-          <option value="acciones">Acciones de validación</option>
-          <option value="customer-dev">Customer Development (4 fases)</option>
-          <option value="customer-journey">Customer Journey</option>
-          <option value="plan-marketing">Plan de marketing</option>
-          <option value="riesgos">Hipótesis y riesgos</option>
-        </select>
+      <div class="dc-select-shell" data-dc-reveal data-dc-delay="0.06">
+        <div class="dc-select-head">
+          <span class="dc-select-ico" aria-hidden="true"><i class="fa-solid fa-list-ol"></i></span>
+          <div class="dc-select-titles">
+            <span class="dc-select-kicker">Navegación del panel</span>
+            <span class="dc-select-heading">Elige el bloque <span class="dc-select-badge">1–10</span></span>
+          </div>
+        </div>
+        <div class="dc-select-row">
+          <label class="dc-select-label" for="bloqueSelect"><i class="fa-solid fa-caret-down" style="color:var(--blue)" aria-hidden="true"></i> Desplegable de contenido</label>
+          <div class="dc-select-field">
+            <select id="bloqueSelect" name="bloque" aria-describedby="bloqueSelectHint">
+              <option value="contexto">1 · Datos contexto educativo</option>
+              <option value="competencia">2 · Análisis competitivo</option>
+              <option value="mvp">3 · PMV · Plan de validación</option>
+              <option value="estado">4 · Punto en el que estamos</option>
+              <option value="funnel">5 · Embudo y escalabilidad</option>
+              <option value="acciones">6 · Acciones de validación</option>
+              <option value="customer-dev">7 · Customer Development (4 fases)</option>
+              <option value="customer-journey">8 · Customer Journey</option>
+              <option value="plan-marketing">9 · Plan de marketing</option>
+              <option value="riesgos">10 · Hipótesis y riesgos</option>
+            </select>
+            <span class="dc-select-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </div>
+        </div>
+        <p id="bloqueSelectHint" class="dc-select-hint"><i class="fa-solid fa-hand-pointer" style="color:var(--blue);margin-right:6px" aria-hidden="true"></i>Haz clic y <strong>despliega la lista</strong> para saltar entre las <strong>10 secciones</strong>; la URL se actualiza para compartir el bloque.</p>
       </div>
 
       <article class="block active" data-block="contexto">
-        <h2>Datos contexto educativo</h2>
+        <h2><span class="dc-num" aria-hidden="true">1</span> Datos contexto educativo</h2>
         <div class="grid">
           <div class="kpi"><div class="n">792k</div><div class="d">Docentes no universitarios en España</div></div>
           <div class="kpi"><div class="n">8.3M</div><div class="d">Alumnado en enseñanzas no universitarias</div></div>
           <div class="kpi"><div class="n">76%</div><div class="d">Profesorado con percepción de formación inicial insuficiente</div></div>
           <div class="kpi"><div class="n">63%</div><div class="d">Docentes que ven la tecnología como aliada</div></div>
         </div>
+        <div class="esf-viz-panel" data-dc-reveal data-dc-delay="0.08" aria-label="Visualización de magnitudes del contexto educativo">
+          <h3 class="esf-viz-title"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Pulso del mercado educativo</h3>
+          <p class="esf-viz-lead">Los KPI de arriba responden a <strong>escala</strong> (docentes, alumnado) y a <strong>actitud</strong> (formación percibida, tecnología como aliada). La tendencia ilustrativa refuerza la narrativa de oportunidad.</p>
+          <div class="esf-spark" aria-hidden="true"></div>
+          <div class="esf-icon-grid">
+            <div class="esf-icon-cell"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i><strong>Escala</strong><span>792k docentes ref.</span></div>
+            <div class="esf-icon-cell"><i class="fa-solid fa-children" aria-hidden="true"></i><strong>Demanda</strong><span>8,3M alumnado</span></div>
+            <div class="esf-icon-cell"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><strong>Formación</strong><span>76% sensación insuficiente</span></div>
+            <div class="esf-icon-cell"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i><strong>Tecnología</strong><span>63% como aliada</span></div>
+          </div>
+        </div>
         <div class="note">Fuentes de referencia del proyecto: MEC 2024-25 y estudios docentes recientes.</div>
       </article>
 
       <article class="block" data-block="competencia">
         <div class="comp-block-head">
-          <h2><span class="comp-num" aria-hidden="true">2</span> Análisis competitivo detallado</h2>
+          <h2><span class="dc-num" aria-hidden="true">2</span> Análisis competitivo detallado</h2>
           <p>Comparativa de alternativas actuales vs. propuesta de Escapify — el feedback pedía más detalle aquí</p>
         </div>
         <div class="comp-table-wrap">
@@ -997,11 +1183,11 @@
       </article>
 
       <article class="block" data-block="mvp">
-        <h2>PMV · Plan de validación</h2>
+        <h2><span class="dc-num" aria-hidden="true">3</span> PMV · Plan de validación</h2>
 
         <div class="mvp-wrap">
           <div class="pmv-intro-head">
-            <h3><span class="pmv-num" aria-hidden="true">4</span> Plan de validación y PMV</h3>
+            <h3>Plan de validación y PMV</h3>
             <p>Cómo validar monetización y captación de primeros usuarios — la pregunta central del feedback</p>
           </div>
           <div class="pmv-intro-grid">
@@ -1031,7 +1217,7 @@
 
           <p class="mvp-kicker"><i class="fa-solid fa-flask" aria-hidden="true"></i> Producto mínimo viable</p>
           <div class="mvp-title-row">
-            <span class="mvp-num" aria-hidden="true">5</span>
+            <span class="dc-num-sub" aria-hidden="true">3.1</span>
             <h3>Producto mínimo viable (PMV)</h3>
           </div>
 
@@ -1102,7 +1288,7 @@
           <div class="mvp-val-section">
             <p class="mvp-kicker" style="color:var(--green)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Validación</p>
             <div class="mvp-title-row">
-              <span class="mvp-num" aria-hidden="true">6</span>
+              <span class="dc-num-sub" aria-hidden="true">3.2</span>
               <h3>Validación <span style="color:var(--muted);font-weight:800;font-size:.85em">(clave)</span></h3>
             </div>
 
@@ -1130,7 +1316,7 @@
 
       <article class="block" data-block="estado">
         <div class="st4c-head">
-          <h2><span class="st4c-badge" aria-hidden="true">4</span> Qué está funcional hoy y qué viene después</h2>
+          <h2><span class="dc-num" aria-hidden="true">4</span> Qué está funcional hoy y qué viene después</h2>
           <p>Aclaración para primeras visitas: estado actual, PMV inmediato y roadmap — <strong>dónde estamos</strong> y <strong>hacia dónde vamos</strong>.</p>
         </div>
 
@@ -1193,39 +1379,51 @@
       </article>
 
       <article class="block" data-block="funnel">
-        <h2>Embudo de captación y escalabilidad</h2>
+        <h2><span class="dc-num" aria-hidden="true">5</span> Embudo de captación y escalabilidad</h2>
         <p class="funnel-lead">Funnel desde descubrimiento hasta comunidad — responde a «¿cómo escalas desde red cercana?»</p>
-        <div class="funnel" role="list" aria-label="Etapas del embudo de captación">
-          <div class="funnel-card" role="listitem">
-            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <div class="ft">Descubrimiento</div>
-            <div class="fd">Redes sociales, SEO, contenido educativo, Meta Ads segmentados a docentes</div>
-          </div>
-          <div class="funnel-card" role="listitem">
-            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-inbox"></i></div>
-            <div class="ft">Registro</div>
-            <div class="fd">Acceso gratuito a recursos básicos, lead magnet (pack gratuito de candados)</div>
-          </div>
-          <div class="funnel-card" role="listitem">
-            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
-            <div class="ft">Activación</div>
-            <div class="fd">Primer escape room aplicado en aula (&lt;30 min de setup). Onboarding extremadamente simple</div>
-          </div>
-          <div class="funnel-card" role="listitem">
-            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></div>
-            <div class="ft">Conversión</div>
-            <div class="fd">Upgrade a premium (más recursos, IA, kits). Validar disposición a pago</div>
-          </div>
-          <div class="funnel-card" role="listitem">
-            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
-            <div class="ft">Escala</div>
-            <div class="fd">Licencias centro, referral docente→docente, formaciones como canal de venta, programas para empresa y marketplace</div>
+        <div class="funnel-viz-wrap" data-dc-reveal data-dc-delay="0.06">
+          <div class="funnel-viz-funnelbar" aria-hidden="true"></div>
+          <div class="funnel funnel--visual" role="group" aria-label="Etapas del embudo de captación, de descubrimiento a escala">
+            <div class="funnel-card funnel-card--s1">
+              <span class="funnel-step">01</span>
+              <div class="funnel-ico-wrap" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <div class="ft">Descubrimiento</div>
+              <div class="fd">Redes sociales, SEO, contenido educativo, Meta Ads segmentados a docentes</div>
+            </div>
+            <div class="funnel-between" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="funnel-card funnel-card--s2">
+              <span class="funnel-step">02</span>
+              <div class="funnel-ico-wrap" aria-hidden="true"><i class="fa-solid fa-inbox"></i></div>
+              <div class="ft">Registro</div>
+              <div class="fd">Acceso gratuito a recursos básicos, lead magnet (pack gratuito de candados)</div>
+            </div>
+            <div class="funnel-between" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="funnel-card funnel-card--s3" role="listitem">
+              <span class="funnel-step">03</span>
+              <div class="funnel-ico-wrap" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+              <div class="ft">Activación</div>
+              <div class="fd">Primer escape room aplicado en aula (&lt;30 min de setup). Onboarding extremadamente simple</div>
+            </div>
+            <div class="funnel-between" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="funnel-card funnel-card--s4">
+              <span class="funnel-step">04</span>
+              <div class="funnel-ico-wrap" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></div>
+              <div class="ft">Conversión</div>
+              <div class="fd">Upgrade a premium (más recursos, IA, kits). Validar disposición a pago</div>
+            </div>
+            <div class="funnel-between" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="funnel-card funnel-card--s5">
+              <span class="funnel-step">05</span>
+              <div class="funnel-ico-wrap" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
+              <div class="ft">Escala</div>
+              <div class="fd">Licencias centro, referral docente→docente, formaciones como canal de venta, programas para empresa y marketplace</div>
+            </div>
           </div>
         </div>
       </article>
 
       <article class="block" data-block="acciones" id="acciones-validacion">
-        <h2>Acciones de validación de mercado</h2>
+        <h2><span class="dc-num" aria-hidden="true">6</span> Acciones de validación de mercado</h2>
         <p class="acciones-lead">El feedback pide validación real: entrevistas, tests, datos — no solo canvas teórico.</p>
         <div class="cards-acciones">
           <div class="card">
@@ -1315,7 +1513,7 @@
       </article>
 
       <article class="block" data-block="customer-dev">
-        <h2>Customer Development · Escapify.io</h2>
+        <h2><span class="dc-num" aria-hidden="true">7</span> Customer Development · Escapify.io</h2>
         <div class="cd-wrap">
           <p class="cd-lead">Marco de <strong>descubrimiento → validación → creación → escala</strong> (Blank). Úsalo como guía operativa junto al PMV y las acciones de validación.</p>
 
@@ -1472,7 +1670,7 @@
       </article>
 
       <article class="block" data-block="customer-journey">
-        <h2>Customer Journey</h2>
+        <h2><span class="dc-num" aria-hidden="true">8</span> Customer Journey</h2>
         <div class="cj-wrap">
           <p class="cj-kicker"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Customer Journey</p>
 
@@ -1679,7 +1877,7 @@
       </article>
 
       <article class="block" data-block="plan-marketing">
-        <h2>Plan de marketing</h2>
+        <h2><span class="dc-num" aria-hidden="true">9</span> Plan de marketing</h2>
         <div class="pm-wrap">
           <p class="pm-kicker"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Estrategia y ejecución</p>
 
@@ -1988,7 +2186,7 @@
       </article>
 
       <article class="block" data-block="riesgos" id="hipotesis-riesgos-detalle">
-        <h2>Hipótesis y riesgos</h2>
+        <h2><span class="dc-num" aria-hidden="true">10</span> Hipótesis y riesgos</h2>
         <div class="riesgos-detail-block">
           <h3 class="riesgos-detail-title">Hipótesis a validar y riesgos principales identificados por el feedback</h3>
           <div class="riesgos-detail-grid">

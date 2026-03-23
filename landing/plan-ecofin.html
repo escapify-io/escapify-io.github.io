@@ -426,6 +426,40 @@
         <p class="section-desc">Versión web de referencia: mismos supuestos que la hoja <strong>Resumen</strong>, <strong>Propuesta Pricing</strong> y <strong>Benchmark Precios</strong> del archivo Excel. Los escenarios inferiores son una <strong>sensibilidad ilustrativa</strong> (tracción); ajústalos cuando tengas datos reales.</p>
       </div>
 
+      <div class="esf-viz-panel" data-ef-reveal data-ef-delay="0.06" aria-label="Mezcla de ingresos referencia año 1">
+        <h3 class="esf-viz-title"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Mezcla de ingresos (referencia Y1)</h3>
+        <p class="esf-viz-lead">Distribución orientativa del modelo: suscripción docente (mensual/anual), licencias de centro y ingresos puntuales (packs / servicios).</p>
+        <div class="esf-bars">
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Suscripción docente</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 42%"></span></span></div>
+          </div>
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Licencias centro / volumen</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 35%"></span></span></div>
+          </div>
+          <div class="esf-bar-row">
+            <span class="esf-bar-name">Packs, onboarding y one-shot</span>
+            <div><span class="esf-bar-track"><span class="esf-bar-fill" style="--esf-pct: 23%"></span></span></div>
+          </div>
+        </div>
+        <svg class="esf-svg-chart" viewBox="0 0 400 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="efLine" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2563eb" />
+              <stop offset="100%" stop-color="#6366f1" />
+            </linearGradient>
+          </defs>
+          <path fill="none" stroke="url(#efLine)" stroke-width="3" stroke-linecap="round" d="M10 72 L70 58 L130 62 L190 38 L250 44 L310 22 L370 28" />
+          <circle cx="10" cy="72" r="4" fill="#2563eb" />
+          <circle cx="190" cy="38" r="4" fill="#2563eb" />
+          <circle cx="370" cy="28" r="4" fill="#6366f1" />
+          <text x="10" y="86" font-size="9" fill="#64748b" font-family="Inter, system-ui, sans-serif">Y1</text>
+          <text x="320" y="86" font-size="9" fill="#64748b" font-family="Inter, system-ui, sans-serif">Run-rate (ilustrativo)</text>
+        </svg>
+        <p class="esf-bar-hint">Alinea estos pesos con la pestaña <strong>Resumen</strong> del Excel cuando actualices hipótesis.</p>
+      </div>
+
       <div class="ec-grid-2">
         <div class="ec-card">
           <h3><i class="fa-solid fa-building"></i> Datos del proyecto</h3>
