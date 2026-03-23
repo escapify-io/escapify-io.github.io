@@ -254,6 +254,58 @@
       .tabs,.grid{grid-template-columns:1fr}
       .canvas-grid{grid-template-columns:1fr;grid-template-areas:"segmento" "objetivos" "acciones" "problemas" "soluciones" "beneficios" "producto";}
     }
+    /* Doble target + personas (antes en datos-contexto) */
+    .dt-block-head{margin-bottom:14px}
+    .dt-block-head h2{
+      font-size:clamp(1.15rem,2.5vw,1.5rem);color:var(--ink);font-weight:900;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
+    }
+    .dt-block-head .dt-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;
+      font-size:14px;font-weight:900;flex-shrink:0;
+    }
+    .dt-block-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .dt-grid{display:grid;gap:14px;grid-template-columns:1fr}
+    @media(min-width:860px){.dt-grid{grid-template-columns:1fr 1fr}}
+    .dt-card{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 18px 16px;
+      box-shadow:0 6px 18px rgba(15,23,42,.07);
+    }
+    .dt-card .dt-lbl{
+      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
+      margin-bottom:10px;
+    }
+    .dt-card h3{font-size:17px;color:var(--ink);margin-bottom:10px;font-weight:800;letter-spacing:-.2px}
+    .dt-card ul{padding-left:18px;margin:0}
+    .dt-card li{font-size:14px;margin-bottom:8px;line-height:1.55;color:var(--body)}
+    .dt-card li strong{color:var(--ink)}
+    .dt-card .note{margin-top:12px;font-size:13px;line-height:1.5}
+    .ea-subhead{margin-top:28px;margin-bottom:14px;padding-top:22px;border-top:1px dashed var(--border)}
+    .ea-subhead h3{
+      font-size:clamp(1.05rem,2.2vw,1.35rem);color:var(--ink);font-weight:900;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;line-height:1.25;
+    }
+    .ea-subhead .ea-num-badge{
+      font-size:13px;font-weight:900;color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
+      padding:5px 11px;border-radius:10px;letter-spacing:.02em;
+    }
+    .ea-subhead p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .ea-persona-grid{display:grid;gap:14px;grid-template-columns:1fr}
+    @media(min-width:800px){.ea-persona-grid{grid-template-columns:1fr 1fr}}
+    .ea-persona{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;
+      box-shadow:0 4px 14px rgba(15,23,42,.06);
+    }
+    .ea-persona .ea-name{
+      font-family:Georgia,'Times New Roman',serif;font-size:1.28rem;font-weight:700;color:var(--ink);
+      margin-bottom:6px;line-height:1.2;
+    }
+    .ea-persona .ea-meta{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.45}
+    .ea-persona ul{padding-left:18px;margin:0}
+    .ea-persona li{font-size:14px;line-height:1.55;margin-bottom:6px;color:var(--body)}
+    .ea-persona li strong{color:var(--ink)}
+    .ea-chapter{margin-bottom:8px}
   </style>
 </head>
 <body>
@@ -270,7 +322,6 @@
         <div class="dropdown-menu">
           <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
           <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
-          <a href="./datos-contexto.html?bloque=target">Doble target</a>
           <a href="./datos-contexto.html?bloque=mvp">PMV · Plan de validación</a>
           <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
@@ -294,6 +345,7 @@
             <span class="hero-kpi"><strong>15–20</strong> entrevistas</span>
           </div>
           <div class="hero-actions">
+            <a class="btn-secondary" href="#doble-target"><i class="fa-solid fa-people-group"></i>Doble target</a>
             <a class="btn-primary" href="./datos-contexto.html?bloque=customer-dev"><i class="fa-solid fa-user-group"></i>Customer Development</a>
             <a class="btn-secondary" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de valor</a>
             <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
@@ -312,10 +364,69 @@
     </div>
   </section>
   </div>
+
+  <section class="section ea-chapter" aria-labelledby="ea-dt-heading">
+    <p class="ea-kicker"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Doble target</p>
+    <div class="dt-block-head" id="doble-target">
+      <h2 id="ea-dt-heading"><span class="dt-num" aria-hidden="true">1</span> Doble target: Docente + Alumno</h2>
+      <p>El feedback recomienda no centrarse solo en el profesor — incluir motivaciones y problemas del alumno. Aquí va <strong>pareado</strong> con el early adopter que validas comercialmente.</p>
+    </div>
+    <div class="dt-grid">
+      <div class="dt-card">
+        <div class="dt-lbl">Target primario · Docente</div>
+        <h3>¿Qué problema le resuelve?</h3>
+        <ul>
+          <li><strong>Tiempo:</strong> Reduce horas de preparación de materiales gamificados de días a minutos.</li>
+          <li><strong>Complejidad:</strong> No necesita saber de game design ni programación.</li>
+          <li><strong>Inclusión:</strong> Obtiene adaptaciones listas sin formación específica en NEE.</li>
+          <li><strong>Diferenciación profesional:</strong> Innova en su aula con evidencia y rigor.</li>
+          <li><strong>Recursos coherentes:</strong> Sistema unificado vs. patchwork de fuentes distintas.</li>
+        </ul>
+      </div>
+      <div class="dt-card">
+        <div class="dt-lbl">Target beneficiario · Alumno</div>
+        <h3>¿Qué gana el alumno?</h3>
+        <ul>
+          <li><strong>Motivación:</strong> Participación activa vs. escucha pasiva. El juego como motor de engagement.</li>
+          <li><strong>Inclusión real:</strong> Todos participan en igualdad (pistas escalonadas, adaptaciones sensoriales, roles distribuidos).</li>
+          <li><strong>Aprendizaje significativo:</strong> Conexión emocional con el contenido a través de la narrativa y la experiencia.</li>
+          <li><strong>Competencias transversales:</strong> Trabajo en equipo, pensamiento crítico, creatividad, liderazgo emergente.</li>
+          <li><strong>Dato:</strong> 94% de satisfacción en la implementación real con 12 participantes con DI.</li>
+        </ul>
+        <div class="note" style="margin-top:12px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--blue-dark)">Los estudios en escape rooms educativos señalan mejoras significativas en participación, cohesión grupal y retención de contenidos (I Congreso Internacional Lúdica, 2025).</div>
+      </div>
+    </div>
+
+    <div class="ea-subhead" id="ea-personas">
+      <h3><span class="ea-num-badge" aria-hidden="true">2</span> Personas concretas · Early adopters</h3>
+      <p>Perfiles más específicos para orientar mensaje, canal y validación comercial (equivalente al bloque 4B del Lean Canvas extendido).</p>
+    </div>
+    <div class="ea-persona-grid">
+      <article class="ea-persona" aria-labelledby="ea-persona-laura">
+        <div class="ea-name" id="ea-persona-laura">Laura · 34 · Primaria</div>
+        <div class="ea-meta">Docente creativa · activa en Instagram educativo · usa Genially/Pinterest</div>
+        <ul>
+          <li><strong>Dolor:</strong> quiere innovar, pero no tiene tiempo para diseñar desde cero.</li>
+          <li><strong>Objetivo:</strong> preparar una actividad diferencial para la próxima semana.</li>
+          <li><strong>Disparador de compra:</strong> ver que puede aplicarlo en clase en menos de 30 minutos.</li>
+        </ul>
+      </article>
+      <article class="ea-persona" aria-labelledby="ea-persona-carlos">
+        <div class="ea-name" id="ea-persona-carlos">Carlos · 39 · Secundaria</div>
+        <div class="ea-meta">Perfil práctico · líder de innovación en su centro · busca impacto medible</div>
+        <ul>
+          <li><strong>Dolor:</strong> coordina proyectos, pero necesita recursos replicables para el equipo docente.</li>
+          <li><strong>Objetivo:</strong> escalar experiencias motivadoras sin sobrecargar al claustro.</li>
+          <li><strong>Disparador de compra:</strong> licencia de centro + formación aplicada.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="ea-main-heading">
     <p class="ea-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cliente ideal inicial</p>
     <h2 id="ea-main-heading" class="ea-page-title">
-      <span class="ea-num">2</span> Early Adopter · perfil concreto
+      <span class="ea-num">3</span> Early Adopter · perfil concreto
     </h2>
     <p class="ea-lead">El early adopter de Escapify <strong>no es genérico</strong>: hay que reconocerlo por comportamiento (herramientas, actitud, contexto) y por <strong>dolor + valor</strong> compartidos.</p>
 

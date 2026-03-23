@@ -12,7 +12,7 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
-      --green:#16a34a; --amber:#d97706; --red:#dc2626; --max:1200px;
+      --green:#16a34a; --amber:#d97706; --red:#dc2626; --purple:#7c3aed; --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
@@ -128,25 +128,210 @@
     .card h3{font-size:15px;color:var(--ink);margin-bottom:6px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:5px}
+    .card .lbl{
+      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+      margin-bottom:8px;line-height:1.2;
+    }
+    .acciones-lead{font-size:15px;color:var(--muted);line-height:1.55;max-width:920px;margin:8px 0 16px}
+    .cards-acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch}
+    .cards-acciones .card h3{margin-top:0;margin-bottom:8px;font-size:16px;letter-spacing:-.02em}
+    .cards-acciones .card li:last-child{margin-bottom:0}
+    .acciones-extra{
+      margin-top:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);
+      background:linear-gradient(145deg,#fafbfc 0%,#fff 100%);
+      box-shadow:0 4px 14px rgba(15,23,42,.05);
+    }
+    .acciones-extra > h3{font-size:15px;font-weight:900;color:var(--ink);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+    .acciones-extra > h3 i{color:var(--blue)}
+    .acciones-extra-grid{display:grid;gap:16px}
+    @media(min-width:800px){.acciones-extra-grid{grid-template-columns:1fr 1fr}}
+    .acciones-extra-col h4{
+      font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;
+    }
+    .acciones-extra-col ul{margin:0;padding-left:18px}
+    .acciones-extra-col li{font-size:14px;line-height:1.5;margin-bottom:6px;color:var(--body)}
+    .acciones-extra-col li strong{color:var(--ink)}
+    .acciones-footnote{
+      margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.55;
+      color:var(--blue-dark);background:var(--blue-light);border:1px dashed var(--blue-mid);
+    }
+    /* Hipótesis + riesgos detallados (feedback) — bloque riesgos */
+    .riesgos-detail-block{margin-top:8px}
+    .riesgos-detail-title{
+      font-size:clamp(17px,1.4vw,19px);font-weight:900;color:var(--ink);letter-spacing:-.02em;
+      margin:0 0 14px;line-height:1.3;
+    }
+    .riesgos-detail-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;
+    }
+    .riesgos-detail-card{padding:16px 14px}
+    .riesgos-detail-card .lbl{margin-bottom:6px}
+    .riesgos-detail-q{
+      font-size:14px;font-weight:700;color:var(--muted);margin:0 0 12px;
+    }
+    .riesgos-hyp-list,.riesgos-risk-list{
+      margin:0;padding-left:0;list-style:none;
+    }
+    .riesgos-hyp-list li{
+      font-size:14px;line-height:1.5;margin-bottom:10px;padding-left:0;color:var(--body);
+    }
+    .riesgos-hyp-list li:last-child{margin-bottom:0}
+    .riesgos-hyp-list strong{color:var(--ink);font-weight:800}
+    .riesgos-risk-list li{
+      display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;margin-bottom:10px;color:var(--body);
+    }
+    .riesgos-risk-list li:last-child{margin-bottom:0}
+    .riesgos-risk-list .risk-ico{
+      flex-shrink:0;color:var(--blue);font-size:14px;margin-top:3px;
+    }
+    .riesgos-risk-list strong{color:var(--ink);font-weight:800}
+    .mitigacion-callout{
+      margin-top:14px;padding:12px 14px;border-radius:12px;
+      background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:13px;line-height:1.55;font-weight:600;
+    }
+    .mitigacion-callout strong{color:#7f1d1d}
     table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
     th{background:#0f172a;color:#fff;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
     td{padding:8px 10px;border-bottom:1px solid var(--border)}
     tr:last-child td{border-bottom:none}
     .note{margin-top:10px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:10px;padding:9px 10px;font-size:12px;color:var(--blue-dark)}
-    .funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-    .step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:0 6px 16px rgba(15,23,42,.06)}
-    .step .icon{font-size:22px;color:var(--blue)}
-    .step .t{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-top:5px}
-    .step .d{font-size:12px;color:var(--muted);margin-top:4px}
+    /* Análisis competitivo detallado (mismo contenido que leancanvas.html) */
+    .comp-block-head{margin-bottom:14px}
+    .comp-block-head h2{
+      font-size:clamp(1.15rem,2.5vw,1.5rem);color:var(--ink);font-weight:900;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
+    }
+    .comp-block-head .comp-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;
+      font-size:14px;font-weight:900;flex-shrink:0;
+    }
+    .comp-block-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .comp-table-wrap{width:100%;overflow-x:auto;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.06);margin-top:4px}
+    .comp-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;min-width:980px}
+    .comp-table th{
+      background:var(--ink);color:#fff;padding:10px 12px;text-align:left;font-weight:800;
+      font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+    }
+    .comp-table th:last-child{background:var(--blue)}
+    .comp-table th:first-child{border-radius:12px 0 0 0}
+    .comp-table th:last-child{border-radius:0 12px 0 0}
+    .comp-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+    .comp-table tr:last-child td{border-bottom:none}
+    .comp-table tr.escapify-row{background:linear-gradient(90deg,var(--blue-light),#ecfdf5);font-weight:700}
+    .comp-table .yes{color:var(--green);font-weight:800}
+    .comp-table .no{color:var(--muted)}
+    .comp-table .partial{color:#92400e;font-weight:600}
+    .comp-concl.note{margin-top:12px;font-size:13px;line-height:1.5}
+    /* Estado 4C — dónde estamos / hacia dónde vamos */
+    .st4c-head{margin-bottom:4px}
+    .st4c-head h2{
+      font-size:clamp(1.15rem,2.5vw,1.5rem);color:var(--ink);font-weight:900;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
+    }
+    .st4c-badge{
+      font-size:12px;font-weight:900;color:#fff;background:var(--blue);
+      padding:6px 11px;border-radius:10px;letter-spacing:.04em;
+    }
+    .st4c-head p{font-size:14px;color:var(--muted);max-width:820px;line-height:1.55}
+    .st4c-track{
+      display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;
+      margin:18px 0 20px;padding:14px 12px;
+      background:linear-gradient(100deg,rgba(22,163,74,.1),rgba(37,99,235,.09),rgba(124,58,237,.1));
+      border-radius:14px;border:1px solid var(--border);
+    }
+    .st4c-phase{
+      display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:900;
+      text-transform:uppercase;letter-spacing:.06em;padding:9px 14px;border-radius:999px;
+      background:#fff;border:1px solid var(--border);box-shadow:0 2px 10px rgba(15,23,42,.06);
+    }
+    .st4c-phase i{font-size:14px;opacity:.9}
+    .st4c-phase--now{color:#15803d;border-color:rgba(22,163,74,.4)}
+    .st4c-phase--pmv{color:var(--blue-dark);border-color:rgba(37,99,235,.4)}
+    .st4c-phase--later{color:#6d28d9;border-color:rgba(124,58,237,.4)}
+    .st4c-connector{
+      width:36px;height:4px;border-radius:4px;flex-shrink:0;
+      background:linear-gradient(90deg,var(--green),var(--blue));opacity:.65;
+    }
+    .st4c-connector--2{background:linear-gradient(90deg,var(--blue),var(--purple));}
+    @media(max-width:720px){
+      .st4c-connector{display:none}
+      .st4c-track{flex-direction:column;gap:10px}
+    }
+    .st4c-grid{display:grid;gap:14px;grid-template-columns:1fr}
+    @media(min-width:900px){.st4c-grid{grid-template-columns:repeat(3,1fr)}}
+    .st4c-card{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 14px 14px 16px;
+      box-shadow:0 8px 22px rgba(15,23,42,.08);position:relative;overflow:hidden;
+    }
+    .st4c-card::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:14px 0 0 14px;
+    }
+    .st4c-card--live::before{background:linear-gradient(180deg,#22c55e,var(--green))}
+    .st4c-card--pmv::before{background:linear-gradient(180deg,#60a5fa,var(--blue))}
+    .st4c-card--roadmap::before{background:linear-gradient(180deg,#c084fc,var(--purple))}
+    .st4c-card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+    .st4c-card-ico{
+      width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:1.15rem;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(15,23,42,.15);
+    }
+    .st4c-card--live .st4c-card-ico{background:linear-gradient(145deg,#4ade80,#16a34a)}
+    .st4c-card--pmv .st4c-card-ico{background:linear-gradient(145deg,#60a5fa,#2563eb)}
+    .st4c-card--roadmap .st4c-card-ico{background:linear-gradient(145deg,#c084fc,#7c3aed)}
+    .st4c-card h3{font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0;line-height:1.3}
+    .st4c-card .st4c-card-tag{font-size:12px;font-weight:700;color:var(--muted);margin-top:2px}
+    .st4c-card ul{padding-left:18px;margin:0}
+    .st4c-card li{font-size:14px;line-height:1.5;margin-bottom:7px;color:var(--body)}
+    .st4c-card li strong{color:var(--ink)}
+    .st4c-footnote{
+      margin-top:18px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.55;
+      color:var(--blue-dark);background:var(--blue-light);border:1px dashed var(--blue-mid);
+    }
+    /* Embudo visual (captación → escala) */
+    .funnel-lead{
+      font-size:15px;color:var(--muted);line-height:1.55;max-width:900px;margin:10px 0 6px;
+    }
+    .funnel{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:8px 22px;
+      margin:18px 0 4px;align-items:stretch;
+    }
+    .funnel-card{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 12px 14px;
+      text-align:center;box-shadow:0 8px 22px rgba(15,23,42,.07);
+      position:relative;min-height:100%;
+    }
+    .funnel-card .funnel-ico{
+      width:44px;height:44px;margin:0 auto 10px;border-radius:12px;
+      background:linear-gradient(145deg,#f1f5f9,#e2e8f0);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.15rem;color:var(--ink);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    .funnel-card .ft{
+      font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+      margin-bottom:8px;line-height:1.25;
+    }
+    .funnel-card .fd{
+      font-size:12.5px;color:var(--muted);line-height:1.45;
+    }
+    .funnel-card::after{
+      content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+      font-size:1.05rem;font-weight:800;color:var(--blue);
+      z-index:1;text-shadow:0 0 0 #fff;
+    }
+    .funnel-card:last-child::after{display:none}
     @media(max-width:980px){
       .tabs{grid-template-columns:1fr 1fr}
       .grid{grid-template-columns:1fr 1fr}
       .cards{grid-template-columns:1fr}
-      .funnel{grid-template-columns:1fr 1fr}
+      .cards-acciones{grid-template-columns:1fr 1fr}
+      .riesgos-detail-grid{grid-template-columns:1fr}
+      .funnel{grid-template-columns:1fr 1fr;gap:14px}
+      .funnel-card::after{display:none}
       .hero-grid{grid-template-columns:1fr}
     }
     @media(max-width:640px){
-      .tabs,.grid,.funnel{grid-template-columns:1fr}
+      .tabs,.grid,.funnel,.cards-acciones{grid-template-columns:1fr}
       select{min-width:100%}
     }
     /* Customer Development */
@@ -287,6 +472,42 @@
     .mvp-val-h4:first-of-type{margin-top:4px}
     .mvp-val-h4 i{color:var(--green)}
     .mvp-val-h4--signals i{color:var(--amber)}
+    /* Plan de validación y PMV — intro (3 tarjetas, alineado con leancanvas) */
+    .pmv-intro-head{margin-bottom:16px}
+    .pmv-intro-head h3{
+      font-size:clamp(1.15rem,2.5vw,1.45rem);color:var(--ink);font-weight:900;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
+    }
+    .pmv-intro-head .pmv-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;
+      font-size:14px;font-weight:900;flex-shrink:0;
+    }
+    .pmv-intro-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .pmv-intro-grid{
+      display:grid;gap:14px;margin-bottom:22px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:900px){.pmv-intro-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:640px) and (max-width:899px){.pmv-intro-grid{grid-template-columns:1fr 1fr}}
+    .pmv-intro-card{
+      background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px;
+      box-shadow:0 4px 14px rgba(15,23,42,.06);
+    }
+    .pmv-intro-lbl{
+      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
+      margin-bottom:8px;
+    }
+    .pmv-intro-card h4{font-size:16px;color:var(--ink);margin-bottom:8px;font-weight:800}
+    .pmv-intro-card p,.pmv-intro-card li{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 8px}
+    .pmv-intro-card ul{padding-left:18px;margin:8px 0 0}
+    .pmv-intro-card li{margin-bottom:6px}
+    .pmv-intro-card .note{margin-top:10px;font-size:13px;line-height:1.5}
+    .mvp-note-warn{
+      margin-top:10px;padding:11px 12px;border-radius:10px;
+      background:#fef2f2;border:1px dashed #fecaca;
+      font-size:13px;color:#991b1b;line-height:1.5;font-weight:600;
+    }
     /* Customer Journey */
     .cj-wrap{margin-top:6px}
     .cj-kicker{
@@ -457,9 +678,8 @@
         <div class="dropdown-menu">
           <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
           <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
-          <a href="./datos-contexto.html?bloque=target">Doble target</a>
           <a href="./datos-contexto.html?bloque=mvp">PMV · Plan de validación</a>
-          <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
+          <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
           <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
           <a href="./datos-contexto.html?bloque=customer-dev">Customer Development (4 fases)</a>
@@ -475,7 +695,7 @@
         <div>
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Datos del contexto y validación</h1>
-          <p class="lead">Panel único para leer contexto educativo, competencia, target, MVP y riesgos en modo decisor.</p>
+          <p class="lead">Panel único para leer contexto educativo, competencia, PMV y riesgos en modo decisor. El target y early adopters están en <strong>Early Adopter</strong>.</p>
           <div class="hero-actions">
             <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Ver Lean Canvas</a>
             <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan ecofin</a>
@@ -500,9 +720,8 @@
         <select id="bloqueSelect">
           <option value="contexto">Datos contexto educativo</option>
           <option value="competencia">Análisis competitivo</option>
-          <option value="target">Doble target</option>
           <option value="mvp">PMV · Plan de validación</option>
-          <option value="estado">Punto en el que estamos (4C)</option>
+          <option value="estado">Punto en el que estamos</option>
           <option value="funnel">Embudo y escalabilidad</option>
           <option value="acciones">Acciones de validación</option>
           <option value="customer-dev">Customer Development (4 fases)</option>
@@ -524,50 +743,150 @@
       </article>
 
       <article class="block" data-block="competencia">
-        <h2>Análisis competitivo</h2>
-        <table>
-          <thead>
-            <tr><th>Criterio</th><th>Genially</th><th>Kahoot</th><th>Breakout EDU</th><th>Lockee.fr</th><th>Escapify</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Escape room completo</td><td>Parcial</td><td>No</td><td>Sí</td><td>Solo candados</td><td>Sí</td></tr>
-            <tr><td>Inclusión DUA</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
-            <tr><td>Maker/Físico</td><td>No</td><td>No</td><td>Sí</td><td>No</td><td>Sí</td></tr>
-            <tr><td>IA pedagógica</td><td>Básica</td><td>Básica</td><td>No</td><td>No</td><td>Sí</td></tr>
-          </tbody>
-        </table>
-        <div class="note">Lockee.fr se integra como acelerador táctico de candados en MVP mientras Escapify consolida sistema completo.</div>
-      </article>
-
-      <article class="block" data-block="target">
-        <h2>Doble target</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Target primario: docente/formador</h3>
-            <ul>
-              <li>Ahorro de tiempo de diseño y preparación.</li>
-              <li>Menor complejidad técnica/metodológica.</li>
-              <li>Aplicación real desde Infantil hasta adultos.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Target beneficiario: alumnado/equipos</h3>
-            <ul>
-              <li>Mayor motivación y participación activa.</li>
-              <li>Inclusión y personalización real.</li>
-              <li>Transferencia a formación corporativa.</li>
-            </ul>
-          </div>
+        <div class="comp-block-head">
+          <h2><span class="comp-num" aria-hidden="true">2</span> Análisis competitivo detallado</h2>
+          <p>Comparativa de alternativas actuales vs. propuesta de Escapify — el feedback pedía más detalle aquí</p>
         </div>
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Genially</th>
+                <th>Kahoot</th>
+                <th>Breakout EDU</th>
+                <th>Lockee.fr</th>
+                <th>TPT / Etsy</th>
+                <th>Blogs / Pinterest</th>
+                <th>Escapify.io</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Escape rooms educativos</strong></td>
+                <td class="partial">Plantillas genéricas</td>
+                <td class="no">No (solo quiz)</td>
+                <td class="yes">Sí (kits físicos US)</td>
+                <td class="partial">Solo candados</td>
+                <td class="partial">Recursos sueltos</td>
+                <td class="partial">Ideas dispersas</td>
+                <td class="yes"><strong>Sistema completo</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Diseño inclusivo (DUA)</strong></td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>23 adaptaciones, ColorADD</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Componente físico/maker</strong></td>
+                <td class="no">Solo digital</td>
+                <td class="no">Solo digital</td>
+                <td class="yes">Kits físicos (US)</td>
+                <td class="no">No</td>
+                <td class="partial">Imprimibles</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>Láser + 3D + imprimible</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Generador con IA</strong></td>
+                <td class="no">No</td>
+                <td class="partial">IA básica quiz</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>Narrativa + adaptaciones IA</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Formación docente</strong></td>
+                <td class="partial">Webinars</td>
+                <td class="partial">Academy</td>
+                <td class="partial">Guías</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>Cursos + talleres + comunidad</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Validación pedagógica</strong></td>
+                <td class="no">No</td>
+                <td class="partial">Estudios externos</td>
+                <td class="partial">Estudios externos</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>TFM + aula real + datos</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Precio/modelo</strong></td>
+                <td>Freemium (€7,5–79/mes)</td>
+                <td>Freemium (€3–9/mes)</td>
+                <td>Kits desde $150 (US)</td>
+                <td>Gratis (60 candados)</td>
+                <td>Pago por recurso</td>
+                <td>Gratis</td>
+                <td><strong>Freemium + kits + formación</strong></td>
+              </tr>
+              <tr class="escapify-row">
+                <td><strong>Integración web</strong></td>
+                <td class="partial">Embeds/manual</td>
+                <td class="no">No</td>
+                <td class="partial">Parcial</td>
+                <td class="yes">Iframe/enlace</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+                <td class="yes"><strong>Flujo guiado + tracking</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note comp-concl">
+          <strong>Conclusión:</strong> Ningún competidor integra las 4 dimensiones que Escapify combina: escape room completo + inclusión real + maker físico + IA pedagógica. El nicho está vacío.
+        </div>
+        <div class="note" style="margin-top:10px">Lockee.fr se integra como acelerador táctico de candados en PMV mientras Escapify consolida sistema completo.</div>
       </article>
 
       <article class="block" data-block="mvp">
         <h2>PMV · Plan de validación</h2>
 
         <div class="mvp-wrap">
+          <div class="pmv-intro-head">
+            <h3><span class="pmv-num" aria-hidden="true">4</span> Plan de validación y PMV</h3>
+            <p>Cómo validar monetización y captación de primeros usuarios — la pregunta central del feedback</p>
+          </div>
+          <div class="pmv-intro-grid">
+            <div class="pmv-intro-card">
+              <div class="pmv-intro-lbl">Perfil docente inicial</div>
+              <h4>Nicho PMV</h4>
+              <p>Profesorado de <strong>Infantil, Primaria y 1º-2º ESO</strong> con sensibilidad hacia innovación (STEAM, gamificación, inclusión), con expansión a formación de personas adultas y empresas. Centros tipo CSMB o con proyectos EBI/ABP. Red directa + centros cercanos.</p>
+              <div class="note">Evitar dispersión: un solo perfil, una sola etapa, un solo tipo de centro como punto de partida.</div>
+            </div>
+            <div class="pmv-intro-card">
+              <div class="pmv-intro-lbl">Problema concreto</div>
+              <h4>Qué le ahorras</h4>
+              <p>No es «gamificación genérica». Es: <strong>«Diseñar un escape room real para mi clase en menos de 1 hora, con materiales listos, adaptados a mi grupo, que funcione el lunes»</strong>.</p>
+              <p>Reducción estimada: de <strong>8–15 horas</strong> de diseño manual a <strong>&lt;1 hora</strong> con Escapify.</p>
+            </div>
+            <div class="pmv-intro-card">
+              <div class="pmv-intro-lbl">PMV concreto</div>
+              <h4>Qué se valida primero</h4>
+              <ul>
+                <li><strong>Recurso mínimo:</strong> Pack de candados digitales + plantillas imprimibles estilo Archivo del Tiempo.</li>
+                <li><strong>Experiencia guiada:</strong> 1 escape room modelo listo para usar (La Maleta del Tiempo como demo).</li>
+                <li><strong>Onboarding:</strong> Docente crea/aplica su primera experiencia en &lt;30 min.</li>
+              </ul>
+              <div class="mvp-note-warn"><strong>Métrica de éxito PMV:</strong> ¿El docente lo aplica EN CLASE y vuelve a usar la plataforma?</div>
+            </div>
+          </div>
+
           <p class="mvp-kicker"><i class="fa-solid fa-flask" aria-hidden="true"></i> Producto mínimo viable</p>
           <div class="mvp-title-row">
-            <span class="mvp-num" aria-hidden="true">2</span>
+            <span class="mvp-num" aria-hidden="true">5</span>
             <h3>Producto mínimo viable (PMV)</h3>
           </div>
 
@@ -638,7 +957,7 @@
           <div class="mvp-val-section">
             <p class="mvp-kicker" style="color:var(--green)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Validación</p>
             <div class="mvp-title-row">
-              <span class="mvp-num" aria-hidden="true">3</span>
+              <span class="mvp-num" aria-hidden="true">6</span>
               <h3>Validación <span style="color:var(--muted);font-weight:800;font-size:.85em">(clave)</span></h3>
             </div>
 
@@ -665,43 +984,187 @@
       </article>
 
       <article class="block" data-block="estado">
-        <h2>Punto en el que estamos (4C)</h2>
-        <div class="cards">
-          <div class="card"><h3>Ya funcional</h3><ul><li>Landing y narrativa de propuesta.</li><li>Demo validada (La Maleta del Tiempo).</li><li>Base metodológica e inclusiva.</li></ul></div>
-          <div class="card"><h3>MVP inmediato</h3><ul><li>Generador guiado de experiencia.</li><li>Integración candados + imprimibles.</li><li>Onboarding en menos de 30 min.</li></ul></div>
-          <div class="card"><h3>Roadmap</h3><ul><li>IA narrativa/adaptaciones.</li><li>Kits maker y marketplace.</li><li>Escala a empresa y licencias.</li></ul></div>
+        <div class="st4c-head">
+          <h2><span class="st4c-badge" aria-hidden="true">4</span> Qué está funcional hoy y qué viene después</h2>
+          <p>Aclaración para primeras visitas: estado actual, PMV inmediato y roadmap — <strong>dónde estamos</strong> y <strong>hacia dónde vamos</strong>.</p>
         </div>
+
+        <div class="st4c-track" aria-label="Línea de evolución del producto">
+          <span class="st4c-phase st4c-phase--now"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Hoy</span>
+          <span class="st4c-connector" aria-hidden="true"></span>
+          <span class="st4c-phase st4c-phase--pmv"><i class="fa-solid fa-bolt" aria-hidden="true"></i> PMV</span>
+          <span class="st4c-connector st4c-connector--2" aria-hidden="true"></span>
+          <span class="st4c-phase st4c-phase--later"><i class="fa-solid fa-route" aria-hidden="true"></i> Después</span>
+        </div>
+
+        <div class="st4c-grid">
+          <article class="st4c-card st4c-card--live">
+            <div class="st4c-card-top">
+              <div class="st4c-card-ico" aria-hidden="true"><i class="fa-solid fa-display"></i></div>
+              <div>
+                <h3>Ya funcional hoy</h3>
+                <div class="st4c-card-tag">Base demostrable</div>
+              </div>
+            </div>
+            <ul>
+              <li>Landing informativa y narrativa del proyecto.</li>
+              <li>Producto demostrador: <strong>La Maleta del Tiempo</strong>.</li>
+              <li>Recursos base y enfoque metodológico validado.</li>
+            </ul>
+          </article>
+
+          <article class="st4c-card st4c-card--pmv">
+            <div class="st4c-card-top">
+              <div class="st4c-card-ico" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <div>
+                <h3>PMV inmediato</h3>
+                <div class="st4c-card-tag">Siguiente foco de desarrollo</div>
+              </div>
+            </div>
+            <ul>
+              <li>Generador guiado de una escape room lista para aula.</li>
+              <li>Candados digitales + plantillas imprimibles.</li>
+              <li>Onboarding: primera actividad en menos de 30 min.</li>
+            </ul>
+          </article>
+
+          <article class="st4c-card st4c-card--roadmap">
+            <div class="st4c-card-top">
+              <div class="st4c-card-ico" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
+              <div>
+                <h3>Roadmap posterior</h3>
+                <div class="st4c-card-tag">Escala y producto</div>
+              </div>
+            </div>
+            <ul>
+              <li>IA para narrativa y adaptaciones inclusivas.</li>
+              <li>Kits maker físicos (láser/3D).</li>
+              <li>Marketplace y licencias de centro.</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="st4c-footnote"><i class="fa-solid fa-lightbulb" style="color:var(--amber);margin-right:6px" aria-hidden="true"></i> <strong>Lectura rápida:</strong> lo verde es lo que ya puedes enseñar; lo azul es el salto de producto a validar; lo violeta es visión de escala cuando el PMV esté probado en aula.</p>
       </article>
 
       <article class="block" data-block="funnel">
-        <h2>Embudo y escalabilidad</h2>
-        <div class="funnel">
-          <div class="step"><div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="t">Descubrimiento</div><div class="d">SEO, redes, contenido</div></div>
-          <div class="step"><div class="icon"><i class="fa-solid fa-inbox"></i></div><div class="t">Registro</div><div class="d">Lead magnet y alta</div></div>
-          <div class="step"><div class="icon"><i class="fa-solid fa-bolt"></i></div><div class="t">Activación</div><div class="d">Primera aplicación real</div></div>
-          <div class="step"><div class="icon"><i class="fa-solid fa-sack-dollar"></i></div><div class="t">Conversión</div><div class="d">Free a premium</div></div>
-          <div class="step"><div class="icon"><i class="fa-solid fa-rocket"></i></div><div class="t">Escala</div><div class="d">Centros y empresas</div></div>
+        <h2>Embudo de captación y escalabilidad</h2>
+        <p class="funnel-lead">Funnel desde descubrimiento hasta comunidad — responde a «¿cómo escalas desde red cercana?»</p>
+        <div class="funnel" role="list" aria-label="Etapas del embudo de captación">
+          <div class="funnel-card" role="listitem">
+            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="ft">Descubrimiento</div>
+            <div class="fd">Redes sociales, SEO, contenido educativo, Meta Ads segmentados a docentes</div>
+          </div>
+          <div class="funnel-card" role="listitem">
+            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-inbox"></i></div>
+            <div class="ft">Registro</div>
+            <div class="fd">Acceso gratuito a recursos básicos, lead magnet (pack gratuito de candados)</div>
+          </div>
+          <div class="funnel-card" role="listitem">
+            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+            <div class="ft">Activación</div>
+            <div class="fd">Primer escape room aplicado en aula (&lt;30 min de setup). Onboarding extremadamente simple</div>
+          </div>
+          <div class="funnel-card" role="listitem">
+            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></div>
+            <div class="ft">Conversión</div>
+            <div class="fd">Upgrade a premium (más recursos, IA, kits). Validar disposición a pago</div>
+          </div>
+          <div class="funnel-card" role="listitem">
+            <div class="funnel-ico" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
+            <div class="ft">Escala</div>
+            <div class="fd">Licencias centro, referral docente→docente, formaciones como canal de venta, programas para empresa y marketplace</div>
+          </div>
         </div>
       </article>
 
-      <article class="block" data-block="acciones">
-        <h2>Acciones de validación</h2>
-        <div class="cards">
+      <article class="block" data-block="acciones" id="acciones-validacion">
+        <h2>Acciones de validación de mercado</h2>
+        <p class="acciones-lead">El feedback pide validación real: entrevistas, tests, datos — no solo canvas teórico.</p>
+        <div class="cards-acciones">
           <div class="card">
+            <div class="lbl">Entrevistas</div>
             <h3>Discovery</h3>
             <ul>
-              <li>10-15 entrevistas a docentes/formadores.</li>
-              <li>Entrevistas a decisores de centro/empresa.</li>
-              <li>Identificación de barreras de adopción.</li>
+              <li>10-15 entrevistas a docentes (perfil MVP).</li>
+              <li>5 entrevistas a alumnado (motivación, experiencia).</li>
+              <li>3 entrevistas a centros (decisores de compra).</li>
+              <li>2-3 empresas de escape rooms educativos (benchmark).</li>
+              <li>Registrar barreras de adopción y el <strong>lenguaje exacto</strong> del dolor (para copys).</li>
             </ul>
           </div>
           <div class="card">
+            <div class="lbl">Test de interés</div>
+            <h3>Landing + Waitlist</h3>
+            <ul>
+              <li>Landing con propuesta de valor clara (1 pantalla, 1 CTA).</li>
+              <li>CTA tipo: «Accede a la beta gratuita».</li>
+              <li>Medir: registros, tasa de clic, origen del tráfico.</li>
+              <li><strong>UTM por canal</strong> (Instagram, LinkedIn, formación presencial) para comparar canales.</li>
+              <li>A/B test de mensajes: ahorro de tiempo vs. innovación vs. inclusión.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="lbl">Piloto en aula</div>
             <h3>Beta cerrada</h3>
             <ul>
-              <li>5-10 pruebas reales en aula y/o equipo.</li>
-              <li>Medición de repetición y recomendación.</li>
-              <li>Test de precio con tres franjas.</li>
+              <li>5-10 docentes usan el MVP real en contexto auténtico.</li>
+              <li>Medir: ¿lo aplican?, ¿repiten?, ¿recomiendan?</li>
+              <li>Entrevistas post-uso (15-20 min) con guión corto.</li>
+              <li><strong>NPS</strong> y disposición a pago declarada vs. comportamiento.</li>
+              <li>Opcional: <strong>concierge</strong> en las 2-3 primeras aulas (onboarding 1:1) para no confundir fallo de producto con fallo de activación.</li>
             </ul>
+          </div>
+          <div class="card">
+            <div class="lbl">Monetización</div>
+            <h3>Smoke test</h3>
+            <ul>
+              <li>Ofrecer pack premium (€9-19) a beta testers.</li>
+              <li>Medir <strong>conversión real</strong> (no intención en encuesta).</li>
+              <li>Test de precio con <strong>3 franjas</strong> (Van Westendorp o simple A/B).</li>
+              <li>Comparar <strong>freemium</strong> vs. pago directo (hipótesis de modelo).</li>
+              <li>Esbocear <strong>LTV proxy</strong> (retención × ticket) aunque los datos sean pocos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acciones-extra">
+          <h3><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Cómo cerrar el ciclo (recomendado)</h3>
+          <div class="acciones-extra-grid">
+            <div class="acciones-extra-col">
+              <h4>Métricas mínimas</h4>
+              <ul>
+                <li><strong>Captación:</strong> visitas → registro → activación (primera actividad lista en aula).</li>
+                <li><strong>Producto:</strong> tiempo hasta primer uso, tasa de abandono en onboarding.</li>
+                <li><strong>Negocio:</strong> conversión a pago, NPS, recomendación orgánica.</li>
+              </ul>
+            </div>
+            <div class="acciones-extra-col">
+              <h4>Registro de aprendizajes</h4>
+              <ul>
+                <li>Una tabla simple (Notion/Sheet): <strong>hipótesis → evidencia → decisión → siguiente experimento</strong>.</li>
+                <li>Evita «validar en la cabeza»: el equipo y tú mismos veis la misma verdad.</li>
+              </ul>
+            </div>
+            <div class="acciones-extra-col">
+              <h4>Criterios de paso de fase</h4>
+              <ul>
+                <li>No subir presupuesto en ads hasta que <strong>≥3 aulas</strong> usen el flujo sin intervención constante.</li>
+                <li>Antes del smoke test, tener <strong>señal de dolor</strong> repetida en entrevistas (no un solo comentario).</li>
+              </ul>
+            </div>
+            <div class="acciones-extra-col">
+              <h4>Experimentos rápidos</h4>
+              <ul>
+                <li>2 variantes de hero en landing (una semana cada una).</li>
+                <li>Secuencia de email de 3 correos: valor → prueba social → invitación a beta.</li>
+                <li>Micro-encuesta post-taller (1 pregunta NPS + campo abierto).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acciones-footnote">
+            <strong>Enlaza con:</strong> bloque <a href="./datos-contexto.html?bloque=customer-dev" style="color:var(--blue-dark);font-weight:700">Customer Development</a> (fases Blank), <a href="./datos-contexto.html?bloque=funnel" style="color:var(--blue-dark);font-weight:700">embudo</a>, <a href="./datos-contexto.html?bloque=riesgos" style="color:var(--blue-dark);font-weight:700">Hipótesis y riesgos</a> (detalle del feedback), <a href="./early-adopter.html" style="color:var(--blue-dark);font-weight:700">Early Adopter</a> y <a href="./plan-ecofin.html" style="color:var(--blue-dark);font-weight:700">Plan ecofin</a> para cifras.
           </div>
         </div>
       </article>
@@ -709,7 +1172,7 @@
       <article class="block" data-block="customer-dev">
         <h2>Customer Development · Escapify.io</h2>
         <div class="cd-wrap">
-          <p class="cd-lead">Marco de <strong>descubrimiento → validación → creación → escala</strong> (Blank). Úsalo como guía operativa junto al MVP y las acciones de validación.</p>
+          <p class="cd-lead">Marco de <strong>descubrimiento → validación → creación → escala</strong> (Blank). Úsalo como guía operativa junto al PMV y las acciones de validación.</p>
 
           <section class="cd-phase cd-phase--1" aria-labelledby="cd-f1">
             <h3 id="cd-f1"><span class="cd-badge">Fase 1</span> <i class="fa-solid fa-compass" aria-hidden="true"></i> Customer Discovery (descubrimiento)</h3>
@@ -770,7 +1233,7 @@
             <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
             <p>Validar que están <strong>dispuestos a pagar</strong> (no solo que les gusta la idea).</p>
 
-            <h4><i class="fa-solid fa-cube"></i> MVP (mínimo producto viable)</h4>
+            <h4><i class="fa-solid fa-cube"></i> PMV (producto mínimo viable)</h4>
             <p><strong>No</strong> empieces con la plataforma completa. Empieza con algo así:</p>
             <div class="cd-callout"><strong>Pack descargable + mini sistema</strong></div>
             <ul>
@@ -1219,7 +1682,7 @@
             <p class="pm-subh">Objetivos SMART de ejemplo</p>
             <ul>
               <li>Conseguir 300 leads cualificados en 3 meses a través de un recurso gratuito descargable.</li>
-              <li>Alcanzar 20 ventas del primer producto mínimo viable en los primeros 60 días.</li>
+              <li>Alcanzar 20 ventas del primer PMV en los primeros 60 días.</li>
               <li>Lograr una tasa de conversión del 5% desde landing a descarga.</li>
               <li>Obtener 10 testimonios reales de docentes durante la fase inicial de validación.</li>
               <li>Alcanzar una tasa de apertura del 35% en email marketing durante el primer trimestre.</li>
@@ -1379,26 +1842,56 @@
         </div>
       </article>
 
-      <article class="block" data-block="riesgos">
+      <article class="block" data-block="riesgos" id="hipotesis-riesgos-detalle">
         <h2>Hipótesis y riesgos</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Hipótesis clave</h3>
-            <ul>
-              <li>Se paga por ahorro de tiempo real.</li>
-              <li>La inclusión diferencia de verdad.</li>
-              <li>Encaje también en formación de empresa.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Riesgos</h3>
-            <ul>
-              <li>Registro sin aplicación práctica.</li>
-              <li>Resistencia al pago en educación.</li>
-              <li>Complejidad operativa en onboarding.</li>
-            </ul>
+        <div class="riesgos-detail-block">
+          <h3 class="riesgos-detail-title">Hipótesis a validar y riesgos principales identificados por el feedback</h3>
+          <div class="riesgos-detail-grid">
+            <div class="card riesgos-detail-card">
+              <div class="lbl">Hipótesis clave a validar</div>
+              <p class="riesgos-detail-q">¿Es cierto que…?</p>
+              <ul class="riesgos-hyp-list">
+                <li><strong>H1:</strong> El docente pagará por ahorrar tiempo de diseño de experiencias gamificadas.</li>
+                <li><strong>H2:</strong> La inclusión será un factor de diferenciación real (no solo discurso).</li>
+                <li><strong>H3:</strong> Los centros valorarán ejemplos tangibles y transferibles.</li>
+                <li><strong>H3B:</strong> El formato también encajará en formación de personas adultas y empresas.</li>
+                <li><strong>H4:</strong> El modelo híbrido físico + digital aumenta el valor percibido frente a solo digital.</li>
+                <li><strong>H5:</strong> Un onboarding simple (&lt;30 min) es suficiente para que el docente aplique.</li>
+                <li><strong>H6:</strong> El alumno muestra mayor motivación y retención con escape rooms vs. métodos tradicionales.</li>
+              </ul>
+            </div>
+            <div class="card riesgos-detail-card">
+              <div class="lbl">Riesgos principales</div>
+              <p class="riesgos-detail-q">¿Qué puede fallar?</p>
+              <ul class="riesgos-risk-list">
+                <li>
+                  <span class="risk-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span><strong>Adopción:</strong> Que el docente se registre pero no aplique (gap intención → acción).</span>
+                </li>
+                <li>
+                  <span class="risk-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span><strong>Monetización:</strong> Cultura de «gratis» en educación → resistencia al pago.</span>
+                </li>
+                <li>
+                  <span class="risk-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span><strong>Escala:</strong> Saltar de red cercana a captación orgánica/pagada sin perder calidad.</span>
+                </li>
+                <li>
+                  <span class="risk-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span><strong>Complejidad:</strong> Que el onboarding no sea tan simple como se promete.</span>
+                </li>
+                <li>
+                  <span class="risk-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span><strong>Competencia indirecta:</strong> Genially evolucione hacia escape rooms con IA.</span>
+                </li>
+              </ul>
+              <div class="mitigacion-callout">
+                <strong>Mitigación:</strong> Validar ANTES de construir. MVP ultra-ligero. Medir uso real, no registros.
+              </div>
+            </div>
           </div>
         </div>
+        <div class="note" style="margin-top:16px">Relacionado: <a href="./datos-contexto.html?bloque=acciones" style="color:var(--blue-dark);font-weight:700">Acciones de validación de mercado</a> para experimentos y métricas.</div>
       </article>
     </section>
   </section>
@@ -1406,7 +1899,7 @@
   <script>
     const select = document.getElementById("bloqueSelect");
     const blocks = document.querySelectorAll(".block");
-    const validBlocks = new Set(["contexto","competencia","target","mvp","estado","funnel","acciones","customer-dev","customer-journey","plan-marketing","riesgos"]);
+    const validBlocks = new Set(["contexto","competencia","mvp","estado","funnel","acciones","customer-dev","customer-journey","plan-marketing","riesgos"]);
 
     function setBlock(value, updateUrl = true) {
       const safe = validBlocks.has(value) ? value : "contexto";

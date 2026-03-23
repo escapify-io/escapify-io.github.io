@@ -228,6 +228,28 @@
     .card strong{color:var(--navy);}
     .card .note{margin-top:8px;}
 
+    .acciones-extra{
+      margin:0 30px 20px;padding:16px 18px;border-radius:var(--r-lg);
+      border:1px solid var(--line);
+      background:linear-gradient(145deg,#fafbfc,#fff);
+      box-shadow:var(--shadow-sm);
+    }
+    .acciones-extra > h3{font-size:1rem;font-weight:900;color:var(--navy);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+    .acciones-extra > h3 i{color:var(--blue)}
+    .acciones-extra-grid{display:grid;gap:16px}
+    @media(min-width:800px){.acciones-extra-grid{grid-template-columns:1fr 1fr}}
+    .acciones-extra-col h4{
+      font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;
+    }
+    .acciones-extra-col ul{margin:0;padding-left:18px}
+    .acciones-extra-col li{font-size:.78rem;line-height:1.55;margin-bottom:4px;color:var(--text)}
+    .acciones-extra-col li strong{color:var(--navy)}
+    .acciones-footnote{
+      margin-top:14px;padding:12px 14px;border-radius:var(--r-md);
+      font-size:.78rem;line-height:1.55;color:var(--blue-dark);background:var(--blue-soft);
+      border:1px dashed var(--line);
+    }
+
     /* Data callout */
     .data-grid{
       display:grid;
@@ -462,7 +484,7 @@
     @media(max-width:840px){
       body{padding:10px;}
       .poster{border-radius:18px;}
-      .hero,.section-head,.canvas,.cards-row,.data-grid,.funnel-row,.footer{padding-left:14px;padding-right:14px;margin-left:0;margin-right:0;}
+      .hero,.section-head,.canvas,.cards-row,.data-grid,.funnel-row,.footer,.acciones-extra{padding-left:14px;padding-right:14px;margin-left:0;margin-right:0;}
       h1{font-size:2.2rem;}
       .grid5,.cards-2,.cards-3,.cards-4,.data-grid,.funnel-row,.status-grid,.persona-grid,.lockee-steps,.scenario-bars{grid-template-columns:1fr;}
     }
@@ -797,41 +819,9 @@
     </div>
   </div>
 
-  <!-- ════════ DOBLE TARGET ════════ -->
-  <div class="section-head">
-    <h2><span class="num">3</span> Doble target: Docente + Alumno</h2>
-    <p>El feedback recomienda no centrarse solo en el profesor — incluir motivaciones y problemas del alumno</p>
-  </div>
-
-  <div class="cards-row cards-2">
-    <div class="card">
-      <div class="lbl">Target primario · Docente</div>
-      <h3>¿Qué problema le resuelve?</h3>
-      <ul>
-        <li><strong>Tiempo:</strong> Reduce horas de preparación de materiales gamificados de días a minutos.</li>
-        <li><strong>Complejidad:</strong> No necesita saber de game design ni programación.</li>
-        <li><strong>Inclusión:</strong> Obtiene adaptaciones listas sin formación específica en NEE.</li>
-        <li><strong>Diferenciación profesional:</strong> Innova en su aula con evidencia y rigor.</li>
-        <li><strong>Recursos coherentes:</strong> Sistema unificado vs. patchwork de fuentes distintas.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="lbl">Target beneficiario · Alumno</div>
-      <h3>¿Qué gana el alumno?</h3>
-      <ul>
-        <li><strong>Motivación:</strong> Participación activa vs. escucha pasiva. El juego como motor de engagement.</li>
-        <li><strong>Inclusión real:</strong> Todos participan en igualdad (pistas escalonadas, adaptaciones sensoriales, roles distribuidos).</li>
-        <li><strong>Aprendizaje significativo:</strong> Conexión emocional con el contenido a través de la narrativa y la experiencia.</li>
-        <li><strong>Competencias transversales:</strong> Trabajo en equipo, pensamiento crítico, creatividad, liderazgo emergente.</li>
-        <li><strong>Dato:</strong> 94% de satisfacción en la implementación real con 12 participantes con DI.</li>
-      </ul>
-      <div class="note">Los estudios en escape rooms educativos señalan mejoras significativas en participación, cohesión grupal y retención de contenidos (I Congreso Internacional Lúdica, 2025).</div>
-    </div>
-  </div>
-
   <!-- ════════ VALIDACIÓN Y MVP ════════ -->
   <div class="section-head">
-    <h2><span class="num">4</span> Plan de validación y MVP</h2>
+    <h2><span class="num">3</span> Plan de validación y MVP</h2>
     <p>Cómo validar monetización y captación de primeros usuarios — la pregunta central del feedback</p>
   </div>
 
@@ -862,7 +852,7 @@
 
   <!-- ════════ EARLY ADOPTERS PERSONAS ════════ -->
   <div class="section-head">
-    <h2><span class="num">4B</span> Early adopters concretos</h2>
+    <h2><span class="num">3B</span> Early adopters concretos</h2>
     <p>Perfiles más específicos para orientar mensaje, canal y validación comercial</p>
   </div>
   <div class="persona-grid">
@@ -888,7 +878,7 @@
 
   <!-- ════════ ESTADO REAL DE LA WEB ════════ -->
   <div class="section-head">
-    <h2><span class="num">4C</span> Qué está funcional hoy y qué viene después</h2>
+    <h2><span class="num">3C</span> Qué está funcional hoy y qué viene después</h2>
     <p>Aclaración para primeras visitas: estado actual, MVP inmediato y roadmap</p>
   </div>
   <div class="status-grid">
@@ -920,7 +910,7 @@
 
   <!-- ════════ INTEGRACIÓN LOCKEE ════════ -->
   <div class="section-head">
-    <h2><span class="num">4D</span> Integración de Lockee.fr en la web</h2>
+    <h2><span class="num">3D</span> Integración de Lockee.fr en la web</h2>
     <p>Cómo incorporarlo sin fricción mientras se desarrolla el sistema propio</p>
   </div>
   <section class="lockee-flow">
@@ -956,7 +946,7 @@
 
   <!-- ════════ EMBUDO DE CAPTACIÓN ════════ -->
   <div class="section-head">
-    <h2><span class="num">5</span> Embudo de captación y escalabilidad</h2>
+    <h2><span class="num">4</span> Embudo de captación y escalabilidad</h2>
     <p>Funnel desde descubrimiento hasta comunidad — responde a "¿cómo escalas desde red cercana?"</p>
   </div>
 
@@ -990,7 +980,7 @@
 
   <!-- ════════ VALIDACIÓN MERCADO ════════ -->
   <div class="section-head">
-    <h2><span class="num">6</span> Acciones de validación de mercado</h2>
+    <h2><span class="num">5</span> Acciones de validación de mercado</h2>
     <p>El feedback pide validación real: entrevistas, tests, datos — no solo canvas teórico</p>
   </div>
 
@@ -1002,44 +992,87 @@
         <li>10-15 entrevistas a docentes (perfil MVP)</li>
         <li>5 entrevistas a alumnado (motivación, experiencia)</li>
         <li>3 entrevistas a centros (decisores de compra)</li>
-        <li>2-3 empresas de escape rooms educativos</li>
+        <li>2-3 empresas de escape rooms educativos (benchmark)</li>
+        <li>Barreras de adopción y <strong>lenguaje exacto</strong> del dolor (para copys)</li>
       </ul>
     </div>
     <div class="card">
       <div class="lbl">Test de interés</div>
       <h3>Landing + Waitlist</h3>
       <ul>
-        <li>Landing page con propuesta clara</li>
-        <li>CTA: "Accede a la beta gratuita"</li>
+        <li>Landing con propuesta clara (1 pantalla, 1 CTA)</li>
+        <li>CTA: «Accede a la beta gratuita»</li>
         <li>Medir: registros, tasa clic, origen</li>
-        <li>A/B test de mensajes (ahorro tiempo vs. innovación vs. inclusión)</li>
+        <li><strong>UTM por canal</strong> (Instagram, LinkedIn, formación)</li>
+        <li>A/B test: ahorro tiempo vs. innovación vs. inclusión</li>
       </ul>
     </div>
     <div class="card">
       <div class="lbl">Piloto en aula</div>
       <h3>Beta cerrada</h3>
       <ul>
-        <li>5-10 docentes usan MVP real</li>
+        <li>5-10 docentes usan MVP real en contexto auténtico</li>
         <li>Medir: ¿lo aplican?, ¿repiten?, ¿recomiendan?</li>
-        <li>Entrevistas post-uso</li>
-        <li>NPS y disposición a pago</li>
+        <li>Entrevistas post-uso (guion corto)</li>
+        <li><strong>NPS</strong> y disposición a pago vs. comportamiento</li>
+        <li>Opcional: <strong>concierge</strong> 1:1 en las 2-3 primeras aulas</li>
       </ul>
     </div>
     <div class="card">
       <div class="lbl">Monetización</div>
       <h3>Smoke test</h3>
       <ul>
-        <li>Ofrecer pack premium (€9-19) a beta testers</li>
-        <li>Medir conversión real (no intención)</li>
+        <li>Pack premium (€9-19) a beta testers</li>
+        <li>Conversión <strong>real</strong> (no intención)</li>
         <li>Test de precio (3 franjas)</li>
-        <li>Validar modelo freemium vs. pago directo</li>
+        <li>Freemium vs. pago directo</li>
+        <li><strong>LTV proxy</strong> (retención × ticket), aunque haya pocos datos</li>
       </ul>
+    </div>
+  </div>
+
+  <div class="acciones-extra">
+    <h3><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Cómo cerrar el ciclo</h3>
+    <div class="acciones-extra-grid">
+      <div class="acciones-extra-col">
+        <h4>Métricas mínimas</h4>
+        <ul>
+          <li><strong>Captación:</strong> visitas → registro → activación (primera actividad en aula)</li>
+          <li><strong>Producto:</strong> tiempo hasta primer uso, abandono en onboarding</li>
+          <li><strong>Negocio:</strong> conversión, NPS, recomendación</li>
+        </ul>
+      </div>
+      <div class="acciones-extra-col">
+        <h4>Registro de aprendizajes</h4>
+        <ul>
+          <li>Tabla viva: <strong>hipótesis → evidencia → decisión → siguiente experimento</strong></li>
+          <li>Una sola fuente de verdad (Notion/Sheet) para el equipo</li>
+        </ul>
+      </div>
+      <div class="acciones-extra-col">
+        <h4>Criterios de paso de fase</h4>
+        <ul>
+          <li>No escalar ads hasta <strong>≥3 aulas</strong> sin tu ayuda constante</li>
+          <li>Smoke test solo con <strong>dolor repetido</strong> en entrevistas</li>
+        </ul>
+      </div>
+      <div class="acciones-extra-col">
+        <h4>Experimentos rápidos</h4>
+        <ul>
+          <li>2 heroes de landing, 1 semana cada uno</li>
+          <li>Email 3 toques: valor → prueba social → beta</li>
+          <li>Micro-encuesta post-taller (NPS + abierto)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="acciones-footnote">
+      <strong>Panel ampliado:</strong> <a href="./datos-contexto.html?bloque=acciones" style="color:var(--blue);font-weight:800">Datos y contexto · Acciones de validación</a> (mismo esquema + enlaces a Customer Development, embudo, Early Adopter y ecofin).
     </div>
   </div>
 
   <!-- ════════ ESCENARIOS ECONÓMICOS ════════ -->
   <div class="section-head">
-    <h2><span class="num">6B</span> Escenarios económico-financieros</h2>
+    <h2><span class="num">5B</span> Escenarios económico-financieros</h2>
     <p>Vista rápida para decisión: pesimista, medio y optimista (editable para validación real)</p>
   </div>
   <section class="scenario">
@@ -1070,7 +1103,7 @@
 
   <!-- ════════ HIPÓTESIS CLAVE ════════ -->
   <div class="section-head">
-    <h2><span class="num">7</span> Hipótesis y riesgos</h2>
+    <h2><span class="num">6</span> Hipótesis y riesgos</h2>
     <p>Hipótesis a validar y riesgos principales identificados por el feedback</p>
   </div>
 

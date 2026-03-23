@@ -12,6 +12,7 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --green:#16a34a; --amber:#d97706;
       --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -85,7 +86,26 @@
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
     .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
-    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:720px}
+    .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .hero-kpi{
+      display:inline-flex;align-items:baseline;gap:6px;
+      background:#fff;border:1px solid var(--blue-mid);border-radius:999px;
+      padding:7px 12px;font-size:12px;color:var(--body);font-weight:600;
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
+    }
+    .hero-kpi strong{font-size:16px;color:var(--blue);line-height:1;font-weight:900}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue);color:#fff;border:1px solid var(--blue);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:800;box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    .btn-secondary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:700;
+    }
     .hero-side{
       background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
       box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
@@ -97,16 +117,81 @@
       margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
       padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-    .btn{border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--blue-dark);padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
-    .btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    /* Panel principal */
+    .panel{margin-top:0;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 20px 28px;
+      box-shadow:0 8px 28px rgba(15,23,42,.07);}
+    .ec-page-title{font-size:clamp(1.35rem,2.8vw,1.85rem);font-weight:900;color:var(--ink);letter-spacing:-.4px;margin-bottom:6px}
+    .ec-page-sub{font-size:14px;color:var(--muted);max-width:780px;margin-bottom:20px;line-height:1.55}
+    .ec-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
+      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+    }
+    .ec-grid-2{display:grid;gap:14px;margin-bottom:22px}
+    @media(min-width:800px){.ec-grid-2{grid-template-columns:1fr 1fr}}
+    .ec-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;
+      box-shadow:0 4px 14px rgba(15,23,42,.04);
+    }
+    .ec-card h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .ec-dl{display:grid;gap:8px}
+    .ec-dl div{display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:10px;font-size:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+    .ec-dl div:last-child{border-bottom:none;padding-bottom:0}
+    .ec-dl dt{font-weight:700;color:var(--ink)}
+    .ec-dl dd{color:var(--body)}
+    .ec-metrics{
+      display:grid;gap:10px;
+      grid-template-columns:repeat(2,1fr);
+    }
+    @media(min-width:640px){.ec-metrics{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:900px){.ec-metrics{grid-template-columns:repeat(3,1fr)}}
+    .ec-metric{
+      background:linear-gradient(145deg,#fff 0%,var(--surface) 100%);
+      border:1px solid var(--border);border-radius:12px;padding:12px 14px;
+    }
+    .ec-metric .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+    .ec-metric .val{font-size:22px;font-weight:900;color:var(--ink);margin-top:4px;line-height:1.15}
+    .ec-metric .hint{font-size:12px;color:var(--muted);margin-top:4px}
+    .ec-section-title{
+      font-size:18px;font-weight:900;color:var(--ink);margin:26px 0 12px;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .ec-section-title:first-of-type{margin-top:4px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+    .btn-s{border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--blue-dark);padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:.15s ease}
+    .btn-s:hover{background:var(--blue-light)}
+    .btn-s.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
     .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:0 6px 16px rgba(15,23,42,.06)}
     .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
-    .v{font-size:28px;font-weight:900;color:var(--ink);line-height:1.1;margin-top:4px}
-    .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#00bcd4)}
+    .v{font-size:26px;font-weight:900;color:var(--ink);line-height:1.1;margin-top:4px}
+    .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#06b6d4)}
+    .scenario-hint{font-size:12px;color:var(--muted);margin-bottom:16px;font-style:italic}
+    .table-wrap{width:100%;overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-top:10px}
+    table.ec-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+    .ec-table th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+    .ec-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+    .ec-table tr:last-child td{border-bottom:none}
+    .ec-table tr:nth-child(even) td{background:#fafbfc}
+    .ec-table .plan-name{font-weight:800;color:var(--ink)}
+    .ec-callout{
+      margin-top:16px;padding:14px 16px;border-radius:12px;
+      background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);
+      border:1px solid #fcd34d;font-size:14px;color:#92400e;line-height:1.55;font-weight:600;
+    }
+    .ec-callout i{margin-right:8px;color:var(--amber)}
+    .ec-notes{display:grid;gap:10px;margin-top:12px}
+    .ec-note{
+      padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+      background:var(--surface);font-size:14px;line-height:1.55;
+    }
+    .ec-note strong{display:block;color:var(--ink);margin-bottom:4px;font-size:13px}
+    .ec-src{font-size:11px;color:var(--muted);word-break:break-all;margin-top:4px}
+    .note-foot{
+      margin-top:20px;padding:10px 12px;border-radius:10px;background:var(--blue-light);
+      border:1px dashed var(--blue-mid);font-size:12px;color:var(--blue-dark);
+    }
     @media(max-width:980px){.tabs,.kpis{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
-    @media(max-width:640px){.tabs,.kpis{grid-template-columns:1fr}}
+    @media(max-width:640px){.tabs,.kpis{grid-template-columns:1fr}.ec-metrics{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -123,7 +208,6 @@
         <div class="dropdown-menu">
           <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
           <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
-          <a href="./datos-contexto.html?bloque=target">Doble target</a>
           <a href="./datos-contexto.html?bloque=mvp">PMV · Plan de validación</a>
           <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
@@ -140,43 +224,303 @@
         <div>
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Plan económico-financiero</h1>
-          <p class="lead">Escenarios para validar desde educación (Infantil a adultos) y expansión a formación corporativa.</p>
-          <div class="toolbar">
-            <button type="button" class="btn active" data-s="pesimista">Pesimista</button>
-            <button type="button" class="btn" data-s="medio">Medio</button>
-            <button type="button" class="btn" data-s="optimista">Optimista</button>
+          <p class="lead">Pricing orientado a docentes y centros: suscripción, anualidades, licencias B2B y pagos únicos. Alineado con el modelo del libro Excel de trabajo (marzo 2026).</p>
+          <div class="hero-kpis" aria-label="Referencia rápida del modelo">
+            <span class="hero-kpi"><strong>9,90 €</strong> /mes ref.</span>
+            <span class="hero-kpi"><strong>89 €</strong> /año ref.</span>
+            <span class="hero-kpi"><strong>~12,3k €</strong> ingresos Y1 (modelo)</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn-primary" href="./datos-contexto.html?bloque=plan-marketing"><i class="fa-solid fa-bullhorn"></i>Plan de marketing</a>
+            <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+            <a class="btn-secondary" href="./datos-contexto.html?bloque=mvp"><i class="fa-solid fa-flask"></i>PMV validación</a>
           </div>
         </div>
         <aside class="hero-side">
           <h3><i class="fa-solid fa-calculator"></i> Decisión clave</h3>
           <ul>
-            <li>Priorizar validación de pago y retención.</li>
-            <li>Evitar inversión fuerte en desarrollo antes de tracción.</li>
+            <li>Priorizar validación de pago y retención antes de escalar desarrollo.</li>
+            <li>Anual y licencias de centro como palanca de caja; mensual como puerta de entrada.</li>
             <li>Iterar escenarios con datos reales cada sprint.</li>
           </ul>
-          <div class="mini"><i class="fa-solid fa-chart-line"></i> Ajusta el escenario y revisa los KPIs inferiores.</div>
+          <div class="mini"><i class="fa-solid fa-file-excel"></i> Los importes de «Indicadores del modelo» provienen del Excel <strong>Escapify_Plan_Ecofin_Pricing</strong> (pestaña Resumen).</div>
         </aside>
       </div>
     </div>
   </section>
   </div>
+
   <section class="section">
-    <div class="kpis">
-      <article class="kpi"><div class="k">Clientes activos</div><div class="v" data-k="a">120</div><div class="bar"><span data-b="a" style="width:20%"></span></div></article>
-      <article class="kpi"><div class="k">Conversión</div><div class="v" data-k="c">4%</div><div class="bar"><span data-b="c" style="width:15%"></span></div></article>
-      <article class="kpi"><div class="k">MRR estimado</div><div class="v" data-k="m">€432</div><div class="bar"><span data-b="m" style="width:12%"></span></div></article>
+    <div class="panel">
+      <p class="ec-kicker"><i class="fa-solid fa-coins" aria-hidden="true"></i> Documento vivo</p>
+      <h2 class="ec-page-title">Modelo económico y tabla de precios</h2>
+      <p class="ec-page-sub">Versión web de referencia: mismos supuestos que la hoja <strong>Resumen</strong>, <strong>Propuesta Pricing</strong> y <strong>Benchmark Precios</strong> del archivo Excel. Los escenarios inferiores son una <strong>sensibilidad ilustrativa</strong> (tracción); ajústalos cuando tengas datos reales.</p>
+
+      <div class="ec-grid-2">
+        <div class="ec-card">
+          <h3><i class="fa-solid fa-building"></i> Datos del proyecto</h3>
+          <dl class="ec-dl">
+            <div><dt>Empresa</dt><dd>Escapify.io</dd></div>
+            <div><dt>Equipo</dt><dd>Equipo Escapify</dd></div>
+            <div><dt>Sede</dt><dd>Operación online (España / LatAm)</dd></div>
+            <div><dt>Sector</dt><dd>EdTech · gamificación · escape rooms educativos</dd></div>
+            <div><dt>Modelo</dt><dd>Suscripción docente + anualidades + licencias centro + packs / onboarding</dd></div>
+            <div><dt>Etapa</dt><dd>Validación comercial y empaquetado para docentes y centros</dd></div>
+            <div><dt>Fecha del plan</dt><dd>Marzo 2026</dd></div>
+          </dl>
+        </div>
+        <div class="ec-card">
+          <h3><i class="fa-solid fa-gauge-high"></i> Indicadores del modelo</h3>
+          <div class="ec-metrics">
+            <div class="ec-metric">
+              <div class="lab">Precio mensual ref.</div>
+              <div class="val">9,90 €</div>
+              <div class="hint">Docente</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Precio anual ref.</div>
+              <div class="val">89 €</div>
+              <div class="hint">Ahorro vs. mensual</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Licencia centro media</div>
+              <div class="val">449 €</div>
+              <div class="hint">Promedio modelo ingresos</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Ticket pago único medio</div>
+              <div class="val">79 €</div>
+              <div class="hint">Packs / servicios</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Ingresos año 1</div>
+              <div class="val">12.346 €</div>
+              <div class="hint">Proyección</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">MRR dic. (modelo)</div>
+              <div class="val">425,70 €</div>
+              <div class="hint">Run-rate estimado</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Coste fijo medio mensual</div>
+              <div class="val">41,25 €</div>
+              <div class="hint">Gastos promedio</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Resultado año 1</div>
+              <div class="val">9.134 €</div>
+              <div class="hint">Cuenta de resultados</div>
+            </div>
+            <div class="ec-metric">
+              <div class="lab">Margen neto año 1</div>
+              <div class="val">~74 %</div>
+              <div class="hint">Sobre ingresos Y1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="ec-section-title"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Sensibilidad (escenarios ilustrativos)</h3>
+      <p class="scenario-hint">No son fórmulas del Excel: sirven para conversar hipótesis de tracción (clientes activos, conversión, MRR).</p>
+      <div class="toolbar" role="tablist" aria-label="Escenario">
+        <button type="button" class="btn-s active" data-s="pesimista" role="tab" aria-selected="true">Pesimista</button>
+        <button type="button" class="btn-s" data-s="medio" role="tab" aria-selected="false">Medio</button>
+        <button type="button" class="btn-s" data-s="optimista" role="tab" aria-selected="false">Optimista</button>
+      </div>
+      <div class="kpis">
+        <article class="kpi"><div class="k">Clientes activos (hipótesis)</div><div class="v" data-k="a">120</div><div class="bar"><span data-b="a" style="width:20%"></span></div></article>
+        <article class="kpi"><div class="k">Conversión (estimada)</div><div class="v" data-k="c">4%</div><div class="bar"><span data-b="c" style="width:15%"></span></div></article>
+        <article class="kpi"><div class="k">MRR estimado</div><div class="v" data-k="m">432 €</div><div class="bar"><span data-b="m" style="width:12%"></span></div></article>
+      </div>
+
+      <h3 class="ec-section-title"><i class="fa-solid fa-tags" aria-hidden="true"></i> Propuesta de planes </h3>
+      <div class="table-wrap">
+        <table class="ec-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Público</th>
+              <th>Precio</th>
+              <th>Cobro</th>
+              <th>Incluye</th>
+              <th>Por qué encaja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="plan-name">Free Explorador</td>
+              <td>Docente</td>
+              <td>0 €</td>
+              <td>Free</td>
+              <td>Prueba básica, 1 proyecto activo, branding Escapify, compartir por enlace/QR</td>
+              <td>Reduce fricción de entrada.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Docente Mensual</td>
+              <td>Docente individual</td>
+              <td>9,90 €/mes</td>
+              <td>Mensual</td>
+              <td>Uso completo, plantillas premium, candados avanzados, duplicar y compartir</td>
+              <td>Rango comparable con Genially, Deck.Toys y ThingLink.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Docente Anual</td>
+              <td>Docente individual</td>
+              <td>89 €/año</td>
+              <td>Anual</td>
+              <td>Todo lo del mensual con ahorro equivalente a ~2 meses</td>
+              <td>Mejora caja y reduce churn.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Centro 5</td>
+              <td>Centro educativo</td>
+              <td>349 €/año</td>
+              <td>Anual</td>
+              <td>5 docentes, biblioteca compartida, onboarding grabado</td>
+              <td>Descuento frente a licencias sueltas.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Centro 15</td>
+              <td>Centro educativo</td>
+              <td>799 €/año</td>
+              <td>Anual</td>
+              <td>15 docentes, biblioteca compartida, soporte prioritario, onboarding live</td>
+              <td>Ticket B2B razonable para etapa o centro.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Pack Plantillas</td>
+              <td>Docente / centro</td>
+              <td>29 €</td>
+              <td>Pago único</td>
+              <td>Colección temática + imprimibles</td>
+              <td>Entrada low-ticket y cross-sell.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Onboarding Live</td>
+              <td>Centro</td>
+              <td>149 €</td>
+              <td>Pago único</td>
+              <td>Sesión de 90 min + primer caso de uso</td>
+              <td>Monetiza implantación.</td>
+            </tr>
+            <tr>
+              <td class="plan-name">Escape a medida</td>
+              <td>Centro / evento</td>
+              <td>Desde 249 €</td>
+              <td>Pago único</td>
+              <td>Diseño personalizado base</td>
+              <td>Servicio premium y validación.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ec-callout"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Regla simple: <strong>mensual</strong> para entrar, <strong>anual</strong> para rentabilizar, <strong>centro</strong> para escalar, <strong>pago único</strong> para captar y monetizar servicios.</div>
+
+      <h3 class="ec-section-title"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Benchmark de precios</h3>
+      <div class="table-wrap">
+        <table class="ec-table">
+          <thead>
+            <tr>
+              <th>Herramienta</th>
+              <th>Modelo</th>
+              <th>Precio individual visible</th>
+              <th>Centro / equipos</th>
+              <th>Lectura para Escapify</th>
+              <th>Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="plan-name">Genially</td>
+              <td>Freemium + plan docente</td>
+              <td>$7/mes facturado anual</td>
+              <td>School / District licenses</td>
+              <td>Referencia de precio bolsillo docente y colaboración con estudiantes gratis.</td>
+              <td><span class="ec-src">genially.com/plans/education/</span></td>
+            </tr>
+            <tr>
+              <td class="plan-name">Deck.Toys</td>
+              <td>Free + Pro</td>
+              <td>$8/mes (US$96/año)</td>
+              <td>Bundle desde 10 docentes; descuentos 20%–60%</td>
+              <td>Comparable por enfoque gamificado y bundles para centro.</td>
+              <td><span class="ec-src">deck.toys/pricing</span></td>
+            </tr>
+            <tr>
+              <td class="plan-name">ThingLink</td>
+              <td>Trial + Teacher License</td>
+              <td>$9/mes facturado anual</td>
+              <td>K-12 custom; HE desde $4.250/año</td>
+              <td>Teacher low-ticket + salto claro a institucional.</td>
+              <td><span class="ec-src">thinglink.com/plans/edu</span></td>
+            </tr>
+            <tr>
+              <td class="plan-name">Nearpod</td>
+              <td>Free + Gold / Platinum</td>
+              <td>$159/año Gold; $397/año Platinum</td>
+              <td>School / District a medida</td>
+              <td>Techo de valor de suite completa; no referencia low-cost directa.</td>
+              <td><span class="ec-src">nearpod.com/pricing</span></td>
+            </tr>
+            <tr>
+              <td class="plan-name">Baamboozle</td>
+              <td>Free + Plus</td>
+              <td>$4,99/mes anual o $7,99 mensual</td>
+              <td>Multi-license anual</td>
+              <td>Marca el suelo del mercado para gamificación sencilla.</td>
+              <td><span class="ec-src">baamboozle.com/pricing</span></td>
+            </tr>
+            <tr>
+              <td class="plan-name">BookWidgets</td>
+              <td>Trial + anual</td>
+              <td>Tarifa anual (sin precio público capturado)</td>
+              <td>Teacher group license / School agreement</td>
+              <td>Valida anualidad y canal centro.</td>
+              <td><span class="ec-src">bookwidgets.com/pricing</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note-foot"><i class="fa-solid fa-ruler-horizontal" aria-hidden="true"></i> <strong>Rango competitivo visible</strong> para docente individual: aprox. 5–13 USD/mes o 60–159 USD/año, salvo suites más amplias (según hoja Excel).</p>
+
+      <h3 class="ec-section-title"><i class="fa-solid fa-note-sticky" aria-hidden="true"></i> Notas de pricing</h3>
+      <div class="ec-notes">
+        <div class="ec-note"><strong>Benchmark visible individual</strong> Genially ($7/mes anual), Deck.Toys ($8/mes anual), ThingLink ($9/mes anual), Baamboozle ($4,99/mes anual o $7,99 mensual), Nearpod ($159–$397/año).</div>
+        <div class="ec-note"><strong>Recomendación Escapify</strong> Salir con <strong>9,90 €/mes</strong> y <strong>89 €/año</strong> para entrar en rango bolsillo docente, sin devaluar el producto.</div>
+        <div class="ec-note"><strong>B2B educativo</strong> Packs de centro anuales y onboarding opcional de pago mejoran ticket medio y reducen soporte reactivo.</div>
+        <div class="ec-note"><strong>Cobro anual prioritario</strong> El plan anual y las licencias de centro deben ser la palanca principal de caja; el mensual queda como puerta de entrada.</div>
+      </div>
     </div>
   </section>
+
   <script>
     const data = {
-      pesimista:{a:"120",c:"4%",m:"€432",aw:20,cw:15,mw:12},
-      medio:{a:"300",c:"7%",m:"€1.890",aw:50,cw:35,mw:50},
-      optimista:{a:"650",c:"10%",m:"€5.850",aw:95,cw:60,mw:95}
+      pesimista:{a:"120",c:"4%",m:"432 €",aw:20,cw:15,mw:12},
+      medio:{a:"300",c:"7%",m:"1.890 €",aw:50,cw:35,mw:50},
+      optimista:{a:"650",c:"10%",m:"5.850 €",aw:95,cw:60,mw:95}
     };
-    const btns=document.querySelectorAll(".btn");
-    const ka=document.querySelector('[data-k="a"]'); const kc=document.querySelector('[data-k="c"]'); const km=document.querySelector('[data-k="m"]');
-    const ba=document.querySelector('[data-b="a"]'); const bc=document.querySelector('[data-b="c"]'); const bm=document.querySelector('[data-b="m"]');
-    btns.forEach((btn)=>btn.addEventListener("click",()=>{btns.forEach((b)=>b.classList.remove("active"));btn.classList.add("active");const d=data[btn.dataset.s];ka.textContent=d.a;kc.textContent=d.c;km.textContent=d.m;ba.style.width=d.aw+"%";bc.style.width=d.cw+"%";bm.style.width=d.mw+"%";}));
+    const btns = document.querySelectorAll(".btn-s");
+    const ka = document.querySelector('[data-k="a"]');
+    const kc = document.querySelector('[data-k="c"]');
+    const km = document.querySelector('[data-k="m"]');
+    const ba = document.querySelector('[data-b="a"]');
+    const bc = document.querySelector('[data-b="c"]');
+    const bm = document.querySelector('[data-b="m"]');
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btns.forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+        const d = data[btn.dataset.s];
+        ka.textContent = d.a;
+        kc.textContent = d.c;
+        km.textContent = d.m;
+        ba.style.width = d.aw + "%";
+        bc.style.width = d.cw + "%";
+        bm.style.width = d.mw + "%";
+      });
+    });
   </script>
 </body>
 </html>
