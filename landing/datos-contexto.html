@@ -16,37 +16,99 @@
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
-    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .hero-wrap{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      border-bottom:1px solid var(--border);
+    }
+    .hero-wrap::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 84% 58% at 12% 14%, rgba(37,99,235,.14), transparent 52%),
+        radial-gradient(ellipse 68% 46% at 90% 84%, rgba(15,23,42,.08), transparent 50%);
+      pointer-events:none;
+    }
+    .hero-wrap::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.05) 56px,rgba(37,99,235,.05) 57px);
+      pointer-events:none;
+    }
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px;position:relative;z-index:1}
+    .label-link{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue-mid);color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+      padding:6px 12px;border-radius:999px;margin-bottom:10px;
+    }
     .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
     .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
     .tab:hover{background:var(--blue-light)}
-    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
     .tab-dropdown{position:relative}
-    .tab-dropbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer}
+    .tab-dropbtn{
+      width:100%;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:11px;border-radius:10px;border:1px solid var(--border);
+      background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer;
+    }
     .tab-dropbtn:hover{background:var(--blue-light)}
-    .tab-dropbtn.active{background:var(--blue-light);border-color:#bfdbfe}
-    .dropdown-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;box-shadow:0 10px 24px rgba(15,23,42,.10);z-index:20}
+    .tab-dropbtn.active{background:var(--blue-light);border-color:#bfdbfe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
+    .dropdown-menu{
+      display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;
+      box-shadow:0 10px 24px rgba(15,23,42,.10);
+    }
     .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
     .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
     .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
     .hero{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#fff 100%);
-      border:1px solid var(--border);border-radius:16px;padding:24px;
-      box-shadow:0 12px 30px rgba(15,23,42,.07);
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
+      border:1px solid var(--border);border-radius:18px;padding:28px;
+      box-shadow:0 16px 36px rgba(15,23,42,.08);
     }
-    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 56% at 12% 16%, rgba(37,99,235,.12), transparent 54%);pointer-events:none}
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .9fr;gap:14px;align-items:start}
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 85% 60% at 12% 16%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(ellipse 70% 48% at 92% 82%, rgba(15,23,42,.08), transparent 48%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
+      pointer-events:none;
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
+      box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
-    .lead{margin-top:10px;color:var(--muted)}
-    .hero-side{background:#ffffffd9;border:1px solid var(--border);border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(15,23,42,.08)}
-    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:7px}
-    .hero-side p{font-size:13px;color:var(--muted);line-height:1.5}
+    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue);color:#fff;border:1px solid var(--blue);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:800;box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    .btn-secondary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:700;
+    }
+    .hero-side{
+      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
+      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+    }
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
+    .hero-side ul{padding-left:16px}
+    .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
+    .hero-side .mini{
+      margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
     .panel{margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px}
     .control{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
     .control label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
@@ -90,8 +152,10 @@
   </style>
 </head>
 <body>
+  <div class="hero-wrap">
   <section class="section">
-    <nav class="tabs">
+    <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
+    <nav class="tabs" aria-label="Navegación Fase 2">
       <a class="tab" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
       <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
       <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
@@ -117,14 +181,24 @@
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Datos del contexto y validación</h1>
           <p class="lead">Panel único para leer contexto educativo, competencia, target, MVP y riesgos en modo decisor.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Ver Lean Canvas</a>
+            <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan ecofin</a>
+          </div>
         </div>
         <aside class="hero-side">
           <h3><i class="fa-solid fa-crosshairs"></i> Objetivo</h3>
-          <p>Convertir datos en decisiones de producto y mercado con foco en tracción real.</p>
+          <ul>
+            <li>Convertir datos en decisiones de producto y mercado.</li>
+            <li>Priorizar hipótesis con foco en tracción real.</li>
+          </ul>
+          <div class="mini"><i class="fa-solid fa-bolt"></i> Usa el desplegable inferior para saltar entre bloques.</div>
         </aside>
       </div>
     </div>
-
+  </section>
+  </div>
+  <section class="section">
     <section class="panel">
       <div class="control">
         <label for="bloqueSelect">Selecciona bloque</label>

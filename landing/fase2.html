@@ -12,14 +12,14 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
-      --max:980px;
+      --max:1080px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
-      border-bottom:1px solid var(--border)
+      border-bottom:1px solid var(--border);
     }
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
@@ -33,57 +33,70 @@
       background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.05) 56px,rgba(37,99,235,.05) 57px);
       pointer-events:none;
     }
-    .section{max-width:var(--max);margin:0 auto;padding:56px 24px;position:relative;z-index:1}
-    .label{display:inline-block;background:var(--blue-mid);color:var(--blue-dark);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px}
-    h1{font-size:clamp(30px,5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-1px;color:var(--ink)}
-    .lead{margin-top:12px;max-width:760px;color:var(--muted);font-size:17px}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px;position:relative;z-index:1}
+    .label-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--blue-mid);color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+      padding:6px 12px;border-radius:999px;margin-bottom:10px;
+    }
+    .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+    .tab{
+      display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;
+      border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease;
+    }
+    .tab:hover{background:var(--blue-light)}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
+    .tab-dropdown{position:relative}
+    .tab-dropbtn{
+      width:100%;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:11px;border-radius:10px;border:1px solid var(--border);
+      background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer;
+    }
+    .tab-dropbtn:hover{background:var(--blue-light)}
+    .dropdown-menu{
+      display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;
+      box-shadow:0 10px 24px rgba(15,23,42,.10);
+    }
+    .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
+    .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
+    .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
+    .hero{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
+      border:1px solid var(--border);border-radius:18px;padding:28px;
+      box-shadow:0 16px 36px rgba(15,23,42,.08);
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 85% 60% at 12% 16%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(ellipse 70% 48% at 92% 82%, rgba(15,23,42,.08), transparent 48%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
+      pointer-events:none;
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:28px}
-    .tab{
-      display:flex;align-items:center;gap:8px;justify-content:center;
-      text-decoration:none;color:var(--blue-dark);font-weight:700;font-size:14px;
-      background:var(--white);border:1px solid var(--blue-mid);padding:12px 10px;border-radius:12px;
-      transition:.15s ease;
-    }
-    .tab:hover{background:var(--blue-light);border-color:var(--blue)}
-    .tab-dropdown{position:relative}
-    .tab-dropbtn{
-      width:100%;
-      display:flex;align-items:center;gap:8px;justify-content:center;
-      text-decoration:none;color:var(--blue-dark);font-weight:700;font-size:14px;
-      background:var(--white);border:1px solid var(--blue-mid);padding:12px 10px;border-radius:12px;
-      transition:.15s ease;cursor:pointer;
-    }
-    .tab-dropbtn:hover{background:var(--blue-light);border-color:var(--blue)}
-    .dropdown-menu{
-      display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);
-      background:#fff;border:1px solid var(--border);border-radius:12px;
-      box-shadow:0 10px 24px rgba(15,23,42,.10);padding:6px;z-index:20;
-    }
-    .tab-dropdown:hover .dropdown-menu,
-    .tab-dropdown:focus-within .dropdown-menu{display:block}
-    .dropdown-menu a{
-      display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;
-      padding:8px 10px;border-radius:8px;
-    }
-    .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
-    .hero-grid{display:grid;grid-template-columns:1.45fr .9fr;gap:18px;align-items:start;margin-top:8px}
-    .hero-panel{
-      background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;
-      box-shadow:0 16px 36px rgba(15,23,42,.08);
-    }
-    .hero-panel h1{margin-top:2px}
+    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hero-kpi{
-      display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid var(--blue-mid);
-      border-radius:999px;padding:7px 12px;font-size:12px;color:var(--body);font-weight:600;
+      display:inline-flex;align-items:baseline;gap:6px;
+      background:#fff;border:1px solid var(--blue-mid);border-radius:999px;
+      padding:7px 12px;font-size:12px;color:var(--body);font-weight:600;
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
     }
-    .hero-kpi strong{font-size:18px;color:var(--blue);font-weight:900;line-height:1}
+    .hero-kpi strong{font-size:18px;color:var(--blue);line-height:1;font-weight:900}
     .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn-primary{
       display:inline-flex;align-items:center;gap:8px;text-decoration:none;
@@ -95,18 +108,18 @@
       background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid);border-radius:10px;
       padding:11px 16px;font-size:14px;font-weight:700;
     }
-    .hero-aside{
+    .hero-side{
       background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 10px 24px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
     }
-    .hero-aside h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
-    .hero-aside ul{padding-left:16px}
-    .hero-aside li{font-size:13px;color:var(--body);margin-bottom:6px}
-    .hero-aside .mini{
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
+    .hero-side ul{padding-left:16px}
+    .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
+    .hero-side .mini{
       margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
       padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
-    .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:0}
     .card{
       background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;
       box-shadow:0 6px 16px rgba(15,23,42,.06);transition:.2s ease;
@@ -114,14 +127,18 @@
     .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10);border-color:#bfd6ff}
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:8px}
     .card p{font-size:14px;color:var(--muted)}
-    @media(max-width:900px){.tabs,.cards{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
+    @media(max-width:980px){
+      .tabs{grid-template-columns:1fr 1fr}
+      .cards{grid-template-columns:1fr 1fr}
+      .hero-grid{grid-template-columns:1fr}
+    }
     @media(max-width:640px){.tabs,.cards{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="hero-wrap">
     <section class="section">
-      <span class="label">Escapify · Fase 2</span>
+      <span class="label-pill"><i class="fa-solid fa-layer-group"></i>Escapify · Fase 2</span>
       <nav class="tabs" aria-label="Navegación Fase 2">
         <a class="tab" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
         <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
@@ -143,30 +160,32 @@
           </div>
         </div>
       </nav>
-      <div class="hero-grid">
-        <div class="hero-panel">
-          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Hub estratégico</span>
-          <h1>Estrategia visual<br/>lista para ejecutar</h1>
-          <p class="lead">Centraliza Lean Canvas, target, propuesta de valor, plan ecofin y toda la validación en una experiencia premium, clara y accionable.</p>
-          <div class="hero-kpis">
-            <span class="hero-kpi"><strong>8</strong> bloques de validación</span>
-            <span class="hero-kpi"><strong>5</strong> páginas estratégicas</span>
-            <span class="hero-kpi"><strong>1</strong> narrativa unificada</span>
+      <div class="hero">
+        <div class="hero-grid">
+          <div>
+            <span class="hero-badge"><i class="fa-solid fa-compass"></i>Hub estratégico</span>
+            <h1>Estrategia visual<br/>lista para ejecutar</h1>
+            <p class="lead">Centraliza Lean Canvas, target, propuesta de valor, plan ecofin y toda la validación en una experiencia premium, clara y accionable.</p>
+            <div class="hero-kpis">
+              <span class="hero-kpi"><strong>8</strong> bloques de validación</span>
+              <span class="hero-kpi"><strong>5</strong> páginas estratégicas</span>
+              <span class="hero-kpi"><strong>1</strong> narrativa unificada</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Ir a Lean Canvas</a>
+              <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-circle-info"></i>Abrir Saber más</a>
+            </div>
           </div>
-          <div class="hero-actions">
-            <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Ir a Lean Canvas</a>
-            <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-circle-info"></i>Abrir Saber más</a>
-          </div>
+          <aside class="hero-side">
+            <h3><i class="fa-solid fa-bullseye"></i> Prioridad ahora</h3>
+            <ul>
+              <li>Validar problema y activación real.</li>
+              <li>Medir conversión y repetición de uso.</li>
+              <li>Escalar de educación a empresa.</li>
+            </ul>
+            <div class="mini"><i class="fa-solid fa-rocket"></i> Foco: pasar de presentación a tracción.</div>
+          </aside>
         </div>
-        <aside class="hero-aside">
-          <h3><i class="fa-solid fa-bullseye"></i> Prioridad ahora</h3>
-          <ul>
-            <li>Validar problema y activación real.</li>
-            <li>Medir conversión y repetición de uso.</li>
-            <li>Escalar de educación a empresa.</li>
-          </ul>
-          <div class="mini"><i class="fa-solid fa-rocket"></i> Foco: pasar de presentación a tracción.</div>
-        </aside>
       </div>
     </section>
   </div>

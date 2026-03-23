@@ -9,54 +9,128 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root{--blue:#2563eb;--blue-dark:#1e40af;--blue-light:#eff6ff;--ink:#0f172a;--body:#374151;--muted:#64748b;--border:#e2e8f0;--surface:#f8fafc;--white:#fff;--max:980px}
-    *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,system-ui,sans-serif;background:var(--surface);color:var(--body)}
-    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    :root{
+      --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
+      --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --max:1080px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
+    .hero-wrap{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      border-bottom:1px solid var(--border);
+    }
+    .hero-wrap::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 84% 58% at 12% 14%, rgba(37,99,235,.14), transparent 52%),
+        radial-gradient(ellipse 68% 46% at 90% 84%, rgba(15,23,42,.08), transparent 50%);
+      pointer-events:none;
+    }
+    .hero-wrap::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.05) 56px,rgba(37,99,235,.05) 57px);
+      pointer-events:none;
+    }
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px;position:relative;z-index:1}
+    .label-link{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue-mid);color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+      padding:6px 12px;border-radius:999px;margin-bottom:10px;
+    }
     .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
     .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
     .tab:hover{background:var(--blue-light)}
-    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
     .tab-dropdown{position:relative}
-    .tab-dropbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer}
+    .tab-dropbtn{
+      width:100%;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:11px;border-radius:10px;border:1px solid var(--border);
+      background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer;
+    }
     .tab-dropbtn:hover{background:var(--blue-light)}
-    .dropdown-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;box-shadow:0 10px 24px rgba(15,23,42,.10);z-index:20}
+    .dropdown-menu{
+      display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;
+      box-shadow:0 10px 24px rgba(15,23,42,.10);
+    }
     .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
     .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
     .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
     .hero{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#fff 100%);
-      border:1px solid var(--border);border-radius:16px;padding:24px;
-      box-shadow:0 12px 30px rgba(15,23,42,.07);
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
+      border:1px solid var(--border);border-radius:18px;padding:28px;
+      box-shadow:0 16px 36px rgba(15,23,42,.08);
     }
-    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 14% 16%, rgba(37,99,235,.13), transparent 56%);pointer-events:none}
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr .9fr;gap:14px;align-items:start}
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 85% 60% at 12% 16%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(ellipse 70% 48% at 92% 82%, rgba(15,23,42,.08), transparent 48%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
+      pointer-events:none;
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
+      box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
-    .lead{margin-top:10px;color:var(--muted)}
+    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .hero-kpi{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid #dbeafe;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:600;color:var(--body)}
-    .hero-kpi strong{font-size:18px;color:var(--blue);font-weight:900;line-height:1}
-    .hero-side{background:#ffffffd9;border:1px solid var(--border);border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(15,23,42,.08)}
-    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:7px}
-    .hero-side p{font-size:13px;color:var(--muted);line-height:1.5}
+    .hero-kpi{
+      display:inline-flex;align-items:baseline;gap:6px;
+      background:#fff;border:1px solid var(--blue-mid);border-radius:999px;
+      padding:7px 12px;font-size:12px;color:var(--body);font-weight:600;
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
+    }
+    .hero-kpi strong{font-size:18px;color:var(--blue);line-height:1;font-weight:900}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue);color:#fff;border:1px solid var(--blue);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:800;box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    .btn-secondary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:700;
+    }
+    .hero-side{
+      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
+      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+    }
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
+    .hero-side ul{padding-left:16px}
+    .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
+    .hero-side .mini{
+      margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
     .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 6px 16px rgba(15,23,42,.06);transition:.2s ease}
     .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10);border-color:#bfd6ff}
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:6px}
-    @media(max-width:900px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
+    @media(max-width:980px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <div class="hero-wrap">
   <section class="section">
-    <nav class="tabs">
+    <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
+    <nav class="tabs" aria-label="Navegación Fase 2">
       <a class="tab" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
       <a class="tab active" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
       <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
@@ -86,13 +160,25 @@
             <span class="hero-kpi"><strong>10-15</strong> entrevistas objetivo</span>
             <span class="hero-kpi"><strong>&lt;30m</strong> tiempo de onboarding</span>
           </div>
+          <div class="hero-actions">
+            <a class="btn-primary" href="./datos-contexto.html?bloque=target"><i class="fa-solid fa-bullseye"></i>Doble target</a>
+            <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+          </div>
         </div>
         <aside class="hero-side">
           <h3><i class="fa-solid fa-user-check"></i> Clave</h3>
-          <p>No vender a “todo el mundo”. Validar primero con quien ya tiene dolor de tiempo y ganas de aplicar.</p>
+          <ul>
+            <li>No vender a “todo el mundo”: foco en dolor de tiempo.</li>
+            <li>Validar con quien ya aplica gamificación o innovación.</li>
+            <li>Medir activación y disposición a pagar.</li>
+          </ul>
+          <div class="mini"><i class="fa-solid fa-rocket"></i> Objetivo: 10–15 entrevistas cualitativas antes de escalar.</div>
         </aside>
       </div>
     </div>
+  </section>
+  </div>
+  <section class="section">
     <div class="grid">
       <article class="card">
         <h3>Perfil educativo</h3>

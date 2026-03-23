@@ -16,7 +16,29 @@
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
-    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .hero-wrap{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      border-bottom:1px solid var(--border);
+    }
+    .hero-wrap::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 84% 58% at 12% 14%, rgba(37,99,235,.14), transparent 52%),
+        radial-gradient(ellipse 68% 46% at 90% 84%, rgba(15,23,42,.08), transparent 50%);
+      pointer-events:none;
+    }
+    .hero-wrap::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg,transparent,transparent 56px,rgba(37,99,235,.05) 56px,rgba(37,99,235,.05) 57px);
+      pointer-events:none;
+    }
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px;position:relative;z-index:1}
+    .label-link{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue-mid);color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+      padding:6px 12px;border-radius:999px;margin-bottom:10px;
+    }
     .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
     .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
     .tab:hover{background:var(--blue-light)}
@@ -154,7 +176,9 @@
   </style>
 </head>
 <body>
+  <div class="hero-wrap">
   <section class="section">
+    <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
     <nav class="tabs" aria-label="Navegación Fase 2">
       <a class="tab active" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
       <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
@@ -181,7 +205,7 @@
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Lean Canvas<br/>de Escapify</h1>
           <p class="lead">Una visión clara y accionable del modelo: problema real del docente, valor diferencial, monetización híbrida y ruta de escala desde Infantil hasta empresa.</p>
-          <div class="hero-kpis">
+          <!-- <div class="hero-kpis">
             <span class="hero-kpi"><strong>792k</strong> docentes</span>
             <span class="hero-kpi"><strong>8.3M</strong> alumnado</span>
             <span class="hero-kpi"><strong>76%</strong> gap formativo</span>
@@ -190,7 +214,7 @@
             <span class="chip">Fase 2</span>
             <span class="chip">Visual + accionable</span>
             <span class="chip">Educación y empresa</span>
-          </div>
+          </div> -->
           <div class="hero-actions">
             <a class="btn-primary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Ver contexto</a>
             <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Ir a plan ecofin</a>
@@ -301,5 +325,6 @@
       </article>
     </section>
   </section>
+  </div>
 </body>
 </html>
