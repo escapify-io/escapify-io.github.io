@@ -218,26 +218,122 @@
     }
     @media(max-width:640px){.tabs,.legend{grid-template-columns:1fr}.grid5{grid-template-columns:1fr}}
     .bmc-wrap{
-      margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06);
+      margin-top:24px;position:relative;overflow:hidden;
+      border-radius:20px;border:1px solid var(--border);
+      background:linear-gradient(165deg,#f1f5f9 0%,#ffffff 42%,#eff6ff 100%);
+      box-shadow:0 14px 48px rgba(15,23,42,.1);
+    }
+    .bmc-wrap::before{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 72% 48% at 96% 4%, rgba(37,99,235,.12), transparent 55%),
+        radial-gradient(ellipse 58% 42% at 4% 96%, rgba(124,58,237,.08), transparent 50%);
+    }
+    .bmc-wrap::after{
+      content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+      background:repeating-linear-gradient(-9deg,transparent,transparent 48px,rgba(37,99,235,.04) 48px,rgba(37,99,235,.04) 49px);
+    }
+    .bmc-inner{position:relative;z-index:1;padding:28px 24px 26px}
+    @media(min-width:640px){.bmc-inner{padding:32px 28px 30px}}
+    .bmc-header{
+      margin-bottom:20px;padding-bottom:18px;
+      border-bottom:1px solid rgba(226,232,240,.9);
+    }
+    .bmc-badge{
+      display:inline-flex;align-items:center;gap:7px;
+      font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--blue-dark);background:#fff;border:1px solid var(--blue-mid);
+      border-radius:999px;padding:6px 12px;margin-bottom:12px;
+      box-shadow:0 2px 10px rgba(37,99,235,.08);
     }
     .bmc-title{
-      font-size:clamp(22px,3.2vw,30px);font-weight:900;color:var(--ink);letter-spacing:-.5px;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      font-size:clamp(24px,3.4vw,34px);font-weight:900;color:var(--ink);letter-spacing:-.6px;line-height:1.15;
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
     }
-    .bmc-sub{font-size:13px;color:var(--muted);margin-top:6px;margin-bottom:18px}
-    .bmc-grid{display:grid;gap:12px}
+    .bmc-title .bmc-title-icon{
+      display:flex;align-items:center;justify-content:center;
+      width:48px;height:48px;border-radius:14px;
+      background:linear-gradient(145deg,var(--blue) 0%,#1d4ed8 100%);
+      color:#fff;font-size:1.25rem;box-shadow:0 8px 22px rgba(37,99,235,.35);
+    }
+    .bmc-sub{
+      font-size:14px;color:var(--muted);margin-top:10px;max-width:720px;line-height:1.55;
+    }
+    .bmc-pills{
+      display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;
+    }
+    .bmc-pill{
+      font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      padding:5px 9px;border-radius:8px;border:1px solid var(--border);
+      background:rgba(255,255,255,.85);color:var(--muted);
+    }
+    .bmc-grid{
+      display:grid;gap:14px;
+    }
     @media(min-width:900px){.bmc-grid{grid-template-columns:1fr 1fr}}
+    @media(min-width:1180px){.bmc-grid{grid-template-columns:repeat(3,1fr)}}
     .bmc-section{
-      padding:14px 14px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface);
+      position:relative;padding:16px 16px 14px 16px;
+      border:1px solid var(--border);border-radius:14px;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(6px);
+      box-shadow:0 4px 16px rgba(15,23,42,.05);
+      transition:transform .18s ease,box-shadow .18s ease;
     }
-    .bmc-section h3{
-      font-size:14px;color:var(--ink);font-weight:800;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;
+    @media(hover:hover){
+      .bmc-section:hover{
+        transform:translateY(-2px);
+        box-shadow:0 10px 28px rgba(15,23,42,.09);
+      }
     }
-    .bmc-section h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;margin:10px 0 6px}
-    .bmc-section ul{padding-left:18px}
-    .bmc-section li{font-size:13px;margin-bottom:6px;color:var(--body)}
-    .bmc-section p{font-size:13px;color:var(--body);margin-bottom:8px;line-height:1.5}
+    .bmc-section::before{
+      content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:4px;
+      background:var(--bmc-accent, var(--blue));
+    }
+    .bmc-section--segmentos{--bmc-accent:#d97706}
+    .bmc-section--valor{--bmc-accent:#7c3aed}
+    .bmc-section--canales{--bmc-accent:#059669}
+    .bmc-section--relaciones{--bmc-accent:#2563eb}
+    .bmc-section--ingresos{--bmc-accent:#16a34a}
+    .bmc-section--recursos{--bmc-accent:#475569}
+    .bmc-section--actividades{--bmc-accent:#ea580c}
+    .bmc-section--socios{--bmc-accent:#6366f1}
+    .bmc-section--costes{--bmc-accent:#dc2626}
+    .bmc-h3{
+      font-size:14px;color:var(--ink);font-weight:800;margin-bottom:10px;
+      display:flex;align-items:flex-start;gap:10px;line-height:1.3;
+    }
+    .bmc-num{
+      flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+      min-width:28px;height:28px;padding:0 6px;border-radius:8px;
+      font-size:12px;font-weight:900;color:#fff;
+      background:var(--bmc-accent, var(--blue));
+      box-shadow:0 2px 10px rgba(15,23,42,.18);
+    }
+    .bmc-h3 > span:last-child{display:flex;align-items:flex-start;gap:8px}
+    .bmc-h3 i{margin-top:2px;color:var(--bmc-accent, var(--blue));opacity:.9}
+    .bmc-section h4{
+      font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+      color:var(--muted);font-weight:800;margin:12px 0 6px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .bmc-section h4::after{
+      content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);
+      margin-left:4px;
+    }
+    .bmc-section ul{padding-left:0;list-style:none}
+    .bmc-section li{
+      font-size:13px;margin-bottom:7px;color:var(--body);
+      padding-left:18px;position:relative;line-height:1.45;
+    }
+    .bmc-section li::before{
+      content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;
+      background:var(--bmc-accent, var(--blue));opacity:.55;
+    }
+    .bmc-section p{font-size:13px;color:var(--body);margin-bottom:8px;line-height:1.55}
+    @media(prefers-reduced-motion:reduce){
+      .bmc-section{transition:none}
+    }
     .pitch-callout{
       margin-top:18px;padding:16px 18px;border-radius:14px;border:1px solid var(--blue-mid);
       background:linear-gradient(135deg,#eff6ff 0%,#ffffff 100%);
@@ -246,15 +342,41 @@
     .pitch-callout h2{font-size:16px;color:var(--blue-dark);font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
     .pitch-callout p{font-size:14px;color:var(--body);line-height:1.55}
     .vision-box{
-      margin-top:14px;padding:14px;border-radius:12px;border:1px dashed var(--blue-mid);background:var(--blue-light);
+      margin-top:18px;padding:18px 18px 16px;border-radius:16px;
+      border:1px solid rgba(37,99,235,.25);
+      background:linear-gradient(135deg,#eff6ff 0%,#ffffff 55%,#f8fafc 100%);
+      box-shadow:0 8px 24px rgba(37,99,235,.1);
     }
-    .vision-box h3{font-size:14px;color:var(--blue-dark);font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-    .vision-box ul{padding-left:18px}
-    .vision-box li{font-size:13px;margin-bottom:5px;color:var(--body)}
+    .vision-box h3{
+      font-size:15px;color:var(--blue-dark);font-weight:900;margin-bottom:10px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .vision-box h3 .vision-ico{
+      width:36px;height:36px;border-radius:10px;
+      background:linear-gradient(145deg,var(--blue),#1d4ed8);
+      color:#fff;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;box-shadow:0 4px 12px rgba(37,99,235,.3);
+    }
+    .vision-box ul{padding-left:0;list-style:none}
+    .vision-box li{
+      font-size:13px;margin-bottom:7px;color:var(--body);
+      padding-left:20px;position:relative;
+    }
+    .vision-box li::before{
+      content:"✓";position:absolute;left:0;font-weight:800;font-size:11px;color:var(--blue);
+    }
     .bmc-summary{
-      margin-top:12px;padding:12px 14px;border-radius:12px;background:#0f172a;color:#e2e8f0;font-size:13px;line-height:1.55;
+      margin-top:16px;padding:16px 18px;border-radius:14px;
+      background:linear-gradient(145deg,#0f172a 0%,#1e293b 100%);
+      color:#e2e8f0;font-size:14px;line-height:1.6;
+      border:1px solid rgba(148,163,184,.15);
+      box-shadow:0 10px 32px rgba(15,23,42,.35);
     }
     .bmc-summary strong{color:#93c5fd}
+    .bmc-summary::before{
+      content:"";display:block;width:40px;height:3px;border-radius:2px;
+      background:linear-gradient(90deg,#60a5fa,#a78bfa);margin-bottom:10px;
+    }
   </style>
 </head>
 <body>
@@ -287,11 +409,11 @@
           <span class="hero-badge"><i class="fa-solid fa-brain"></i>Lean Canvas · Escapify.io</span>
           <h1>Lean Canvas<br/>de Escapify</h1>
           <p class="lead"><strong>Escapify.io</strong> permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando gamificación real, materiales físicos y herramientas digitales, sin experiencia previa.</p>
-          <div class="hero-kpis" aria-label="Datos clave">
+          <!-- <div class="hero-kpis" aria-label="Datos clave">
             <span class="hero-kpi"><strong>~43h</strong> semanales docentes (referencia)</span>
             <span class="hero-kpi"><strong>Sistema</strong> diseño + implementación</span>
             <span class="hero-kpi"><strong>SaaS +</strong> formación + maker</span>
-          </div>
+          </div> -->
           <div class="hero-actions">
             <a class="btn-primary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Ver contexto</a>
             <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan ecofin</a>
@@ -502,12 +624,30 @@
     </div>
 
     <section class="bmc-wrap" aria-labelledby="bmc-heading">
-      <h2 id="bmc-heading" class="bmc-title"><i class="fa-solid fa-diagram-project"></i> Business Model Canvas · Escapify.io</h2>
-      <p class="bmc-sub">Visión del modelo de negocio: segmentos, propuesta de valor, canales, relaciones, ingresos, recursos, actividades, socios y costes.</p>
+      <div class="bmc-inner">
+        <header class="bmc-header">
+        <span class="bmc-badge"><i class="fa-solid fa-layer-group"></i> Bloque · Modelo de negocio</span>
+        <h2 id="bmc-heading" class="bmc-title">
+          <span class="bmc-title-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span>
+          Business Model Canvas · Escapify.io
+        </h2>
+        <p class="bmc-sub">Las 9 palancas del canvas Osterwalder: de <strong>quién paga</strong> y <strong>qué prometes</strong> a <strong>cómo llegas</strong>, <strong>qué haces</strong> y <strong>con quién colaboras</strong>.</p>
+        <div class="bmc-pills" aria-hidden="true">
+          <span class="bmc-pill">Clientes</span>
+          <span class="bmc-pill">Valor</span>
+          <span class="bmc-pill">Canales</span>
+          <span class="bmc-pill">Relaciones</span>
+          <span class="bmc-pill">Ingresos</span>
+          <span class="bmc-pill">Recursos</span>
+          <span class="bmc-pill">Actividades</span>
+          <span class="bmc-pill">Socios</span>
+          <span class="bmc-pill">Costes</span>
+        </div>
+        </header>
 
-      <div class="bmc-grid">
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-users"></i> 1. Segmentos de clientes</h3>
+        <div class="bmc-grid">
+        <div class="bmc-section bmc-section--segmentos">
+          <h3 class="bmc-h3"><span class="bmc-num">1</span><span><i class="fa-solid fa-users" aria-hidden="true"></i> Segmentos de clientes</span></h3>
           <p>Escapify no tiene un único cliente, sino varios bien definidos.</p>
           <h4>Segmento principal</h4>
           <ul>
@@ -529,8 +669,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-gem"></i> 2. Propuesta de valor</h3>
+        <div class="bmc-section bmc-section--valor">
+          <h3 class="bmc-h3"><span class="bmc-num">2</span><span><i class="fa-solid fa-gem" aria-hidden="true"></i> Propuesta de valor</span></h3>
           <p>Escapify no vende solo «recursos»: vende <strong>experiencias educativas diseñadas</strong>.</p>
           <h4>Para docentes</h4>
           <ul>
@@ -549,8 +689,8 @@
           <p><strong>Diferencial:</strong> integra pedagogía + gamificación + maker + IA + inclusión.</p>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-bullhorn"></i> 3. Canales</h3>
+        <div class="bmc-section bmc-section--canales">
+          <h3 class="bmc-h3"><span class="bmc-num">3</span><span><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Canales</span></h3>
           <h4>Captación</h4>
           <ul>
             <li>Instagram y TikTok (visual + maker + escape rooms).</li>
@@ -573,8 +713,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-handshake"></i> 4. Relaciones con clientes</h3>
+        <div class="bmc-section bmc-section--relaciones">
+          <h3 class="bmc-h3"><span class="bmc-num">4</span><span><i class="fa-solid fa-handshake" aria-hidden="true"></i> Relaciones con clientes</span></h3>
           <ul>
             <li>Comunidad docente (clave).</li>
             <li>Soporte práctico: cómo implementar en aula.</li>
@@ -585,8 +725,8 @@
           <p><strong>Estrategia:</strong> usuario → creador → embajador.</p>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-sack-dollar"></i> 5. Fuentes de ingresos</h3>
+        <div class="bmc-section bmc-section--ingresos">
+          <h3 class="bmc-h3"><span class="bmc-num">5</span><span><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> Fuentes de ingresos</span></h3>
           <p><strong>Modelo híbrido</strong></p>
           <h4>Suscripción SaaS</h4>
           <ul>
@@ -615,8 +755,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-toolbox"></i> 6. Recursos clave</h3>
+        <div class="bmc-section bmc-section--recursos">
+          <h3 class="bmc-h3"><span class="bmc-num">6</span><span><i class="fa-solid fa-toolbox" aria-hidden="true"></i> Recursos clave</span></h3>
           <ul>
             <li>Plataforma web (escapify.io).</li>
             <li>Contenido educativo (pruebas, plantillas, narrativa).</li>
@@ -628,8 +768,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-gears"></i> 7. Actividades clave</h3>
+        <div class="bmc-section bmc-section--actividades">
+          <h3 class="bmc-h3"><span class="bmc-num">7</span><span><i class="fa-solid fa-gears" aria-hidden="true"></i> Actividades clave</span></h3>
           <ul>
             <li>Diseño de pruebas y experiencias.</li>
             <li>Desarrollo de la plataforma.</li>
@@ -641,8 +781,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section">
-          <h3><i class="fa-solid fa-people-group"></i> 8. Socios clave</h3>
+        <div class="bmc-section bmc-section--socios">
+          <h3 class="bmc-h3"><span class="bmc-num">8</span><span><i class="fa-solid fa-people-group" aria-hidden="true"></i> Socios clave</span></h3>
           <ul>
             <li>Centros educativos (pilotos y validación).</li>
             <li>Profesores early adopters.</li>
@@ -654,8 +794,8 @@
           </ul>
         </div>
 
-        <div class="bmc-section" style="grid-column:1/-1">
-          <h3><i class="fa-solid fa-money-bill-wave"></i> 9. Estructura de costes</h3>
+        <div class="bmc-section bmc-section--costes">
+          <h3 class="bmc-h3"><span class="bmc-num">9</span><span><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i> Estructura de costes</span></h3>
           <ul>
             <li>Desarrollo y mantenimiento web.</li>
             <li>Creación de contenido (tiempo + diseño).</li>
@@ -666,20 +806,21 @@
             <li>Branding y diseño.</li>
           </ul>
         </div>
-      </div>
+        </div>
 
-      <div class="vision-box">
-        <h3><i class="fa-solid fa-lightbulb"></i> Visión estratégica</h3>
-        <ul>
-          <li>No es solo SaaS.</li>
-          <li>No es solo formación.</li>
-          <li>No es solo producto físico.</li>
-        </ul>
-        <p style="margin-top:8px;margin-bottom:0;"><strong>Ecosistema educativo híbrido:</strong> plataforma (escala) + formación (credibilidad e ingresos rápidos) + producto físico (diferenciación).</p>
-      </div>
+        <div class="vision-box">
+          <h3><span class="vision-ico" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span> Visión estratégica</h3>
+          <ul>
+            <li>No es solo SaaS.</li>
+            <li>No es solo formación.</li>
+            <li>No es solo producto físico.</li>
+          </ul>
+          <p style="margin-top:8px;margin-bottom:0;"><strong>Ecosistema educativo híbrido:</strong> plataforma (escala) + formación (credibilidad e ingresos rápidos) + producto físico (diferenciación).</p>
+        </div>
 
-      <div class="bmc-summary">
-        <strong>Resumen clave:</strong> Escapify.io es un modelo <strong>escalable</strong> (SaaS), <strong>monetizable desde el inicio</strong> (formación), <strong>diferencial</strong> (maker + inclusión) y <strong>difícil de copiar</strong> (know-how + experiencia real en aula).
+        <div class="bmc-summary">
+          <strong>Resumen clave:</strong> Escapify.io es un modelo <strong>escalable</strong> (SaaS), <strong>monetizable desde el inicio</strong> (formación), <strong>diferencial</strong> (maker + inclusión) y <strong>difícil de copiar</strong> (know-how + experiencia real en aula).
+        </div>
       </div>
     </section>
   </section>

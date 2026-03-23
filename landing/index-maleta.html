@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Maleta del Tiempo — Escape Room Educativo Inclusivo</title>
   <meta name="description" content="Un viaje a través de 8 eras históricas mediante un escape room educativo inclusivo. Desafíos STEAM adaptados con 23 adaptaciones de accesibilidad." />
-  <link rel="canonical" href="https://escapify.io/landing/index-maleta.html" />
+  <link rel="canonical" href="https://archivotiempo.github.io/" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="La Maleta del Tiempo — Escape Room Educativo Inclusivo" />
   <meta property="og:description" content="Un viaje a trav&eacute;s de 8 eras hist&oacute;ricas mediante un escape room educativo inclusivo. 23 adaptaciones, 12 participantes, 94% satisfacci&oacute;n." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://escapify.io/landing/index-maleta.html" />
+  <meta property="og:url" content="https://archivotiempo.github.io/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="La Maleta del Tiempo — Escape Room STEAM Inclusivo" />
   <meta name="twitter:description" content="8 eras hist&oacute;ricas, 23 adaptaciones de accesibilidad, un modelo pedag&oacute;gico validado." />
@@ -893,6 +893,13 @@
     /* Citas: acento editorial */
     .quote-block.quote-block--accent { border-left-color: var(--accent-editorial); }
 
+    /* Ocultos: índice flotante, botón Escapify en barra, CTA «Ver la landing de Escapify», chips hero, galería */
+    .toc-float { display: none !important; }
+    .nav-back { display: none !important; }
+    .cta-escapify-landing-hidden { display: none !important; }
+    .hero-kpis { display: none !important; }
+    #galeria { display: none !important; }
+
     footer {
       background: #0a0f1e; padding: 24px;
       text-align: center; font-size: 13px; color: #475569;
@@ -999,7 +1006,7 @@
 <!-- NAV -->
 <nav id="site-nav">
   <div class="nav-inner">
-    <a href="index-maleta.html" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <i class="fa-solid fa-suitcase-rolling"></i>
       La Maleta <span>del Tiempo</span>
     </a>
@@ -1009,12 +1016,11 @@
     <ul class="nav-links" id="nav-menu">
       <li><a href="#eras">Eras</a></li>
       <li><a href="#diseno">Dise&ntilde;o</a></li>
-      <li><a href="#galeria">Galer&iacute;a</a></li>
       <li><a href="#adaptaciones">Adaptaciones</a></li>
       <li><a href="#resultados">Resultados</a></li>
       <li><a href="#marcos">Marco te&oacute;rico</a></li>
     </ul>
-    <a href="index.html" class="nav-back nav-back--desktop"><i class="fa-solid fa-rocket"></i> Escapify.io</a>
+    <a href="https://escapify.io/" class="nav-back nav-back--desktop"><i class="fa-solid fa-rocket"></i> Escapify.io</a>
   </div>
 </nav>
 
@@ -1037,7 +1043,7 @@
     </p>
     <div class="hero-actions">
       <a href="#eras" class="btn-primary"><i class="fa-solid fa-clock-rotate-left"></i> Explorar las eras</a>
-      <a href="index.html" class="btn-ghost"><i class="fa-solid fa-rocket"></i> Conocer Escapify.io</a>
+      <a href="https://escapify.io/" class="btn-ghost"><i class="fa-solid fa-rocket"></i> Conocer Escapify.io</a>
     </div>
   </div>
 </div>
@@ -2097,7 +2103,7 @@
       La Maleta del Tiempo demostr&oacute; que los escape rooms educativos inclusivos funcionan. <strong>Escapify.io</strong> es el siguiente paso: una plataforma digital que permite a cualquier docente crear, adaptar y compartir experiencias como esta.
     </p>
     <p style="margin-top:16px; font-size:15px; color:var(--body); line-height:1.65; max-width:680px;">
-      Tambi&eacute;n puedes ver la <a href="https://archivotiempo.github.io/index-iebs.html" style="color:var(--blue); font-weight:700;">propuesta vinculada al m&aacute;ster IEBS</a> (recursos y enfoque del proyecto en ese contexto).
+      Tambi&eacute;n puedes ver la <a href="index-iebs.html" style="color:var(--blue); font-weight:700;">propuesta vinculada al m&aacute;ster IEBS</a> (recursos y enfoque del proyecto en ese contexto).
     </p>
 
     <div style="margin-top:32px; background:linear-gradient(135deg, var(--ink) 0%, #1e293b 100%); border-radius:20px; padding:40px; color:var(--white);">
@@ -2127,9 +2133,9 @@
       </div>
 
       <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="index.html" style="background:var(--blue); color:var(--white); font-size:14px; font-weight:700; padding:12px 20px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;"><i class="fa-solid fa-arrow-right"></i> Ver la landing de Escapify</a>
+        <a href="https://escapify.io/" class="cta-escapify-landing-hidden" style="background:var(--blue); color:var(--white); font-size:14px; font-weight:700; padding:12px 20px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;"><i class="fa-solid fa-arrow-right"></i> Ver la landing de Escapify</a>
         <a href="https://escapify.io/" style="background:transparent; color:var(--white); font-size:14px; font-weight:600; padding:12px 20px; border-radius:10px; text-decoration:none; border:1.5px solid rgba(255,255,255,.3); display:inline-flex; align-items:center; gap:8px;"><i class="fa-solid fa-compass"></i> Explorar la plataforma</a>
-        <a href="https://archivotiempo.github.io/index-iebs.html" style="background:rgba(255,255,255,.1); color:var(--white); font-size:14px; font-weight:600; padding:12px 20px; border-radius:10px; text-decoration:none; border:1.5px solid rgba(255,255,255,.25); display:inline-flex; align-items:center; gap:8px;"><i class="fa-solid fa-graduation-cap"></i> Propuesta IEBS</a>
+        <a href="index-iebs.html" style="background:rgba(255,255,255,.1); color:var(--white); font-size:14px; font-weight:600; padding:12px 20px; border-radius:10px; text-decoration:none; border:1.5px solid rgba(255,255,255,.25); display:inline-flex; align-items:center; gap:8px;"><i class="fa-solid fa-graduation-cap"></i> Propuesta IEBS</a>
       </div>
     </div>
   </div>
@@ -2144,7 +2150,7 @@
       &laquo;Cuando dise&ntilde;as para los m&aacute;rgenes, innovas para el centro.&raquo; La Maleta del Tiempo demostr&oacute; que es posible. Escapify lo hace replicable.
     </p>
     <div class="cta-actions">
-      <a href="index.html" class="btn-white"><i class="fa-solid fa-rocket"></i> Conocer Escapify.io</a>
+      <a href="https://escapify.io/" class="btn-white"><i class="fa-solid fa-rocket"></i> Conocer Escapify.io</a>
       <a href="https://escapify.io/" class="btn-outline-white"><i class="fa-solid fa-compass"></i> Explorar la plataforma</a>
     </div>
   </div>
@@ -2158,7 +2164,7 @@
       <strong>La Maleta del Tiempo</strong> &mdash; TFM de Raquel Cuesta Barber&aacute; &middot; URJC 2025 &middot; Dir. Dr. Oriol Borr&aacute;s Gen&eacute;
     </p>
     <p style="margin-top:8px;">
-      <a href="index.html">Escapify.io</a>
+      <a href="https://escapify.io/">Escapify.io</a>
     </p>
   </div>
 </footer>
@@ -2169,7 +2175,6 @@
     <ul>
       <li><a href="#eras">Eras</a></li>
       <li><a href="#diseno">Dise&ntilde;o</a></li>
-      <li><a href="#galeria">Galer&iacute;a</a></li>
       <li><a href="#adaptaciones">Adaptaciones</a></li>
       <li><a href="#resultados">Resultados</a></li>
       <li><a href="#marcos">Marco te&oacute;rico</a></li>
