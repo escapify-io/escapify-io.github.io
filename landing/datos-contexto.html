@@ -213,6 +213,234 @@
     .cd-list-check li::before{
       content:"✓";position:absolute;left:0;font-weight:900;font-size:12px;color:var(--green);
     }
+    /* PMV — Producto mínimo viable */
+    .mvp-wrap{margin-top:4px}
+    .mvp-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
+      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+    }
+    .mvp-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+    .mvp-title-row .mvp-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:36px;height:36px;border-radius:10px;background:var(--blue);color:#fff;
+      font-size:16px;font-weight:900;box-shadow:0 4px 12px rgba(37,99,235,.25);
+    }
+    .mvp-title-row h3{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:900;color:var(--ink);margin:0}
+    .mvp-goal{
+      margin-bottom:16px;padding:14px 16px;border-radius:14px;
+      background:linear-gradient(135deg,#fef2f2 0%,#fff 100%);
+      border:1px solid #fecaca;font-size:14px;line-height:1.55;color:#991b1b;
+    }
+    .mvp-goal strong{color:#7f1d1d}
+    .mvp-goal .mvp-x{font-weight:900}
+    .mvp-option{
+      border:1px solid var(--border);border-radius:14px;padding:14px 14px 12px;margin-bottom:12px;
+      background:#fff;position:relative;box-shadow:0 4px 14px rgba(15,23,42,.05);
+    }
+    .mvp-option::before{
+      content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;
+      background:var(--mvp-accent, var(--blue));
+    }
+    .mvp-option--1{--mvp-accent:#16a34a}
+    .mvp-option--2{--mvp-accent:#2563eb}
+    .mvp-option--3{--mvp-accent:#7c3aed}
+    .mvp-option--4{--mvp-accent:#64748b}
+    .mvp-option--5{--mvp-accent:#d97706}
+    .mvp-option--rec{
+      border-color:rgba(22,163,74,.35);
+      background:linear-gradient(145deg,#f0fdf4 0%,#ffffff 100%);
+    }
+    .mvp-option .mvp-opt-tag{
+      display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
+      border-radius:6px;padding:3px 8px;margin-bottom:6px;
+    }
+    .mvp-option h4{font-size:15px;font-weight:900;color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .mvp-option ul{padding-left:18px;margin:8px 0}
+    .mvp-option li{font-size:14px;margin-bottom:6px;line-height:1.45}
+    .mvp-sub{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 0 4px}
+    .mvp-price{font-size:14px;color:var(--body);padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--border);margin-top:6px}
+    .mvp-valida{font-size:13px;margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--blue-light);color:var(--blue-dark);font-weight:600}
+    .mvp-val-section{
+      margin-top:22px;padding-top:20px;border-top:1px dashed var(--border);
+    }
+    .mvp-val-section .mvp-title-row{margin-bottom:12px}
+    .mvp-val-section .mvp-num{background:var(--green);box-shadow:0 4px 12px rgba(22,163,74,.28)}
+    .mvp-metrics-list,.mvp-signals-list{list-style:none;padding-left:0!important;margin:0}
+    .mvp-metrics-list li,.mvp-signals-list li{
+      font-size:14px;line-height:1.5;color:var(--body);padding:10px 12px;margin-bottom:8px;border-radius:10px;
+      border:1px solid var(--border);background:var(--surface);position:relative;padding-left:14px;
+    }
+    .mvp-metrics-list li strong{color:var(--ink)}
+    .mvp-metrics-list li.mvp-metric--primary{
+      border-color:rgba(22,163,74,.45);
+      background:linear-gradient(145deg,#f0fdf4 0%,#fff 100%);
+      font-weight:600;
+    }
+    .mvp-signals-list li{
+      font-style:italic;color:var(--ink);border-left:4px solid var(--amber);background:#fff;
+    }
+    .mvp-val-h4{
+      font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+      margin:16px 0 10px;display:flex;align-items:center;gap:8px;
+    }
+    .mvp-val-h4:first-of-type{margin-top:4px}
+    .mvp-val-h4 i{color:var(--green)}
+    .mvp-val-h4--signals i{color:var(--amber)}
+    /* Customer Journey */
+    .cj-wrap{margin-top:6px}
+    .cj-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
+      margin-bottom:6px;display:flex;align-items:center;gap:8px;
+    }
+    .cj-persona{
+      padding:14px 16px;border-radius:14px;margin-bottom:20px;
+      border:1px solid var(--border);
+      background:linear-gradient(145deg,#ffffff 0%,var(--surface) 100%);
+      box-shadow:0 4px 14px rgba(15,23,42,.06);
+      display:flex;gap:14px;align-items:flex-start;
+    }
+    .cj-persona__ico{
+      flex-shrink:0;width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(145deg,var(--blue),#1d4ed8);color:#fff;
+      display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+      box-shadow:0 6px 16px rgba(37,99,235,.25);
+    }
+    .cj-persona h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 6px}
+    .cj-persona p{font-size:14px;line-height:1.55;color:var(--body);margin:0}
+    .cj-phase{
+      border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px;
+      background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.05);position:relative;
+    }
+    .cj-phase::before{
+      content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;
+      background:var(--cj-accent, var(--blue));
+    }
+    .cj-phase--1{--cj-accent:#2563eb}
+    .cj-phase--2{--cj-accent:#6366f1}
+    .cj-phase--3{--cj-accent:#16a34a}
+    .cj-phase--4{--cj-accent:#d97706}
+    .cj-phase--5{--cj-accent:#7c3aed}
+    .cj-phase--6{--cj-accent:#e11d48}
+    .cj-phase h3{
+      font-size:15px;font-weight:900;color:var(--ink);margin:0 0 10px;
+      display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;line-height:1.35;
+    }
+    .cj-phase .cj-badge{
+      flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
+      border-radius:6px;padding:3px 8px;
+    }
+    .cj-phase h4{
+      font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+      font-weight:800;margin:12px 0 6px;display:flex;align-items:center;gap:6px;
+    }
+    .cj-phase h4 i{color:var(--cj-accent, var(--blue));opacity:.9;width:14px;text-align:center}
+    .cj-phase ul{padding-left:18px;margin:0 0 4px}
+    .cj-phase li{font-size:14px;line-height:1.5;color:var(--body);margin-bottom:6px}
+    .cj-phase p.cj-obj{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 4px}
+    .cj-action{
+      margin-top:12px;padding:10px 12px;border-radius:10px;
+      background:var(--blue-light);border:1px dashed var(--blue-mid);
+      font-size:14px;font-weight:700;color:var(--blue-dark);
+    }
+    .cj-action i{margin-right:6px;color:var(--blue)}
+    /* Plan de marketing */
+    .pm-wrap{margin-top:8px;max-width:920px}
+    .pm-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
+      margin-bottom:14px;display:flex;align-items:center;gap:8px;
+    }
+    .pm-section{
+      margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border);
+    }
+    .pm-section:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .pm-section h3{
+      font-size:clamp(1.05rem,2vw,1.25rem);font-weight:900;color:var(--ink);margin:0 0 12px;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.3;
+    }
+    .pm-section .pm-num{
+      display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;
+      border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:900;
+    }
+    .pm-section p,.pm-section li{font-size:14px;line-height:1.6;color:var(--body)}
+    .pm-section p{margin:0 0 10px}
+    .pm-section ul{padding-left:20px;margin:8px 0 0}
+    .pm-section li{margin-bottom:6px}
+    .pm-quote{
+      margin:12px 0 0;padding:12px 14px;border-radius:12px;border-left:4px solid var(--blue);
+      background:var(--blue-light);font-size:14px;font-style:italic;color:var(--blue-dark);line-height:1.55;
+    }
+    .pm-dafo{
+      display:grid;gap:12px;margin-top:12px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:720px){.pm-dafo{grid-template-columns:1fr 1fr}}
+    .pm-dafo-card{
+      border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:#fff;
+      box-shadow:0 2px 10px rgba(15,23,42,.04);
+    }
+    .pm-dafo-card h4{
+      font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .pm-dafo--deb h4{color:#b45309}
+    .pm-dafo--ame h4{color:#dc2626}
+    .pm-dafo--for h4{color:#15803d}
+    .pm-dafo--opo h4{color:#2563eb}
+    .pm-dafo-card ul{padding-left:18px;margin:0}
+    .pm-came{
+      display:grid;gap:12px;margin-top:12px;
+    }
+    @media(min-width:900px){.pm-came{grid-template-columns:1fr 1fr}}
+    .pm-came-card{
+      border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface);
+    }
+    .pm-came-card h4{font-size:13px;font-weight:900;color:var(--ink);margin:0 0 8px}
+    .pm-came-card ul{padding-left:18px;margin:0}
+    .pm-subh{
+      font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+      margin:14px 0 6px;
+    }
+    .pm-flow{
+      margin-top:10px;padding:12px 14px;border-radius:10px;background:var(--surface);
+      border:1px dashed var(--border);font-size:14px;font-weight:700;color:var(--ink);text-align:center;
+    }
+    .pm-tactic{
+      margin-top:12px;padding:12px;border-radius:12px;border:1px solid var(--border);background:#fff;
+    }
+    .pm-tactic h4{margin:0 0 8px;font-size:14px;font-weight:900;color:var(--ink)}
+    .pm-mix-grid{display:grid;gap:12px;margin-top:10px}
+    @media(min-width:720px){.pm-mix-grid{grid-template-columns:1fr 1fr}}
+    .pm-mix-item{
+      padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);
+    }
+    .pm-mix-item strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}
+    .pm-kpi-grid{display:grid;gap:10px;margin-top:10px}
+    @media(min-width:640px){.pm-kpi-grid{grid-template-columns:1fr 1fr}}
+    .pm-kpi-card{
+      padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--border);
+    }
+    .pm-kpi-card h4{margin:0 0 6px;font-size:12px;font-weight:900;color:var(--blue-dark)}
+    .pm-kpi-card ul{margin:0;padding-left:18px}
+    .pm-laws{
+      counter-reset:law;margin:12px 0 0;padding:0;list-style:none;
+    }
+    .pm-laws li{
+      counter-increment:law;position:relative;padding:10px 12px 10px 44px;margin-bottom:10px;
+      border-radius:12px;border:1px solid var(--border);background:#fff;font-size:14px;line-height:1.55;
+    }
+    .pm-laws li::before{
+      content:counter(law);position:absolute;left:12px;top:50%;transform:translateY(-50%);
+      width:24px;height:24px;border-radius:8px;background:var(--blue);color:#fff;
+      font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;
+    }
+    .pm-breve{
+      margin-top:16px;padding:14px 16px;border-radius:14px;
+      background:linear-gradient(145deg,#f0f9ff 0%,#fff 100%);
+      border:1px solid #bae6fd;font-size:14px;line-height:1.6;color:var(--body);
+    }
+    .pm-breve strong{color:var(--ink)}
   </style>
 </head>
 <body>
@@ -230,11 +458,13 @@
           <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
           <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
           <a href="./datos-contexto.html?bloque=target">Doble target</a>
-          <a href="./datos-contexto.html?bloque=mvp">Plan de validación y MVP</a>
+          <a href="./datos-contexto.html?bloque=mvp">PMV · Plan de validación</a>
           <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
           <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
           <a href="./datos-contexto.html?bloque=customer-dev">Customer Development (4 fases)</a>
+          <a href="./datos-contexto.html?bloque=customer-journey">Customer Journey</a>
+          <a href="./datos-contexto.html?bloque=plan-marketing">Plan de marketing</a>
           <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
         </div>
       </div>
@@ -271,11 +501,13 @@
           <option value="contexto">Datos contexto educativo</option>
           <option value="competencia">Análisis competitivo</option>
           <option value="target">Doble target</option>
-          <option value="mvp">Plan de validación y MVP</option>
+          <option value="mvp">PMV · Plan de validación</option>
           <option value="estado">Punto en el que estamos (4C)</option>
           <option value="funnel">Embudo y escalabilidad</option>
           <option value="acciones">Acciones de validación</option>
           <option value="customer-dev">Customer Development (4 fases)</option>
+          <option value="customer-journey">Customer Journey</option>
+          <option value="plan-marketing">Plan de marketing</option>
           <option value="riesgos">Hipótesis y riesgos</option>
         </select>
       </div>
@@ -330,22 +562,104 @@
       </article>
 
       <article class="block" data-block="mvp">
-        <h2>Plan de validación y MVP</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Nicho MVP inicial</h3>
+        <h2>PMV · Plan de validación</h2>
+
+        <div class="mvp-wrap">
+          <p class="mvp-kicker"><i class="fa-solid fa-flask" aria-hidden="true"></i> Producto mínimo viable</p>
+          <div class="mvp-title-row">
+            <span class="mvp-num" aria-hidden="true">2</span>
+            <h3>Producto mínimo viable (PMV)</h3>
+          </div>
+
+          <div class="mvp-goal" role="note">
+            <strong>Objetivo del PMV</strong><br/>
+            <span class="mvp-x">NO</span> es «hacer la plataforma» <i class="fa-solid fa-xmark" style="color:#dc2626" aria-hidden="true"></i><br/>
+            Es: <strong>validar si alguien paga y usa Escapify</strong> — interés, uso real y disposición a pagar antes de escalar producto.
+          </div>
+
+          <div class="mvp-option mvp-option--1 mvp-option--rec">
+            <span class="mvp-opt-tag">Opción 1 · Recomendada</span>
+            <h4><i class="fa-solid fa-suitcase" aria-hidden="true"></i> «Kit Escape Room listo para usar»</h4>
+            <p style="font-size:14px;color:var(--body);margin:0 0 8px">Incluye:</p>
             <ul>
-              <li>Infantil, Primaria y primeros cursos de Secundaria.</li>
-              <li>Docentes innovadores y perfiles con urgencia de tiempo.</li>
+              <li>1 escape room completo (ej. una era del Archivo del Tiempo).</li>
+              <li>5–10 pruebas imprimibles.</li>
+              <li>Guía docente paso a paso.</li>
+              <li>Adaptaciones básicas y narrativa incluida.</li>
+            </ul>
+            <div class="mvp-sub">Formato</div>
+            <p style="font-size:14px;margin:0">PDF descargable + editable.</p>
+            <div class="mvp-sub">Precio test</div>
+            <div class="mvp-price">Versión validación → <strong>9 €–19 €</strong> · Versión más completa → <strong>29 €</strong></div>
+            <div class="mvp-valida"><strong>Qué validas:</strong> si lo compran · si lo usan · si quieren más.</div>
+          </div>
+
+          <div class="mvp-option mvp-option--2">
+            <span class="mvp-opt-tag">Opción 2 · Formación</span>
+            <h4><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Taller práctico (muy potente en tu caso)</h4>
+            <ul>
+              <li><strong>2–3 h</strong> · «Crea tu escape room en clase».</li>
+              <li>Incluye materiales.</li>
+            </ul>
+            <div class="mvp-sub">Precio</div>
+            <div class="mvp-price"><strong>30 €–60 €</strong></div>
+            <div class="mvp-valida"><strong>Qué validas:</strong> interés real · disposición a pagar · dudas reales del docente.</div>
+          </div>
+
+          <div class="mvp-option mvp-option--3">
+            <span class="mvp-opt-tag">Opción 3 · Concierge</span>
+            <h4><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> PMV «hecho para ti» (nivel PRO)</h4>
+            <p style="font-size:14px;color:var(--body);margin:0 0 6px">Tú haces el escape room para el docente: <strong>personalizado</strong> y <strong>adaptado a su clase</strong>.</p>
+            <div class="mvp-sub">Precio</div>
+            <div class="mvp-price"><strong>50 €–150 €</strong></div>
+            <div class="mvp-valida"><strong>Qué validas:</strong> qué necesita de verdad · qué problemas aparecen · cómo usarán el producto.</div>
+          </div>
+
+          <div class="mvp-option mvp-option--4">
+            <span class="mvp-opt-tag">Opción 4 · Fake door</span>
+            <h4><i class="fa-solid fa-door-open" aria-hidden="true"></i> Antes de tener el producto completo</h4>
+            <ul>
+              <li>Landing: «Crea tu escape room en minutos».</li>
+              <li>Botón: «Empieza ahora».</li>
+            </ul>
+            <div class="mvp-valida"><strong>Mides:</strong> cuántos hacen clic · cuántos dejan email.</div>
+          </div>
+
+          <div class="mvp-option mvp-option--5">
+            <span class="mvp-opt-tag">Opción 5 · Contenido (growth)</span>
+            <h4><i class="fa-solid fa-hashtag" aria-hidden="true"></i> Pruebas en redes</h4>
+            <ul>
+              <li>Publicar pruebas / ideas en redes.</li>
+              <li>Ver cuáles funcionan.</li>
+              <li>Ofrecer pack completo a quienes muerden.</li>
             </ul>
           </div>
-          <div class="card">
-            <h3>Qué valida el MVP</h3>
-            <ul>
-              <li>Candados + plantillas + onboarding rápido.</li>
-              <li>Primera aplicación real en aula/equipo.</li>
-              <li>Uso recurrente y disposición a pago.</li>
+
+          <div class="mvp-val-section">
+            <p class="mvp-kicker" style="color:var(--green)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Validación</p>
+            <div class="mvp-title-row">
+              <span class="mvp-num" aria-hidden="true">3</span>
+              <h3>Validación <span style="color:var(--muted);font-weight:800;font-size:.85em">(clave)</span></h3>
+            </div>
+
+            <h4 class="mvp-val-h4"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Métricas que debes mirar</h4>
+            <ul class="mvp-metrics-list">
+              <li class="mvp-metric--primary">¿<strong>Compran</strong>? <span style="color:var(--muted);font-weight:600">(lo más importante)</span></li>
+              <li>¿<strong>Lo usan</strong> en clase?</li>
+              <li>¿<strong>Repiten</strong>?</li>
+              <li>¿<strong>Lo recomiendan</strong>?</li>
             </ul>
+
+            <h4 class="mvp-val-h4 mvp-val-h4--signals"><i class="fa-solid fa-comments" aria-hidden="true"></i> Señales de éxito</h4>
+            <ul class="mvp-signals-list">
+              <li>«¿Tienes más?»</li>
+              <li>«Esto me ha funcionado genial»</li>
+              <li>«¿Lo puedo adaptar a…?»</li>
+            </ul>
+          </div>
+
+          <div class="note" style="margin-top:14px">
+            Conecta con <a href="./datos-contexto.html?bloque=customer-dev" style="color:var(--blue-dark);font-weight:700">Customer Development</a> (Fase 2 · validación) y con el <a href="./propuesta-valor.html" style="color:var(--blue-dark);font-weight:700">Value Proposition Canvas</a> para alinear precio, oferta y mensajes.
           </div>
         </div>
       </article>
@@ -549,6 +863,522 @@
         </div>
       </article>
 
+      <article class="block" data-block="customer-journey">
+        <h2>Customer Journey</h2>
+        <div class="cj-wrap">
+          <p class="cj-kicker"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Customer Journey</p>
+
+          <div class="cj-persona">
+            <div class="cj-persona__ico" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
+            <div>
+              <h3>Persona base</h3>
+              <p>Docente innovador/a (early adopter), con interés en gamificación, poco tiempo y necesidad de recursos prácticos.</p>
+            </div>
+          </div>
+
+          <section class="cj-phase cj-phase--1" aria-labelledby="cj-f1">
+            <h3 id="cj-f1"><span class="cj-badge">Fase 1</span> <i class="fa-solid fa-compass" aria-hidden="true"></i> Descubrimiento (awareness)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Que el docente descubra Escapify y piense: «esto es justo lo que necesito».</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Instagram / TikTok (Reels)</li>
+              <li>LinkedIn (posts educativos)</li>
+              <li>Talleres / formaciones</li>
+              <li>Recomendación de otros docentes</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos del usuario</h4>
+            <ul>
+              <li>«Esto mola…»</li>
+              <li>«Yo quiero hacer algo así»</li>
+              <li>«Pero no sé cómo hacerlo»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>Cree que será complicado</li>
+              <li>Piensa que requiere mucho tiempo</li>
+              <li>No sabe por dónde empezar</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Mostrar ejemplos reales en aula</li>
+              <li>Enseñar resultados (antes/después)</li>
+              <li>Contenido muy visual (material físico + alumnado)</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: seguir la cuenta / visitar la web</div>
+          </section>
+
+          <section class="cj-phase cj-phase--2" aria-labelledby="cj-f2">
+            <h3 id="cj-f2"><span class="cj-badge">Fase 2</span> <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Interés (consideration)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Que entienda que Escapify es útil y accesible.</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Web Escapify</li>
+              <li>Lead magnet (escape room gratis)</li>
+              <li>Emails</li>
+              <li>Vídeos explicativos</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
+            <ul>
+              <li>«Esto parece útil»</li>
+              <li>«¿Podré hacerlo yo?»</li>
+              <li>«¿Funcionará en mi clase?»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>Duda sobre dificultad</li>
+              <li>Miedo a que no funcione</li>
+              <li>Falta de tiempo</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Explicar «paso a paso»</li>
+              <li>Mostrar facilidad de uso</li>
+              <li>Testimonios reales</li>
+              <li>Casos de aula</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: descargar recurso gratuito / dejar email</div>
+          </section>
+
+          <section class="cj-phase cj-phase--3" aria-labelledby="cj-f3">
+            <h3 id="cj-f3"><span class="cj-badge">Fase 3</span> <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Decisión (conversion)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Que compre su primer producto.</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Página de producto</li>
+              <li>Email marketing</li>
+              <li>Ofertas / packs</li>
+              <li>Formación</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
+            <ul>
+              <li>«Esto me puede ahorrar mucho tiempo»</li>
+              <li>«Si funciona, merece la pena»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>Precio</li>
+              <li>«¿Y si no lo uso?»</li>
+              <li>«¿Y si no me sale bien?»</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Garantía / confianza</li>
+              <li>Mostrar uso real en aula</li>
+              <li>Explicar ahorro de tiempo</li>
+              <li>Bonus (plantillas, extras)</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: compra (primer producto o formación)</div>
+          </section>
+
+          <section class="cj-phase cj-phase--4" aria-labelledby="cj-f4">
+            <h3 id="cj-f4"><span class="cj-badge">Fase 4</span> <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Experiencia (uso)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Que lo use en el aula y tenga éxito.</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Material descargado</li>
+              <li>Guía docente</li>
+              <li>Vídeos de apoyo</li>
+              <li>Soporte</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
+            <ul>
+              <li>«A ver si esto funciona…»</li>
+              <li>«Vale, esto está claro»</li>
+              <li>«¡Esto ha salido genial!»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>Falta de tiempo para prepararlo</li>
+              <li>Dudas durante la implementación</li>
+              <li>Adaptación al grupo</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Guía ultra clara</li>
+              <li>Checklists</li>
+              <li>Adaptaciones incluidas</li>
+              <li>Tutoriales rápidos</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: implementarlo en clase</div>
+          </section>
+
+          <section class="cj-phase cj-phase--5" aria-labelledby="cj-f5">
+            <h3 id="cj-f5"><span class="cj-badge">Fase 5</span> <i class="fa-solid fa-heart" aria-hidden="true"></i> Satisfacción (retención)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Que repita y siga usando Escapify.</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Emails</li>
+              <li>Nuevos recursos</li>
+              <li>Comunidad</li>
+              <li>Actualizaciones</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
+            <ul>
+              <li>«Quiero más de esto»</li>
+              <li>«Esto me ha funcionado muy bien»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>Falta de continuidad</li>
+              <li>No saber qué hacer después</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Nuevos packs</li>
+              <li>Itinerarios (por eras, materias…)</li>
+              <li>Suscripción</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: nueva compra / suscripción</div>
+          </section>
+
+          <section class="cj-phase cj-phase--6" aria-labelledby="cj-f6">
+            <h3 id="cj-f6"><span class="cj-badge">Fase 6</span> <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Recomendación (advocacy)</h3>
+            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+            <p class="cj-obj">Convertirlo en embajador.</p>
+            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
+            <ul>
+              <li>Redes sociales</li>
+              <li>Comunidad docente</li>
+              <li>Centro educativo</li>
+            </ul>
+            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
+            <ul>
+              <li>«Esto lo tienen que ver otros profes»</li>
+              <li>«Voy a usarlo en el cole»</li>
+            </ul>
+            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
+            <ul>
+              <li>No tener espacio para compartir</li>
+              <li>No sentirse reconocido</li>
+            </ul>
+            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
+            <ul>
+              <li>Comunidad Escapify</li>
+              <li>Compartir experiencias</li>
+              <li>Mostrar casos de éxito</li>
+              <li>Reconocimiento (badges, visibilidad)</li>
+            </ul>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: recomendar / compartir / escalar en centro</div>
+          </section>
+
+          <div class="note" style="margin-top:6px">Conecta con el <a href="./datos-contexto.html?bloque=funnel" style="color:var(--blue-dark);font-weight:700">embudo</a>, <a href="./datos-contexto.html?bloque=acciones" style="color:var(--blue-dark);font-weight:700">acciones de validación</a> y <a href="./early-adopter.html" style="color:var(--blue-dark);font-weight:700">Early Adopter</a>.</div>
+        </div>
+      </article>
+
+      <article class="block" data-block="plan-marketing">
+        <h2>Plan de marketing</h2>
+        <div class="pm-wrap">
+          <p class="pm-kicker"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Estrategia y ejecución</p>
+
+          <section class="pm-section" aria-labelledby="pm-s1">
+            <h3 id="pm-s1"><span class="pm-num">1</span> Introducción</h3>
+            <p><strong>Escapify.io</strong> es un proyecto edtech orientado al diseño y uso de escape rooms educativos, recursos gamificados, materiales imprimibles y herramientas de apoyo para docentes. Su propuesta combina innovación educativa, inclusión, STEAM, diseño maker y aplicabilidad real en el aula. El marketing en este proyecto no se entiende solo como promoción, sino como una filosofía de trabajo centrada en detectar necesidades reales del profesorado, transformar esas necesidades en soluciones útiles y construir una relación de confianza sostenida con la comunidad educativa.</p>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s2">
+            <h3 id="pm-s2"><span class="pm-num">2</span> Análisis de situación</h3>
+            <p>Escapify nace en un contexto en el que el profesorado busca metodologías activas, recursos motivadores y propuestas innovadoras que generen impacto en el alumnado. Sin embargo, existe una brecha entre el deseo de innovar y la capacidad real de diseñar experiencias gamificadas estructuradas, inclusivas y viables dentro del tiempo disponible. En este escenario, Escapify se posiciona como una solución práctica: no solo inspira, sino que facilita la implementación.</p>
+            <p>A nivel interno, el proyecto cuenta con una ventaja importante: experiencia real en aula, conocimiento profundo del sector educativo, enfoque inclusivo y capacidad de diseñar materiales físicos y digitales. A nivel externo, el mercado muestra interés creciente por la gamificación, la personalización del aprendizaje y las herramientas docentes listas para usar.</p>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s3">
+            <h3 id="pm-s3"><span class="pm-num">3</span> DAFO</h3>
+            <div class="pm-dafo">
+              <div class="pm-dafo-card pm-dafo--deb">
+                <h4><i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i> Debilidades</h4>
+                <ul>
+                  <li>Proyecto en fase inicial, todavía en construcción de marca y audiencia propia.</li>
+                  <li>Dependencia alta de la marca personal en las primeras etapas.</li>
+                  <li>Necesidad de tiempo para desarrollar una plataforma robusta.</li>
+                  <li>Escalabilidad limitada al inicio si la venta depende mucho de personalización o formación en directo.</li>
+                </ul>
+              </div>
+              <div class="pm-dafo-card pm-dafo--for">
+                <h4><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Fortalezas</h4>
+                <ul>
+                  <li>Conocimiento experto en escape rooms educativos, inclusión y gamificación real.</li>
+                  <li>Diferenciación clara al combinar recursos digitales, materiales físicos, maker e IA.</li>
+                  <li>Experiencia directa en diseño educativo e innovación.</li>
+                  <li>Posibilidad de validación en contextos reales de aula.</li>
+                  <li>Capacidad para generar productos, formación y comunidad al mismo tiempo.</li>
+                </ul>
+              </div>
+              <div class="pm-dafo-card pm-dafo--ame">
+                <h4><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Amenazas</h4>
+                <ul>
+                  <li>Saturación de contenidos educativos gratuitos en internet.</li>
+                  <li>Aparición de competidores que ofrezcan recursos similares a bajo precio.</li>
+                  <li>Resistencia de parte del profesorado a adoptar nuevas metodologías.</li>
+                  <li>Limitaciones presupuestarias en centros educativos.</li>
+                </ul>
+              </div>
+              <div class="pm-dafo-card pm-dafo--opo">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Crecimiento del interés por metodologías activas y aprendizaje competencial.</li>
+                  <li>Mayor necesidad de recursos estructurados y listos para usar.</li>
+                  <li>Expansión de la formación docente online.</li>
+                  <li>Potencial de licencias para centros y venta B2B.</li>
+                  <li>Integración de IA como valor añadido en diseño y personalización de experiencias.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s4">
+            <h3 id="pm-s4"><span class="pm-num">4</span> Alternativas estratégicas (CAME)</h3>
+            <p>A partir del DAFO, podemos traducirlo en una lógica <strong>CAME</strong>.</p>
+            <div class="pm-came">
+              <div class="pm-came-card">
+                <h4>Corregir debilidades</h4>
+                <ul>
+                  <li>Lanzar primero productos sencillos y validados antes de construir una plataforma compleja.</li>
+                  <li>Reducir dependencia de la personalización creando recursos escalables.</li>
+                  <li>Estructurar bien la identidad de marca para que el proyecto no dependa solo del nombre personal.</li>
+                </ul>
+              </div>
+              <div class="pm-came-card">
+                <h4>Afrontar amenazas</h4>
+                <ul>
+                  <li>Diferenciarse no por volumen, sino por calidad pedagógica, inclusión y aplicabilidad real.</li>
+                  <li>Evitar competir solo por precio; competir por transformación, ahorro de tiempo y diseño experto.</li>
+                  <li>Construir confianza con casos reales, testimonios y prueba social.</li>
+                </ul>
+              </div>
+              <div class="pm-came-card">
+                <h4>Mantener fortalezas</h4>
+                <ul>
+                  <li>Potenciar el enfoque híbrido entre pedagogía, gamificación, maker e inclusión.</li>
+                  <li>Usar la experiencia real de aula como prueba de autoridad.</li>
+                  <li>Mantener el diseño visual y práctico como rasgo diferenciador.</li>
+                </ul>
+              </div>
+              <div class="pm-came-card">
+                <h4>Explotar oportunidades</h4>
+                <ul>
+                  <li>Desarrollar una línea de formación para docentes y centros.</li>
+                  <li>Crear productos descargables y suscripción.</li>
+                  <li>Explorar acuerdos con colegios, redes educativas y formaciones institucionales.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s5">
+            <h3 id="pm-s5"><span class="pm-num">5</span> Ventaja competitiva</h3>
+            <p>La principal ventaja competitiva de Escapify es que no ofrece solo «recursos bonitos», sino un <strong>sistema completo</strong> para diseñar experiencias educativas memorables. Combina cuatro dimensiones que raramente aparecen juntas: pedagogía, gamificación, inclusión y diseño maker. Además, parte de una necesidad real del mercado: el profesorado quiere innovar, pero necesita estructuras claras, materiales usables y soluciones que ahorren tiempo.</p>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s6">
+            <h3 id="pm-s6"><span class="pm-num">6</span> Segmentación, público objetivo y posicionamiento</h3>
+            <p class="pm-subh">Segmentación</p>
+            <p>Escapify puede dirigirse a varios segmentos:</p>
+            <ul>
+              <li>Profesorado de Primaria y Secundaria.</li>
+              <li>Docentes de educación especial o contextos inclusivos.</li>
+              <li>Centros educativos innovadores.</li>
+              <li>Formadores y consultores educativos.</li>
+              <li>Estudiantes del máster de profesorado y opositores.</li>
+            </ul>
+            <p class="pm-subh">Público objetivo prioritario</p>
+            <p>El foco inicial debe ponerse en el <strong>docente innovador early adopter</strong>, especialmente aquel que:</p>
+            <ul>
+              <li>ya ha mostrado interés por gamificación,</li>
+              <li>busca recursos prácticos,</li>
+              <li>quiere motivar más al alumnado,</li>
+              <li>y no dispone de tiempo para diseñarlo todo desde cero.</li>
+            </ul>
+            <p class="pm-subh">Posicionamiento</p>
+            <p>Escapify se posiciona como una marca de referencia en <strong>escape rooms educativos inclusivos y listos para aplicar</strong>, que ayuda al profesorado a innovar de forma realista, estructurada y visualmente potente.</p>
+            <p>Una frase de posicionamiento podría ser:</p>
+            <p class="pm-quote">Escapify ayuda a docentes a crear experiencias gamificadas memorables, inclusivas y fáciles de implementar, sin partir de cero.</p>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s7">
+            <h3 id="pm-s7"><span class="pm-num">7</span> Objetivos de marketing</h3>
+            <p class="pm-subh">Objetivos generales</p>
+            <ul>
+              <li>Dar a conocer Escapify como marca educativa innovadora.</li>
+              <li>Validar el interés real del mercado por sus productos y servicios.</li>
+              <li>Convertir audiencia en leads y leads en clientes.</li>
+              <li>Construir una comunidad docente vinculada a la gamificación educativa.</li>
+            </ul>
+            <p class="pm-subh">Objetivos específicos</p>
+            <ul>
+              <li>Captar los primeros leads cualificados mediante contenido y recursos gratuitos.</li>
+              <li>Conseguir las primeras ventas de productos descargables o formaciones.</li>
+              <li>Generar prueba social con casos reales y testimonios.</li>
+              <li>Aumentar el reconocimiento de marca en redes y entornos docentes.</li>
+              <li>Crear una base estable para futuras licencias a centros y suscripción.</li>
+            </ul>
+            <p class="pm-subh">Objetivos SMART de ejemplo</p>
+            <ul>
+              <li>Conseguir 300 leads cualificados en 3 meses a través de un recurso gratuito descargable.</li>
+              <li>Alcanzar 20 ventas del primer producto mínimo viable en los primeros 60 días.</li>
+              <li>Lograr una tasa de conversión del 5% desde landing a descarga.</li>
+              <li>Obtener 10 testimonios reales de docentes durante la fase inicial de validación.</li>
+              <li>Alcanzar una tasa de apertura del 35% en email marketing durante el primer trimestre.</li>
+            </ul>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s8">
+            <h3 id="pm-s8"><span class="pm-num">8</span> Estrategia de marketing</h3>
+            <p>La estrategia debe combinar <strong>autoridad, utilidad y comunidad</strong>.</p>
+            <p>Primero, atraer mediante contenido inspirador y práctico. Después, captar mediante lead magnets valiosos. A continuación, nutrir esa relación con emails, ejemplos y casos reales. Finalmente, convertir mediante productos iniciales sencillos, formación o packs descargables.</p>
+            <p>La lógica estratégica sería:</p>
+            <div class="pm-flow">contenido → confianza → captación → validación → conversión → fidelización</div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s9">
+            <h3 id="pm-s9"><span class="pm-num">9</span> Tácticas de marketing</h3>
+            <div class="pm-tactic">
+              <h4>Contenidos</h4>
+              <ul>
+                <li>Publicaciones en Instagram y TikTok mostrando pruebas, materiales, escapes y aplicaciones reales.</li>
+                <li>Contenido en LinkedIn con enfoque profesional e innovador.</li>
+                <li>Carouseles, reels y ejemplos visuales de actividades.</li>
+                <li>Demostraciones antes/después: «de una idea suelta a una experiencia completa».</li>
+              </ul>
+            </div>
+            <div class="pm-tactic">
+              <h4>Captación</h4>
+              <ul>
+                <li>Lead magnet: escape room gratuito, pack de pruebas o plantilla editable.</li>
+                <li>Landing específica para docentes.</li>
+                <li>Formularios simples con propuesta clara de valor.</li>
+              </ul>
+            </div>
+            <div class="pm-tactic">
+              <h4>Nutrición</h4>
+              <ul>
+                <li>Secuencia de emails con: bienvenida, ejemplo real de aula, consejos para diseñar escapes, presentación del primer producto o formación.</li>
+              </ul>
+            </div>
+            <div class="pm-tactic">
+              <h4>Conversión</h4>
+              <ul>
+                <li>Venta del primer kit descargable.</li>
+                <li>Taller online o formación práctica.</li>
+                <li>Oferta para centros o packs más completos.</li>
+              </ul>
+            </div>
+            <div class="pm-tactic">
+              <h4>Fidelización</h4>
+              <ul>
+                <li>Nuevos lanzamientos periódicos.</li>
+                <li>Comunidad o newsletter temática.</li>
+                <li>Packs por materias, etapas o temáticas históricas.</li>
+                <li>Recompra y recomendación.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s10">
+            <h3 id="pm-s10"><span class="pm-num">10</span> Marketing mix</h3>
+            <div class="pm-mix-grid">
+              <div class="pm-mix-item"><strong>Producto</strong> Escapify ofrece recursos educativos gamificados: escape rooms, plantillas, pruebas, cifrados, materiales imprimibles, formación y, más adelante, herramientas digitales y kits físicos.</div>
+              <div class="pm-mix-item"><strong>Precio</strong> Estrategia escalonada: entrada asequible para producto inicial descargable; ticket medio para talleres y packs completos; ticket superior para licencias, formación a centros o servicios personalizados.</div>
+              <div class="pm-mix-item"><strong>Plaza</strong> Distribución digital (web propia, email, redes, formaciones online) y presencial mediante talleres o acuerdos con centros.</div>
+              <div class="pm-mix-item"><strong>Promoción</strong> Basada en contenido de valor, demostración de casos reales, autoridad profesional, comunidad y marketing relacional.</div>
+            </div>
+            <p class="pm-subh">Versión ampliada: las 7P</p>
+            <div class="pm-mix-grid">
+              <div class="pm-mix-item"><strong>Personas</strong> Docentes, equipos directivos, formadores y comunidad educativa.</div>
+              <div class="pm-mix-item"><strong>Procesos</strong> Proceso claro de descubrimiento, captación, compra, uso y fidelización.</div>
+              <div class="pm-mix-item"><strong>Evidencia física</strong> Diseño visual de marca, materiales imprimibles, mockups, testimonios, fichas, kits y ejemplos reales de aula.</div>
+            </div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s11">
+            <h3 id="pm-s11"><span class="pm-num">11</span> KPIs</h3>
+            <p>Para controlar el plan, necesitas métricas por fase.</p>
+            <div class="pm-kpi-grid">
+              <div class="pm-kpi-card">
+                <h4>Visibilidad</h4>
+                <ul>
+                  <li>Alcance en redes.</li>
+                  <li>Impresiones.</li>
+                  <li>Tráfico web.</li>
+                  <li>Crecimiento de seguidores cualificados.</li>
+                </ul>
+              </div>
+              <div class="pm-kpi-card">
+                <h4>Captación</h4>
+                <ul>
+                  <li>Número de leads.</li>
+                  <li>Tasa de conversión landing-descarga.</li>
+                  <li>Coste por lead (si haces campañas).</li>
+                </ul>
+              </div>
+              <div class="pm-kpi-card">
+                <h4>Nutrición</h4>
+                <ul>
+                  <li>Tasa de apertura de emails.</li>
+                  <li>CTR en emails.</li>
+                  <li>Descargas de recursos.</li>
+                </ul>
+              </div>
+              <div class="pm-kpi-card">
+                <h4>Conversión</h4>
+                <ul>
+                  <li>Número de ventas.</li>
+                  <li>Tasa de conversión lead-cliente.</li>
+                  <li>Ingreso por producto.</li>
+                  <li>Ticket medio.</li>
+                </ul>
+              </div>
+              <div class="pm-kpi-card">
+                <h4>Fidelización</h4>
+                <ul>
+                  <li>Recompra.</li>
+                  <li>Participación en comunidad.</li>
+                  <li>Testimonios recibidos.</li>
+                  <li>Tasa de recomendación.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s12">
+            <h3 id="pm-s12"><span class="pm-num">12</span> Control y seguimiento</h3>
+            <p>El plan de marketing no termina en el diseño; necesita revisión continua. Se recomienda control mensual de indicadores para detectar qué canales atraen mejor audiencia, qué mensajes convierten más y qué productos generan más interés. A partir de esos datos, se pueden ajustar campañas, contenidos y ofertas.</p>
+            <p>Una estructura sencilla de seguimiento sería:</p>
+            <ul>
+              <li>revisión semanal de contenidos y captación,</li>
+              <li>revisión mensual de conversión y ventas,</li>
+              <li>revisión trimestral de posicionamiento, audiencia y oportunidades de crecimiento.</li>
+            </ul>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s13">
+            <h3 id="pm-s13"><span class="pm-num">13</span> Cinco leyes del marketing aplicadas a Escapify</h3>
+            <p>Puedes cerrar muy bien con una reflexión tipo «leyes del marketing» adaptadas al proyecto.</p>
+            <ul class="pm-laws">
+              <li><strong>La percepción es la realidad.</strong> No basta con tener un buen producto; hay que comunicarlo de forma clara y memorable.</li>
+              <li><strong>Es mejor ser diferente que ser uno más.</strong> Escapify debe evitar parecer «otra cuenta con recursos educativos» y reforzar su posición única: escape rooms inclusivos, maker y pedagógicos.</li>
+              <li><strong>La especialización fortalece la marca.</strong> Cuanto más claro sea su territorio, más fácil será que el mercado la recuerde.</li>
+              <li><strong>La confianza precede a la compra.</strong> En educación, la autoridad, los casos reales y la utilidad importan más que la venta agresiva.</li>
+              <li><strong>El cliente compra transformación, no producto.</strong> El docente no compra un PDF: compra tiempo, seguridad, inspiración y una experiencia que funciona en el aula.</li>
+            </ul>
+          </section>
+
+          <section class="pm-section" aria-labelledby="pm-s14">
+            <h3 id="pm-s14"><span class="pm-num">14</span> Conclusión</h3>
+            <p>El Plan de Marketing de <strong>Escapify.io</strong> debe entenderse como una herramienta estratégica para convertir una idea con gran valor pedagógico en una propuesta sólida, diferenciada y sostenible. A través del análisis DAFO, la definición de objetivos, el posicionamiento, las tácticas y los KPIs, el proyecto puede avanzar de forma ordenada hacia la validación y el crecimiento. La clave estará en no comunicar solo recursos, sino el cambio real que Escapify permite en la experiencia docente y en el aprendizaje del alumnado.</p>
+            <div class="pm-breve">
+              <strong>Versión breve (cierre):</strong> Escapify.io plantea un marketing centrado en la utilidad, la innovación y la experiencia real del docente. Su estrategia se apoya en una propuesta de valor clara, un posicionamiento diferencial y un sistema de captación y conversión basado en contenido, comunidad y validación progresiva del mercado.
+            </div>
+          </section>
+
+          <div class="note" style="margin-top:14px">Relacionado: <a href="./datos-contexto.html?bloque=customer-journey" style="color:var(--blue-dark);font-weight:700">Customer Journey</a>, <a href="./datos-contexto.html?bloque=funnel" style="color:var(--blue-dark);font-weight:700">embudo</a> y <a href="./plan-ecofin.html" style="color:var(--blue-dark);font-weight:700">Plan ecofin</a>.</div>
+        </div>
+      </article>
+
       <article class="block" data-block="riesgos">
         <h2>Hipótesis y riesgos</h2>
         <div class="cards">
@@ -576,7 +1406,7 @@
   <script>
     const select = document.getElementById("bloqueSelect");
     const blocks = document.querySelectorAll(".block");
-    const validBlocks = new Set(["contexto","competencia","target","mvp","estado","funnel","acciones","customer-dev","riesgos"]);
+    const validBlocks = new Set(["contexto","competencia","target","mvp","estado","funnel","acciones","customer-dev","customer-journey","plan-marketing","riesgos"]);
 
     function setBlock(value, updateUrl = true) {
       const safe = validBlocks.has(value) ? value : "contexto";
