@@ -12,7 +12,7 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
-      --max:1080px;
+      --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
@@ -122,6 +122,123 @@
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:6px}
+    .section-title{
+      font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:900;color:var(--ink);margin-bottom:10px;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .section-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:900;
+    }
+    .vpc-status{
+      display:flex;align-items:flex-start;gap:12px;
+      background:linear-gradient(135deg,#fffbeb 0%,#ffffff 100%);
+      border:1px solid #fcd34d;border-radius:14px;padding:14px 16px;margin-bottom:18px;
+      font-size:14px;line-height:1.55;color:#92400e;
+      box-shadow:0 4px 14px rgba(245,158,11,.08);
+    }
+    .vpc-status i{margin-top:3px;color:#d97706}
+    .vpc-status strong{color:#b45309}
+    .vpc-lead{font-size:14px;color:var(--muted);margin-bottom:16px;max-width:720px;line-height:1.55}
+    .vpc-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media(max-width:960px){.vpc-grid{grid-template-columns:1fr}}
+    .vpc-panel{
+      background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 18px 18px;
+      box-shadow:0 8px 26px rgba(15,23,42,.07);
+      position:relative;overflow:hidden;
+    }
+    .vpc-panel::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px;
+    }
+    .vpc-panel--customer::before{background:linear-gradient(180deg,#f59e0b,#d97706)}
+    .vpc-panel--value::before{background:linear-gradient(180deg,#3b82f6,#1d4ed8)}
+    .vpc-panel h3{
+      font-size:17px;font-weight:900;color:var(--ink);margin-bottom:14px;padding-left:8px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .vpc-panel h3 i{color:var(--muted);font-size:1rem}
+    .vpc-block{
+      margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--border);
+    }
+    .vpc-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .vpc-block h4{
+      font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;margin-bottom:8px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .vpc-block--jobs h4{color:#b45309}
+    .vpc-block--pains h4{color:#dc2626}
+    .vpc-block--gains h4{color:#15803d}
+    .vpc-block--products h4{color:var(--blue-dark)}
+    .vpc-block--painrel h4{color:#6d28d9}
+    .vpc-block--gaincr h4{color:#047857}
+    .vpc-block ul{padding-left:18px}
+    .vpc-block li{font-size:14px;margin-bottom:7px;line-height:1.45}
+    .vpc-block li strong{color:var(--ink)}
+    .vpc-fit{
+      margin-top:18px;padding:14px 16px;border-radius:14px;
+      background:var(--blue-light);border:1px dashed var(--blue-mid);
+      font-size:13px;color:var(--blue-dark);line-height:1.5;
+    }
+    .vpc-fit strong{color:var(--ink)}
+    .vpc-main-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
+      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+    }
+    .vpc-jobs-tier{margin-top:12px}
+    .vpc-jobs-tier:first-child{margin-top:4px}
+    .vpc-jobs-tier .tier-label{
+      font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;
+    }
+    .vpc-jobs-tier ul{padding-left:18px}
+    .vpc-key{
+      margin-top:12px;padding:12px 14px;border-radius:12px;
+      background:linear-gradient(135deg,#fef2f2 0%,#ffffff 100%);
+      border:1px solid #fecaca;font-size:14px;line-height:1.5;color:#991b1b;
+    }
+    .vpc-key strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;color:#b91c1c}
+    .vpc-key--gain{
+      background:linear-gradient(135deg,#fefce8 0%,#ffffff 100%);
+      border-color:#fde68a;color:#854d0e;
+    }
+    .vpc-key--gain strong{color:#a16207}
+    .vpc-translate{
+      margin-top:10px;padding:11px 12px;border-radius:10px;border-left:4px solid #7c3aed;
+      background:#faf5ff;font-size:13px;font-weight:600;color:#5b21b6;line-height:1.45;
+    }
+    .vpc-translate strong{color:#4c1d95}
+    .vpc-encaje{
+      margin-top:18px;padding:18px 18px 16px;border-radius:16px;
+      border:1px solid var(--border);
+      background:linear-gradient(145deg,#fff7ed 0%,#ffffff 48%,#eff6ff 100%);
+      box-shadow:0 8px 26px rgba(15,23,42,.07);
+    }
+    .vpc-encaje h3{
+      font-size:17px;font-weight:900;color:var(--ink);margin-bottom:10px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .vpc-encaje ul{padding-left:18px;margin-top:8px}
+    .vpc-encaje li{font-size:14px;margin-bottom:7px;line-height:1.45}
+    .vpc-pitch{
+      margin-top:16px;padding:18px 20px;border-radius:14px;
+      background:linear-gradient(145deg,#0f172a 0%,#1e3a5f 100%);
+      color:#e2e8f0;font-size:15px;line-height:1.6;border:1px solid rgba(148,163,184,.2);
+      box-shadow:0 12px 32px rgba(15,23,42,.25);
+    }
+    .vpc-pitch .vpc-pitch-label{
+      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#93c5fd;margin-bottom:8px;
+    }
+    .vpc-pitch p{margin:0;font-weight:500}
+    .vpc-pitch::before{
+      content:"";display:block;width:40px;height:3px;border-radius:2px;
+      background:linear-gradient(90deg,#60a5fa,#a78bfa);margin-bottom:12px;
+    }
+    #frase-pitch{scroll-margin-top:88px}
+    .subhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:24px 0 12px}
     @media(max-width:980px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
   </style>
@@ -145,6 +262,7 @@
           <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
           <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
+          <a href="./datos-contexto.html?bloque=customer-dev">Customer Development (4 fases)</a>
           <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
         </div>
       </div>
@@ -154,31 +272,187 @@
         <div>
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Propuesta de valor</h1>
-          <p class="lead">Crea escape rooms inclusivos en minutos sin diseñar desde cero. Menos fricción, más impacto real en aula y empresa.</p>
+          <p class="lead"><strong>Escapify</strong> permite a los docentes <strong>diseñar escape rooms educativos</strong> de forma <strong>rápida, estructurada e inclusiva</strong>, combinando <strong>recursos listos para usar</strong>, <strong>herramientas digitales</strong> y <strong>materiales físicos</strong>, sin necesidad de experiencia previa.</p>
           <div class="hero-kpis">
-            <span class="hero-kpi"><strong>1h</strong> diseño estimado</span>
-            <span class="hero-kpi"><strong>DUA</strong> inclusión aplicada</span>
-            <span class="hero-kpi"><strong>B2B</strong> escalable</span>
+            <span class="hero-kpi"><strong>Rápido</strong> + estructurado</span>
+            <span class="hero-kpi"><strong>Listos</strong> + inclusivo</span>
+            <span class="hero-kpi"><strong>Digital</strong> + físico</span>
           </div>
           <div class="hero-actions">
             <a class="btn-primary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
             <a class="btn-secondary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Contexto</a>
+            <a class="btn-secondary" href="#frase-pitch"><i class="fa-solid fa-bullseye"></i>Frase en el lienzo VPC</a>
           </div>
         </div>
         <aside class="hero-side">
-          <h3><i class="fa-solid fa-link"></i> Promesa central</h3>
+          <h3><i class="fa-solid fa-microphone-lines"></i> Misma frase que el pitch (VPC)</h3>
           <ul>
-            <li>Menos tiempo perdido diseñando desde cero.</li>
-            <li>Experiencia lista para aplicar en aula o empresa.</li>
-            <li>Inclusión y gamificación sin fricción operativa.</li>
+            <li><strong>Sistema claro</strong>, no ideas sueltas: narrativa + pruebas ordenadas.</li>
+            <li><strong>Tres palancas:</strong> recursos listos, herramientas digitales, materiales físicos.</li>
+            <li><strong>Cero barrera de entrada:</strong> sin experiencia previa en escape rooms.</li>
           </ul>
-          <div class="mini"><i class="fa-solid fa-gem"></i> Beneficio directo: ahorro de tiempo + impacto medible.</div>
+          <div class="mini"><i class="fa-solid fa-gem"></i> Abajo repitimos esta promesa en el lienzo VPC y en la frase clave de pitch.</div>
         </aside>
       </div>
     </div>
   </section>
   </div>
+
+  <section class="section" aria-labelledby="vpc-heading">
+    <p class="vpc-main-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Value Proposition Canvas · Escapify.io</p>
+    <h2 id="vpc-heading" class="section-title">
+      <span class="section-num">3</span>
+      Lienzo de propuesta de valor <span style="font-size:14px;font-weight:700;color:var(--muted)">(VPC completo)</span>
+    </h2>
+
+    <div class="vpc-status" role="status">
+      <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+      <div>
+        <strong>Iteración continua:</strong> este lienzo recoge <strong>perfil del cliente</strong> (jobs / pains / gains) y <strong>mapa de valor</strong> (productos / pain relievers / gain creators). Refínalo con entrevistas hasta cerrar el <strong>encaje (fit)</strong> con evidencia.
+      </div>
+    </div>
+
+    <p class="vpc-lead">
+      El <strong>Value Proposition Canvas</strong> enlaza lo que el docente <strong>intenta hacer, sufrir y conseguir</strong> con lo que Escapify <strong>ofrece, alivia y potencia</strong>. Versión operativa para pitch y validación.
+    </p>
+
+    <div class="vpc-grid">
+      <div class="vpc-panel vpc-panel--customer">
+        <h3><i class="fa-solid fa-user" aria-hidden="true"></i> Perfil del cliente (docente)</h3>
+
+        <div class="vpc-block vpc-block--jobs">
+          <h4><i class="fa-solid fa-puzzle-piece"></i> Jobs (qué intenta hacer)</h4>
+
+          <div class="vpc-jobs-tier">
+            <div class="tier-label">Funcionales</div>
+            <ul>
+              <li>Diseñar actividades motivadoras para el aula.</li>
+              <li>Introducir gamificación (escape rooms, retos, dinámicas).</li>
+              <li>Trabajar competencias STEAM.</li>
+              <li>Atender a la diversidad del alumnado.</li>
+              <li>Ahorrar tiempo en la preparación de clases.</li>
+            </ul>
+          </div>
+          <div class="vpc-jobs-tier">
+            <div class="tier-label">Emocionales</div>
+            <ul>
+              <li>Sentirse innovador/a y actualizado/a.</li>
+              <li>Motivar al alumnado y ver resultados reales.</li>
+              <li>Reducir la frustración al preparar clases.</li>
+              <li>Disfrutar enseñando.</li>
+            </ul>
+          </div>
+          <div class="vpc-jobs-tier">
+            <div class="tier-label">Sociales</div>
+            <ul>
+              <li>Ser reconocido/a dentro del centro.</li>
+              <li>Compartir prácticas innovadoras.</li>
+              <li>Posicionarse como docente referente.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="vpc-block vpc-block--pains">
+          <h4><i class="fa-solid fa-face-frown"></i> Pains (dolores reales)</h4>
+          <ul>
+            <li>«No sé por dónde empezar con un escape room».</li>
+            <li>Falta de tiempo para diseñar materiales.</li>
+            <li>Recursos dispersos y poco estructurados.</li>
+            <li>Dificultad para adaptar actividades a un alumnado diverso.</li>
+            <li>Miedo a que no funcione en clase.</li>
+            <li>Sobrecarga de trabajo docente.</li>
+            <li>Herramientas actuales demasiado superficiales (Kahoot, juegos simples).</li>
+          </ul>
+          <div class="vpc-key">
+            <strong>Dolor clave</strong>
+            Quiero innovar, pero no tengo tiempo ni un sistema claro.
+          </div>
+        </div>
+
+        <div class="vpc-block vpc-block--gains">
+          <h4><i class="fa-solid fa-gift"></i> Gains (beneficios que busca)</h4>
+          <ul>
+            <li>Recursos listos para usar.</li>
+            <li>Actividades que funcionen en clase (seguridad).</li>
+            <li>Materiales atractivos y visuales.</li>
+            <li>Adaptaciones inclusivas reales.</li>
+            <li>Ahorro de tiempo.</li>
+            <li>Impacto en el alumnado (motivación + aprendizaje).</li>
+            <li>Sentir que «esto merece la pena».</li>
+          </ul>
+          <div class="vpc-key vpc-key--gain">
+            <strong>Gain clave</strong>
+            Quiero algo práctico, rápido y que funcione de verdad.
+          </div>
+        </div>
+      </div>
+
+      <div class="vpc-panel vpc-panel--value">
+        <h3><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Propuesta de valor · Escapify</h3>
+
+        <div class="vpc-block vpc-block--products">
+          <h4><i class="fa-solid fa-box-open"></i> Productos y servicios</h4>
+          <ul>
+            <li>Plataforma de creación de escape rooms educativos.</li>
+            <li>Biblioteca de pruebas, cifrados y dinámicas.</li>
+            <li>Plantillas imprimibles (estilo Archivo del Tiempo).</li>
+            <li>Generador con IA (narrativa, pruebas, adaptaciones).</li>
+            <li>Kits físicos maker (láser, materiales manipulativos).</li>
+            <li>Formación práctica para docentes.</li>
+          </ul>
+        </div>
+
+        <div class="vpc-block vpc-block--painrel">
+          <h4><i class="fa-solid fa-wrench"></i> Pain relievers (cómo solucionas sus problemas)</h4>
+          <ul>
+            <li>Sistema paso a paso para diseñar escape rooms.</li>
+            <li>Recursos listos → sin empezar de cero.</li>
+            <li>Adaptaciones inclusivas ya integradas.</li>
+            <li>Reducción del tiempo de preparación.</li>
+            <li>Estructura clara (no ideas sueltas).</li>
+            <li>Seguridad: actividades probadas en aula real.</li>
+          </ul>
+          <div class="vpc-translate"><strong>Traducción:</strong> le quitas el caos, la incertidumbre y la falta de tiempo.</div>
+        </div>
+
+        <div class="vpc-block vpc-block--gaincr">
+          <h4><i class="fa-solid fa-rocket"></i> Gain creators (cómo generas valor)</h4>
+          <ul>
+            <li>Experiencias educativas memorables.</li>
+            <li>Mayor motivación del alumnado.</li>
+            <li>Mejora del aprendizaje competencial.</li>
+            <li>Sensación de innovación real.</li>
+            <li>Materiales visuales y atractivos.</li>
+            <li>Posibilidad de personalizar fácilmente.</li>
+          </ul>
+          <div class="vpc-translate"><strong>Traducción:</strong> le das impacto, resultados y reconocimiento.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpc-encaje">
+      <h3><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i> Encaje (fit) clave</h3>
+      <p style="font-size:14px;color:var(--body);margin:0;line-height:1.55"><strong>Escapify encaja porque:</strong></p>
+      <ul>
+        <li>Ataca un <strong>problema real</strong> (no teórico).</li>
+        <li>Reduce una <strong>fricción muy fuerte</strong> (tiempo + diseño).</li>
+        <li>Aporta <strong>resultados visibles en aula</strong>.</li>
+        <li>Integra algo <strong>único</strong>: gamificación + inclusión + maker + IA.</li>
+      </ul>
+    </div>
+
+    <div class="vpc-pitch" id="frase-pitch">
+      <div class="vpc-pitch-label">Frase clave (pitch)</div>
+      <p>Escapify permite a los docentes <strong>diseñar escape rooms educativos</strong> de forma <strong>rápida, estructurada e inclusiva</strong>, combinando <strong>recursos listos para usar</strong>, <strong>herramientas digitales</strong> y <strong>materiales físicos</strong>, sin necesidad de experiencia previa.</p>
+    </div>
+
+    <div class="vpc-fit">
+      <strong>Siguiente paso de validación:</strong> contrastar pains y gains prioritarios con <a href="./datos-contexto.html?bloque=customer-dev" style="color:var(--blue-dark);font-weight:700">Customer Development</a> y medir qué pain relievers y gain creators son <strong>imprescindibles</strong> en la percepción del docente.
+    </div>
+  </section>
+
   <section class="section">
+    <p class="subhead">Síntesis por segmento</p>
     <div class="grid">
       <article class="card">
         <h3>Valor para educación</h3>

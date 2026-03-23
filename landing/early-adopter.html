@@ -12,7 +12,7 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
-      --max:1080px;
+      --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
@@ -168,6 +168,77 @@
     .interview p{font-size:13px;color:var(--body);margin-top:6px}
     .interview ul{padding-left:16px;margin-top:6px}
     .interview li{font-size:13px;color:var(--body);margin-bottom:4px}
+    /* Early adopter — bloque detallado */
+    .ea-kicker{
+      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
+      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+    }
+    .ea-page-title{
+      font-size:clamp(1.35rem,2.8vw,1.85rem);font-weight:900;color:var(--ink);letter-spacing:-.4px;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;
+    }
+    .ea-page-title .ea-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:36px;height:36px;border-radius:11px;background:var(--blue);color:#fff;font-size:15px;font-weight:900;
+    }
+    .ea-lead{font-size:14px;color:var(--muted);max-width:720px;line-height:1.55;margin-bottom:20px}
+    .ea-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;
+    }
+    @media(max-width:900px){.ea-grid{grid-template-columns:1fr}}
+    .ea-panel{
+      background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 18px 16px;
+      box-shadow:0 8px 24px rgba(15,23,42,.06);position:relative;overflow:hidden;
+    }
+    .ea-panel::before{
+      content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:4px;
+      background:var(--ea-bar, var(--blue));
+    }
+    .ea-panel--profile{--ea-bar:#d97706}
+    .ea-panel--psych{--ea-bar:#7c3aed}
+    .ea-panel--pain{--ea-bar:#dc2626}
+    .ea-panel--value{--ea-bar:#16a34a}
+    .ea-panel h3{
+      font-size:15px;font-weight:900;color:var(--ink);margin-bottom:10px;padding-left:8px;
+      display:flex;align-items:center;gap:8px;
+    }
+    .ea-panel h3 i{color:var(--muted);font-size:1rem}
+    .ea-sub{
+      font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;
+    }
+    .ea-sub:first-of-type{margin-top:4px}
+    .ea-panel ul{padding-left:18px}
+    .ea-panel li{font-size:14px;margin-bottom:7px;line-height:1.45}
+    .ea-panel li strong{color:var(--ink)}
+    .ea-callout{
+      margin-top:12px;padding:11px 13px;border-radius:12px;
+      background:linear-gradient(135deg,#fffbeb 0%,#fff 100%);
+      border:1px solid #fde68a;font-size:14px;color:#92400e;line-height:1.5;
+    }
+    .ea-callout strong{color:#b45309}
+    .ea-translate{
+      margin-top:10px;padding:10px 12px;border-radius:10px;border-left:4px solid #7c3aed;
+      background:#faf5ff;font-size:13px;font-weight:600;color:#5b21b6;line-height:1.45;
+    }
+    .ea-quote-list li{font-style:italic;color:var(--body)}
+    .ea-locate{
+      margin-top:16px;padding:18px 18px 16px;border-radius:16px;
+      border:1px solid var(--border);
+      background:linear-gradient(145deg,#eff6ff 0%,#ffffff 55%,#f8fafc 100%);
+      box-shadow:0 6px 20px rgba(37,99,235,.08);
+    }
+    .ea-locate h3{font-size:15px;font-weight:900;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .ea-locate ul{list-style:none;padding:0;display:grid;gap:8px}
+    @media(min-width:640px){.ea-locate ul{grid-template-columns:1fr 1fr}}
+    .ea-locate li{
+      font-size:14px;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--border);
+      display:flex;align-items:flex-start;gap:8px;
+    }
+    .ea-locate li i{color:var(--blue);margin-top:2px}
+    .ea-note-important{
+      margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--blue-light);
+      border:1px dashed var(--blue-mid);font-size:13px;color:var(--blue-dark);font-weight:600;
+    }
     @media(max-width:980px){
       .tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}
       .canvas-grid{
@@ -204,6 +275,7 @@
           <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
           <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
           <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
+          <a href="./datos-contexto.html?bloque=customer-dev">Customer Development (4 fases)</a>
           <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
         </div>
       </div>
@@ -211,55 +283,107 @@
     <div class="hero">
       <div class="hero-grid">
         <div>
-          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <span class="hero-badge"><i class="fa-solid fa-user-check"></i>Fase 2 · Cliente ideal inicial</span>
           <h1>Early Adopter</h1>
-          <p class="lead">Define el perfil que activa primero, compra antes y acelera validación desde aula a empresa.</p>
+          <p class="lead">No es <strong>cualquier docente</strong>: es quien enseña en <strong>Primaria o Secundaria</strong>, ya mueve <strong>gamificación</strong>, busca <strong>impacto real</strong> y está <strong>dispuesto a invertir tiempo o dinero</strong> en mejorar su práctica.</p>
           <div class="hero-kpis">
-            <span class="hero-kpi"><strong>30-40</strong> perfil inicial</span>
-            <span class="hero-kpi"><strong>10-15</strong> entrevistas objetivo</span>
-            <span class="hero-kpi"><strong>&lt;30m</strong> tiempo de onboarding</span>
+            <span class="hero-kpi"><strong>P/S</strong> Primaria · Secundaria</span>
+            <span class="hero-kpi"><strong>Activo</strong> Genially / Kahoot+</span>
+            <span class="hero-kpi"><strong>15–20</strong> entrevistas</span>
           </div>
           <div class="hero-actions">
-            <a class="btn-primary" href="./datos-contexto.html?bloque=target"><i class="fa-solid fa-bullseye"></i>Doble target</a>
+            <a class="btn-primary" href="./datos-contexto.html?bloque=customer-dev"><i class="fa-solid fa-user-group"></i>Customer Development</a>
+            <a class="btn-secondary" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de valor</a>
             <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
           </div>
         </div>
         <aside class="hero-side">
-          <h3><i class="fa-solid fa-user-check"></i> Clave</h3>
+          <h3><i class="fa-solid fa-brain"></i> Perfil psicológico</h3>
           <ul>
-            <li>No vender a “todo el mundo”: foco en dolor de tiempo.</li>
-            <li>Validar con quien ya aplica gamificación o innovación.</li>
-            <li>Medir activación y disposición a pagar.</li>
+            <li>Curioso/a e <strong>inconformista</strong> con lo tradicional.</li>
+            <li>Quiere <strong>WOW</strong> en aula; le frustra el tiempo perdido.</li>
+            <li><strong>No quiere teoría</strong> → quiere hacer cosas reales.</li>
           </ul>
-          <div class="mini"><i class="fa-solid fa-rocket"></i> Objetivo: 10–15 entrevistas cualitativas antes de escalar.</div>
+          <div class="mini"><i class="fa-solid fa-bullseye"></i> Validación: problemas concretos + disposición a pagar.</div>
         </aside>
       </div>
     </div>
   </section>
   </div>
-  <section class="section">
-    <div class="grid">
-      <article class="card">
-        <h3>Perfil educativo</h3>
+  <section class="section" aria-labelledby="ea-main-heading">
+    <p class="ea-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cliente ideal inicial</p>
+    <h2 id="ea-main-heading" class="ea-page-title">
+      <span class="ea-num">2</span> Early Adopter · perfil concreto
+    </h2>
+    <p class="ea-lead">El early adopter de Escapify <strong>no es genérico</strong>: hay que reconocerlo por comportamiento (herramientas, actitud, contexto) y por <strong>dolor + valor</strong> compartidos.</p>
+
+    <div class="ea-grid">
+      <div class="ea-panel ea-panel--profile">
+        <h3><i class="fa-solid fa-id-card" aria-hidden="true"></i> Perfil concreto (no genérico)</h3>
+        <p class="ea-sub">Es</p>
         <ul>
-          <li>Docente creativo en Infantil, Primaria o primeros cursos de Secundaria.</li>
-          <li>Interés real por gamificación, inclusión y aprendizaje activo.</li>
-          <li>Dolor principal: falta de tiempo para diseñar experiencias desde cero.</li>
+          <li>Docente de <strong>Primaria o Secundaria</strong>.</li>
+          <li>Interesado/a en <strong>innovación educativa</strong>.</li>
+          <li>Ya ha probado <strong>gamificación</strong> (aunque sea básica).</li>
+          <li>Usa herramientas como <strong>Genially, Kahoot</strong> o similares.</li>
+          <li>Tiene actitud <strong>proactiva</strong> (busca cosas nuevas).</li>
+          <li>Está dispuesto/a a <strong>invertir tiempo o dinero</strong> en mejorar su práctica.</li>
         </ul>
-      </article>
-      <article class="card">
-        <h3>Perfil corporativo</h3>
+        <div class="ea-callout"><strong>Contexto típico:</strong> centro con cierto nivel de innovación (no tradicional puro), o docente <strong>«motor»</strong> dentro del claustro.</div>
+      </div>
+
+      <div class="ea-panel ea-panel--psych">
+        <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Perfil psicológico (muy importante)</h3>
         <ul>
-          <li>Responsable de aprendizaje (L&amp;D) en empresas.</li>
-          <li>Busca formación más participativa para equipos.</li>
-          <li>Necesita dinámicas fáciles de desplegar y medibles.</li>
+          <li><strong>Curioso/a.</strong></li>
+          <li><strong>Inconformista</strong> con la educación tradicional.</li>
+          <li>Busca <strong>impacto real</strong> en el alumnado.</li>
+          <li>Le frustra <strong>no tener tiempo</strong>.</li>
+          <li>Quiere hacer cosas <strong>«WOW»</strong> en el aula.</li>
         </ul>
-      </article>
+        <div class="ea-translate"><strong>Traducción:</strong> no quiere teoría → quiere hacer cosas reales.</div>
+      </div>
+    </div>
+
+    <div class="ea-grid" style="margin-top:14px">
+      <div class="ea-panel ea-panel--pain">
+        <h3><i class="fa-solid fa-face-frown" aria-hidden="true"></i> Problemas específicos del early adopter</h3>
+        <ul class="ea-quote-list">
+          <li>«Quiero hacer un escape room pero no sé estructurarlo».</li>
+          <li>«He probado cosas, pero me lleva demasiado tiempo».</li>
+          <li>«Lo que encuentro en internet está incompleto».</li>
+          <li>«No sé cómo adaptarlo a mi alumnado».</li>
+          <li>«No sé si funcionará en clase».</li>
+        </ul>
+      </div>
+
+      <div class="ea-panel ea-panel--value">
+        <h3><i class="fa-solid fa-gift" aria-hidden="true"></i> Qué valora especialmente</h3>
+        <ul>
+          <li>Recursos <strong>listos para usar</strong>.</li>
+          <li><strong>Plantillas claras</strong>.</li>
+          <li><strong>Ejemplos reales</strong>.</li>
+          <li><strong>Guía paso a paso</strong>.</li>
+          <li><strong>Resultados rápidos</strong> en aula.</li>
+        </ul>
+        <div class="ea-note-important"><strong>Muy importante:</strong> no quiere perder tiempo experimentando sin guía.</div>
+      </div>
+    </div>
+
+    <div class="ea-locate">
+      <h3><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Dónde encontrarlo</h3>
+      <ul>
+        <li><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram (cuentas educativas)</li>
+        <li><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn (docentes innovadores)</li>
+        <li><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Formaciones que tú impartes</li>
+        <li><i class="fa-solid fa-school" aria-hidden="true"></i> Centros como CSMB o similares</li>
+        <li><i class="fa-solid fa-users" aria-hidden="true"></i> Comunidades docentes</li>
+      </ul>
     </div>
 
     <div class="canvas-wrap">
       <h2 class="canvas-title">Canvas Early Adopter &amp; Propuesta de Valor</h2>
-      <p class="canvas-sub">Versión de trabajo basada en la lógica de 7 bloques + 1 bloque de entrevistas para validar hipótesis de cliente.</p>
+      <p class="canvas-sub">Complemento operativo: 7 bloques + entrevistas para validar hipótesis. Alinea cada casilla con el perfil concreto de arriba.</p>
 
       <div class="canvas-grid">
         <article class="canvas-box c-objetivos">
@@ -268,9 +392,9 @@
             <span class="num">1</span>
           </div>
           <ul>
-            <li>Ahorrar tiempo de preparación de dinámicas.</li>
-            <li>Elevar engagement y participación del grupo.</li>
-            <li>Mejorar resultados de aprendizaje sin sobrecarga.</li>
+            <li>Hacer cosas «WOW» con gamificación real (no superficial).</li>
+            <li>Impacto en alumnado sin perderse en diseño interminable.</li>
+            <li>Recursos listos + guía; resultados visibles en aula.</li>
           </ul>
         </article>
 
@@ -280,9 +404,9 @@
             <span class="num">2</span>
           </div>
           <ul>
-            <li>Busca recursos en internet y redes educativas.</li>
-            <li>Adapta plantillas o juegos genéricos manualmente.</li>
-            <li>Coordina materiales, tiempos y evaluación por su cuenta.</li>
+            <li>Usa Genially, Kahoot y busca ideas en Instagram / comunidades.</li>
+            <li>Prueba cosas nuevas y comparte prácticas en el centro.</li>
+            <li>Participa en formaciones; invierte tiempo en mejorar.</li>
           </ul>
         </article>
 
@@ -292,9 +416,9 @@
             <span class="num">3</span>
           </div>
           <ul>
-            <li>No tiene tiempo para diseñar experiencias desde cero.</li>
-            <li>Falta de recursos listos y adaptables por nivel.</li>
-            <li>Dificultad para medir impacto y justificar continuidad.</li>
+            <li>No sabe estructurar un escape; lo que encuentra online está incompleto.</li>
+            <li>Le lleva demasiado tiempo; miedo a que no funcione en clase.</li>
+            <li>No sabe adaptar a su alumnado sin una guía clara.</li>
           </ul>
         </article>
 
@@ -341,15 +465,15 @@
           </div>
           <div class="segmento-core">
             <div class="label">Early Adopter prioritario</div>
-            <div class="name">Docente creativo + Responsable L&amp;D</div>
-            <p>Perfil innovador, digital y orientado a resultados que sufre dolor operativo por falta de tiempo.</p>
+            <div class="name">Primaria / Secundaria · innovador</div>
+            <p>Ya gamifica, usa herramientas digitales, es proactivo y está dispuesto a invertir tiempo o dinero. No es el docente tradicional puro.</p>
           </div>
         </article>
       </div>
 
       <article class="interview">
         <h4><i class="fa-solid fa-microphone-lines"></i>Bloque +1 · Entrevistas semanales</h4>
-        <p>Validar con <strong>5-10 entrevistas por semana</strong> hasta convertir hipótesis en hechos y priorizar el segmento con mayor intención de pago.</p>
+        <p>Planifica <strong>15–20 entrevistas</strong> (Customer Discovery) para contrastar este perfil con la realidad y priorizar el segmento con mayor intención de pago.</p>
         <ul>
           <li>Guion corto: objetivos, acciones actuales, problemas, soluciones usadas.</li>
           <li>No vender en la entrevista; escuchar y cuantificar intensidad del dolor.</li>
