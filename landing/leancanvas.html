@@ -270,6 +270,10 @@
       background:linear-gradient(90deg,var(--blue-soft),var(--success-bg));
       font-weight:700;
     }
+    .comp-table tr.escapify-row{
+      background:linear-gradient(90deg,var(--blue-soft),var(--success-bg));
+      font-weight:700;
+    }
     .yes{color:var(--success);font-weight:800;}
     .no{color:var(--muted);}
     .partial{color:var(--gold-text);font-weight:600;}
@@ -299,6 +303,137 @@
     .funnel-step .step-title{font-size:.72rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;}
     .funnel-step .step-desc{font-size:.68rem;color:var(--muted);margin-top:4px;line-height:1.4;}
 
+    /* Estado producto + integración + escenarios */
+    .status-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:0 36px 20px;
+    }
+    .status-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--r-md);
+      padding:14px;
+    }
+    .status-card h4{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:var(--navy);
+      margin-bottom:8px;
+    }
+    .status-card ul{padding-left:16px;}
+    .status-card li{font-size:.76rem;line-height:1.5;margin-bottom:4px;}
+    .status-live{border-left:4px solid var(--success);}
+    .status-mvp{border-left:4px solid var(--blue);}
+    .status-roadmap{border-left:4px solid var(--purple);}
+
+    .persona-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      padding:0 36px 20px;
+    }
+    .persona{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--r-lg);
+      padding:16px;
+    }
+    .persona .name{
+      font-family:'DM Serif Display',Georgia,serif;
+      font-size:1.2rem;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+    .persona .meta{
+      font-size:.72rem;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    .persona ul{padding-left:16px;}
+    .persona li{font-size:.78rem;line-height:1.55;margin-bottom:4px;}
+
+    .lockee-flow{
+      margin:0 36px 20px;
+      border:1px solid var(--line);
+      border-radius:var(--r-lg);
+      background:#fff;
+      padding:14px;
+    }
+    .lockee-steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    .lockee-step{
+      border:1px solid var(--line);
+      border-radius:var(--r-md);
+      padding:10px;
+      background:#f9fcff;
+    }
+    .lockee-step .n{
+      display:inline-flex;
+      width:20px;height:20px;
+      border-radius:50%;
+      align-items:center;justify-content:center;
+      background:var(--blue);color:#fff;
+      font-size:.64rem;font-weight:800;
+      margin-bottom:6px;
+    }
+    .lockee-step h4{font-size:.74rem;color:var(--navy);margin-bottom:4px;}
+    .lockee-step p{font-size:.7rem;color:var(--muted);line-height:1.45;}
+
+    .scenario{
+      margin:0 36px 20px;
+      border:1px solid var(--line);
+      border-radius:var(--r-lg);
+      background:#fff;
+      padding:14px;
+    }
+    .scenario-controls{
+      display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;
+    }
+    .scenario-btn{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--blue);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      padding:7px 11px;
+      border-radius:999px;
+      cursor:pointer;
+    }
+    .scenario-btn.active{
+      background:var(--blue);
+      color:#fff;
+      border-color:var(--blue);
+    }
+    .scenario-bars{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .s-bar{
+      background:#f7fbff;
+      border:1px solid var(--line);
+      border-radius:var(--r-md);
+      padding:10px;
+    }
+    .s-bar .k{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;}
+    .s-bar .v{font-family:'DM Serif Display',Georgia,serif;font-size:1.45rem;color:var(--navy);line-height:1.1;margin-top:4px;}
+    .s-bar .bar{
+      margin-top:7px;
+      height:8px;border-radius:999px;background:#eaf3fb;overflow:hidden;
+    }
+    .s-bar .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));}
+    .scenario-note{font-size:.72rem;color:var(--muted);}
+
     /* Footer */
     .footer{
       margin:0 36px 24px;
@@ -311,7 +446,7 @@
 
     /* Responsive */
     @media(max-width:1300px){
-      .hero,.grid5,.cards-3,.cards-4,.data-grid,.funnel-row{grid-template-columns:1fr 1fr;}
+      .hero,.grid5,.cards-3,.cards-4,.data-grid,.funnel-row,.status-grid,.persona-grid,.lockee-steps,.scenario-bars{grid-template-columns:1fr 1fr;}
       .problem,.solution,.metrics,.value,.advantage,.channels,.segments,.costs,.revenue{grid-column:auto;grid-row:auto;min-height:auto;}
     }
     @media(max-width:840px){
@@ -319,7 +454,7 @@
       .poster{border-radius:18px;}
       .hero,.section-head,.canvas,.cards-row,.data-grid,.funnel-row,.footer{padding-left:16px;padding-right:16px;margin-left:0;margin-right:0;}
       h1{font-size:2.4rem;}
-      .grid5,.cards-2,.cards-3,.cards-4,.data-grid,.funnel-row{grid-template-columns:1fr;}
+      .grid5,.cards-2,.cards-3,.cards-4,.data-grid,.funnel-row,.status-grid,.persona-grid,.lockee-steps,.scenario-bars{grid-template-columns:1fr;}
     }
     @page{size:A3 landscape;margin:8mm;}
     @media print{
@@ -404,8 +539,8 @@
           <h3>Problema</h3>
           <div class="sub">Respaldado con datos</div>
           <ul>
-            <li>El profesorado quiere innovar pero <strong>no sabe cómo diseñar experiencias gamificadas</strong> estructuradas. La formación docente inicial es percibida como insuficiente por el 76% del profesorado.</li>
-            <li><strong>Falta de tiempo y recursos:</strong> media de 43h/semana de trabajo docente. No queda margen para diseñar materiales.</li>
+            <li><strong>Dolor operativo:</strong> el docente quiere innovar, pero no le da la vida para diseñar un escape room sólido entre clases, evaluación y burocracia.</li>
+            <li><strong>Falta de tiempo y sobrecarga:</strong> media de 43h/semana de trabajo docente. Diseñar actividades diferenciales suele quedar fuera.</li>
             <li>Dificultad para <strong>adaptar a la diversidad</strong> (DI, TEA, TDAH, daltonismo…). Los beneficios de la personalización son mayores para alumnado en situación de desventaja.</li>
             <li>Escasez de herramientas que integren <strong>lo físico (maker) + lo digital</strong>.</li>
             <li>La gamificación existente es <strong>superficial</strong> (tipo quiz), no diseñada pedagógicamente.</li>
@@ -452,7 +587,7 @@
         <div class="bc">
           <h3>Propuesta de valor</h3>
           <div class="sub">Dual: docente + alumno</div>
-          <p><strong>Para el docente:</strong> Ahorra tiempo de preparación, reduce complejidad de diseño, obtiene materiales inclusivos listos y se diferencia profesionalmente con innovación real en el aula.</p>
+          <p><strong>Para el docente:</strong> <strong>"Crea escape rooms educativos inclusivos en minutos, sin diseñarlos desde cero"</strong>. Ahorra tiempo de preparación, reduce complejidad de diseño, obtiene materiales inclusivos listos y se diferencia profesionalmente con innovación real en el aula.</p>
           <p style="margin-top:6px;"><strong>Para el alumno:</strong> Experiencia inmersiva y motivadora, aprendizaje significativo a través del juego, participación activa en igualdad de condiciones (inclusión real), desarrollo de competencias transversales (trabajo en equipo, pensamiento crítico, creatividad).</p>
           <div class="note new"><strong>Feedback integrado:</strong> se incluye perspectiva del alumno como beneficiario final, no solo del docente como usuario directo.</div>
           <div class="tag-row">
@@ -481,13 +616,13 @@
           <h3>Canales</h3>
           <div class="sub">Captación + conversión</div>
           <ul>
-            <li>🌐 Web Escapify.io + landing archivotiempo</li>
-            <li>📱 Instagram/TikTok (Tencanta + Escapify)</li>
-            <li>💼 LinkedIn (marca personal)</li>
-            <li>📧 Email marketing a profesorado</li>
-            <li>🎓 Formaciones presenciales/online</li>
-            <li>🏫 Workshops en centros (puerta a puerta)</li>
-            <li>📢 Meta Ads (segmentación docentes)</li>
+            <li>🌐 <strong>Inbound:</strong> Web + landing (SEO de "escape room educativo", recursos gratuitos, casos reales).</li>
+            <li>📱 <strong>Contenido:</strong> Instagram/TikTok con mini demos de candados y actividades aplicadas en aula.</li>
+            <li>💼 <strong>Autoridad:</strong> LinkedIn con evidencia pedagógica, resultados y testimonios.</li>
+            <li>📧 <strong>Nurturing:</strong> email por secuencias (descarga → tutorial → demo → oferta beta).</li>
+            <li>🎓 <strong>Canal de conversión:</strong> formaciones y webinars que terminan en prueba del MVP.</li>
+            <li>🏫 <strong>B2B educativo:</strong> workshops en centros para cerrar licencias de claustro/departamento.</li>
+            <li>📢 <strong>Escala:</strong> Meta Ads y alianzas con comunidades docentes.</li>
           </ul>
         </div>
       </article>
@@ -505,7 +640,7 @@
             <li>🧠 Opositores y máster profesorado</li>
           </ul>
           <div class="note">
-            <strong>Early adopters:</strong> Profesores que ya buscan recursos en Genially/Pinterest pero les falta sistema completo. Centros con proyectos STEAM/EBI/ABP.
+            <strong>Early adopters perfilado:</strong> docente 30-40 años, creativo, activo en redes educativas, con interés real por gamificación y frustración por falta de tiempo para diseñar actividades diferenciales.
           </div>
           <div class="note new"><strong>Feedback:</strong> foco inicial en nicho estrecho para evitar dispersión → Primaria + 1º ESO innovadores.</div>
         </div>
@@ -527,14 +662,14 @@
           <h3>Fuentes de ingresos</h3>
           <div class="sub">Modelo freemium escalonado</div>
           <p>
-            💳 <strong>Freemium:</strong> recursos básicos gratis → premium por suscripción ·
+            💳 <strong>SaaS:</strong> freemium (recursos base) → premium por suscripción mensual/anual ·
             📦 Venta kits físicos (escape boxes) ·
-            🎓 Formación (cursos 6h, talleres, certificaciones) ·
+            🎓 <strong>Formación:</strong> cursos 6h, talleres y certificaciones para docentes/centros ·
             🏫 Licencias centro ·
             📘 Packs de recursos descargables ·
             🤖 Herramientas IA avanzadas
           </p>
-          <div class="note new"><strong>Validación monetización:</strong> Test de disposición a pago con beta cerrada antes de escalar.</div>
+          <div class="note new"><strong>Modelo recomendado:</strong> híbrido <strong>SaaS + formación</strong> como núcleo de crecimiento sostenible.</div>
         </div>
       </article>
 
@@ -556,6 +691,7 @@
             <th>Genially</th>
             <th>Kahoot</th>
             <th>Breakout EDU</th>
+            <th>Lockee.fr</th>
             <th>TPT / Etsy</th>
             <th>Blogs / Pinterest</th>
             <th style="background:var(--blue);">Escapify.io</th>
@@ -567,12 +703,14 @@
             <td class="partial">Plantillas genéricas</td>
             <td class="no">No (solo quiz)</td>
             <td class="yes">Sí (kits físicos US)</td>
+            <td class="partial">Solo candados</td>
             <td class="partial">Recursos sueltos</td>
             <td class="partial">Ideas dispersas</td>
             <td class="yes"><strong>Sistema completo</strong></td>
           </tr>
           <tr>
             <td><strong>Diseño inclusivo (DUA)</strong></td>
+            <td class="no">No</td>
             <td class="no">No</td>
             <td class="no">No</td>
             <td class="no">No</td>
@@ -585,6 +723,7 @@
             <td class="no">Solo digital</td>
             <td class="no">Solo digital</td>
             <td class="yes">Kits físicos (US)</td>
+            <td class="no">No</td>
             <td class="partial">Imprimibles</td>
             <td class="no">No</td>
             <td class="yes"><strong>Láser + 3D + imprimible</strong></td>
@@ -593,6 +732,7 @@
             <td><strong>Generador con IA</strong></td>
             <td class="no">No</td>
             <td class="partial">IA básica quiz</td>
+            <td class="no">No</td>
             <td class="no">No</td>
             <td class="no">No</td>
             <td class="no">No</td>
@@ -605,6 +745,7 @@
             <td class="partial">Guías</td>
             <td class="no">No</td>
             <td class="no">No</td>
+            <td class="no">No</td>
             <td class="yes"><strong>Cursos + talleres + comunidad</strong></td>
           </tr>
           <tr>
@@ -614,6 +755,7 @@
             <td class="partial">Estudios externos</td>
             <td class="no">No</td>
             <td class="no">No</td>
+            <td class="no">No</td>
             <td class="yes"><strong>TFM + aula real + datos</strong></td>
           </tr>
           <tr>
@@ -621,9 +763,20 @@
             <td>Freemium (€7,5–79/mes)</td>
             <td>Freemium (€3–9/mes)</td>
             <td>Kits desde $150 (US)</td>
+            <td>Gratis (60 candados)</td>
             <td>Pago por recurso</td>
             <td>Gratis</td>
             <td><strong>Freemium + kits + formación</strong></td>
+          </tr>
+          <tr class="escapify-row">
+            <td><strong>Integración web</strong></td>
+            <td class="partial">Embeds/manual</td>
+            <td class="no">No</td>
+            <td class="partial">Parcial</td>
+            <td class="yes">Iframe/enlace</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="yes"><strong>Flujo guiado + tracking</strong></td>
           </tr>
         </tbody>
       </table>
@@ -695,6 +848,100 @@
       <div class="note warn"><strong>Métrica de éxito MVP:</strong> ¿El docente lo aplica EN CLASE y vuelve a usar la plataforma?</div>
     </div>
   </div>
+
+  <!-- ════════ EARLY ADOPTERS PERSONAS ════════ -->
+  <div class="section-head">
+    <h2><span class="num">4B</span> Early adopters concretos</h2>
+    <p>Perfiles más específicos para orientar mensaje, canal y validación comercial</p>
+  </div>
+  <div class="persona-grid">
+    <article class="persona">
+      <div class="name">Laura · 34 · Primaria</div>
+      <div class="meta">Docente creativa · activa en Instagram educativo · usa Genially/Pinterest</div>
+      <ul>
+        <li><strong>Dolor:</strong> quiere innovar, pero no tiene tiempo para diseñar desde cero.</li>
+        <li><strong>Objetivo:</strong> preparar una actividad diferencial para la próxima semana.</li>
+        <li><strong>Disparador de compra:</strong> ver que puede aplicarlo en clase en menos de 30 minutos.</li>
+      </ul>
+    </article>
+    <article class="persona">
+      <div class="name">Carlos · 39 · Secundaria</div>
+      <div class="meta">Perfil práctico · líder de innovación en su centro · busca impacto medible</div>
+      <ul>
+        <li><strong>Dolor:</strong> coordina proyectos, pero necesita recursos replicables para el equipo docente.</li>
+        <li><strong>Objetivo:</strong> escalar experiencias motivadoras sin sobrecargar al claustro.</li>
+        <li><strong>Disparador de compra:</strong> licencia de centro + formación aplicada.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- ════════ ESTADO REAL DE LA WEB ════════ -->
+  <div class="section-head">
+    <h2><span class="num">4C</span> Qué está funcional hoy y qué viene después</h2>
+    <p>Aclaración para primeras visitas: estado actual, MVP inmediato y roadmap</p>
+  </div>
+  <div class="status-grid">
+    <article class="status-card status-live">
+      <h4>Ya funcional hoy</h4>
+      <ul>
+        <li>Landing informativa y narrativa del proyecto.</li>
+        <li>Producto demostrador: <strong>La Maleta del Tiempo</strong>.</li>
+        <li>Recursos base y enfoque metodológico validado.</li>
+      </ul>
+    </article>
+    <article class="status-card status-mvp">
+      <h4>MVP inmediato</h4>
+      <ul>
+        <li>Generador guiado de una escape room lista para aula.</li>
+        <li>Candados digitales + plantillas imprimibles.</li>
+        <li>Onboarding: primera actividad en menos de 30 min.</li>
+      </ul>
+    </article>
+    <article class="status-card status-roadmap">
+      <h4>Roadmap posterior</h4>
+      <ul>
+        <li>IA para narrativa y adaptaciones inclusivas.</li>
+        <li>Kits maker físicos (láser/3D).</li>
+        <li>Marketplace y licencias de centro.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- ════════ INTEGRACIÓN LOCKEE ════════ -->
+  <div class="section-head">
+    <h2><span class="num">4D</span> Integración de Lockee.fr en la web</h2>
+    <p>Cómo incorporarlo sin fricción mientras se desarrolla el sistema propio</p>
+  </div>
+  <section class="lockee-flow">
+    <p style="font-size:.78rem;color:var(--text);">
+      Lockee.fr puede usarse como acelerador táctico del MVP: permite resolver candados digitales rápidamente mientras Escapify concentra el valor diferencial en plantilla pedagógica, inclusión y experiencia guiada.
+    </p>
+    <div class="lockee-steps">
+      <article class="lockee-step">
+        <span class="n">1</span>
+        <h4>Diseño en Escapify</h4>
+        <p>El docente define narrativa, objetivo curricular y nivel del grupo desde un asistente guiado.</p>
+      </article>
+      <article class="lockee-step">
+        <span class="n">2</span>
+        <h4>Candados en Lockee</h4>
+        <p>Crear candados concretos (numérico, color, texto) y copiar enlace/código de acceso.</p>
+      </article>
+      <article class="lockee-step">
+        <span class="n">3</span>
+        <h4>Integración web</h4>
+        <p>Incrustar por iframe o abrir en pestaña controlada desde cada pista de Escapify.</p>
+      </article>
+      <article class="lockee-step">
+        <span class="n">4</span>
+        <h4>Seguimiento</h4>
+        <p>Medir si el docente completa setup y aplica en aula para validar activación real.</p>
+      </article>
+    </div>
+    <div class="note" style="margin-top:10px;">
+      <strong>Importante:</strong> Lockee aporta el candado puntual; Escapify aporta el sistema completo (diseño pedagógico + inclusión + experiencia de aula + soporte).
+    </div>
+  </section>
 
   <!-- ════════ EMBUDO DE CAPTACIÓN ════════ -->
   <div class="section-head">
@@ -779,6 +1026,37 @@
     </div>
   </div>
 
+  <!-- ════════ ESCENARIOS ECONÓMICOS ════════ -->
+  <div class="section-head">
+    <h2><span class="num">6B</span> Escenarios económico-financieros</h2>
+    <p>Vista rápida para decisión: pesimista, medio y optimista (editable para validación real)</p>
+  </div>
+  <section class="scenario">
+    <div class="scenario-controls">
+      <button class="scenario-btn active" data-scenario="pesimista">Pesimista</button>
+      <button class="scenario-btn" data-scenario="medio">Medio</button>
+      <button class="scenario-btn" data-scenario="optimista">Optimista</button>
+    </div>
+    <div class="scenario-bars">
+      <article class="s-bar">
+        <div class="k">Docentes activos</div>
+        <div class="v" data-kpi="activos">120</div>
+        <div class="bar"><span data-fill="activos" style="width:20%"></span></div>
+      </article>
+      <article class="s-bar">
+        <div class="k">Conversión a premium</div>
+        <div class="v" data-kpi="conversion">4%</div>
+        <div class="bar"><span data-fill="conversion" style="width:13%"></span></div>
+      </article>
+      <article class="s-bar">
+        <div class="k">MRR estimado</div>
+        <div class="v" data-kpi="mrr">€432</div>
+        <div class="bar"><span data-fill="mrr" style="width:12%"></span></div>
+      </article>
+    </div>
+    <p class="scenario-note">Hipótesis iniciales para trabajo de campo. Ajustar tras entrevistas (10-15) y beta cerrada.</p>
+  </section>
+
   <!-- ════════ HIPÓTESIS CLAVE ════════ -->
   <div class="section-head">
     <h2><span class="num">7</span> Hipótesis y riesgos</h2>
@@ -820,5 +1098,39 @@
   </footer>
 
 </main>
+<script>
+  const scenarioData = {
+    pesimista: { activos: "120", activosW: 20, conversion: "4%", conversionW: 13, mrr: "€432", mrrW: 12 },
+    medio: { activos: "300", activosW: 48, conversion: "7%", conversionW: 23, mrr: "€1.890", mrrW: 52 },
+    optimista: { activos: "650", activosW: 95, conversion: "10%", conversionW: 34, mrr: "€5.850", mrrW: 95 }
+  };
+
+  const btns = document.querySelectorAll(".scenario-btn");
+  const kpiNodes = {
+    activos: document.querySelector('[data-kpi="activos"]'),
+    conversion: document.querySelector('[data-kpi="conversion"]'),
+    mrr: document.querySelector('[data-kpi="mrr"]')
+  };
+  const fillNodes = {
+    activos: document.querySelector('[data-fill="activos"]'),
+    conversion: document.querySelector('[data-fill="conversion"]'),
+    mrr: document.querySelector('[data-fill="mrr"]')
+  };
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const key = btn.dataset.scenario;
+      const data = scenarioData[key];
+      kpiNodes.activos.textContent = data.activos;
+      kpiNodes.conversion.textContent = data.conversion;
+      kpiNodes.mrr.textContent = data.mrr;
+      fillNodes.activos.style.width = data.activosW + "%";
+      fillNodes.conversion.style.width = data.conversionW + "%";
+      fillNodes.mrr.style.width = data.mrrW + "%";
+    });
+  });
+</script>
 </body>
 </html>

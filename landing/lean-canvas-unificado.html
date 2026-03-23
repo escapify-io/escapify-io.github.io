@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Lean Canvas</title>
+  <meta name="description" content="Lean Canvas de Escapify: problema, propuesta de valor, segmentos, competencia, MVP y escenarios financieros." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
+      --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc;
+      --green:#16a34a; --green-bg:#ecfdf5; --red:#dc2626; --red-bg:#fef2f2; --amber:#d97706; --amber-bg:#fffbeb; --white:#fff;
+      --max:1100px;
+    }
+    body { font-family:"Inter",system-ui,-apple-system,sans-serif; color:var(--body); background:var(--white); line-height:1.6; }
+    .section { max-width:var(--max); margin:0 auto; padding:64px 24px; }
+    .label {
+      display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      background:var(--blue-mid); color:var(--blue-dark); padding:5px 12px; border-radius:999px; margin-bottom:14px;
+    }
+    h1 { font-size:clamp(32px,5vw,52px); font-weight:900; line-height:1.05; letter-spacing:-1.2px; color:var(--ink); }
+    h2 { font-size:clamp(24px,3.4vw,34px); font-weight:800; line-height:1.15; color:var(--ink); letter-spacing:-.5px; }
+    .lead { margin-top:12px; color:var(--muted); font-size:17px; max-width:840px; }
+    .hero-wrap { background:linear-gradient(165deg,#e8edf5 0%,#f0f4fd 45%,#fff 100%); border-bottom:1px solid var(--border); }
+    .hero-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:28px; }
+    .kpi { background:var(--ink); color:#fff; border-radius:12px; padding:16px; text-align:center; }
+    .kpi .n { font-size:30px; font-weight:900; line-height:1; color:#93c5fd; }
+    .kpi .d { margin-top:4px; font-size:11px; color:#cbd5e1; }
+
+    .canvas-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:28px; }
+    .card {
+      background:var(--white); border:1px solid var(--border); border-radius:14px; padding:18px;
+      box-shadow:0 2px 8px rgba(0,0,0,.04);
+    }
+    .card h3 { font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .card ul { list-style:none; font-size:13px; line-height:1.72; }
+    .card li i { margin-right:8px; font-size:10px; }
+    .card-blue h3 { color:var(--blue); }
+    .card-red h3 { color:var(--red); }
+    .card-green h3 { color:var(--green); }
+    .card-amber h3 { color:var(--amber); }
+    .value {
+      background:linear-gradient(135deg,var(--blue) 0%,#1e40af 100%);
+      color:var(--white); border:none; box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    .value h3 { color:#bfdbfe; }
+    .value p { font-size:14px; line-height:1.6; color:#e0e7ff; }
+    .value strong { color:#fff; }
+    .note {
+      margin-top:10px; font-size:12px; border-radius:10px; padding:10px 12px;
+      background:var(--blue-light); border:1px dashed var(--blue-mid); color:var(--blue-dark);
+    }
+    .problem { grid-column:1; grid-row:1 / span 2; }
+    .solution { grid-column:2; grid-row:1; }
+    .metrics { grid-column:2; grid-row:2; }
+    .value-box { grid-column:3; grid-row:1 / span 2; }
+    .advantage { grid-column:4; grid-row:1; }
+    .channels { grid-column:4; grid-row:2; }
+    .segments { grid-column:5; grid-row:1 / span 2; }
+    .costs { grid-column:1 / span 2; grid-row:3; }
+    .revenue { grid-column:3 / span 3; grid-row:3; }
+
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+    .persona { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:16px; }
+    .persona h4 { color:var(--ink); font-size:16px; margin-bottom:6px; }
+    .persona .meta { color:var(--muted); font-size:12px; margin-bottom:8px; }
+    .persona ul { padding-left:16px; font-size:13px; }
+
+    .table-wrap { overflow-x:auto; margin-top:16px; }
+    table { width:100%; border-collapse:separate; border-spacing:0; font-size:12px; }
+    th { background:var(--ink); color:#fff; text-align:left; padding:8px 10px; font-size:10px; letter-spacing:.04em; text-transform:uppercase; }
+    th:first-child { border-radius:10px 0 0 0; }
+    th:last-child { border-radius:0 10px 0 0; }
+    td { padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top; }
+    tr:nth-child(even) td { background:#fafcff; }
+    tr:last-child td { border-bottom:none; }
+    .esc-row td { background:linear-gradient(90deg,#e3f2fd,#e8f5e9); font-weight:700; }
+
+    .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px; }
+    .step { background:#fff; border:1px solid var(--border); border-radius:12px; padding:12px; }
+    .step .num {
+      width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+      background:var(--blue);color:#fff;font-size:11px;font-weight:800;margin-bottom:6px;
+    }
+    .step h4 { font-size:13px; color:var(--ink); margin-bottom:4px; }
+    .step p { font-size:12px; color:var(--muted); line-height:1.45; }
+
+    .status-grid, .scenarios { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .status { border-radius:12px; padding:14px; border:1px solid var(--border); background:#fff; }
+    .status h4 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; color:var(--ink); }
+    .status ul { padding-left:16px; font-size:13px; }
+
+    .scenario-toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    .sbtn {
+      border:1px solid var(--border); border-radius:999px; padding:7px 12px; font-size:11px; font-weight:800;
+      text-transform:uppercase; letter-spacing:.05em; color:var(--blue); background:#fff; cursor:pointer;
+    }
+    .sbtn.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .kpi-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+    .kpi-box { border:1px solid var(--border); border-radius:12px; background:#f8fcff; padding:12px; }
+    .kpi-box .k { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:700; }
+    .kpi-box .v { font-size:28px; line-height:1.1; color:var(--ink); font-weight:900; margin-top:4px; }
+    .bar { margin-top:8px; height:8px; border-radius:999px; background:#e6f0f8; overflow:hidden; }
+    .bar span { display:block; height:100%; background:linear-gradient(90deg,var(--blue),#00bcd4); }
+
+    footer { border-top:1px solid var(--border); margin-top:30px; padding:16px 24px 34px; color:var(--muted); font-size:12px; text-align:center; }
+
+    @media (max-width: 980px) {
+      .canvas-grid, .split, .status-grid, .scenarios, .kpi-row { grid-template-columns:1fr; }
+      .hero-kpis { grid-template-columns:repeat(2,1fr); }
+      .flow { grid-template-columns:1fr 1fr; }
+      .problem, .solution, .metrics, .value-box, .advantage, .channels, .segments, .costs, .revenue {
+        grid-column:auto; grid-row:auto;
+      }
+    }
+    @media (max-width: 640px) {
+      .hero-kpis, .flow { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-wrap">
+    <section class="section">
+      <div class="label">Escapify · Lean Canvas</div>
+      <h1>Modelo de negocio claro, visual y accionable</h1>
+      <p class="lead">
+        Versión centrada en dolor operativo docente, propuesta de valor concreta, canales de captación, validación MVP y hoja de ruta de monetización, desde Infantil hasta cualquier etapa formativa.
+      </p>
+      <div class="hero-kpis">
+        <div class="kpi"><div class="n">792k</div><div class="d">Docentes potenciales</div></div>
+        <div class="kpi"><div class="n">8.3M</div><div class="d">Alumnado no universitario</div></div>
+        <div class="kpi"><div class="n">76%</div><div class="d">Formación percibida insuficiente</div></div>
+        <div class="kpi"><div class="n">63%</div><div class="d">Tecnología como aliada</div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="label">Lean Canvas</div>
+    <h2>Bloques principales</h2>
+    <p class="lead">Con foco en problema, propuesta de valor y segmentos early adopter.</p>
+
+    <div class="canvas-grid">
+      <article class="card card-red problem">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Problema</h3>
+        <ul>
+          <li><i class="fa-solid fa-xmark"></i><strong>Dolor operativo:</strong> al docente no le da el tiempo para diseñar desde cero.</li>
+          <li><i class="fa-solid fa-xmark"></i>Sobrecarga real (43h/semana) y poca capacidad para innovar.</li>
+          <li><i class="fa-solid fa-xmark"></i>Dificultad para adaptar a diversidad (DI, TEA, TDAH, etc.).</li>
+          <li><i class="fa-solid fa-xmark"></i>Recursos dispersos, no sistema integral.</li>
+        </ul>
+        <div class="note">Alternativas actuales: Genially, Kahoot, Lockee.fr, EduEscapeRoom, Pinterest y recursos sueltos.</div>
+      </article>
+
+      <article class="card card-blue solution">
+        <h3><i class="fa-solid fa-lightbulb"></i> Solución</h3>
+        <ul>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>MVP: candados + plantillas + guía rápida de aula.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Fase 2: IA narrativa + adaptaciones.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Fase 3: kits maker físicos (láser/3D).</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Fase 4: formación, comunidad y marketplace.</li>
+        </ul>
+      </article>
+
+      <article class="card card-blue metrics">
+        <h3><i class="fa-solid fa-chart-line"></i> Métricas clave</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle"></i>Docentes registrados</li>
+          <li><i class="fa-solid fa-circle"></i>Primer escape room aplicado en aula</li>
+          <li><i class="fa-solid fa-circle"></i>Conversión free → premium</li>
+          <li><i class="fa-solid fa-circle"></i>Retención mensual</li>
+        </ul>
+      </article>
+
+      <article class="card value value-box">
+        <h3><i class="fa-solid fa-gem"></i> Propuesta de valor</h3>
+        <p><strong>"Crea escape rooms educativos inclusivos en minutos, sin diseñarlos desde cero".</strong></p>
+        <p style="margin-top:8px;">Ahorro de tiempo + inclusión real + experiencia motivadora adaptable desde Infantil hasta personas adultas, incluyendo formación en empresa.</p>
+      </article>
+
+      <article class="card card-blue advantage">
+        <h3><i class="fa-solid fa-shield-halved"></i> Ventaja especial</h3>
+        <ul>
+          <li><i class="fa-solid fa-star" style="color:var(--amber)"></i>Validación real en aula (TFM + datos).</li>
+          <li><i class="fa-solid fa-star" style="color:var(--amber)"></i>23 adaptaciones inclusivas aplicadas.</li>
+          <li><i class="fa-solid fa-star" style="color:var(--amber)"></i>Know-how pedagógico + maker + digital.</li>
+        </ul>
+      </article>
+
+      <article class="card card-blue channels">
+        <h3><i class="fa-solid fa-route"></i> Canales</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle"></i>Inbound web + SEO + lead magnets.</li>
+          <li><i class="fa-solid fa-circle"></i>Instagram/TikTok con demos cortas.</li>
+          <li><i class="fa-solid fa-circle"></i>LinkedIn con evidencia y casos.</li>
+          <li><i class="fa-solid fa-circle"></i>Email nurturing y webinars.</li>
+          <li><i class="fa-solid fa-circle"></i>Workshops en centros educativos y programas para formación en empresas.</li>
+        </ul>
+      </article>
+
+      <article class="card card-amber segments">
+        <h3><i class="fa-solid fa-users"></i> Segmentos</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle" style="color:var(--amber)"></i>Nicho MVP: Infantil, Primaria y 1º-2º ESO con perfil innovador.</li>
+          <li><i class="fa-solid fa-circle" style="color:var(--amber)"></i>Docencia de inclusión/educación especial y formación de personas adultas.</li>
+          <li><i class="fa-solid fa-circle" style="color:var(--amber)"></i>Centros con cultura STEAM/ABP y equipos de aprendizaje corporativo.</li>
+        </ul>
+        <div class="note">Early adopter tipo: perfil creativo, activo en comunidades educativas o de formación, con necesidad de diseñar experiencias de alto impacto en poco tiempo.</div>
+      </article>
+
+      <article class="card costs">
+        <h3><i class="fa-solid fa-sack-dollar"></i> Estructura de costes</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle"></i>Desarrollo web y mantenimiento.</li>
+          <li><i class="fa-solid fa-circle"></i>Creación de contenidos y soporte pedagógico.</li>
+          <li><i class="fa-solid fa-circle"></i>APIs IA, herramientas y automatización.</li>
+          <li><i class="fa-solid fa-circle"></i>Marketing, ads y formación comercial.</li>
+        </ul>
+      </article>
+
+      <article class="card card-green revenue">
+        <h3><i class="fa-solid fa-coins"></i> Ingresos</h3>
+        <ul>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>SaaS freemium → premium.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Formación y certificaciones.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Licencias para centros.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Programas de formación para empresas y equipos.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green)"></i>Kits y recursos premium.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+    <div class="label" style="background:#f3e8ff;color:#6b21a8;">Competencia</div>
+    <h2>Análisis competitivo</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criterio</th><th>Genially</th><th>Kahoot</th><th>Breakout EDU</th><th>Lockee.fr</th><th>EduEscapeRoom</th><th>Escapify</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Escape room completo</strong></td><td>Parcial</td><td>No</td><td>Sí</td><td>Solo candados</td><td>Parcial</td><td>Sistema completo</td></tr>
+          <tr><td><strong>Inclusión DUA</strong></td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>23 adaptaciones</td></tr>
+          <tr><td><strong>Maker/Físico</strong></td><td>No</td><td>No</td><td>Sí</td><td>No</td><td>No</td><td>Láser + 3D</td></tr>
+          <tr><td><strong>IA</strong></td><td>Básica</td><td>Básica</td><td>No</td><td>No</td><td>No</td><td>Narrativa + adaptaciones</td></tr>
+          <tr class="esc-row"><td><strong>Posición</strong></td><td>Plataforma genérica</td><td>Quiz</td><td>Kits físicos</td><td>Herramienta puntual</td><td>Candados puntuales</td><td>Solución integral</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="label" style="margin-top:20px;">Integración lockee.fr</div>
+    <h2 style="font-size:24px;">Cómo integrarlo en la web (MVP)</h2>
+    <div class="flow">
+      <article class="step"><span class="num">1</span><h4>Diseño guiado</h4><p>Crear narrativa y secuencia en Escapify.</p></article>
+      <article class="step"><span class="num">2</span><h4>Candados Lockee</h4><p>Generar candados y copiar enlaces/códigos.</p></article>
+      <article class="step"><span class="num">3</span><h4>Integración</h4><p>Insertar iframe o enlace controlado por pista.</p></article>
+      <article class="step"><span class="num">4</span><h4>Tracking</h4><p>Medir activación: si docente llega a uso real en aula.</p></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="label" style="background:#fce7f3;color:#9d174d;">Claridad de producto</div>
+    <h2>Qué hay hoy, qué es MVP y qué viene después</h2>
+    <div class="status-grid">
+      <article class="status">
+        <h4>Ya funcional</h4>
+        <ul><li>Landing y propuesta del proyecto.</li><li>Demo validada: La Maleta del Tiempo.</li><li>Base de investigación e inclusión.</li></ul>
+      </article>
+      <article class="status">
+        <h4>MVP inmediato</h4>
+        <ul><li>1 experiencia guiada lista para aula.</li><li>Candados + imprimibles + onboarding < 30 min.</li><li>Medición de primera aplicación real.</li></ul>
+      </article>
+      <article class="status">
+        <h4>Roadmap</h4>
+        <ul><li>Generador IA completo.</li><li>Kits maker escalables.</li><li>Marketplace y licencias centro.</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+    <div class="label" style="background:var(--amber-bg); color:var(--amber);">Escenarios financieros</div>
+    <h2>Pesimista · Medio · Optimista</h2>
+    <p class="lead">Escenarios para validar con 10-15 entrevistas y una beta cerrada real.</p>
+    <div class="scenario-toolbar">
+      <button class="sbtn active" data-s="pesimista">Pesimista</button>
+      <button class="sbtn" data-s="medio">Medio</button>
+      <button class="sbtn" data-s="optimista">Optimista</button>
+    </div>
+    <div class="kpi-row">
+      <article class="kpi-box">
+        <div class="k">Docentes activos</div>
+        <div class="v" data-k="activos">120</div>
+        <div class="bar"><span data-b="activos" style="width:18%"></span></div>
+      </article>
+      <article class="kpi-box">
+        <div class="k">Conversión premium</div>
+        <div class="v" data-k="conv">4%</div>
+        <div class="bar"><span data-b="conv" style="width:20%"></span></div>
+      </article>
+      <article class="kpi-box">
+        <div class="k">MRR estimado</div>
+        <div class="v" data-k="mrr">€432</div>
+        <div class="bar"><span data-b="mrr" style="width:10%"></span></div>
+      </article>
+    </div>
+
+    <div class="split" style="margin-top:18px;">
+      <article class="persona">
+        <h4>Early adopter persona #1</h4>
+        <div class="meta">Laura, 34, Primaria · creativa · activa en redes educativas</div>
+        <ul>
+          <li>Quiere actividades diferenciales sin invertir 8-15h.</li>
+          <li>Valora guías cerradas y recursos listos para clase.</li>
+          <li>Paga si la primera experiencia funciona rápido.</li>
+        </ul>
+      </article>
+      <article class="persona">
+        <h4>Early adopter persona #2</h4>
+        <div class="meta">Carlos, 39, Secundaria · coordinación de innovación</div>
+        <ul>
+          <li>Necesita recursos replicables para el claustro.</li>
+          <li>Busca impacto medible y facilidad de implementación.</li>
+          <li>Interés en licencia de centro + formación aplicada.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    Escapify.io · Lean Canvas · Base: modelo SaaS + formación + validación en aula real
+  </footer>
+
+  <script>
+    const SCENARIOS = {
+      pesimista: { activos: "120", conv: "4%", mrr: "€432", wa: 18, wc: 20, wm: 10 },
+      medio: { activos: "300", conv: "7%", mrr: "€1.890", wa: 46, wc: 45, wm: 42 },
+      optimista: { activos: "650", conv: "10%", mrr: "€5.850", wa: 96, wc: 72, wm: 96 }
+    };
+
+    const buttons = document.querySelectorAll(".sbtn");
+    const kActivos = document.querySelector('[data-k="activos"]');
+    const kConv = document.querySelector('[data-k="conv"]');
+    const kMrr = document.querySelector('[data-k="mrr"]');
+    const bActivos = document.querySelector('[data-b="activos"]');
+    const bConv = document.querySelector('[data-b="conv"]');
+    const bMrr = document.querySelector('[data-b="mrr"]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const d = SCENARIOS[btn.dataset.s];
+        kActivos.textContent = d.activos;
+        kConv.textContent = d.conv;
+        kMrr.textContent = d.mrr;
+        bActivos.style.width = d.wa + "%";
+        bConv.style.width = d.wc + "%";
+        bMrr.style.width = d.wm + "%";
+      });
+    });
+  </script>
+</body>
+</html>

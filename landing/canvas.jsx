@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, LineChart, Line, CartesianGrid } from "recharts";
 
 const navy = "#0a1f38";
 const blue = "#1565a8";
@@ -9,7 +9,7 @@ const gold = "#ffc107";
 const success = "#43a047";
 const purple = "#7e57c2";
 
-const tabs = ["Canvas", "Datos", "Competencia", "Target", "MVP & Validación", "Funnel", "Riesgos"];
+const tabs = ["Canvas", "Datos", "Competencia", "Target", "MVP & Validación", "Estado Producto", "Funnel", "Riesgos", "Finanzas"];
 
 // Data
 const marketData = [
@@ -50,6 +50,21 @@ const funnelSteps = [
   { icon: "⚡", title: "Activación", users: 600, desc: "1er escape room en aula", actions: ["Onboarding <30 min", "Plantilla lista para usar", "Tutorial paso a paso", "Soporte chat comunidad"] },
   { icon: "💰", title: "Conversión", users: 120, desc: "Free → Premium", actions: ["Pack premium €9-19", "Generador IA", "Kits maker", "Test 3 franjas precio"] },
   { icon: "🚀", title: "Escala", users: 60, desc: "Referral + Licencias", actions: ["Docente→docente", "Licencia centro", "Marketplace recursos", "Formación como canal"] },
+];
+
+const scenarios = {
+  pesimista: { label: "Pesimista", activos: 120, conversion: 4, ticket: 9, mrr: 432 },
+  medio: { label: "Medio", activos: 300, conversion: 7, ticket: 9, mrr: 1890 },
+  optimista: { label: "Optimista", activos: 650, conversion: 10, ticket: 9, mrr: 5850 },
+};
+
+const financialEvolution = [
+  { month: "M1", pesimista: 120, medio: 280, optimista: 700 },
+  { month: "M2", pesimista: 220, medio: 650, optimista: 1600 },
+  { month: "M3", pesimista: 310, medio: 1180, optimista: 2900 },
+  { month: "M4", pesimista: 400, medio: 1650, optimista: 4300 },
+  { month: "M5", pesimista: 430, medio: 1820, optimista: 5100 },
+  { month: "M6", pesimista: 432, medio: 1890, optimista: 5850 },
 ];
 
 const hypotheses = [
@@ -125,6 +140,8 @@ function CompTable() {
 
 export default function LeanCanvasV2() {
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedScenario, setSelectedScenario] = useState("medio");
+  const scenario = scenarios[selectedScenario];
 
   return (
     <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", color: navy, minHeight: "100vh", padding: 0 }}>
@@ -165,8 +182,8 @@ export default function LeanCanvasV2() {
             <div style={{ display: "grid", gridTemplateColumns: "1.05fr 1.05fr 1.2fr 1.05fr 1.25fr", gap: 10 }}>
               <CanvasBox title="Problema" sub="Top 5 con datos" color={blue} span>
                 <ul style={{ paddingLeft: 14, fontSize: 12, lineHeight: 1.6 }}>
-                  <li>No sabe diseñar experiencias gamificadas (<strong>76% siente formación insuficiente</strong>)</li>
-                  <li>Falta tiempo (<strong>43h/semana</strong> de media)</li>
+                  <li><strong>Dolor operativo:</strong> quiere innovar, pero no le da la vida para diseñar desde cero</li>
+                  <li>Falta tiempo/sobrecarga (<strong>43h/semana</strong> de media)</li>
                   <li>Adaptar a diversidad (DI, TEA, TDAH…)</li>
                   <li>No hay herramienta físico + digital</li>
                   <li>Gamificación superficial (quiz ≠ pedagógica)</li>
@@ -186,7 +203,8 @@ export default function LeanCanvasV2() {
               </CanvasBox>
 
               <CanvasBox title="Propuesta de valor" sub="Dual: docente + alumno" color={warm} span>
-                <p style={{ fontSize: 12, lineHeight: 1.6 }}><strong>Docente:</strong> Ahorra tiempo, reduce complejidad, materiales inclusivos listos, innovación con rigor.</p>
+                <p style={{ fontSize: 12, lineHeight: 1.6 }}><strong>Docente:</strong> <strong>"Crea escape rooms educativos inclusivos en minutos, sin diseñarlos desde cero"</strong>.</p>
+                <p style={{ fontSize: 12, lineHeight: 1.6, marginTop: 4 }}>Ahorra tiempo, reduce complejidad y obtiene materiales listos para aplicar.</p>
                 <p style={{ fontSize: 12, lineHeight: 1.6, marginTop: 4 }}><strong>Alumno:</strong> Motivación, inclusión real, aprendizaje significativo, competencias transversales.</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 8 }}>
                   {["Ahorro tiempo", "DUA", "Físico+Digital", "Motivación", "Competencias"].map(t => <Badge key={t}>{t}</Badge>)}
@@ -205,6 +223,9 @@ export default function LeanCanvasV2() {
                   <li>🎮 Formadores gamificación</li>
                   <li>🧠 Opositores / máster</li>
                 </ul>
+                <div style={{ marginTop: 8, padding: "6px 8px", borderRadius: 8, background: "#fff4ea", border: "1px dashed rgba(255,112,67,.25)", fontSize: 11, color: "#9c4f28" }}>
+                  <strong>Perfil tipo:</strong> docente 30-40 años, creativo, activo en redes educativas, frustrado por falta de tiempo.
+                </div>
               </CanvasBox>
 
               <CanvasBox title="Métricas" sub="North Star + AARRR" color={success}>
@@ -218,10 +239,12 @@ export default function LeanCanvasV2() {
 
               <CanvasBox title="Canales" sub="Captación" color={blue}>
                 <ul style={{ paddingLeft: 14, fontSize: 12, lineHeight: 1.6 }}>
-                  <li>🌐 Web + landing</li>
-                  <li>📱 IG/TikTok + LinkedIn</li>
-                  <li>📧 Email + 📢 Meta Ads</li>
-                  <li>🎓 Formaciones + workshops</li>
+                  <li>🌐 Inbound: web + SEO + recursos gratuitos</li>
+                  <li>📱 Contenido en IG/TikTok con demos reales</li>
+                  <li>💼 LinkedIn con evidencia pedagógica</li>
+                  <li>📧 Secuencias email: descarga → demo → beta</li>
+                  <li>🎓 Formación/workshops como canal de venta</li>
+                  <li>📢 Meta Ads + alianzas comunidades docentes</li>
                 </ul>
               </CanvasBox>
 
@@ -232,7 +255,10 @@ export default function LeanCanvasV2() {
               </div>
               <div style={{ gridColumn: "3 / span 3" }}>
                 <CanvasBox title="Fuentes de ingresos" sub="Freemium escalonado" color={success}>
-                  <p style={{ fontSize: 12, lineHeight: 1.6 }}>💳 Suscripción free→premium · 📦 Kits físicos · 🎓 Formación · 🏫 Licencias centro · 📘 Packs premium · 🤖 IA avanzada</p>
+                  <p style={{ fontSize: 12, lineHeight: 1.6 }}>💳 SaaS free→premium · 📦 Kits físicos · 🎓 Formación · 🏫 Licencias centro · 📘 Packs premium · 🤖 IA avanzada</p>
+                  <div style={{ marginTop: 8, padding: "6px 8px", borderRadius: 8, background: "#e8f5e9", border: "1px dashed rgba(67,160,71,.25)", fontSize: 11, color: "#2e7d32" }}>
+                    <strong>Enfoque recomendado:</strong> modelo híbrido SaaS + formación.
+                  </div>
                 </CanvasBox>
               </div>
             </div>
@@ -332,6 +358,12 @@ export default function LeanCanvasV2() {
                 <div style={{ padding: "10px 12px", borderRadius: 10, background: "#e8f5e9", border: `1px solid ${success}30`, marginTop: 10 }}>
                   <div style={{ fontSize: 12, fontWeight: 800, color: navy }}>→ Conclusión</div>
                   <p style={{ fontSize: 11, lineHeight: 1.5 }}>Ningún competidor integra las 4 dimensiones: escape room completo + inclusión real + maker + IA. Lockee.fr y EduEscapeRoom resuelven solo candados. Genially es plataforma genérica. El nicho de "sistema completo de escape room educativo inclusivo" está vacío.</p>
+                </div>
+                <div style={{ marginTop: 10, padding: "10px 12px", borderRadius: 10, background: "#f3f7ff", border: `1px solid ${blue}30` }}>
+                  <div style={{ fontSize: 12, fontWeight: 800, color: navy, marginBottom: 4 }}>Integración web con Lockee.fr (MVP)</div>
+                  <p style={{ fontSize: 11, lineHeight: 1.55 }}>
+                    1) Diseñar narrativa/pistas en Escapify → 2) Crear candados en Lockee → 3) Integrar por iframe o enlace controlado → 4) Medir activación (docente aplica en aula).
+                  </p>
                 </div>
               </div>
             </div>
@@ -442,8 +474,45 @@ export default function LeanCanvasV2() {
           </div>
         )}
 
-        {/* TAB 5: FUNNEL */}
+        {/* TAB 5: ESTADO PRODUCTO */}
         {activeTab === 5 && (
+          <div>
+            <Section title="Qué está funcional hoy y qué viene después">
+              <p style={{ fontSize: 13, color: "#607080", marginBottom: 18 }}>
+                Para quien entra por primera vez: separar claramente realidad actual, MVP y roadmap.
+              </p>
+            </Section>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14, marginBottom: 20 }}>
+              <div style={{ padding: 16, borderRadius: 12, background: "#e8f5e9", border: "1px solid #c8e6c9" }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: success, letterSpacing: ".08em", textTransform: "uppercase", marginBottom: 8 }}>Ya funcional</div>
+                <ul style={{ paddingLeft: 16, fontSize: 12, lineHeight: 1.65 }}>
+                  <li>Landing y narrativa de proyecto</li>
+                  <li>Demo validada: La Maleta del Tiempo</li>
+                  <li>Base metodológica e inclusión documentada</li>
+                </ul>
+              </div>
+              <div style={{ padding: 16, borderRadius: 12, background: "#f3f8ff", border: "1px solid #d3e6f7" }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: blue, letterSpacing: ".08em", textTransform: "uppercase", marginBottom: 8 }}>MVP inmediato</div>
+                <ul style={{ paddingLeft: 16, fontSize: 12, lineHeight: 1.65 }}>
+                  <li>Generador guiado de 1 escape room</li>
+                  <li>Candados digitales + plantillas</li>
+                  <li>Onboarding para usar en &lt;30 min</li>
+                </ul>
+              </div>
+              <div style={{ padding: 16, borderRadius: 12, background: "#f8f4ff", border: "1px solid #e3d9f6" }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: purple, letterSpacing: ".08em", textTransform: "uppercase", marginBottom: 8 }}>Roadmap</div>
+                <ul style={{ paddingLeft: 16, fontSize: 12, lineHeight: 1.65 }}>
+                  <li>IA para narrativa/adaptaciones</li>
+                  <li>Kits maker físicos (láser/3D)</li>
+                  <li>Licencias de centro + marketplace</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 6: FUNNEL */}
+        {activeTab === 6 && (
           <div>
             <Section title="Embudo de captación y escalabilidad">
               <p style={{ fontSize: 13, color: "#607080", marginBottom: 20 }}>De red cercana a captación escalable — responde a la pregunta central del feedback</p>
@@ -506,8 +575,8 @@ export default function LeanCanvasV2() {
           </div>
         )}
 
-        {/* TAB 6: RIESGOS */}
-        {activeTab === 6 && (
+        {/* TAB 7: RIESGOS */}
+        {activeTab === 7 && (
           <div>
             <Section title="Hipótesis y Riesgos">
               <p style={{ fontSize: 13, color: "#607080", marginBottom: 20 }}>Qué validar y qué puede fallar — visión honesta para el pitch</p>
@@ -551,6 +620,74 @@ export default function LeanCanvasV2() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 8: FINANZAS */}
+        {activeTab === 8 && (
+          <div>
+            <Section title="Escenarios económico-financieros">
+              <p style={{ fontSize: 13, color: "#607080", marginBottom: 20 }}>
+                Tres escenarios para validar con entrevistas y beta real (10-15 potenciales clientes).
+              </p>
+            </Section>
+            <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
+              {Object.entries(scenarios).map(([key, item]) => (
+                <button
+                  key={key}
+                  onClick={() => setSelectedScenario(key)}
+                  style={{
+                    border: `1px solid ${selectedScenario === key ? blue : "#d0dfec"}`,
+                    background: selectedScenario === key ? blue : "#fff",
+                    color: selectedScenario === key ? "#fff" : blue,
+                    borderRadius: 999,
+                    padding: "7px 12px",
+                    fontSize: 11,
+                    fontWeight: 800,
+                    letterSpacing: ".05em",
+                    textTransform: "uppercase",
+                    cursor: "pointer",
+                  }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
+              {[
+                { label: "Docentes activos", value: scenario.activos, max: 650, suffix: "" },
+                { label: "Conversión premium", value: scenario.conversion, max: 12, suffix: "%" },
+                { label: "MRR estimado", value: scenario.mrr, max: 6000, suffix: "€", money: true },
+              ].map((kpi) => (
+                <div key={kpi.label} style={{ border: "1px solid #dbe9f5", borderRadius: 12, padding: 12, background: "#f8fcff" }}>
+                  <div style={{ fontSize: 10, color: "#607080", textTransform: "uppercase", letterSpacing: ".08em", fontWeight: 700 }}>{kpi.label}</div>
+                  <div style={{ fontFamily: "Georgia, serif", fontSize: 28, color: navy, lineHeight: 1.15, marginTop: 4 }}>
+                    {kpi.money ? `€${kpi.value.toLocaleString()}` : `${kpi.value}${kpi.suffix}`}
+                  </div>
+                  <div style={{ marginTop: 8, height: 8, borderRadius: 999, background: "#e6f0f8", overflow: "hidden" }}>
+                    <span style={{ display: "block", width: `${Math.min(100, (kpi.value / kpi.max) * 100)}%`, height: "100%", background: `linear-gradient(90deg, ${blue}, ${accent})` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ padding: 14, borderRadius: 12, border: "1px solid #dbe9f5", background: "#fff", marginBottom: 16 }}>
+              <h4 style={{ fontSize: 13, fontWeight: 700, color: navy, marginBottom: 8 }}>Evolución MRR estimada (6 meses)</h4>
+              <ResponsiveContainer width="100%" height={240}>
+                <LineChart data={financialEvolution}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e0ecf5" />
+                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 10 }} />
+                  <Tooltip formatter={(v) => `€${v.toLocaleString()}`} />
+                  <Legend wrapperStyle={{ fontSize: 10 }} />
+                  <Line type="monotone" dataKey="pesimista" stroke={warm} strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="medio" stroke={blue} strokeWidth={2.5} dot={false} />
+                  <Line type="monotone" dataKey="optimista" stroke={success} strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div style={{ padding: 12, borderRadius: 10, background: "#fff8e1", border: "1px solid #ffe082", fontSize: 12, lineHeight: 1.6 }}>
+              <strong>Próximo paso recomendado:</strong> validar estas hipótesis con 10-15 docentes (entrevistas + beta) antes de priorizar desarrollo pesado.
             </div>
           </div>
         )}
