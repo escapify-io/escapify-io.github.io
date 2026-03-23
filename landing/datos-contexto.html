@@ -172,17 +172,32 @@
     .section-head-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .section-head .num,.section-head-row .num,.block h2 .dc-num,.comp-block-head .dc-num,.comp-block-head .comp-num,.st4c-head h2 .dc-num{
       flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
-      min-width:36px;height:36px;padding:0 8px;border-radius:10px;
-      background:var(--blue);color:#fff;font-size:17px;font-weight:900;line-height:1;
-      box-shadow:0 4px 14px rgba(37,99,235,.28);
+      min-width:40px;height:40px;padding:0 10px;border-radius:12px;
+      background:linear-gradient(145deg,#3b82f6,#1d4ed8);color:#fff;font-size:18px;font-weight:900;line-height:1;
+      box-shadow:0 6px 18px rgba(37,99,235,.32),inset 0 1px 0 rgba(255,255,255,.22);
     }
+    .block[data-block="mvp"] h2 .dc-num{
+      background:linear-gradient(145deg,#fbbf24,#d97706);
+      box-shadow:0 6px 22px rgba(217,119,6,.4),inset 0 1px 0 rgba(255,255,255,.28);
+    }
+    .block[data-block="contexto"] h2 .dc-num{background:linear-gradient(145deg,#38bdf8,#0284c7);box-shadow:0 6px 20px rgba(14,165,233,.35),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="competencia"] h2 .dc-num{background:linear-gradient(145deg,#a78bfa,#6d28d9);box-shadow:0 6px 20px rgba(124,58,237,.32),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="estado"] h2 .dc-num{background:linear-gradient(145deg,#4ade80,#15803d);box-shadow:0 6px 20px rgba(22,163,74,.32),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="funnel"] h2 .dc-num{background:linear-gradient(145deg,#818cf8,#4f46e5);box-shadow:0 6px 20px rgba(99,102,241,.32),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="acciones"] h2 .dc-num{background:linear-gradient(145deg,#fb7185,#be123c);box-shadow:0 6px 20px rgba(225,29,72,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="customer-dev"] h2 .dc-num{background:linear-gradient(145deg,#60a5fa,#1d4ed8);box-shadow:0 6px 20px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="customer-journey"] h2 .dc-num{background:linear-gradient(145deg,#22d3ee,#0e7490);box-shadow:0 6px 20px rgba(8,145,178,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+    .block[data-block="plan-marketing"] h2 .dc-num{background:linear-gradient(145deg,#64748b,#1e293b);box-shadow:0 6px 20px rgba(51,65,85,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+    .block[data-block="riesgos"] h2 .dc-num{background:linear-gradient(145deg,#f87171,#b91c1c);box-shadow:0 6px 20px rgba(220,38,38,.32),inset 0 1px 0 rgba(255,255,255,.2)}
     /* Subsecciones dentro del bloque PMV (3.x) */
     .mvp-title-row .dc-num-sub,.mvp-val-section .mvp-title-row .dc-num-sub{
-      min-width:44px;height:34px;font-size:14px;font-weight:900;border-radius:10px;
-      background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.22);
+      min-width:52px;height:40px;font-size:15px;font-weight:900;border-radius:12px;
+      background:linear-gradient(145deg,#fbbf24,#d97706);color:#fff;
+      box-shadow:0 6px 18px rgba(217,119,6,.35),inset 0 1px 0 rgba(255,255,255,.25);
     }
     .mvp-val-section .mvp-title-row .dc-num-sub{
-      background:var(--green);box-shadow:0 4px 12px rgba(22,163,74,.28);
+      background:linear-gradient(145deg,#4ade80,#15803d);
+      box-shadow:0 6px 18px rgba(22,163,74,.32),inset 0 1px 0 rgba(255,255,255,.22);
     }
     .block h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .panel{
@@ -199,6 +214,280 @@
         radial-gradient(ellipse 45% 35% at 0% 100%,rgba(37,99,235,.07),transparent 48%);
     }
     .panel > *{position:relative;z-index:1}
+    /* ═══ Sistema visual por bloque (dinámico / esquemático) ═══ */
+    .block{
+      position:relative;padding:2px 4px 12px 16px;margin:0 0 6px;
+      border-radius:0 14px 14px 0;
+    }
+    .block::before{
+      content:"";position:absolute;left:0;top:4px;bottom:6px;width:4px;border-radius:4px;
+      background:linear-gradient(180deg,var(--dc-block-accent,var(--blue)) 0%,rgba(37,99,235,.35) 55%,rgba(37,99,235,.08) 100%);
+      box-shadow:0 0 0 1px rgba(255,255,255,.5) inset;
+    }
+    .block[data-block="contexto"]{--dc-block-accent:#0ea5e9}
+    .block[data-block="competencia"]{--dc-block-accent:#7c3aed}
+    .block[data-block="mvp"]{--dc-block-accent:#d97706}
+    .block[data-block="estado"]{--dc-block-accent:#16a34a}
+    .block[data-block="funnel"]{--dc-block-accent:#6366f1}
+    .block[data-block="acciones"]{--dc-block-accent:#e11d48}
+    .block[data-block="customer-dev"]{--dc-block-accent:#2563eb}
+    .block[data-block="customer-journey"]{--dc-block-accent:#0891b2}
+    .block[data-block="plan-marketing"]{--dc-block-accent:#334155}
+    .block[data-block="riesgos"]{--dc-block-accent:#dc2626}
+    .dc-block-tag{
+      display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--blue-dark);
+      margin:0 0 14px;padding:8px 14px;border-radius:999px;
+      background:linear-gradient(135deg,rgba(255,255,255,.98),var(--blue-light));
+      border:1px solid var(--blue-mid);box-shadow:0 3px 14px rgba(37,99,235,.1);
+    }
+    .dc-block-tag i{color:var(--blue);font-size:12px;opacity:.95}
+    .block[data-block="mvp"] .dc-block-tag{
+      color:#9a3412;
+      background:linear-gradient(135deg,#fffbeb 0%,#ffedd5 100%);
+      border-color:rgba(251,191,36,.55);
+      box-shadow:0 4px 16px rgba(245,158,11,.12);
+    }
+    .block[data-block="mvp"] .dc-block-tag i{color:#d97706}
+    .dc-schematic{
+      display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+      margin:0 0 14px;padding:12px 14px;border-radius:14px;
+      background:linear-gradient(145deg,#faf5ff 0%,#fff 50%,#f8fafc 100%);
+      border:1px solid rgba(167,139,250,.35);
+    }
+    .dc-schematic__title{
+      font-size:13px;font-weight:900;color:var(--ink);display:flex;align-items:center;gap:8px;
+    }
+    .dc-schematic__title i{color:var(--purple)}
+    .dc-schematic__legend{
+      display:flex;flex-wrap:wrap;gap:14px;font-size:12px;font-weight:700;color:var(--muted);
+    }
+    .dc-schematic__legend span{display:inline-flex;align-items:center;gap:6px}
+    .dc-dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .dc-dot--yes{background:linear-gradient(145deg,#4ade80,#16a34a);box-shadow:0 0 0 2px rgba(22,163,74,.2)}
+    .dc-dot--partial{background:linear-gradient(145deg,#fbbf24,#d97706);box-shadow:0 0 0 2px rgba(217,119,6,.2)}
+    .dc-dot--no{background:linear-gradient(145deg,#94a3b8,#64748b);box-shadow:0 0 0 2px rgba(100,116,139,.2)}
+    .dc-mini-flow{
+      display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;
+      gap:10px 6px;margin:0 0 22px;padding:22px 16px 24px;border-radius:20px;position:relative;
+      background:linear-gradient(165deg,#fffbeb 0%,#fff 42%,#fef9c3 100%);
+      border:1px solid rgba(251,191,36,.4);
+      box-shadow:0 14px 40px rgba(245,158,11,.11),inset 0 1px 0 rgba(255,255,255,.8);
+      overflow:hidden;
+    }
+    .dc-mini-flow::before{
+      content:"";position:absolute;left:6%;right:6%;top:calc(50% - 2px);height:4px;border-radius:4px;
+      background:linear-gradient(90deg,#fde68a,#f59e0b,#ea580c,#16a34a);
+      opacity:.28;pointer-events:none;
+    }
+    @media(max-width:720px){
+      .dc-mini-flow::before{display:none}
+    }
+    .dc-mini-flow__step{
+      position:relative;z-index:1;
+      display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;
+      flex:1 1 min(140px,100%);
+      min-width:min(140px,100%);
+      text-align:center;font-size:12px;font-weight:800;color:var(--ink);
+      padding:14px 12px 16px;border-radius:16px;background:#fff;
+      border:1px solid rgba(251,191,36,.45);
+      box-shadow:0 10px 28px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.9);
+      transition:transform .22s ease,box-shadow .22s ease;
+    }
+    @media(hover:hover){
+      .dc-mini-flow__step:hover{
+        transform:translateY(-4px);
+        box-shadow:0 16px 36px rgba(217,119,6,.15);
+        border-color:rgba(245,158,11,.65);
+      }
+    }
+    html.dc-reduce-motion .dc-mini-flow__step{transition:none}
+    html.dc-reduce-motion .dc-mini-flow__step:hover{transform:none}
+    .dc-mini-flow__n{
+      display:flex;align-items:center;justify-content:center;
+      width:28px;height:28px;border-radius:10px;font-size:13px;font-weight:900;
+      color:#fff;background:linear-gradient(145deg,#fbbf24,#d97706);
+      box-shadow:0 4px 12px rgba(217,119,6,.35);
+    }
+    .dc-mini-flow__step:last-of-type .dc-mini-flow__n{background:linear-gradient(145deg,#34d399,#059669);box-shadow:0 4px 12px rgba(5,150,105,.3)}
+    .dc-mini-flow__step i{font-size:1.1rem;color:#d97706;margin-top:2px}
+    .dc-mini-flow__step:last-of-type i{color:#059669}
+    .dc-mini-flow__lbl{line-height:1.35;max-width:12em;margin:0 auto}
+    .dc-mini-flow__arr{
+      display:flex;align-items:center;justify-content:center;align-self:center;
+      color:#f59e0b;font-size:13px;opacity:.85;padding:0 2px;
+      filter:drop-shadow(0 2px 4px rgba(245,158,11,.25));
+    }
+    @media(max-width:720px){
+      .dc-mini-flow__arr{flex:1 1 100%;transform:rotate(90deg);padding:4px 0}
+    }
+    /* Blank — stepper (sustituye barra plana de enlaces) */
+    .cd-stepper{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch;
+      margin:0 0 22px;padding:18px 16px 20px;border-radius:20px;position:relative;overflow:hidden;
+      background:linear-gradient(165deg,#eff6ff 0%,#ffffff 45%,#f8fafc 100%);
+      border:1px solid rgba(59,130,246,.28);
+      box-shadow:0 14px 44px rgba(37,99,235,.1);
+    }
+    .cd-stepper::before{
+      content:"";position:absolute;left:4%;right:4%;top:40px;height:4px;border-radius:4px;z-index:0;
+      background:linear-gradient(90deg,#2563eb,#22c55e,#f59e0b,#6366f1);
+      opacity:.2;
+    }
+    @media(max-width:959px){
+      .cd-stepper{grid-template-columns:repeat(2,1fr);gap:14px}
+      .cd-stepper::before{display:none}
+    }
+    @media(max-width:480px){
+      .cd-stepper{grid-template-columns:1fr}
+    }
+    .cd-stepper__step{
+      position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+      text-decoration:none;color:inherit;padding:14px 10px 16px;border-radius:16px;
+      background:#fff;border:1px solid rgba(226,232,240,.95);
+      box-shadow:0 8px 24px rgba(15,23,42,.07);
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+    @media(min-width:960px){
+      .cd-stepper__step:not(:last-child)::after{
+        content:"\f054";font-family:"Font Awesome 6 Free";font-weight:900;
+        position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:2;
+        font-size:10px;color:var(--muted);opacity:.4;background:#fff;padding:5px 3px;border-radius:999px;
+        border:1px solid var(--border);box-shadow:0 2px 8px rgba(15,23,42,.06);
+      }
+    }
+    @media(hover:hover){
+      .cd-stepper__step:hover{
+        transform:translateY(-3px);
+        box-shadow:0 14px 36px rgba(37,99,235,.14);
+        border-color:rgba(191,219,254,.95);
+      }
+    }
+    html.dc-reduce-motion .cd-stepper__step{transition:none}
+    html.dc-reduce-motion .cd-stepper__step:hover{transform:none}
+    .cd-stepper__step:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+    .cd-stepper__n{
+      width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:15px;font-weight:900;color:#fff;
+      box-shadow:0 6px 16px rgba(15,23,42,.15);
+    }
+    .cd-stepper__step--1 .cd-stepper__n{background:linear-gradient(145deg,#60a5fa,#2563eb)}
+    .cd-stepper__step--2 .cd-stepper__n{background:linear-gradient(145deg,#4ade80,#15803d)}
+    .cd-stepper__step--3 .cd-stepper__n{background:linear-gradient(145deg,#fbbf24,#d97706)}
+    .cd-stepper__step--4 .cd-stepper__n{background:linear-gradient(145deg,#a78bfa,#6366f1)}
+    .cd-stepper__ico{
+      width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      font-size:1.15rem;color:#fff;
+      box-shadow:0 8px 20px rgba(15,23,42,.12);
+    }
+    .cd-stepper__step--1 .cd-stepper__ico{background:linear-gradient(145deg,#3b82f6,#1d4ed8)}
+    .cd-stepper__step--2 .cd-stepper__ico{background:linear-gradient(145deg,#22c55e,#166534)}
+    .cd-stepper__step--3 .cd-stepper__ico{background:linear-gradient(145deg,#f59e0b,#c2410c)}
+    .cd-stepper__step--4 .cd-stepper__ico{background:linear-gradient(145deg,#8b5cf6,#5b21b6)}
+    .cd-stepper__lbl{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);line-height:1.25}
+    .cd-stepper__name{font-size:13px;font-weight:900;color:var(--ink);letter-spacing:-.02em}
+    .cj-rail{
+      margin:0 0 22px;padding:18px 14px 20px;border-radius:20px;position:relative;overflow:hidden;
+      background:linear-gradient(165deg,#ecfeff 0%,#ffffff 42%,#f8fafc 100%);
+      border:1px solid rgba(6,182,212,.32);
+      box-shadow:0 14px 40px rgba(6,182,212,.12);
+    }
+    .cj-rail::before{
+      content:"";position:absolute;left:5%;right:5%;top:36px;height:4px;border-radius:4px;z-index:0;
+      background:linear-gradient(90deg,#2563eb,#6366f1,#16a34a,#d97706,#7c3aed,#e11d48);
+      opacity:.18;
+    }
+    @media(max-width:900px){
+      .cj-rail::before{display:none}
+    }
+    @media(min-width:901px){
+      .cj-rail::before{left:16px;right:16px}
+    }
+    .cj-rail__list{
+      list-style:none;margin:0;padding:6px 4px 4px;
+      display:flex;gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+      position:relative;z-index:1;
+    }
+    .cj-rail__list li{
+      flex:0 0 auto;scroll-snap-align:start;min-width:118px;max-width:140px;
+      padding:14px 10px 16px;border-radius:18px;text-align:center;
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      position:relative;
+      background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+      border:1px solid rgba(226,232,240,.95);
+      border-top:4px solid var(--cj-rail-accent,var(--blue));
+      box-shadow:0 10px 28px rgba(15,23,42,.09);
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+    @media(hover:hover){
+      .cj-rail__list li:hover{
+        transform:translateY(-3px);
+        box-shadow:0 16px 40px rgba(15,23,42,.12);
+        border-color:rgba(191,219,254,.9);
+      }
+    }
+    html.dc-reduce-motion .cj-rail__list li{transition:none}
+    html.dc-reduce-motion .cj-rail__list li:hover{transform:none}
+    .cj-rail__list li:nth-child(1){--cj-rail-accent:#2563eb}
+    .cj-rail__list li:nth-child(2){--cj-rail-accent:#6366f1}
+    .cj-rail__list li:nth-child(3){--cj-rail-accent:#16a34a}
+    .cj-rail__list li:nth-child(4){--cj-rail-accent:#d97706}
+    .cj-rail__list li:nth-child(5){--cj-rail-accent:#7c3aed}
+    .cj-rail__list li:nth-child(6){--cj-rail-accent:#e11d48}
+    @media(min-width:901px){
+      .cj-rail__list{
+        overflow-x:visible;
+        scroll-snap-type:none;
+        gap:10px;
+        justify-content:stretch;
+      }
+      .cj-rail__list li{
+        flex:1 1 0;
+        min-width:0;
+        max-width:none;
+        scroll-snap-align:unset;
+      }
+      .cj-rail__list li:not(:last-child)::after{
+        content:"\f054";font-family:"Font Awesome 6 Free";font-weight:900;
+        position:absolute;right:-5px;top:50%;transform:translateY(-50%);z-index:2;
+        font-size:10px;color:var(--muted);opacity:.42;background:#fff;padding:4px 2px;border-radius:999px;
+        border:1px solid var(--border);box-shadow:0 2px 8px rgba(15,23,42,.06);
+      }
+    }
+    .cj-rail__ico{
+      width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;color:#fff;
+      background:linear-gradient(145deg,var(--cj-rail-accent,#2563eb),#0f172a);
+      box-shadow:0 6px 16px rgba(15,23,42,.15);
+    }
+    .cj-rail__n{display:block;font-size:18px;font-weight:900;line-height:1;color:var(--ink);margin-bottom:0}
+    .cj-rail__lab{display:block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.25}
+    .pm-wrap > section.pm-section:nth-of-type(odd){
+      background:linear-gradient(145deg,rgba(248,250,252,.95) 0%,#fff 55%);
+      border:1px solid rgba(226,232,240,.9);border-radius:14px;
+      padding:16px 16px 14px;margin-left:-4px;margin-right:-4px;
+      box-shadow:0 4px 16px rgba(15,23,42,.04);
+    }
+    .pm-wrap > section.pm-section:nth-of-type(odd) h3{margin-top:0}
+    .acciones-hero{
+      display:flex;flex-wrap:wrap;align-items:center;gap:12px;
+      margin:0 0 16px;padding:14px 16px;border-radius:16px;
+      background:linear-gradient(135deg,#fff1f2 0%,#fff 60%,#fef2f2 100%);
+      border:1px solid rgba(244,63,94,.2);
+    }
+    .acciones-hero__ico{
+      width:48px;height:48px;border-radius:14px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#fb7185,#e11d48);color:#fff;font-size:1.2rem;
+      box-shadow:0 8px 22px rgba(225,29,72,.3);
+    }
+    .acciones-hero__text{font-size:14px;color:var(--body);line-height:1.5;max-width:720px;margin:0}
+    .acciones-hero__text strong{color:var(--ink)}
+    .grid.grid--kpi-pop .kpi{
+      border:1px solid rgba(148,163,184,.2);
+      background:linear-gradient(155deg,#1e293b 0%,#0f172a 55%,#172554 100%);
+    }
     select{
       transition:border-color .2s ease,box-shadow .2s ease;
     }
@@ -214,11 +503,25 @@
     }
     /* Desplegable de bloques — más visible */
     .dc-select-shell{
-      margin-bottom:20px;padding:16px 18px 14px;border-radius:16px;
+      margin-bottom:20px;padding:16px 18px 14px;border-radius:18px;
       border:2px solid rgba(37,99,235,.35);
       background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 55%,#eef2ff 100%);
       box-shadow:0 10px 32px rgba(37,99,235,.12),0 1px 0 rgba(255,255,255,.9) inset;
+      transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease;
     }
+    @media(hover:hover){
+      .dc-select-shell:hover{
+        border-color:rgba(59,130,246,.55);
+        box-shadow:0 16px 44px rgba(37,99,235,.16),0 1px 0 rgba(255,255,255,.95) inset;
+        transform:translateY(-1px);
+      }
+    }
+    .dc-select-shell:focus-within{
+      border-color:var(--blue);
+      box-shadow:0 18px 48px rgba(37,99,235,.2),0 0 0 1px rgba(37,99,235,.08) inset;
+    }
+    html.dc-reduce-motion .dc-select-shell{transition:none}
+    html.dc-reduce-motion .dc-select-shell:hover{transform:none}
     .dc-select-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
     .dc-select-ico{
       width:44px;height:44px;border-radius:12px;flex-shrink:0;
@@ -262,6 +565,11 @@
     .dc-select-chevron{
       position:absolute;right:14px;top:50%;transform:translateY(-50%);
       pointer-events:none;color:var(--blue);font-size:14px;opacity:.9;
+      transition:transform .25s ease,color .2s ease;
+    }
+    .dc-select-field:focus-within .dc-select-chevron{
+      transform:translateY(-50%) rotate(180deg);
+      color:var(--blue-dark);
     }
     .dc-select-hint{
       margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--muted);
@@ -311,39 +619,171 @@
       font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
       margin-bottom:8px;line-height:1.2;
     }
-    .acciones-lead{font-size:15px;color:var(--muted);line-height:1.55;max-width:920px;margin:8px 0 16px}
-    .cards-acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch}
-    .cards-acciones .card h3{margin-top:0;margin-bottom:8px;font-size:16px;letter-spacing:-.02em}
-    .cards-acciones .card li:last-child{margin-bottom:0}
+    .acciones-lead{
+      font-size:15px;color:var(--muted);line-height:1.55;max-width:920px;margin:8px 0 20px;
+      padding:12px 14px;border-radius:12px;background:rgba(248,250,252,.9);border-left:4px solid var(--blue);
+    }
+    .acciones-pipeline{
+      position:relative;margin:0 0 8px;padding:8px 0 4px;
+    }
+    .acciones-pipeline::before{
+      content:"";position:absolute;left:2%;right:2%;top:0;height:3px;border-radius:3px;
+      background:linear-gradient(90deg,#2563eb,#6366f1,#059669,#d97706);
+      opacity:.22;
+    }
+    .cards-acciones{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch;position:relative}
+    .card--accion{
+      position:relative;overflow:hidden;padding:16px 14px 16px 16px;border-radius:16px!important;
+      border:1px solid rgba(226,232,240,.95)!important;
+      background:linear-gradient(165deg,#ffffff 0%,#f8fafc 100%)!important;
+      box-shadow:0 10px 32px rgba(15,23,42,.07)!important;
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+    }
+    @media(hover:hover){
+      .card--accion:hover{
+        transform:translateY(-4px);
+        box-shadow:0 16px 40px rgba(37,99,235,.12)!important;
+        border-color:rgba(191,219,254,.95)!important;
+      }
+    }
+    html.dc-reduce-motion .card--accion{transition:none}
+    html.dc-reduce-motion .card--accion:hover{transform:none}
+    .card--accion::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:16px 0 0 16px;
+      background:linear-gradient(180deg,var(--accion-c,#2563eb),rgba(15,23,42,.12));
+    }
+    .card--accion-1{--accion-c:#2563eb}
+    .card--accion-2{--accion-c:#6366f1}
+    .card--accion-3{--accion-c:#059669}
+    .card--accion-4{--accion-c:#d97706}
+    .card-accion-num{
+      position:absolute;right:10px;top:8px;font-size:52px;font-weight:900;line-height:1;
+      background:linear-gradient(180deg,var(--accion-c),transparent);-webkit-background-clip:text;background-clip:text;
+      color:transparent;opacity:.2;pointer-events:none;font-family:Inter,system-ui,sans-serif;
+    }
+    .card-accion-hd{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;padding-right:36px}
+    .card-accion-ico{
+      flex-shrink:0;width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;color:#fff;
+      background:linear-gradient(145deg,var(--accion-c),#1e293b);
+      box-shadow:0 8px 20px rgba(15,23,42,.12);
+    }
+    .card-accion-hd .lbl{margin-bottom:4px;color:var(--accion-c)!important;font-weight:900}
+    .card--accion h3{font-size:17px!important;margin:0!important;letter-spacing:-.03em}
+    .cards-acciones .card--accion ul{padding-left:18px;margin:0}
+    .cards-acciones .card--accion li:last-child{margin-bottom:0}
+    @media(min-width:1100px){
+      .cards-acciones .card--accion:not(:last-child)::after{
+        content:"\f054";font-family:"Font Awesome 6 Free";font-weight:900;
+        position:absolute;right:-13px;top:50%;transform:translateY(-50%);z-index:2;
+        font-size:11px;color:var(--muted);opacity:.45;background:#fff;padding:4px 2px;border-radius:999px;
+        border:1px solid var(--border);box-shadow:0 2px 8px rgba(15,23,42,.06);
+      }
+    }
     .acciones-extra{
-      margin-top:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);
-      background:linear-gradient(145deg,#fafbfc 0%,#fff 100%);
-      box-shadow:0 4px 14px rgba(15,23,42,.05);
+      margin-top:24px;padding:0;border-radius:20px;overflow:hidden;
+      border:1px solid rgba(191,219,254,.85);
+      background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+      box-shadow:0 16px 48px rgba(37,99,235,.09);
     }
-    .acciones-extra > h3{font-size:15px;font-weight:900;color:var(--ink);margin:0 0 12px;display:flex;align-items:center;gap:8px}
-    .acciones-extra > h3 i{color:var(--blue)}
-    .acciones-extra-grid{display:grid;gap:16px}
-    @media(min-width:800px){.acciones-extra-grid{grid-template-columns:1fr 1fr}}
-    .acciones-extra-col h4{
-      font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;
+    .acciones-extra__head{
+      padding:16px 18px 14px;
+      background:linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%);
+      border-bottom:1px dashed var(--border);
     }
-    .acciones-extra-col ul{margin:0;padding-left:18px}
-    .acciones-extra-col li{font-size:14px;line-height:1.5;margin-bottom:6px;color:var(--body)}
-    .acciones-extra-col li strong{color:var(--ink)}
+    .acciones-extra__head h3{
+      font-size:clamp(1.05rem,2vw,1.2rem);font-weight:900;color:var(--ink);margin:0;
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    }
+    .acciones-extra__head-ico{
+      width:46px;height:46px;border-radius:14px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#3b82f6,#1d4ed8);color:#fff;font-size:1.15rem;
+      box-shadow:0 8px 22px rgba(37,99,235,.3);
+    }
+    .acciones-extra-grid{
+      display:grid;gap:0;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:900px){
+      .acciones-extra-grid{grid-template-columns:1fr 1fr}
+    }
+    .acciones-extra-cell{
+      padding:18px 18px 20px;border-bottom:1px solid var(--border);
+      position:relative;
+    }
+    @media(min-width:900px){
+      .acciones-extra-cell:nth-child(odd){border-right:1px solid var(--border)}
+      .acciones-extra-cell:nth-child(3),
+      .acciones-extra-cell:nth-child(4){border-bottom:none}
+    }
+    @media(max-width:899px){
+      .acciones-extra-cell:last-child{border-bottom:none}
+    }
+    .acciones-extra-cell--m{background:linear-gradient(180deg,rgba(239,246,255,.5) 0%,transparent 100%)}
+    .acciones-extra-cell--l{background:linear-gradient(180deg,rgba(240,253,244,.45) 0%,transparent 100%)}
+    .acciones-extra-cell--c{background:linear-gradient(180deg,rgba(254,252,232,.5) 0%,transparent 100%)}
+    .acciones-extra-cell--e{background:linear-gradient(180deg,rgba(250,245,255,.5) 0%,transparent 100%)}
+    .acciones-extra-cell h4{
+      font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+      margin:0 0 12px;display:flex;align-items:center;gap:8px;color:var(--ink);
+    }
+    .acciones-extra-cell h4 .ae-ico{
+      width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+      font-size:.85rem;color:#fff;flex-shrink:0;
+    }
+    .acciones-extra-cell--m h4 .ae-ico{background:linear-gradient(145deg,#60a5fa,#2563eb)}
+    .acciones-extra-cell--l h4 .ae-ico{background:linear-gradient(145deg,#4ade80,#15803d)}
+    .acciones-extra-cell--c h4 .ae-ico{background:linear-gradient(145deg,#fbbf24,#c2410c)}
+    .acciones-extra-cell--e h4 .ae-ico{background:linear-gradient(145deg,#c084fc,#7c3aed)}
+    .acciones-extra-cell ul{margin:0;padding-left:18px}
+    .acciones-extra-cell li{font-size:14px;line-height:1.55;margin-bottom:8px;color:var(--body)}
+    .acciones-extra-cell li:last-child{margin-bottom:0}
+    .acciones-extra-cell li strong{color:var(--ink)}
     .acciones-footnote{
-      margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.55;
-      color:var(--blue-dark);background:var(--blue-light);border:1px dashed var(--blue-mid);
+      margin:0;padding:14px 18px;font-size:13px;line-height:1.6;
+      color:var(--blue-dark);
+      background:linear-gradient(90deg,#eff6ff,#f0f9ff);
+      border-top:1px dashed rgba(191,219,254,.95);
     }
+    .acciones-footnote a{
+      display:inline-flex;align-items:center;gap:4px;padding:2px 8px;margin:2px 2px 2px 0;
+      border-radius:8px;background:#fff;border:1px solid var(--blue-mid);
+      font-weight:700;text-decoration:none;color:var(--blue-dark)!important;
+      transition:background .15s ease;
+    }
+    .acciones-footnote a:hover{background:var(--blue-light)}
     /* Hipótesis + riesgos detallados (feedback) — bloque riesgos */
     .riesgos-detail-block{margin-top:8px}
+    .riesgos-detail-block--visual{
+      margin-top:4px;padding:0;border-radius:20px;overflow:hidden;
+      border:1px solid rgba(226,232,240,.95);
+      background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+      box-shadow:0 14px 44px rgba(15,23,42,.09);
+    }
     .riesgos-detail-title{
       font-size:clamp(17px,1.4vw,19px);font-weight:900;color:var(--ink);letter-spacing:-.02em;
       margin:0 0 14px;line-height:1.3;
     }
+    .riesgos-detail-block--visual .riesgos-detail-title{
+      margin:0;padding:18px 20px 16px;
+      background:linear-gradient(90deg,#fef2f2 0%,#fff7ed 50%,#eff6ff 100%);
+      border-bottom:1px dashed var(--border);
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    }
+    .riesgos-detail-block--visual .riesgos-detail-title::before{
+      content:"\f0eb";font-family:"Font Awesome 6 Free";font-weight:900;
+      width:42px;height:42px;border-radius:14px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;color:#fff;
+      background:linear-gradient(145deg,#f87171,#dc2626);
+      box-shadow:0 8px 22px rgba(220,38,38,.3);
+    }
+    .riesgos-detail-block--visual .riesgos-detail-grid{padding:16px 18px 18px;gap:14px}
     .riesgos-detail-grid{
       display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;
     }
-    .riesgos-detail-card{padding:16px 14px}
+    .riesgos-detail-card{padding:16px 14px;border-radius:16px!important;box-shadow:0 8px 24px rgba(15,23,42,.06)!important}
     .riesgos-detail-card .lbl{margin-bottom:6px}
     .riesgos-detail-q{
       font-size:14px;font-weight:700;color:var(--muted);margin:0 0 12px;
@@ -621,39 +1061,142 @@
       display:flex;align-items:center;justify-content:center;font-size:1.1rem;
       box-shadow:0 6px 16px rgba(37,99,235,.28);
     }
-    .cd-lead{font-size:14px;color:var(--muted);margin-bottom:18px;max-width:720px;line-height:1.55}
+    .cd-lead{
+      font-size:14px;color:var(--muted);margin-bottom:18px;max-width:720px;line-height:1.55;
+      padding:12px 14px;border-radius:12px;background:rgba(248,250,252,.85);
+      border-left:4px solid var(--blue);
+    }
     .cd-phase{
-      border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px;
-      background:linear-gradient(145deg,#ffffff 0%,var(--surface) 100%);
-      box-shadow:0 4px 14px rgba(15,23,42,.05);
-      position:relative;
+      border:1px solid rgba(226,232,240,.95);border-radius:18px;padding:18px 18px 16px;margin-bottom:18px;
+      background:linear-gradient(165deg,#ffffff 0%,#f8fafc 100%);
+      box-shadow:0 10px 32px rgba(15,23,42,.07);
+      position:relative;scroll-margin-top:24px;overflow:hidden;
     }
     .cd-phase::before{
-      content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;
-      background:var(--cd-accent, var(--blue));
+      content:"";position:absolute;left:0;top:12px;bottom:12px;width:5px;border-radius:6px;
+      background:linear-gradient(180deg,var(--cd-accent, var(--blue)),rgba(15,23,42,.12));
     }
-    .cd-phase--1{--cd-accent:var(--blue)}
-    .cd-phase--2{--cd-accent:var(--green)}
-    .cd-phase--3{--cd-accent:var(--amber)}
+    .cd-phase--1{--cd-accent:#2563eb}
+    .cd-phase--2{--cd-accent:#16a34a}
+    .cd-phase--3{--cd-accent:#d97706}
     .cd-phase--4{--cd-accent:#6366f1}
+    .cd-phase__water{
+      position:absolute;right:8px;top:4px;font-size:64px;font-weight:900;line-height:1;
+      font-family:Inter,system-ui,sans-serif;
+      background:linear-gradient(180deg,var(--cd-accent),transparent);-webkit-background-clip:text;background-clip:text;
+      color:transparent;opacity:.14;pointer-events:none;
+    }
     .cd-phase h3{
-      font-size:15px;font-weight:900;color:var(--ink);margin-bottom:4px;
-      display:flex;align-items:flex-start;gap:8px;line-height:1.3;
+      font-size:clamp(1rem,2vw,1.05rem);font-weight:900;color:var(--ink);margin:0 0 12px;
+      display:flex;align-items:flex-start;gap:8px;line-height:1.35;position:relative;z-index:1;padding-right:48px;
     }
     .cd-phase h3 .cd-badge{
       flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
       color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
-      border-radius:6px;padding:3px 8px;margin-top:1px;
+      border-radius:8px;padding:4px 10px;margin-top:2px;
     }
     .cd-phase h4{
       font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
-      font-weight:800;margin:14px 0 8px;display:flex;align-items:center;gap:6px;
+      font-weight:800;margin:16px 0 8px;display:flex;align-items:center;gap:8px;
     }
-    .cd-phase h4 i{color:var(--cd-accent, var(--blue));opacity:.85}
+    .cd-phase h4 i{color:var(--cd-accent, var(--blue));opacity:.9;width:16px;text-align:center}
     .cd-phase p,.cd-phase li{font-size:14px;line-height:1.55;color:var(--body)}
     .cd-phase ul{padding-left:18px}
     .cd-phase li{margin-bottom:7px}
     .cd-phase li strong{color:var(--ink)}
+    .cd-split{
+      display:grid;gap:14px;margin:4px 0 8px;
+    }
+    @media(min-width:800px){
+      .cd-split{grid-template-columns:1fr 1fr;align-items:stretch}
+    }
+    .cd-panel{
+      padding:14px 14px 12px;border-radius:14px;border:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(248,250,252,.9) 100%);
+      box-shadow:0 4px 16px rgba(15,23,42,.04);
+    }
+    .cd-panel--obj{border-top:3px solid var(--cd-accent)}
+    .cd-panel--seg{border-top:3px solid #6366f1}
+    .cd-panel > h4:first-child{margin-top:0}
+    .cd-panel__kicker{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 10px}
+    .cd-chip-list{
+      list-style:none;padding:0!important;margin:0;display:flex;flex-direction:column;gap:8px;
+    }
+    .cd-chip-list li{margin:0!important}
+    .cd-chip{
+      display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;
+      font-size:13px;line-height:1.45;color:var(--body);
+      background:#fff;border:1px solid var(--border);
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
+    }
+    .cd-chip i{color:var(--cd-accent);margin-top:2px;opacity:.9}
+    .cd-hyp-grid{
+      list-style:none;padding:0!important;margin:8px 0 0;
+      display:grid;gap:10px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:640px){
+      .cd-hyp-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(min-width:1100px){
+      .cd-hyp-grid.cd-hyp-grid--5{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    .cd-hyp-card{
+      margin:0!important;padding:12px 12px 11px;border-radius:12px;
+      border:1px dashed rgba(148,163,184,.7);background:rgba(248,250,252,.8);
+      font-size:13px;line-height:1.45;color:var(--body);position:relative;
+      padding-left:36px!important;
+    }
+    .cd-hyp-card::before{
+      content:attr(data-h);position:absolute;left:10px;top:12px;font-size:11px;font-weight:900;
+      color:var(--cd-accent);opacity:.75;
+    }
+    .cd-q-list{
+      list-style:none;padding:0!important;margin:8px 0 0;
+    }
+    .cd-q-list li{
+      padding:10px 12px 10px 40px!important;margin-bottom:8px!important;border-radius:12px;
+      background:#fff;border:1px solid var(--border);position:relative;font-size:14px;line-height:1.45;
+    }
+    .cd-q-list li::before{
+      content:"\f059";font-family:"Font Awesome 6 Free";font-weight:900;
+      position:absolute;left:12px;top:11px;font-size:14px;color:var(--cd-accent);opacity:.85;
+    }
+    .cd-price-row{
+      display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px;
+    }
+    .cd-price-pill{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      font-size:13px;font-weight:800;color:var(--ink);
+      background:linear-gradient(145deg,#ecfdf5,#fff);
+      border:1px solid #86efac;box-shadow:0 4px 12px rgba(22,163,74,.1);
+    }
+    .cd-price-pill i{color:#16a34a}
+    .cd-metric-grid{
+      display:grid;gap:10px;margin:8px 0 0;
+      grid-template-columns:1fr 1fr;
+    }
+    @media(min-width:720px){
+      .cd-metric-grid{grid-template-columns:repeat(4,1fr)}
+    }
+    .cd-metric{
+      padding:10px 10px 9px;border-radius:12px;text-align:center;
+      background:linear-gradient(180deg,#eff6ff,#fff);
+      border:1px solid rgba(191,219,254,.9);font-size:12px;line-height:1.35;font-weight:700;color:var(--blue-dark);
+    }
+    .cd-metric i{display:block;font-size:1.1rem;margin-bottom:4px;color:var(--blue)}
+    .cd-pillar-grid{
+      display:grid;gap:12px;margin-top:8px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:720px){
+      .cd-pillar-grid{grid-template-columns:1fr 1fr}
+    }
+    .cd-pillar{
+      padding:12px 14px;border-radius:14px;border:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(239,246,255,.5),#fff);
+    }
+    .cd-pillar h4{margin-top:0!important}
     .cd-callout{
       margin-top:10px;padding:11px 12px;border-radius:10px;
       background:var(--blue-light);border:1px dashed var(--blue-mid);
@@ -662,6 +1205,7 @@
     .cd-callout strong{color:var(--ink)}
     .cd-grid-2{display:grid;gap:12px}
     @media(min-width:720px){.cd-grid-2{grid-template-columns:1fr 1fr}}
+    .cd-grid-2 .cd-callout{margin-top:8px}
     .cd-mini{
       font-size:12px;font-weight:700;color:var(--blue-dark);background:#fff;border:1px solid var(--border);
       border-radius:8px;padding:8px 10px;margin-top:8px;
@@ -675,26 +1219,78 @@
     }
     /* PMV — Producto mínimo viable */
     .mvp-wrap{margin-top:4px}
+    .mvp-p31-head{
+      margin:8px 0 18px;padding:16px 18px;border-radius:18px;
+      background:linear-gradient(135deg,#fffbeb 0%,#fff 50%,#eff6ff 100%);
+      border:1px solid rgba(251,191,36,.4);
+      box-shadow:0 10px 32px rgba(245,158,11,.1);
+    }
     .mvp-kicker{
-      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
-      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+      font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b45309;
+      margin:0 0 10px;display:inline-flex;align-items:center;gap:8px;
+      padding:5px 11px;border-radius:999px;background:#fff;
+      border:1px solid rgba(251,191,36,.5);box-shadow:0 2px 8px rgba(245,158,11,.12);
     }
-    .mvp-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-    .mvp-title-row h3{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:900;color:var(--ink);margin:0}
+    .mvp-kicker i{color:#d97706}
+    .mvp-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0}
+    .mvp-title-row h3{font-size:clamp(1.2rem,2.4vw,1.55rem);font-weight:900;color:var(--ink);margin:0;letter-spacing:-.02em}
     .mvp-goal{
-      margin-bottom:16px;padding:14px 16px;border-radius:14px;
-      background:linear-gradient(135deg,#fef2f2 0%,#fff 100%);
-      border:1px solid #fecaca;font-size:14px;line-height:1.55;color:#991b1b;
+      margin-bottom:20px;padding:0;border-radius:18px;overflow:hidden;
+      border:1px solid rgba(252,165,165,.85);
+      box-shadow:0 12px 36px rgba(220,38,38,.08);
+      background:#fff;
     }
-    .mvp-goal strong{color:#7f1d1d}
-    .mvp-goal .mvp-x{font-weight:900}
+    .mvp-goal__head{
+      padding:12px 16px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+      color:#991b1b;background:linear-gradient(90deg,#fef2f2,#fff1f2);
+      border-bottom:1px dashed #fecaca;display:flex;align-items:center;gap:8px;
+    }
+    .mvp-goal__head i{color:#dc2626}
+    .mvp-goal__grid{
+      display:grid;gap:0;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:700px){
+      .mvp-goal__grid{grid-template-columns:1fr 1fr}
+    }
+    .mvp-goal__no,.mvp-goal__yes{padding:16px 18px;font-size:14px;line-height:1.55}
+    .mvp-goal__no{
+      background:linear-gradient(180deg,#fff5f5,#fff);
+      border-bottom:1px dashed #fecaca;color:#991b1b;
+    }
+    @media(min-width:700px){
+      .mvp-goal__no{border-bottom:none;border-right:1px dashed #fecaca}
+    }
+    .mvp-goal__yes{background:linear-gradient(180deg,#f0fdf4,#fff);color:#14532d}
+    .mvp-goal__yes strong{color:#166534}
+    .mvp-goal__lab{
+      display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:900;letter-spacing:.1em;
+      text-transform:uppercase;margin-bottom:8px;padding:4px 10px;border-radius:999px;
+    }
+    .mvp-goal__lab--no{color:#b91c1c;background:#fee2e2}
+    .mvp-goal__lab--yes{color:#15803d;background:#dcfce7}
+    .mvp-goal .mvp-x{font-weight:900;font-size:1.05em}
+    .mvp-options-stack{display:flex;flex-direction:column;gap:14px;margin-bottom:8px}
+    @media(min-width:1100px){
+      .mvp-options-stack{
+        display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch;
+      }
+      .mvp-options-stack .mvp-option--rec{grid-column:1 / -1}
+    }
     .mvp-option{
-      border:1px solid var(--border);border-radius:14px;padding:14px 14px 12px;margin-bottom:12px;
-      background:#fff;position:relative;box-shadow:0 4px 14px rgba(15,23,42,.05);
+      border:1px solid rgba(226,232,240,.95);border-radius:18px;padding:0 0 14px;margin-bottom:0;
+      background:linear-gradient(180deg,#ffffff 0%,#fafbff 100%);
+      position:relative;box-shadow:0 8px 28px rgba(15,23,42,.07);
+      transition:transform .2s ease,box-shadow .2s ease;
     }
+    @media(hover:hover){
+      .mvp-option:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(15,23,42,.1)}
+    }
+    html.dc-reduce-motion .mvp-option{transition:none}
+    html.dc-reduce-motion .mvp-option:hover{transform:none}
     .mvp-option::before{
-      content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;
-      background:var(--mvp-accent, var(--blue));
+      content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:18px 0 0 18px;
+      background:linear-gradient(180deg,var(--mvp-accent,var(--blue)),rgba(15,23,42,.15));
     }
     .mvp-option--1{--mvp-accent:#16a34a}
     .mvp-option--2{--mvp-accent:#2563eb}
@@ -702,67 +1298,188 @@
     .mvp-option--4{--mvp-accent:#64748b}
     .mvp-option--5{--mvp-accent:#d97706}
     .mvp-option--rec{
-      border-color:rgba(22,163,74,.35);
-      background:linear-gradient(145deg,#f0fdf4 0%,#ffffff 100%);
+      border-color:rgba(22,163,74,.4);
+      background:linear-gradient(165deg,#ecfdf5 0%,#ffffff 55%);
+      box-shadow:0 10px 36px rgba(22,163,74,.12);
     }
+    .mvp-option__inner{padding:14px 16px 0 20px}
+    .mvp-option__hd{
+      display:flex;align-items:flex-start;gap:14px;margin-bottom:10px;
+    }
+    .mvp-option__ico{
+      flex-shrink:0;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem;color:#fff;
+      box-shadow:0 8px 20px rgba(15,23,42,.15);
+    }
+    .mvp-option--1 .mvp-option__ico{background:linear-gradient(145deg,#4ade80,#15803d)}
+    .mvp-option--2 .mvp-option__ico{background:linear-gradient(145deg,#60a5fa,#1d4ed8)}
+    .mvp-option--3 .mvp-option__ico{background:linear-gradient(145deg,#c084fc,#6d28d9)}
+    .mvp-option--4 .mvp-option__ico{background:linear-gradient(145deg,#94a3b8,#475569)}
+    .mvp-option--5 .mvp-option__ico{background:linear-gradient(145deg,#fbbf24,#c2410c)}
+    .mvp-option__hd-text{min-width:0;flex:1}
     .mvp-option .mvp-opt-tag{
       display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
       color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
-      border-radius:6px;padding:3px 8px;margin-bottom:6px;
+      border-radius:8px;padding:4px 10px;margin-bottom:6px;
     }
-    .mvp-option h4{font-size:15px;font-weight:900;color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .mvp-option--rec .mvp-opt-tag{
+      color:#14532d;background:#dcfce7;border-color:#86efac;
+    }
+    .mvp-option h4{font-size:16px;font-weight:900;color:var(--ink);margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;letter-spacing:-.02em}
     .mvp-option ul{padding-left:18px;margin:8px 0}
     .mvp-option li{font-size:14px;margin-bottom:6px;line-height:1.45}
-    .mvp-sub{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 0 4px}
-    .mvp-price{font-size:14px;color:var(--body);padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--border);margin-top:6px}
-    .mvp-valida{font-size:13px;margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--blue-light);color:var(--blue-dark);font-weight:600}
-    .mvp-val-section{
-      margin-top:22px;padding-top:20px;border-top:1px dashed var(--border);
+    .mvp-option-includes{
+      display:grid;gap:6px;margin:10px 0 0;
+      grid-template-columns:1fr;
     }
-    .mvp-val-section .mvp-title-row{margin-bottom:12px}
+    @media(min-width:520px){
+      .mvp-option-includes--2{grid-template-columns:1fr 1fr}
+    }
+    .mvp-option-includes li{font-size:13px;padding-left:4px}
+    .mvp-meta-grid{
+      display:grid;gap:10px;margin-top:12px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:480px){
+      .mvp-meta-grid--2{grid-template-columns:1fr 1fr}
+    }
+    .mvp-sub{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+    .mvp-price{font-size:14px;color:var(--body);padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+    .mvp-price-chips{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;
+    }
+    .mvp-price-chip{
+      flex:1 1 min(200px,100%);
+      padding:10px 12px;border-radius:12px;font-size:13px;font-weight:700;
+      background:linear-gradient(145deg,#f8fafc,#fff);border:1px solid var(--border);
+    }
+    .mvp-price-chip span{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+    .mvp-price-chip strong{font-size:15px;color:var(--ink)}
+    .mvp-valida{
+      font-size:13px;margin:12px 16px 0;padding:12px 14px;border-radius:12px;
+      background:linear-gradient(135deg,#eff6ff,#f8fafc);
+      border:1px solid rgba(191,219,254,.9);color:var(--blue-dark);font-weight:600;
+      display:flex;align-items:flex-start;gap:10px;
+    }
+    .mvp-valida::before{
+      content:"";flex-shrink:0;width:8px;height:8px;margin-top:5px;border-radius:50%;
+      background:linear-gradient(145deg,var(--blue),#6366f1);
+      box-shadow:0 0 0 3px rgba(37,99,235,.15);
+    }
+    .mvp-val-section{
+      margin-top:28px;padding:22px 18px 18px;border-radius:20px;
+      border:1px solid rgba(187,247,208,.9);
+      background:linear-gradient(165deg,#f0fdf4 0%,#ffffff 45%,#fafbff 100%);
+      box-shadow:0 14px 44px rgba(22,163,74,.1);
+    }
+    .mvp-val-section .mvp-kicker{
+      margin-bottom:12px;color:#15803d!important;
+      background:linear-gradient(135deg,#ecfdf5,#f0fdf4)!important;
+      border-color:#bbf7d0!important;
+    }
+    .mvp-val-section .mvp-kicker i{color:#16a34a}
+    .mvp-val-section .mvp-title-row{margin-bottom:14px}
     .mvp-metrics-list,.mvp-signals-list{list-style:none;padding-left:0!important;margin:0}
     .mvp-metrics-list li,.mvp-signals-list li{
-      font-size:14px;line-height:1.5;color:var(--body);padding:10px 12px;margin-bottom:8px;border-radius:10px;
-      border:1px solid var(--border);background:var(--surface);position:relative;padding-left:14px;
+      font-size:14px;line-height:1.45;color:var(--body);
+      padding:12px 14px 12px 12px;margin-bottom:10px;border-radius:14px;
+      border:1px solid var(--border);background:#fff;
+      display:flex;align-items:center;gap:12px;
+      box-shadow:0 2px 10px rgba(15,23,42,.04);
     }
     .mvp-metrics-list li strong{color:var(--ink)}
+    .mvp-metric__ico{
+      flex-shrink:0;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;color:#fff;background:linear-gradient(145deg,#86efac,#22c55e);
+      box-shadow:0 4px 12px rgba(34,197,94,.25);
+    }
+    .mvp-metrics-list li.mvp-metric--primary .mvp-metric__ico{
+      background:linear-gradient(145deg,#4ade80,#15803d);
+      box-shadow:0 6px 16px rgba(22,163,74,.3);
+    }
+    .mvp-metric__body{flex:1;min-width:0}
+    .mvp-metric__chev{
+      flex-shrink:0;color:var(--muted);opacity:.45;font-size:12px;
+    }
     .mvp-metrics-list li.mvp-metric--primary{
-      border-color:rgba(22,163,74,.45);
-      background:linear-gradient(145deg,#f0fdf4 0%,#fff 100%);
+      border-color:rgba(22,163,74,.5);
+      background:linear-gradient(145deg,#ecfdf5 0%,#fff 100%);
       font-weight:600;
     }
     .mvp-signals-list li{
-      font-style:italic;color:var(--ink);border-left:4px solid var(--amber);background:#fff;
+      color:var(--ink);border-left:4px solid #f59e0b;
+      background:linear-gradient(90deg,#fffbeb,#fff);
+      align-items:flex-start;
+    }
+    .mvp-signals-list li > span:last-child{font-style:italic;flex:1;min-width:0;padding-top:2px}
+    .mvp-signal__ico{
+      flex-shrink:0;width:36px;height:36px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#fde68a,#f59e0b);color:#fff;font-size:.85rem;
     }
     .mvp-val-h4{
       font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
-      margin:16px 0 10px;display:flex;align-items:center;gap:8px;
+      margin:18px 0 12px;display:flex;align-items:center;gap:8px;
     }
-    .mvp-val-h4:first-of-type{margin-top:4px}
+    .mvp-val-h4:first-of-type{margin-top:0}
     .mvp-val-h4 i{color:var(--green)}
     .mvp-val-h4--signals i{color:var(--amber)}
     /* Plan de validación y PMV — intro (3 tarjetas, alineado con leancanvas) */
-    .pmv-intro-head{margin-bottom:16px}
+    .pmv-intro-head{
+      margin-bottom:18px;padding:16px 18px 18px;border-radius:16px;
+      background:linear-gradient(135deg,rgba(255,251,235,.9) 0%,#fff 55%,rgba(239,246,255,.5) 100%);
+      border:1px solid rgba(254,243,199,.9);
+      box-shadow:0 6px 22px rgba(245,158,11,.06);
+    }
     .pmv-intro-head h3{
       font-size:clamp(1.15rem,2.5vw,1.45rem);color:var(--ink);font-weight:900;
       display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
     }
-    .pmv-intro-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .pmv-intro-head h3::before{
+      content:"";width:4px;height:1.15em;border-radius:3px;background:linear-gradient(180deg,#f59e0b,#d97706);
+      flex-shrink:0;
+    }
+    .pmv-intro-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.6;margin:0}
     .pmv-intro-grid{
-      display:grid;gap:14px;margin-bottom:22px;
+      display:grid;gap:16px;margin-bottom:22px;
       grid-template-columns:1fr;
     }
     @media(min-width:900px){.pmv-intro-grid{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:640px) and (max-width:899px){.pmv-intro-grid{grid-template-columns:1fr 1fr}}
     .pmv-intro-card{
-      background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px;
-      box-shadow:0 4px 14px rgba(15,23,42,.06);
+      position:relative;
+      background:linear-gradient(180deg,#ffffff 0%,#fafbff 100%);
+      border:1px solid rgba(226,232,240,.95);border-radius:16px;padding:16px 44px 16px 16px;
+      box-shadow:0 8px 26px rgba(15,23,42,.07);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
+    @media(hover:hover){
+      .pmv-intro-card:hover{
+        transform:translateY(-3px);
+        box-shadow:0 14px 36px rgba(37,99,235,.1);
+        border-color:rgba(191,219,254,.95);
+      }
+    }
+    html.dc-reduce-motion .pmv-intro-card{transition:none}
+    html.dc-reduce-motion .pmv-intro-card:hover{transform:none}
+    .pmv-intro-card__ico{
+      position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:#fff;
+      box-shadow:0 6px 16px rgba(15,23,42,.12);
+    }
+    .pmv-intro-card--a{border-top:3px solid #2563eb}
+    .pmv-intro-card--a .pmv-intro-card__ico{background:linear-gradient(145deg,#60a5fa,#2563eb)}
+    .pmv-intro-card--b{border-top:3px solid #d97706}
+    .pmv-intro-card--b .pmv-intro-card__ico{background:linear-gradient(145deg,#fbbf24,#d97706)}
+    .pmv-intro-card--c{border-top:3px solid #16a34a}
+    .pmv-intro-card--c .pmv-intro-card__ico{background:linear-gradient(145deg,#4ade80,#15803d)}
     .pmv-intro-lbl{
       font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
       margin-bottom:8px;
     }
-    .pmv-intro-card h4{font-size:16px;color:var(--ink);margin-bottom:8px;font-weight:800}
+    .pmv-intro-card--b .pmv-intro-lbl{color:#9a3412}
+    .pmv-intro-card--c .pmv-intro-lbl{color:#15803d}
+    .pmv-intro-card h4{font-size:16px;color:var(--ink);margin-bottom:8px;font-weight:800;letter-spacing:-.02em}
     .pmv-intro-card p,.pmv-intro-card li{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 8px}
     .pmv-intro-card ul{padding-left:18px;margin:8px 0 0}
     .pmv-intro-card li{margin-bottom:6px}
@@ -776,30 +1493,40 @@
     .cj-wrap{margin-top:6px}
     .cj-kicker{
       font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
-      margin-bottom:6px;display:flex;align-items:center;gap:8px;
+      margin:0 0 14px;padding:12px 14px;border-radius:14px;display:flex;align-items:center;gap:10px;
+      background:linear-gradient(135deg,#ecfeff 0%,#ffffff 60%,#f0fdfa 100%);
+      border:1px solid rgba(6,182,212,.28);
+      box-shadow:0 6px 20px rgba(6,182,212,.08);
+    }
+    .cj-kicker i{
+      width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;color:#fff;
+      background:linear-gradient(145deg,#22d3ee,#0891b2);
+      box-shadow:0 6px 16px rgba(8,145,178,.35);
     }
     .cj-persona{
-      padding:14px 16px;border-radius:14px;margin-bottom:20px;
-      border:1px solid var(--border);
-      background:linear-gradient(145deg,#ffffff 0%,var(--surface) 100%);
-      box-shadow:0 4px 14px rgba(15,23,42,.06);
-      display:flex;gap:14px;align-items:flex-start;
+      padding:16px 18px;border-radius:18px;margin-bottom:22px;
+      border:1px solid rgba(59,130,246,.28);
+      background:linear-gradient(135deg,#eff6ff 0%,#ffffff 50%,#f8fafc 100%);
+      box-shadow:0 12px 36px rgba(37,99,235,.09);
+      display:flex;gap:16px;align-items:flex-start;
     }
     .cj-persona__ico{
-      flex-shrink:0;width:44px;height:44px;border-radius:12px;
-      background:linear-gradient(145deg,var(--blue),#1d4ed8);color:#fff;
-      display:flex;align-items:center;justify-content:center;font-size:1.15rem;
-      box-shadow:0 6px 16px rgba(37,99,235,.25);
+      flex-shrink:0;width:52px;height:52px;border-radius:16px;
+      background:linear-gradient(145deg,#60a5fa,#1d4ed8);color:#fff;
+      display:flex;align-items:center;justify-content:center;font-size:1.25rem;
+      box-shadow:0 8px 22px rgba(37,99,235,.35);
     }
     .cj-persona h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 6px}
     .cj-persona p{font-size:14px;line-height:1.55;color:var(--body);margin:0}
     .cj-phase{
-      border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px;
-      background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.05);position:relative;
+      border:1px solid rgba(226,232,240,.95);border-radius:18px;padding:18px 18px 16px;margin-bottom:18px;
+      background:linear-gradient(165deg,#ffffff 0%,#f8fafc 100%);
+      box-shadow:0 10px 32px rgba(15,23,42,.07);position:relative;overflow:hidden;
     }
     .cj-phase::before{
-      content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:4px;
-      background:var(--cj-accent, var(--blue));
+      content:"";position:absolute;left:0;top:12px;bottom:12px;width:5px;border-radius:6px;
+      background:linear-gradient(180deg,var(--cj-accent, var(--blue)),rgba(15,23,42,.12));
     }
     .cj-phase--1{--cj-accent:#2563eb}
     .cj-phase--2{--cj-accent:#6366f1}
@@ -807,15 +1534,58 @@
     .cj-phase--4{--cj-accent:#d97706}
     .cj-phase--5{--cj-accent:#7c3aed}
     .cj-phase--6{--cj-accent:#e11d48}
+    .cj-water{
+      position:absolute;right:6px;top:2px;font-size:56px;font-weight:900;line-height:1;
+      font-family:Inter,system-ui,sans-serif;
+      background:linear-gradient(180deg,var(--cj-accent),transparent);-webkit-background-clip:text;background-clip:text;
+      color:transparent;opacity:.13;pointer-events:none;
+    }
     .cj-phase h3{
-      font-size:15px;font-weight:900;color:var(--ink);margin:0 0 10px;
+      font-size:clamp(1rem,2vw,1.05rem);font-weight:900;color:var(--ink);margin:0 0 12px;
       display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;line-height:1.35;
+      position:relative;z-index:1;padding-right:44px;
     }
     .cj-phase .cj-badge{
       flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
       color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
-      border-radius:6px;padding:3px 8px;
+      border-radius:8px;padding:4px 10px;
     }
+    .cj-obj--strip{
+      margin:0 0 14px;padding:12px 14px;border-radius:14px;
+      background:linear-gradient(90deg,rgba(239,246,255,.9),#fff);
+      border:1px solid rgba(191,219,254,.95);
+      font-size:14px;line-height:1.55;font-weight:600;color:var(--blue-dark);
+      display:flex;align-items:flex-start;gap:10px;
+    }
+    .cj-obj--strip > i{flex-shrink:0;margin-top:2px}
+    .cj-mosaic{
+      display:grid;gap:10px;margin:4px 0 0;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:680px){
+      .cj-mosaic{grid-template-columns:1fr 1fr}
+    }
+    .cj-tile{
+      padding:12px 14px 12px;border-radius:14px;border:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(255,255,255,.95),#f8fafc);
+      box-shadow:0 4px 14px rgba(15,23,42,.04);
+    }
+    .cj-tile h4{
+      font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+      font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:8px;
+    }
+    .cj-tile h4 i{width:16px;text-align:center}
+    .cj-tile--tp{border-top:3px solid #2563eb}
+    .cj-tile--tp h4 i{color:#2563eb}
+    .cj-tile--think{border-top:3px solid #6366f1}
+    .cj-tile--think h4 i{color:#6366f1}
+    .cj-tile--fric{border-top:3px solid #f59e0b}
+    .cj-tile--fric h4 i{color:#d97706}
+    .cj-tile--opp{border-top:3px solid #16a34a}
+    .cj-tile--opp h4 i{color:#16a34a}
+    .cj-tile ul{padding-left:18px;margin:0}
+    .cj-tile li{font-size:13px;line-height:1.45;margin-bottom:5px;color:var(--body)}
+    .cj-tile li:last-child{margin-bottom:0}
     .cj-phase h4{
       font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
       font-weight:800;margin:12px 0 6px;display:flex;align-items:center;gap:6px;
@@ -825,13 +1595,33 @@
     .cj-phase li{font-size:14px;line-height:1.5;color:var(--body);margin-bottom:6px}
     .cj-phase p.cj-obj{font-size:14px;line-height:1.55;color:var(--body);margin:0 0 4px}
     .cj-action{
-      margin-top:12px;padding:10px 12px;border-radius:10px;
-      background:var(--blue-light);border:1px dashed var(--blue-mid);
+      margin-top:14px;padding:12px 14px;border-radius:12px;
+      background:linear-gradient(90deg,#eff6ff,#f0f9ff);
+      border:1px dashed var(--blue-mid);
       font-size:14px;font-weight:700;color:var(--blue-dark);
+      display:flex;align-items:flex-start;gap:10px;
     }
-    .cj-action i{margin-right:6px;color:var(--blue)}
+    .cj-action i{margin-top:2px;color:var(--blue)}
     /* Plan de marketing */
     .pm-wrap{margin-top:8px;max-width:920px}
+    .pm-banner{
+      margin:0 0 22px;padding:18px 20px;border-radius:20px;
+      background:linear-gradient(135deg,#1e293b 0%,#334155 50%,#0f172a 100%);
+      color:#e2e8f0;box-shadow:0 18px 48px rgba(15,23,42,.22);
+      display:flex;flex-wrap:wrap;align-items:center;gap:16px;
+      border:1px solid rgba(148,163,184,.35);
+    }
+    .pm-banner__lead{
+      font-size:14px;line-height:1.55;margin:0;flex:1;min-width:220px;font-weight:600;color:#e2e8f0;
+    }
+    .pm-banner__lead i{color:#38bdf8;margin-right:8px}
+    .pm-banner__tags{display:flex;flex-wrap:wrap;gap:8px}
+    .pm-banner__tag{
+      display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;
+      font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#f1f5f9;
+    }
+    .pm-banner__tag i{font-size:.85rem;opacity:.9}
     .pm-kicker{
       font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
       margin-bottom:14px;display:flex;align-items:center;gap:8px;
@@ -1017,11 +1807,11 @@
   </div>
   <section class="section">
     <section class="panel">
-      <div class="dc-iebs-strip" data-dc-reveal data-dc-delay="0.03">
+      <!-- <div class="dc-iebs-strip" data-dc-reveal data-dc-delay="0.03">
         <p><strong>Misma línea que el pitch IEBS:</strong> Escapify convierte la gamificación en herramienta real para docentes — enlaza con la Semana del Emprendedor y el relato de producto.</p>
         <a href="./index-iebs.html"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Ver propuesta IEBS</a>
         <a class="dc-iebs--ghost" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> escapify.io</a>
-      </div>
+      </div> -->
       <div class="dc-select-shell" data-dc-reveal data-dc-delay="0.06">
         <div class="dc-select-head">
           <span class="dc-select-ico" aria-hidden="true"><i class="fa-solid fa-list-ol"></i></span>
@@ -1053,7 +1843,8 @@
 
       <article class="block active" data-block="contexto">
         <h2><span class="dc-num" aria-hidden="true">1</span> Datos contexto educativo</h2>
-        <div class="grid">
+        <p class="dc-block-tag"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Vista de mercado · cifras y actitud del profesorado</p>
+        <div class="grid grid--kpi-pop">
           <div class="kpi"><div class="n">792k</div><div class="d">Docentes no universitarios en España</div></div>
           <div class="kpi"><div class="n">8.3M</div><div class="d">Alumnado en enseñanzas no universitarias</div></div>
           <div class="kpi"><div class="n">76%</div><div class="d">Profesorado con percepción de formación inicial insuficiente</div></div>
@@ -1077,6 +1868,15 @@
         <div class="comp-block-head">
           <h2><span class="dc-num" aria-hidden="true">2</span> Análisis competitivo detallado</h2>
           <p>Comparativa de alternativas actuales vs. propuesta de Escapify — el feedback pedía más detalle aquí</p>
+        </div>
+        <p class="dc-block-tag"><i class="fa-solid fa-chess" aria-hidden="true"></i> Tabla tipo heatmap · última columna = Escapify</p>
+        <div class="dc-schematic">
+          <div class="dc-schematic__title"><i class="fa-solid fa-table-list" aria-hidden="true"></i> Matriz comparativa</div>
+          <div class="dc-schematic__legend" aria-hidden="true">
+            <span><span class="dc-dot dc-dot--yes"></span> Sí / fuerte</span>
+            <span><span class="dc-dot dc-dot--partial"></span> Parcial</span>
+            <span><span class="dc-dot dc-dot--no"></span> No / no aplica</span>
+          </div>
         </div>
         <div class="comp-table-wrap">
           <table class="comp-table">
@@ -1184,26 +1984,55 @@
 
       <article class="block" data-block="mvp">
         <h2><span class="dc-num" aria-hidden="true">3</span> PMV · Plan de validación</h2>
+        <p class="dc-block-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> De la hipótesis al experimento · opciones y métricas</p>
 
         <div class="mvp-wrap">
           <div class="pmv-intro-head">
             <h3>Plan de validación y PMV</h3>
             <p>Cómo validar monetización y captación de primeros usuarios — la pregunta central del feedback</p>
           </div>
+          <div class="dc-mini-flow" role="group" aria-label="Secuencia de validación en cuatro pasos">
+            <div class="dc-mini-flow__step">
+              <span class="dc-mini-flow__n">1</span>
+              <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+              <span class="dc-mini-flow__lbl">Nicho claro</span>
+            </div>
+            <span class="dc-mini-flow__arr" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+            <div class="dc-mini-flow__step">
+              <span class="dc-mini-flow__n">2</span>
+              <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+              <span class="dc-mini-flow__lbl">Oferta mínima</span>
+            </div>
+            <span class="dc-mini-flow__arr" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+            <div class="dc-mini-flow__step">
+              <span class="dc-mini-flow__n">3</span>
+              <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+              <span class="dc-mini-flow__lbl">Pago real</span>
+            </div>
+            <span class="dc-mini-flow__arr" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+            <div class="dc-mini-flow__step">
+              <span class="dc-mini-flow__n">4</span>
+              <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
+              <span class="dc-mini-flow__lbl">Uso en aula</span>
+            </div>
+          </div>
           <div class="pmv-intro-grid">
-            <div class="pmv-intro-card">
+            <div class="pmv-intro-card pmv-intro-card--a">
+              <span class="pmv-intro-card__ico" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span>
               <div class="pmv-intro-lbl">Perfil docente inicial</div>
               <h4>Nicho PMV</h4>
               <p>Profesorado de <strong>Infantil, Primaria y 1º-2º ESO</strong> con sensibilidad hacia innovación (STEAM, gamificación, inclusión), con expansión a formación de personas adultas y empresas. Centros tipo CSMB o con proyectos EBI/ABP. Red directa + centros cercanos.</p>
               <div class="note">Evitar dispersión: un solo perfil, una sola etapa, un solo tipo de centro como punto de partida.</div>
             </div>
-            <div class="pmv-intro-card">
+            <div class="pmv-intro-card pmv-intro-card--b">
+              <span class="pmv-intro-card__ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
               <div class="pmv-intro-lbl">Problema concreto</div>
               <h4>Qué le ahorras</h4>
               <p>No es «gamificación genérica». Es: <strong>«Diseñar un escape room real para mi clase en menos de 1 hora, con materiales listos, adaptados a mi grupo, que funcione el lunes»</strong>.</p>
               <p>Reducción estimada: de <strong>8–15 horas</strong> de diseño manual a <strong>&lt;1 hora</strong> con Escapify.</p>
             </div>
-            <div class="pmv-intro-card">
+            <div class="pmv-intro-card pmv-intro-card--c">
+              <span class="pmv-intro-card__ico" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
               <div class="pmv-intro-lbl">PMV concreto</div>
               <h4>Qué se valida primero</h4>
               <ul>
@@ -1215,78 +2044,134 @@
             </div>
           </div>
 
-          <p class="mvp-kicker"><i class="fa-solid fa-flask" aria-hidden="true"></i> Producto mínimo viable</p>
-          <div class="mvp-title-row">
-            <span class="dc-num-sub" aria-hidden="true">3.1</span>
-            <h3>Producto mínimo viable (PMV)</h3>
-          </div>
+          <header class="mvp-p31-head">
+            <p class="mvp-kicker"><i class="fa-solid fa-flask" aria-hidden="true"></i> Producto mínimo viable</p>
+            <div class="mvp-title-row">
+              <span class="dc-num-sub" aria-hidden="true">3.1</span>
+              <h3>Producto mínimo viable (PMV)</h3>
+            </div>
+          </header>
 
           <div class="mvp-goal" role="note">
-            <strong>Objetivo del PMV</strong><br/>
-            <span class="mvp-x">NO</span> es «hacer la plataforma» <i class="fa-solid fa-xmark" style="color:#dc2626" aria-hidden="true"></i><br/>
-            Es: <strong>validar si alguien paga y usa Escapify</strong> — interés, uso real y disposición a pagar antes de escalar producto.
+            <div class="mvp-goal__head"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo del PMV</div>
+            <div class="mvp-goal__grid">
+              <div class="mvp-goal__no">
+                <span class="mvp-goal__lab mvp-goal__lab--no"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Evitar</span>
+                <p><span class="mvp-x">NO</span> es «hacer la plataforma» <i class="fa-solid fa-xmark" style="color:#dc2626" aria-hidden="true"></i></p>
+              </div>
+              <div class="mvp-goal__yes">
+                <span class="mvp-goal__lab mvp-goal__lab--yes"><i class="fa-solid fa-check" aria-hidden="true"></i> Priorizar</span>
+                <p>Es: <strong>validar si alguien paga y usa Escapify</strong> — interés, uso real y disposición a pagar antes de escalar producto.</p>
+              </div>
+            </div>
           </div>
 
+          <div class="mvp-options-stack">
           <div class="mvp-option mvp-option--1 mvp-option--rec">
-            <span class="mvp-opt-tag">Opción 1 · Recomendada</span>
-            <h4><i class="fa-solid fa-suitcase" aria-hidden="true"></i> «Kit Escape Room listo para usar»</h4>
-            <p style="font-size:14px;color:var(--body);margin:0 0 8px">Incluye:</p>
-            <ul>
-              <li>1 escape room completo (ej. una era del Archivo del Tiempo).</li>
-              <li>5–10 pruebas imprimibles.</li>
-              <li>Guía docente paso a paso.</li>
-              <li>Adaptaciones básicas y narrativa incluida.</li>
-            </ul>
-            <div class="mvp-sub">Formato</div>
-            <p style="font-size:14px;margin:0">PDF descargable + editable.</p>
-            <div class="mvp-sub">Precio test</div>
-            <div class="mvp-price">Versión validación → <strong>9 €–19 €</strong> · Versión más completa → <strong>29 €</strong></div>
+            <div class="mvp-option__inner">
+              <div class="mvp-option__hd">
+                <div class="mvp-option__ico" aria-hidden="true"><i class="fa-solid fa-suitcase"></i></div>
+                <div class="mvp-option__hd-text">
+                  <span class="mvp-opt-tag">Opción 1 · Recomendada</span>
+                  <h4>«Kit Escape Room listo para usar»</h4>
+                </div>
+              </div>
+              <p style="font-size:13px;font-weight:700;color:var(--slate-label);margin:0 0 8px;text-transform:uppercase;letter-spacing:.06em">Incluye</p>
+              <ul class="mvp-option-includes mvp-option-includes--2">
+                <li>1 escape room completo (ej. una era del Archivo del Tiempo).</li>
+                <li>5–10 pruebas imprimibles.</li>
+                <li>Guía docente paso a paso.</li>
+                <li>Adaptaciones básicas y narrativa incluida.</li>
+              </ul>
+              <div class="mvp-meta-grid mvp-meta-grid--2">
+                <div>
+                  <div class="mvp-sub">Formato</div>
+                  <div class="mvp-price">PDF descargable + editable</div>
+                </div>
+                <div>
+                  <div class="mvp-sub">Precio test</div>
+                  <div class="mvp-price-chips">
+                    <div class="mvp-price-chip"><span>Validación</span><strong>9 €–19 €</strong></div>
+                    <div class="mvp-price-chip"><span>Más completo</span><strong>29 €</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="mvp-valida"><strong>Qué validas:</strong> si lo compran · si lo usan · si quieren más.</div>
           </div>
 
           <div class="mvp-option mvp-option--2">
-            <span class="mvp-opt-tag">Opción 2 · Formación</span>
-            <h4><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Taller práctico (muy potente en tu caso)</h4>
-            <ul>
-              <li><strong>2–3 h</strong> · «Crea tu escape room en clase».</li>
-              <li>Incluye materiales.</li>
-            </ul>
-            <div class="mvp-sub">Precio</div>
-            <div class="mvp-price"><strong>30 €–60 €</strong></div>
+            <div class="mvp-option__inner">
+              <div class="mvp-option__hd">
+                <div class="mvp-option__ico" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <div class="mvp-option__hd-text">
+                  <span class="mvp-opt-tag">Opción 2 · Formación</span>
+                  <h4>Taller práctico (muy potente en tu caso)</h4>
+                </div>
+              </div>
+              <ul>
+                <li><strong>2–3 h</strong> · «Crea tu escape room en clase».</li>
+                <li>Incluye materiales.</li>
+              </ul>
+              <div class="mvp-sub">Precio</div>
+              <div class="mvp-price"><strong>30 €–60 €</strong></div>
+            </div>
             <div class="mvp-valida"><strong>Qué validas:</strong> interés real · disposición a pagar · dudas reales del docente.</div>
           </div>
 
           <div class="mvp-option mvp-option--3">
-            <span class="mvp-opt-tag">Opción 3 · Concierge</span>
-            <h4><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> PMV «hecho para ti» (nivel PRO)</h4>
-            <p style="font-size:14px;color:var(--body);margin:0 0 6px">Tú haces el escape room para el docente: <strong>personalizado</strong> y <strong>adaptado a su clase</strong>.</p>
-            <div class="mvp-sub">Precio</div>
-            <div class="mvp-price"><strong>50 €–150 €</strong></div>
+            <div class="mvp-option__inner">
+              <div class="mvp-option__hd">
+                <div class="mvp-option__ico" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="mvp-option__hd-text">
+                  <span class="mvp-opt-tag">Opción 3 · Concierge</span>
+                  <h4>PMV «hecho para ti» (nivel PRO)</h4>
+                </div>
+              </div>
+              <p style="font-size:14px;color:var(--body);margin:0 0 6px">Tú haces el escape room para el docente: <strong>personalizado</strong> y <strong>adaptado a su clase</strong>.</p>
+              <div class="mvp-sub">Precio</div>
+              <div class="mvp-price"><strong>50 €–150 €</strong></div>
+            </div>
             <div class="mvp-valida"><strong>Qué validas:</strong> qué necesita de verdad · qué problemas aparecen · cómo usarán el producto.</div>
           </div>
 
           <div class="mvp-option mvp-option--4">
-            <span class="mvp-opt-tag">Opción 4 · Fake door</span>
-            <h4><i class="fa-solid fa-door-open" aria-hidden="true"></i> Antes de tener el producto completo</h4>
-            <ul>
-              <li>Landing: «Crea tu escape room en minutos».</li>
-              <li>Botón: «Empieza ahora».</li>
-            </ul>
+            <div class="mvp-option__inner">
+              <div class="mvp-option__hd">
+                <div class="mvp-option__ico" aria-hidden="true"><i class="fa-solid fa-door-open"></i></div>
+                <div class="mvp-option__hd-text">
+                  <span class="mvp-opt-tag">Opción 4 · Fake door</span>
+                  <h4>Antes de tener el producto completo</h4>
+                </div>
+              </div>
+              <ul>
+                <li>Landing: «Crea tu escape room en minutos».</li>
+                <li>Botón: «Empieza ahora».</li>
+              </ul>
+            </div>
             <div class="mvp-valida"><strong>Mides:</strong> cuántos hacen clic · cuántos dejan email.</div>
           </div>
 
           <div class="mvp-option mvp-option--5">
-            <span class="mvp-opt-tag">Opción 5 · Contenido (growth)</span>
-            <h4><i class="fa-solid fa-hashtag" aria-hidden="true"></i> Pruebas en redes</h4>
-            <ul>
-              <li>Publicar pruebas / ideas en redes.</li>
-              <li>Ver cuáles funcionan.</li>
-              <li>Ofrecer pack completo a quienes muerden.</li>
-            </ul>
+            <div class="mvp-option__inner">
+              <div class="mvp-option__hd">
+                <div class="mvp-option__ico" aria-hidden="true"><i class="fa-solid fa-hashtag"></i></div>
+                <div class="mvp-option__hd-text">
+                  <span class="mvp-opt-tag">Opción 5 · Contenido (growth)</span>
+                  <h4>Pruebas en redes</h4>
+                </div>
+              </div>
+              <ul>
+                <li>Publicar pruebas / ideas en redes.</li>
+                <li>Ver cuáles funcionan.</li>
+                <li>Ofrecer pack completo a quienes muerden.</li>
+              </ul>
+            </div>
+          </div>
           </div>
 
           <div class="mvp-val-section">
-            <p class="mvp-kicker" style="color:var(--green)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Validación</p>
+            <p class="mvp-kicker"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Validación</p>
             <div class="mvp-title-row">
               <span class="dc-num-sub" aria-hidden="true">3.2</span>
               <h3>Validación <span style="color:var(--muted);font-weight:800;font-size:.85em">(clave)</span></h3>
@@ -1294,17 +2179,33 @@
 
             <h4 class="mvp-val-h4"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Métricas que debes mirar</h4>
             <ul class="mvp-metrics-list">
-              <li class="mvp-metric--primary">¿<strong>Compran</strong>? <span style="color:var(--muted);font-weight:600">(lo más importante)</span></li>
-              <li>¿<strong>Lo usan</strong> en clase?</li>
-              <li>¿<strong>Repiten</strong>?</li>
-              <li>¿<strong>Lo recomiendan</strong>?</li>
+              <li class="mvp-metric--primary">
+                <span class="mvp-metric__ico" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></span>
+                <span class="mvp-metric__body">¿<strong>Compran</strong>? <span style="color:var(--muted);font-weight:600">(lo más importante)</span></span>
+                <span class="mvp-metric__chev" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+              </li>
+              <li>
+                <span class="mvp-metric__ico" style="background:linear-gradient(145deg,#93c5fd,#2563eb)" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></span>
+                <span class="mvp-metric__body">¿<strong>Lo usan</strong> en clase?</span>
+                <span class="mvp-metric__chev" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+              </li>
+              <li>
+                <span class="mvp-metric__ico" style="background:linear-gradient(145deg,#c4b5fd,#7c3aed)" aria-hidden="true"><i class="fa-solid fa-rotate"></i></span>
+                <span class="mvp-metric__body">¿<strong>Repiten</strong>?</span>
+                <span class="mvp-metric__chev" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+              </li>
+              <li>
+                <span class="mvp-metric__ico" style="background:linear-gradient(145deg,#fdba74,#ea580c)" aria-hidden="true"><i class="fa-solid fa-share-nodes"></i></span>
+                <span class="mvp-metric__body">¿<strong>Lo recomiendan</strong>?</span>
+                <span class="mvp-metric__chev" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+              </li>
             </ul>
 
             <h4 class="mvp-val-h4 mvp-val-h4--signals"><i class="fa-solid fa-comments" aria-hidden="true"></i> Señales de éxito</h4>
             <ul class="mvp-signals-list">
-              <li>«¿Tienes más?»</li>
-              <li>«Esto me ha funcionado genial»</li>
-              <li>«¿Lo puedo adaptar a…?»</li>
+              <li><span class="mvp-signal__ico" aria-hidden="true"><i class="fa-solid fa-quote-left"></i></span><span>«¿Tienes más?»</span></li>
+              <li><span class="mvp-signal__ico" aria-hidden="true"><i class="fa-solid fa-quote-left"></i></span><span>«Esto me ha funcionado genial»</span></li>
+              <li><span class="mvp-signal__ico" aria-hidden="true"><i class="fa-solid fa-quote-left"></i></span><span>«¿Lo puedo adaptar a…?»</span></li>
             </ul>
           </div>
 
@@ -1315,6 +2216,7 @@
       </article>
 
       <article class="block" data-block="estado">
+        <p class="dc-block-tag"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Línea de tiempo · producto vs roadmap</p>
         <div class="st4c-head">
           <h2><span class="dc-num" aria-hidden="true">4</span> Qué está funcional hoy y qué viene después</h2>
           <p>Aclaración para primeras visitas: estado actual, PMV inmediato y roadmap — <strong>dónde estamos</strong> y <strong>hacia dónde vamos</strong>.</p>
@@ -1380,6 +2282,7 @@
 
       <article class="block" data-block="funnel">
         <h2><span class="dc-num" aria-hidden="true">5</span> Embudo de captación y escalabilidad</h2>
+        <p class="dc-block-tag"><i class="fa-solid fa-filter" aria-hidden="true"></i> Esquema de tracción · de la captación a la escala</p>
         <p class="funnel-lead">Funnel desde descubrimiento hasta comunidad — responde a «¿cómo escalas desde red cercana?»</p>
         <div class="funnel-viz-wrap" data-dc-reveal data-dc-delay="0.06">
           <div class="funnel-viz-funnelbar" aria-hidden="true"></div>
@@ -1424,81 +2327,116 @@
 
       <article class="block" data-block="acciones" id="acciones-validacion">
         <h2><span class="dc-num" aria-hidden="true">6</span> Acciones de validación de mercado</h2>
+        <div class="acciones-hero">
+          <div class="acciones-hero__ico" aria-hidden="true"><i class="fa-solid fa-vials"></i></div>
+          <p class="acciones-hero__text"><strong>Ciclo de experimentos:</strong> de la hipótesis a la evidencia (entrevistas, landing, piloto, test de precio). Complementa el <strong>Customer Development</strong> y el <strong>embudo</strong>.</p>
+        </div>
         <p class="acciones-lead">El feedback pide validación real: entrevistas, tests, datos — no solo canvas teórico.</p>
-        <div class="cards-acciones">
-          <div class="card">
-            <div class="lbl">Entrevistas</div>
-            <h3>Discovery</h3>
-            <ul>
-              <li>10-15 entrevistas a docentes (perfil MVP).</li>
-              <li>5 entrevistas a alumnado (motivación, experiencia).</li>
-              <li>3 entrevistas a centros (decisores de compra).</li>
-              <li>2-3 empresas de escape rooms educativos (benchmark).</li>
-              <li>Registrar barreras de adopción y el <strong>lenguaje exacto</strong> del dolor (para copys).</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="lbl">Test de interés</div>
-            <h3>Landing + Waitlist</h3>
-            <ul>
-              <li>Landing con propuesta de valor clara (1 pantalla, 1 CTA).</li>
-              <li>CTA tipo: «Accede a la beta gratuita».</li>
-              <li>Medir: registros, tasa de clic, origen del tráfico.</li>
-              <li><strong>UTM por canal</strong> (Instagram, LinkedIn, formación presencial) para comparar canales.</li>
-              <li>A/B test de mensajes: ahorro de tiempo vs. innovación vs. inclusión.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="lbl">Piloto en aula</div>
-            <h3>Beta cerrada</h3>
-            <ul>
-              <li>5-10 docentes usan el MVP real en contexto auténtico.</li>
-              <li>Medir: ¿lo aplican?, ¿repiten?, ¿recomiendan?</li>
-              <li>Entrevistas post-uso (15-20 min) con guión corto.</li>
-              <li><strong>NPS</strong> y disposición a pago declarada vs. comportamiento.</li>
-              <li>Opcional: <strong>concierge</strong> en las 2-3 primeras aulas (onboarding 1:1) para no confundir fallo de producto con fallo de activación.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="lbl">Monetización</div>
-            <h3>Smoke test</h3>
-            <ul>
-              <li>Ofrecer pack premium (€9-19) a beta testers.</li>
-              <li>Medir <strong>conversión real</strong> (no intención en encuesta).</li>
-              <li>Test de precio con <strong>3 franjas</strong> (Van Westendorp o simple A/B).</li>
-              <li>Comparar <strong>freemium</strong> vs. pago directo (hipótesis de modelo).</li>
-              <li>Esbocear <strong>LTV proxy</strong> (retención × ticket) aunque los datos sean pocos.</li>
-            </ul>
+        <div class="acciones-pipeline">
+          <div class="cards-acciones">
+            <div class="card card--accion card--accion-1">
+              <span class="card-accion-num" aria-hidden="true">1</span>
+              <div class="card-accion-hd">
+                <span class="card-accion-ico" aria-hidden="true"><i class="fa-solid fa-comments"></i></span>
+                <div>
+                  <div class="lbl">Entrevistas</div>
+                  <h3>Discovery</h3>
+                </div>
+              </div>
+              <ul>
+                <li>10-15 entrevistas a docentes (perfil MVP).</li>
+                <li>5 entrevistas a alumnado (motivación, experiencia).</li>
+                <li>3 entrevistas a centros (decisores de compra).</li>
+                <li>2-3 empresas de escape rooms educativos (benchmark).</li>
+                <li>Registrar barreras de adopción y el <strong>lenguaje exacto</strong> del dolor (para copys).</li>
+              </ul>
+            </div>
+            <div class="card card--accion card--accion-2">
+              <span class="card-accion-num" aria-hidden="true">2</span>
+              <div class="card-accion-hd">
+                <span class="card-accion-ico" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+                <div>
+                  <div class="lbl">Test de interés</div>
+                  <h3>Landing + Waitlist</h3>
+                </div>
+              </div>
+              <ul>
+                <li>Landing con propuesta de valor clara (1 pantalla, 1 CTA).</li>
+                <li>CTA tipo: «Accede a la beta gratuita».</li>
+                <li>Medir: registros, tasa de clic, origen del tráfico.</li>
+                <li><strong>UTM por canal</strong> (Instagram, LinkedIn, formación presencial) para comparar canales.</li>
+                <li>A/B test de mensajes: ahorro de tiempo vs. innovación vs. inclusión.</li>
+              </ul>
+            </div>
+            <div class="card card--accion card--accion-3">
+              <span class="card-accion-num" aria-hidden="true">3</span>
+              <div class="card-accion-hd">
+                <span class="card-accion-ico" aria-hidden="true"><i class="fa-solid fa-flask"></i></span>
+                <div>
+                  <div class="lbl">Piloto en aula</div>
+                  <h3>Beta cerrada</h3>
+                </div>
+              </div>
+              <ul>
+                <li>5-10 docentes usan el MVP real en contexto auténtico.</li>
+                <li>Medir: ¿lo aplican?, ¿repiten?, ¿recomiendan?</li>
+                <li>Entrevistas post-uso (15-20 min) con guión corto.</li>
+                <li><strong>NPS</strong> y disposición a pago declarada vs. comportamiento.</li>
+                <li>Opcional: <strong>concierge</strong> en las 2-3 primeras aulas (onboarding 1:1) para no confundir fallo de producto con fallo de activación.</li>
+              </ul>
+            </div>
+            <div class="card card--accion card--accion-4">
+              <span class="card-accion-num" aria-hidden="true">4</span>
+              <div class="card-accion-hd">
+                <span class="card-accion-ico" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></span>
+                <div>
+                  <div class="lbl">Monetización</div>
+                  <h3>Smoke test</h3>
+                </div>
+              </div>
+              <ul>
+                <li>Ofrecer pack premium (€9-19) a beta testers.</li>
+                <li>Medir <strong>conversión real</strong> (no intención en encuesta).</li>
+                <li>Test de precio con <strong>3 franjas</strong> (Van Westendorp o simple A/B).</li>
+                <li>Comparar <strong>freemium</strong> vs. pago directo (hipótesis de modelo).</li>
+                <li>Esbocear <strong>LTV proxy</strong> (retención × ticket) aunque los datos sean pocos.</li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div class="acciones-extra">
-          <h3><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Cómo cerrar el ciclo (recomendado)</h3>
+          <div class="acciones-extra__head">
+            <h3>
+              <span class="acciones-extra__head-ico" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+              Cómo cerrar el ciclo <span style="font-weight:700;color:var(--muted);font-size:.88em">(recomendado)</span>
+            </h3>
+          </div>
           <div class="acciones-extra-grid">
-            <div class="acciones-extra-col">
-              <h4>Métricas mínimas</h4>
+            <div class="acciones-extra-cell acciones-extra-cell--m">
+              <h4><span class="ae-ico" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span> Métricas mínimas</h4>
               <ul>
                 <li><strong>Captación:</strong> visitas → registro → activación (primera actividad lista en aula).</li>
                 <li><strong>Producto:</strong> tiempo hasta primer uso, tasa de abandono en onboarding.</li>
                 <li><strong>Negocio:</strong> conversión a pago, NPS, recomendación orgánica.</li>
               </ul>
             </div>
-            <div class="acciones-extra-col">
-              <h4>Registro de aprendizajes</h4>
+            <div class="acciones-extra-cell acciones-extra-cell--l">
+              <h4><span class="ae-ico" aria-hidden="true"><i class="fa-solid fa-table-list"></i></span> Registro de aprendizajes</h4>
               <ul>
                 <li>Una tabla simple (Notion/Sheet): <strong>hipótesis → evidencia → decisión → siguiente experimento</strong>.</li>
                 <li>Evita «validar en la cabeza»: el equipo y tú mismos veis la misma verdad.</li>
               </ul>
             </div>
-            <div class="acciones-extra-col">
-              <h4>Criterios de paso de fase</h4>
+            <div class="acciones-extra-cell acciones-extra-cell--c">
+              <h4><span class="ae-ico" aria-hidden="true"><i class="fa-solid fa-flag-checkered"></i></span> Criterios de paso de fase</h4>
               <ul>
                 <li>No subir presupuesto en ads hasta que <strong>≥3 aulas</strong> usen el flujo sin intervención constante.</li>
                 <li>Antes del smoke test, tener <strong>señal de dolor</strong> repetida en entrevistas (no un solo comentario).</li>
               </ul>
             </div>
-            <div class="acciones-extra-col">
-              <h4>Experimentos rápidos</h4>
+            <div class="acciones-extra-cell acciones-extra-cell--e">
+              <h4><span class="ae-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span> Experimentos rápidos</h4>
               <ul>
                 <li>2 variantes de hero en landing (una semana cada una).</li>
                 <li>Secuencia de email de 3 correos: valor → prueba social → invitación a beta.</li>
@@ -1507,37 +2445,70 @@
             </div>
           </div>
           <div class="acciones-footnote">
-            <strong>Enlaza con:</strong> bloque <a href="./datos-contexto.html?bloque=customer-dev" style="color:var(--blue-dark);font-weight:700">Customer Development</a> (fases Blank), <a href="./datos-contexto.html?bloque=funnel" style="color:var(--blue-dark);font-weight:700">embudo</a>, <a href="./datos-contexto.html?bloque=riesgos" style="color:var(--blue-dark);font-weight:700">Hipótesis y riesgos</a> (detalle del feedback), <a href="./early-adopter.html" style="color:var(--blue-dark);font-weight:700">Early Adopter</a> y <a href="./plan-ecofin.html" style="color:var(--blue-dark);font-weight:700">Plan ecofin</a> para cifras.
+            <strong>Enlaza con:</strong> bloque <a href="./datos-contexto.html?bloque=customer-dev">Customer Development</a> (fases Blank), <a href="./datos-contexto.html?bloque=funnel">embudo</a>, <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a> (detalle del feedback), <a href="./early-adopter.html">Early Adopter</a> y <a href="./plan-ecofin.html">Plan ecofin</a> para cifras.
           </div>
         </div>
       </article>
 
       <article class="block" data-block="customer-dev">
-        <h2><span class="dc-num" aria-hidden="true">7</span> Customer Development · Escapify.io</h2>
+        <h2><span class="dc-num" aria-hidden="true">7</span> Customer Development</h2>
+        <p class="dc-block-tag"><i class="fa-solid fa-sitemap" aria-hidden="true"></i> Marco Blank · 4 fases enlazadas abajo</p>
         <div class="cd-wrap">
           <p class="cd-lead">Marco de <strong>descubrimiento → validación → creación → escala</strong> (Blank). Úsalo como guía operativa junto al PMV y las acciones de validación.</p>
+          <nav class="cd-stepper" aria-label="Saltar a fase del marco Blank">
+            <a class="cd-stepper__step cd-stepper__step--1" href="#cd-f1">
+              <span class="cd-stepper__n">1</span>
+              <span class="cd-stepper__ico" aria-hidden="true"><i class="fa-solid fa-compass"></i></span>
+              <span class="cd-stepper__lbl">Fase</span>
+              <span class="cd-stepper__name">Discovery</span>
+            </a>
+            <a class="cd-stepper__step cd-stepper__step--2" href="#cd-f2">
+              <span class="cd-stepper__n">2</span>
+              <span class="cd-stepper__ico" aria-hidden="true"><i class="fa-solid fa-clipboard-check"></i></span>
+              <span class="cd-stepper__lbl">Fase</span>
+              <span class="cd-stepper__name">Validation</span>
+            </a>
+            <a class="cd-stepper__step cd-stepper__step--3" href="#cd-f3">
+              <span class="cd-stepper__n">3</span>
+              <span class="cd-stepper__ico" aria-hidden="true"><i class="fa-solid fa-rocket"></i></span>
+              <span class="cd-stepper__lbl">Fase</span>
+              <span class="cd-stepper__name">Creation</span>
+            </a>
+            <a class="cd-stepper__step cd-stepper__step--4" href="#cd-f4">
+              <span class="cd-stepper__n">4</span>
+              <span class="cd-stepper__ico" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
+              <span class="cd-stepper__lbl">Fase</span>
+              <span class="cd-stepper__name">Company</span>
+            </a>
+          </nav>
 
           <section class="cd-phase cd-phase--1" aria-labelledby="cd-f1">
+            <span class="cd-phase__water" aria-hidden="true">1</span>
             <h3 id="cd-f1"><span class="cd-badge">Fase 1</span> <i class="fa-solid fa-compass" aria-hidden="true"></i> Customer Discovery (descubrimiento)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p>Validar que el <strong>problema es real, urgente y suficientemente importante</strong> como para que <strong>paguen</strong>.</p>
-
-            <h4><i class="fa-solid fa-user-group"></i> Segmento prioritario (no todos a la vez)</h4>
-            <p>Empieza con:</p>
-            <ul>
-              <li>Docentes innovadores de <strong>Primaria / Secundaria</strong></li>
-              <li>Interesados en <strong>gamificación</strong> o <strong>STEAM</strong></li>
-              <li>Con <strong>poca experiencia</strong> diseñando escape rooms</li>
-            </ul>
-            <div class="cd-callout">Este es tu <strong>«early adopter perfecto»</strong>.</div>
+            <div class="cd-split">
+              <div class="cd-panel cd-panel--obj">
+                <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+                <p style="margin:0">Validar que el <strong>problema es real, urgente y suficientemente importante</strong> como para que <strong>paguen</strong>.</p>
+              </div>
+              <div class="cd-panel cd-panel--seg">
+                <h4><i class="fa-solid fa-user-group"></i> Segmento prioritario</h4>
+                <p class="cd-panel__kicker">Empieza con perfiles concretos (no «todos los docentes»):</p>
+                <ul class="cd-chip-list">
+                  <li><span class="cd-chip"><i class="fa-solid fa-school" aria-hidden="true"></i> Docentes innovadores de <strong>Primaria / Secundaria</strong></span></li>
+                  <li><span class="cd-chip"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i> Interés en <strong>gamificación</strong> o <strong>STEAM</strong></span></li>
+                  <li><span class="cd-chip"><i class="fa-solid fa-hourglass-start" aria-hidden="true"></i> Con <strong>poca experiencia</strong> diseñando escape rooms</span></li>
+                </ul>
+                <div class="cd-callout" style="margin-top:12px">Este es tu <strong>«early adopter perfecto»</strong>.</div>
+              </div>
+            </div>
 
             <h4><i class="fa-solid fa-flask"></i> Hipótesis a validar</h4>
-            <ul>
-              <li>«Quiero hacer escape rooms, pero no sé cómo estructurarlos»</li>
-              <li>«No tengo tiempo para diseñar materiales»</li>
-              <li>«Necesito recursos ya hechos y adaptables»</li>
-              <li>«Me preocupa atender a la diversidad del aula»</li>
-              <li>«Lo que hay ahora es superficial (Kahoot, juegos simples)»</li>
+            <ul class="cd-hyp-grid cd-hyp-grid--5">
+              <li class="cd-hyp-card" data-h="H1">«Quiero hacer escape rooms, pero no sé cómo estructurarlos»</li>
+              <li class="cd-hyp-card" data-h="H2">«No tengo tiempo para diseñar materiales»</li>
+              <li class="cd-hyp-card" data-h="H3">«Necesito recursos ya hechos y adaptables»</li>
+              <li class="cd-hyp-card" data-h="H4">«Me preocupa atender a la diversidad del aula»</li>
+              <li class="cd-hyp-card" data-h="H5">«Lo que hay ahora es superficial (Kahoot, juegos simples)»</li>
             </ul>
 
             <h4><i class="fa-solid fa-vial"></i> Cómo validar (acción real)</h4>
@@ -1551,7 +2522,7 @@
 
             <h4><i class="fa-solid fa-comments"></i> Preguntas clave (muy importantes)</h4>
             <p>Investiga, no vendas:</p>
-            <ul>
+            <ul class="cd-q-list">
               <li>Cuéntame la última vez que intentaste hacer algo gamificado</li>
               <li>¿Qué fue lo más difícil?</li>
               <li>¿Cuánto tiempo te llevó?</li>
@@ -1572,107 +2543,124 @@
           </section>
 
           <section class="cd-phase cd-phase--2" aria-labelledby="cd-f2">
+            <span class="cd-phase__water" aria-hidden="true">2</span>
             <h3 id="cd-f2"><span class="cd-badge">Fase 2</span> <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Customer Validation (validación)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p>Validar que están <strong>dispuestos a pagar</strong> (no solo que les gusta la idea).</p>
+            <div class="cd-split">
+              <div class="cd-panel cd-panel--obj">
+                <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+                <p style="margin:0">Validar que están <strong>dispuestos a pagar</strong> (no solo que les gusta la idea).</p>
+              </div>
+              <div class="cd-panel cd-panel--seg">
+                <h4><i class="fa-solid fa-box-open"></i> Experimento clave</h4>
+                <p style="margin:0">Lanza algo como: <strong>«Kit Escape Room listo para usar en clase»</strong></p>
+                <p style="margin:8px 0 0;font-size:13px;color:var(--muted)">Mide: ¿cuántos compran?, ¿quién repite?, ¿qué feedback dan?</p>
+              </div>
+            </div>
 
             <h4><i class="fa-solid fa-cube"></i> PMV (producto mínimo viable)</h4>
-            <p><strong>No</strong> empieces con la plataforma completa. Empieza con algo así:</p>
-            <div class="cd-callout"><strong>Pack descargable + mini sistema</strong></div>
-            <ul>
-              <li>1 escape room completo (tipo Archivo del Tiempo)</li>
-              <li>Plantillas editables</li>
-              <li>5–10 pruebas reutilizables</li>
-              <li>Guía docente</li>
-            </ul>
+            <p><strong>No</strong> empieces con la plataforma completa. Empieza con:</p>
+            <div class="cd-panel" style="margin-top:10px;border-top:3px solid var(--green)">
+              <div class="cd-callout" style="margin-top:0"><strong>Pack descargable + mini sistema</strong></div>
+              <ul style="margin-bottom:0">
+                <li>1 escape room completo (tipo Archivo del Tiempo)</li>
+                <li>Plantillas editables</li>
+                <li>5–10 pruebas reutilizables</li>
+                <li>Guía docente</li>
+              </ul>
+            </div>
 
             <h4><i class="fa-solid fa-tags"></i> Test de precio</h4>
             <p>Opciones para validar:</p>
-            <ul>
-              <li>Precio bajo → <strong>9–19 €</strong></li>
-              <li>Pack más completo → <strong>29–49 €</strong></li>
-              <li>Taller + recursos → <strong>60–120 €</strong></li>
-            </ul>
+            <div class="cd-price-row">
+              <span class="cd-price-pill"><i class="fa-solid fa-tag" aria-hidden="true"></i> Entrada <strong>9–19 €</strong></span>
+              <span class="cd-price-pill"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i> Pack <strong>29–49 €</strong></span>
+              <span class="cd-price-pill"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Taller + recursos <strong>60–120 €</strong></span>
+            </div>
             <div class="cd-mini"><i class="fa-solid fa-coins" aria-hidden="true"></i> Lo importante: <strong>no regalar</strong> → validar <strong>pago real</strong>.</div>
 
-            <h4><i class="fa-solid fa-box-open"></i> Experimento clave</h4>
-            <p>Lanza algo como: <strong>«Kit Escape Room listo para usar en clase»</strong></p>
-            <p>Y mide:</p>
-            <ul>
-              <li>¿Cuántos lo compran?</li>
-              <li>¿Quién repite?</li>
-              <li>¿Qué feedback dan?</li>
-            </ul>
-
             <h4><i class="fa-solid fa-chart-line"></i> Métricas clave</h4>
-            <ul>
-              <li>% de conversión (interesados → compradores)</li>
-              <li>Feedback cualitativo</li>
-              <li>Uso real en aula</li>
-              <li>Recomendación (muy importante)</li>
-            </ul>
+            <div class="cd-metric-grid">
+              <div class="cd-metric"><i class="fa-solid fa-percent" aria-hidden="true"></i> Conversión interesados → compradores</div>
+              <div class="cd-metric"><i class="fa-solid fa-comments" aria-hidden="true"></i> Feedback cualitativo</div>
+              <div class="cd-metric"><i class="fa-solid fa-chalkboard" aria-hidden="true"></i> Uso real en aula</div>
+              <div class="cd-metric"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Recomendación</div>
+            </div>
           </section>
 
           <section class="cd-phase cd-phase--3" aria-labelledby="cd-f3">
+            <span class="cd-phase__water" aria-hidden="true">3</span>
             <h3 id="cd-f3"><span class="cd-badge">Fase 3</span> <i class="fa-solid fa-rocket" aria-hidden="true"></i> Customer Creation (crecimiento)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p>Escalar lo que <strong>ya funciona</strong>.</p>
+            <div class="cd-panel cd-panel--obj" style="margin-bottom:14px">
+              <h4 style="margin-top:0"><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+              <p style="margin:0">Escalar lo que <strong>ya funciona</strong>.</p>
+            </div>
 
             <h4><i class="fa-solid fa-route"></i> Estrategia de crecimiento</h4>
             <div class="cd-grid-2">
-              <div>
-                <p><strong>1. Contenido (top funnel)</strong></p>
-                <p><strong>Reels</strong> tipo: «3 ideas de escape room en clase», «Este profe hizo esto y fliparon»; mostrar <strong>materiales físicos</strong> (muy diferencial).</p>
-                <div class="cd-callout" style="margin-top:8px"><strong>Tencanta + Escapify</strong> se fusionan aquí.</div>
+              <div class="cd-panel" style="border-top:3px solid #f59e0b">
+                <p style="margin:0 0 12px;font-size:18px;font-weight:900;color:var(--ink)">1 · Contenido</p>
+                <p style="margin:0"><strong>Reels</strong> tipo: «3 ideas de escape room en clase», «Este profe hizo esto y fliparon»; mostrar <strong>materiales físicos</strong> (muy diferencial).</p>
               </div>
-              <div>
-                <p><strong>2. Lead magnet</strong></p>
-                <p>Escape room gratuito descargable; «5 pruebas listas para imprimir» → <strong>a cambio de email</strong>.</p>
-                <p style="margin-top:10px"><strong>3. Funnel</strong></p>
-                <p>Contenido → redes → lead magnet → email (valor + ejemplos) → venta (pack / curso / suscripción).</p>
+              <div class="cd-panel" style="border-top:3px solid #6366f1">
+                <p style="margin:0 0 12px;font-size:18px;font-weight:900;color:var(--ink)">2 · Lead magnet</p>
+                <p style="margin:0">Escape room gratuito descargable; «5 pruebas listas para imprimir» → <strong>a cambio de email</strong>.</p>
+                <p style="margin:14px 0 8px;font-size:18px;font-weight:900;color:var(--ink)">3 · Funnel</p>
+                <p style="margin:0">Contenido → redes → lead magnet → email (valor + ejemplos) → venta (pack / curso / suscripción).</p>
               </div>
             </div>
-            <div class="cd-mini" style="margin-top:10px"><strong>4. Formación como motor de ventas</strong> — tus talleres son clave: <strong>validación + ingresos + marketing</strong>.</div>
+            <div class="cd-mini" style="margin-top:10px"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <strong>4. Formación como motor de ventas</strong> — tus talleres: <strong>validación + ingresos + marketing</strong>.</div>
           </section>
 
           <section class="cd-phase cd-phase--4" aria-labelledby="cd-f4">
+            <span class="cd-phase__water" aria-hidden="true">4</span>
             <h3 id="cd-f4"><span class="cd-badge">Fase 4</span> <i class="fa-solid fa-building" aria-hidden="true"></i> Company Building (escala)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p>Convertir esto en <strong>sistema estable</strong>.</p>
+            <div class="cd-panel cd-panel--obj" style="margin-bottom:14px">
+              <h4 style="margin-top:0"><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
+              <p style="margin:0">Convertir esto en <strong>sistema estable</strong>.</p>
+            </div>
 
-            <h4><i class="fa-solid fa-diagram-project"></i> Estructura futura</h4>
-            <ul>
-              <li>Plataforma Escapify (SaaS)</li>
-              <li>Biblioteca de recursos</li>
-              <li>Generador con IA</li>
-              <li>Comunidad docente</li>
-            </ul>
+            <div class="cd-pillar-grid">
+              <div class="cd-pillar">
+                <h4><i class="fa-solid fa-diagram-project"></i> Estructura futura</h4>
+                <ul>
+                  <li>Plataforma Escapify (SaaS)</li>
+                  <li>Biblioteca de recursos</li>
+                  <li>Generador con IA</li>
+                  <li>Comunidad docente</li>
+                </ul>
+              </div>
+              <div class="cd-pillar">
+                <h4><i class="fa-solid fa-sack-dollar"></i> Líneas de negocio</h4>
+                <ul>
+                  <li>SaaS (suscripción)</li>
+                  <li>Formación</li>
+                  <li>Recursos premium</li>
+                  <li>Kits físicos</li>
+                </ul>
+              </div>
+            </div>
 
-            <h4><i class="fa-solid fa-sack-dollar"></i> Líneas de negocio claras</h4>
-            <ul>
-              <li>SaaS (suscripción)</li>
-              <li>Formación</li>
-              <li>Recursos premium</li>
-              <li>Kits físicos</li>
-            </ul>
-
-            <h4><i class="fa-solid fa-fire"></i> Tu ventaja aquí</h4>
-            <p>No empiezas desde cero:</p>
-            <ul class="cd-list-check">
-              <li>Ya tienes contenido</li>
-              <li>Ya tienes experiencia real</li>
-              <li>Ya tienes comunidad potencial</li>
-              <li>Ya tienes producto físico</li>
-            </ul>
-            <div class="cd-callout" style="margin-top:12px"><strong>Ventaja brutal</strong> respecto a una startup típica.</div>
+            
           </section>
         </div>
       </article>
 
       <article class="block" data-block="customer-journey">
         <h2><span class="dc-num" aria-hidden="true">8</span> Customer Journey</h2>
+        <p class="dc-block-tag"><i class="fa-solid fa-route" aria-hidden="true"></i> Recorrido docente · fricciones y acciones por fase</p>
         <div class="cj-wrap">
           <p class="cj-kicker"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Customer Journey</p>
+
+          <div class="cj-rail">
+            <ol class="cj-rail__list" aria-label="Resumen de fases del journey">
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-eye"></i></span><span class="cj-rail__n">1</span><span class="cj-rail__lab">Awareness</span></li>
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span><span class="cj-rail__n">2</span><span class="cj-rail__lab">Consideración</span></li>
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span><span class="cj-rail__n">3</span><span class="cj-rail__lab">Conversión</span></li>
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></span><span class="cj-rail__n">4</span><span class="cj-rail__lab">Uso</span></li>
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-heart"></i></span><span class="cj-rail__n">5</span><span class="cj-rail__lab">Retención</span></li>
+              <li><span class="cj-rail__ico" aria-hidden="true"><i class="fa-solid fa-bullhorn"></i></span><span class="cj-rail__n">6</span><span class="cj-rail__lab">Advocacy</span></li>
+            </ol>
+          </div>
 
           <div class="cj-persona">
             <div class="cj-persona__ico" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
@@ -1683,193 +2671,253 @@
           </div>
 
           <section class="cj-phase cj-phase--1" aria-labelledby="cj-f1">
+            <span class="cj-water" aria-hidden="true">1</span>
             <h3 id="cj-f1"><span class="cj-badge">Fase 1</span> <i class="fa-solid fa-compass" aria-hidden="true"></i> Descubrimiento (awareness)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Que el docente descubra Escapify y piense: «esto es justo lo que necesito».</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Instagram / TikTok (Reels)</li>
-              <li>LinkedIn (posts educativos)</li>
-              <li>Talleres / formaciones</li>
-              <li>Recomendación de otros docentes</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos del usuario</h4>
-            <ul>
-              <li>«Esto mola…»</li>
-              <li>«Yo quiero hacer algo así»</li>
-              <li>«Pero no sé cómo hacerlo»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>Cree que será complicado</li>
-              <li>Piensa que requiere mucho tiempo</li>
-              <li>No sabe por dónde empezar</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Mostrar ejemplos reales en aula</li>
-              <li>Enseñar resultados (antes/después)</li>
-              <li>Contenido muy visual (material físico + alumnado)</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: seguir la cuenta / visitar la web</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: que el docente descubra Escapify y piense: «esto es justo lo que necesito».</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Instagram / TikTok (Reels)</li>
+                  <li>LinkedIn (posts educativos)</li>
+                  <li>Talleres / formaciones</li>
+                  <li>Recomendación de otros docentes</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«Esto mola…»</li>
+                  <li>«Yo quiero hacer algo así»</li>
+                  <li>«Pero no sé cómo hacerlo»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>Cree que será complicado</li>
+                  <li>Piensa que requiere mucho tiempo</li>
+                  <li>No sabe por dónde empezar</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Mostrar ejemplos reales en aula</li>
+                  <li>Enseñar resultados (antes/después)</li>
+                  <li>Contenido muy visual (material físico + alumnado)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: seguir la cuenta / visitar la web</span></div>
           </section>
 
           <section class="cj-phase cj-phase--2" aria-labelledby="cj-f2">
+            <span class="cj-water" aria-hidden="true">2</span>
             <h3 id="cj-f2"><span class="cj-badge">Fase 2</span> <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Interés (consideration)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Que entienda que Escapify es útil y accesible.</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Web Escapify</li>
-              <li>Lead magnet (escape room gratis)</li>
-              <li>Emails</li>
-              <li>Vídeos explicativos</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
-            <ul>
-              <li>«Esto parece útil»</li>
-              <li>«¿Podré hacerlo yo?»</li>
-              <li>«¿Funcionará en mi clase?»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>Duda sobre dificultad</li>
-              <li>Miedo a que no funcione</li>
-              <li>Falta de tiempo</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Explicar «paso a paso»</li>
-              <li>Mostrar facilidad de uso</li>
-              <li>Testimonios reales</li>
-              <li>Casos de aula</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: descargar recurso gratuito / dejar email</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: que entienda que Escapify es útil y accesible.</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Web Escapify</li>
+                  <li>Lead magnet (escape room gratis)</li>
+                  <li>Emails</li>
+                  <li>Vídeos explicativos</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«Esto parece útil»</li>
+                  <li>«¿Podré hacerlo yo?»</li>
+                  <li>«¿Funcionará en mi clase?»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>Duda sobre dificultad</li>
+                  <li>Miedo a que no funcione</li>
+                  <li>Falta de tiempo</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Explicar «paso a paso»</li>
+                  <li>Mostrar facilidad de uso</li>
+                  <li>Testimonios reales</li>
+                  <li>Casos de aula</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: descargar recurso gratuito / dejar email</span></div>
           </section>
 
           <section class="cj-phase cj-phase--3" aria-labelledby="cj-f3">
+            <span class="cj-water" aria-hidden="true">3</span>
             <h3 id="cj-f3"><span class="cj-badge">Fase 3</span> <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Decisión (conversion)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Que compre su primer producto.</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Página de producto</li>
-              <li>Email marketing</li>
-              <li>Ofertas / packs</li>
-              <li>Formación</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
-            <ul>
-              <li>«Esto me puede ahorrar mucho tiempo»</li>
-              <li>«Si funciona, merece la pena»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>Precio</li>
-              <li>«¿Y si no lo uso?»</li>
-              <li>«¿Y si no me sale bien?»</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Garantía / confianza</li>
-              <li>Mostrar uso real en aula</li>
-              <li>Explicar ahorro de tiempo</li>
-              <li>Bonus (plantillas, extras)</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: compra (primer producto o formación)</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: que compre su primer producto.</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Página de producto</li>
+                  <li>Email marketing</li>
+                  <li>Ofertas / packs</li>
+                  <li>Formación</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«Esto me puede ahorrar mucho tiempo»</li>
+                  <li>«Si funciona, merece la pena»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>Precio</li>
+                  <li>«¿Y si no lo uso?»</li>
+                  <li>«¿Y si no me sale bien?»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Garantía / confianza</li>
+                  <li>Mostrar uso real en aula</li>
+                  <li>Explicar ahorro de tiempo</li>
+                  <li>Bonus (plantillas, extras)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: compra (primer producto o formación)</span></div>
           </section>
 
           <section class="cj-phase cj-phase--4" aria-labelledby="cj-f4">
+            <span class="cj-water" aria-hidden="true">4</span>
             <h3 id="cj-f4"><span class="cj-badge">Fase 4</span> <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Experiencia (uso)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Que lo use en el aula y tenga éxito.</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Material descargado</li>
-              <li>Guía docente</li>
-              <li>Vídeos de apoyo</li>
-              <li>Soporte</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
-            <ul>
-              <li>«A ver si esto funciona…»</li>
-              <li>«Vale, esto está claro»</li>
-              <li>«¡Esto ha salido genial!»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>Falta de tiempo para prepararlo</li>
-              <li>Dudas durante la implementación</li>
-              <li>Adaptación al grupo</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Guía ultra clara</li>
-              <li>Checklists</li>
-              <li>Adaptaciones incluidas</li>
-              <li>Tutoriales rápidos</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: implementarlo en clase</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: que lo use en el aula y tenga éxito.</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Material descargado</li>
+                  <li>Guía docente</li>
+                  <li>Vídeos de apoyo</li>
+                  <li>Soporte</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«A ver si esto funciona…»</li>
+                  <li>«Vale, esto está claro»</li>
+                  <li>«¡Esto ha salido genial!»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>Falta de tiempo para prepararlo</li>
+                  <li>Dudas durante la implementación</li>
+                  <li>Adaptación al grupo</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Guía ultra clara</li>
+                  <li>Checklists</li>
+                  <li>Adaptaciones incluidas</li>
+                  <li>Tutoriales rápidos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: implementarlo en clase</span></div>
           </section>
 
           <section class="cj-phase cj-phase--5" aria-labelledby="cj-f5">
+            <span class="cj-water" aria-hidden="true">5</span>
             <h3 id="cj-f5"><span class="cj-badge">Fase 5</span> <i class="fa-solid fa-heart" aria-hidden="true"></i> Satisfacción (retención)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Que repita y siga usando Escapify.</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Emails</li>
-              <li>Nuevos recursos</li>
-              <li>Comunidad</li>
-              <li>Actualizaciones</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
-            <ul>
-              <li>«Quiero más de esto»</li>
-              <li>«Esto me ha funcionado muy bien»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>Falta de continuidad</li>
-              <li>No saber qué hacer después</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Nuevos packs</li>
-              <li>Itinerarios (por eras, materias…)</li>
-              <li>Suscripción</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: nueva compra / suscripción</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: que repita y siga usando Escapify.</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Emails</li>
+                  <li>Nuevos recursos</li>
+                  <li>Comunidad</li>
+                  <li>Actualizaciones</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«Quiero más de esto»</li>
+                  <li>«Esto me ha funcionado muy bien»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>Falta de continuidad</li>
+                  <li>No saber qué hacer después</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Nuevos packs</li>
+                  <li>Itinerarios (por eras, materias…)</li>
+                  <li>Suscripción</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: nueva compra / suscripción</span></div>
           </section>
 
           <section class="cj-phase cj-phase--6" aria-labelledby="cj-f6">
+            <span class="cj-water" aria-hidden="true">6</span>
             <h3 id="cj-f6"><span class="cj-badge">Fase 6</span> <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Recomendación (advocacy)</h3>
-            <h4><i class="fa-solid fa-bullseye"></i> Objetivo</h4>
-            <p class="cj-obj">Convertirlo en embajador.</p>
-            <h4><i class="fa-solid fa-location-dot"></i> Touchpoints</h4>
-            <ul>
-              <li>Redes sociales</li>
-              <li>Comunidad docente</li>
-              <li>Centro educativo</li>
-            </ul>
-            <h4><i class="fa-solid fa-cloud"></i> Pensamientos</h4>
-            <ul>
-              <li>«Esto lo tienen que ver otros profes»</li>
-              <li>«Voy a usarlo en el cole»</li>
-            </ul>
-            <h4><i class="fa-solid fa-bolt"></i> Fricciones</h4>
-            <ul>
-              <li>No tener espacio para compartir</li>
-              <li>No sentirse reconocido</li>
-            </ul>
-            <h4><i class="fa-solid fa-lightbulb"></i> Oportunidades</h4>
-            <ul>
-              <li>Comunidad Escapify</li>
-              <li>Compartir experiencias</li>
-              <li>Mostrar casos de éxito</li>
-              <li>Reconocimiento (badges, visibilidad)</li>
-            </ul>
-            <div class="cj-action"><i class="fa-solid fa-hand-pointer"></i> Acción esperada: recomendar / compartir / escalar en centro</div>
+            <p class="cj-obj cj-obj--strip"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivo: convertirlo en embajador.</p>
+            <div class="cj-mosaic">
+              <div class="cj-tile cj-tile--tp">
+                <h4><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Touchpoints</h4>
+                <ul>
+                  <li>Redes sociales</li>
+                  <li>Comunidad docente</li>
+                  <li>Centro educativo</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--think">
+                <h4><i class="fa-solid fa-cloud" aria-hidden="true"></i> Pensamientos</h4>
+                <ul>
+                  <li>«Esto lo tienen que ver otros profes»</li>
+                  <li>«Voy a usarlo en el cole»</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--fric">
+                <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Fricciones</h4>
+                <ul>
+                  <li>No tener espacio para compartir</li>
+                  <li>No sentirse reconocido</li>
+                </ul>
+              </div>
+              <div class="cj-tile cj-tile--opp">
+                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Oportunidades</h4>
+                <ul>
+                  <li>Comunidad Escapify</li>
+                  <li>Compartir experiencias</li>
+                  <li>Mostrar casos de éxito</li>
+                  <li>Reconocimiento (badges, visibilidad)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cj-action"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> <span>Acción esperada: recomendar / compartir / escalar en centro</span></div>
           </section>
 
           <div class="note" style="margin-top:6px">Conecta con el <a href="./datos-contexto.html?bloque=funnel" style="color:var(--blue-dark);font-weight:700">embudo</a>, <a href="./datos-contexto.html?bloque=acciones" style="color:var(--blue-dark);font-weight:700">acciones de validación</a> y <a href="./early-adopter.html" style="color:var(--blue-dark);font-weight:700">Early Adopter</a>.</div>
@@ -1878,7 +2926,16 @@
 
       <article class="block" data-block="plan-marketing">
         <h2><span class="dc-num" aria-hidden="true">9</span> Plan de marketing</h2>
+        <p class="dc-block-tag"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Documento largo · secciones alternas resaltadas para lectura</p>
         <div class="pm-wrap">
+          <div class="pm-banner">
+            <p class="pm-banner__lead"><i class="fa-solid fa-map" aria-hidden="true"></i> Mapa del plan: recorre los bloques numerados; el <strong style="color:#fff">DAFO</strong> y el <strong style="color:#fff">CAME</strong> aparecen como paneles destacados.</p>
+            <div class="pm-banner__tags">
+              <span class="pm-banner__tag"><i class="fa-solid fa-crosshairs" aria-hidden="true"></i> Objetivos</span>
+              <span class="pm-banner__tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Audiencia</span>
+              <span class="pm-banner__tag"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> KPIs</span>
+            </div>
+          </div>
           <p class="pm-kicker"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Estrategia y ejecución</p>
 
           <section class="pm-section" aria-labelledby="pm-s1">
@@ -2187,7 +3244,8 @@
 
       <article class="block" data-block="riesgos" id="hipotesis-riesgos-detalle">
         <h2><span class="dc-num" aria-hidden="true">10</span> Hipótesis y riesgos</h2>
-        <div class="riesgos-detail-block">
+        <p class="dc-block-tag"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Mapa de incertidumbre · prioriza qué validar</p>
+        <div class="riesgos-detail-block riesgos-detail-block--visual">
           <h3 class="riesgos-detail-title">Hipótesis a validar y riesgos principales identificados por el feedback</h3>
           <div class="riesgos-detail-grid">
             <div class="card riesgos-detail-card">
@@ -2243,7 +3301,6 @@
     <div class="esf-journey-head">
       <span class="esf-journey-kicker"><i class="fa-solid fa-route" aria-hidden="true"></i> Recorrido sugerido</span>
       <h2 id="esf-jf-title" class="esf-journey-title">Orden de lectura</h2>
-      <p class="esf-journey-lead">Del modelo a la validación — mismo trabajo que presentas en <strong>IEBS</strong> y enlazas con <strong>La Maleta</strong>.</p>
     </div>
     <div class="section" style="padding-top: 0">
       <div class="esf-timeline-scroll">
