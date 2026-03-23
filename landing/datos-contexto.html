@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Datos del Contexto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
+      --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --green:#16a34a; --amber:#d97706; --red:#dc2626; --max:1080px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
+    .tab:hover{background:var(--blue-light)}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .tab-dropdown{position:relative}
+    .tab-dropbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer}
+    .tab-dropbtn:hover{background:var(--blue-light)}
+    .tab-dropbtn.active{background:var(--blue-light);border-color:#bfdbfe}
+    .dropdown-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;box-shadow:0 10px 24px rgba(15,23,42,.10);z-index:20}
+    .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
+    .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
+    .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
+    .hero{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#fff 100%);
+      border:1px solid var(--border);border-radius:16px;padding:24px;
+      box-shadow:0 12px 30px rgba(15,23,42,.07);
+    }
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 56% at 12% 16%, rgba(37,99,235,.12), transparent 54%);pointer-events:none}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .9fr;gap:14px;align-items:start}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;border:1px solid var(--border);border-radius:999px;
+      padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
+    }
+    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
+    .lead{margin-top:10px;color:var(--muted)}
+    .hero-side{background:#ffffffd9;border:1px solid var(--border);border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(15,23,42,.08)}
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:7px}
+    .hero-side p{font-size:13px;color:var(--muted);line-height:1.5}
+    .panel{margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px}
+    .control{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+    .control label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    select{
+      border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:var(--ink);
+      min-width:320px;font-weight:600;
+    }
+    .block{display:none}
+    .block.active{display:block}
+    .block h2{font-size:24px;color:var(--ink);font-weight:800;margin-bottom:10px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .kpi{background:#0f172a;color:#fff;border-radius:12px;padding:14px}
+    .kpi .n{font-size:28px;line-height:1;font-weight:900;color:#93c5fd}
+    .kpi .d{font-size:12px;color:#cbd5e1;margin-top:6px}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:0 6px 16px rgba(15,23,42,.06)}
+    .card h3{font-size:15px;color:var(--ink);margin-bottom:6px}
+    .card ul{padding-left:16px}
+    .card li{font-size:14px;margin-bottom:5px}
+    table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+    th{background:#0f172a;color:#fff;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+    td{padding:8px 10px;border-bottom:1px solid var(--border)}
+    tr:last-child td{border-bottom:none}
+    .note{margin-top:10px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:10px;padding:9px 10px;font-size:12px;color:var(--blue-dark)}
+    .funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:0 6px 16px rgba(15,23,42,.06)}
+    .step .icon{font-size:22px;color:var(--blue)}
+    .step .t{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-top:5px}
+    .step .d{font-size:12px;color:var(--muted);margin-top:4px}
+    @media(max-width:980px){
+      .tabs{grid-template-columns:1fr 1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .cards{grid-template-columns:1fr}
+      .funnel{grid-template-columns:1fr 1fr}
+      .hero-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+      .tabs,.grid,.funnel{grid-template-columns:1fr}
+      select{min-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <nav class="tabs">
+      <a class="tab" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
+      <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
+      <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+      <div class="tab-dropdown">
+        <button class="tab-dropbtn active" type="button"><i class="fa-solid fa-circle-info"></i>Saber más <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="dropdown-menu">
+          <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
+          <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
+          <a href="./datos-contexto.html?bloque=target">Doble target</a>
+          <a href="./datos-contexto.html?bloque=mvp">Plan de validación y MVP</a>
+          <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
+          <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
+          <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
+          <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <h1>Datos del contexto y validación</h1>
+          <p class="lead">Panel único para leer contexto educativo, competencia, target, MVP y riesgos en modo decisor.</p>
+        </div>
+        <aside class="hero-side">
+          <h3><i class="fa-solid fa-crosshairs"></i> Objetivo</h3>
+          <p>Convertir datos en decisiones de producto y mercado con foco en tracción real.</p>
+        </aside>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="control">
+        <label for="bloqueSelect">Selecciona bloque</label>
+        <select id="bloqueSelect">
+          <option value="contexto">Datos contexto educativo</option>
+          <option value="competencia">Análisis competitivo</option>
+          <option value="target">Doble target</option>
+          <option value="mvp">Plan de validación y MVP</option>
+          <option value="estado">Punto en el que estamos (4C)</option>
+          <option value="funnel">Embudo y escalabilidad</option>
+          <option value="acciones">Acciones de validación</option>
+          <option value="riesgos">Hipótesis y riesgos</option>
+        </select>
+      </div>
+
+      <article class="block active" data-block="contexto">
+        <h2>Datos contexto educativo</h2>
+        <div class="grid">
+          <div class="kpi"><div class="n">792k</div><div class="d">Docentes no universitarios en España</div></div>
+          <div class="kpi"><div class="n">8.3M</div><div class="d">Alumnado en enseñanzas no universitarias</div></div>
+          <div class="kpi"><div class="n">76%</div><div class="d">Profesorado con percepción de formación inicial insuficiente</div></div>
+          <div class="kpi"><div class="n">63%</div><div class="d">Docentes que ven la tecnología como aliada</div></div>
+        </div>
+        <div class="note">Fuentes de referencia del proyecto: MEC 2024-25 y estudios docentes recientes.</div>
+      </article>
+
+      <article class="block" data-block="competencia">
+        <h2>Análisis competitivo</h2>
+        <table>
+          <thead>
+            <tr><th>Criterio</th><th>Genially</th><th>Kahoot</th><th>Breakout EDU</th><th>Lockee.fr</th><th>Escapify</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Escape room completo</td><td>Parcial</td><td>No</td><td>Sí</td><td>Solo candados</td><td>Sí</td></tr>
+            <tr><td>Inclusión DUA</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
+            <tr><td>Maker/Físico</td><td>No</td><td>No</td><td>Sí</td><td>No</td><td>Sí</td></tr>
+            <tr><td>IA pedagógica</td><td>Básica</td><td>Básica</td><td>No</td><td>No</td><td>Sí</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Lockee.fr se integra como acelerador táctico de candados en MVP mientras Escapify consolida sistema completo.</div>
+      </article>
+
+      <article class="block" data-block="target">
+        <h2>Doble target</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Target primario: docente/formador</h3>
+            <ul>
+              <li>Ahorro de tiempo de diseño y preparación.</li>
+              <li>Menor complejidad técnica/metodológica.</li>
+              <li>Aplicación real desde Infantil hasta adultos.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Target beneficiario: alumnado/equipos</h3>
+            <ul>
+              <li>Mayor motivación y participación activa.</li>
+              <li>Inclusión y personalización real.</li>
+              <li>Transferencia a formación corporativa.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="block" data-block="mvp">
+        <h2>Plan de validación y MVP</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Nicho MVP inicial</h3>
+            <ul>
+              <li>Infantil, Primaria y primeros cursos de Secundaria.</li>
+              <li>Docentes innovadores y perfiles con urgencia de tiempo.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Qué valida el MVP</h3>
+            <ul>
+              <li>Candados + plantillas + onboarding rápido.</li>
+              <li>Primera aplicación real en aula/equipo.</li>
+              <li>Uso recurrente y disposición a pago.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="block" data-block="estado">
+        <h2>Punto en el que estamos (4C)</h2>
+        <div class="cards">
+          <div class="card"><h3>Ya funcional</h3><ul><li>Landing y narrativa de propuesta.</li><li>Demo validada (La Maleta del Tiempo).</li><li>Base metodológica e inclusiva.</li></ul></div>
+          <div class="card"><h3>MVP inmediato</h3><ul><li>Generador guiado de experiencia.</li><li>Integración candados + imprimibles.</li><li>Onboarding en menos de 30 min.</li></ul></div>
+          <div class="card"><h3>Roadmap</h3><ul><li>IA narrativa/adaptaciones.</li><li>Kits maker y marketplace.</li><li>Escala a empresa y licencias.</li></ul></div>
+        </div>
+      </article>
+
+      <article class="block" data-block="funnel">
+        <h2>Embudo y escalabilidad</h2>
+        <div class="funnel">
+          <div class="step"><div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="t">Descubrimiento</div><div class="d">SEO, redes, contenido</div></div>
+          <div class="step"><div class="icon"><i class="fa-solid fa-inbox"></i></div><div class="t">Registro</div><div class="d">Lead magnet y alta</div></div>
+          <div class="step"><div class="icon"><i class="fa-solid fa-bolt"></i></div><div class="t">Activación</div><div class="d">Primera aplicación real</div></div>
+          <div class="step"><div class="icon"><i class="fa-solid fa-sack-dollar"></i></div><div class="t">Conversión</div><div class="d">Free a premium</div></div>
+          <div class="step"><div class="icon"><i class="fa-solid fa-rocket"></i></div><div class="t">Escala</div><div class="d">Centros y empresas</div></div>
+        </div>
+      </article>
+
+      <article class="block" data-block="acciones">
+        <h2>Acciones de validación</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Discovery</h3>
+            <ul>
+              <li>10-15 entrevistas a docentes/formadores.</li>
+              <li>Entrevistas a decisores de centro/empresa.</li>
+              <li>Identificación de barreras de adopción.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Beta cerrada</h3>
+            <ul>
+              <li>5-10 pruebas reales en aula y/o equipo.</li>
+              <li>Medición de repetición y recomendación.</li>
+              <li>Test de precio con tres franjas.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="block" data-block="riesgos">
+        <h2>Hipótesis y riesgos</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Hipótesis clave</h3>
+            <ul>
+              <li>Se paga por ahorro de tiempo real.</li>
+              <li>La inclusión diferencia de verdad.</li>
+              <li>Encaje también en formación de empresa.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Riesgos</h3>
+            <ul>
+              <li>Registro sin aplicación práctica.</li>
+              <li>Resistencia al pago en educación.</li>
+              <li>Complejidad operativa en onboarding.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+  </section>
+
+  <script>
+    const select = document.getElementById("bloqueSelect");
+    const blocks = document.querySelectorAll(".block");
+    const validBlocks = new Set(["contexto","competencia","target","mvp","estado","funnel","acciones","riesgos"]);
+
+    function setBlock(value, updateUrl = true) {
+      const safe = validBlocks.has(value) ? value : "contexto";
+      select.value = safe;
+      blocks.forEach((b) => b.classList.toggle("active", b.dataset.block === safe));
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("bloque", safe);
+        window.history.replaceState({}, "", url);
+      }
+    }
+
+    select.addEventListener("change", () => setBlock(select.value, true));
+
+    const params = new URLSearchParams(window.location.search);
+    setBlock(params.get("bloque") || "contexto", false);
+  </script>
+</body>
+</html>

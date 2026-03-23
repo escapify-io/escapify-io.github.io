@@ -17,22 +17,88 @@
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
-    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
     .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
     .tab:hover{background:var(--blue-light)}
     .tab.active{background:var(--blue-light);border-color:#bfdbfe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
-    .hero{
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 50%,#fff 100%);
-      border:1px solid var(--border);border-radius:16px;padding:24px;
-      box-shadow:0 6px 18px rgba(15,23,42,.05);
+    .tab-dropdown{position:relative}
+    .tab-dropbtn{
+      width:100%;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:11px;border-radius:10px;border:1px solid var(--border);
+      background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer;
     }
-    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
-    .lead{margin-top:10px;color:var(--muted)}
+    .tab-dropbtn:hover{background:var(--blue-light)}
+    .dropdown-menu{
+      display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;
+      box-shadow:0 10px 24px rgba(15,23,42,.10);
+    }
+    .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
+    .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
+    .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
+    .hero{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
+      border:1px solid var(--border);border-radius:18px;padding:28px;
+      box-shadow:0 16px 36px rgba(15,23,42,.08);
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 85% 60% at 12% 16%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(ellipse 70% 48% at 92% 82%, rgba(15,23,42,.08), transparent 48%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;opacity:.35;
+      background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
+      pointer-events:none;
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;border:1px solid var(--border);border-radius:999px;
+      padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
+      box-shadow:0 2px 8px rgba(15,23,42,.06);
+    }
+    h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .hero-kpi{
+      display:inline-flex;align-items:baseline;gap:6px;
+      background:#fff;border:1px solid var(--blue-mid);border-radius:999px;
+      padding:7px 12px;font-size:12px;color:var(--body);font-weight:600;
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
+    }
+    .hero-kpi strong{font-size:18px;color:var(--blue);line-height:1;font-weight:900}
     .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .chip{
       font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
       color:var(--blue-dark);background:#fff;border:1px solid var(--blue-mid);
       border-radius:999px;padding:5px 10px;
+    }
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:var(--blue);color:#fff;border:1px solid var(--blue);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:800;box-shadow:0 6px 18px rgba(37,99,235,.25);
+    }
+    .btn-secondary{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+      background:#fff;color:var(--blue-dark);border:1px solid var(--blue-mid);border-radius:10px;
+      padding:11px 16px;font-size:14px;font-weight:700;
+    }
+    .hero-side{
+      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
+      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+    }
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
+    .hero-side ul{padding-left:16px}
+    .hero-side li{font-size:13px;color:var(--body);margin-bottom:6px}
+    .hero-side .mini{
+      margin-top:8px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 9px;font-size:12px;color:var(--blue-dark);font-weight:600;
     }
     .canvas{
       margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;
@@ -81,6 +147,7 @@
       .tabs{grid-template-columns:1fr 1fr}
       .canvas{grid-template-columns:1fr 1fr}
       .legend{grid-template-columns:1fr 1fr}
+      .hero-grid{grid-template-columns:1fr}
       .problem,.solution,.metrics,.value,.advantage,.channels,.segments,.costs,.revenue{grid-column:auto;grid-row:auto}
     }
     @media(max-width:640px){.tabs,.canvas,.legend{grid-template-columns:1fr}}
@@ -93,15 +160,51 @@
       <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
       <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
       <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+      <div class="tab-dropdown">
+        <button class="tab-dropbtn" type="button"><i class="fa-solid fa-circle-info"></i>Saber más <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="dropdown-menu">
+          <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
+          <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
+          <a href="./datos-contexto.html?bloque=target">Doble target</a>
+          <a href="./datos-contexto.html?bloque=mvp">Plan de validación y MVP</a>
+          <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
+          <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
+          <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
+          <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
+        </div>
+      </div>
     </nav>
 
     <div class="hero">
-      <h1>Lean Canvas · Escapify</h1>
-      <p class="lead">Modelo enfocado en ejecución real: desde Infantil hasta cualquier edad, con adaptación a formación de empresas.</p>
-      <div class="hero-chips">
-        <span class="chip">Fase 2</span>
-        <span class="chip">Visual + accionable</span>
-        <span class="chip">Educación y empresa</span>
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <h1>Lean Canvas<br/>de Escapify</h1>
+          <p class="lead">Una visión clara y accionable del modelo: problema real del docente, valor diferencial, monetización híbrida y ruta de escala desde Infantil hasta empresa.</p>
+          <div class="hero-kpis">
+            <span class="hero-kpi"><strong>792k</strong> docentes</span>
+            <span class="hero-kpi"><strong>8.3M</strong> alumnado</span>
+            <span class="hero-kpi"><strong>76%</strong> gap formativo</span>
+          </div>
+          <div class="hero-chips">
+            <span class="chip">Fase 2</span>
+            <span class="chip">Visual + accionable</span>
+            <span class="chip">Educación y empresa</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn-primary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Ver contexto</a>
+            <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Ir a plan ecofin</a>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <h3><i class="fa-solid fa-bullseye"></i> Enfoque de impacto</h3>
+          <ul>
+            <li>Resuelve sobrecarga de diseño docente.</li>
+            <li>Integra inclusión, maker y narrativa digital.</li>
+            <li>Escala por licencias y formación.</li>
+          </ul>
+          <div class="mini"><i class="fa-solid fa-rocket"></i> Objetivo inmediato: validar uso real en aula/equipo y conversión a premium.</div>
+        </aside>
       </div>
     </div>
 

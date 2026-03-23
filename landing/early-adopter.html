@@ -12,32 +12,86 @@
     :root{--blue:#2563eb;--blue-dark:#1e40af;--blue-light:#eff6ff;--ink:#0f172a;--body:#374151;--muted:#64748b;--border:#e2e8f0;--surface:#f8fafc;--white:#fff;--max:980px}
     *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,system-ui,sans-serif;background:var(--surface);color:var(--body)}
     .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
-    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
-    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700}
+    .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;transition:.15s ease}
+    .tab:hover{background:var(--blue-light)}
     .tab.active{background:var(--blue-light);border-color:#bfdbfe}
-    .hero{background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 50%,#fff 100%);border:1px solid var(--border);border-radius:16px;padding:24px}
+    .tab-dropdown{position:relative}
+    .tab-dropbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700;cursor:pointer}
+    .tab-dropbtn:hover{background:var(--blue-light)}
+    .dropdown-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;box-shadow:0 10px 24px rgba(15,23,42,.10);z-index:20}
+    .tab-dropdown:hover .dropdown-menu,.tab-dropdown:focus-within .dropdown-menu{display:block}
+    .dropdown-menu a{display:block;text-decoration:none;color:var(--body);font-size:13px;font-weight:600;padding:8px 10px;border-radius:8px}
+    .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue-dark)}
+    .hero{
+      position:relative;overflow:hidden;
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#fff 100%);
+      border:1px solid var(--border);border-radius:16px;padding:24px;
+      box-shadow:0 12px 30px rgba(15,23,42,.07);
+    }
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 14% 16%, rgba(37,99,235,.13), transparent 56%);pointer-events:none}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr .9fr;gap:14px;align-items:start}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;border:1px solid var(--border);border-radius:999px;
+      padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
+    }
     h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
     .lead{margin-top:10px;color:var(--muted)}
+    .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .hero-kpi{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border:1px solid #dbeafe;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:600;color:var(--body)}
+    .hero-kpi strong{font-size:18px;color:var(--blue);font-weight:900;line-height:1}
+    .hero-side{background:#ffffffd9;border:1px solid var(--border);border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(15,23,42,.08)}
+    .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:7px}
+    .hero-side p{font-size:13px;color:var(--muted);line-height:1.5}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-    .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 6px 16px rgba(15,23,42,.06);transition:.2s ease}
+    .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10);border-color:#bfd6ff}
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:6px}
-    @media(max-width:900px){.tabs,.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:900px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <section class="section">
     <nav class="tabs">
-      <a class="tab" href="./leancanvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
       <a class="tab active" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
       <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
       <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+      <div class="tab-dropdown">
+        <button class="tab-dropbtn" type="button"><i class="fa-solid fa-circle-info"></i>Saber más <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="dropdown-menu">
+          <a href="./datos-contexto.html?bloque=contexto">Datos contexto educativo</a>
+          <a href="./datos-contexto.html?bloque=competencia">Análisis competitivo</a>
+          <a href="./datos-contexto.html?bloque=target">Doble target</a>
+          <a href="./datos-contexto.html?bloque=mvp">Plan de validación y MVP</a>
+          <a href="./datos-contexto.html?bloque=estado">Punto en el que estamos (4C)</a>
+          <a href="./datos-contexto.html?bloque=funnel">Embudo y escalabilidad</a>
+          <a href="./datos-contexto.html?bloque=acciones">Acciones de validación</a>
+          <a href="./datos-contexto.html?bloque=riesgos">Hipótesis y riesgos</a>
+        </div>
+      </div>
     </nav>
     <div class="hero">
-      <h1>Early Adopter</h1>
-      <p class="lead">Perfil inicial para validar con rapidez: desde Infantil y Primaria hasta formación adulta y empresa.</p>
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
+          <h1>Early Adopter</h1>
+          <p class="lead">Define el perfil que activa primero, compra antes y acelera validación desde aula a empresa.</p>
+          <div class="hero-kpis">
+            <span class="hero-kpi"><strong>30-40</strong> perfil inicial</span>
+            <span class="hero-kpi"><strong>10-15</strong> entrevistas objetivo</span>
+            <span class="hero-kpi"><strong>&lt;30m</strong> tiempo de onboarding</span>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <h3><i class="fa-solid fa-user-check"></i> Clave</h3>
+          <p>No vender a “todo el mundo”. Validar primero con quien ya tiene dolor de tiempo y ganas de aplicar.</p>
+        </aside>
+      </div>
     </div>
     <div class="grid">
       <article class="card">
