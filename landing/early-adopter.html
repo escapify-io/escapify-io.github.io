@@ -12,15 +12,45 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --slate-label:#475569;
       --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      background:linear-gradient(160deg,#e0e9f8 0%,#eef2ff 40%,#f8fafc 100%);
       border-bottom:1px solid var(--border);
     }
+    .ea-hero-mesh{
+      position:absolute;inset:-28% -18% -22% -18%;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 48% 40% at 72% 16%, rgba(99,102,241,.14), transparent 55%),
+        radial-gradient(ellipse 42% 38% at 14% 78%, rgba(37,99,235,.15), transparent 50%),
+        radial-gradient(ellipse 32% 28% at 88% 80%, rgba(14,165,233,.1), transparent 45%);
+      opacity:.78;
+      transform:translate(var(--ea-mx,0), var(--ea-my,0));
+      will-change:transform;
+      animation:ea-mesh-breathe 16s ease-in-out infinite alternate;
+    }
+    @keyframes ea-mesh-breathe{
+      0%{filter:hue-rotate(-5deg) saturate(1.05);opacity:.74}
+      100%{filter:hue-rotate(6deg) saturate(1.1);opacity:.84}
+    }
+    html.ea-reduce-motion .ea-hero-mesh{animation:none}
+    .ea-float{
+      position:absolute;pointer-events:none;z-index:1;
+      color:rgba(37,99,235,.26);font-size:clamp(1.8rem,3.2vw,2.8rem);
+      animation:ea-float 8s ease-in-out infinite;
+    }
+    .ea-float--1{top:10%;right:6%;animation-delay:-1.2s}
+    .ea-float--2{bottom:20%;right:11%;font-size:clamp(1.4rem,2.4vw,2rem);animation-delay:-3s;opacity:.88}
+    .ea-float--3{top:38%;left:3%;font-size:clamp(1.2rem,2vw,1.7rem);animation-delay:-2.5s;opacity:.72}
+    @keyframes ea-float{
+      0%,100%{transform:translateY(0) rotate(-5deg)}
+      50%{transform:translateY(-14px) rotate(5deg)}
+    }
+    html.ea-reduce-motion .ea-float{animation:none}
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
       background:
@@ -64,6 +94,7 @@
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
       border:1px solid var(--border);border-radius:18px;padding:28px;
       box-shadow:0 16px 36px rgba(15,23,42,.08);
+      isolation:isolate;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -77,15 +108,27 @@
       background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
       pointer-events:none;
     }
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    .hero h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
-    .hero .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
+    .hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.05;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    .hero h1 .ea-gradient{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 38%,#6366f1 68%,#0ea5e9 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero .lead{margin-top:14px;color:var(--muted);font-size:clamp(16px,1.9vw,18px);max-width:720px;line-height:1.65}
+    .ea-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .ea-chip{
+      font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--blue-dark);background:rgba(255,255,255,.9);
+      border:1px solid var(--blue-mid);border-radius:999px;padding:6px 11px;
+      box-shadow:0 2px 10px rgba(37,99,235,.07);
+    }
+    .ea-chip i{margin-right:5px;font-size:11px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hero-kpi{
       display:inline-flex;align-items:baseline;gap:6px;
@@ -106,8 +149,17 @@
       padding:11px 16px;font-size:14px;font-weight:700;
     }
     .hero-side{
-      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(255,255,255,.82));
+      border:1px solid rgba(191,219,254,.95);border-radius:16px;padding:16px 15px;
+      box-shadow:0 8px 28px rgba(37,99,235,.1),0 1px 0 rgba(255,255,255,.95) inset;
+      backdrop-filter:blur(10px);position:relative;overflow:hidden;
+    }
+    .hero-side::before{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
+      background:linear-gradient(135deg,rgba(37,99,235,.35),transparent 42%,rgba(14,165,233,.18));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.55;
     }
     .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
     .hero-side ul{padding-left:16px}
@@ -126,8 +178,16 @@
       margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;
       box-shadow:0 8px 24px rgba(15,23,42,.06);
     }
-    .canvas-title{font-size:24px;color:var(--ink);font-weight:900;letter-spacing:-.4px}
-    .canvas-sub{font-size:14px;color:var(--muted);margin-top:4px}
+    /* Canvas operativo — mismas proporciones que lean-canvas (section-head) */
+    .canvas-head-block{margin-bottom:4px}
+    .canvas-head-block .canvas-title{
+      font-size:clamp(1.45rem,2.8vw,1.9rem);color:var(--ink);font-weight:900;letter-spacing:-.4px;
+      line-height:1.15;margin:0;
+    }
+    .canvas-head-block .canvas-sub{
+      margin-top:14px;font-size:17px;line-height:1.55;color:var(--muted);max-width:720px;
+    }
+    .canvas-head-block .canvas-sub strong{color:var(--ink);font-weight:700}
     .canvas-grid{
       margin-top:14px;display:grid;gap:10px;
       grid-template-columns:1.1fr 1.1fr 1fr 1fr;
@@ -145,12 +205,24 @@
     .canvas-box{
       background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;
       box-shadow:0 2px 8px rgba(15,23,42,.04);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
+    @media(hover:hover){
+      .canvas-box:hover{
+        transform:translateY(-3px);
+        box-shadow:0 12px 28px rgba(15,23,42,.1);
+        border-color:#c7d7fe;
+      }
+    }
+    html.ea-reduce-motion .canvas-box{transition:none}
+    html.ea-reduce-motion .canvas-box:hover{transform:none;box-shadow:0 2px 8px rgba(15,23,42,.04)}
     .canvas-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
     .canvas-box h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);font-weight:800;display:flex;align-items:center;gap:7px}
-    .num{
+    /* Número pequeño en cada casilla del canvas (no confundir con .section-head .num) */
+    .canvas-box .canvas-head .num{
       min-width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
-      background:var(--blue-light);border:1px solid var(--blue-mid);font-size:12px;font-weight:800;color:var(--blue-dark)
+      background:var(--blue-light);border:1px solid var(--blue-mid);font-size:12px;font-weight:800;color:var(--blue-dark);
+      box-shadow:none;padding:0;
     }
     .canvas-box ul{padding-left:16px}
     .canvas-box li{font-size:13px;margin-bottom:5px}
@@ -168,20 +240,32 @@
     .interview p{font-size:13px;color:var(--body);margin-top:6px}
     .interview ul{padding-left:16px;margin-top:6px}
     .interview li{font-size:13px;color:var(--body);margin-bottom:4px}
-    /* Early adopter — bloque detallado */
-    .ea-kicker{
-      font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);
-      margin-bottom:8px;display:flex;align-items:center;gap:8px;
+    /* Cabeceras de sección — mismo sistema que lean-canvas.html */
+    .section-overline{
+      display:flex;align-items:center;gap:8px;
+      font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--slate-label);margin:0 0 10px;
     }
-    .ea-page-title{
-      font-size:clamp(1.35rem,2.8vw,1.85rem);font-weight:900;color:var(--ink);letter-spacing:-.4px;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;
+    .section-overline i{font-size:0.95em;opacity:.9}
+    .section-head{margin:22px 0 0;padding:0 0 4px}
+    .ea-chapter .section-head:first-of-type,
+    .section > .section-overline + .section-head{margin-top:0}
+    .section-head-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .section-head .num,.section-head-row .num{
+      flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+      min-width:36px;height:36px;padding:0 8px;border-radius:10px;
+      background:var(--blue);color:#fff;font-size:17px;font-weight:900;line-height:1;
+      box-shadow:0 4px 14px rgba(37,99,235,.28);
     }
-    .ea-page-title .ea-num{
-      display:inline-flex;align-items:center;justify-content:center;
-      min-width:36px;height:36px;border-radius:11px;background:var(--blue);color:#fff;font-size:15px;font-weight:900;
+    .section-head h2,.section-head-row h2{
+      font-size:clamp(1.45rem,2.8vw,1.9rem);color:var(--ink);font-weight:900;letter-spacing:-.4px;
+      line-height:1.15;margin:0;
     }
-    .ea-lead{font-size:14px;color:var(--muted);max-width:720px;line-height:1.55;margin-bottom:20px}
+    .section-desc{
+      margin-top:14px;font-size:17px;line-height:1.55;color:var(--muted);max-width:720px;
+    }
+    .section-desc strong{color:var(--ink);font-weight:700}
+    .ea-lead{font-size:17px;color:var(--muted);max-width:720px;line-height:1.55;margin-bottom:20px}
     .ea-grid{
       display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;
     }
@@ -189,7 +273,13 @@
     .ea-panel{
       background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 18px 16px;
       box-shadow:0 8px 24px rgba(15,23,42,.06);position:relative;overflow:hidden;
+      transition:transform .2s ease,box-shadow .2s ease;
     }
+    @media(hover:hover){
+      .ea-panel:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,23,42,.1)}
+    }
+    html.ea-reduce-motion .ea-panel{transition:none}
+    html.ea-reduce-motion .ea-panel:hover{transform:none}
     .ea-panel::before{
       content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:4px;
       background:var(--ea-bar, var(--blue));
@@ -254,48 +344,42 @@
       .tabs,.grid{grid-template-columns:1fr}
       .canvas-grid{grid-template-columns:1fr;grid-template-areas:"segmento" "objetivos" "acciones" "problemas" "soluciones" "beneficios" "producto";}
     }
-    /* Doble target + personas (antes en datos-contexto) */
+    /* Doble target + personas */
     .dt-block-head{margin-bottom:14px}
-    .dt-block-head h2{
-      font-size:clamp(1.15rem,2.5vw,1.5rem);color:var(--ink);font-weight:900;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;line-height:1.25;
-    }
-    .dt-block-head .dt-num{
-      display:inline-flex;align-items:center;justify-content:center;
-      min-width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;
-      font-size:14px;font-weight:900;flex-shrink:0;
-    }
-    .dt-block-head p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .dt-block-head .section-desc{margin-top:14px}
     .dt-grid{display:grid;gap:14px;grid-template-columns:1fr}
     @media(min-width:860px){.dt-grid{grid-template-columns:1fr 1fr}}
     .dt-card{
       background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 18px 16px;
       box-shadow:0 6px 18px rgba(15,23,42,.07);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    @media(hover:hover){
+      .dt-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,23,42,.1)}
     }
     .dt-card .dt-lbl{
-      font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-dark);
-      margin-bottom:10px;
+      font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+      margin-bottom:7px;
     }
-    .dt-card h3{font-size:17px;color:var(--ink);margin-bottom:10px;font-weight:800;letter-spacing:-.2px}
+    /* Pregunta principal (no es el h3 compacto del lienzo; va tras .dt-lbl tipo .sub) */
+    .dt-card h3{font-size:15px;color:var(--ink);margin-bottom:10px;font-weight:800;letter-spacing:-.2px;line-height:1.3}
     .dt-card ul{padding-left:18px;margin:0}
     .dt-card li{font-size:14px;margin-bottom:8px;line-height:1.55;color:var(--body)}
     .dt-card li strong{color:var(--ink)}
     .dt-card .note{margin-top:12px;font-size:13px;line-height:1.5}
-    .ea-subhead{margin-top:28px;margin-bottom:14px;padding-top:22px;border-top:1px dashed var(--border)}
-    .ea-subhead h3{
-      font-size:clamp(1.05rem,2.2vw,1.35rem);color:var(--ink);font-weight:900;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;line-height:1.25;
+    .ea-subhead.section-head{
+      margin-top:28px;margin-bottom:14px;padding-top:22px;border-top:1px dashed var(--border);
     }
-    .ea-subhead .ea-num-badge{
-      font-size:13px;font-weight:900;color:var(--blue-dark);background:var(--blue-light);border:1px solid var(--blue-mid);
-      padding:5px 11px;border-radius:10px;letter-spacing:.02em;
-    }
-    .ea-subhead p{font-size:14px;color:var(--muted);max-width:900px;line-height:1.55}
+    .ea-subhead .section-desc{margin-top:14px}
     .ea-persona-grid{display:grid;gap:14px;grid-template-columns:1fr}
     @media(min-width:800px){.ea-persona-grid{grid-template-columns:1fr 1fr}}
     .ea-persona{
       background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;
       box-shadow:0 4px 14px rgba(15,23,42,.06);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    @media(hover:hover){
+      .ea-persona:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1)}
     }
     .ea-persona .ea-name{
       font-family:Georgia,'Times New Roman',serif;font-size:1.28rem;font-weight:700;color:var(--ink);
@@ -306,10 +390,18 @@
     .ea-persona li{font-size:14px;line-height:1.55;margin-bottom:6px;color:var(--body)}
     .ea-persona li strong{color:var(--ink)}
     .ea-chapter{margin-bottom:8px}
+    /* Scroll reveal (alineado con lean-canvas) */
+    [data-ea-reveal]{
+      opacity:0;transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.2,.8,.2,1),transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+    html.ea-motion-ok [data-ea-reveal].ea-revealed{opacity:1;transform:translateY(0)}
+    html.ea-reduce-motion [data-ea-reveal]{opacity:1;transform:none;transition:none}
   </style>
 </head>
 <body>
   <div class="hero-wrap">
+    <div class="ea-hero-mesh" data-ea-mesh aria-hidden="true"></div>
   <section class="section">
     <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
     <nav class="tabs" aria-label="Navegación Fase 2">
@@ -334,24 +426,35 @@
       </div>
     </nav>
     <div class="hero">
+        <span class="ea-float ea-float--1" aria-hidden="true"><i class="fa-solid fa-users"></i></span>
+        <span class="ea-float ea-float--2" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+        <span class="ea-float ea-float--3" aria-hidden="true"><i class="fa-solid fa-user-check"></i></span>
       <div class="hero-grid">
         <div>
-          <span class="hero-badge"><i class="fa-solid fa-user-check"></i>Fase 2 · Cliente ideal inicial</span>
-          <h1>Early Adopter</h1>
-          <p class="lead">No es <strong>cualquier docente</strong>: es quien enseña en <strong>Primaria o Secundaria</strong>, ya mueve <strong>gamificación</strong>, busca <strong>impacto real</strong> y está <strong>dispuesto a invertir tiempo o dinero</strong> en mejorar su práctica.</p>
-          <div class="hero-kpis">
+          <span class="hero-badge" data-ea-reveal data-ea-delay="0"><i class="fa-solid fa-user-check"></i>Fase 2 · Cliente ideal inicial</span>
+          <h1 data-ea-reveal data-ea-delay="0.04">
+            <span class="ea-gradient">Early Adopter</span><br/>quién valida primero
+          </h1>
+          <p class="lead" data-ea-reveal data-ea-delay="0.08">No es <strong>cualquier docente</strong>: es quien enseña en <strong>Primaria o Secundaria</strong>, ya mueve <strong>gamificación</strong>, busca <strong>impacto real</strong> y está <strong>dispuesto a invertir tiempo o dinero</strong> en mejorar su práctica.</p>
+          <div class="ea-chip-row" data-ea-reveal data-ea-delay="0.1">
+            <span class="ea-chip"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Educativo</span>
+            <span class="ea-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Proactivo</span>
+            <span class="ea-chip"><i class="fa-solid fa-comments" aria-hidden="true"></i> Validable</span>
+          </div>
+          <div class="hero-kpis" data-ea-reveal data-ea-delay="0.12">
             <span class="hero-kpi"><strong>P/S</strong> Primaria · Secundaria</span>
             <span class="hero-kpi"><strong>Activo</strong> Genially / Kahoot+</span>
             <span class="hero-kpi"><strong>15–20</strong> entrevistas</span>
           </div>
-          <div class="hero-actions">
+          <div class="hero-actions" data-ea-reveal data-ea-delay="0.15">
             <a class="btn-secondary" href="#doble-target"><i class="fa-solid fa-people-group"></i>Doble target</a>
             <a class="btn-primary" href="./datos-contexto.html?bloque=customer-dev"><i class="fa-solid fa-user-group"></i>Customer Development</a>
             <a class="btn-secondary" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de valor</a>
             <a class="btn-secondary" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+            <a class="btn-secondary" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i>escapify.io</a>
           </div>
         </div>
-        <aside class="hero-side">
+        <aside class="hero-side" data-ea-reveal data-ea-delay="0.18">
           <h3><i class="fa-solid fa-brain"></i> Perfil psicológico</h3>
           <ul>
             <li>Curioso/a e <strong>inconformista</strong> con lo tradicional.</li>
@@ -366,10 +469,13 @@
   </div>
 
   <section class="section ea-chapter" aria-labelledby="ea-dt-heading">
-    <p class="ea-kicker"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Doble target</p>
-    <div class="dt-block-head" id="doble-target">
-      <h2 id="ea-dt-heading"><span class="dt-num" aria-hidden="true">1</span> Doble target: Docente + Alumno</h2>
-      <p>El feedback recomienda no centrarse solo en el profesor — incluir motivaciones y problemas del alumno. Aquí va <strong>pareado</strong> con el early adopter que validas comercialmente.</p>
+    <p class="section-overline" data-ea-reveal data-ea-delay="0.02"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Doble target</p>
+    <div class="section-head dt-block-head" id="doble-target" data-ea-reveal data-ea-delay="0.04">
+      <div class="section-head-row">
+        <span class="num" aria-hidden="true">1</span>
+        <h2 id="ea-dt-heading">Doble target: Docente + Alumno</h2>
+      </div>
+      <p class="section-desc">El feedback recomienda no centrarse solo en el profesor — incluir motivaciones y problemas del alumno. Aquí va <strong>pareado</strong> con el early adopter que validas comercialmente.</p>
     </div>
     <div class="dt-grid">
       <div class="dt-card">
@@ -397,9 +503,12 @@
       </div>
     </div>
 
-    <div class="ea-subhead" id="ea-personas">
-      <h3><span class="ea-num-badge" aria-hidden="true">2</span> Personas concretas · Early adopters</h3>
-      <p>Perfiles más específicos para orientar mensaje, canal y validación comercial (equivalente al bloque 4B del Lean Canvas extendido).</p>
+    <div class="ea-subhead section-head" id="ea-personas" data-ea-reveal data-ea-delay="0.05">
+      <div class="section-head-row">
+        <span class="num" aria-hidden="true">2</span>
+        <h2 id="ea-personas-heading">Personas concretas · Early adopters</h2>
+      </div>
+      <p class="section-desc">Perfiles más específicos para orientar mensaje, canal y validación comercial (equivalente al bloque 4B del Lean Canvas extendido).</p>
     </div>
     <div class="ea-persona-grid">
       <article class="ea-persona" aria-labelledby="ea-persona-laura">
@@ -424,11 +533,14 @@
   </section>
 
   <section class="section" aria-labelledby="ea-main-heading">
-    <p class="ea-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cliente ideal inicial</p>
-    <h2 id="ea-main-heading" class="ea-page-title">
-      <span class="ea-num">3</span> Early Adopter · perfil concreto
-    </h2>
-    <p class="ea-lead">El early adopter de Escapify <strong>no es genérico</strong>: hay que reconocerlo por comportamiento (herramientas, actitud, contexto) y por <strong>dolor + valor</strong> compartidos.</p>
+    <p class="section-overline" data-ea-reveal data-ea-delay="0.02"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cliente ideal inicial</p>
+    <div class="section-head" data-ea-reveal data-ea-delay="0.04">
+      <div class="section-head-row">
+        <span class="num" aria-hidden="true">3</span>
+        <h2 id="ea-main-heading">Early Adopter · perfil concreto</h2>
+      </div>
+    </div>
+    <p class="ea-lead section-desc" data-ea-reveal data-ea-delay="0.06">El early adopter de Escapify <strong>no es genérico</strong>: hay que reconocerlo por comportamiento (herramientas, actitud, contexto) y por <strong>dolor + valor</strong> compartidos.</p>
 
     <div class="ea-grid">
       <div class="ea-panel ea-panel--profile">
@@ -483,7 +595,7 @@
       </div>
     </div>
 
-    <div class="ea-locate">
+    <div class="ea-locate" data-ea-reveal data-ea-delay="0.06">
       <h3><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Dónde encontrarlo</h3>
       <ul>
         <li><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram (cuentas educativas)</li>
@@ -495,8 +607,10 @@
     </div>
 
     <div class="canvas-wrap">
-      <h2 class="canvas-title">Canvas Early Adopter &amp; Propuesta de Valor</h2>
-      <p class="canvas-sub">Complemento operativo: 7 bloques + entrevistas para validar hipótesis. Alinea cada casilla con el perfil concreto de arriba.</p>
+      <div class="canvas-head-block" data-ea-reveal data-ea-delay="0.03">
+        <h2 class="canvas-title">Canvas Early Adopter &amp; Propuesta de Valor</h2>
+        <p class="canvas-sub" data-ea-reveal data-ea-delay="0.05">Complemento operativo: 7 bloques + entrevistas para validar hipótesis. Alinea cada casilla con el perfil concreto de arriba.</p>
+      </div>
 
       <div class="canvas-grid">
         <article class="canvas-box c-objetivos">
@@ -595,5 +709,6 @@
       </article>
     </div>
   </section>
+  <script src="./js/early-adopter-effects.js" defer></script>
 </body>
 </html>

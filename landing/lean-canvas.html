@@ -20,9 +20,38 @@
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
     .hero-wrap{
       position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 52%,#ffffff 100%);
+      background:linear-gradient(160deg,#e0e9f8 0%,#eef2ff 40%,#f8fafc 100%);
       border-bottom:1px solid var(--border);
     }
+    .lc-hero-mesh{
+      position:absolute;inset:-28% -18% -22% -18%;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 48% 40% at 72% 16%, rgba(99,102,241,.14), transparent 55%),
+        radial-gradient(ellipse 42% 38% at 12% 78%, rgba(37,99,235,.15), transparent 50%),
+        radial-gradient(ellipse 32% 28% at 88% 82%, rgba(14,165,233,.1), transparent 45%);
+      opacity:.78;
+      transform:translate(var(--lc-mx,0), var(--lc-my,0));
+      will-change:transform;
+      animation:lc-mesh-breathe 16s ease-in-out infinite alternate;
+    }
+    @keyframes lc-mesh-breathe{
+      0%{filter:hue-rotate(-5deg) saturate(1.05);opacity:.74}
+      100%{filter:hue-rotate(6deg) saturate(1.1);opacity:.84}
+    }
+    html.lc-reduce-motion .lc-hero-mesh{animation:none}
+    .lc-float{
+      position:absolute;pointer-events:none;z-index:1;
+      color:rgba(37,99,235,.26);font-size:clamp(1.8rem,3.2vw,2.8rem);
+      animation:lc-float 8s ease-in-out infinite;
+    }
+    .lc-float--1{top:10%;right:6%;animation-delay:-1.2s}
+    .lc-float--2{bottom:18%;right:12%;font-size:clamp(1.4rem,2.4vw,2rem);animation-delay:-3s;opacity:.88}
+    .lc-float--3{top:36%;left:3%;font-size:clamp(1.2rem,2vw,1.7rem);animation-delay:-2.5s;opacity:.72}
+    @keyframes lc-float{
+      0%,100%{transform:translateY(0) rotate(-5deg)}
+      50%{transform:translateY(-14px) rotate(5deg)}
+    }
+    html.lc-reduce-motion .lc-float{animation:none}
     .hero-wrap::before{
       content:"";position:absolute;inset:0;
       background:
@@ -66,6 +95,7 @@
       background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 48%,#ffffff 100%);
       border:1px solid var(--border);border-radius:18px;padding:28px;
       box-shadow:0 16px 36px rgba(15,23,42,.08);
+      isolation:isolate;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
@@ -79,14 +109,18 @@
       background:repeating-linear-gradient(-8deg, transparent, transparent 54px, rgba(37,99,235,.05) 54px, rgba(37,99,235,.05) 55px);
       pointer-events:none;
     }
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .85fr;gap:18px;align-items:start}
     .hero-badge{
       display:inline-flex;align-items:center;gap:8px;
       background:#fff;border:1px solid var(--border);border-radius:999px;
       padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;
       box-shadow:0 2px 8px rgba(15,23,42,.06);
     }
-    h1{font-size:clamp(32px,5.2vw,52px);line-height:1.04;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    h1{font-size:clamp(32px,5.2vw,54px);line-height:1.05;color:var(--ink);font-weight:900;letter-spacing:-1px}
+    h1 .lc-gradient{
+      background:linear-gradient(105deg,#1e40af 0%,#2563eb 38%,#6366f1 68%,#0ea5e9 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
     .lead{margin-top:12px;color:var(--muted);font-size:17px;max-width:700px}
     .hero-kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hero-kpi{
@@ -114,8 +148,17 @@
       padding:11px 16px;font-size:14px;font-weight:700;
     }
     .hero-side{
-      background:#ffffffd9;border:1px solid var(--border);border-radius:14px;padding:14px;
-      box-shadow:0 6px 18px rgba(15,23,42,.08);backdrop-filter:blur(4px);
+      background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(255,255,255,.82));
+      border:1px solid rgba(191,219,254,.95);border-radius:16px;padding:16px 15px;
+      box-shadow:0 8px 28px rgba(37,99,235,.1),0 1px 0 rgba(255,255,255,.95) inset;
+      backdrop-filter:blur(10px);position:relative;overflow:hidden;
+    }
+    .hero-side::before{
+      content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
+      background:linear-gradient(135deg,rgba(37,99,235,.35),transparent 42%,rgba(14,165,233,.18));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.55;
     }
     .hero-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);margin-bottom:8px}
     .hero-side ul{padding-left:16px}
@@ -166,7 +209,17 @@
       background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 12px 10px;
       position:relative;overflow:hidden;min-height:130px;
       box-shadow:0 2px 8px rgba(15,23,42,.04);
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
+    @media(hover:hover){
+      .canvas .box:hover{
+        transform:translateY(-4px);
+        box-shadow:0 14px 32px rgba(15,23,42,.1);
+        border-color:#c7d7fe;
+      }
+    }
+    html.lc-reduce-motion .canvas .box{transition:none}
+    html.lc-reduce-motion .canvas .box:hover{transform:none;box-shadow:0 2px 8px rgba(15,23,42,.04)}
     .canvas .box::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px}
     .canvas .box.blue::before{background:var(--blue)}
     .canvas .box.warm::before{background:var(--amber)}
@@ -380,10 +433,30 @@
       content:"";display:block;width:40px;height:3px;border-radius:2px;
       background:linear-gradient(90deg,#60a5fa,#a78bfa);margin-bottom:10px;
     }
+    /* Scroll reveal + chips hero */
+    [data-lc-reveal]{
+      opacity:0;transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.2,.8,.2,1),transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+    html.lc-motion-ok [data-lc-reveal].lc-revealed{opacity:1;transform:translateY(0)}
+    html.lc-reduce-motion [data-lc-reveal]{opacity:1;transform:none;transition:none}
+    .lc-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .lc-chip{
+      font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--blue-dark);background:rgba(255,255,255,.9);
+      border:1px solid var(--blue-mid);border-radius:999px;padding:6px 11px;
+      box-shadow:0 2px 10px rgba(37,99,235,.07);
+    }
+    .lc-chip i{margin-right:5px;font-size:11px}
+    .legend-item{transition:transform .2s ease,box-shadow .2s ease}
+    @media(hover:hover){
+      .legend-item:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,23,42,.08)}
+    }
   </style>
 </head>
 <body>
   <div class="hero-wrap">
+    <div class="lc-hero-mesh" data-lc-mesh aria-hidden="true"></div>
   <section class="section">
     <a class="label-link" href="./fase2.html"><i class="fa-solid fa-arrow-left"></i>Escapify · Fase 2</a>
     <nav class="tabs" aria-label="Navegación Fase 2">
@@ -409,23 +482,29 @@
     </nav>
 
     <div class="hero">
+        <span class="lc-float lc-float--1" aria-hidden="true"><i class="fa-solid fa-table-cells-large"></i></span>
+        <span class="lc-float lc-float--2" aria-hidden="true"><i class="fa-solid fa-puzzle-piece"></i></span>
+        <span class="lc-float lc-float--3" aria-hidden="true"><i class="fa-solid fa-lock-open"></i></span>
       <div class="hero-grid">
         <div>
-          <span class="hero-badge"><i class="fa-solid fa-brain"></i>Lean Canvas · Escapify.io</span>
-          <h1>Lean Canvas<br/>de Escapify</h1>
-          <p class="lead"><strong>Escapify.io</strong> permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando gamificación real, materiales físicos y herramientas digitales, sin experiencia previa.</p>
-          <!-- <div class="hero-kpis" aria-label="Datos clave">
-            <span class="hero-kpi"><strong>~43h</strong> semanales docentes (referencia)</span>
-            <span class="hero-kpi"><strong>Sistema</strong> diseño + implementación</span>
-            <span class="hero-kpi"><strong>SaaS +</strong> formación + maker</span>
-          </div> -->
-          <div class="hero-actions">
+          <span class="hero-badge" data-lc-reveal data-lc-delay="0"><i class="fa-solid fa-brain"></i>Lean Canvas · Escapify.io</span>
+          <h1 data-lc-reveal data-lc-delay="0.04">
+            <span class="lc-gradient">Lean Canvas</span><br/>de Escapify
+          </h1>
+          <p class="lead" data-lc-reveal data-lc-delay="0.08"><strong>Escapify.io</strong> permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando gamificación real, materiales físicos y herramientas digitales, sin experiencia previa.</p>
+          <div class="lc-chip-row" data-lc-reveal data-lc-delay="0.1">
+            <span class="lc-chip"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Educativo</span>
+            <span class="lc-chip"><i class="fa-solid fa-universal-access" aria-hidden="true"></i> Inclusión</span>
+            <span class="lc-chip"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Maker + digital</span>
+          </div>
+          <div class="hero-actions" data-lc-reveal data-lc-delay="0.14">
             <a class="btn-primary" href="./datos-contexto.html?bloque=contexto"><i class="fa-solid fa-chart-column"></i>Ver contexto</a>
             <a class="btn-secondary" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan ecofin</a>
-            <a class="btn-secondary" href="./index-iebs.html"><i class="fa-solid fa-graduation-cap"></i>Propuesta IEBS</a>
+            <a class="btn-secondary" href="https://escapify.io/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i>escapify.io</a>
+            <a class="btn-secondary" href="./index-iebs.html"><i class="fa-solid fa-graduation-cap"></i>IEBS</a>
           </div>
         </div>
-        <aside class="hero-side">
+        <aside class="hero-side" data-lc-reveal data-lc-delay="0.18">
           <h3><i class="fa-solid fa-bullseye"></i> Pitch en una frase</h3>
           <ul>
             <li>No es solo contenido: es <strong>sistema de diseño + implementación</strong>.</li>
@@ -442,14 +521,14 @@
 
   <section class="section">
 
-    <div class="legend" aria-hidden="true">
+    <div class="legend" data-lc-reveal data-lc-delay="0.02" aria-hidden="true">
       <div class="legend-item"><span class="dot" style="background:var(--red)"></span>Problema/Riesgo</div>
       <div class="legend-item"><span class="dot" style="background:var(--blue)"></span>Estrategia/Canales</div>
       <div class="legend-item"><span class="dot" style="background:var(--amber)"></span>Mercado/Segmento</div>
       <div class="legend-item"><span class="dot" style="background:var(--green)"></span>Ingresos/Métricas</div>
     </div>
 
-    <div class="section-head">
+    <div class="section-head" data-lc-reveal data-lc-delay="0.04">
       <p class="section-overline"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Lienzo estratégico</p>
       <div class="section-head-row">
         <span class="num" aria-hidden="true">1</span>
@@ -634,7 +713,7 @@
 
     <section class="bmc-wrap" aria-labelledby="bmc-heading">
       <div class="bmc-inner">
-        <header class="bmc-header">
+        <header class="bmc-header" data-lc-reveal data-lc-delay="0.02">
         <p class="section-overline"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Modelo de negocio</p>
         <div class="section-head-row">
           <span class="num" aria-hidden="true">2</span>
@@ -833,14 +912,15 @@
       </div>
     </section>
 
-    <div class="pitch-callout">
+    <div class="pitch-callout" data-lc-reveal data-lc-delay="0.05">
       <p class="section-overline"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre para presentar</p>
       <div class="section-head-row">
         <span class="num" aria-hidden="true">3</span>
-        <h2>Resumen ultra claro (pitch)</h2>
+        <h2>Pitch</h2>
       </div>
       <p class="pitch-body"><strong>Escapify.io</strong> es una plataforma que permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando <strong>gamificación real</strong>, <strong>materiales físicos</strong> y <strong>herramientas digitales</strong>, sin necesidad de experiencia previa.</p>
     </div>
   </section>
+  <script src="./js/lean-canvas-effects.js" defer></script>
 </body>
 </html>
