@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Propuesta de Valor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{--blue:#2563eb;--blue-dark:#1e40af;--blue-light:#eff6ff;--ink:#0f172a;--body:#374151;--muted:#64748b;--border:#e2e8f0;--surface:#f8fafc;--white:#fff;--max:980px}
+    *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,system-ui,sans-serif;background:var(--surface);color:var(--body)}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .hero{background:linear-gradient(135deg,#2563eb 0%,#1e40af 100%);border-radius:16px;padding:24px;color:#fff}
+    h1{font-size:32px;line-height:1.1;font-weight:900}
+    .lead{margin-top:10px;color:#dbeafe}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+    .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
+    .card ul{padding-left:16px}
+    .card li{font-size:14px;margin-bottom:6px}
+    @media(max-width:900px){.tabs,.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section class="section">
+    <nav class="tabs">
+      <a class="tab" href="./leancanvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
+      <a class="tab active" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
+      <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+    </nav>
+    <div class="hero">
+      <h1>Propuesta de valor</h1>
+      <p class="lead">Crea escape rooms educativos inclusivos en minutos, sin diseñarlos desde cero. Escalable desde Infantil hasta empresa.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <h3>Valor para educación</h3>
+        <ul>
+          <li>Ahorro de tiempo para docentes.</li>
+          <li>Materiales inclusivos listos para aplicar.</li>
+          <li>Impacto en motivación y participación del alumnado.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Valor para empresa</h3>
+        <ul>
+          <li>Dinámicas prácticas para aprendizaje de equipos.</li>
+          <li>Formato experiencial para onboarding y soft skills.</li>
+          <li>Diseño adaptable por objetivo y nivel.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</body>
+</html>

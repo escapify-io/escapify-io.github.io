@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Plan Ecofin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{--blue:#2563eb;--blue-dark:#1e40af;--blue-light:#eff6ff;--ink:#0f172a;--body:#374151;--muted:#64748b;--border:#e2e8f0;--surface:#f8fafc;--white:#fff;--max:980px}
+    *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,system-ui,sans-serif;background:var(--surface);color:var(--body)}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .hero{background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 50%,#fff 100%);border:1px solid var(--border);border-radius:16px;padding:24px}
+    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
+    .lead{margin-top:10px;color:var(--muted)}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .btn{border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--blue-dark);padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
+    .btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
+    .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+    .v{font-size:28px;font-weight:900;color:var(--ink);line-height:1.1;margin-top:4px}
+    .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#00bcd4)}
+    @media(max-width:900px){.tabs,.kpis{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.tabs,.kpis{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section class="section">
+    <nav class="tabs">
+      <a class="tab" href="./leancanvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
+      <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
+      <a class="tab active" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+    </nav>
+    <div class="hero">
+      <h1>Plan económico-financiero</h1>
+      <p class="lead">Escenarios para validar desde educación (Infantil a adultos) y expansión a formación corporativa.</p>
+      <div class="toolbar">
+        <button class="btn active" data-s="pesimista">Pesimista</button>
+        <button class="btn" data-s="medio">Medio</button>
+        <button class="btn" data-s="optimista">Optimista</button>
+      </div>
+      <div class="kpis">
+        <article class="kpi"><div class="k">Clientes activos</div><div class="v" data-k="a">120</div><div class="bar"><span data-b="a" style="width:20%"></span></div></article>
+        <article class="kpi"><div class="k">Conversión</div><div class="v" data-k="c">4%</div><div class="bar"><span data-b="c" style="width:15%"></span></div></article>
+        <article class="kpi"><div class="k">MRR estimado</div><div class="v" data-k="m">€432</div><div class="bar"><span data-b="m" style="width:12%"></span></div></article>
+      </div>
+    </div>
+  </section>
+  <script>
+    const data = {
+      pesimista:{a:"120",c:"4%",m:"€432",aw:20,cw:15,mw:12},
+      medio:{a:"300",c:"7%",m:"€1.890",aw:50,cw:35,mw:50},
+      optimista:{a:"650",c:"10%",m:"€5.850",aw:95,cw:60,mw:95}
+    };
+    const btns=document.querySelectorAll(".btn");
+    const ka=document.querySelector('[data-k="a"]'); const kc=document.querySelector('[data-k="c"]'); const km=document.querySelector('[data-k="m"]');
+    const ba=document.querySelector('[data-b="a"]'); const bc=document.querySelector('[data-b="c"]'); const bm=document.querySelector('[data-b="m"]');
+    btns.forEach((btn)=>btn.addEventListener("click",()=>{btns.forEach((b)=>b.classList.remove("active"));btn.classList.add("active");const d=data[btn.dataset.s];ka.textContent=d.a;kc.textContent=d.c;km.textContent=d.m;ba.style.width=d.aw+"%";bc.style.width=d.cw+"%";bm.style.width=d.mw+"%";}));
+  </script>
+</body>
+</html>

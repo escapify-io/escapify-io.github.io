@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Early Adopter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{--blue:#2563eb;--blue-dark:#1e40af;--blue-light:#eff6ff;--ink:#0f172a;--body:#374151;--muted:#64748b;--border:#e2e8f0;--surface:#f8fafc;--white:#fff;--max:980px}
+    *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,system-ui,sans-serif;background:var(--surface);color:var(--body)}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .hero{background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 50%,#fff 100%);border:1px solid var(--border);border-radius:16px;padding:24px}
+    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
+    .lead{margin-top:10px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+    .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
+    .card ul{padding-left:16px}
+    .card li{font-size:14px;margin-bottom:6px}
+    @media(max-width:900px){.tabs,.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section class="section">
+    <nav class="tabs">
+      <a class="tab" href="./leancanvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab active" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
+      <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
+      <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+    </nav>
+    <div class="hero">
+      <h1>Early Adopter</h1>
+      <p class="lead">Perfil inicial para validar con rapidez: desde Infantil y Primaria hasta formación adulta y empresa.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <h3>Perfil educativo</h3>
+        <ul>
+          <li>Docente creativo en Infantil, Primaria o primeros cursos de Secundaria.</li>
+          <li>Interés real por gamificación, inclusión y aprendizaje activo.</li>
+          <li>Dolor principal: falta de tiempo para diseñar experiencias desde cero.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Perfil corporativo</h3>
+        <ul>
+          <li>Responsable de aprendizaje (L&amp;D) en empresas.</li>
+          <li>Busca formación más participativa para equipos.</li>
+          <li>Necesita dinámicas fáciles de desplegar y medibles.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</body>
+</html>

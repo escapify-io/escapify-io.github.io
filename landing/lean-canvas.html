@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Lean Canvas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
+      --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
+      --green:#16a34a; --amber:#d97706; --red:#dc2626; --max:1080px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
+    .section{max-width:var(--max);margin:0 auto;padding:34px 24px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+    .tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:11px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--blue-dark);font-size:13px;font-weight:700}
+    .tab.active{background:var(--blue-light);border-color:#bfdbfe}
+    .hero{
+      background:linear-gradient(160deg,#e8edf5 0%,#f0f4fd 50%,#fff 100%);
+      border:1px solid var(--border);border-radius:16px;padding:24px;
+    }
+    h1{font-size:32px;line-height:1.1;color:var(--ink);font-weight:900}
+    .lead{margin-top:10px;color:var(--muted)}
+    .canvas{
+      margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;
+      display:grid;grid-template-columns:1.05fr 1.05fr 1.2fr 1.05fr 1.25fr;grid-template-rows:auto auto auto;gap:10px;
+    }
+    .box{
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;position:relative;min-height:124px;
+    }
+    .box::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px}
+    .b-blue::before{background:var(--blue)} .b-amber::before{background:var(--amber)} .b-green::before{background:var(--green)} .b-red::before{background:var(--red)}
+    .box h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin-bottom:7px;font-weight:800}
+    .box p,.box li{font-size:13px;color:var(--body)}
+    .box ul{padding-left:16px}
+    .box li{margin-bottom:5px}
+    .tag{
+      display:inline-block;margin-top:8px;background:var(--blue-light);color:var(--blue-dark);border:1px solid var(--blue-mid);
+      border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;
+    }
+    .problem{grid-column:1;grid-row:1/span 2}
+    .solution{grid-column:2;grid-row:1}
+    .metrics{grid-column:2;grid-row:2}
+    .value{grid-column:3;grid-row:1/span 2;background:linear-gradient(135deg,#2563eb 0%,#1e40af 100%);border-color:#1e40af}
+    .value h3,.value p,.value li{color:#fff}
+    .value .tag{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25);color:#dbeafe}
+    .advantage{grid-column:4;grid-row:1}
+    .channels{grid-column:4;grid-row:2}
+    .segments{grid-column:5;grid-row:1/span 2}
+    .costs{grid-column:1/span 2;grid-row:3}
+    .revenue{grid-column:3/span 3;grid-row:3}
+    .sub{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;font-weight:700}
+    @media(max-width:980px){
+      .tabs{grid-template-columns:1fr 1fr}
+      .canvas{grid-template-columns:1fr 1fr}
+      .problem,.solution,.metrics,.value,.advantage,.channels,.segments,.costs,.revenue{grid-column:auto;grid-row:auto}
+    }
+    @media(max-width:640px){.tabs,.canvas{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section class="section">
+    <nav class="tabs" aria-label="Navegación Fase 2">
+      <a class="tab active" href="./lean-canvas.html"><i class="fa-solid fa-table-cells-large"></i>Lean Canvas</a>
+      <a class="tab" href="./early-adopter.html"><i class="fa-solid fa-users"></i>Early Adopter</a>
+      <a class="tab" href="./propuesta-valor.html"><i class="fa-solid fa-gem"></i>Propuesta de Valor</a>
+      <a class="tab" href="./plan-ecofin.html"><i class="fa-solid fa-chart-line"></i>Plan Ecofin</a>
+    </nav>
+
+    <div class="hero">
+      <h1>Lean Canvas · Escapify</h1>
+      <p class="lead">Modelo enfocado en ejecución real: desde Infantil hasta cualquier edad, con adaptación a formación de empresas.</p>
+    </div>
+
+    <section class="canvas" aria-label="Lienzo Lean Canvas">
+      <article class="box b-red problem">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Problema</h3>
+        <ul>
+          <li>Falta de tiempo para diseñar experiencias desde cero.</li>
+          <li>Dificultad para adaptar actividades inclusivas.</li>
+          <li>Recursos dispersos y sin estructura pedagógica.</li>
+        </ul>
+        <span class="tag">Alternativas: Genially · Lockee · Kahoot</span>
+      </article>
+
+      <article class="box b-blue solution">
+        <h3><i class="fa-solid fa-lightbulb"></i> Solución</h3>
+        <div class="sub">MVP + Roadmap</div>
+        <ul>
+          <li>Candados + plantillas + guía de aula.</li>
+          <li>IA narrativa y adaptaciones.</li>
+          <li>Kits maker y formación.</li>
+        </ul>
+      </article>
+
+      <article class="box b-green metrics">
+        <h3><i class="fa-solid fa-chart-line"></i> Métricas clave</h3>
+        <ul>
+          <li>Registros y activación inicial.</li>
+          <li>Aplicación real en aula/equipo.</li>
+          <li>Conversión y retención mensual.</li>
+        </ul>
+      </article>
+
+      <article class="box value">
+        <h3><i class="fa-solid fa-gem"></i> Propuesta de valor única</h3>
+        <p><strong>Crea escape rooms inclusivos en minutos, sin diseñarlos desde cero.</strong></p>
+        <p style="margin-top:8px;">Ahorro de tiempo + impacto real + escalable de Infantil a adultos y empresa.</p>
+        <span class="tag">Educación sin límite de edad</span>
+      </article>
+
+      <article class="box b-blue advantage">
+        <h3><i class="fa-solid fa-shield-halved"></i> Ventaja especial</h3>
+        <ul>
+          <li>Validación en aula y enfoque metodológico.</li>
+          <li>Inclusión + maker + digital integrados.</li>
+        </ul>
+      </article>
+
+      <article class="box b-blue channels">
+        <h3><i class="fa-solid fa-route"></i> Canales</h3>
+        <ul>
+          <li>Web, SEO y contenido social.</li>
+          <li>Email y webinars.</li>
+          <li>Workshops en centros y empresas.</li>
+        </ul>
+      </article>
+
+      <article class="box b-amber segments">
+        <h3><i class="fa-solid fa-users"></i> Segmentos de clientes</h3>
+        <ul>
+          <li>Docentes: Infantil, Primaria, Secundaria.</li>
+          <li>Formación de adultos y academia.</li>
+          <li>L&amp;D y equipos de formación corporativa.</li>
+        </ul>
+        <span class="tag">Early adopters: perfiles innovadores</span>
+      </article>
+
+      <article class="box b-blue costs">
+        <h3><i class="fa-solid fa-sack-dollar"></i> Estructura de costes</h3>
+        <ul>
+          <li>Desarrollo y mantenimiento web.</li>
+          <li>Contenido pedagógico y soporte.</li>
+          <li>IA, marketing y operaciones.</li>
+        </ul>
+      </article>
+
+      <article class="box b-green revenue">
+        <h3><i class="fa-solid fa-coins"></i> Flujo de ingresos</h3>
+        <ul>
+          <li>SaaS freemium → premium.</li>
+          <li>Formación y certificaciones.</li>
+          <li>Licencias centro y programas empresa.</li>
+          <li>Kits físicos y recursos premium.</li>
+        </ul>
+      </article>
+    </section>
+  </section>
+</body>
+</html>
