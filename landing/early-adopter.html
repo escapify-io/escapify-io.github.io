@@ -122,8 +122,67 @@
     .card h3{font-size:16px;color:var(--ink);margin-bottom:8px}
     .card ul{padding-left:16px}
     .card li{font-size:14px;margin-bottom:6px}
-    @media(max-width:980px){.tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}}
-    @media(max-width:640px){.tabs,.grid{grid-template-columns:1fr}}
+    .canvas-wrap{
+      margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;
+      box-shadow:0 8px 24px rgba(15,23,42,.06);
+    }
+    .canvas-title{font-size:24px;color:var(--ink);font-weight:900;letter-spacing:-.4px}
+    .canvas-sub{font-size:14px;color:var(--muted);margin-top:4px}
+    .canvas-grid{
+      margin-top:14px;display:grid;gap:10px;
+      grid-template-columns:1.1fr 1.1fr 1fr 1fr;
+      grid-template-areas:
+      "producto beneficios objetivos acciones"
+      "producto soluciones segmento problemas";
+    }
+    .c-producto{grid-area:producto}
+    .c-beneficios{grid-area:beneficios}
+    .c-soluciones{grid-area:soluciones}
+    .c-objetivos{grid-area:objetivos}
+    .c-acciones{grid-area:acciones}
+    .c-problemas{grid-area:problemas}
+    .c-segmento{grid-area:segmento}
+    .canvas-box{
+      background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;
+      box-shadow:0 2px 8px rgba(15,23,42,.04);
+    }
+    .canvas-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+    .canvas-box h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);font-weight:800;display:flex;align-items:center;gap:7px}
+    .num{
+      min-width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
+      background:var(--blue-light);border:1px solid var(--blue-mid);font-size:12px;font-weight:800;color:var(--blue-dark)
+    }
+    .canvas-box ul{padding-left:16px}
+    .canvas-box li{font-size:13px;margin-bottom:5px}
+    .segmento-core{
+      text-align:center;background:linear-gradient(135deg,#eff6ff 0%,#f8fbff 100%);
+      border:1px dashed #bfdbfe;border-radius:12px;padding:12px;
+    }
+    .segmento-core .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+    .segmento-core .name{font-size:16px;font-weight:900;color:var(--blue-dark);margin-top:4px}
+    .segmento-core p{font-size:13px;color:var(--body);margin-top:5px}
+    .interview{
+      margin-top:12px;background:var(--blue-light);border:1px dashed var(--blue-mid);border-radius:12px;padding:12px;
+    }
+    .interview h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-dark);font-weight:800;display:flex;align-items:center;gap:7px}
+    .interview p{font-size:13px;color:var(--body);margin-top:6px}
+    .interview ul{padding-left:16px;margin-top:6px}
+    .interview li{font-size:13px;color:var(--body);margin-bottom:4px}
+    @media(max-width:980px){
+      .tabs,.grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}
+      .canvas-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-areas:
+        "segmento segmento"
+        "objetivos acciones"
+        "problemas soluciones"
+        "beneficios producto";
+      }
+    }
+    @media(max-width:640px){
+      .tabs,.grid{grid-template-columns:1fr}
+      .canvas-grid{grid-template-columns:1fr;grid-template-areas:"segmento" "objetivos" "acciones" "problemas" "soluciones" "beneficios" "producto";}
+    }
   </style>
 </head>
 <body>
@@ -194,6 +253,107 @@
           <li>Responsable de aprendizaje (L&amp;D) en empresas.</li>
           <li>Busca formación más participativa para equipos.</li>
           <li>Necesita dinámicas fáciles de desplegar y medibles.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="canvas-wrap">
+      <h2 class="canvas-title">Canvas Early Adopter &amp; Propuesta de Valor</h2>
+      <p class="canvas-sub">Versión de trabajo basada en la lógica de 7 bloques + 1 bloque de entrevistas para validar hipótesis de cliente.</p>
+
+      <div class="canvas-grid">
+        <article class="canvas-box c-objetivos">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-bullseye"></i>Objetivos</h4>
+            <span class="num">1</span>
+          </div>
+          <ul>
+            <li>Ahorrar tiempo de preparación de dinámicas.</li>
+            <li>Elevar engagement y participación del grupo.</li>
+            <li>Mejorar resultados de aprendizaje sin sobrecarga.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-acciones">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-gears"></i>Acciones</h4>
+            <span class="num">2</span>
+          </div>
+          <ul>
+            <li>Busca recursos en internet y redes educativas.</li>
+            <li>Adapta plantillas o juegos genéricos manualmente.</li>
+            <li>Coordina materiales, tiempos y evaluación por su cuenta.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-problemas">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-triangle-exclamation"></i>Problemas</h4>
+            <span class="num">3</span>
+          </div>
+          <ul>
+            <li>No tiene tiempo para diseñar experiencias desde cero.</li>
+            <li>Falta de recursos listos y adaptables por nivel.</li>
+            <li>Dificultad para medir impacto y justificar continuidad.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-soluciones">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-puzzle-piece"></i>Soluciones potenciales</h4>
+            <span class="num">4</span>
+          </div>
+          <ul>
+            <li>Plantillas guiadas de escape room por etapa y objetivo.</li>
+            <li>Asistente para adaptar narrativa, dificultad y tiempos.</li>
+            <li>Panel básico de evidencias de uso y resultados.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-beneficios">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-chart-line"></i>Beneficios</h4>
+            <span class="num">5</span>
+          </div>
+          <ul>
+            <li>Reduce drásticamente la fricción de diseño.</li>
+            <li>Permite aplicar sesiones atractivas en menos tiempo.</li>
+            <li>Mejora percepción de valor para renovar o ampliar licencia.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-producto">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-box-open"></i>Producto / Servicio</h4>
+            <span class="num">6</span>
+          </div>
+          <ul>
+            <li><strong>SaaS Escapify:</strong> creador de escape rooms inclusivos en minutos.</li>
+            <li><strong>Biblioteca premium:</strong> actividades listas para aplicar.</li>
+            <li><strong>Formación:</strong> acompañamiento para docentes y equipos L&amp;D.</li>
+          </ul>
+        </article>
+
+        <article class="canvas-box c-segmento">
+          <div class="canvas-head">
+            <h4><i class="fa-solid fa-user-check"></i>Segmento de cliente</h4>
+            <span class="num">7</span>
+          </div>
+          <div class="segmento-core">
+            <div class="label">Early Adopter prioritario</div>
+            <div class="name">Docente creativo + Responsable L&amp;D</div>
+            <p>Perfil innovador, digital y orientado a resultados que sufre dolor operativo por falta de tiempo.</p>
+          </div>
+        </article>
+      </div>
+
+      <article class="interview">
+        <h4><i class="fa-solid fa-microphone-lines"></i>Bloque +1 · Entrevistas semanales</h4>
+        <p>Validar con <strong>5-10 entrevistas por semana</strong> hasta convertir hipótesis en hechos y priorizar el segmento con mayor intención de pago.</p>
+        <ul>
+          <li>Guion corto: objetivos, acciones actuales, problemas, soluciones usadas.</li>
+          <li>No vender en la entrevista; escuchar y cuantificar intensidad del dolor.</li>
+          <li>Actualizar el canvas cada semana con aprendizaje real.</li>
         </ul>
       </article>
     </div>

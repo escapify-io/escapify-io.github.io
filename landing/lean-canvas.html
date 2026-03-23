@@ -12,7 +12,7 @@
     :root{
       --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-mid:#dbeafe;
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
-      --green:#16a34a; --amber:#d97706; --red:#dc2626; --max:1080px;
+      --green:#16a34a; --amber:#d97706; --red:#dc2626; --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--surface);color:var(--body);line-height:1.6}
@@ -124,7 +124,12 @@
     }
     .canvas{
       margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;
-      display:grid;grid-template-columns:1.05fr 1.05fr 1.2fr 1.05fr 1.25fr;grid-template-rows:auto auto auto;gap:10px;
+      display:grid;
+      /* Izq. 2 col (problema/solución/métricas) | centro PV más ancha | der. 2 col (ventaja/segmentos/canales) */
+      grid-template-columns:1fr 1fr minmax(300px,1.75fr) 1fr 1fr;
+      grid-template-rows:auto auto auto auto;
+      gap:10px;
+      align-items:stretch;
       box-shadow:0 8px 24px rgba(15,23,42,.06);
     }
     .box{
@@ -145,17 +150,22 @@
       margin-top:8px;font-size:11px;line-height:1.45;color:var(--muted);
       background:#f8fafc;border:1px dashed var(--border);border-radius:8px;padding:7px 8px;
     }
-    .problem{grid-column:1;grid-row:1/span 2}
-    .solution{grid-column:2;grid-row:1}
-    .metrics{grid-column:2;grid-row:2}
-    .value{grid-column:3;grid-row:1/span 2;background:linear-gradient(135deg,#2563eb 0%,#1e40af 100%);border-color:#1e40af}
+    .problem{grid-column:1/3;grid-row:1}
+    .solution{grid-column:1/3;grid-row:2}
+    .metrics{grid-column:1/3;grid-row:3}
+    .value{
+      grid-column:3;grid-row:1/span 3;
+      min-height:100%;
+      background:linear-gradient(135deg,#2563eb 0%,#1e40af 100%);border-color:#1e40af;
+    }
     .value h3,.value p,.value li{color:#fff}
+    .value .fa-hand-pointer{color:rgba(255,255,255,.95)}
     .value .tag{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25);color:#dbeafe}
-    .advantage{grid-column:4;grid-row:1}
-    .channels{grid-column:4;grid-row:2}
-    .segments{grid-column:5;grid-row:1/span 2}
-    .costs{grid-column:1/span 2;grid-row:3}
-    .revenue{grid-column:3/span 3;grid-row:3}
+    .advantage{grid-column:4/6;grid-row:1}
+    .segments{grid-column:4/6;grid-row:2}
+    .channels{grid-column:4/6;grid-row:3}
+    .costs{grid-column:1/3;grid-row:4}
+    .revenue{grid-column:3/6;grid-row:4}
     .sub{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;font-weight:700}
     .legend{
       margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
@@ -167,12 +177,53 @@
     .dot{width:9px;height:9px;border-radius:50%}
     @media(max-width:980px){
       .tabs{grid-template-columns:1fr 1fr}
-      .canvas{grid-template-columns:1fr 1fr}
+      .canvas{grid-template-columns:1fr}
       .legend{grid-template-columns:1fr 1fr}
       .hero-grid{grid-template-columns:1fr}
-      .problem,.solution,.metrics,.value,.advantage,.channels,.segments,.costs,.revenue{grid-column:auto;grid-row:auto}
+      .problem,.solution,.metrics,.value,.advantage,.channels,.segments,.costs,.revenue{
+        grid-column:1/-1;
+        grid-row:auto;
+      }
     }
     @media(max-width:640px){.tabs,.canvas,.legend{grid-template-columns:1fr}}
+    .bmc-wrap{
+      margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;
+      box-shadow:0 8px 24px rgba(15,23,42,.06);
+    }
+    .bmc-title{
+      font-size:clamp(22px,3.2vw,30px);font-weight:900;color:var(--ink);letter-spacing:-.5px;
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .bmc-sub{font-size:13px;color:var(--muted);margin-top:6px;margin-bottom:18px}
+    .bmc-grid{display:grid;gap:12px}
+    @media(min-width:900px){.bmc-grid{grid-template-columns:1fr 1fr}}
+    .bmc-section{
+      padding:14px 14px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface);
+    }
+    .bmc-section h3{
+      font-size:14px;color:var(--ink);font-weight:800;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;
+    }
+    .bmc-section h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;margin:10px 0 6px}
+    .bmc-section ul{padding-left:18px}
+    .bmc-section li{font-size:13px;margin-bottom:6px;color:var(--body)}
+    .bmc-section p{font-size:13px;color:var(--body);margin-bottom:8px;line-height:1.5}
+    .pitch-callout{
+      margin-top:18px;padding:16px 18px;border-radius:14px;border:1px solid var(--blue-mid);
+      background:linear-gradient(135deg,#eff6ff 0%,#ffffff 100%);
+      box-shadow:0 6px 18px rgba(37,99,235,.08);
+    }
+    .pitch-callout h2{font-size:16px;color:var(--blue-dark);font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .pitch-callout p{font-size:14px;color:var(--body);line-height:1.55}
+    .vision-box{
+      margin-top:14px;padding:14px;border-radius:12px;border:1px dashed var(--blue-mid);background:var(--blue-light);
+    }
+    .vision-box h3{font-size:14px;color:var(--blue-dark);font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .vision-box ul{padding-left:18px}
+    .vision-box li{font-size:13px;margin-bottom:5px;color:var(--body)}
+    .bmc-summary{
+      margin-top:12px;padding:12px 14px;border-radius:12px;background:#0f172a;color:#e2e8f0;font-size:13px;line-height:1.55;
+    }
+    .bmc-summary strong{color:#93c5fd}
   </style>
 </head>
 <body>
@@ -204,7 +255,7 @@
         <div>
           <span class="hero-badge"><i class="fa-solid fa-compass"></i>Fase 2 · Bloque estratégico</span>
           <h1>Lean Canvas<br/>de Escapify</h1>
-          <p class="lead">Una visión clara y accionable del modelo: problema real del docente, valor diferencial, monetización híbrida y ruta de escala desde Infantil hasta empresa.</p>
+          <p class="lead"><strong>Escapify.io</strong> permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando gamificación real, materiales físicos y herramientas digitales, sin experiencia previa.</p>
           <!-- <div class="hero-kpis">
             <span class="hero-kpi"><strong>792k</strong> docentes</span>
             <span class="hero-kpi"><strong>8.3M</strong> alumnado</span>
@@ -221,13 +272,13 @@
           </div>
         </div>
         <aside class="hero-side">
-          <h3><i class="fa-solid fa-bullseye"></i> Enfoque de impacto</h3>
+          <h3><i class="fa-solid fa-bullseye"></i> Pitch en una frase</h3>
           <ul>
-            <li>Resuelve sobrecarga de diseño docente.</li>
-            <li>Integra inclusión, maker y narrativa digital.</li>
-            <li>Escala por licencias y formación.</li>
+            <li>No es solo contenido: es <strong>sistema de diseño + implementación</strong>.</li>
+            <li>Ecosistema híbrido: plataforma + formación + maker + IA.</li>
+            <li>Diferencial: pedagogía + experiencia real en aula.</li>
           </ul>
-          <div class="mini"><i class="fa-solid fa-rocket"></i> Objetivo inmediato: validar uso real en aula/equipo y conversión a premium.</div>
+          <div class="mini"><i class="fa-solid fa-rocket"></i> Validar uso en aula, retención y conversión a premium.</div>
         </aside>
       </div>
     </div>
@@ -243,86 +294,305 @@
       <article class="box b-red problem">
         <h3><i class="fa-solid fa-triangle-exclamation"></i> Problema</h3>
         <ul>
-          <li>Falta de tiempo para diseñar experiencias desde cero.</li>
-          <li>Dificultad para adaptar actividades inclusivas.</li>
-          <li>Recursos dispersos y sin estructura pedagógica.</li>
+          <li>El profesorado quiere innovar, pero no sabe cómo diseñar experiencias gamificadas estructuradas (escape rooms educativos).</li>
+          <li>Falta de tiempo y recursos para crear materiales atractivos y coherentes.</li>
+          <li>Dificultad para adaptar actividades a la diversidad del alumnado (DI, TEA, TDAH, etc.).</li>
+          <li>Escasez de herramientas que integren lo físico (maker) + lo digital (Genially, IA, etc.).</li>
+          <li>La gamificación existente es superficial (Kahoot, trivialización), no diseñada pedagógicamente.</li>
         </ul>
-        <span class="tag">Alternativas: Genially · Lockee · Kahoot</span>
+        <span class="tag">Alternativas: Kahoot · Genially · trivialización</span>
       </article>
 
       <article class="box b-blue solution">
         <h3><i class="fa-solid fa-lightbulb"></i> Solución</h3>
-        <div class="sub">MVP + Roadmap</div>
+        <div class="sub">Biblioteca + IA + maker + formación</div>
         <ul>
-          <li>Candados + plantillas + guía de aula.</li>
-          <li>IA narrativa y adaptaciones.</li>
-          <li>Kits maker y formación.</li>
+          <li><strong>Biblioteca:</strong> candados digitales, cifrados y pruebas listas para usar.</li>
+          <li><strong>Plantillas imprimibles</strong> (estilo Archivo del Tiempo).</li>
+          <li><strong>Generador con IA:</strong> narrativa automática, adaptaciones por nivel.</li>
+          <li><strong>Kits físicos (maker):</strong> diseños para láser / 3D.</li>
+          <li><strong>Formación:</strong> cursos prácticos (p. ej. 6 h).</li>
+          <li><strong>Ecosistema:</strong> web + recursos + comunidad docente.</li>
         </ul>
-        <div class="muted-note">Integración táctica con Lockee.fr para acelerar el MVP.</div>
+        <div class="muted-note">Integración posible con flujos tipo Lockee / Genially según roadmap.</div>
       </article>
 
       <article class="box b-green metrics">
         <h3><i class="fa-solid fa-chart-line"></i> Métricas clave</h3>
         <ul>
-          <li>Registros y activación inicial.</li>
-          <li>Aplicación real en aula/equipo.</li>
-          <li>Conversión y retención mensual.</li>
+          <li>Nº de docentes registrados.</li>
+          <li>Nº de escape rooms creados.</li>
+          <li>Tasa de uso de recursos.</li>
+          <li>Conversión free → premium.</li>
+          <li>Engagement en formaciones.</li>
+          <li>Retención mensual (MRR).</li>
+          <li>Descargas / uso de materiales.</li>
         </ul>
       </article>
 
       <article class="box value">
         <h3><i class="fa-solid fa-gem"></i> Propuesta de valor única</h3>
-        <p><strong>Crea escape rooms inclusivos en minutos, sin diseñarlos desde cero.</strong></p>
-        <p style="margin-top:8px;">Ahorro de tiempo + impacto real + escalable de Infantil a adultos y empresa.</p>
-        <span class="tag">Educación sin límite de edad</span>
+        <p><strong><i class="fa-solid fa-hand-pointer"></i> «Diseña experiencias educativas memorables sin complicarte»</strong></p>
+        <p style="margin-top:8px;">Plataforma para crear <strong>escape rooms educativos listos para aplicar</strong>. Combina:</p>
+        <ul style="margin-top:6px;">
+          <li>Pedagogía (STEAM, inclusión, UDL).</li>
+          <li>Gamificación real (no superficial).</li>
+          <li>Maker (material físico + diseño).</li>
+          <li>IA (pruebas, narrativa, adaptaciones).</li>
+        </ul>
+        <span class="tag">Diferencial: sistema completo diseño + implementación</span>
       </article>
 
       <article class="box b-blue advantage">
-        <h3><i class="fa-solid fa-shield-halved"></i> Ventaja especial</h3>
+        <h3><i class="fa-solid fa-shield-halved"></i> Ventaja competitiva</h3>
         <ul>
-          <li>Validación en aula y enfoque metodológico.</li>
-          <li>Inclusión + maker + digital integrados.</li>
+          <li>Experiencia real en aula + innovación educativa (no teórico).</li>
+          <li>Integración única: escape room + inclusión + STEAM + maker + IA.</li>
+          <li>Sistema completo (no herramienta aislada).</li>
+          <li>Diseño accesible: adaptaciones reales, no superficiales.</li>
+          <li>Marca personal + comunidad.</li>
+          <li>Materiales físicos (láser, 3D) → barrera de imitación.</li>
+        </ul>
+        <div class="muted-note">Difícil de copiar: know-how pedagógico + diseño experiencial, no solo tecnología.</div>
+      </article>
+
+      <article class="box b-amber segments">
+        <h3><i class="fa-solid fa-users"></i> Segmentos de clientes</h3>
+        <ul>
+          <li><i class="fa-solid fa-graduation-cap" style="color:var(--amber)"></i> Profesorado de Primaria, Secundaria y FP.</li>
+          <li><i class="fa-solid fa-puzzle-piece" style="color:var(--amber)"></i> Docentes de educación especial e inclusión.</li>
+          <li><i class="fa-solid fa-school" style="color:var(--amber)"></i> Centros innovadores (p. ej. CSMB).</li>
+          <li><i class="fa-solid fa-gamepad" style="color:var(--amber)"></i> Formadores en gamificación / edtech.</li>
+          <li><i class="fa-solid fa-book-open" style="color:var(--amber)"></i> Opositores y docentes en formación (máster profesorado).</li>
+        </ul>
+        <div class="sub" style="margin-top:8px;">Early adopters</div>
+        <ul>
+          <li>Profesores motivados por innovación + gamificación.</li>
+          <li>Centros con proyectos STEAM / EBI / ABP.</li>
         </ul>
       </article>
 
       <article class="box b-blue channels">
         <h3><i class="fa-solid fa-route"></i> Canales</h3>
         <ul>
-          <li>Web, SEO y contenido social.</li>
-          <li>Email y webinars.</li>
-          <li>Workshops en centros y empresas.</li>
+          <li><i class="fa-brands fa-instagram" style="color:var(--blue)"></i> Redes: Instagram, TikTok (Tencanta + Escapify).</li>
+          <li><i class="fa-brands fa-linkedin" style="color:var(--blue)"></i> LinkedIn (marca personal + IEBS + educación).</li>
+          <li><i class="fa-solid fa-envelope" style="color:var(--blue)"></i> Email marketing al profesorado.</li>
+          <li>Formaciones presenciales y online; workshops en centros.</li>
+          <li>Web escapify.io y colaboraciones con colegios / instituciones.</li>
         </ul>
-        <div class="muted-note">Canal híbrido B2C + B2B para escalar sin perder foco.</div>
-      </article>
-
-      <article class="box b-amber segments">
-        <h3><i class="fa-solid fa-users"></i> Segmentos de clientes</h3>
-        <ul>
-          <li>Docentes: Infantil, Primaria, Secundaria.</li>
-          <li>Formación de adultos y academia.</li>
-          <li>L&amp;D y equipos de formación corporativa.</li>
-        </ul>
-        <span class="tag">Early adopters: perfiles innovadores</span>
       </article>
 
       <article class="box b-blue costs">
         <h3><i class="fa-solid fa-sack-dollar"></i> Estructura de costes</h3>
         <ul>
-          <li>Desarrollo y mantenimiento web.</li>
-          <li>Contenido pedagógico y soporte.</li>
-          <li>IA, marketing y operaciones.</li>
+          <li>Desarrollo web y tecnología.</li>
+          <li>Diseño de contenidos (pruebas, materiales, prompts IA).</li>
+          <li>Marketing y adquisición de usuarios.</li>
+          <li>Producción de kits físicos (láser, materiales).</li>
+          <li>Tiempo de desarrollo pedagógico.</li>
+          <li>Herramientas digitales (hosting, IA, automatización).</li>
         </ul>
       </article>
 
       <article class="box b-green revenue">
-        <h3><i class="fa-solid fa-coins"></i> Flujo de ingresos</h3>
+        <h3><i class="fa-solid fa-coins"></i> Fuentes de ingresos</h3>
         <ul>
-          <li>SaaS freemium → premium.</li>
-          <li>Formación y certificaciones.</li>
-          <li>Licencias centro y programas empresa.</li>
-          <li>Kits físicos y recursos premium.</li>
+          <li>Suscripción plataforma (freemium + premium).</li>
+          <li>Venta de kits físicos (escape boxes, materiales).</li>
+          <li>Formación (cursos, talleres, certificaciones).</li>
+          <li>Licencias para centros educativos.</li>
+          <li>Recursos descargables premium.</li>
+          <li>Herramientas IA avanzadas (generador de pruebas).</li>
         </ul>
       </article>
+    </section>
+
+    <div class="pitch-callout">
+      <h2><i class="fa-solid fa-rocket"></i> Resumen ultra claro (pitch)</h2>
+      <p><strong>Escapify.io</strong> es una plataforma que permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando <strong>gamificación real</strong>, <strong>materiales físicos</strong> y <strong>herramientas digitales</strong>, sin necesidad de experiencia previa.</p>
+    </div>
+
+    <section class="bmc-wrap" aria-labelledby="bmc-heading">
+      <h2 id="bmc-heading" class="bmc-title"><i class="fa-solid fa-diagram-project"></i> Business Model Canvas · Escapify.io</h2>
+      <p class="bmc-sub">Visión del modelo de negocio: segmentos, propuesta de valor, canales, relaciones, ingresos, recursos, actividades, socios y costes.</p>
+
+      <div class="bmc-grid">
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-users"></i> 1. Segmentos de clientes</h3>
+          <p>Escapify no tiene un único cliente, sino varios bien definidos.</p>
+          <h4>Segmento principal</h4>
+          <ul>
+            <li>Profesorado de Primaria, Secundaria y FP.</li>
+            <li>Docentes interesados en gamificación, STEAM e innovación educativa.</li>
+          </ul>
+          <h4>Segmentos secundarios</h4>
+          <ul>
+            <li>Educación especial (DI, TEA, inclusión).</li>
+            <li>Centros innovadores (EBI, ABP, STEAM).</li>
+            <li>Opositores y estudiantes del máster de profesorado.</li>
+            <li>Formadores y consultores educativos.</li>
+          </ul>
+          <h4>Clientes institucionales (escala)</h4>
+          <ul>
+            <li>Colegios privados y concertados.</li>
+            <li>Redes educativas.</li>
+            <li>Administraciones / programas formativos.</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-gem"></i> 2. Propuesta de valor</h3>
+          <p>Escapify no vende solo «recursos»: vende <strong>experiencias educativas diseñadas</strong>.</p>
+          <h4>Para docentes</h4>
+          <ul>
+            <li>Crear escape rooms educativos sin perder tiempo.</li>
+            <li>Recursos listos para aplicar.</li>
+            <li>Adaptaciones inclusivas reales.</li>
+            <li>Sistema estructurado (no ideas sueltas).</li>
+          </ul>
+          <h4>Para centros</h4>
+          <ul>
+            <li>Innovación educativa tangible.</li>
+            <li>Mejora del engagement del alumnado.</li>
+            <li>Desarrollo de competencias STEAM.</li>
+            <li>Diferenciación del proyecto educativo.</li>
+          </ul>
+          <p><strong>Diferencial:</strong> integra pedagogía + gamificación + maker + IA + inclusión.</p>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-bullhorn"></i> 3. Canales</h3>
+          <h4>Captación</h4>
+          <ul>
+            <li>Instagram y TikTok (visual + maker + escape rooms).</li>
+            <li>LinkedIn (marca profesional + impacto educativo).</li>
+            <li>Web escapify.io (landing + recursos).</li>
+            <li>Workshops y formaciones presenciales.</li>
+            <li>Ponencias / congresos educativos.</li>
+          </ul>
+          <h4>Conversión</h4>
+          <ul>
+            <li>Email marketing (secuencias para profesorado).</li>
+            <li>Lead magnets (pruebas gratis, escape descargable).</li>
+            <li>Web con demo interactiva.</li>
+          </ul>
+          <h4>Distribución</h4>
+          <ul>
+            <li>Plataforma online.</li>
+            <li>Descargas digitales.</li>
+            <li>Kits físicos enviados.</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-handshake"></i> 4. Relaciones con clientes</h3>
+          <ul>
+            <li>Comunidad docente (clave).</li>
+            <li>Soporte práctico: cómo implementar en aula.</li>
+            <li>Formación continua (cursos, tutoriales).</li>
+            <li>Recursos periódicos (retos, pruebas nuevas).</li>
+            <li>Gamificación también dentro de la propia plataforma.</li>
+          </ul>
+          <p><strong>Estrategia:</strong> usuario → creador → embajador.</p>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-sack-dollar"></i> 5. Fuentes de ingresos</h3>
+          <p><strong>Modelo híbrido</strong></p>
+          <h4>Suscripción SaaS</h4>
+          <ul>
+            <li>Freemium (recursos básicos).</li>
+            <li>Premium (generador IA, plantillas avanzadas).</li>
+          </ul>
+          <h4>Recursos premium</h4>
+          <ul>
+            <li>Escape rooms completos.</li>
+            <li>Packs por temática (historia, ciencia, etc.).</li>
+          </ul>
+          <h4>Kits físicos</h4>
+          <ul>
+            <li>Cajas, materiales maker, piezas láser.</li>
+          </ul>
+          <h4>Formación</h4>
+          <ul>
+            <li>Cursos online.</li>
+            <li>Talleres presenciales (p. ej. 6 h).</li>
+            <li>Certificaciones docentes.</li>
+          </ul>
+          <h4>Licencias para centros</h4>
+          <ul>
+            <li>Acceso para todo el claustro.</li>
+            <li>Formación incluida.</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-toolbox"></i> 6. Recursos clave</h3>
+          <ul>
+            <li>Plataforma web (escapify.io).</li>
+            <li>Contenido educativo (pruebas, plantillas, narrativa).</li>
+            <li>Sistema de generación con IA.</li>
+            <li>Know-how pedagógico (gran activo).</li>
+            <li>Marca personal.</li>
+            <li>Diseño maker (láser, 3D, materiales físicos).</li>
+            <li>Comunidad de docentes.</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-gears"></i> 7. Actividades clave</h3>
+          <ul>
+            <li>Diseño de pruebas y experiencias.</li>
+            <li>Desarrollo de la plataforma.</li>
+            <li>Creación de contenido (redes, recursos).</li>
+            <li>Formación docente.</li>
+            <li>Mejora continua con feedback de aula real.</li>
+            <li>Diseño de kits físicos.</li>
+            <li>Automatización (IA, marketing, procesos).</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section">
+          <h3><i class="fa-solid fa-people-group"></i> 8. Socios clave</h3>
+          <ul>
+            <li>Centros educativos (pilotos y validación).</li>
+            <li>Profesores early adopters.</li>
+            <li>Empresas edtech.</li>
+            <li>Plataformas como Genially.</li>
+            <li>Proveedores maker (madera, láser, impresión 3D).</li>
+            <li>Instituciones / programas formativos.</li>
+            <li>Comunidades docentes.</li>
+          </ul>
+        </div>
+
+        <div class="bmc-section" style="grid-column:1/-1">
+          <h3><i class="fa-solid fa-money-bill-wave"></i> 9. Estructura de costes</h3>
+          <ul>
+            <li>Desarrollo y mantenimiento web.</li>
+            <li>Creación de contenido (tiempo + diseño).</li>
+            <li>Marketing y adquisición.</li>
+            <li>Producción de kits físicos.</li>
+            <li>Herramientas digitales (IA, SaaS).</li>
+            <li>Formación y soporte.</li>
+            <li>Branding y diseño.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vision-box">
+        <h3><i class="fa-solid fa-lightbulb"></i> Visión estratégica</h3>
+        <ul>
+          <li>No es solo SaaS.</li>
+          <li>No es solo formación.</li>
+          <li>No es solo producto físico.</li>
+        </ul>
+        <p style="margin-top:8px;margin-bottom:0;"><strong>Ecosistema educativo híbrido:</strong> plataforma (escala) + formación (credibilidad e ingresos rápidos) + producto físico (diferenciación).</p>
+      </div>
+
+      <div class="bmc-summary">
+        <strong>Resumen clave:</strong> Escapify.io es un modelo <strong>escalable</strong> (SaaS), <strong>monetizable desde el inicio</strong> (formación), <strong>diferencial</strong> (maker + inclusión) y <strong>difícil de copiar</strong> (know-how + experiencia real en aula).
+      </div>
     </section>
   </section>
   </div>
