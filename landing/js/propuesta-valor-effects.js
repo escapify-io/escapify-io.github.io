@@ -58,6 +58,72 @@
     io.observe(el);
   });
 
+  function initVisualMicroAnimations() {
+    function observeOnce(el, cb, threshold) {
+      if (!("IntersectionObserver" in window)) {
+        cb();
+        return;
+      }
+      var done = false;
+      var o = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (done || !e.isIntersecting) return;
+            done = true;
+            cb();
+            o.unobserve(el);
+          });
+        },
+        { threshold: threshold || 0.2 }
+      );
+      o.observe(el);
+    }
+
+    document.querySelectorAll(".esf-bar-fill, .bar span").forEach(function (el) {
+      if (el.dataset.pvAnimDone === "1") return;
+      var pctRaw = (el.style.getPropertyValue("--esf-pct") || "").trim();
+      var widthRaw = (el.style.width || "").trim();
+      var target = !isNaN(parseFloat(pctRaw)) ? parseFloat(pctRaw) : parseFloat(widthRaw);
+      if (isNaN(target)) return;
+      el.dataset.pvAnimDone = "1";
+      el.style.width = "0%";
+      el.style.transition = "width .9s cubic-bezier(.22,.61,.36,1)";
+      observeOnce(el, function () {
+        requestAnimationFrame(function () {
+          el.style.width = target + "%";
+        });
+      });
+    });
+
+    document.querySelectorAll(".esf-donut, .esf-ring").forEach(function (el) {
+      if (el.dataset.pvAnimDone === "1") return;
+      var prop = el.classList.contains("esf-ring") ? "--esf-ring-p" : "--p";
+      var target = parseFloat((el.style.getPropertyValue(prop) || "").trim());
+      if (isNaN(target)) return;
+      el.dataset.pvAnimDone = "1";
+      el.style.setProperty(prop, "0");
+      observeOnce(el, function () {
+        var start = null;
+        var dur = 950;
+        function tick(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          var val = target * eased;
+          el.style.setProperty(prop, val.toFixed(2));
+          var hole = el.querySelector(".esf-donut-hole");
+          if (hole && /%/.test(hole.textContent || "")) {
+            hole.textContent = Math.round(val) + "%";
+          }
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    });
+  }
+
+  initVisualMicroAnimations();
+
   /* Parallax suave en mesh */
   var mesh = document.querySelector("[data-pv-mesh]");
   if (!mesh) return;
