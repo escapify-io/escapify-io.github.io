@@ -1,6 +1,16 @@
 /**
  * Escapify — Sistema visual unificado (Fase 2 + Maleta + IEBS)
  * Complementa los estilos inline de cada landing · escapify.io
+ *
+ * INDICE RAPIDO
+ * 1) Tokens base compartidos
+ * 2) Base minimalista
+ * 3) Componentes base
+ * 4) Overrides por pagina (historicos)
+ * 5) Locks intermedios de compatibilidad
+ * 6) Componentes graficos reutilizables
+ * 7) Sistema de bandas y ritmo de seccion
+ * 8) Lock final de paleta (al final absoluto)
  */
 html {
   scroll-behavior: smooth;
@@ -32,7 +42,7 @@ html {
   --esf-max: 1200px;
 }
 
-/* Sistema cromatico comun para landings Escapify (no index) */
+/* ===== 1) Tokens base compartidos (landings no-index) ===== */
 body.esf-minimal[data-esf-page="datos-contexto"],
 body.esf-minimal[data-esf-page="early-adopter"],
 body.esf-minimal[data-esf-page="fase2"],
@@ -68,7 +78,7 @@ body.esf-minimal[data-esf-page="propuesta-valor"] {
   --purple-bg: #a5b4fc;
 }
 
-/* Modo visual minimalista (sin elevaciones) */
+/* ===== 2) Base minimalista (sin elevaciones) ===== */
 .esf-minimal *,
 .esf-minimal *::before,
 .esf-minimal *::after {
@@ -77,7 +87,7 @@ body.esf-minimal[data-esf-page="propuesta-valor"] {
   filter: none !important;
 }
 
-/* Tablas, gráficos e iconografía en versión minimal */
+/* ===== 3) Componentes base (tablas, charts, iconos) ===== */
 .esf-minimal table {
   border-collapse: collapse !important;
   background: #fff !important;
@@ -138,7 +148,7 @@ body.esf-minimal[data-esf-page="propuesta-valor"] {
   opacity: 1 !important;
 }
 
-/* En Fase 2, reforzar el aspecto de pulso */
+/* Ajuste puntual: pulso en Fase 2 */
 body.esf-minimal[data-esf-page="fase2"] .esf-spark {
   min-height: 54px;
 }
@@ -185,7 +195,7 @@ body.esf-minimal[data-esf-page="fase2"] .esf-spark {
   border: 1px solid var(--esf-blue-mid) !important;
 }
 
-/* Aplanado fuerte: tarjetas e iconografía (sin degradados ni arcoíris) */
+/* Aplanado global de tarjetas e iconografía */
 .esf-minimal .f2-card,
 .esf-minimal .card,
 .esf-minimal .cd-phase,
@@ -265,52 +275,21 @@ body.esf-minimal[data-esf-page="fase2"] .esf-spark {
   opacity: 1 !important;
 }
 
-/* Fase2: mejorar legibilidad del recorrido (iconos con fondo) */
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-dot {
-  background: #eff6ff !important;
-  border: 1px solid var(--esf-blue-mid) !important;
-  color: var(--esf-blue) !important;
-}
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-dot {
-  background: #eff6ff !important;
-  border: 1px solid var(--esf-blue-mid) !important;
-  color: var(--esf-blue) !important;
-}
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-dot {
-  background: #eff6ff !important;
-  border: 1px solid var(--esf-blue-mid) !important;
-  color: var(--esf-blue) !important;
-}
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-dot {
-  background: #eff6ff !important;
-  border: 1px solid var(--esf-blue-mid) !important;
-  color: var(--esf-blue) !important;
-}
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-dot {
-  background: #eff6ff !important;
-  border: 1px solid var(--esf-blue-mid) !important;
-  color: var(--esf-blue) !important;
-}
-
-/* Plan ecofin: cabecera de tablas legible en minimal */
+/* ===== 4) Overrides por página (históricos) ===== */
+/* Plan ecofin: cabecera de tablas legible */
 body.esf-minimal[data-esf-page="plan-ecofin"] .ec-table thead th {
   background: #f8fafc !important;
   color: var(--esf-slate) !important;
   border-bottom: 1px solid var(--esf-border) !important;
 }
 
-/* Paleta suave en bloques no-hero */
+/* Plan ecofin: bloques no-hero */
 body.esf-minimal[data-esf-page="plan-ecofin"] .ec-card,
 body.esf-minimal[data-esf-page="plan-ecofin"] .kpi,
 body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note,
 body.esf-minimal[data-esf-page="plan-ecofin"] .ef-pitch-card {
   background: #f8fafc !important;
   border-color: #dbe4ee !important;
-}
-body.esf-minimal[data-esf-page="plan-ecofin"] .ec-callout {
-  background: #f6f8fb !important;
-  border-color: #d9e2ec !important;
-  color: #475569 !important;
 }
 body.esf-minimal[data-esf-page="plan-ecofin"] .esf-bar-fill,
 body.esf-minimal[data-esf-page="plan-ecofin"] .bar span {
@@ -346,12 +325,7 @@ body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-pitch-label {
   background: none !important;
   -webkit-text-fill-color: currentColor !important;
 }
-body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth-ico {
-  background: #e8f0f7 !important;
-  color: #48698f !important;
-}
-
-/* Lean canvas: bajar saturacion de bloques BMC */
+/* Lean Canvas: bajar saturación de bloques BMC */
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section,
 body.esf-minimal[data-esf-page="lean-canvas"] .vision-box,
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary,
@@ -361,7 +335,7 @@ body.esf-minimal[data-esf-page="lean-canvas"] .lc-pitch-card {
   color: #475569 !important;
 }
 
-/* Unificacion global de color para todos los bloques con acento */
+/* Unificación global de color en bloques con acento */
 body.esf-minimal[data-esf-page="datos-contexto"] .hero-kpi strong,
 body.esf-minimal[data-esf-page="early-adopter"] .hero-kpi strong,
 body.esf-minimal[data-esf-page="fase2"] .hero-kpi strong,
@@ -402,7 +376,7 @@ body.esf-minimal[data-esf-page="lean-canvas"] .lc-chip {
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary::before {
   background: linear-gradient(90deg, #93aeca, #bdd0e0) !important;
 }
-/* Fase2: ritmo visual refinado (azul Escapify + acentos suaves) */
+/* Fase 2: ritmo visual refinado */
 body.esf-minimal[data-esf-page="fase2"] .f2-card,
 body.esf-minimal[data-esf-page="fase2"] .f2-story-step,
 body.esf-minimal[data-esf-page="fase2"] .esf-insight,
@@ -488,34 +462,6 @@ body.esf-minimal[data-esf-page="fase2"] .f2-story-step .n {
   border-color: #bfdbfe !important;
   color: #1e40af !important;
 }
-body.esf-minimal[data-esf-page="fase2"] .esf-chart-block .esf-bar-fill {
-  background: #60a5fa !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-chart-block .esf-bar-row:nth-child(2) .esf-bar-fill {
-  background: #818cf8 !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-chart-block .esf-bar-row:nth-child(3) .esf-bar-fill {
-  background: #5eead4 !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-chart-block .esf-bar-row:nth-child(4) .esf-bar-fill {
-  background: #86efac !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-spark::after {
-  background: linear-gradient(90deg, #93c5fd, #60a5fa, #2563eb) !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-donut {
-  background: conic-gradient(#60a5fa calc(var(--p) * 1%), #e5e7eb 0) !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-donut--violet {
-  background: conic-gradient(#818cf8 calc(var(--p) * 1%), #e5e7eb 0) !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-donut--teal {
-  background: conic-gradient(#5eead4 calc(var(--p) * 1%), #e5e7eb 0) !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-timeline::before {
-  background: linear-gradient(90deg, #93c5fd, #a5b4fc, #99f6e4, #86efac) !important;
-  opacity: 1 !important;
-}
 body.esf-minimal[data-esf-page="fase2"] .esf-timeline-step:nth-child(1) .esf-timeline-dot {
   background: #dbeafe !important;
   color: #2563eb !important;
@@ -545,16 +491,6 @@ body.esf-minimal[data-esf-page="fase2"] .esf-chart-title,
 body.esf-minimal[data-esf-page="fase2"] .esf-viz-title {
   color: #475569 !important;
 }
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-kicker {
-  color: #1e40af !important;
-  background: #eff6ff !important;
-  border: 1px solid #bfdbfe !important;
-  padding: 4px 10px !important;
-  border-radius: 999px !important;
-}
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-title {
-  color: #0f172a !important;
-}
 body.esf-minimal[data-esf-page="fase2"] .esf-chart-title i,
 body.esf-minimal[data-esf-page="fase2"] .esf-viz-title i,
 body.esf-minimal[data-esf-page="fase2"] .esf-insight__ico {
@@ -583,112 +519,25 @@ body.esf-minimal[data-esf-page="fase2"] .esf-insight {
 body.esf-minimal[data-esf-page="fase2"] .f2-story-arrow {
   color: #94a3b8 !important;
 }
-body.esf-minimal[data-esf-page="fase2"] .esf-timeline-step a:hover {
-  background: #f1f5f9 !important;
-  transform: none !important;
-}
 
-/* Recorrido sugerido: referencia visual comun (6 docs Escapify) */
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-journey-kicker,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-journey-kicker,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-journey-kicker,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-journey-kicker,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-journey-kicker,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-journey-kicker {
+/* Recorrido sugerido: estilo común */
+body.esf-minimal .esf-journey-footer .esf-journey-kicker {
   color: #1e40af !important;
   background: #eff6ff !important;
   border: 1px solid #bfdbfe !important;
   padding: 4px 10px !important;
   border-radius: 999px !important;
 }
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-journey-title,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-journey-title,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-journey-title,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-journey-title,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-journey-title,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-journey-title {
+body.esf-minimal .esf-journey-footer .esf-journey-title {
   color: #0f172a !important;
 }
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline::before,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline::before,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline::before,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline::before,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline::before,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline::before {
-  background: linear-gradient(90deg, #93c5fd, #818cf8, #f9a8d4, #86efac, #7dd3fc, #6ee7b7) !important;
-  opacity: 1 !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step a:hover,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step a:hover,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step a:hover,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step a:hover,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step a:hover,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step a:hover {
+body.esf-minimal .esf-journey-footer .esf-timeline-step a:hover {
   background: #f1f5f9 !important;
   transform: none !important;
 }
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot {
-  background: #dbeafe !important;
-  color: #2563eb !important;
-  border-color: #bfdbfe !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot {
-  background: #e0e7ff !important;
-  color: #4f46e5 !important;
-  border-color: #c7d2fe !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot {
-  background: #fce7f3 !important;
-  color: #db2777 !important;
-  border-color: #fbcfe8 !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot {
-  background: #dcfce7 !important;
-  color: #16a34a !important;
-  border-color: #bbf7d0 !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot {
-  background: #dbeafe !important;
-  color: #0284c7 !important;
-  border-color: #bfdbfe !important;
-}
-body.esf-minimal[data-esf-page="datos-contexto"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot,
-body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot {
-  background: #fef3c7 !important;
-  color: #d97706 !important;
-  border-color: #fde68a !important;
-}
 
-/* Forzado final de paleta en componentes con hex locales */
+/* ===== 5) Locks intermedios de compatibilidad ===== */
+/* Forzado de paleta para componentes con hex locales */
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--segmentos { --bmc-accent: #2563eb !important; }
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--valor { --bmc-accent: #4f46e5 !important; }
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--canales { --bmc-accent: #db2777 !important; }
@@ -699,7 +548,7 @@ body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--actividades { --bmc-
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--socios { --bmc-accent: #4f46e5 !important; }
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--costes { --bmc-accent: #db2777 !important; }
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-grid .bmc-section {
-  /* Evita dobles lineas: se mantiene solo la barra ::before */
+  /* Evita dobles líneas: solo barra ::before */
   border-left: 1px solid #dbe4ee !important;
 }
 body.esf-minimal[data-esf-page="lean-canvas"] .bmc-grid .bmc-section:nth-child(4n + 1),
@@ -739,7 +588,7 @@ body.esf-minimal[data-esf-page="early-adopter"] .ea-panel--psych { --ea-bar: var
 body.esf-minimal[data-esf-page="early-adopter"] .ea-panel--pain { --ea-bar: var(--ea-c3) !important; }
 body.esf-minimal[data-esf-page="early-adopter"] .ea-panel--value { --ea-bar: var(--ea-c4) !important; }
 
-/* Iconografia tipo referencia: tarjeta neutra + icono con fondo suave */
+/* Iconografía tipo referencia: tarjeta neutra + icono suave */
 body.esf-minimal[data-esf-page="early-adopter"] .ea-panel h3 i {
   width: 26px !important;
   height: 26px !important;
@@ -761,7 +610,7 @@ body.esf-minimal[data-esf-page="early-adopter"] .ea-panel--value h3 i {
   color: var(--ea-c4) !important; background: var(--ea-c4-bg) !important; border-color: var(--ea-c4-br) !important;
 }
 
-/* Doble target y personas en ritmo cromatico del recorrido */
+/* Early-adopter: doble target y personas */
 body.esf-minimal[data-esf-page="early-adopter"] .dt-grid .dt-card:nth-child(1) .dt-lbl {
   background: var(--ea-c1-bg) !important; color: var(--ea-c1) !important; border: 1px solid var(--ea-c1-br) !important; border-radius: 999px !important; padding: 4px 10px !important; display: inline-flex !important;
 }
@@ -781,7 +630,7 @@ body.esf-minimal[data-esf-page="early-adopter"] .ea-persona-grid .ea-persona:nth
   border-top: 3px solid var(--ea-c4) !important;
 }
 
-/* Chips y localizacion con ritmo visual suave */
+/* Early-adopter: chips y localización */
 body.esf-minimal[data-esf-page="early-adopter"] .ea-chip:nth-child(1) {
   background: var(--ea-c1-bg) !important; color: var(--ea-c1) !important; border-color: var(--ea-c1-br) !important;
 }
@@ -800,11 +649,6 @@ body.esf-minimal[data-esf-page="early-adopter"] .ea-locate li:nth-child(5) i { c
 body.esf-minimal[data-esf-page="plan-ecofin"] .ec-callout {
   background: #eff6ff !important; border-color: #bfdbfe !important; color: #1e3a8a !important;
 }
-body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note:nth-child(1) { border-left: 3px solid #2563eb !important; }
-body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note:nth-child(2) { border-left: 3px solid #4f46e5 !important; }
-body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note:nth-child(3) { border-left: 3px solid #0d9488 !important; }
-body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note:nth-child(4) { border-left: 3px solid #16a34a !important; }
-
 body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-panel--customer::before { background: #2563eb !important; }
 body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-panel--value::before { background: #4f46e5 !important; }
 body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-block--pains h4 { color: #db2777 !important; }
@@ -921,7 +765,7 @@ body.esf-minimal[data-esf-page="datos-contexto"] .cj-rail__list li:nth-child(6) 
   line-height: 1.45;
 }
 
-/* Bloque de pitch unificado (misma posición en todas) */
+/* Bloque de pitch unificado */
 .esf-pitch-unified {
   padding: 10px 0 2px;
   border-top: 1px solid var(--esf-border);
@@ -1337,7 +1181,7 @@ ol.esf-timeline {
   border: 0;
 }
 
-/* ═══ Bloques gráficos extra (charts sin JS) ═══ */
+/* ===== 6) Componentes gráficos reutilizables ===== */
 .esf-viz-panel {
   margin: 18px 0 22px;
   padding: 18px 18px 16px;
@@ -1368,7 +1212,7 @@ ol.esf-timeline {
   max-width: 720px;
 }
 
-/* Área tipo sparkline (solo decoración) */
+/* Área tipo sparkline (decorativa) */
 .esf-spark {
   height: 52px;
   border-radius: 12px;
@@ -1465,7 +1309,7 @@ ol.esf-timeline {
   margin: 0 auto;
 }
 
-/* Embudo vertical (early adopter / funnel) */
+/* Embudo vertical (early-adopter / funnel) */
 .esf-funnel-viz {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1526,7 +1370,7 @@ ol.esf-timeline {
   max-width: 90px;
 }
 
-/* Grid comparativo 2×2 iconos */
+/* Grid comparativo 2x2 iconos */
 .esf-icon-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1578,18 +1422,14 @@ ol.esf-timeline {
   display: block;
 }
 
-/* ═══════════════════════════════════════════════════
-   RITMO VISUAL DE SECCIONES — Sistema de bandas
-   Escapify · Fase 2 (datos-contexto, lean-canvas,
-   propuesta-valor, early-adopter, fase2, plan-ecofin)
-═══════════════════════════════════════════════════ */
+/* ===== 7) Sistema de bandas y ritmo de sección ===== */
 
-/* Fondo de página unificado para todos los docs Escapify */
+/* Fondo de página base */
 body.esf-minimal {
   background: #f1f5f9;
 }
 
-/* Bandas de sección (ritmo cromático entre bloques) */
+/* Bandas de sección */
 .esf-band { position: relative; }
 .esf-band--white  { background: #ffffff; }
 .esf-band--surface { background: #f8fafc; }
@@ -1608,7 +1448,7 @@ body.esf-minimal {
 .esf-band--dark h2, .esf-band--dark h3 { color: var(--esf-ink); }
 .esf-band--dark p  { color: var(--esf-body); }
 
-/* Banda de métricas destacadas (fondo azul sólido) */
+/* Banda de métricas destacadas */
 .esf-stats-band {
   background: #eef4f9;
   color: var(--esf-body);
@@ -1651,20 +1491,20 @@ body.esf-minimal {
   color: var(--esf-blue);
 }
 
-/* Ajuste de ritmo: panel principal sobre fondo #f1f5f9 */
+/* Panel principal sobre fondo base */
 body.esf-minimal .panel,
 body.esf-minimal .hero {
   background: #ffffff !important;
   border-color: #dbe4ee !important;
 }
 
-/* Bloques alternos dentro del panel de datos-contexto */
+/* Datos-contexto: bloques alternos */
 body.esf-minimal[data-esf-page="datos-contexto"] .block:nth-child(even) {
   background: #f6f9fc;
   border-radius: 0 14px 14px 0;
 }
 
-/* Ritmo cromatico suave en bloques repetitivos (coherente en todas las landings) */
+/* Ritmo cromático en bloques repetitivos */
 body.esf-minimal[data-esf-page="fase2"] .f2-grid .f2-card:nth-child(4n + 1),
 body.esf-minimal[data-esf-page="datos-contexto"] .cards-acciones .card--accion:nth-child(4n + 1) {
   border-left: 3px solid #9fb6cf !important;
@@ -1682,25 +1522,6 @@ body.esf-minimal[data-esf-page="datos-contexto"] .cards-acciones .card--accion:n
   border-left: 3px solid #b4bed6 !important;
 }
 
-/* Iconografia pastel tipo referencia adjunta */
-body.esf-minimal .f2-card__icon,
-body.esf-minimal .cj-rail__ico,
-body.esf-minimal .cd-stepper__ico,
-body.esf-minimal .acciones-extra__head-ico,
-body.esf-minimal .ae-ico,
-body.esf-minimal .mvp-option__ico,
-body.esf-minimal .pmv-intro-card__ico,
-body.esf-minimal .st4c-card-ico,
-body.esf-minimal .mvp-metric__ico,
-body.esf-minimal .mvp-signal__ico,
-body.esf-minimal .funnel-ico-wrap,
-body.esf-minimal .vision-box h3 .vision-ico,
-body.esf-minimal .pv-synth-ico {
-  background: var(--esf-blue-soft) !important;
-  color: var(--esf-blue) !important;
-  border-color: #dbe4ee !important;
-}
-
 /* Acentos de ritmo en propuesta-valor y plan-ecofin */
 body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth-list li:nth-child(1),
 body.esf-minimal[data-esf-page="plan-ecofin"] .ec-notes .ec-note:nth-child(1) {
@@ -1715,7 +1536,7 @@ body.esf-minimal[data-esf-page="plan-ecofin"] .ec-notes .ec-note:nth-child(3) {
   border-left: 3px solid #9abdad !important;
 }
 
-/* Coherencia de etiquetas de sección (pill azul) */
+/* Etiquetas de sección (pill azul) */
 body.esf-minimal .dc-block-tag,
 body.esf-minimal .label-link,
 body.esf-minimal .label-pill {
@@ -1725,23 +1546,7 @@ body.esf-minimal .label-pill {
   box-shadow: none !important;
 }
 
-/* Canvas superior (9 bloques) con la misma secuencia */
-body.esf-minimal[data-esf-page="lean-canvas"] .canvas .box.blue::before {
-  background: #2563eb !important;
-}
-body.esf-minimal[data-esf-page="lean-canvas"] .canvas .box.purple::before {
-  background: #4f46e5 !important;
-}
-body.esf-minimal[data-esf-page="lean-canvas"] .canvas .box.green::before {
-  background: #16a34a !important;
-}
-body.esf-minimal[data-esf-page="lean-canvas"] .canvas .box.warm::before {
-  background: #d97706 !important;
-}
-
-/* =========================================================
-   PALETA UNICA FORZADA (solo colores definidos en 598-630)
-   ========================================================= */
+/* ===== 8) Lock final de paleta (fuente de verdad) ===== */
 body.esf-minimal[data-esf-page="datos-contexto"],
 body.esf-minimal[data-esf-page="early-adopter"],
 body.esf-minimal[data-esf-page="fase2"],
@@ -1860,4 +1665,57 @@ body.esf-minimal .btn-secondary {
 }
 body.esf-minimal a {
   color: #2563eb;
+}
+
+/* Ajuste final fiel a referencia: Recorrido sugerido */
+body.esf-minimal .esf-journey-footer {
+  background: #f8fafc !important;
+}
+body.esf-minimal .esf-journey-footer .esf-journey-kicker {
+  background: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #4f46e5 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-journey-title {
+  color: #0f172a !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline::before {
+  background: linear-gradient(90deg, #93c5fd, #a5b4fc, #f9a8d4, #86efac, #67e8f9, #6ee7b7) !important;
+  opacity: 1 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-label {
+  color: #334155 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-sub {
+  color: #64748b !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(1) .esf-timeline-dot {
+  background: #dbeafe !important;
+  border-color: #bfdbfe !important;
+  color: #3b82f6 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(2) .esf-timeline-dot {
+  background: #ede9fe !important;
+  border-color: #ddd6fe !important;
+  color: #7c3aed !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(3) .esf-timeline-dot {
+  background: #fce7f3 !important;
+  border-color: #fbcfe8 !important;
+  color: #db2777 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(4) .esf-timeline-dot {
+  background: #dcfce7 !important;
+  border-color: #bbf7d0 !important;
+  color: #16a34a !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(5) .esf-timeline-dot {
+  background: #e0f2fe !important;
+  border-color: #bae6fd !important;
+  color: #0284c7 !important;
+}
+body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeline-dot {
+  background: #fef3c7 !important;
+  border-color: #fde68a !important;
+  color: #d97706 !important;
 }
