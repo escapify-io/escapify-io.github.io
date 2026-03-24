@@ -217,6 +217,11 @@ body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-dot {
   border: 1px solid var(--esf-blue-mid) !important;
   color: var(--esf-blue) !important;
 }
+body.esf-minimal[data-esf-page="lean-canvas"] .esf-journey-footer .esf-timeline-dot {
+  background: #eff6ff !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+  color: var(--esf-blue) !important;
+}
 
 /* ─── Pie ecosistema (todas las landings Fase 2) ─── */
 .esf-ecosystem-footer {

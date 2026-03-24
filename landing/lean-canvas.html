@@ -387,16 +387,20 @@
     @media(prefers-reduced-motion:reduce){
       .bmc-section{transition:none}
     }
-    .pitch-callout{
-      margin-top:24px;padding:18px 20px;border-radius:14px;border:1px solid var(--blue-mid);
-      background:linear-gradient(135deg,#eff6ff 0%,#ffffff 100%);
-      box-shadow:0 6px 18px rgba(37,99,235,.08);
+    .lc-pitch-card{
+      border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px 14px 12px;
     }
-    .pitch-callout .section-overline{color:var(--slate-label)}
-    .pitch-callout .section-head-row{margin-bottom:4px}
-    .pitch-callout .section-head-row h2{color:var(--blue-dark);font-size:clamp(1.2rem,2.2vw,1.45rem)}
-    .pitch-callout .pitch-body{margin-top:12px;font-size:16px;color:var(--body);line-height:1.55}
-    .pitch-callout .pitch-body strong{color:var(--ink)}
+    .lc-pitch-head{
+      margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--blue-dark);
+      display:flex;align-items:center;gap:8px;
+    }
+    .lc-pitch-list{margin:8px 0 0;padding-left:18px}
+    .lc-pitch-list li{font-size:13px;line-height:1.5;color:var(--body);margin-bottom:6px}
+    .lc-pitch-list li:last-child{margin-bottom:0}
+    .lc-pitch-mini{
+      margin-top:10px;background:#f8fafc;border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 10px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
     .vision-box{
       margin-top:18px;padding:18px 18px 16px;border-radius:16px;
       border:1px solid rgba(37,99,235,.25);
@@ -938,22 +942,21 @@
       </div>
     </section>
 
-    <div class="pitch-callout" data-lc-reveal data-lc-delay="0.05">
-      <p class="section-overline"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre para presentar</p>
-      <div class="section-head-row">
-        <span class="num" aria-hidden="true">3</span>
-        <h2>Pitch</h2>
-      </div>
-      <p class="pitch-body"><strong>Escapify.io</strong> es una plataforma que permite a docentes diseñar <strong>escape rooms educativos inclusivos</strong> de forma rápida, combinando <strong>gamificación real</strong>, <strong>materiales físicos</strong> y <strong>herramientas digitales</strong>, sin necesidad de experiencia previa.</p>
-    </div>
   </section>
 
   <section class="esf-pitch-unified" aria-labelledby="esf-pitch-title">
     <div class="section">
       <p class="esf-pitch-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre común</p>
-      <article class="esf-pitch-card">
+      <article class="esf-pitch-card lc-pitch-card">
         <h2 id="esf-pitch-title">Pitch</h2>
+        <p class="lc-pitch-head"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Mensaje principal</p>
         <p>Escapify.io transforma la gamificación en un sistema aplicable desde el primer día: recursos estructurados, inclusión desde el diseño y validación real en aula.</p>
+        <ul class="lc-pitch-list">
+          <li><strong>Problema:</strong> innovar requiere tiempo, método y materiales que encajen en aula real.</li>
+          <li><strong>Solución:</strong> lienzo claro + producto usable + acompañamiento formativo.</li>
+          <li><strong>Diferencial:</strong> investigación aplicada, accesibilidad y enfoque práctico docente.</li>
+        </ul>
+        <div class="lc-pitch-mini"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Prioridad ahora: pasar del diseño del modelo a señales de validación medibles.</div>
       </article>
     </div>
   </section>
