@@ -584,6 +584,11 @@
     }
     .block{display:none}
     .block.active{display:block}
+    .block.dc-focus{animation:dcFocus .42s ease}
+    @keyframes dcFocus{
+      0%{transform:translateY(6px);opacity:.78}
+      100%{transform:translateY(0);opacity:1}
+    }
     .block h2{
       font-size:clamp(1.35rem,2.5vw,1.75rem);color:var(--ink);font-weight:900;margin-bottom:12px;
       letter-spacing:-.35px;padding-bottom:10px;border-bottom:1px dashed var(--border);
@@ -592,6 +597,54 @@
     .block h2::after{
       content:"";position:absolute;left:0;bottom:-1px;width:64px;height:2px;border-radius:2px;
       background:linear-gradient(90deg,var(--blue),#6366f1,#a78bfa);
+    }
+    .dc-block-summary{
+      display:grid;
+      grid-template-columns:1.25fr repeat(3,minmax(0,1fr));
+      gap:8px;
+      margin:0 0 14px;
+      align-items:stretch;
+    }
+    .dc-sum-intro,.dc-sum-pill{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      padding:10px 12px;
+      min-height:58px;
+    }
+    .dc-sum-intro{
+      background:linear-gradient(145deg,#eff6ff,#ffffff);
+      border-color:#bfdbfe;
+    }
+    .dc-sum-k{
+      display:block;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+    .dc-sum-v{
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      line-height:1.35;
+      color:var(--ink);
+    }
+    .dc-sum-num{
+      display:block;
+      font-size:18px;
+      line-height:1;
+      font-weight:900;
+      color:var(--blue-dark);
+      margin-bottom:4px;
+    }
+    .dc-sum-lab{
+      font-size:11px;
+      font-weight:700;
+      color:var(--muted);
+      line-height:1.28;
     }
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
     .kpi{
@@ -893,6 +946,7 @@
     }
     .st4c-connector--2{background:linear-gradient(90deg,var(--blue),var(--purple));}
     @media(max-width:720px){
+      .dc-block-summary{grid-template-columns:1fr}
       .st4c-connector{display:none}
       .st4c-track{flex-direction:column;gap:10px}
     }
@@ -3608,11 +3662,69 @@
     const select = document.getElementById("bloqueSelect");
     const blocks = document.querySelectorAll(".block");
     const validBlocks = new Set(["contexto","competencia","mvp","estado","funnel","acciones","customer-dev","customer-journey","plan-marketing","riesgos"]);
+    const blockGuide = {
+      contexto: "Panorama de mercado y oportunidad",
+      competencia: "Comparativa rápida con alternativas",
+      mvp: "Hipótesis, PMV y validación priorizada",
+      estado: "Punto actual y siguiente paso operativo",
+      funnel: "Lectura de embudo y escalabilidad",
+      acciones: "Plan de ejecución por frentes",
+      "customer-dev": "Qué validar en cada fase",
+      "customer-journey": "Experiencia de usuario extremo a extremo",
+      "plan-marketing": "Canales, tácticas y KPI de tracción",
+      riesgos: "Supuestos críticos y mitigaciones"
+    };
+
+    function buildBlockSummaries() {
+      blocks.forEach((block) => {
+        if (block.querySelector(".dc-block-summary")) return;
+        const key = block.dataset.block || "contexto";
+        const cards = block.querySelectorAll(".card,.cd-phase,.mvp-option,.pm-action,.pm-snap,.pm-road,.pm-kpi-card,.st4c-card,.ec-note,.funnel-step").length;
+        const lists = block.querySelectorAll("ul,ol").length;
+        const visuals = block.querySelectorAll(".esf-viz-panel,.comp-table-wrap,.table-wrap,.dc-mini-flow,.cd-stepper,.funnel-viz-wrap,.pm-snapshot,.pm-channels,.pm-roadmap,.pm-action-grid").length;
+
+        const summary = document.createElement("div");
+        summary.className = "dc-block-summary";
+        summary.innerHTML = `
+          <div class="dc-sum-intro">
+            <span class="dc-sum-k">Lectura rápida</span>
+            <span class="dc-sum-v">${blockGuide[key] || "Resumen visual del bloque"}</span>
+          </div>
+          <div class="dc-sum-pill">
+            <span class="dc-sum-num">${cards}</span>
+            <span class="dc-sum-lab">tarjetas/etapas</span>
+          </div>
+          <div class="dc-sum-pill">
+            <span class="dc-sum-num">${lists}</span>
+            <span class="dc-sum-lab">listas accionables</span>
+          </div>
+          <div class="dc-sum-pill">
+            <span class="dc-sum-num">${visuals}</span>
+            <span class="dc-sum-lab">módulos visuales</span>
+          </div>
+        `;
+
+        const anchor = block.querySelector(".dc-block-tag") || block.querySelector("h2");
+        if (anchor && anchor.parentNode) {
+          anchor.insertAdjacentElement("afterend", summary);
+        } else {
+          block.prepend(summary);
+        }
+      });
+    }
 
     function setBlock(value, updateUrl = true) {
       const safe = validBlocks.has(value) ? value : "contexto";
       select.value = safe;
       blocks.forEach((b) => b.classList.toggle("active", b.dataset.block === safe));
+      const active = document.querySelector(`.block[data-block="${safe}"]`);
+      if (active) {
+        active.classList.remove("dc-focus");
+        requestAnimationFrame(() => active.classList.add("dc-focus"));
+        if (updateUrl) {
+          active.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
       if (updateUrl) {
         const url = new URL(window.location.href);
         url.searchParams.set("bloque", safe);
@@ -3620,6 +3732,7 @@
       }
     }
 
+    buildBlockSummaries();
     select.addEventListener("change", () => setBlock(select.value, true));
 
     const params = new URLSearchParams(window.location.search);

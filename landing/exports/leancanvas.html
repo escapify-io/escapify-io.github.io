@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Lean Canvas Export</title>
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --ink:#0f172a;
+      --body:#334155;
+      --border:#cbd5e1;
+      --blue:#2563eb;
+      --blue-soft:#dbeafe;
+      --violet:#6366f1;
+      --teal:#14b8a6;
+      --slate:#1e293b;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--body)}
+    .page{
+      width:297mm;
+      min-height:210mm;
+      margin:0 auto;
+      padding:8mm;
+      background:linear-gradient(180deg,#f1f5f9 0%,#f8fafc 100%);
+    }
+    .head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      margin-bottom:6mm;
+    }
+    .kicker{
+      display:inline-block;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#1e40af;
+      background:var(--blue-soft);
+      border:1px solid #bfdbfe;
+      border-radius:999px;
+      padding:4px 10px;
+      margin-bottom:6px;
+    }
+    h1{
+      margin:0;
+      font-size:28px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      color:var(--ink);
+    }
+    .sub{
+      margin:4px 0 0;
+      font-size:12px;
+      color:#475569;
+      max-width:900px;
+    }
+    .brand{
+      font-size:11px;
+      font-weight:800;
+      color:#1e40af;
+      border:1px solid #bfdbfe;
+      background:#eff6ff;
+      border-radius:10px;
+      padding:8px 10px;
+      white-space:nowrap;
+    }
+
+    .canvas{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      grid-template-rows:1fr 1fr auto;
+      gap:6px;
+      height:172mm;
+    }
+    .box{
+      border:1.5px solid var(--border);
+      border-radius:12px;
+      background:var(--white);
+      padding:8px 9px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+    }
+    .box h3{
+      margin:0 0 4px;
+      font-size:12px;
+      line-height:1.2;
+      color:var(--ink);
+      font-weight:900;
+      letter-spacing:.01em;
+    }
+    .mini{
+      margin:0 0 6px;
+      font-size:9px;
+      line-height:1.2;
+      font-weight:800;
+      color:#64748b;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    ul{
+      margin:0;
+      padding-left:14px;
+      font-size:10.2px;
+      line-height:1.28;
+    }
+    li{margin:0 0 3px}
+    li:last-child{margin-bottom:0}
+    .note{
+      margin-top:5px;
+      font-size:9.5px;
+      line-height:1.3;
+      padding:5px 7px;
+      border-radius:8px;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      color:#475569;
+    }
+
+    .problem{grid-column:1;grid-row:1 / span 2;border-top:3px solid #60a5fa}
+    .solution{grid-column:2;grid-row:1;border-top:3px solid #60a5fa}
+    .metrics{grid-column:2;grid-row:2;border-top:3px solid #14b8a6}
+    .value{grid-column:3;grid-row:1 / span 2;border-top:3px solid #6366f1}
+    .advantage{grid-column:4;grid-row:1;border-top:3px solid #6366f1}
+    .channels{grid-column:4;grid-row:2;border-top:3px solid #60a5fa}
+    .segments{grid-column:5;grid-row:1 / span 2;border-top:3px solid #60a5fa}
+    .costs{grid-column:1 / span 3;grid-row:3;border-top:3px solid #2563eb}
+    .revenue{grid-column:4 / span 2;grid-row:3;border-top:3px solid #14b8a6}
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .tag{
+      display:inline-block;
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#1e40af;
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      border-radius:999px;
+      padding:3px 7px;
+      margin:0 0 4px;
+    }
+
+    @media print{
+      @page{
+        size:A4 landscape;
+        margin:8mm;
+      }
+      body{background:#fff}
+      .page{
+        width:auto;
+        min-height:auto;
+        margin:0;
+        padding:0;
+        background:#fff;
+      }
+      .canvas{height:auto}
+    }
+  </style>
+</head>
+<body>
+  <main class="page" role="main">
+    <header class="head">
+      <div>
+        <span class="kicker">Escapify · Fase 2</span>
+        <h1>Lean Canvas</h1>
+        <!-- <p class="sub">Formato de impresión A4 horizontal · versión ejecutiva simple con los 9 bloques estratégicos.</p> -->
+      </div>
+      <div class="brand">escapify.io</div>
+    </header>
+
+    <section class="canvas" aria-label="Lean Canvas Escapify">
+      <article class="box problem">
+        <h3>Problema</h3>
+        <p class="mini">Urgencia y barreras</p>
+        <ul>
+          <li>~43 h/semana docente: poco margen para diseñar escapes sólidos.</li>
+          <li>Sobrecarga y fatiga para innovar con calidad.</li>
+          <li>Dificultad real de adaptación inclusiva (DI, TEA, TDAH, daltonismo).</li>
+          <li>Herramientas fragmentadas; gamificación superficial.</li>
+        </ul>
+        <div class="note">Alternativas: Genially, Kahoot, Breakout EDU, Pinterest/TPT/Etsy, blogs. Recursos sueltos, no sistema completo.</div>
+      </article>
+
+      <article class="box solution">
+        <h3>Solución</h3>
+        <p class="mini">Producto + formación + maker</p>
+        <ul>
+          <li>Biblioteca de escapes, candados y guías.</li>
+          <li>Generador IA para narrativa y adaptaciones.</li>
+          <li>Kits maker (3D, circuitos, micro:bit).</li>
+          <li>Formación práctica (~6 h).</li>
+        </ul>
+        <div class="note">Roadmap: MVP -> IA -> kits físicos -> comunidad/marketplace.</div>
+      </article>
+
+      <article class="box metrics">
+        <h3>Métricas clave</h3>
+        <p class="mini">North Star + KPIs</p>
+        <div class="note"><strong>North Star:</strong> docentes que aplican un escape real en aula con Escapify.</div>
+        <ul>
+          <li>Docentes registrados y activación real.</li>
+          <li>Creación/publicación de escapes.</li>
+          <li>Conversión free -> premium.</li>
+          <li>MRR/ARR, engagement formativo, referidos.</li>
+        </ul>
+      </article>
+
+      <article class="box value">
+        <h3>Propuesta de valor</h3>
+        <p class="mini">Una frase + pilares</p>
+        <div class="note"><strong>"Diseña experiencias educativas memorables sin complicarte"</strong> con escapes listos para aplicar.</div>
+        <ul>
+          <li>Pedagogía y evaluación competencial (no solo quiz).</li>
+          <li>Narrativa, retos y dinámicas de equipo.</li>
+          <li>Integración maker + digital en un mismo flujo.</li>
+          <li>IA para creación y adaptación inclusiva.</li>
+        </ul>
+      </article>
+
+      <article class="box advantage">
+        <h3>Ventaja especial</h3>
+        <p class="mini">Unfair advantage</p>
+        <ul>
+          <li>TFM + implementación real (12 participantes).</li>
+          <li>94% satisfacción y 23 adaptaciones documentadas.</li>
+          <li>Barrera de copia: pedagogía + narrativa + maker + digital.</li>
+        </ul>
+      </article>
+
+      <article class="box channels">
+        <h3>Canales</h3>
+        <p class="mini">Captación y conversión</p>
+        <ul>
+          <li>Captación: Instagram/TikTok, LinkedIn, SEO, comunidad docente.</li>
+          <li>Conversión: email, webinars, formaciones, workshops B2B.</li>
+          <li>Escala: ads y partnerships con embudo medido.</li>
+        </ul>
+      </article>
+
+      <article class="box segments">
+        <h3>Segmentos</h3>
+        <p class="mini">Nicho inicial y expansión</p>
+        <ul>
+          <li>Nicho: Infantil, Primaria, Secundaria, FP, inclusión y centros innovadores.</li>
+          <li>Early adopter: docente creativo, activo y frustrado por tiempo de diseño.</li>
+          <li>Expansión: L&amp;D y formación corporativa, licencias por centro/red.</li>
+        </ul>
+      </article>
+
+      <article class="box costs">
+        <h3>Estructura de costes</h3>
+        <p class="mini">MVP y escala</p>
+        <div class="split">
+          <div>
+            <span class="tag">MVP · 0-6 meses</span>
+            <ul>
+              <li>Desarrollo web (hosting, dominio, tooling).</li>
+              <li>Diseño de contenido y validación en aula.</li>
+              <li>Tiempo fundador / equipo reducido.</li>
+            </ul>
+          </div>
+          <div>
+            <span class="tag">Escala · 6-18 meses</span>
+            <ul>
+              <li>IA (APIs y consumo por uso).</li>
+              <li>Marketing y ads con embudo validado.</li>
+              <li>Producción kits maker y operaciones (email/soporte).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="box revenue">
+        <h3>Fuentes de ingresos</h3>
+        <p class="mini">Freemium -> premium + servicios</p>
+        <div class="split">
+          <div>
+            <span class="tag">MVP · 0-6 meses</span>
+            <ul>
+              <li>Freemium para adquisición y prueba.</li>
+              <li>Talleres y packs descargables.</li>
+              <li>Licencias beta / centros piloto.</li>
+            </ul>
+          </div>
+          <div>
+            <span class="tag">Escala · 6-18 meses</span>
+            <ul>
+              <li>SaaS premium mensual/anual.</li>
+              <li>Kits físicos y escape boxes.</li>
+              <li>Formación/certificación y licencias por centro.</li>
+              <li>Módulos IA avanzados.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><strong>Núcleo recomendado:</strong> SaaS + formación para crecimiento sostenible.</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
