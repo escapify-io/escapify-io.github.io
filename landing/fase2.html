@@ -264,10 +264,74 @@
     }
     .f2-card__mini a:hover{color:var(--blue)}
     .f2-card__mini a i{font-size:11px;opacity:.65}
+    .f2-story{
+      margin:10px 0 14px;
+      display:grid;gap:10px;grid-template-columns:1fr;
+    }
+    @media(min-width:900px){.f2-story{grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}}
+    .f2-story-step{
+      border:1px solid var(--border);border-radius:12px;background:#fff;padding:12px 12px 11px;
+    }
+    .f2-story-step h4{
+      margin:0 0 6px;font-size:13px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;
+    }
+    .f2-story-step p{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+    .f2-story-step strong{color:var(--ink)}
+    .f2-story-step .n{
+      width:24px;height:24px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+      background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue-dark);font-size:12px;font-weight:900;
+    }
+    .f2-story-arrow{
+      display:none;
+      align-items:center;justify-content:center;color:var(--muted);font-size:12px;font-weight:900;
+    }
+    @media(min-width:900px){.f2-story-arrow{display:flex}}
+    .f2-pitch-card{
+      border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px 14px 12px;
+    }
+    .f2-pitch-head{
+      margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--blue-dark);
+      display:flex;align-items:center;gap:8px;
+    }
+    .f2-pitch-list{margin:8px 0 0;padding-left:18px}
+    .f2-pitch-list li{font-size:13px;line-height:1.5;color:var(--body);margin-bottom:6px}
+    .f2-pitch-list li:last-child{margin-bottom:0}
+    .f2-pitch-mini{
+      margin-top:10px;background:#f8fafc;border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 10px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
+    .esf-chart-block{
+      padding:14px 16px 14px;
+    }
+    .esf-chart-block .esf-bar-row{
+      grid-template-columns:minmax(180px,36%) 1fr;
+      gap:14px;
+      margin-bottom:8px;
+    }
+    .esf-chart-block .esf-bar-row:last-child{margin-bottom:0}
+    .esf-chart-block .esf-bar-track{
+      display:block;width:100%;height:8px;border-radius:999px;
+    }
+    .esf-chart-block .esf-bar-fill{
+      display:block;height:100%;border-radius:999px;
+    }
+    .esf-viz-panel{
+      padding:14px 16px 14px;
+    }
+    .esf-viz-panel .esf-donut-row{
+      margin-top:4px;
+    }
+    .esf-viz-panel .esf-donut-item{
+      min-width:118px;
+    }
+    .esf-viz-panel .esf-donut-lab{
+      max-width:130px;
+    }
     @media(max-width:980px){
       .tabs{grid-template-columns:1fr 1fr}
       .f2-hub-grid{grid-template-columns:1fr 1fr}
       .hero-grid{grid-template-columns:1fr}
+      .esf-chart-block .esf-bar-row{grid-template-columns:1fr;gap:6px}
     }
     @media(max-width:640px){
       .tabs,.f2-hub-grid{grid-template-columns:1fr}
@@ -275,7 +339,7 @@
   </style>
   <link rel="stylesheet" href="./css/escapify-unified.css" />
 </head>
-<body data-esf-page="fase2">
+<body class="esf-minimal" data-esf-page="fase2">
   <div class="hero-wrap">
     <div class="hero-mesh" data-f2-mesh aria-hidden="true"></div>
     <section class="section">
@@ -350,7 +414,7 @@
       <header class="f2-hub-head" data-f2-reveal data-f2-delay="0.04">
         <span class="f2-hub-kicker"><i class="fa-solid fa-grip" aria-hidden="true"></i> Mapa Fase 2</span>
         <h2 class="f2-hub-title">Todo el hub, en un vistazo</h2>
-        <p class="f2-hub-sub">Cinco páginas para narrar y decidir, más el <strong>panel de datos</strong> (competencia, embudo, journey, marketing, hipótesis…) y atajos a lo que más se pide en reuniones.</p>
+        <p class="f2-hub-sub">Cinco páginas para narrar y decidir, más el <strong>panel de datos</strong> (competencia, embudo, journey, marketing, hipótesis…).</p>
       </header>
       <div class="f2-hub-grid" data-f2-reveal data-f2-delay="0.1">
         <article class="f2-card f2-card--canvas">
@@ -441,6 +505,22 @@
           la <strong>Semana del Emprendedor IEBS</strong> resume el relato para inversión y comunidad.
         </p>
       </div>
+      <div class="f2-story" aria-label="Secuencia narrativa del proyecto">
+        <article class="f2-story-step">
+          <h4><span class="n">1</span> Origen · La Maleta</h4>
+          <p>Base investigadora, evidencia en aula y marco inclusivo.</p>
+        </article>
+        <div class="f2-story-arrow" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+        <article class="f2-story-step">
+          <h4><span class="n">2</span> Producto · Escapify</h4>
+          <p>Digitaliza el modelo y lo convierte en sistema usable y escalable.</p>
+        </article>
+        <div class="f2-story-arrow" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></div>
+        <article class="f2-story-step">
+          <h4><span class="n">3</span> Relato · IEBS</h4>
+          <p>Comunica tracción, visión y oportunidad para partners e inversión.</p>
+        </article>
+      </div>
       <div class="esf-insight">
         <span class="esf-insight__ico" aria-hidden="true"><i class="fa-solid fa-link"></i></span>
         <p>
@@ -448,7 +528,7 @@
         </p>
       </div>
       <div class="esf-chart-block">
-        <h3 class="esf-chart-title"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Foco de trabajo en Fase 2 (ilustrativo)</h3>
+        <h3 class="esf-chart-title"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Foco de trabajo en Fase 2</h3>
         <div class="esf-bars">
           <div class="esf-bar-row">
             <span class="esf-bar-name">Modelo + propuesta de valor</span>
@@ -484,7 +564,7 @@
         </div>
       </div>
       <div class="esf-viz-panel" aria-label="Tendencia e intensidad por pilar">
-        <h3 class="esf-viz-title"><i class="fa-solid fa-wave-square" aria-hidden="true"></i> Pulso del portafolio (ilustrativo)</h3>
+        <h3 class="esf-viz-title"><i class="fa-solid fa-wave-square" aria-hidden="true"></i> Pulso del portafolio</h3>
         <p class="esf-viz-lead">Cómo se reparte el <strong>esfuerzo de narrativa</strong> entre modelo de negocio, evidencia de mercado y storytelling para IEBS / inversión.</p>
         <div class="esf-spark" aria-hidden="true"></div>
         <div class="esf-donut-row">
@@ -505,6 +585,23 @@
       </div>
     </section>
   </div>
+
+  <section class="esf-pitch-unified" aria-labelledby="esf-pitch-title">
+    <div class="section">
+      <p class="esf-pitch-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre común</p>
+      <article class="esf-pitch-card f2-pitch-card">
+        <h2 id="esf-pitch-title">Pitch</h2>
+        <p class="f2-pitch-head"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Mensaje principal</p>
+        <p>Escapify.io transforma la gamificación en un sistema aplicable desde el primer día: recursos estructurados, inclusión desde el diseño y validación real en aula.</p>
+        <ul class="f2-pitch-list">
+          <li><strong>Problema:</strong> innovar cuesta tiempo y no siempre hay estructura usable.</li>
+          <li><strong>Solución:</strong> plataforma + recursos + metodología probada en contexto real.</li>
+          <li><strong>Diferencial:</strong> investigación + accesibilidad + enfoque práctico docente.</li>
+        </ul>
+        <div class="f2-pitch-mini"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Objetivo inmediato: convertir narrativa en señales de tracción medibles.</div>
+      </article>
+    </div>
+  </section>
 
   <section class="esf-journey-footer" aria-labelledby="esf-jf-title">
     <div class="esf-journey-head">
@@ -548,6 +645,7 @@
         <a href="./index-maleta.html"><i class="fa-solid fa-suitcase" aria-hidden="true"></i> La Maleta</a>
         <a href="./fase2.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Hub Fase 2</a>
       </nav>
+      <p class="esf-ecosystem-legal">© 2026 Escapify.io · Todos los derechos reservados.</p>
     </div>
   </footer>
   <script src="./js/fase2-effects.js" defer></script>

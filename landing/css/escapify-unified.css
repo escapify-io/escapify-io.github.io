@@ -23,78 +23,311 @@ html {
   --esf-max: 1200px;
 }
 
+/* Modo visual minimalista (sin elevaciones) */
+.esf-minimal *,
+.esf-minimal *::before,
+.esf-minimal *::after {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Tablas, gráficos e iconografía en versión minimal */
+.esf-minimal table {
+  border-collapse: collapse !important;
+  background: #fff !important;
+}
+.esf-minimal th,
+.esf-minimal td {
+  background: #fff !important;
+  border: 1px solid var(--esf-border) !important;
+}
+.esf-minimal .comp-table-wrap,
+.esf-minimal .ec-table-wrap,
+.esf-minimal .table-wrap {
+  background: #fff !important;
+  border: 1px solid var(--esf-border) !important;
+}
+.esf-minimal .comp-table tr.escapify-row {
+  background: #f8fafc !important;
+}
+.esf-minimal .esf-chart-block,
+.esf-minimal .esf-viz-panel,
+.esf-minimal .esf-insight,
+.esf-minimal .esf-stat-visual-item {
+  background: #fff !important;
+  border: 1px solid var(--esf-border) !important;
+}
+.esf-minimal .esf-bar-track {
+  background: #e5e7eb !important;
+}
+.esf-minimal .esf-bar-fill {
+  background: var(--esf-blue) !important;
+}
+.esf-minimal .esf-spark {
+  background: #f8fafc !important;
+  border: 1px solid var(--esf-border);
+  min-height: 42px;
+}
+.esf-minimal .esf-spark::after {
+  background: linear-gradient(90deg, #93c5fd, #60a5fa, #3b82f6) !important;
+  clip-path: polygon(
+    0% 65%,
+    8% 52%,
+    16% 58%,
+    26% 36%,
+    36% 43%,
+    46% 24%,
+    56% 30%,
+    66% 16%,
+    76% 22%,
+    86% 10%,
+    94% 16%,
+    100% 8%,
+    100% 100%,
+    0% 100%
+  ) !important;
+  height: 70% !important;
+  bottom: 0 !important;
+  border-radius: 999px !important;
+  opacity: 1 !important;
+}
+
+/* En Fase 2, reforzar el aspecto de pulso */
+body.esf-minimal[data-esf-page="fase2"] .esf-spark {
+  min-height: 54px;
+}
+.esf-minimal .esf-donut,
+.esf-minimal .esf-donut--violet,
+.esf-minimal .esf-donut--teal {
+  background: conic-gradient(var(--esf-blue) calc(var(--p) * 1%), #e5e7eb 0) !important;
+  border: 1px solid var(--esf-border);
+}
+.esf-minimal .esf-donut-hole {
+  background: #fff !important;
+  border: 1px solid var(--esf-border);
+  color: var(--esf-blue-dark) !important;
+}
+.esf-minimal .esf-ring {
+  background: conic-gradient(var(--esf-blue) calc(var(--esf-ring-p) * 1%), #e5e7eb 0) !important;
+  border: 1px solid var(--esf-border);
+}
+.esf-minimal .esf-ring-inner {
+  border: 1px solid var(--esf-border);
+}
+.esf-minimal .esf-funnel-bar,
+.esf-minimal .esf-funnel-step:nth-child(4) .esf-funnel-bar {
+  background: var(--esf-blue) !important;
+}
+.esf-minimal .esf-icon-cell {
+  background: #fff !important;
+  border: 1px solid var(--esf-border) !important;
+}
+.esf-minimal .esf-icon-cell i,
+.esf-minimal .esf-insight__ico,
+.esf-minimal .esf-timeline-dot {
+  background: transparent !important;
+  color: var(--esf-blue) !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+}
+
+/* Aplanado fuerte: tarjetas e iconografía (sin degradados ni arcoíris) */
+.esf-minimal .f2-card,
+.esf-minimal .card,
+.esf-minimal .cd-phase,
+.esf-minimal .cj-phase,
+.esf-minimal .acciones-extra,
+.esf-minimal .acciones-extra-cell,
+.esf-minimal .mvp-option,
+.esf-minimal .pmv-intro-card,
+.esf-minimal .st4c-card,
+.esf-minimal .funnel-card,
+.esf-minimal .hero-side,
+.esf-minimal .hero,
+.esf-minimal .hero-wrap {
+  background: #fff !important;
+  border-color: var(--esf-border) !important;
+}
+
+.esf-minimal .f2-card::before,
+.esf-minimal .card--accion::before,
+.esf-minimal .cd-phase::before,
+.esf-minimal .cj-phase::before,
+.esf-minimal .mvp-option::before,
+.esf-minimal .funnel-card::before {
+  background: var(--esf-blue) !important;
+  opacity: 1 !important;
+}
+
+.esf-minimal .f2-card:hover,
+.esf-minimal .card:hover,
+.esf-minimal .cd-stepper__step:hover,
+.esf-minimal .cj-rail__list li:hover,
+.esf-minimal .mvp-option:hover {
+  transform: none !important;
+  border-color: var(--esf-border) !important;
+}
+
+.esf-minimal .f2-card__icon,
+.esf-minimal .cj-rail__ico,
+.esf-minimal .cd-stepper__ico,
+.esf-minimal .acciones-extra__head-ico,
+.esf-minimal .ae-ico,
+.esf-minimal .mvp-option__ico,
+.esf-minimal .pmv-intro-card__ico,
+.esf-minimal .st4c-card-ico,
+.esf-minimal .mvp-metric__ico,
+.esf-minimal .mvp-signal__ico,
+.esf-minimal .funnel-ico-wrap,
+.esf-minimal .hero-side::before {
+  background: #eff6ff !important;
+  color: var(--esf-blue) !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+}
+
+.esf-minimal .f2-card__tag,
+.esf-minimal .mvp-opt-tag,
+.esf-minimal .dc-block-tag,
+.esf-minimal .cd-badge,
+.esf-minimal .cj-badge {
+  background: #f8fafc !important;
+  color: var(--esf-slate) !important;
+  border: 1px solid var(--esf-border) !important;
+}
+
+.esf-minimal .f2-card--canvas,
+.esf-minimal .f2-card--adopter,
+.esf-minimal .f2-card--valor,
+.esf-minimal .f2-card--ecofin,
+.esf-minimal .f2-card--contexto,
+.esf-minimal .f2-card--atajos {
+  --card-accent: var(--esf-blue);
+}
+
+.esf-minimal .cj-rail::before,
+.esf-minimal .cd-stepper::before,
+.esf-minimal .acciones-pipeline::before {
+  background: var(--esf-blue-mid) !important;
+  opacity: 1 !important;
+}
+
+/* Fase2: mejorar legibilidad del recorrido (iconos con fondo) */
+body.esf-minimal[data-esf-page="fase2"] .esf-journey-footer .esf-timeline-dot {
+  background: #eff6ff !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+  color: var(--esf-blue) !important;
+}
+
 /* ─── Pie ecosistema (todas las landings Fase 2) ─── */
 .esf-ecosystem-footer {
   margin-top: 0;
-  padding: 28px 24px 32px;
-  background: linear-gradient(165deg, #0f172a 0%, #1e293b 42%, #1e3a5f 100%);
-  color: #cbd5e1;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 20px 24px 22px;
+  background: #f8fafc;
+  color: var(--esf-body);
+  border-top: 1px solid var(--esf-border);
 }
 .esf-ecosystem-inner {
   max-width: var(--esf-max);
   margin: 0 auto;
   display: grid;
-  gap: 20px;
+  gap: 14px;
   align-items: start;
 }
 @media (min-width: 768px) {
   .esf-ecosystem-inner {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     align-items: center;
   }
 }
 .esf-ecosystem-brand .esf-logo-mark {
   display: inline-block;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 900;
   letter-spacing: -0.03em;
-  background: linear-gradient(105deg, #93c5fd, #fff, #a5b4fc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 6px;
+  color: var(--esf-blue-dark);
+  margin-bottom: 4px;
 }
 .esf-ecosystem-brand p {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
-  color: #94a3b8;
-  max-width: 420px;
+  color: var(--esf-muted);
+  max-width: 680px;
 }
 .esf-ecosystem-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   justify-content: flex-start;
 }
 @media (min-width: 768px) {
   .esf-ecosystem-links {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 }
 .esf-ecosystem-links a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
+  gap: 6px;
+  padding: 0;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 600;
   text-decoration: none;
-  color: #e2e8f0;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  color: var(--esf-slate);
+  background: transparent;
+  border: 0;
+  transition: color 0.2s ease;
 }
 .esf-ecosystem-links a:hover {
-  background: rgba(37, 99, 235, 0.35);
-  border-color: rgba(147, 197, 253, 0.5);
-  transform: translateY(-2px);
+  color: var(--esf-blue-dark);
 }
 .esf-ecosystem-links a i {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.esf-ecosystem-legal {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--esf-muted);
+  line-height: 1.45;
+}
+
+/* Bloque de pitch unificado (misma posición en todas) */
+.esf-pitch-unified {
+  padding: 10px 0 2px;
+  border-top: 1px solid var(--esf-border);
+  background: #fff;
+}
+.esf-pitch-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--esf-slate);
+  margin-bottom: 8px;
+}
+.esf-pitch-card {
+  border: 1px solid var(--esf-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: #fff;
+}
+.esf-pitch-card h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 900;
+  color: var(--esf-ink);
+  letter-spacing: -0.02em;
+}
+.esf-pitch-card p {
+  margin: 0;
   font-size: 14px;
-  opacity: 0.9;
+  line-height: 1.6;
+  color: var(--esf-body);
 }
 
 /* ─── Línea temporal · recorrido (scroll horizontal en móvil) ─── */
