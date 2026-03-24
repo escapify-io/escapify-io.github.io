@@ -1719,3 +1719,99 @@ body.esf-minimal .esf-journey-footer .esf-timeline-step:nth-child(6) .esf-timeli
   border-color: #fde68a !important;
   color: #d97706 !important;
 }
+
+/* Modo visual IEBS: limpio y simple para datos-contexto */
+body.esf-minimal[data-esf-page="datos-contexto"] {
+  background: #f8fafc !important;
+  color: #1f2937 !important;
+  font-family: "Segoe UI", Inter, system-ui, -apple-system, sans-serif !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .block,
+body.esf-minimal[data-esf-page="datos-contexto"] .card,
+body.esf-minimal[data-esf-page="datos-contexto"] .surface,
+body.esf-minimal[data-esf-page="datos-contexto"] .dc-subblock,
+body.esf-minimal[data-esf-page="datos-contexto"] .pm-section {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .block h2,
+body.esf-minimal[data-esf-page="datos-contexto"] h3,
+body.esf-minimal[data-esf-page="datos-contexto"] .section-title {
+  color: #0f172a !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .muted,
+body.esf-minimal[data-esf-page="datos-contexto"] .subtle,
+body.esf-minimal[data-esf-page="datos-contexto"] p {
+  color: #475569 !important;
+}
+
+/* Tabla comparativa con estilo base IEBS */
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table-wrap {
+  width: 100% !important;
+  overflow-x: auto !important;
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table {
+  width: 100% !important;
+  min-width: 980px !important;
+  border-collapse: collapse !important;
+  color: #1f2937 !important;
+  font-size: 14px !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table thead th {
+  background: #0f172a !important;
+  color: #cbd5e1 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  text-align: center !important;
+  padding: 12px 14px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table thead th:first-child {
+  color: #ffffff !important;
+  text-align: left !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table thead th:last-child {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table tbody td {
+  background: #ffffff !important;
+  color: #374151 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 10px 14px !important;
+  vertical-align: top !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table tbody tr:nth-child(even) td {
+  background: #f8fafc !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table tbody td:first-child {
+  text-align: left !important;
+  font-weight: 700 !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table tbody td:not(:first-child) {
+  text-align: center !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table tbody tr.escapify-row td {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  font-weight: 700 !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table .yes {
+  color: #16a34a !important;
+  font-weight: 800 !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table .partial {
+  color: #b45309 !important;
+  font-weight: 700 !important;
+}
+body.esf-minimal[data-esf-page="datos-contexto"] .comp-table .no {
+  color: #64748b !important;
+}
