@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Escapify · Lean Canvas Export</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root{
       --bg:#f8fafc;
@@ -31,7 +32,7 @@
       justify-content:space-between;
       align-items:flex-end;
       gap:12px;
-      margin-bottom:6mm;
+      margin-bottom:4mm;
     }
     .kicker{
       display:inline-block;
@@ -75,13 +76,13 @@
       grid-template-columns:repeat(5,minmax(0,1fr));
       grid-template-rows:1fr 1fr auto;
       gap:6px;
-      height:172mm;
+      height:176mm;
     }
     .box{
       border:1.5px solid var(--border);
       border-radius:12px;
       background:var(--white);
-      padding:8px 9px;
+      padding:7px 8px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -95,6 +96,8 @@
       font-weight:900;
       letter-spacing:.01em;
     }
+    .i-h{color:var(--blue);margin-right:6px;font-size:11px}
+    .fa-inline{color:var(--blue);margin-right:6px;font-size:9px;width:11px;text-align:center}
     .mini{
       margin:0 0 6px;
       font-size:9px;
@@ -107,20 +110,29 @@
     ul{
       margin:0;
       padding-left:14px;
-      font-size:10.2px;
-      line-height:1.28;
+      font-size:9.5px;
+      line-height:1.22;
     }
     li{margin:0 0 3px}
     li:last-child{margin-bottom:0}
     .note{
-      margin-top:5px;
-      font-size:9.5px;
-      line-height:1.3;
-      padding:5px 7px;
+      margin-top:4px;
+      font-size:9px;
+      line-height:1.22;
+      padding:4px 6px;
       border-radius:8px;
       background:#f8fafc;
       border:1px solid #e2e8f0;
       color:#475569;
+    }
+    .mini-h{
+      margin:5px 0 3px;
+      font-size:8.5px;
+      line-height:1.1;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#1e40af;
     }
 
     .problem{grid-column:1;grid-row:1 / span 2;border-top:3px solid #60a5fa}
@@ -151,6 +163,7 @@
       padding:3px 7px;
       margin:0 0 4px;
     }
+    .brand i{margin-right:5px}
 
     @media print{
       @page{
@@ -173,134 +186,144 @@
   <main class="page" role="main">
     <header class="head">
       <div>
-        <span class="kicker">Escapify · Fase 2</span>
+        <span class="kicker"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Escapify · Fase 2</span>
         <h1>Lean Canvas</h1>
-        <!-- <p class="sub">Formato de impresión A4 horizontal · versión ejecutiva simple con los 9 bloques estratégicos.</p> -->
       </div>
-      <div class="brand">escapify.io</div>
+      <div class="brand"><i class="fa-solid fa-globe" aria-hidden="true"></i>escapify.io</div>
     </header>
 
     <section class="canvas" aria-label="Lean Canvas Escapify">
       <article class="box problem">
-        <h3>Problema</h3>
+        <h3><i class="fa-solid fa-triangle-exclamation i-h" aria-hidden="true"></i>Problema</h3>
         <p class="mini">Urgencia y barreras</p>
         <ul>
-          <li>~43 h/semana docente: poco margen para diseñar escapes sólidos.</li>
-          <li>Sobrecarga y fatiga para innovar con calidad.</li>
-          <li>Dificultad real de adaptación inclusiva (DI, TEA, TDAH, daltonismo).</li>
-          <li>Herramientas fragmentadas; gamificación superficial.</li>
+          <li><i class="fa-solid fa-clock fa-inline" aria-hidden="true"></i>~43 h/semana docente: poco margen para diseñar escapes sólidos.</li>
+          <li><i class="fa-solid fa-brain fa-inline" aria-hidden="true"></i>Sobrecarga y fatiga para innovar con calidad.</li>
+          <li><i class="fa-solid fa-universal-access fa-inline" aria-hidden="true"></i>Dificultad real de adaptación inclusiva (DI, TEA, TDAH, daltonismo).</li>
+          <li><i class="fa-solid fa-puzzle-piece fa-inline" aria-hidden="true"></i>Herramientas fragmentadas; gamificación superficial.</li>
         </ul>
         <div class="note">Alternativas: Genially, Kahoot, Breakout EDU, Pinterest/TPT/Etsy, blogs. Recursos sueltos, no sistema completo.</div>
       </article>
 
       <article class="box solution">
-        <h3>Solución</h3>
+        <h3><i class="fa-solid fa-lightbulb i-h" aria-hidden="true"></i>Solución</h3>
         <p class="mini">Producto + formación + maker</p>
         <ul>
-          <li>Biblioteca de escapes, candados y guías.</li>
-          <li>Generador IA para narrativa y adaptaciones.</li>
-          <li>Kits maker (3D, circuitos, micro:bit).</li>
-          <li>Formación práctica (~6 h).</li>
+          <li><i class="fa-solid fa-book-open fa-inline" aria-hidden="true"></i>Biblioteca de escapes, candados y guías.</li>
+          <li><i class="fa-solid fa-robot fa-inline" aria-hidden="true"></i>Generador IA para narrativa y adaptaciones.</li>
+          <li><i class="fa-solid fa-screwdriver-wrench fa-inline" aria-hidden="true"></i>Kits maker (3D, circuitos, micro:bit).</li>
+          <li><i class="fa-solid fa-chalkboard-user fa-inline" aria-hidden="true"></i>Formación práctica (~6 h).</li>
         </ul>
         <div class="note">Roadmap: MVP -> IA -> kits físicos -> comunidad/marketplace.</div>
       </article>
 
       <article class="box metrics">
-        <h3>Métricas clave</h3>
+        <h3><i class="fa-solid fa-chart-simple i-h" aria-hidden="true"></i>Métricas clave</h3>
         <p class="mini">North Star + KPIs</p>
         <div class="note"><strong>North Star:</strong> docentes que aplican un escape real en aula con Escapify.</div>
         <ul>
-          <li>Docentes registrados y activación real.</li>
-          <li>Creación/publicación de escapes.</li>
-          <li>Conversión free -> premium.</li>
-          <li>MRR/ARR, engagement formativo, referidos.</li>
+          <li><i class="fa-solid fa-user-plus fa-inline" aria-hidden="true"></i>Docentes registrados y activación real.</li>
+          <li><i class="fa-solid fa-puzzle-piece fa-inline" aria-hidden="true"></i>Creación/publicación de escapes.</li>
+          <li><i class="fa-solid fa-arrow-trend-up fa-inline" aria-hidden="true"></i>Conversión free -> premium.</li>
+          <li><i class="fa-solid fa-sack-dollar fa-inline" aria-hidden="true"></i>MRR/ARR, engagement formativo, referidos.</li>
         </ul>
+        <div class="note"><strong>AARRR:</strong> adquisicion -> activacion -> retencion -> ingresos -> referidos.</div>
       </article>
 
       <article class="box value">
-        <h3>Propuesta de valor</h3>
+        <h3><i class="fa-solid fa-gem i-h" aria-hidden="true"></i>Propuesta de valor</h3>
         <p class="mini">Una frase + pilares</p>
         <div class="note"><strong>"Diseña experiencias educativas memorables sin complicarte"</strong> con escapes listos para aplicar.</div>
         <ul>
-          <li>Pedagogía y evaluación competencial (no solo quiz).</li>
-          <li>Narrativa, retos y dinámicas de equipo.</li>
-          <li>Integración maker + digital en un mismo flujo.</li>
-          <li>IA para creación y adaptación inclusiva.</li>
+          <li><i class="fa-solid fa-graduation-cap fa-inline" aria-hidden="true"></i>Pedagogía y evaluación competencial (no solo quiz).</li>
+          <li><i class="fa-solid fa-gamepad fa-inline" aria-hidden="true"></i>Narrativa, retos y dinámicas de equipo.</li>
+          <li><i class="fa-solid fa-puzzle-piece fa-inline" aria-hidden="true"></i>Integración maker + digital en un mismo flujo.</li>
+          <li><i class="fa-solid fa-robot fa-inline" aria-hidden="true"></i>IA para creación y adaptación inclusiva.</li>
         </ul>
+        <div class="note"><strong>Diferencial:</strong> sistema completo + ahorro de tiempo docente + inclusion (DUA).</div>
       </article>
 
       <article class="box advantage">
-        <h3>Ventaja especial</h3>
+        <h3><i class="fa-solid fa-shield-halved i-h" aria-hidden="true"></i>Ventaja especial</h3>
         <p class="mini">Unfair advantage</p>
         <ul>
-          <li>TFM + implementación real (12 participantes).</li>
-          <li>94% satisfacción y 23 adaptaciones documentadas.</li>
-          <li>Barrera de copia: pedagogía + narrativa + maker + digital.</li>
+          <li><i class="fa-solid fa-flask fa-inline" aria-hidden="true"></i>TFM + implementación real (12 participantes).</li>
+          <li><i class="fa-solid fa-star fa-inline" aria-hidden="true"></i>94% satisfacción y 23 adaptaciones documentadas.</li>
+          <li><i class="fa-solid fa-lock fa-inline" aria-hidden="true"></i>Barrera de copia: pedagogía + narrativa + maker + digital.</li>
         </ul>
+        <div class="note"><strong>La Maleta del Tiempo</strong> aporta caso tangible y prueba real en aula.</div>
       </article>
 
       <article class="box channels">
-        <h3>Canales</h3>
+        <h3><i class="fa-solid fa-bullhorn i-h" aria-hidden="true"></i>Canales</h3>
         <p class="mini">Captación y conversión</p>
+        <div class="mini-h">Captación</div>
         <ul>
-          <li>Captación: Instagram/TikTok, LinkedIn, SEO, comunidad docente.</li>
-          <li>Conversión: email, webinars, formaciones, workshops B2B.</li>
-          <li>Escala: ads y partnerships con embudo medido.</li>
+          <li><i class="fa-solid fa-mobile-screen-button fa-inline" aria-hidden="true"></i>Instagram/TikTok, LinkedIn, SEO y comunidad docente.</li>
+        </ul>
+        <div class="mini-h">Conversión</div>
+        <ul>
+          <li><i class="fa-solid fa-envelope fa-inline" aria-hidden="true"></i>Email, webinars, formaciones y workshops B2B.</li>
+          <li><i class="fa-solid fa-chart-line fa-inline" aria-hidden="true"></i>Escala: ads y partnerships con embudo medido.</li>
         </ul>
       </article>
 
       <article class="box segments">
-        <h3>Segmentos</h3>
+        <h3><i class="fa-solid fa-users i-h" aria-hidden="true"></i>Segmentos</h3>
         <p class="mini">Nicho inicial y expansión</p>
+        <div class="mini-h">Nicho inicial</div>
         <ul>
-          <li>Nicho: Infantil, Primaria, Secundaria, FP, inclusión y centros innovadores.</li>
-          <li>Early adopter: docente creativo, activo y frustrado por tiempo de diseño.</li>
-          <li>Expansión: L&amp;D y formación corporativa, licencias por centro/red.</li>
+          <li><i class="fa-solid fa-school fa-inline" aria-hidden="true"></i>Infantil, Primaria, Secundaria, FP, inclusión y centros innovadores.</li>
+          <li><i class="fa-solid fa-user-check fa-inline" aria-hidden="true"></i>Early adopter: creativo, activo y frustrado por tiempo de diseño.</li>
+        </ul>
+        <div class="mini-h">Expansión</div>
+        <ul>
+          <li><i class="fa-solid fa-briefcase fa-inline" aria-hidden="true"></i>L&amp;D y formación corporativa; licencias por centro/red.</li>
         </ul>
       </article>
 
       <article class="box costs">
-        <h3>Estructura de costes</h3>
+        <h3><i class="fa-solid fa-money-bill-wave i-h" aria-hidden="true"></i>Estructura de costes</h3>
         <p class="mini">MVP y escala</p>
         <div class="split">
           <div>
             <span class="tag">MVP · 0-6 meses</span>
             <ul>
-              <li>Desarrollo web (hosting, dominio, tooling).</li>
-              <li>Diseño de contenido y validación en aula.</li>
-              <li>Tiempo fundador / equipo reducido.</li>
+              <li><i class="fa-solid fa-code fa-inline" aria-hidden="true"></i>Desarrollo web (hosting, dominio, tooling).</li>
+              <li><i class="fa-solid fa-pen-ruler fa-inline" aria-hidden="true"></i>Diseño de contenido y validación en aula.</li>
+              <li><i class="fa-solid fa-user-clock fa-inline" aria-hidden="true"></i>Tiempo fundador / equipo reducido.</li>
             </ul>
           </div>
           <div>
             <span class="tag">Escala · 6-18 meses</span>
             <ul>
-              <li>IA (APIs y consumo por uso).</li>
-              <li>Marketing y ads con embudo validado.</li>
-              <li>Producción kits maker y operaciones (email/soporte).</li>
+              <li><i class="fa-solid fa-robot fa-inline" aria-hidden="true"></i>IA (APIs y consumo por uso).</li>
+              <li><i class="fa-solid fa-bullhorn fa-inline" aria-hidden="true"></i>Marketing y ads con embudo validado.</li>
+              <li><i class="fa-solid fa-gears fa-inline" aria-hidden="true"></i>Producción kits maker y operaciones (email/soporte).</li>
             </ul>
           </div>
         </div>
       </article>
 
       <article class="box revenue">
-        <h3>Fuentes de ingresos</h3>
+        <h3><i class="fa-solid fa-sack-dollar i-h" aria-hidden="true"></i>Fuentes de ingresos</h3>
         <p class="mini">Freemium -> premium + servicios</p>
         <div class="split">
           <div>
             <span class="tag">MVP · 0-6 meses</span>
             <ul>
-              <li>Freemium para adquisición y prueba.</li>
-              <li>Talleres y packs descargables.</li>
-              <li>Licencias beta / centros piloto.</li>
+              <li><i class="fa-solid fa-download fa-inline" aria-hidden="true"></i>Freemium para adquisición y prueba.</li>
+              <li><i class="fa-solid fa-chalkboard-user fa-inline" aria-hidden="true"></i>Talleres y packs descargables.</li>
+              <li><i class="fa-solid fa-school fa-inline" aria-hidden="true"></i>Licencias beta / centros piloto.</li>
             </ul>
           </div>
           <div>
             <span class="tag">Escala · 6-18 meses</span>
             <ul>
-              <li>SaaS premium mensual/anual.</li>
-              <li>Kits físicos y escape boxes.</li>
-              <li>Formación/certificación y licencias por centro.</li>
-              <li>Módulos IA avanzados.</li>
+              <li><i class="fa-solid fa-credit-card fa-inline" aria-hidden="true"></i>SaaS premium mensual/anual.</li>
+              <li><i class="fa-solid fa-box-open fa-inline" aria-hidden="true"></i>Kits físicos y escape boxes.</li>
+              <li><i class="fa-solid fa-building fa-inline" aria-hidden="true"></i>Formación/certificación y licencias por centro.</li>
+              <li><i class="fa-solid fa-robot fa-inline" aria-hidden="true"></i>Módulos IA avanzados.</li>
             </ul>
           </div>
         </div>

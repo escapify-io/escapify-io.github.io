@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Business Model Canvas Export</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --ink:#0f172a;
+      --body:#334155;
+      --border:#cbd5e1;
+      --blue:#2563eb;
+      --blue-soft:#dbeafe;
+      --violet:#6366f1;
+      --teal:#14b8a6;
+      --pink:#db2777;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--body)}
+    .page{
+      width:297mm;
+      min-height:210mm;
+      margin:0 auto;
+      padding:8mm;
+      background:linear-gradient(180deg,#f1f5f9 0%,#f8fafc 100%);
+    }
+    .head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      margin-bottom:4mm;
+    }
+    .kicker{
+      display:inline-block;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#1e40af;
+      background:var(--blue-soft);
+      border:1px solid #bfdbfe;
+      border-radius:999px;
+      padding:4px 10px;
+      margin-bottom:6px;
+    }
+    h1{
+      margin:0;
+      font-size:27px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      color:var(--ink);
+    }
+    .sub{
+      margin:4px 0 0;
+      font-size:11px;
+      color:#475569;
+      max-width:950px;
+      line-height:1.3;
+    }
+    .brand{
+      font-size:11px;
+      font-weight:800;
+      color:#1e40af;
+      border:1px solid #bfdbfe;
+      background:#eff6ff;
+      border-radius:10px;
+      padding:8px 10px;
+      white-space:nowrap;
+    }
+    .brand i{margin-right:5px}
+
+    .canvas{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:6px;
+      height:164mm;
+    }
+    .box{
+      border:1.5px solid var(--border);
+      border-radius:12px;
+      background:var(--white);
+      padding:7px 8px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+    }
+    .box h3{
+      margin:0 0 4px;
+      font-size:11.5px;
+      line-height:1.2;
+      color:var(--ink);
+      font-weight:900;
+      letter-spacing:.01em;
+      display:flex;
+      align-items:flex-start;
+      gap:6px;
+    }
+    .num{
+      width:18px;height:18px;border-radius:6px;flex:0 0 18px;
+      display:inline-flex;align-items:center;justify-content:center;
+      background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;
+      font-size:10px;font-weight:900;line-height:1;
+    }
+    .i-h{color:var(--blue);font-size:11px;margin-top:1px}
+    .mini{
+      margin:0 0 4px;
+      font-size:8.5px;
+      line-height:1.1;
+      font-weight:900;
+      color:#64748b;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .mini-h{
+      margin:4px 0 2px;
+      font-size:8px;
+      line-height:1.1;
+      font-weight:900;
+      color:#1e40af;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    ul{
+      margin:0;
+      padding-left:13px;
+      font-size:9px;
+      line-height:1.2;
+    }
+    li{margin:0 0 2px}
+    li:last-child{margin-bottom:0}
+    .note{
+      margin-top:4px;
+      font-size:8.6px;
+      line-height:1.2;
+      padding:4px 6px;
+      border-radius:8px;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      color:#475569;
+    }
+    .c1{border-top:3px solid #2563eb}
+    .c2{border-top:3px solid #6366f1}
+    .c3{border-top:3px solid #db2777}
+    .c4{border-top:3px solid #16a34a}
+    .c5{border-top:3px solid #0284c7}
+    .c6{border-top:3px solid #d97706}
+    .c7{border-top:3px solid #2563eb}
+    .c8{border-top:3px solid #6366f1}
+    .c9{border-top:3px solid #db2777}
+
+    .vision{
+      margin-top:6px;
+      border:1px solid #cbd5e1;
+      background:#ffffff;
+      border-radius:12px;
+      padding:6px 8px;
+      display:grid;
+      grid-template-columns:1.1fr 1.4fr;
+      gap:8px;
+      font-size:9px;
+      line-height:1.24;
+    }
+    .vision h4{
+      margin:0 0 4px;
+      font-size:10px;
+      color:var(--ink);
+      font-weight:900;
+      display:flex;align-items:center;gap:6px;
+    }
+    .vision ul{padding-left:13px}
+
+    @media print{
+      @page{size:A4 landscape;margin:8mm}
+      body{background:#fff}
+      .page{width:auto;min-height:auto;margin:0;padding:0;background:#fff}
+      .canvas{height:auto}
+    }
+  </style>
+</head>
+<body>
+  <main class="page" role="main">
+    <header class="head">
+      <div>
+        <span class="kicker"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Escapify · Fase 2</span>
+        <h1>Business Model Canvas</h1>
+      </div>
+      <div class="brand"><i class="fa-solid fa-globe" aria-hidden="true"></i>escapify.io</div>
+    </header>
+
+    <section class="canvas" aria-label="Business Model Canvas Escapify">
+      <article class="box c1">
+        <h3><span class="num">1</span><i class="fa-solid fa-users i-h" aria-hidden="true"></i>Segmentos de clientes</h3>
+        <p class="mini">Principal, secundarios e institucional</p>
+        <div class="mini-h">Segmento principal</div>
+        <ul>
+          <li>Profesorado de Primaria, Secundaria y FP.</li>
+          <li>Docentes interesados en gamificación, STEAM e innovación.</li>
+        </ul>
+        <div class="mini-h">Secundarios / escala</div>
+        <ul>
+          <li>Educación especial, centros innovadores, opositores y formadores.</li>
+          <li>Colegios privados/concertados, redes educativas y administración.</li>
+        </ul>
+      </article>
+
+      <article class="box c2">
+        <h3><span class="num">2</span><i class="fa-solid fa-gem i-h" aria-hidden="true"></i>Propuesta de valor</h3>
+        <p class="mini">Experiencias educativas diseñadas</p>
+        <div class="mini-h">Para docentes</div>
+        <ul>
+          <li>Crear escape rooms sin perder tiempo.</li>
+          <li>Recursos listos y adaptaciones inclusivas reales.</li>
+          <li>Sistema estructurado, no ideas sueltas.</li>
+        </ul>
+        <div class="mini-h">Para centros</div>
+        <ul>
+          <li>Innovación tangible y mayor engagement del alumnado.</li>
+          <li>Desarrollo STEAM y diferenciación del proyecto educativo.</li>
+        </ul>
+      </article>
+
+      <article class="box c3">
+        <h3><span class="num">3</span><i class="fa-solid fa-bullhorn i-h" aria-hidden="true"></i>Canales</h3>
+        <p class="mini">Captación, conversión y distribución</p>
+        <div class="mini-h">Captación</div>
+        <ul>
+          <li>Instagram/TikTok, LinkedIn y web escapify.io.</li>
+          <li>Workshops, ponencias y comunidades docentes.</li>
+        </ul>
+        <div class="mini-h">Conversión / distribución</div>
+        <ul>
+          <li>Email marketing, lead magnets y demo interactiva.</li>
+          <li>Plataforma online, descargas digitales y kits físicos.</li>
+        </ul>
+      </article>
+
+      <article class="box c4">
+        <h3><span class="num">4</span><i class="fa-solid fa-handshake i-h" aria-hidden="true"></i>Relaciones con clientes</h3>
+        <p class="mini">Comunidad + soporte + loop</p>
+        <ul>
+          <li>Comunidad docente y soporte práctico de implementación.</li>
+          <li>Formación continua, tutoriales y recursos periódicos.</li>
+          <li>Estrategia: usuario -> creador -> embajador.</li>
+        </ul>
+        <div class="note"><strong>Growth loop en aula:</strong> un docente aplica, comparte resultados en el centro y activa nuevas pruebas entre compañeros.</div>
+      </article>
+
+      <article class="box c5">
+        <h3><span class="num">5</span><i class="fa-solid fa-sack-dollar i-h" aria-hidden="true"></i>Fuentes de ingresos</h3>
+        <p class="mini">Modelo híbrido</p>
+        <ul>
+          <li>Suscripción SaaS (freemium + premium).</li>
+          <li>Recursos premium y packs temáticos.</li>
+          <li>Kits físicos (escape boxes / maker).</li>
+          <li>Formación, talleres y certificaciones.</li>
+          <li>Licencias para centros educativos.</li>
+        </ul>
+      </article>
+
+      <article class="box c6">
+        <h3><span class="num">6</span><i class="fa-solid fa-toolbox i-h" aria-hidden="true"></i>Recursos clave</h3>
+        <p class="mini">Activos críticos</p>
+        <ul>
+          <li>Plataforma web y motor de contenido educativo.</li>
+          <li>Sistema IA para creación/adaptación.</li>
+          <li>Know-how pedagógico y marca personal.</li>
+          <li>Diseño/fabricación maker y comunidad docente.</li>
+        </ul>
+      </article>
+
+      <article class="box c7">
+        <h3><span class="num">7</span><i class="fa-solid fa-gears i-h" aria-hidden="true"></i>Actividades clave</h3>
+        <p class="mini">Ejecución operativa</p>
+        <ul>
+          <li>Diseño de pruebas y experiencias didácticas.</li>
+          <li>Desarrollo de plataforma y mejora continua.</li>
+          <li>Creación de contenido y formación docente.</li>
+          <li>Diseño de kits físicos y automatización IA/marketing.</li>
+        </ul>
+      </article>
+
+      <article class="box c8">
+        <h3><span class="num">8</span><i class="fa-solid fa-people-group i-h" aria-hidden="true"></i>Socios clave</h3>
+        <p class="mini">Ecosistema colaborador</p>
+        <ul>
+          <li>Centros educativos y profesores early adopters.</li>
+          <li>Empresas edtech y plataformas como Genially.</li>
+          <li>Proveedores maker (láser, madera, 3D).</li>
+          <li>Instituciones, programas y comunidades docentes.</li>
+        </ul>
+      </article>
+
+      <article class="box c9">
+        <h3><span class="num">9</span><i class="fa-solid fa-money-bill-wave i-h" aria-hidden="true"></i>Estructura de costes</h3>
+        <p class="mini">Costes principales</p>
+        <ul>
+          <li>Desarrollo y mantenimiento web.</li>
+          <li>Creación de contenido y diseño.</li>
+          <li>Marketing y adquisición de usuarios.</li>
+          <li>Producción de kits físicos y herramientas IA/SaaS.</li>
+          <li>Formación, soporte, branding y diseño.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="vision" aria-label="Vision estratégica">
+      <div>
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Visión estratégica</h4>
+        <ul>
+          <li>No es solo SaaS.</li>
+          <li>No es solo formación.</li>
+          <li>No es solo producto físico.</li>
+        </ul>
+      </div>
+      <div>
+        <h4><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Resumen clave</h4>
+        Escapify combina plataforma (escala), formación (credibilidad e ingresos tempranos) y producto físico (diferenciación): modelo escalable, monetizable desde inicio y difícil de copiar por know-how + validación real en aula.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
