@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Escapify: crea escape rooms educativos inclusivos en minutos con candados digitales, cifrados, recursos y accesibilidad real.">
+  <meta name="keywords" content="escape room educativo, candados digitales, gamificación, cifrados, recursos docentes, accesibilidad, ColorADD">
+  <meta name="author" content="Escapify">
+  <meta name="theme-color" content="#0252CD">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://escapify.io/">
+  <meta property="og:title" content="Escapify · Escape rooms educativos con look startup">
+  <meta property="og:description" content="Diseña retos educativos inclusivos sin empezar de cero. Generador, cifrados, recursos y accesibilidad real.">
+  <meta property="og:image" content="https://escapify.io/assets/images/og-image.jpg">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Escapify · Escape rooms educativos con look startup">
+  <meta property="twitter:description" content="Para docentes que quieren innovar sin complicarse.">
+  <title>Escapify · Escape rooms educativos inclusivos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root[data-theme="light"] {
+      --primary-color: #0252CD;
+      --secondary-color: #2D7FF9;
+      --accent-color: #FF5757;
+      --background-color: #ffffff;
+      --surface-color: #ffffff;
+      --card-bg: #ffffff;
+      --text-color: #111827;
+      --text-color-light: #4b5563;
+      --text-muted: #6b7280;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-color: rgba(0, 0, 0, 0.06);
+      --success-color: #10B981;
+      --error-color: #EF4444;
+      --warning-color: #F59E0B;
+      --hover-color: rgba(45, 127, 249, 0.08);
+      --primary-color-rgb: 2, 82, 205;
+      --secondary-color-rgb: 45, 127, 249;
+      --input-bg: #ffffff;
+      --tag-bg: #f3f4f6;
+    }
+
+    :root[data-theme="dark"] {
+      --primary-color: #2D7FF9;
+      --secondary-color: #5096FF;
+      --accent-color: #FF5757;
+      --background-color: #111827;
+      --surface-color: #1F2937;
+      --card-bg: #1F2937;
+      --text-color: #F9FAFB;
+      --text-color-light: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --success-color: #10B981;
+      --error-color: #EF4444;
+      --warning-color: #F59E0B;
+      --hover-color: rgba(45, 127, 249, 0.15);
+      --primary-color-rgb: 45, 127, 249;
+      --secondary-color-rgb: 80, 150, 255;
+      --input-bg: #374151;
+      --tag-bg: #374151;
+    }
+
+    /* ===== BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5em;
+    }
+
+    p { margin-bottom: 1.5rem; }
+    a { text-decoration: none; }
+
+    /* ===== SKIP TO CONTENT ===== */
+    .skip-to-content {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      background: #0252CD;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      z-index: 2000;
+      font-weight: 600;
+      transition: left 0.2s, box-shadow 0.2s;
+    }
+    .skip-to-content:focus {
+      left: 20px;
+      top: 20px;
+      width: auto;
+      height: auto;
+      outline: 2px solid #0252CD;
+      box-shadow: 0 2px 8px rgba(2,82,205,0.15);
+    }
+
+    /* ===== DEV RIBBONS ===== */
+    .dev-ribbon {
+      position: fixed;
+      top: 52px;
+      right: -52px;
+      background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+      color: white;
+      padding: 12px 60px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transform: rotate(45deg);
+      transform-origin: center;
+      z-index: 9998;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+      pointer-events: none;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .dev-ribbon::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -5px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 28px 5px;
+      border-color: transparent transparent #D97706 transparent;
+    }
+    .dev-ribbon::after {
+      content: '';
+      position: absolute;
+      top: 0; right: -5px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 5px 28px 0;
+      border-color: transparent #D97706 transparent transparent;
+    }
+    .dev-ribbon-bottom {
+      position: fixed;
+      bottom: 52px;
+      left: -58px;
+      background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+      color: white;
+      padding: 12px 60px;
+      font-size: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transform: rotate(225deg);
+      transform-origin: center;
+      z-index: 9998;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+      pointer-events: none;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dev-ribbon-bottom > * { font-size: 0; opacity: 0; }
+    .dev-ribbon-bottom::before {
+      content: 'En desarrollo';
+      font-size: 0.9rem;
+      display: inline-block;
+      transform: rotate(180deg);
+      position: relative;
+      z-index: 1;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .dev-ribbon-bottom::after {
+      content: '';
+      position: absolute;
+      top: 0; right: -5px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 5px 28px 0;
+      border-color: transparent #D97706 transparent transparent;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    .main-header {
+      background-color: var(--card-bg);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    .nav-logo i {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-color-light);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      transition: width 0.3s ease, left 0.3s ease;
+      z-index: 1;
+    }
+
+    .nav-link:hover { color: var(--secondary-color); }
+    .nav-link:hover::after { width: 100%; left: 0; }
+
+    .nav-link.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-color-light);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary-color);
+      background-color: var(--hover-color);
+      transform: rotate(30deg);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        z-index: 2100;
+        transition: background 0.2s, color 0.2s;
+      }
+      .mobile-menu-btn:focus,
+      .mobile-menu-btn:hover { background: var(--hover-color); outline: none; }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100vw;
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px rgba(2,82,205,0.10);
+        flex-direction: column;
+        gap: 0;
+        padding: 1.5rem 0 2rem;
+        z-index: 2000;
+        border-bottom-left-radius: 18px;
+        border-bottom-right-radius: 18px;
+        border-top: 1px solid var(--border-color);
+        align-items: center;
+        animation: slideDownMenu 0.25s cubic-bezier(.4,1.3,.6,1) both;
+      }
+      .nav-menu.active { display: flex; }
+
+      .nav-link {
+        padding: 1.1rem 0;
+        text-align: center;
+        width: 100%;
+        border-radius: 0;
+        color: var(--text-color);
+        background: none;
+        font-size: 1.15rem;
+        margin: 0;
+        font-weight: 500;
+        border: none;
+        position: relative;
+      }
+      .nav-link:not(:last-child)::after {
+        content: '';
+        display: block;
+        width: 60%;
+        height: 1px;
+        background: var(--border-color);
+        margin: 0.5rem auto 0;
+        opacity: 0.4;
+      }
+      .nav-link.active {
+        background: none;
+        color: var(--primary-color) !important;
+        font-weight: 700;
+      }
+      :root[data-theme="dark"] .nav-menu {
+        background: rgba(17,24,39,0.95);
+      }
+      .theme-toggle { margin: 1.2rem 0 0; align-self: center; }
+    }
+
+    @keyframes slideDownMenu {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--primary-color);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 6px rgba(var(--primary-color-rgb), 0.2);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(var(--primary-color-rgb), 0.3);
+      background-color: var(--secondary-color);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0252CD, #2D7FF9);
+      border: none;
+      box-shadow: 0 14px 34px rgba(45,127,249,0.28);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background-color: var(--hover-color);
+    }
+
+    .btn-large {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .main-footer {
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 0;
+      margin-top: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-footer::before { content: none; }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-section h3 {
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-section p {
+      color: var(--text-color-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li { margin-bottom: 0.75rem; }
+
+    .footer-section a {
+      color: var(--text-color-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary-color);
+      transform: translateX(3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1.25rem 2rem;
+      margin-top: 0;
+      border-top: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ===== HERO ===== */
+    .premium-hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(45,127,249,0.28), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(2,82,205,0.22), transparent 30%),
+        radial-gradient(circle at 75% 75%, rgba(16,185,129,0.16), transparent 24%),
+        linear-gradient(135deg, #08111f 0%, #0f172a 48%, #13233f 100%);
+      color: #fff;
+      padding: 6rem 0 5rem;
+    }
+
+    .premium-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 92%);
+      pointer-events: none;
+    }
+
+    .premium-hero .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+      gap: 3rem;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .premium-hero h1 {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.98;
+      margin-bottom: 1rem;
+      color: #fff;
+      max-width: 10.8ch;
+      letter-spacing: -0.05em;
+    }
+
+    .premium-hero .lead {
+      font-size: 1.16rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.9);
+      max-width: 61ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-highlight { color: #8ad5ff; }
+
+    .hero-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1rem;
+      margin: 1.6rem 0 2rem;
+    }
+
+    .hero-list div {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      color: rgba(255,255,255,0.94);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .hero-list i,
+    .proof-strip i,
+    .metric-chip i,
+    .feature-pill i,
+    .benefit-item i,
+    .process-card i,
+    .audience-card i,
+    .showcase-card i,
+    .premium-cta-card i {
+      color: #7dd3fc;
+    }
+
+    .hero-actions-pro {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-actions-pro .btn-primary {
+      background: linear-gradient(135deg, #0252CD, #2D7FF9);
+      border: none;
+      box-shadow: 0 14px 34px rgba(45,127,249,0.28);
+    }
+
+    .hero-actions-pro .btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-actions-pro .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .proof-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .proof-strip span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .hero-editorial-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.07));
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 30px;
+      padding: 1.25rem;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-editorial-panel::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 30px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.03));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .panel-window {
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 40px rgba(15,23,42,0.16);
+    }
+
+    .panel-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.1rem;
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .dots { display: flex; gap: 0.4rem; }
+
+    .dots span {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: block;
+      background: #cbd5e1;
+    }
+
+    .dots span:nth-child(1){ background:#f87171; }
+    .dots span:nth-child(2){ background:#fbbf24; }
+    .dots span:nth-child(3){ background:#34d399; }
+
+    .panel-topbar strong { color: #0f172a; font-size: 0.92rem; }
+
+    .panel-body-pro {
+      padding: 1.2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .demo-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 1rem;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+      margin-bottom: 0.95rem;
+    }
+
+    .demo-card:last-child { margin-bottom: 0; }
+
+    .demo-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(2,82,205,0.08);
+      color: #0252CD;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .demo-card h3 { font-size: 1.05rem; color: #0f172a; margin-bottom: 0.45rem; }
+    .demo-card p { color: #475569; font-size: 0.94rem; line-height: 1.6; margin-bottom: 0.8rem; }
+
+    .feature-pills { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+
+    .feature-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.48rem 0.72rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .feature-pill i { color: #0252CD !important; }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.95rem;
+    }
+
+    .metric-chip {
+      border-radius: 16px;
+      padding: 0.85rem 0.75rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .metric-chip strong {
+      display: block;
+      font-size: 1.25rem;
+      color: #0252CD;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .metric-chip span { display: block; font-size: 0.8rem; color: #64748b; }
+
+    /* ===== BRAND STRIP ===== */
+    .brand-strip {
+      padding: 1.15rem 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .brand-strip .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .brand-copy {
+      color: var(--text-color-light);
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .brand-icons { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+
+    .brand-icons span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 999px;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .brand-icons span i { color: var(--primary-color); }
+
+    /* ===== SECTIONS ===== */
+    .premium-section { padding: 5.5rem 0; }
+
+    .premium-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: 0.9rem;
+      color: var(--text-color);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--text-color-light);
+      max-width: 64ch;
+      margin-bottom: 0;
+    }
+
+    /* ===== BENEFIT GRID ===== */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .benefit-item {
+      position: relative;
+      background: linear-gradient(180deg, var(--card-bg) 0%, rgba(45,127,249,0.03) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 1.6rem;
+      box-shadow: 0 16px 35px rgba(15,23,42,0.06);
+    }
+
+    .benefit-item .icon-box,
+    .audience-card .icon-box,
+    .showcase-card .icon-box,
+    .premium-cta-card .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 14px 24px rgba(var(--primary-color-rgb),0.22);
+    }
+
+    .benefit-item .icon-box i,
+    .audience-card .icon-box i,
+    .showcase-card .icon-box i,
+    .premium-cta-card .icon-box i {
+      color: white !important;
+      font-size: 1.25rem;
+    }
+
+    .benefit-item h3,
+    .audience-card h3,
+    .showcase-card h3,
+    .premium-cta-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 0.7rem;
+      color: var(--text-color);
+    }
+
+    .benefit-item p,
+    .audience-card p,
+    .showcase-card p,
+    .premium-cta-card p {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--text-color-light);
+      margin-bottom: 0;
+    }
+
+    /* ===== PROCESS SPLIT ===== */
+    .process-split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .process-rail,
+    .showcase-stack,
+    .premium-cta-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 1.4rem;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.06);
+    }
+
+    .process-cards { display: grid; gap: 1rem; }
+
+    .process-card {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 1rem;
+      padding: 1.1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: linear-gradient(180deg, var(--surface-color), rgba(45,127,249,0.03));
+    }
+
+    .process-card .step-no {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(var(--primary-color-rgb), 0.1);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .process-card h3 { font-size: 1.02rem; margin-bottom: 0.35rem; color: var(--text-color); }
+    .process-card p { font-size: 0.95rem; color: var(--text-color-light); margin-bottom: 0.45rem; }
+
+    .process-card .small-note {
+      font-size: 0.82rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== SHOWCASE ===== */
+    .editorial-showcase { display: grid; gap: 1rem; }
+
+    .showcase-card {
+      border-radius: 22px;
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      background: linear-gradient(180deg, var(--card-bg), rgba(45,127,249,0.04));
+    }
+
+    .mini-kpis { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.8rem; }
+
+    .mini-kpi {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .mini-kpi i { color: var(--primary-color); }
+
+    /* ===== AUDIENCE ===== */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .audience-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 1.6rem;
+      box-shadow: 0 16px 35px rgba(15,23,42,0.05);
+    }
+
+    .audience-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .audience-card li {
+      display: flex;
+      gap: 0.55rem;
+      font-size: 0.94rem;
+      color: var(--text-color-light);
+      line-height: 1.55;
+    }
+
+    .audience-card li i { color: var(--primary-color) !important; margin-top: 0.15rem; }
+
+    /* ===== EDITORIAL BAND ===== */
+    .editorial-band {
+      background: linear-gradient(180deg, rgba(2,82,205,0.04), rgba(45,127,249,0.02));
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* ===== CTA GRID ===== */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .premium-cta-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .premium-cta-card .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.3rem;
+    }
+
+    .premium-cta-card .cta-note {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .list-checks {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .list-checks li {
+      display: flex;
+      gap: 0.7rem;
+      color: var(--text-color-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .list-checks i { color: var(--primary-color) !important; margin-top: 0.16rem; }
+
+    .premium-footer-copy { max-width: 34ch; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .premium-hero .container,
+      .process-split,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-grid,
+      .audience-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .premium-hero {
+        padding: 4.5rem 0 3.5rem;
+      }
+
+      .premium-hero .container,
+      .premium-container,
+      .brand-strip .container {
+        padding: 0 1rem;
+      }
+
+      .hero-list,
+      .benefit-grid,
+      .audience-grid,
+      .metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions-pro,
+      .premium-cta-card .cta-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions-pro .btn,
+      .premium-cta-card .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .premium-hero h1 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+
+  <header class="main-header" role="banner">
+    <nav class="nav-container" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="nav-logo" aria-label="Inicio - Escapify">
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        Escapify
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
+        <li><a href="#que-es" class="nav-link">Qué es</a></li>
+        <li><a href="#problema" class="nav-link">Qué resuelve</a></li>
+        <li><a href="#para-quien" class="nav-link">Para quién</a></li>
+        <li><a href="https://escapify.io/generador.html" class="nav-link">Probar ahora</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="premium-hero" aria-labelledby="hero-title" id="que-es">
+    <div class="container">
+      <div>
+        <div class="hero-badge"><i class="fas fa-sparkles"></i> Plataforma educativa con look startup y accesibilidad real</div>
+        <h1 id="hero-title">Diseña <span class="hero-highlight">escape rooms educativos</span> sin empezar de cero.</h1>
+        <p class="lead">Escapify convierte una idea de aula en una experiencia lista para jugar: candados digitales, cifrados, recursos imprimibles y estructura inclusiva para que innovar sea más fácil, más rápido y más aplicable.</p>
+
+        <div class="hero-list">
+          <div><i class="fas fa-bolt"></i><span>Crea un candado digital en minutos y compártelo por enlace o QR.</span></div>
+          <div><i class="fas fa-shapes"></i><span>Combina retos, cifrados y materiales para montar una experiencia completa.</span></div>
+          <div><i class="fas fa-universal-access"></i><span>Integra accesibilidad desde el diseño, no como añadido final.</span></div>
+          <div><i class="fas fa-graduation-cap"></i><span>Piensa como docente: utilidad real en el aula, no solo "gamificación bonita".</span></div>
+        </div>
+
+        <div class="hero-actions-pro">
+          <a href="/generador.html" class="btn btn-primary btn-large"><i class="fas fa-plus-circle"></i> Probar el generador</a>
+          <a href="#para-quien" class="btn btn-secondary btn-large"><i class="fas fa-user-check"></i> Ver si encaja contigo</a>
+        </div>
+
+        <div class="proof-strip" aria-label="Pruebas de valor">
+          <span><i class="fas fa-check-circle"></i> Pensado para personal educativo</span>
+          <span><i class="fas fa-check-circle"></i> Probado desde la práctica educativa</span>
+          <span><i class="fas fa-check-circle"></i> Con enfoque inclusivo y usable</span>
+        </div>
+      </div>
+
+      <div class="hero-editorial-panel" aria-hidden="true">
+        <div class="panel-window">
+          <div class="panel-topbar">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <strong>Escapify dashboard preview</strong>
+          </div>
+          <div class="panel-body-pro">
+            <div class="demo-card">
+              <div class="demo-label"><i class="fas fa-lock"></i> Lo que puedes hacer hoy</div>
+              <h3>Generar candados, usar pistas y compartir en segundos</h3>
+              <p>Con una estructura clara, rápida y reconocible. No hace falta diseñarlo todo desde cero para empezar.</p>
+              <div class="feature-pills">
+                <span class="feature-pill"><i class="fas fa-qrcode"></i> QR</span>
+                <span class="feature-pill"><i class="fas fa-clock-rotate-left"></i> Historial</span>
+                <span class="feature-pill"><i class="fas fa-lightbulb"></i> Pistas</span>
+                <span class="feature-pill"><i class="fas fa-sliders"></i> Personalización</span>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-label"><i class="fas fa-shield-halved"></i> Diferencial Escapify</div>
+              <h3>Accesibilidad visible, no escondida</h3>
+              <p>ColorADD, lenguaje sencillo, ayudas visuales y ajustes para que la inclusión forme parte natural de la experiencia.</p>
+              <div class="metric-row">
+                <div class="metric-chip"><strong>17+</strong><span>tipos de candado</span></div>
+                <div class="metric-chip"><strong>3</strong><span>niveles de dificultad</span></div>
+                <div class="metric-chip"><strong>100%</strong><span>web y en aula</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <section class="premium-section" id="problema">
+      <div class="premium-container">
+        <div class="section-heading">
+          <div class="section-kicker"><i class="fas fa-bullseye"></i> Qué problema resuelve</div>
+          <h2>La mayoría de docentes no necesitan más ideas. Necesitan una forma de aplicarlas de verdad.</h2>
+          <p>Escapify nace para reducir la fricción entre querer innovar y poder hacerlo en el día a día. Menos tiempo diseñando desde cero, menos caos técnico, más claridad para convertir una actividad en una experiencia jugable y útil.</p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-clock"></i></div>
+            <h3>Ahorra tiempo real</h3>
+            <p>No partes de una pantalla en blanco. Empiezas con herramientas, estructuras y recursos que ya te ponen en marcha.</p>
+          </article>
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-wand-magic-sparkles"></i></div>
+            <h3>Convierte ideas en experiencias</h3>
+            <p>No te quedas en la inspiración. Puedes montar candados, secuencias, retos y materiales con una lógica clara de uso.</p>
+          </article>
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-eye"></i></div>
+            <h3>Se entiende rápido</h3>
+            <p>La web está pensada para que quien entra por primera vez capte qué es, para quién es y qué puede hacer hoy dentro de Escapify.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="premium-section editorial-band" id="para-quien">
+      <div class="premium-container">
+        <div class="section-heading">
+          <div class="section-kicker"><i class="fas fa-users"></i> Para quién es</div>
+          <h2>Escapify está pensado para profesorado y equipos educativos.</h2>
+          <p>Una plataforma para innovar en el aula con actividades aplicables, inclusivas y fáciles de implementar.</p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-school"></i></div>
+            <h3>Docentes que quieren innovar</h3>
+            <p>Pero necesitan una vía realista para hacerlo sin invertir horas y horas en diseño previo.</p>
+          </article>
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-chalkboard-user"></i></div>
+            <h3>Equipos de innovación y formación</h3>
+            <p>Que buscan recursos demostrables, prácticos y con un relato metodológico claro para compartir con otros docentes.</p>
+          </article>
+          <article class="benefit-item">
+            <div class="icon-box"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3>Centros con sensibilidad inclusiva</h3>
+            <p>Porque la accesibilidad y la diversidad del alumnado no aparecen aquí como un extra, sino como base de diseño.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="premium-section" id="cta-final">
+      <div class="premium-container">
+        <div class="cta-grid">
+          <article class="premium-cta-card">
+            <div>
+              <div class="section-kicker"><i class="fas fa-gem"></i> Diferencial</div>
+              <h3>Lo que hace distinta a Escapify</h3>
+              <p>No se limita a crear candados. Une narrativa, recursos, interacción y accesibilidad para construir experiencias de aprendizaje completas.</p>
+              <ul class="list-checks">
+                <li><i class="fas fa-check-circle"></i><span>Se siente plataforma, no página suelta.</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Combina creatividad, aplicabilidad y diseño cuidado.</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Crece junto a las necesidades reales del aula.</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="premium-cta-card">
+            <div>
+              <div class="icon-box"><i class="fas fa-arrow-right"></i></div>
+              <h3>Empieza por la acción más simple</h3>
+              <p>Empieza hoy con una acción clara: probar el generador y crear tu primer reto en minutos.</p>
+              <div class="cta-actions">
+                <a href="https://escapify.io/generador.html" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear mi primer candado</a>
+                <a href="/recursos.html" class="btn btn-secondary"><i class="fas fa-folder-open"></i> Ver recursos</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer" role="contentinfo">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Escapify. Plataforma educativa para crear experiencias gamificadas.</p>
+      <p>Diseñado para que cualquier docente entienda rápido qué es y cómo aplicarlo.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== MOBILE NAV =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileBtn = document.querySelector('.mobile-menu-btn');
+      const navMenu = document.querySelector('.nav-menu');
+      if (!mobileBtn || !navMenu) return;
+
+      mobileBtn.addEventListener('click', function() {
+        const expanded = navMenu.classList.toggle('active');
+        mobileBtn.setAttribute('aria-expanded', expanded);
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!navMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+          navMenu.classList.remove('active');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          mobileBtn.focus();
+        }
+      });
+
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
