@@ -367,6 +367,20 @@
     .dt-card li{font-size:14px;margin-bottom:8px;line-height:1.55;color:var(--body)}
     .dt-card li strong{color:var(--ink)}
     .dt-card .note{margin-top:12px;font-size:13px;line-height:1.5}
+    .ea-pitch-card{
+      border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px 14px 12px;
+    }
+    .ea-pitch-head{
+      margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--blue-dark);
+      display:flex;align-items:center;gap:8px;
+    }
+    .ea-pitch-list{margin:8px 0 0;padding-left:18px}
+    .ea-pitch-list li{font-size:13px;line-height:1.5;color:var(--body);margin-bottom:6px}
+    .ea-pitch-list li:last-child{margin-bottom:0}
+    .ea-pitch-mini{
+      margin-top:10px;background:#f8fafc;border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 10px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
     .ea-subhead.section-head{
       margin-top:28px;margin-bottom:14px;padding-top:22px;border-top:1px dashed var(--border);
     }
@@ -743,9 +757,16 @@
   <section class="esf-pitch-unified" aria-labelledby="esf-pitch-title">
     <div class="section">
       <p class="esf-pitch-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre común</p>
-      <article class="esf-pitch-card">
+      <article class="esf-pitch-card ea-pitch-card">
         <h2 id="esf-pitch-title">Pitch</h2>
+        <p class="ea-pitch-head"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Mensaje principal</p>
         <p>Escapify.io transforma la gamificación en un sistema aplicable desde el primer día: recursos estructurados, inclusión desde el diseño y validación real en aula.</p>
+        <ul class="ea-pitch-list">
+          <li><strong>Problema:</strong> no todo docente innovador tiene tiempo ni método para diseñar bien.</li>
+          <li><strong>Solución:</strong> herramientas guiadas + recursos listos + acompañamiento contextual.</li>
+          <li><strong>Diferencial:</strong> enfoque inclusivo y validación con perfil early adopter real.</li>
+        </ul>
+        <div class="ea-pitch-mini"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Prioridad ahora: confirmar señales de dolor repetido y disposición real a pago.</div>
       </article>
     </div>
   </section>
