@@ -15,9 +15,13 @@ html {
   --esf-blue-dark: #1e40af;
   --esf-blue-light: #eff6ff;
   --esf-blue-mid: #dbeafe;
-  --esf-violet: #7c3aed;
+  --esf-violet: #4f46e5;
+  --esf-pink: #db2777;
+  --esf-teal: #0d9488;
   --esf-green: #16a34a;
   --esf-amber: #d97706;
+  --esf-amber-light: #fffbeb;
+  --esf-green-bg: #ecfdf5;
   --esf-border: #e2e8f0;
   --esf-surface: #f8fafc;
   --esf-max: 1200px;
@@ -97,11 +101,15 @@ html {
 body.esf-minimal[data-esf-page="fase2"] .esf-spark {
   min-height: 54px;
 }
-.esf-minimal .esf-donut,
-.esf-minimal .esf-donut--violet,
-.esf-minimal .esf-donut--teal {
+.esf-minimal .esf-donut {
   background: conic-gradient(var(--esf-blue) calc(var(--p) * 1%), #e5e7eb 0) !important;
   border: 1px solid var(--esf-border);
+}
+.esf-minimal .esf-donut--violet {
+  background: conic-gradient(var(--esf-violet) calc(var(--p) * 1%), #e5e7eb 0) !important;
+}
+.esf-minimal .esf-donut--teal {
+  background: conic-gradient(var(--esf-teal) calc(var(--p) * 1%), #e5e7eb 0) !important;
 }
 .esf-minimal .esf-donut-hole {
   background: #fff !important;
@@ -116,8 +124,13 @@ body.esf-minimal[data-esf-page="fase2"] .esf-spark {
   border: 1px solid var(--esf-border);
 }
 .esf-minimal .esf-funnel-bar,
-.esf-minimal .esf-funnel-step:nth-child(4) .esf-funnel-bar {
+.esf-minimal .esf-funnel-step:nth-child(1) .esf-funnel-bar,
+.esf-minimal .esf-funnel-step:nth-child(2) .esf-funnel-bar,
+.esf-minimal .esf-funnel-step:nth-child(3) .esf-funnel-bar {
   background: var(--esf-blue) !important;
+}
+.esf-minimal .esf-funnel-step:nth-child(4) .esf-funnel-bar {
+  background: var(--esf-green) !important;
 }
 .esf-minimal .esf-icon-cell {
   background: #fff !important;
@@ -226,6 +239,144 @@ body.esf-minimal[data-esf-page="early-adopter"] .esf-journey-footer .esf-timelin
   background: #eff6ff !important;
   border: 1px solid var(--esf-blue-mid) !important;
   color: var(--esf-blue) !important;
+}
+body.esf-minimal[data-esf-page="propuesta-valor"] .esf-journey-footer .esf-timeline-dot {
+  background: #eff6ff !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+  color: var(--esf-blue) !important;
+}
+body.esf-minimal[data-esf-page="plan-ecofin"] .esf-journey-footer .esf-timeline-dot {
+  background: #eff6ff !important;
+  border: 1px solid var(--esf-blue-mid) !important;
+  color: var(--esf-blue) !important;
+}
+
+/* Plan ecofin: cabecera de tablas legible en minimal */
+body.esf-minimal[data-esf-page="plan-ecofin"] .ec-table thead th {
+  background: #f8fafc !important;
+  color: var(--esf-slate) !important;
+  border-bottom: 1px solid var(--esf-border) !important;
+}
+
+/* Paleta suave en bloques no-hero */
+body.esf-minimal[data-esf-page="plan-ecofin"] .ec-card,
+body.esf-minimal[data-esf-page="plan-ecofin"] .kpi,
+body.esf-minimal[data-esf-page="plan-ecofin"] .ec-note,
+body.esf-minimal[data-esf-page="plan-ecofin"] .ef-pitch-card {
+  background: #f8fafc !important;
+  border-color: #dbe4ee !important;
+}
+body.esf-minimal[data-esf-page="plan-ecofin"] .ec-callout {
+  background: #f6f8fb !important;
+  border-color: #d9e2ec !important;
+  color: #475569 !important;
+}
+body.esf-minimal[data-esf-page="plan-ecofin"] .esf-bar-fill,
+body.esf-minimal[data-esf-page="plan-ecofin"] .bar span {
+  background: linear-gradient(90deg, #88a6c4, #9eb8d1) !important;
+}
+
+body.esf-minimal[data-esf-page="early-adopter"] .card,
+body.esf-minimal[data-esf-page="early-adopter"] .canvas-box,
+body.esf-minimal[data-esf-page="early-adopter"] .ea-panel,
+body.esf-minimal[data-esf-page="early-adopter"] .dt-card,
+body.esf-minimal[data-esf-page="early-adopter"] .ea-persona,
+body.esf-minimal[data-esf-page="early-adopter"] .ea-pitch-card {
+  background: #f8fafc !important;
+  border-color: #dbe4ee !important;
+}
+body.esf-minimal[data-esf-page="early-adopter"] .hero-kpi {
+  background: #f1f5f9 !important;
+  border-color: #dbe4ee !important;
+  color: #334155 !important;
+}
+
+body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-status,
+body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-encaje,
+body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-pitch,
+body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth,
+body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth-card {
+  background: #f8fafc !important;
+  border-color: #dbe4ee !important;
+}
+body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth-card__grad,
+body.esf-minimal[data-esf-page="propuesta-valor"] .vpc-pitch-label {
+  color: #48698f !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+body.esf-minimal[data-esf-page="propuesta-valor"] .pv-synth-ico {
+  background: #e8f0f7 !important;
+  color: #48698f !important;
+}
+
+/* Lean canvas: bajar saturacion de bloques BMC */
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section,
+body.esf-minimal[data-esf-page="lean-canvas"] .vision-box,
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary,
+body.esf-minimal[data-esf-page="lean-canvas"] .lc-pitch-card {
+  background: #f8fafc !important;
+  border-color: #dbe4ee !important;
+  color: #475569 !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section:hover,
+body.esf-minimal[data-esf-page="lean-canvas"] .vision-box:hover,
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary:hover {
+  transform: none !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section::before {
+  background: var(--bmc-accent, #9fb2c6) !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-num {
+  background: var(--bmc-accent, #9fb2c6) !important;
+  color: #1f2937 !important;
+  border: 1px solid #dbe4ee !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section li::before {
+  background: var(--bmc-accent, #9fb2c6) !important;
+  opacity: 0.75 !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary strong,
+body.esf-minimal[data-esf-page="lean-canvas"] .lc-pitch-head,
+body.esf-minimal[data-esf-page="lean-canvas"] .lc-pitch-mini,
+body.esf-minimal[data-esf-page="lean-canvas"] .vision-box h3 {
+  color: #48698f !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .vision-box h3 .vision-ico,
+body.esf-minimal[data-esf-page="lean-canvas"] .lc-chip {
+  background: #e8f0f7 !important;
+  border-color: #dbe4ee !important;
+  color: #48698f !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-summary::before {
+  background: linear-gradient(90deg, #93aeca, #bdd0e0) !important;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--segmentos {
+  --bmc-accent: #c5ab88;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--valor {
+  --bmc-accent: #b7a6d0;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--canales {
+  --bmc-accent: #9abdad;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--relaciones {
+  --bmc-accent: #9fb6cf;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--ingresos {
+  --bmc-accent: #9fbeab;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--recursos {
+  --bmc-accent: #aeb8c3;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--actividades {
+  --bmc-accent: #cfb39a;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--socios {
+  --bmc-accent: #b4bed6;
+}
+body.esf-minimal[data-esf-page="lean-canvas"] .bmc-section--costes {
+  --bmc-accent: #c9a8a8;
 }
 
 /* ─── Pie ecosistema (todas las landings Fase 2) ─── */
@@ -404,7 +555,13 @@ ol.esf-timeline {
   top: 28px;
   height: 4px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--esf-blue), #6366f1, var(--esf-violet), #0ea5e9);
+  background: linear-gradient(
+    90deg,
+    var(--esf-blue),
+    #818cf8,
+    var(--esf-violet),
+    var(--esf-teal)
+  );
   opacity: 0.35;
   z-index: 0;
 }
@@ -448,19 +605,19 @@ ol.esf-timeline {
   background: linear-gradient(145deg, #3b82f6, #1d4ed8);
 }
 .esf-timeline-step:nth-child(2) .esf-timeline-dot {
-  background: linear-gradient(145deg, #6366f1, #4f46e5);
+  background: linear-gradient(145deg, #a5b4fc, var(--esf-violet));
 }
 .esf-timeline-step:nth-child(3) .esf-timeline-dot {
-  background: linear-gradient(145deg, #a855f7, #7c3aed);
+  background: linear-gradient(145deg, #f9a8d4, var(--esf-pink));
 }
 .esf-timeline-step:nth-child(4) .esf-timeline-dot {
-  background: linear-gradient(145deg, #10b981, #059669);
+  background: linear-gradient(145deg, #86efac, var(--esf-green));
 }
 .esf-timeline-step:nth-child(5) .esf-timeline-dot {
   background: linear-gradient(145deg, #0ea5e9, #0284c7);
 }
 .esf-timeline-step:nth-child(6) .esf-timeline-dot {
-  background: linear-gradient(145deg, #f59e0b, #d97706);
+  background: linear-gradient(145deg, #fcd34d, var(--esf-amber));
 }
 .esf-timeline-label {
   font-size: 11px;
@@ -809,10 +966,10 @@ ol.esf-timeline {
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.15);
 }
 .esf-donut--violet {
-  background: conic-gradient(#7c3aed calc(var(--p) * 1%), #e5e7eb 0);
+  background: conic-gradient(var(--esf-violet) calc(var(--p) * 1%), #e5e7eb 0);
 }
 .esf-donut--teal {
-  background: conic-gradient(#0d9488 calc(var(--p) * 1%), #e5e7eb 0);
+  background: conic-gradient(var(--esf-teal) calc(var(--p) * 1%), #e5e7eb 0);
 }
 .esf-donut-hole {
   width: 52px;
@@ -827,7 +984,7 @@ ol.esf-timeline {
   box-shadow: inset 0 1px 4px rgba(15, 23, 42, 0.06);
 }
 .esf-donut--violet .esf-donut-hole {
-  color: #5b21b6;
+  color: #4338ca;
 }
 .esf-donut--teal .esf-donut-hole {
   color: #0f766e;
@@ -885,7 +1042,7 @@ ol.esf-timeline {
 }
 .esf-funnel-step:nth-child(4) .esf-funnel-bar {
   --fh: 84px;
-  background: linear-gradient(180deg, #34d399, #059669);
+  background: linear-gradient(180deg, #86efac, var(--esf-green));
 }
 .esf-funnel-cap {
   font-size: 10px;
@@ -952,4 +1109,98 @@ ol.esf-timeline {
   height: auto;
   margin: 10px auto 0;
   display: block;
+}
+
+/* ═══════════════════════════════════════════════════
+   RITMO VISUAL DE SECCIONES — Sistema de bandas
+   Escapify · Fase 2 (datos-contexto, lean-canvas,
+   propuesta-valor, early-adopter, fase2, plan-ecofin)
+═══════════════════════════════════════════════════ */
+
+/* Fondo de página unificado para todos los docs Escapify */
+body.esf-minimal {
+  background: #f1f5f9;
+}
+
+/* Bandas de sección (ritmo cromático entre bloques) */
+.esf-band { position: relative; }
+.esf-band--white  { background: #ffffff; }
+.esf-band--surface { background: #f8fafc; }
+.esf-band--blue   {
+  background: #eff6ff;
+  border-top: 1px solid #dbeafe;
+  border-bottom: 1px solid #dbeafe;
+}
+.esf-band--mid    { background: #e8eef8; }
+.esf-band--dark   {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f8fafc;
+}
+.esf-band--dark h2, .esf-band--dark h3 { color: #ffffff; }
+.esf-band--dark p  { color: #cbd5e1; }
+
+/* Banda de métricas destacadas (fondo azul sólido) */
+.esf-stats-band {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 55%, #1d4ed8 100%);
+  color: #ffffff;
+  padding: 22px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.esf-stats-band .section,
+.esf-stats-band .esf-stats-inner {
+  max-width: var(--esf-max, 1200px);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+.esf-kpi-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+}
+.esf-kpi-pill strong {
+  font-size: 19px;
+  font-weight: 900;
+  color: #bfdbfe;
+  line-height: 1;
+}
+.esf-kpi-pill i {
+  font-size: 13px;
+  color: #93c5fd;
+}
+
+/* Ajuste de ritmo: panel principal sobre fondo #f1f5f9 */
+body.esf-minimal .panel,
+body.esf-minimal .hero {
+  background: #ffffff !important;
+  border-color: #dbeafe !important;
+}
+
+/* Bloques alternos dentro del panel de datos-contexto */
+body.esf-minimal[data-esf-page="datos-contexto"] .block:nth-child(even) {
+  background: rgba(239, 246, 255, 0.45);
+  border-radius: 0 14px 14px 0;
+}
+
+/* Coherencia de etiquetas de sección (pill azul) */
+body.esf-minimal .dc-block-tag,
+body.esf-minimal .label-link,
+body.esf-minimal .label-pill {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border-color: #bfdbfe !important;
+  box-shadow: none !important;
 }

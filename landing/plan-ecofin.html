@@ -14,7 +14,7 @@
       --ink:#0f172a; --body:#374151; --muted:#64748b; --border:#e2e8f0; --surface:#f8fafc; --white:#fff;
       --green:#16a34a; --amber:#d97706;
       --slate-label:#475569;
-      --purple:#7c3aed; --purple-bg:#f3e8ff;
+      --purple:#4f46e5; --purple-bg:#e0e7ff;
       --max:1200px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -294,7 +294,7 @@
     .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
     .v{font-size:26px;font-weight:900;color:var(--ink);line-height:1.1;margin-top:4px}
     .bar{height:8px;background:#e6f0f8;border-radius:999px;overflow:hidden;margin-top:8px}
-    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#6366f1,#06b6d4);transition:width .45s cubic-bezier(.4,.14,.3,1)}
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#7fa0c4,#9cb8d5);transition:width .45s cubic-bezier(.4,.14,.3,1)}
     .scenario-hint{font-size:12px;color:var(--muted);margin-bottom:16px;font-style:italic}
     .table-wrap{width:100%;overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-top:10px}
     table.ec-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
@@ -313,11 +313,11 @@
     .ec-table .plan-name{font-weight:800;color:var(--ink)}
     .ec-callout{
       margin-top:16px;padding:15px 17px;border-radius:14px;
-      background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);
-      border:1px solid #fcd34d;font-size:14px;color:#92400e;line-height:1.55;font-weight:600;
-      box-shadow:0 6px 20px rgba(245,158,11,.1);
+      background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);
+      border:1px solid #93c5fd;font-size:14px;color:#1e3a8a;line-height:1.55;font-weight:600;
+      box-shadow:0 6px 20px rgba(37,99,235,.08);
     }
-    .ec-callout i{margin-right:8px;color:var(--amber)}
+    .ec-callout i{margin-right:8px;color:var(--blue)}
     .ec-notes{display:grid;gap:10px;margin-top:12px}
     .ec-note{
       padding:14px 16px;border-radius:12px;border:1px solid var(--border);
@@ -332,6 +332,20 @@
     }
     .ec-note strong{display:block;color:var(--ink);margin-bottom:4px;font-size:13px}
     .ec-src{font-size:11px;color:var(--muted);word-break:break-all;margin-top:4px}
+    .ef-pitch-card{
+      border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px 14px 12px;
+    }
+    .ef-pitch-head{
+      margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--blue-dark);
+      display:flex;align-items:center;gap:8px;
+    }
+    .ef-pitch-list{margin:8px 0 0;padding-left:18px}
+    .ef-pitch-list li{font-size:13px;line-height:1.5;color:var(--body);margin-bottom:6px}
+    .ef-pitch-list li:last-child{margin-bottom:0}
+    .ef-pitch-mini{
+      margin-top:10px;background:#f8fafc;border:1px dashed var(--blue-mid);border-radius:8px;
+      padding:8px 10px;font-size:12px;color:var(--blue-dark);font-weight:600;
+    }
     .note-foot{
       margin-top:20px;padding:12px 14px;border-radius:12px;background:var(--blue-light);
       border:1px dashed var(--blue-mid);font-size:12px;color:var(--blue-dark);
@@ -420,7 +434,7 @@
       <p class="section-overline" data-ef-reveal data-ef-delay="0.02"><i class="fa-solid fa-coins" aria-hidden="true"></i> Documento vivo · Excel + web</p>
       <div class="section-head" data-ef-reveal data-ef-delay="0.05">
         <div class="section-head-row">
-          <span class="num" aria-hidden="true">4</span>
+          <span class="num" aria-hidden="true">1</span>
           <h2 id="ec-panel-heading">Modelo económico y tabla de precios</h2>
         </div>
         <p class="section-desc">Versión web de referencia: mismos supuestos que la hoja <strong>Resumen</strong>, <strong>Propuesta Pricing</strong> y <strong>Benchmark Precios</strong> del archivo Excel. Los escenarios inferiores son una <strong>sensibilidad ilustrativa</strong> (tracción); ajústalos cuando tengas datos reales.</p>
@@ -446,14 +460,14 @@
         <svg class="esf-svg-chart" viewBox="0 0 400 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="efLine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#2563eb" />
-              <stop offset="100%" stop-color="#6366f1" />
+              <stop offset="0%" stop-color="#5f87b4" />
+              <stop offset="100%" stop-color="#8aa7c9" />
             </linearGradient>
           </defs>
           <path fill="none" stroke="url(#efLine)" stroke-width="3" stroke-linecap="round" d="M10 72 L70 58 L130 62 L190 38 L250 44 L310 22 L370 28" />
-          <circle cx="10" cy="72" r="4" fill="#2563eb" />
-          <circle cx="190" cy="38" r="4" fill="#2563eb" />
-          <circle cx="370" cy="28" r="4" fill="#6366f1" />
+          <circle cx="10" cy="72" r="4" fill="#5f87b4" />
+          <circle cx="190" cy="38" r="4" fill="#5f87b4" />
+          <circle cx="370" cy="28" r="4" fill="#8aa7c9" />
           <text x="10" y="86" font-size="9" fill="#64748b" font-family="Inter, system-ui, sans-serif">Y1</text>
           <text x="320" y="86" font-size="9" fill="#64748b" font-family="Inter, system-ui, sans-serif">Run-rate (ilustrativo)</text>
         </svg>
@@ -701,9 +715,16 @@
   <section class="esf-pitch-unified" aria-labelledby="esf-pitch-title">
     <div class="section">
       <p class="esf-pitch-kicker"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Cierre común</p>
-      <article class="esf-pitch-card">
+      <article class="esf-pitch-card ef-pitch-card">
         <h2 id="esf-pitch-title">Pitch</h2>
+        <p class="ef-pitch-head"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Mensaje principal</p>
         <p>Escapify.io transforma la gamificación en un sistema aplicable desde el primer día: recursos estructurados, inclusión desde el diseño y validación real en aula.</p>
+        <ul class="ef-pitch-list">
+          <li><strong>Problema:</strong> sin pricing claro no hay validación real de negocio.</li>
+          <li><strong>Solución:</strong> planes escalonados con benchmark y ruta mensual→anual→centro.</li>
+          <li><strong>Diferencial:</strong> mezcla sostenible entre ticket docente, licencias y servicios.</li>
+        </ul>
+        <div class="ef-pitch-mini"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Prioridad ahora: validar conversión mensual→anual y ticket medio por centro.</div>
       </article>
     </div>
   </section>
