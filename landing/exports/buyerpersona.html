@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Buyer Persona (export)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      --ink:#0f172a;
+      --body:#475569;
+      --border:#e2e8f0;
+      --blue:#2563eb;
+      --blue-dark:#1e40af;
+      --pink:#db2777;
+      --violet:#7c3aed;
+      --teal:#0d9488;
+    }
+    *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    html,body{margin:0;padding:0;background:#f1f5f9;font-family:Inter,system-ui,sans-serif;color:var(--body);font-weight:500}
+    .page{
+      width:297mm;
+      min-height:210mm;
+      margin:0 auto;
+      padding:4.5mm 6.5mm 4mm;
+      background:
+        radial-gradient(ellipse 70% 45% at 0% 0%,rgba(37,99,235,.09),transparent 52%),
+        radial-gradient(ellipse 55% 40% at 100% 100%,rgba(124,58,237,.07),transparent 48%),
+        linear-gradient(180deg,#f8fafc,#f1f5f9);
+    }
+    .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:3mm}
+    .kicker{
+      display:inline-flex;align-items:center;gap:5px;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;
+      color:var(--blue-dark);background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;padding:3px 9px;margin-bottom:4px;
+    }
+    h1{margin:0;font-size:18px;font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1.05}
+    h1 .hl{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#64748b;margin-top:3px}
+    h1 .hl em{font-style:normal;color:var(--blue);font-weight:900}
+    .sub{margin:5px 0 0;font-size:8.8px;line-height:1.36;max-width:920px}
+    .sub strong{color:var(--ink);font-weight:800}
+    .src-note{font-size:7px;color:#64748b;margin-top:4px;line-height:1.3}
+    .src-note strong{color:#475569}
+    .brand{font-size:9.5px;font-weight:800;color:var(--blue-dark);border:1px solid #bfdbfe;background:linear-gradient(135deg,#eff6ff,#fff);border-radius:11px;padding:6px 10px}
+    .brand i{margin-right:5px}
+    /* Marco early adopter + dolor / valor (documento estratégico) */
+    .ea-marco{
+      display:grid;grid-template-columns:1.15fr 1fr 0.95fr;gap:6px;margin-bottom:5px;padding:7px 8px;border-radius:12px;
+      background:linear-gradient(145deg,#f8fafc 0%,#fff 50%,#eff6ff 100%);
+      border:1px solid #c7d2fe;box-shadow:0 2px 10px rgba(37,99,235,.06);
+    }
+    .ea-col h3{margin:0 0 4px;font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-dark);display:flex;align-items:center;gap:4px}
+    .ea-col h3 i{font-size:8px}
+    .ea-kpis{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+    .ea-kpi{font-size:6.5px;font-weight:800;padding:2px 7px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;color:#334155}
+    .ea-ul{margin:0;padding-left:10px;font-size:6.9px;line-height:1.28;color:#475569}
+    .ea-ul li{margin:0 0 1px}
+    .ea-val{display:flex;flex-wrap:wrap;gap:3px}
+    .ea-val span{font-size:6.4px;font-weight:700;padding:2px 6px;border-radius:6px;background:linear-gradient(180deg,#dbeafe,#eff6ff);border:1px solid #93c5fd;color:#1e40af}
+    .ea-prio{margin-top:5px;padding-top:5px;border-top:1px dashed #cbd5e1;font-size:6.8px;line-height:1.25;color:#334155}
+    .ea-prio strong{color:var(--ink)}
+    .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:4px;min-height:0}
+    .persona{
+      border:1px solid var(--border);border-radius:12px;overflow:hidden;
+      background:linear-gradient(180deg,#fff,#fafbfc);
+      box-shadow:0 3px 14px rgba(15,23,42,.06);
+      display:flex;flex-direction:column;min-height:0;
+    }
+    .persona--a{border-top:4px solid #ec4899}
+    .persona--b{border-top:4px solid var(--violet)}
+    .ph{
+      display:flex;align-items:flex-start;gap:8px;padding:7px 9px 6px;
+      background:linear-gradient(135deg,rgba(239,246,255,.9),#fff);
+      border-bottom:1px solid #f1f5f9;
+    }
+    .avatar{
+      width:40px;height:40px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+      font-size:15px;font-weight:900;color:#fff;
+      box-shadow:0 3px 10px rgba(15,23,42,.12);
+    }
+    .persona--a .avatar{background:linear-gradient(145deg,#f472b6,#db2777)}
+    .persona--b .avatar{background:linear-gradient(145deg,#a78bfa,#6d28d9)}
+    .ph-main{min-width:0}
+    .ph-tag{font-size:6.2px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:2px}
+    .persona--a .ph-tag{color:#be185d}
+    .persona--b .ph-tag{color:#6d28d9}
+    .ph-name{margin:0;font-size:12px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.12}
+    .ph-meta{font-size:7px;color:#64748b;margin-top:2px;line-height:1.25}
+    .ph-one{font-size:7.2px;line-height:1.28;margin-top:4px;padding:4px 6px;border-radius:7px;background:#f8fafc;border:1px dashed #e2e8f0;color:#334155}
+    .ph-one strong{color:var(--ink)}
+    .body{padding:6px 9px 7px;flex:1;display:grid;gap:5px}
+    .blk{border-radius:8px;padding:5px 7px;border:1px solid #f1f5f0;background:#fff}
+    .blk h4{margin:0 0 3px;font-size:6.5px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:flex;align-items:center;gap:4px}
+    .blk h4 i{font-size:7.5px;opacity:.88}
+    .blk--goal h4{color:var(--blue-dark)}
+    .blk--pain h4{color:#be123c}
+    .blk--dig h4{color:#0369a1}
+    .blk--val h4{color:#7c3aed}
+    .blk--buy h4{color:#0f766e}
+    ul{margin:0;padding-left:10px;font-size:6.95px;line-height:1.26}
+    li{margin:0 0 1px}
+    li strong{color:var(--ink);font-weight:800}
+    .chips{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+    .chip{font-size:6.2px;font-weight:700;padding:2px 6px;border-radius:999px;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569}
+    .chip--pri{border-color:#93c5fd;background:#eff6ff;color:#1e40af}
+    .quote{
+      margin:0;font-size:7px;font-style:italic;line-height:1.28;color:#334155;padding:5px 7px;border-radius:7px;
+      background:linear-gradient(135deg,#fffbeb,#fff);border-left:3px solid #f59e0b;
+    }
+    .quote::before{content:"«";font-weight:900;color:#d97706;margin-right:1px;font-style:normal}
+    .quote::after{content:"»";font-weight:900;color:#d97706;margin-left:1px;font-style:normal}
+    .escapify-line{font-size:6.8px;line-height:1.3;color:#1e40af;font-weight:600;padding:5px 7px;border-radius:8px;background:linear-gradient(90deg,#eff6ff,#fff);border:1px solid #bfdbfe;margin-top:2px}
+    .escapify-line strong{color:var(--blue-dark)}
+    .row-tools{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+    .foot{
+      margin-top:3px;padding:6px 9px;border-radius:11px;border:1px solid #c7d2fe;
+      background:linear-gradient(135deg,#eef2ff,#fff);
+      font-size:7px;line-height:1.3;color:#334155;
+    }
+    .foot strong{color:var(--blue-dark)}
+    @media print{
+      @page{size:A4 landscape;margin:4.5mm}
+      body{background:#fff}
+      .page{width:auto;min-height:auto;margin:0;padding:0;background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <main class="page" role="main">
+    <header class="head">
+      <div>
+        <span class="kicker"><i class="fa-solid fa-user-tag" aria-hidden="true"></i> Escapify · Fase 2 · Validación comercial</span>
+        <h1>Buyer Persona <span class="hl"><em>Early adopter</em> · usuario principal y decisor centro</span></h1>
+        <p class="sub">
+          Cruce entre el <strong>early adopter</strong> del proyecto Escapify, el export estratégico (marketing y captación) y el canvas de adopción.
+          Incluye la definición ampliada de segmento, dolores macro, propuesta de valor y dos personajes: <strong>usuario principal</strong> (docente) y <strong>decisor</strong> (centro).
+        </p>
+        <p class="src-note"><strong>Fuente complementaria:</strong> aportaciones de marketing estratégico y adquisición (perfil early adopter, pains, canales, funnel y buyer personas <strong>Marta García</strong> / <strong>Carlos Fuentes</strong>). <strong>Desarrollo del documento:</strong> <strong>Claudia Iturbe Scala</strong>, junto con <strong>Marketing</strong>.</p>
+      </div>
+      <div class="brand"><i class="fa-solid fa-globe" aria-hidden="true"></i>escapify.io</div>
+    </header>
+
+    <section class="ea-marco" aria-label="Marco de early adopter y propuesta de valor">
+      <div class="ea-col">
+        <h3><i class="fa-solid fa-crosshairs" aria-hidden="true"></i> Early adopter (segmento)</h3>
+        <div class="ea-kpis">
+          <span class="ea-kpi">28–45 años</span>
+          <span class="ea-kpi">Primaria / Secundaria</span>
+          <span class="ea-kpi">5–15 años experiencia</span>
+          <span class="ea-kpi">Nivel digital medio</span>
+          <span class="ea-kpi">Metodologías activas</span>
+        </div>
+        <ul class="ea-ul">
+          <li>Busca actividades innovadoras y comparte recursos con otros docentes.</li>
+          <li>Ya ha probado gamificación o escape rooms; sigue cuentas educativas y descarga materiales.</li>
+          <li>Es de los que <strong>prueba herramientas nuevas</strong> antes que el resto del claustro.</li>
+        </ul>
+      </div>
+      <div class="ea-col">
+        <h3><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Aula · Pains (macro)</h3>
+        <p style="margin:0 0 4px;font-size:6.6px;line-height:1.25;color:#475569">Contexto: alumnado diverso, TDAH / NEE, sesgos de atención, necesidad de participación.</p>
+        <ul class="ea-ul">
+          <li><strong>Tiempo:</strong> preparar gamificación desde cero consume muchas horas.</li>
+          <li><strong>Adaptación:</strong> pocos materiales pensados para necesidades educativas diversas.</li>
+          <li><strong>Motivación</strong> del alumnado y <strong>falta de experiencia</strong> para diseñar escapes.</li>
+          <li><strong>Implementación</strong> compleja sin guía clara.</li>
+        </ul>
+      </div>
+      <div class="ea-col">
+        <h3><i class="fa-solid fa-gem" aria-hidden="true"></i> Qué ofrece Escapify</h3>
+        <div class="ea-val">
+          <span>Ahorro de tiempo</span>
+          <span>Inclusión</span>
+          <span>Aprendizaje activo</span>
+          <span>Facilidad de uso</span>
+        </div>
+        <p class="ea-prio"><strong>Canales a priorizar (inicio):</strong> <strong>1</strong> Instagram (visual, prueba en aula) · <strong>2</strong> Formación / workshops (valida interés y disposición a pagar) · Lead magnet descargable · LinkedIn y comunidades como refuerzo.</p>
+      </div>
+    </section>
+
+    <div class="bp-grid">
+      <article class="persona persona--a" aria-labelledby="bp-marta">
+        <div class="ph">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div class="ph-main">
+            <p class="ph-tag">Usuario principal · compra B2C</p>
+            <h2 class="ph-name" id="bp-marta">Marta García · 34 años</h2>
+            <p class="ph-meta">Profesora de educación primaria · ~8 años de experiencia · innovación y metodologías activas</p>
+            <p class="ph-one"><strong>Perfil:</strong> busca nuevas formas de motivar al alumnado; sigue cuentas de docentes y busca recursos online que pueda aplicar <strong>sin fricción</strong> en clase.</p>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-tools">
+            <div class="blk blk--goal">
+              <h4><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivos</h4>
+              <ul>
+                <li>Clases más <strong>dinámicas</strong> y participación real del alumnado.</li>
+                <li>Actividades <strong>diferentes</strong> que motiven.</li>
+                <li>Mantenerse al día en <strong>innovación educativa</strong>.</li>
+              </ul>
+            </div>
+            <div class="blk blk--pain">
+              <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Frustraciones</h4>
+              <ul>
+                <li>Poco <strong>tiempo</strong> para preparar materiales complejos.</li>
+                <li>Dificultad para mantener la <strong>atención</strong> (grupos heterogéneos).</li>
+                <li>Poca oferta <strong>adaptada</strong> a necesidades diversas.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="blk blk--dig">
+            <h4><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Comportamiento digital</h4>
+            <ul>
+              <li>Sigue <strong>cuentas educativas</strong>; busca ideas y <strong>descarga materiales</strong>.</li>
+              <li>Participa en <strong>formaciones</strong> de innovación pedagógica.</li>
+            </ul>
+          </div>
+          <div class="blk blk--val">
+            <h4><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Qué valora en una herramienta</h4>
+            <ul>
+              <li><strong>Fácil de implementar</strong>, que ahorre tiempo, con ejemplos claros.</li>
+              <li>Que <strong>funcione en el aula real</strong> (no solo en teoría).</li>
+            </ul>
+            <p class="escapify-line"><strong>Escapify:</strong> actividades gamificadas listas para usar; escape rooms sin diseñarlos desde cero.</p>
+            <p class="quote" style="margin-top:5px">No quiero teoría: quiero aplicar ya y que mis alumnos se enganchen sin prepararme el fin de semana entero.</p>
+          </div>
+          <div class="blk blk--buy">
+            <h4><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Captación · disparadores</h4>
+            <p style="margin:0 0 3px;font-size:6.9px;line-height:1.28">Contenido que consume: actividades reales en aula, paso a paso, descargables, experiencias de otros docentes.</p>
+            <div class="chips" aria-label="Canales">
+              <span class="chip chip--pri">Instagram (prioridad)</span>
+              <span class="chip chip--pri">Formación / webinars</span>
+              <span class="chip">Comunidades / Facebook docente</span>
+              <span class="chip">Lead magnet gratuito</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="persona persona--b" aria-labelledby="bp-carlos-f">
+        <div class="ph">
+          <div class="avatar" aria-hidden="true">C</div>
+          <div class="ph-main">
+            <p class="ph-tag">Decisor educativo · compra B2B centro</p>
+            <h2 class="ph-name" id="bp-carlos-f">Carlos Fuentes · 47 años</h2>
+            <p class="ph-meta">Coordinador pedagógico o jefe de estudios · impulsa metodologías innovadoras en el centro</p>
+            <p class="ph-one"><strong>Perfil:</strong> busca herramientas que mejoren el aprendizaje del alumnado y sean <strong>prácticas</strong> para el profesorado; evalúa soluciones a escala de centro.</p>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-tools">
+            <div class="blk blk--goal">
+              <h4><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivos</h4>
+              <ul>
+                <li>Mejorar la <strong>calidad educativa</strong> del centro.</li>
+                <li>Fomentar <strong>metodologías activas</strong> con sentido.</li>
+                <li>Ofrecer al claustro <strong>recursos útiles</strong> y cohesionados.</li>
+              </ul>
+            </div>
+            <div class="blk blk--pain">
+              <h4><i class="fa-solid fa-bolt" aria-hidden="true"></i> Frustraciones</h4>
+              <ul>
+                <li>Herramientas <strong>complejas</strong> o poco prácticas.</li>
+                <li>Recursos que el equipo <strong>no acaba usando</strong> en aula.</li>
+                <li>Dificultad para <strong>formar</strong> al profesorado en nuevas metodologías.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="blk blk--dig">
+            <h4><i class="fa-solid fa-route" aria-hidden="true"></i> Comportamiento</h4>
+            <ul>
+              <li><strong>Evalúa</strong> herramientas; participa en formaciones y eventos educativos.</li>
+              <li>Busca soluciones <strong>implementables a nivel de centro</strong>.</li>
+            </ul>
+          </div>
+          <div class="blk blk--val">
+            <h4><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i> Qué valora</h4>
+            <ul>
+              <li>Recursos que <strong>funcionen en aula real</strong>; facilidad para el profesorado.</li>
+              <li><strong>Impacto</strong> positivo en el aprendizaje y evidencias.</li>
+            </ul>
+            <p class="escapify-line"><strong>Escapify:</strong> dinámicas de gamificación estructuradas para el centro; recursos que aumentan motivación y participación sin añadir caos al claustro.</p>
+            <p class="quote" style="margin-top:5px">Necesito que el equipo lo use de verdad: si no es replicable y ligero, no pasa del piloto.</p>
+          </div>
+          <div class="blk blk--buy">
+            <h4><i class="fa-solid fa-handshake" aria-hidden="true"></i> Captación · decisión</h4>
+            <p style="margin:0 0 3px;font-size:6.9px;line-height:1.28"><strong>Disparador:</strong> licencia de centro, formación aplicada y precio anual claro; casos de uso y posible demo con departamentos.</p>
+            <div class="chips" aria-label="Canales B2B">
+              <span class="chip">LinkedIn</span>
+              <span class="chip">Eventos / formación inspectorado</span>
+              <span class="chip">Reuniones de coordinación</span>
+              <span class="chip">Propuesta a dirección</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <footer class="foot" role="note">
+      <strong>Uso:</strong> validar en entrevistas (Customer Discovery) y en campañas piloto (test en redes, lead magnet, kit inicial).
+      Coherente con el embudo propuesto: awareness → interés → lead → nurturing → conversión → fidelización. Actualizar cifras y nombres cuando haya datos propios.
+    </footer>
+  </main>
+</body>
+</html>
