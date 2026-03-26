@@ -203,6 +203,98 @@
       .hero{ padding: 34px 18px 26px; }
       .foot{ padding: 18px; }
     }
+
+    /* ===== SLIDES (apoyos visuales) ===== */
+    .slides {
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+    }
+    .slide {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15,23,42,.07);
+      padding: 30px 28px;
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .slide .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+    }
+    .slide h3 {
+      font-size: clamp(26px, 3.2vw, 36px);
+      font-weight: 950;
+      line-height: 1.12;
+      letter-spacing: -0.6px;
+      color: var(--ink);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .slide .big {
+      margin-top: 14px;
+      font-size: clamp(17px, 1.5vw, 20px);
+      line-height: 1.7;
+      color: var(--body);
+    }
+    .slide .big strong { color: var(--ink); }
+    .slide ul {
+      margin-top: 14px;
+      padding-left: 22px;
+      font-size: clamp(16px, 1.35vw, 18px);
+      line-height: 1.7;
+      color: var(--body);
+    }
+    .slide li { margin: 8px 0; }
+    .slide .numbers {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid #bfdbfe;
+      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+    }
+    .metric .m-k {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue-dark);
+    }
+    .metric .m-v {
+      margin-top: 6px;
+      font-size: 26px;
+      font-weight: 950;
+      letter-spacing: -0.6px;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+    .metric .m-h {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    @media (max-width: 900px){
+      .slide{ min-height: 0; padding: 22px 18px; }
+      .slide .numbers{ grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -299,8 +391,8 @@
           </div>
           <div style="font-size:14.5px;line-height:1.75;color:var(--body);">
             Hay lugares donde todo cambia.<br>
-            Donde una puerta no es solo una puerta…<br>
-            …sino el inicio de una experiencia que transforma.<br>
+            Donde una puerta no es solo una puerta.<br>
+            Es el inicio de una experiencia que transforma.<br>
             Donde aprender no es memorizar.<br>
             Sino descubrir. Explorar. Sentir. Resolver.<br><br>
 
@@ -336,7 +428,7 @@
 
             Porque aprender puede ser una aventura.<br>
             Y enseñar, un acto de magia.<br>
-            Y porque detrás de cada puerta…<br>
+            Y porque detrás de cada puerta<br>
             hay un nuevo mundo esperando.<br>
             Escapify<br>
             Cambia las reglas del juego. Cambia la forma de enseñar.
@@ -348,7 +440,7 @@
             <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-play"></i></span>0) Arranque (0:00–0:20)</h3>
             <p>
               (Arranque emocional, 15–20 segundos).<br>
-              “Hay lugares donde todo cambia… …sino el inicio de una experiencia que transforma. Donde aprender no es memorizar. Sino descubrir. Explorar. Sentir. Resolver.”
+              “Hay lugares donde todo cambia. Donde una puerta no es solo una puerta. Es el inicio de una experiencia que transforma. Donde aprender no es memorizar. Sino descubrir. Explorar. Sentir. Resolver.”
             </p>
           </div>
 
@@ -374,7 +466,7 @@
               Además, integro el componente <strong>maker</strong> (impresión 3D, corte láser, CNC y electrónica educativa) para conectar lo digital con lo tangible.
             </p>
             <p>
-              Y ahora, para escalar, este proyecto es un puzzle: <strong>faltan piezas</strong>. Busco perfiles que quieran sumar en:
+              Y ahora, para escalar, este proyecto puzzle: me <strong>faltan piezas</strong>. Busco perfiles que quieran sumar en:
               <strong>producto</strong> (UX/UI), <strong>desarrollo</strong> (front/back/integraciones), <strong>educación</strong> (pedagogía, contenido, gamificación),
               <strong>accesibilidad</strong> (WCAG, inclusión, diversidad), <strong>marketing</strong> (crecimiento, RRSS, comunidad),
               <strong>negocio</strong> (modelo, finanzas, estrategia), <strong>datos</strong> (analytics, métricas, impacto) y <strong>audiovisual</strong> (vídeo, diseño, marca).
@@ -385,7 +477,7 @@
             <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>3) Mercado (1:25–1:55)</h3>
             <p>
               Empezamos por el nicho donde el dolor es más alto: docentes de Infantil/Primaria/Secundaria y FP con foco en innovación y STEAM, y aulas con alta diversidad e inclusión.
-              Desde ahí, escalamos a centros (licencias por volumen) y, a futuro, formación y L&amp;D.
+              Desde ahí, escalamos a centros (licencias por volumen) y, a futuro, formación y Learning and Development (Aprendizaje y Desarrollo).
             </p>
             <p>
               El contexto favorece el cambio: la innovación educativa y la accesibilidad dejan de ser “opcional” y pasan a ser criterio de adopción real.
@@ -402,7 +494,7 @@
             <p>
               Genially, Kahoot y Drimify compiten por <strong>crear experiencias interactivas</strong>.
               Breakout EDU y Lockee compiten por <strong>resolver una parte del escape room</strong>.
-              Y TPT/Etsy, junto con blogs o Pinterest, compiten por <strong>dar recursos o inspiración</strong>.
+              Y TPT (Teachers Pay Teachers)/Etsy, junto con blogs o Pinterest, compiten por <strong>dar recursos o inspiración</strong>.
               Escapify gana si no intenta ser “otro Genially” o “otro Kahoot”, sino una categoría propia:
               <strong>escape room educativo completo, inclusivo, guiado</strong> y con componente <strong>físico/digital real</strong>.
             </p>
@@ -434,7 +526,12 @@
             </p>
             <p>
               (Cierre emocional, 10–15 segundos).<br>
-              “Porque aprender puede ser una aventura… …hay un nuevo mundo esperando. Escapify. Cambia las reglas del juego. Cambia la forma de enseñar.”
+              “Porque aprender puede ser una aventura.
+              Y enseñar, un acto de magia.
+              Y porque detrás de cada puerta
+              hay un nuevo mundo esperando.
+              Escapify.
+              Cambia las reglas del juego. Cambia la forma de enseñar.”
             </p>
           </div>
         </div>
@@ -444,118 +541,104 @@
         <div class="label"><i class="fa-solid fa-desktop" aria-hidden="true"></i> Apoyos visuales</div>
         <h2>Slides para enseñar mientras hablas</h2>
         <p>
-          Estas tarjetas están pensadas para <strong>mostrar en pantalla</strong> mientras tú dices el guion. Son titulares + bullets (no texto para leer).
+          <!-- Estas tarjetas están pensadas para <strong>mostrar en pantalla</strong> mientras tú dices el guion. Son titulares + bullets (no texto para leer). -->
         </p>
 
-        <div class="grid grid-3">
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>Mapa competitivo</h3>
-            <p style="margin-top:10px;font-weight:800;color:var(--ink);">3 categorías</p>
-            <p style="margin-top:6px;">
-              - Generalistas de creación<br>
-              - Parciales de escape room<br>
-              - Marketplaces de recursos
+        <div class="slides" aria-label="Diapositivas">
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Slide 1 · Contexto</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chess"></i></span>Escapify compite contra 3 categorías</h3>
+            <ul>
+              <li><strong>Generalistas de creación</strong> (crear experiencias interactivas).</li>
+              <li><strong>Soluciones parciales</strong> (resolver una parte del escape room).</li>
+              <li><strong>Marketplaces</strong> (recursos e inspiración).</li>
+            </ul>
+            <p class="big"><strong>Clave:</strong> Escapify no es “otro Genially/Kahoot”. Es <strong>categoría propia</strong>.</p>
+          </article>
+
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-crown" aria-hidden="true"></i> Slide 2 · Hueco</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>La categoría propia de Escapify</h3>
+            <p class="big">
+              <strong>Escape room educativo completo</strong> + <strong>inclusión real (DUA)</strong> + <strong>flujo guiado</strong> + <strong>maker físico/digital</strong> + <strong>IA pedagógica</strong>.
             </p>
-            <p style="margin-top:10px;"><strong>Clave:</strong> Escapify no es “otro Genially/Kahoot”. Es <strong>categoría propia</strong>.</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-crown"></i></span>Hueco de mercado</h3>
-            <p style="margin-top:10px;">
-              <strong>Escape room educativo completo</strong><br>
-              + <strong>inclusión real (DUA)</strong><br>
-              + <strong>flujo guiado</strong><br>
-              + <strong>físico/digital maker</strong><br>
-              + <strong>IA pedagógica</strong>
-            </p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-star"></i></span>Métrica norte</h3>
-            <p style="margin-top:10px;"><strong>North Star</strong></p>
-            <p style="margin-top:6px;">Docentes que <strong>aplican un escape room real en aula</strong> con Escapify.</p>
-          </div>
-        </div>
+            <p class="big">Lo que hoy está repartido entre varios productos, aquí queda resuelto de forma nativa.</p>
+          </article>
 
-        <div class="card" style="margin-top:14px;">
-          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chess"></i></span>¿Quién compite con qué?</h3>
-          <p style="margin-top:10px;">
-            <strong>Crear experiencias interactivas:</strong> Genially · Kahoot · Drimify<br>
-            <strong>Resolver una parte del escape:</strong> Breakout EDU · Lockee<br>
-            <strong>Recursos / inspiración:</strong> TPT/Etsy · Blogs · Pinterest
-          </p>
-        </div>
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-flag" aria-hidden="true"></i> Slide 3 · “Quién compite con qué”</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span>Mapa rápido</h3>
+            <ul>
+              <li><strong>Crear experiencias interactivas:</strong> Genially · Kahoot · Drimify.</li>
+              <li><strong>Parte del escape:</strong> Breakout EDU · Lockee.</li>
+              <li><strong>Recursos / inspiración:</strong> TPT (Teachers Pay Teachers)/Etsy · Blogs · Pinterest.</li>
+            </ul>
+          </article>
 
-        <div class="grid grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>Genially</h3>
-            <p style="margin-top:10px;"><strong>Fuerte en:</strong> escala + plantillas + SCORM/LTI</p>
-            <p style="margin-top:6px;"><strong>Debilidad:</strong> “constructor” (lienzo en blanco)</p>
-            <p style="margin-top:6px;"><strong>Posición Escapify:</strong> menos lienzo, más “listo para aula”.</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>Kahoot</h3>
-            <p style="margin-top:10px;"><strong>Fuerte en:</strong> velocidad + marca</p>
-            <p style="margin-top:6px;"><strong>Debilidad:</strong> “quiz-first”</p>
-            <p style="margin-top:6px;"><strong>Escapify:</strong> narrativa + itinerario + maker + DUA.</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>Drimify</h3>
-            <p style="margin-top:10px;"><strong>Lectura:</strong> techo aspiracional</p>
-            <p style="margin-top:6px;"><strong>Orientación:</strong> campañas / empresa</p>
-            <p style="margin-top:6px;"><strong>Conclusión:</strong> no marca tu precio, marca el “tope” de producto.</p>
-          </div>
-        </div>
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Slide 4 · Generalistas</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>Genially / Kahoot / Drimify</h3>
+            <ul>
+              <li><strong>Genially</strong>: escala, plantillas, SCORM/LTI… pero es “constructor” → lienzo en blanco.</li>
+              <li><strong>Kahoot</strong>: rapidez y marca… pero “quiz-first”.</li>
+              <li><strong>Drimify</strong>: gamificación premium (techo aspiracional), más “campañas/empresa” que “aula cotidiana”.</li>
+            </ul>
+            <p class="big"><strong>Posición Escapify:</strong> menos lienzo y más <strong>solución lista para aula</strong>.</p>
+          </article>
 
-        <div class="grid grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-box"></i></span>Breakout EDU</h3>
-            <p style="margin-top:10px;"><strong>Valida mercado</strong> (biblioteca + kit)</p>
-            <p style="margin-top:6px;"><strong>Hueco:</strong> más accesible, flexible e inclusivo.</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>Lockee</h3>
-            <p style="margin-top:10px;"><strong>No compite “entero”</strong>: es pieza (candados)</p>
-            <p style="margin-top:6px;"><strong>Escapify:</strong> sistema completo guiado.</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></span>TPT/Etsy + Pinterest</h3>
-            <p style="margin-top:10px;"><strong>Resuelven:</strong> recursos sueltos</p>
-            <p style="margin-top:6px;"><strong>Uso Escapify:</strong> canal + validación, no ventaja central.</p>
-          </div>
-        </div>
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-box" aria-hidden="true"></i> Slide 5 · Parciales</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-box"></i></span>Breakout EDU / Lockee</h3>
+            <ul>
+              <li><strong>Breakout EDU</strong> valida el mercado (biblioteca + kit físico), pero deja hueco en accesibilidad y adaptación fina.</li>
+              <li><strong>Lockee</strong> no es plataforma completa: es <strong>pieza</strong> (candados).</li>
+            </ul>
+            <p class="big"><strong>Escapify:</strong> sistema completo guiado + inclusión desde el diseño.</p>
+          </article>
 
-        <div class="card" style="margin-top:14px;">
-          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>Modelo híbrido (realista)</h3>
-          <p style="margin-top:10px;"><strong>Recurrencia + caja rápida</strong></p>
-          <p style="margin-top:6px;">
-            - Suscripción (Free + Docente Pro + Centro)<br>
-            - Packs descargables (9–29€)<br>
-            - Formación/servicios (palanca de caja)<br>
-            - Maker sin stock (archivos + bajo pedido + partners)
-          </p>
-        </div>
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Slide 6 · Marketplaces</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></span>TPT (Teachers Pay Teachers)/Etsy + blogs/Pinterest</h3>
+            <ul>
+              <li>Resuelven <strong>recursos sueltos</strong> e inspiración.</li>
+              <li>Sirven para <strong>validar demanda</strong> y como canal secundario.</li>
+              <li>No construyen ventaja central: no dan sistema completo ni flujo guiado.</li>
+            </ul>
+          </article>
 
-        <div class="grid grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-tag"></i></span>Precios referencia</h3>
-            <p style="margin-top:10px;"><strong>Docente Pro</strong>: 9,90€/mes · 89€/año</p>
-            <p style="margin-top:6px;"><strong>Centro</strong>: ~790€/año (hasta 10 docentes)</p>
-            <p style="margin-top:6px;"><strong>Packs</strong>: 9–29€</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-simple"></i></span>Escenario base Y1</h3>
-            <p style="margin-top:10px;"><strong>Ingresos</strong>: ~26.940€</p>
-            <p style="margin-top:6px;"><strong>Costes</strong>: ~22.350€</p>
-            <p style="margin-top:6px;"><strong>Resultado</strong>: ~4.590€</p>
-          </div>
-          <div class="card">
-            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></span>Mix sano</h3>
-            <p style="margin-top:10px;">
-              45% suscripción<br>
-              20% packs<br>
-              25% formación/servicios<br>
-              10% maker bajo pedido
-            </p>
-          </div>
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-coins" aria-hidden="true"></i> Slide 7 · Modelo</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>Modelo híbrido (realista)</h3>
+            <ul>
+              <li><strong>Suscripción</strong>: Free + Docente Pro + Centro.</li>
+              <li><strong>Packs</strong> descargables (9–29€).</li>
+              <li><strong>Formación/servicios</strong>: palanca de caja.</li>
+              <li><strong>Maker sin stock</strong>: archivos + bajo pedido + partners.</li>
+            </ul>
+          </article>
+
+          <article class="slide">
+            <div class="kicker"><i class="fa-solid fa-tags" aria-hidden="true"></i> Slide 8 · Números</div>
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-simple"></i></span>Cifras rápidas para pantalla</h3>
+            <div class="numbers" aria-label="Métricas">
+              <div class="metric">
+                <div class="m-k">Docente Pro</div>
+                <div class="m-v">9,90€</div>
+                <div class="m-h">mes · 89€/año</div>
+              </div>
+              <div class="metric">
+                <div class="m-k">Centro</div>
+                <div class="m-v">~790€</div>
+                <div class="m-h">año · hasta 10 docentes</div>
+              </div>
+              <div class="metric">
+                <div class="m-k">Y1 base</div>
+                <div class="m-v">+4,6k€</div>
+                <div class="m-h">resultado operativo aprox.</div>
+              </div>
+            </div>
+            <p class="big"><strong>Mix sano:</strong> 45% suscripción · 20% packs · 25% formación · 10% maker bajo pedido.</p>
+          </article>
         </div>
       </section>
     </main>
