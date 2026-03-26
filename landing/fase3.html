@@ -727,14 +727,20 @@
       <a href="#pitch-arranque" class="btn-ghost"><i class="fa-solid fa-route"></i> Ver apoyo visual pitch</a>
     </div>
 
-    <!-- Video placeholder -->
-    <div id="video" style="margin-top:48px; background:var(--ink); border-radius:16px; overflow:hidden; aspect-ratio:16/9; max-width:680px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; cursor:pointer; position:relative; box-shadow:0 8px 30px rgba(15,23,42,.15);">
-      <div style="width:72px; height:72px; border-radius:50%; background:rgba(37,99,235,.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,99,235,.4);">
-        <i class="fa-solid fa-play" style="font-size:24px; color:var(--white); margin-left:4px;"></i>
-      </div>
-      <div style="font-size:15px; font-weight:600; color:var(--white);">Pitch de Escapify</div>
-      <div style="font-size:12px; color:#94a3b8;">Video disponible próximamente</div>
+    <!-- Video incrustado -->
+    <div id="video" style="margin-top:48px; border-radius:16px; overflow:hidden; aspect-ratio:16/9; max-width:680px; position:relative; box-shadow:0 8px 30px rgba(15,23,42,.15); background:#0f172a;">
+      <iframe
+        src="https://www.youtube.com/embed/l9VGmzE7y00"
+        title="Pitch de Escapify"
+        style="width:100%; height:100%; border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
     </div>
+    <a href="https://youtu.be/l9VGmzE7y00" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; margin-top:12px; font-size:13px; font-weight:700; color:#1e40af; text-decoration:none;">
+      <i class="fa-solid fa-up-right-from-square"></i> Ver video en YouTube
+    </a>
   </div>
 </div>
 
