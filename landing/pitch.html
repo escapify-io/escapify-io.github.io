@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Pitch (3 minutos)</title>
+  <meta name="description" content="Guion y preparación de la video presentación (3 minutos) orientada a inversores para Escapify." />
+  <link rel="canonical" href="https://escapify.io/landing/pitch.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --blue:#2563eb;
+      --blue-dark:#1e40af;
+      --blue-light:#eff6ff;
+      --blue-mid:#dbeafe;
+      --ink:#0f172a;
+      --body:#374151;
+      --muted:#64748b;
+      --border:#e2e8f0;
+      --surface:#f1f5f9;
+      --white:#ffffff;
+      --green:#16a34a;
+      --green-bg:#ecfdf5;
+      --amber:#d97706;
+      --amber-bg:#fffbeb;
+      --max: 980px;
+    }
+    html { scroll-behavior: smooth; }
+    body{
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      color: var(--body);
+      background: var(--surface);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a{ color: inherit; }
+    nav{
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo{
+      font-size: 18px; font-weight: 900; color: var(--ink);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .nav-logo span{ color: var(--blue); }
+    .nav-links{ display:flex; gap: 14px; list-style:none; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a{
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background .15s ease, color .15s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover{ background: var(--blue-light); color: var(--blue-dark); }
+    .nav-cta{
+      background: var(--blue); color: var(--white);
+      font-size: 13px; font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(37,99,235,.22);
+    }
+    .nav-cta i{ margin-right: 6px; }
+
+    .page{
+      max-width: var(--max);
+      margin: 18px auto 42px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    }
+    .hero{
+      padding: 44px 38px 38px;
+      background: #e8edf5;
+      border-bottom: 1px solid #d5dbe8;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.08);
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap: 10px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      box-shadow: 0 2px 10px rgba(15,23,42,.06);
+      margin-bottom: 18px;
+    }
+    .dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    h1{ font-size: clamp(32px, 5vw, 50px); font-weight: 900; line-height: 1.06; letter-spacing: -1px; color: var(--ink); }
+    h1 em{ font-style: normal; color: var(--blue); }
+    .lead{ margin-top: 14px; font-size: 17px; line-height: 1.75; color: var(--muted); max-width: 780px; }
+    .actions{ display:flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .btn{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .btn-primary{ background: var(--blue); color: #fff; box-shadow: 0 6px 18px rgba(37,99,235,.26); }
+    .btn-ghost{ background: transparent; color: var(--blue-dark); border: 1.5px solid #93c5fd; }
+    .btn-ghost:hover{ background: var(--blue-light); }
+
+    .section{ padding: 32px 38px; }
+    .section + .section{ border-top: 1px solid #eef2f7; }
+    .label{
+      display:inline-flex; align-items:center; gap: 8px;
+      background: var(--blue-mid); color: var(--blue-dark);
+      font-size: 11px; font-weight: 900; letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 12px; border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    h2{ font-size: 26px; font-weight: 900; color: var(--ink); line-height: 1.2; letter-spacing: -0.5px; }
+    p{ margin-top: 12px; font-size: 15.5px; line-height: 1.8; color: var(--body); }
+
+    .grid{ display:grid; gap: 14px; margin-top: 16px; }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
+    .card{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(15,23,42,.05);
+    }
+    .card h3{
+      display:flex; align-items:center; gap: 10px;
+      font-size: 16px; font-weight: 900; color: var(--ink);
+    }
+    .ic{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      display:flex; align-items:center; justify-content:center;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border: 1px solid #bfdbfe;
+      flex-shrink: 0;
+    }
+    .card p{ margin-top: 10px; font-size: 14.5px; color: var(--body); line-height: 1.7; }
+    .time{
+      margin-top: 10px;
+      display:inline-flex; align-items:center; gap: 8px;
+      font-size: 12px; font-weight: 900;
+      color: #065f46; background: var(--green-bg);
+      border: 1px solid #a7f3d0;
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+    .note{
+      margin-top: 16px;
+      background: #f8fafc;
+      border-left: 4px solid var(--blue);
+      padding: 16px 18px;
+      border-radius: 0 14px 14px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .note strong{ color: var(--ink); }
+    footer{
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    .foot{
+      padding: 22px 38px;
+      display:flex; justify-content: space-between; align-items:center; gap: 12px; flex-wrap: wrap;
+      color: var(--muted); font-size: 13px;
+    }
+    .foot a{ color: var(--blue); text-decoration: none; font-weight: 900; }
+    .foot a:hover{ text-decoration: underline; }
+
+    @media (max-width: 900px){
+      .grid-3{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+      .page{ margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+      .section{ padding: 24px 18px; }
+      .hero{ padding: 34px 18px 26px; }
+      .foot{ padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Navegación">
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://escapify.io/">
+        Escapify<span>.io</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="fase3.html">Fase 3</a></li>
+        <li><a href="#estructura">Estructura</a></li>
+        <li><a href="#guion">Guion</a></li>
+      </ul>
+      <a class="nav-cta" href="fase3.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <header class="hero">
+      <div class="badge"><span class="dot" aria-hidden="true"></span> Video presentación · Pitch a inversores</div>
+      <h1>Pitch de Escapify en <em>3 minutos</em></h1>
+      <p class="lead">
+        Preparación de la video presentación: duración total de <strong>3 minutos</strong>, orientada a inversores. El objetivo es que se entienda la oportunidad,
+        el producto y la <strong>propuesta de valor para el inversor</strong> con claridad.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#guion"><i class="fa-solid fa-play" aria-hidden="true"></i> Ver guion</a>
+        <a class="btn btn-ghost" href="fase3.html#video"><i class="fa-solid fa-link" aria-hidden="true"></i> Enlace del vídeo</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="estructura" class="section" aria-label="Estructura">
+        <div class="label"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Estructura</div>
+        <h2>Qué debe cubrir el vídeo</h2>
+        <p>
+          El contenido de la video presentación es:
+        </p>
+
+        <div class="grid grid-3" style="margin-top:14px;">
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>Oportunidad y producto</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 35–45 s</div>
+            <p>Qué problema hay, por qué ahora, y qué es Escapify (en 1 frase). Qué resultados aporta.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>Equipo</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 20–30 s</div>
+            <p>Quién lo impulsa y por qué el equipo puede ejecutarlo (educación, diseño, producto, maker, investigación).</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>Mercado</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 25–35 s</div>
+            <p>Segmentos objetivo y por qué hay demanda. Señales de interés / canal inicial.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>Modelo de negocio</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 25–35 s</div>
+            <p><strong>Cómo ganáis dinero</strong>: planes, licencias, formación, kits/recursos, y lógica de precios.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></span>Necesidades financieras</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 20–30 s</div>
+            <p>Qué se necesita para la siguiente fase y en qué se usaría la inversión (producto, validación, captación, equipo).</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>Propuesta al inversor</h3>
+            <div class="time"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 20–30 s</div>
+            <p>Algunos apartados pueden adaptarse, pero debe quedar claro <strong>qué propuesta de valor ofrecéis a los inversores</strong>.</p>
+          </article>
+        </div>
+
+        <div class="note">
+          <div style="font-size:14px;font-weight:900;color:var(--blue-dark);margin-bottom:6px;">
+            <i class="fa-solid fa-bullseye" aria-hidden="true" style="margin-right:8px;"></i>Regla de oro
+          </div>
+          <div style="font-size:14.5px;line-height:1.7;color:var(--body);">
+            En 3 minutos, menos es más: <strong>1 idea por bloque</strong>, con una frase clara de valor, un “por qué ahora” y un cierre orientado a inversores.
+          </div>
+        </div>
+      </section>
+
+      <section id="guion" class="section" aria-label="Guion">
+        <div class="label"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Guion</div>
+        <h2>Plantilla lista para grabar</h2>
+        <p>
+          Puedes usar este orden como teleprompter. Sustituye los corchetes por tus datos.
+        </p>
+
+        <div class="grid" style="grid-template-columns:1fr;gap:12px;margin-top:14px;">
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>1) Oportunidad y producto</h3>
+            <p><strong>[1 frase problema]</strong> · <strong>[1 frase solución]</strong> · <strong>[1 frase resultado]</strong>.</p>
+          </div>
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>2) Equipo</h3>
+            <p><strong>[quién soy / somos]</strong> y por qué tenemos capacidad de ejecución en <strong>[educación + producto + investigación]</strong>.</p>
+          </div>
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>3) Mercado</h3>
+            <p>Nos dirigimos a <strong>[B2C/B2B]</strong>. Empezamos por <strong>[canal / segmento inicial]</strong> y escalamos hacia <strong>[siguiente segmento]</strong>.</p>
+          </div>
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>4) Modelo de negocio</h3>
+            <p>Ingresos por <strong>[suscripción/licencias]</strong> + <strong>[formación/kits/recursos]</strong>. Ticket objetivo: <strong>[rango]</strong>.</p>
+          </div>
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></span>5) Necesidades financieras</h3>
+            <p>Buscamos <strong>[cantidad/objetivo]</strong> para <strong>[producto/validación/captación]</strong> en <strong>[plazo]</strong>.</p>
+          </div>
+          <div class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>6) Cierre para inversores</h3>
+            <p>Propuesta al inversor: <strong>[por qué es una oportunidad]</strong> · <strong>[por qué nosotros]</strong> · <strong>[por qué ahora]</strong>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot">
+        <div><strong style="color:var(--ink);">Escapify · Pitch</strong> · Guion de 3 minutos</div>
+        <div><a href="fase3.html">Fase 3</a> · <a href="landing.html">Landing</a></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
