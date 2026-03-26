@@ -264,6 +264,220 @@
     .fs-title { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
     .fs-sub { font-size: 12px; color: var(--muted); }
 
+    /* ── PITCH VISUAL FLOW ── */
+    .pitch-wrap {
+      background: radial-gradient(circle at 20% 0%, #e0eaff 0%, #f4f8ff 40%, #ffffff 75%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .section[id^="pitch-"] {
+      position: relative;
+      margin-top: 20px;
+      padding: 52px 28px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, .06);
+    }
+    .section[id^="pitch-"] .label {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      color: #1e3a8a;
+      border: 1px solid #93c5fd;
+    }
+    .section[id^="pitch-"] h2 { margin-bottom: 10px; }
+    .section[id^="pitch-"] .lead { max-width: 760px; }
+    #pitch-arranque.section[id^="pitch-"] {
+      border-color: #bfdbfe;
+      background: linear-gradient(145deg, #f8fbff 0%, #ecf3ff 100%);
+    }
+    #pitch-cierre.section[id^="pitch-"] {
+      border-color: #c7d2fe;
+      background: linear-gradient(145deg, #f8faff 0%, #eef2ff 100%);
+    }
+    .pitch-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .pitch-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 13px; border-radius: 999px;
+      border: 1px solid #bfdbfe; background: #eff6ff;
+      color: #1e3a8a; text-decoration: none;
+      font-size: 12px; font-weight: 700;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+    }
+    .pitch-chip:hover { background: #dbeafe; }
+    .pitch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; }
+    .pitch-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid #dbeafe;
+      border-radius: 16px; padding: 20px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, .06);
+    }
+    .pitch-card h4 {
+      font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pitch-card h4 i {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: #e0eaff; color: #1d4ed8;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .pitch-card p { font-size: 14px; color: var(--body); line-height: 1.7; }
+    .pitch-card ul { margin: 8px 0 0 18px; }
+    .pitch-card li { font-size: 14px; color: var(--body); margin: 6px 0; }
+    .pitch-card li::marker { color: #2563eb; }
+    .pitch-card.pitch-hero {
+      background: linear-gradient(145deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%);
+      border-color: #1d4ed8;
+      color: var(--white);
+    }
+    .pitch-card.pitch-hero h4,
+    .pitch-card.pitch-hero p,
+    .pitch-card.pitch-hero li { color: #eff6ff; }
+    .pitch-card.pitch-hero h4 i {
+      background: rgba(255,255,255,.16);
+      color: #dbeafe;
+    }
+    .pitch-card.pitch-hero li::marker { color: #bfdbfe; }
+    .pitch-kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .pitch-kpi .k {
+      background: linear-gradient(145deg, #0f172a 0%, #1e3a8a 100%);
+      border-radius: 14px; padding: 15px 12px;
+      text-align: center; border: 1px solid #1e40af;
+      box-shadow: 0 6px 16px rgba(30, 64, 175, .25);
+    }
+    .pitch-kpi .n { font-size: 30px; font-weight: 900; color: var(--white); line-height: 1; }
+    .pitch-kpi .l { font-size: 11px; color: #bfdbfe; margin-top: 5px; line-height: 1.35; }
+    .pitch-dark {
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%) !important;
+      border-color: #334155 !important;
+    }
+    .pitch-dark h2 { color: #f8fafc; }
+    .pitch-dark .lead { color: #cbd5e1; }
+    .pitch-dark .label { background: rgba(59,130,246,.18) !important; color: #bfdbfe; border-color: rgba(147,197,253,.4); }
+    .pitch-dark .pitch-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 100%);
+      border-color: rgba(148,163,184,.35);
+    }
+    .pitch-dark .pitch-card h4,
+    .pitch-dark .pitch-card p,
+    .pitch-dark .pitch-card li { color: #e2e8f0; }
+    .pitch-dark .pitch-card h4 i { background: rgba(59,130,246,.25); color: #bfdbfe; }
+    .pitch-dark .pitch-card li::marker { color: #93c5fd; }
+    .pitch-steps {
+      margin-top: 22px; background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 12px 14px;
+    }
+    .pitch-steps .track {
+      height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; margin-bottom: 12px;
+    }
+    .pitch-steps .track > div {
+      height: 100%; width: 100%;
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+    }
+    .pitch-steps .items { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+    .pitch-steps .it {
+      font-size: 10px; text-align: center; color: #64748b; font-weight: 700;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 4px;
+    }
+    .iebs-h-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .iebs-timeline {
+      margin-top: 20px; background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px; box-shadow: 0 4px 14px rgba(15,23,42,.05);
+    }
+    .pitch-dark .iebs-timeline {
+      background: rgba(255,255,255,.03); border-color: rgba(148,163,184,.25);
+    }
+    .iebs-timeline h3 {
+      font-size: 24px; font-weight: 800; text-align: center; color: var(--ink); margin-bottom: 2px;
+    }
+    .pitch-dark .iebs-timeline h3 { color: #f8fafc; }
+    .iebs-timeline .sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+    .pitch-dark .iebs-timeline .sub { color: #cbd5e1; }
+    .iebs-line {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+    }
+    .iebs-line.second { grid-template-columns: repeat(5, 1fr); margin-top: 12px; }
+    .iebs-node { text-align: center; }
+    .iebs-badge {
+      width: 34px; height: 34px; border-radius: 50%; display: inline-flex;
+      align-items: center; justify-content: center; font-size: 13px; font-weight: 800;
+      margin-bottom: 6px; background: #cbd5e1; color: #fff;
+    }
+    .iebs-badge.done { background: #2563eb; }
+    .iebs-badge.current { background: #0f172a; border: 3px solid #2563eb; }
+    .iebs-node .t { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+    .iebs-node .s { font-size: 10px; color: var(--muted); line-height: 1.25; margin-top: 2px; }
+    .pitch-dark .iebs-node .t { color: #e2e8f0; }
+    .pitch-dark .iebs-node .s { color: #94a3b8; }
+    .progress-band {
+      height: 6px; border-radius: 99px; background: #e2e8f0; margin: 10px 14px 4px;
+      overflow: hidden;
+    }
+    .progress-band .fill { height: 100%; width: 72%; background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%); }
+    .progress-meta {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 0 14px;
+      font-size: 10px; font-weight: 700; color: #64748b;
+    }
+    .progress-meta .mid { text-align: center; color: #2563eb; }
+    .progress-meta .right { text-align: right; color: #94a3b8; }
+
+    .value-tiles { margin-top: 16px; }
+    .value-tiles .row {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    }
+    .value-tile {
+      background: #fff; border: 2px solid #2563eb; border-radius: 12px;
+      text-align: center; padding: 16px 10px; box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+    .value-tile .n { font-size: 26px; font-weight: 900; color: #2563eb; line-height: 1; margin-bottom: 6px; }
+    .value-tile .tx { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .value-tile.accent { background: #2563eb; border-color: #2563eb; }
+    .value-tile.accent .n, .value-tile.accent .tx { color: #fff; }
+    .value-claim {
+      margin-top: 10px; text-align: center; font-size: 15px; font-weight: 700;
+      color: #334155; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px;
+    }
+    .value-claim span { color: #2563eb; }
+    .pitch-dark .value-tile { background: rgba(255,255,255,.04); border-color: rgba(147,197,253,.55); }
+    .pitch-dark .value-tile .tx { color: #e2e8f0; }
+    .pitch-dark .value-tile.accent { background: #1d4ed8; border-color: #2563eb; }
+    .pitch-dark .value-claim { background: rgba(255,255,255,.04); color: #e2e8f0; border-color: rgba(148,163,184,.3); }
+
+    .comp-table { margin-top: 10px; border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+    .comp-table th, .comp-table td { border: 1px solid #e2e8f0; padding: 10px 12px; }
+    .comp-table th { background: #0f172a; color: #e2e8f0; font-weight: 700; text-align: center; }
+    .comp-table th:last-child { background: #2563eb; color: #fff; }
+    .comp-table td:first-child { font-weight: 700; color: var(--ink); background: #f8fafc; min-width: 210px; }
+    .comp-table td { color: #64748b; text-align: center; }
+    .comp-table td:last-child { background: #eff6ff; color: #1e3a8a; font-weight: 800; }
+
+    /* Barra lateral de progreso */
+    .pitch-progress {
+      position: fixed; right: 16px; top: 96px; z-index: 90;
+      width: 214px; background: rgba(255,255,255,.95);
+      border: 1px solid #dbeafe; border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      backdrop-filter: blur(6px);
+      padding: 10px;
+    }
+    .pitch-progress-title {
+      font-size: 11px; font-weight: 800; letter-spacing: .8px;
+      text-transform: uppercase; color: #1e3a8a; margin-bottom: 8px;
+    }
+    .pitch-progress a {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: #475569;
+      font-size: 12px; font-weight: 600;
+      border-radius: 8px; padding: 7px 8px;
+      transition: all .18s ease;
+    }
+    .pitch-progress a:hover { background: #eff6ff; color: #1d4ed8; }
+    .pitch-progress a.active { background: #dbeafe; color: #1e40af; }
+    .pitch-progress .dot {
+      width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; flex-shrink: 0;
+    }
+    .pitch-progress a.active .dot { background: #2563eb; box-shadow: 0 0 0 4px rgba(37,99,235,.16); }
+
     /* ── THESIS CONNECTION ── */
     .thesis-card {
       background: linear-gradient(135deg, var(--ink) 0%, #1e293b 100%);
@@ -440,6 +654,8 @@
       .origin-grid, .thesis-grid, .ps-grid, .pillars,
       .maleta-grid, .adapt-grid,
       .profile-card { grid-template-columns: 1fr; }
+      .pitch-grid { grid-template-columns: 1fr; }
+      .pitch-kpi { grid-template-columns: 1fr; }
       [style*="grid-template-columns:repeat(4"] { grid-template-columns: repeat(2, 1fr) !important; }
       [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
@@ -454,6 +670,12 @@
       .diff-table { font-size: 12px; }
       .diff-table th, .diff-table td { padding: 10px 10px; }
       .thesis-card { padding: 32px 24px; }
+      .pitch-steps .items { grid-template-columns: repeat(4, 1fr); }
+      .iebs-line { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .iebs-line.second { grid-template-columns: repeat(3, 1fr); }
+      .value-tiles .row { grid-template-columns: 1fr; }
+      .comp-table { min-width: 620px; }
+      .pitch-progress { display: none; }
     }
   </style>
 </head>
@@ -466,15 +688,27 @@
       Escapify<span>.io</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#origen">Origen</a></li>
-      <li><a href="#maleta">La Maleta</a></li>
-      <li><a href="#investigacion">Investigación</a></li>
-      <li><a href="#plataforma">Plataforma</a></li>
-      <li><a href="#hoja-de-ruta">Hoja de ruta</a></li>
+      <li><a href="#pitch-arranque">Arranque</a></li>
+      <li><a href="#pitch-oportunidad">Oportunidad</a></li>
+      <li><a href="#pitch-mercado">Mercado</a></li>
+      <li><a href="#pitch-modelo">Modelo</a></li>
+      <li><a href="#pitch-cierre">Cierre</a></li>
     </ul>
     <a href="https://escapify.io/crear-escape.html" class="nav-cta"><i class="fa-solid fa-plus"></i> Crear escape room</a>
   </div>
 </nav>
+
+<aside class="pitch-progress" aria-label="Progreso del pitch">
+  <div class="pitch-progress-title">Ruta de presentación</div>
+  <a href="#pitch-arranque" data-step="pitch-arranque"><span class="dot"></span>01 Arranque</a>
+  <a href="#pitch-oportunidad" data-step="pitch-oportunidad"><span class="dot"></span>02 Oportunidad</a>
+  <a href="#pitch-equipo" data-step="pitch-equipo"><span class="dot"></span>03 Equipo</a>
+  <a href="#pitch-mercado" data-step="pitch-mercado"><span class="dot"></span>04 Mercado</a>
+  <a href="#pitch-competencia" data-step="pitch-competencia"><span class="dot"></span>05 Competidores</a>
+  <a href="#pitch-modelo" data-step="pitch-modelo"><span class="dot"></span>06 Modelo</a>
+  <a href="#pitch-inversion" data-step="pitch-inversion"><span class="dot"></span>07 Inversión</a>
+  <a href="#pitch-cierre" data-step="pitch-cierre"><span class="dot"></span>08 Cierre</a>
+</aside>
 
 
 <!-- ══════════ HERO ══════════ -->
@@ -486,11 +720,11 @@
     </div>
     <h1>Una tesis que se convirtió<br>en <em>plataforma educativa</em></h1>
     <p class="lead">
-      Escapify nació en el aula, con 12 personas con discapacidad intelectual, ocho eras históricas y la certeza de que <strong>cuando diseñas para la diversidad, mejoras la experiencia para todos</strong>.
+      Escapify nació en el aula, con personas con discapacidad intelectual, eras históricas y la certeza de que <strong>cuando diseñas para la diversidad, mejoras la experiencia para todos</strong>.
     </p>
     <div class="hero-actions">
       <a href="https://escapify.io/" class="btn-primary"><i class="fa-solid fa-compass"></i> Explorar la plataforma</a>
-      <a href="#origen" class="btn-ghost"><i class="fa-solid fa-route"></i> Conocer el proceso</a>
+      <a href="#pitch-arranque" class="btn-ghost"><i class="fa-solid fa-route"></i> Ver apoyo visual pitch</a>
     </div>
 
     <!-- Video placeholder -->
@@ -524,6 +758,261 @@
       <div class="stat-n">8</div>
       <div class="stat-l"><i class="fa-solid fa-clock-rotate-left"></i> Eras históricas en El Archivo de la Historia</div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════════ RUTA VISUAL DEL PITCH ══════════ -->
+<div class="full-bleed pitch-wrap">
+  <div class="section" id="pitch-arranque">
+    <div class="label">01 · Arranque del pitch</div>
+    <h2>Problema real</h2>
+    <p class="lead">
+      Este bloque abre el vídeo y sitúa el dolor principal: <strong>docentes que quieren innovar pero no tienen tiempo ni estructura</strong> para implementar una gamificación de calidad en aulas diversas.
+    </p>
+    <div class="pitch-nav">
+      <a href="#pitch-arranque" class="pitch-chip"><i class="fa-solid fa-play"></i> Arranque</a>
+      <a href="#pitch-oportunidad" class="pitch-chip"><i class="fa-solid fa-lightbulb"></i> Oportunidad</a>
+      <a href="#pitch-equipo" class="pitch-chip"><i class="fa-solid fa-people-group"></i> Equipo</a>
+      <a href="#pitch-mercado" class="pitch-chip"><i class="fa-solid fa-chart-line"></i> Mercado</a>
+      <a href="#pitch-competencia" class="pitch-chip"><i class="fa-solid fa-chess"></i> Competidores</a>
+      <a href="#pitch-modelo" class="pitch-chip"><i class="fa-solid fa-coins"></i> Modelo</a>
+      <a href="#pitch-inversion" class="pitch-chip"><i class="fa-solid fa-sack-dollar"></i> Inversión</a>
+      <a href="#pitch-cierre" class="pitch-chip"><i class="fa-solid fa-gem"></i> Cierre</a>
+    </div>
+    <div class="pitch-grid">
+      <article class="pitch-card pitch-hero">
+        <h4><i class="fa-solid fa-door-open"></i> Mensaje de entrada</h4>
+        <p><strong>Hay lugares donde todo cambia.</strong> Una puerta no es solo una puerta: es el inicio de una experiencia que transforma. Escapify convierte el aprendizaje en una experiencia activa: <strong>descubrir, explorar, sentir y resolver</strong>.</p>
+      </article>
+      <article class="pitch-card">
+        <h4><i class="fa-solid fa-triangle-exclamation"></i> Dolor del aula</h4>
+        <ul>
+          <li>Falta de tiempo para diseñar experiencias completas.</li>
+          <li>Dificultad para adaptar a <strong>inclusión y diversidad</strong>.</li>
+          <li>Resultado habitual: recursos dispersos y ejecución superficial.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="iebs-timeline" aria-label="Evolución del proyecto">
+      <h3>Evolución del proyecto</h3>
+      <div class="sub">De la investigación académica al lanzamiento internacional</div>
+
+      <div class="iebs-line">
+        <div class="iebs-node"><div class="iebs-badge done">1</div><div class="t">TFM</div><div class="s">Marco teórico</div></div>
+        <div class="iebs-node"><div class="iebs-badge done">2</div><div class="t">Experiencias</div><div class="s">Escape rooms reales</div></div>
+        <div class="iebs-node"><div class="iebs-badge done">3</div><div class="t">Prototipo</div><div class="s">Plataforma funcional</div></div>
+        <div class="iebs-node"><div class="iebs-badge done">4</div><div class="t">Tesis doctoral</div><div class="s">Modelo URJC</div></div>
+        <div class="iebs-node"><div class="iebs-badge current">5</div><div class="t" style="color:#2563eb;">Arranque</div><div class="s" style="color:#2563eb;font-weight:700;">Aqui</div></div>
+        <div class="iebs-node"><div class="iebs-badge">6</div><div class="t">Desarrollo</div><div class="s">Lean Canvas, EcoFin</div></div>
+      </div>
+      <div class="progress-band"><div class="fill"></div></div>
+      <div class="progress-meta">
+        <div>2024</div><div class="mid">Semana del Emprendedor · 2026</div><div class="right"></div>
+      </div>
+
+      <div class="iebs-line second">
+        <div class="iebs-node"><div class="iebs-badge">7</div><div class="t">Pitch + Votacion</div><div class="s">Video e inversion</div></div>
+        <div class="iebs-node"><div class="iebs-badge">8</div><div class="t">MVP completo</div><div class="s">Plataforma lista</div></div>
+        <div class="iebs-node"><div class="iebs-badge">9</div><div class="t">Beta testers</div><div class="s">Primeros usuarios</div></div>
+        <div class="iebs-node"><div class="iebs-badge">10</div><div class="t">Lanzamiento</div><div class="s">Apertura publica</div></div>
+        <div class="iebs-node"><div class="iebs-badge">11</div><div class="t">Escalado</div><div class="s">Internacionalizacion</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section pitch-dark" id="pitch-oportunidad">
+  <div class="label">02 · Oportunidad y producto</div>
+  <h2>De actividad suelta a sistema aplicable</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card pitch-hero">
+      <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Qué hace Escapify</h4>
+      <p><strong>Escapify</strong> permite a docentes y centros <strong>diseñar, adaptar y aplicar escape rooms educativos inclusivos</strong> de forma rápida, estructurada y sin experiencia previa, combinando digital y tangible.</p>
+      <ul>
+        <li>Recursos listos para usar (plantillas y packs).</li>
+        <li>Herramientas digitales de creación y validación.</li>
+        <li>Componente físico maker para experiencias inmersivas.</li>
+      </ul>
+    </article>
+    <article class="pitch-card pitch-hero">
+      <h4><i class="fa-solid fa-bullseye"></i> North Star</h4>
+      <p>No optimizamos solo el registro. La métrica clave es: <strong>docentes que aplican un escape room real en el aula con Escapify</strong>. Esto conecta producto, uso real e impacto educativo.</p>
+      <p style="margin-top:8px;">Objetivo de corto plazo: reducir fricción en diseño y despliegue para aumentar sesiones reales en centros.</p>
+    </article>
+  </div>
+  <div class="value-tiles" aria-label="Propuesta de valor en 5 puntos">
+    <div class="row">
+      <div class="value-tile"><div class="n">01</div><div class="tx">Gamificacion real sin esfuerzo</div></div>
+      <div class="value-tile"><div class="n">02</div><div class="tx">Recursos listos y adaptables</div></div>
+      <div class="value-tile"><div class="n">03</div><div class="tx">STEAM y soft skills integrados</div></div>
+      <div class="value-tile"><div class="n">04</div><div class="tx">Inclusion desde el diseno</div></div>
+      <div class="value-tile accent"><div class="n">05</div><div class="tx">Mas motivacion y participacion</div></div>
+    </div>
+    <div class="value-claim">No solo ahorra tiempo: <span>transforma como se aprende</span>.</div>
+  </div>
+</div>
+
+<div class="section" id="pitch-equipo">
+  <div class="label">03 · Equipo y capacidades</div>
+  <h2>Base pedagógica, investigación y ejecución</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-user-graduate"></i> Perfil fundador</h4>
+      <p>Raquel: docente, investigadora y diseñadora de experiencia, con práctica en contextos de diversidad (discapacidad intelectual, centros juveniles, educación digital y personas adultas). <strong>Doctoranda URJC</strong> en innovación educativa.</p>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-puzzle-piece"></i> Piezas para escalar</h4>
+      <p>El proyecto ya tiene base real y validación inicial. Para acelerar, se buscan perfiles en <strong>producto, desarrollo, educación, accesibilidad, marketing, negocio, datos y audiovisual</strong>.</p>
+    </article>
+  </div>
+</div>
+
+<div class="section pitch-dark" id="pitch-mercado">
+  <div class="label">04 · Mercado y validación</div>
+  <h2>Entrada por nicho crítico y escalado por centros</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-school"></i> Go-to-market</h4>
+      <ul>
+        <li>Nicho inicial: Infantil, Primaria, Secundaria y FP con foco en innovación, STEAM e inclusión.</li>
+        <li>Escalado: licencias por volumen para centros educativos.</li>
+        <li>Siguiente capa: formación y Learning and Development.</li>
+      </ul>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-seedling"></i> Señales de adopción</h4>
+      <p>El contexto favorece la adopción: accesibilidad e innovación ya son criterios de compra y uso, no extras opcionales.</p>
+      <div class="pitch-kpi">
+        <div class="k"><div class="n">150+</div><div class="l">Docentes preparados para testeo</div></div>
+        <div class="k"><div class="n">2.300+</div><div class="l">Alumnos en entorno de validación</div></div>
+        <div class="k"><div class="n">1</div><div class="l">Centro para piloto inmediato</div></div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div class="section" id="pitch-competencia">
+  <div class="label">05 · Competidores y hueco</div>
+  <h2>No compite con una sola herramienta, sino con tres categorías</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-layer-group"></i> Mapa competitivo real</h4>
+      <ul>
+        <li><strong>Generalistas:</strong> Genially, Kahoot y <strong>Drimify</strong> (interactividad).</li>
+        <li><strong>Parciales:</strong> Breakout EDU y <strong>lockee.fr</strong> (parte del flujo).</li>
+        <li><strong>Marketplaces:</strong> <strong>TPT/Etsy</strong> y <strong>Blogs/Pinterest</strong> (inspiración y recursos sueltos).</li>
+      </ul>
+      <p style="margin-top:10px;">
+        En esta capa competitiva, Escapify compite por resolver el sistema completo, no solo una pieza aislada.
+      </p>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-cubes-stacked"></i> Categoría propia</h4>
+      <p>Ventaja estratégica: no ser “otro Genially/Kahoot”, sino un <strong>sistema completo para escape rooms educativos inclusivos</strong>, guiado de principio a fin y conectado a una experiencia física + digital real.</p>
+    </article>
+  </div>
+  <div class="iebs-h-scroll">
+    <table class="comp-table" role="presentation" aria-label="Comparativa visual de diferenciacion">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Genially / Kahoot / Drimify</th>
+          <th>Breakout EDU / lockee.fr</th>
+          <th>TPT/Etsy + Blogs/Pinterest</th>
+          <th>Escapify</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Enfoque en escape rooms educativos</td>
+          <td>Generalista</td>
+          <td>Parcial</td>
+          <td>Puntual</td>
+          <td>Especializado</td>
+        </tr>
+        <tr>
+          <td>Inclusion desde el diseno</td>
+          <td>No central</td>
+          <td>Limitada</td>
+          <td>Variable</td>
+          <td>Diferencial</td>
+        </tr>
+        <tr>
+          <td>Integracion fisico + digital</td>
+          <td>Poco habitual</td>
+          <td>Parcial</td>
+          <td>Fragmentado</td>
+          <td>Integrado</td>
+        </tr>
+        <tr>
+          <td>Sistema completo y estructurado</td>
+          <td>Herramienta</td>
+          <td>Plataforma parcial</td>
+          <td>Recursos aislados</td>
+          <td>Ecosistema educativo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section pitch-dark" id="pitch-modelo">
+  <div class="label">06 · Modelo de negocio</div>
+  <h2>Arquitectura híbrida para tracción y caja</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-coins"></i> Ingresos principales</h4>
+      <ul>
+        <li>Suscripción digital: Free, Docente Pro y Centro.</li>
+        <li>Packs descargables: ticket medio entre 9 y 29 euros.</li>
+        <li>Formación y servicios para acelerar monetización inicial.</li>
+      </ul>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-gears"></i> Componente maker sin stock</h4>
+      <p>Escalado eficiente: archivos listos para fabricación, producción bajo pedido y red de partners. Menor riesgo de inventario y mayor capacidad de personalización para centros.</p>
+    </article>
+  </div>
+</div>
+
+<div class="section" id="pitch-inversion">
+  <div class="label">07 · Necesidades financieras</div>
+  <h2>Inversión enfocada en producto y validación comercial</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-rocket"></i> Prioridades de ejecución</h4>
+      <ul>
+        <li>Reforzar flujo guiado para implementación docente.</li>
+        <li>Integrar IA para narrativa y adaptaciones.</li>
+        <li>Convertir captación en ventas medibles por canal.</li>
+      </ul>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-chart-column"></i> Qué se espera demostrar</h4>
+      <ul>
+        <li>Más activaciones reales en aula (North Star).</li>
+        <li>Mejor conversión de docentes a planes de pago.</li>
+        <li>Primeras licencias de centro replicables.</li>
+      </ul>
+    </article>
+  </div>
+</div>
+
+<div class="section pitch-dark" id="pitch-cierre">
+  <div class="label">08 · Cierre para inversores</div>
+  <h2>Una llave para escalar una educación más humana</h2>
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-gem"></i> Tesis de inversión</h4>
+      <p><strong>Escapify ocupa un hueco claro</strong>: escape room completo, inclusión real, componente maker físico e IA pedagógica, con validación desde aula e investigación aplicada.</p>
+      <p style="margin-top:8px;">La oportunidad no es solo crear recursos. Es convertir la gamificación en un sistema escalable para docentes y centros.</p>
+    </article>
+    <article class="pitch-card">
+      <h4><i class="fa-solid fa-handshake-angle"></i> Llamada a acción</h4>
+      <p>Si te interesa impulsar una EdTech con base real de aula y modelo híbrido rentable, este es el momento para financiar la siguiente fase y acelerar adopción en centros.</p>
+      <p style="margin-top:8px;"><strong>Validación inmediata:</strong> más de 150 docentes y un entorno de más de 2.300 alumnos para testeo.</p>
+    </article>
   </div>
 </div>
 
@@ -1750,6 +2239,44 @@
     <i class="fa-solid fa-university" style="margin-right:4px;"></i> URJC (Máster Profesorado + Tesis doctoral) · <i class="fa-solid fa-gamepad" style="margin-right:4px;"></i> IEBS (Máster Gamificación y Narrativas Transmedia)
   </p>
 </footer>
+
+<script>
+  (function () {
+    var sectionIds = [
+      "pitch-arranque",
+      "pitch-oportunidad",
+      "pitch-equipo",
+      "pitch-mercado",
+      "pitch-competencia",
+      "pitch-modelo",
+      "pitch-inversion",
+      "pitch-cierre"
+    ];
+    var links = Array.prototype.slice.call(document.querySelectorAll(".pitch-progress a[data-step]"));
+    if (!links.length || !("IntersectionObserver" in window)) return;
+
+    var byId = {};
+    links.forEach(function (link) { byId[link.getAttribute("data-step")] = link; });
+    var sections = sectionIds
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    function setActive(id) {
+      links.forEach(function (l) { l.classList.remove("active"); });
+      if (byId[id]) byId[id].classList.add("active");
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      var visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible[0] && visible[0].target && visible[0].target.id) setActive(visible[0].target.id);
+    }, { rootMargin: "-20% 0px -55% 0px", threshold: [0.2, 0.4, 0.65] });
+
+    sections.forEach(function (s) { observer.observe(s); });
+    setActive("pitch-arranque");
+  })();
+</script>
 
 </body>
 </html>
