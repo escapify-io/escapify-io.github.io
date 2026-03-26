@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escapify · Fase 3</title>
+  <meta name="description" content="Fase 3 de Escapify: explicación breve del proyecto, qué hace, qué soluciona, diferenciación, competidores y enlace a video presentación." />
+  <link rel="canonical" href="https://escapify.io/landing/fase3.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --blue:#2563eb;
+      --blue-dark:#1e40af;
+      --blue-light:#eff6ff;
+      --blue-mid:#dbeafe;
+      --ink:#0f172a;
+      --body:#374151;
+      --muted:#64748b;
+      --subtle:#94a3b8;
+      --border:#e2e8f0;
+      --surface:#f1f5f9;
+      --white:#ffffff;
+      --green:#16a34a;
+      --green-bg:#ecfdf5;
+      --amber:#d97706;
+      --amber-bg:#fffbeb;
+      --red:#dc2626;
+      --red-bg:#fef2f2;
+      --max: 980px;
+    }
+    html { scroll-behavior: smooth; }
+    body{
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      color: var(--body);
+      background: var(--surface);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a{ color: inherit; }
+
+    /* NAV */
+    nav{
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo{
+      font-size: 18px; font-weight: 900; color: var(--ink);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .nav-logo span{ color: var(--blue); }
+    .nav-links{ display:flex; gap: 18px; list-style:none; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a{
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background .15s ease, color .15s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover{ background: var(--blue-light); color: var(--blue-dark); }
+    .nav-cta{
+      background: var(--blue); color: var(--white);
+      font-size: 13px; font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(37,99,235,.22);
+    }
+    .nav-cta i{ margin-right: 6px; }
+
+    /* LAYOUT */
+    .page{
+      max-width: var(--max);
+      margin: 18px auto 42px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    }
+    .section{ padding: 32px 38px; }
+    .section + .section{ border-top: 1px solid #eef2f7; }
+    .label{
+      display:inline-flex; align-items:center; gap: 8px;
+      background: var(--blue-mid); color: var(--blue-dark);
+      font-size: 11px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 12px; border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    h1{ font-size: clamp(34px, 5.5vw, 56px); font-weight: 900; line-height: 1.05; letter-spacing: -1.2px; color: var(--ink); }
+    h2{ font-size: clamp(22px, 3vw, 34px); font-weight: 900; line-height: 1.15; letter-spacing: -0.6px; color: var(--ink); }
+    h3{ font-size: 18px; font-weight: 800; color: var(--ink); }
+    .lead{ font-size: 18px; line-height: 1.75; color: var(--muted); max-width: 820px; }
+    .muted{ color: var(--muted); }
+
+    /* HERO */
+    .hero-wrap{
+      background: #e8edf5;
+      border-bottom: 1px solid #d5dbe8;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.08);
+    }
+    .hero{
+      padding: 44px 38px 38px 38px;
+    }
+    .hero-badge{
+      display:inline-flex; align-items:center; gap: 10px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      box-shadow: 0 2px 10px rgba(15,23,42,.06);
+      margin-bottom: 18px;
+    }
+    .dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .hero h1 em{ font-style: normal; color: var(--blue); }
+    .hero-actions{ display:flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    .btn-primary{
+      display:inline-flex; align-items:center; gap: 8px;
+      background: var(--blue); color: var(--white);
+      font-size: 14px; font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(37,99,235,.26);
+    }
+    .btn-ghost{
+      display:inline-flex; align-items:center; gap: 8px;
+      background: transparent; color: var(--blue-dark);
+      font-size: 14px; font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1.5px solid #93c5fd;
+    }
+    .btn-ghost:hover{ background: var(--blue-light); }
+
+    /* CARDS */
+    .grid{ display:grid; gap: 14px; }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
+    .grid-2{ grid-template-columns: 1fr 1fr; }
+    .card{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 3px 14px rgba(15,23,42,.05);
+    }
+    .card h3{ display:flex; align-items:center; gap: 10px; margin-bottom: 10px; }
+    .ic{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      display:flex; align-items:center; justify-content:center;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border: 1px solid #bfdbfe;
+      flex-shrink: 0;
+    }
+    .card p{ margin-top: 6px; font-size: 14.5px; color: var(--body); line-height: 1.7; }
+    .bullets{ margin-top: 10px; padding-left: 18px; color: var(--body); }
+    .bullets li{ margin: 6px 0; font-size: 14.5px; }
+    .pill{
+      display:inline-flex; align-items:center; gap: 8px;
+      font-size: 12px; font-weight: 800;
+      color: var(--blue-dark);
+      background: var(--blue-light);
+      border: 1px solid #bfdbfe;
+      padding: 7px 10px;
+      border-radius: 999px;
+      margin-top: 10px;
+    }
+
+    /* COMPETIDORES */
+    .table-wrap{
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(15,23,42,.06);
+    }
+    table{ width: 100%; border-collapse: collapse; }
+    th, td{ padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th{ background: var(--ink); color: #fff; font-size: 13px; text-align: left; }
+    td{ font-size: 13.5px; color: var(--body); }
+    tr:last-child td{ border-bottom: none; }
+    .tag{
+      display:inline-flex; align-items:center; gap: 6px;
+      font-size: 11px; font-weight: 800; letter-spacing:.04em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .tag-escapify{ background: var(--blue-light); border-color: #bfdbfe; color: var(--blue-dark); }
+
+    /* VIDEO */
+    .video-box{
+      margin-top: 14px;
+      background: var(--ink);
+      border-radius: 18px;
+      overflow: hidden;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(15,23,42,.18);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .video-left{ display:flex; align-items:center; gap: 14px; }
+    .play{
+      width: 52px; height: 52px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.95);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 22px rgba(37,99,235,.32);
+      flex-shrink: 0;
+    }
+    .video-title{ color:#fff; font-weight: 900; letter-spacing: -.02em; }
+    .video-sub{ color:#cbd5e1; font-size: 13px; margin-top: 2px; }
+    .video-cta{
+      display:inline-flex; align-items:center; gap: 8px;
+      background: #fff; color: var(--blue-dark);
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.6);
+    }
+    .video-note{
+      width: 100%;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer{
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    .foot{
+      padding: 22px 38px;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot a{ color: var(--blue); text-decoration: none; font-weight: 800; }
+    .foot a:hover{ text-decoration: underline; }
+
+    @media (max-width: 900px){
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+      th,td{ padding: 10px 10px; }
+      .page{ margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+      .section{ padding: 24px 18px; }
+      .hero{ padding: 34px 18px 26px; }
+      .foot{ padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Navegación">
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://escapify.io/">
+        Escapify<span>.io</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="landing.html">Landing</a></li>
+        <li><a href="index-iebs.html">Fase 1</a></li>
+        <li><a href="fase2.html">Fase 2</a></li>
+        <li><a href="#idea">La idea</a></li>
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#competidores">Competidores</a></li>
+        <li><a href="#video">Vídeo</a></li>
+      </ul>
+      <a class="nav-cta" href="https://escapify.io/"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Web principal</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="hero-wrap">
+      <header class="hero" role="banner">
+      <div class="hero-badge"><span class="dot" aria-hidden="true"></span> Fase 3 · Resumen del proyecto</div>
+      <h1>Escapify: <em>escape rooms educativos</em> inclusivos sin empezar de cero</h1>
+      <p class="lead">
+        Esta página reúne, en formato claro y directo, lo que normalmente se pide en una presentación de proyecto:
+        qué es Escapify, qué hace, qué problema soluciona, en qué se diferencia, con quién compite y dónde ver la video-presentación.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" href="#resumen"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Ver resumen</a>
+        <a class="btn-ghost" href="landing.html"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Ir a la landing</a>
+      </div>
+      </header>
+    </div>
+
+  <main>
+    <section id="resumen" class="section" aria-label="Resumen en bloques">
+      <div class="label"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Fase 3 · Entregable (estructura por bloques)</div>
+      <h2>Resumen ejecutivo</h2>
+      <p class="lead" style="margin-top:12px;">
+        A continuación se presenta Escapify en el formato de pitch/foro: <strong>qué es</strong>, <strong>qué hace</strong>, <strong>qué problema resuelve</strong>,
+        <strong>qué le diferencia</strong>, <strong>competidores</strong> y <strong>enlace a la video presentación</strong>.
+      </p>
+
+      <div style="margin-top:18px;background:#f8fafc;border-left:4px solid var(--blue);padding:18px 20px;border-radius:0 14px 14px 0;box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+        <div style="font-size:14px;font-weight:900;color:var(--blue-dark);margin-bottom:6px;"><i class="fa-solid fa-circle-info" aria-hidden="true" style="margin-right:8px;"></i>Idea clave</div>
+        <div style="font-size:15px;line-height:1.75;color:var(--body);">
+          Escapify convierte el diseño de escape rooms educativos en un proceso <strong>rápido, estructurado e inclusivo</strong>, para que el docente pueda aplicar experiencias
+          gamificadas <strong>sin empezar de cero</strong> y con <strong>adaptaciones</strong> pensadas para el aula real.
+        </div>
+      </div>
+    </section>
+
+    <section id="idea" class="section" aria-label="La idea">
+      <div class="label"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> 01 · La idea</div>
+      <h2>¿En qué consiste Escapify?</h2>
+      <p class="lead" style="margin-top:12px;">
+        Escapify es una plataforma y ecosistema de recursos para que docentes y centros puedan <strong>diseñar, adaptar y aplicar</strong>
+        experiencias de aprendizaje gamificadas tipo <strong>escape room</strong>, integrando <strong>accesibilidad</strong> e <strong>inclusión</strong> desde el inicio.
+      </p>
+
+      <div class="grid grid-2" style="margin-top:18px;">
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>¿Qué hace (en la práctica)?</h3>
+          <ul class="bullets">
+            <li>Transforma una idea didáctica en una experiencia gamificada <strong>lista para aplicar</strong>.</li>
+            <li>Aporta <strong>recursos</strong> listos y adaptables (retos, dinámicas, materiales de apoyo).</li>
+            <li>Incluye <strong>herramientas</strong> para el aula (cifrados, candados, materiales imprimibles y digitales).</li>
+          </ul>
+          <div class="pill"><i class="fa-solid fa-clock" aria-hidden="true"></i> Menos preparación, más implementación</div>
+        </article>
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-person-chalkboard"></i></span>Para quién está pensado</h3>
+          <ul class="bullets">
+            <li>Docentes que quieren innovar pero necesitan <strong>estructura</strong> y <strong>rapidez</strong>.</li>
+            <li>Aulas diversas: la accesibilidad es un <strong>requisito de partida</strong>, no un añadido.</li>
+            <li>Centros que buscan propuestas <strong>replicables</strong> y coherentes pedagógicamente.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="problema" class="section" aria-label="El problema">
+      <div class="label"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 02 · El problema</div>
+      <h2>¿Qué resuelve?</h2>
+      <p class="lead" style="margin-top:12px;">
+        En el aula, el cuello de botella no es tener ideas: es <strong>hacerlas viables</strong> y replicables con poco tiempo, grupos heterogéneos y necesidades diversas.
+      </p>
+
+      <div class="grid grid-2" style="margin-top:18px;">
+        <article class="card" style="border-color:#fecaca;background:linear-gradient(180deg,#fff,#fff7f7);">
+          <h3><span class="ic" aria-hidden="true" style="background:var(--red-bg);border-color:#fecaca;color:var(--red);"><i class="fa-solid fa-xmark"></i></span>SIN ESCAPIFY</h3>
+          <ul class="bullets">
+            <li><strong>Falta de tiempo</strong> para diseñar experiencias gamificadas.</li>
+            <li><strong>Herramientas genéricas</strong>, no específicas de escape rooms.</li>
+            <li><strong>Sin integración real</strong> de inclusión ni accesibilidad.</li>
+            <li><strong>Gamificación superficial</strong>, sin base metodológica.</li>
+            <li><strong>Alumnado con necesidades especiales</strong> excluido.</li>
+          </ul>
+        </article>
+        <article class="card" style="border-color:#a7f3d0;background:linear-gradient(180deg,#fff,#f2fff8);">
+          <h3><span class="ic" aria-hidden="true" style="background:var(--green-bg);border-color:#a7f3d0;color:#065f46;"><i class="fa-solid fa-check"></i></span>CON ESCAPIFY</h3>
+          <ul class="bullets">
+            <li><strong>Gamificación real</strong> sin esfuerzo de diseño desde cero.</li>
+            <li><strong>Recursos listos</strong>, adaptables y listos para usar hoy.</li>
+            <li><strong>Inclusión práctica</strong> desde el diseño, no como parche.</li>
+            <li><strong>Base investigadora</strong> y metodológica validada empíricamente.</li>
+            <li><strong>Participación en igualdad</strong> de condiciones para todos los alumnos.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="diferenciacion" class="section" aria-label="Diferenciación">
+      <div class="label"><i class="fa-solid fa-gem" aria-hidden="true"></i> 03 · Diferenciación</div>
+      <h2>¿Qué le hace diferente?</h2>
+      <p class="lead" style="margin-top:12px;">
+        Escapify no es una herramienta genérica ni un repositorio de recursos sueltos: es un <strong>sistema especializado</strong> para escape rooms educativos, diseñado para escalar en aula.
+      </p>
+
+      <div class="grid grid-3" style="margin-top:18px;">
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-universal-access"></i></span>Inclusión desde el diseño</h3>
+          <p>La accesibilidad no se añade al final: se integra como criterio de producto y de experiencia desde el principio.</p>
+        </article>
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span>Sistema completo</h3>
+          <p>Recursos + herramientas + guía: todo en un mismo flujo para pasar de “idea” a “actividad aplicada”.</p>
+        </article>
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-bridge"></i></span>Puente investigación ↔ aula</h3>
+          <p>Conecta un enfoque pedagógico sólido con implementación real y repetible en contextos diversos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="competidores" class="section" aria-label="Competidores">
+      <div class="label"><i class="fa-solid fa-chess" aria-hidden="true"></i> 04 · Competidores</div>
+      <h2>¿Con quién compite?</h2>
+      <p class="lead" style="margin-top:12px;">
+        Compite con herramientas de contenido interactivo, kits de breakout, recursos sueltos y, sobre todo, con el <strong>coste de tiempo</strong> de hacerlo desde cero.
+      </p>
+
+      <div class="table-wrap" role="region" aria-label="Tabla comparativa" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 28%;">Criterio</th>
+              <th><span class="tag">Genially</span></th>
+              <th><span class="tag">Breakout EDU</span></th>
+              <th><span class="tag">lockee.fr</span></th>
+              <th><span class="tag">drimify.com</span></th>
+              <th><span class="tag">EduEscapeRoom</span></th>
+              <th><span class="tag tag-escapify">Escapify</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Enfoque específico en escape rooms</strong></td>
+              <td>Generalista</td>
+              <td>Parcial</td>
+              <td>Más enfocado</td>
+              <td>Generalista</td>
+              <td>Más enfocado</td>
+              <td><strong>Especializado</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Inclusión y accesibilidad</strong></td>
+              <td>No central</td>
+              <td>Limitado</td>
+              <td>Variable</td>
+              <td>Variable</td>
+              <td>Variable</td>
+              <td><strong>Diferencial</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Sistema completo (recursos + guía + herramientas)</strong></td>
+              <td>Herramienta</td>
+              <td>Kit / enfoque</td>
+              <td>Herramienta</td>
+              <td>Herramienta</td>
+              <td>Recursos</td>
+              <td><strong>Ecosistema</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Implementación en aula</strong></td>
+              <td>Depende del docente</td>
+              <td>Depende del contexto</td>
+              <td>Depende del docente</td>
+              <td>Depende del docente</td>
+              <td>Depende del docente</td>
+              <td><strong>Diseñado para ser replicable</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>Alternativas reales</h3>
+          <ul class="bullets">
+            <li>Genially (interactividad) y recursos generalistas.</li>
+            <li>Breakout EDU y kits físicos/digitales.</li>
+            <li><strong>lockee.fr</strong> y <strong>drimify.com</strong> como alternativas de creación/experiencias interactivas.</li>
+            <li>EduEscapeRoom y propuestas similares (recursos y plantillas).</li>
+            <li>Recursos sueltos (Pinterest, blogs, Teachers Pay Teachers, etc.).</li>
+            <li>Diseño manual desde cero (o no hacer la actividad).</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>Posicionamiento</h3>
+          <ul class="bullets">
+            <li><strong>Especialización</strong> en escape rooms educativos.</li>
+            <li><strong>Estructura</strong> para ahorrar tiempo y aumentar adopción real.</li>
+            <li><strong>Inclusión</strong> como ventaja competitiva (mejora la experiencia para todos).</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="video" class="section" aria-label="Video presentación">
+      <div class="label"><i class="fa-solid fa-video" aria-hidden="true"></i> 05 · Video presentación</div>
+      <h2>Enlace a la video presentación</h2>
+      <p class="lead" style="margin-top:12px;">
+        Enlace directo al vídeo (YouTube / Drive / Vimeo). Si todavía no está publicado, la página queda preparada para actualizar solo la URL.
+      </p>
+
+      <div class="video-box">
+        <div class="video-left">
+          <div class="play" aria-hidden="true"><i class="fa-solid fa-play" style="color:#fff;margin-left:3px;"></i></div>
+          <div>
+            <div class="video-title">Presentación de Escapify (Fase 3)</div>
+            <div class="video-sub">Enlace externo al vídeo</div>
+          </div>
+        </div>
+        <a class="video-cta" href="#" aria-disabled="true"><i class="fa-solid fa-link" aria-hidden="true"></i> Ver vídeo</a>
+        <div class="video-note">
+          Nota: sustituye el <code>href=\"#\"</code> del botón “Ver vídeo” por la URL final de la video-presentación.
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <div class="label"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i> Contenido de la presentación</div>
+        <p class="lead" style="margin-top:12px;">El contenido de la video presentación es:</p>
+
+        <div class="grid grid-3" style="margin-top:14px;">
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>Oportunidad y producto</h3>
+            <p>Problema, contexto y por qué ahora. Qué es Escapify y qué valor aporta en el aula.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>Equipo</h3>
+            <p>Quién lo impulsa, capacidades clave y por qué el equipo puede ejecutarlo.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span>Mercado</h3>
+            <p>Segmentos, tamaño, tendencias y por qué existe demanda.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-coins"></i></span>Modelo de negocio</h3>
+            <p><strong>Cómo se genera ingreso</strong>: planes/recursos, lógica de precios y canales.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></span>Necesidades financieras</h3>
+            <p>Qué se necesita para avanzar (producto, validación, captación, equipo) y destino de la inversión.</p>
+          </article>
+          <article class="card">
+            <h3><span class="ic" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>Propuesta de valor al inversor</h3>
+            <p>Algunos apartados pueden adaptarse, pero debe quedar claro <strong>qué propuesta de valor ofrecéis a los inversores</strong>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <strong style="color:var(--ink);">Escapify · Fase 3</strong> · Resumen para presentación
+      </div>
+      <div>
+        <a href="index-iebs2.html">Materiales</a> · <a href="fase2.html">Fase 2</a> · <a href="landing.html">Landing</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
